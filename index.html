@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sensisoftware | The Future of Engineering</title>
+    <title>Sensisoftware | Premium Engineering Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;900&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -16,53 +16,53 @@
             --border: rgba(188, 111, 241, 0.2);
             --gold: #ffb703;
             --blue: #00d2ff;
+            --success: #00ff88;
+            --danger: #ff4757;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: #fff; overflow-x: hidden; }
 
-        /* Gelişmiş Arka Plan (Grid + Işık) */
         .bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: 
-                radial-gradient(circle at 50% 10%, #1a0b30 0%, transparent 60%),
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background: radial-gradient(circle at 50% 10%, #1a0b30 0%, transparent 60%),
+                        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
             background-size: 100% 100%, 40px 40px, 40px 40px;
         }
 
         .container { max-width: 1300px; margin: 0 auto; padding: 0 30px; }
 
-        /* --- ÜST MENÜ --- */
+        /* --- ÜST MENÜ & DROPDOWN DÜZELTMELERİ --- */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             position: sticky; top: 0; background: rgba(9, 9, 14, 0.8); backdrop-filter: blur(15px); z-index: 100;
         }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: 2px; cursor: pointer; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: 2px; cursor: pointer; padding: 25px 0;}
         .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
 
         .nav-right { display: flex; align-items: center; gap: 30px; }
-        .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; }
-        .nav-links li { position: relative; }
+        .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; height: 100%; }
+        
+        /* HOVER BOŞLUĞU ÇÖZÜMÜ */
+        .nav-links li { position: relative; padding: 30px 0; } 
         .nav-links a { color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
         .nav-links a:hover { color: var(--primary); }
         .nav-links .highlight { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 5px; }
 
-        /* Hizmetlerimiz Açılır Menü (Dropdown) */
         .dropdown-menu {
             display: none; position: absolute; top: 100%; left: 0; background: var(--card-bg);
-            border: 1px solid var(--border); border-radius: 8px; min-width: 220px; padding: 10px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8); margin-top: 15px;
+            border: 1px solid var(--border); border-radius: 8px; min-width: 240px; padding: 10px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); margin-top: -5px; /* Boşluğu kapattım */
             animation: fadeInDown 0.3s ease forwards;
         }
         .nav-links li:hover .dropdown-menu { display: block; }
-        .dropdown-menu a { display: block; padding: 10px 20px; color: #aaa; text-transform: none; font-weight: 500; font-size: 0.9rem; }
+        .dropdown-menu a { display: block; padding: 12px 20px; color: #aaa; text-transform: none; font-weight: 500; font-size: 0.95rem; }
         .dropdown-menu a:hover { background: rgba(188, 111, 241, 0.1); color: #fff; padding-left: 25px; }
         
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Giriş / Profil Alanı */
         .auth-btns { display: flex; gap: 15px; border-left: 1px solid #333; padding-left: 25px; position: relative; }
         .btn-outline, .btn-solid { padding: 10px 20px; border-radius: 5px; font-weight: 800; font-size: 0.8rem; cursor: pointer; transition: 0.4s; text-transform: uppercase; border: none; }
         .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
@@ -70,33 +70,47 @@
         .btn-solid { background: linear-gradient(45deg, var(--primary), var(--accent)); color: #fff; }
         .btn-solid:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(188, 111, 241, 0.4); }
 
-        /* Profil Menüsü */
-        .user-profile { display: none; align-items: center; gap: 10px; cursor: pointer; position: relative; }
+        /* PROFİL & DROPDOWN DÜZELTMESİ */
+        .user-profile { display: none; align-items: center; gap: 10px; cursor: pointer; position: relative; padding: 25px 0; }
         .avatar { width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; color: #fff; }
+        
+        /* Admin Etiketi */
+        .admin-badge { display: none; background: var(--danger); color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 1px; margin-left: 5px; }
+
         .profile-dropdown {
-            display: none; position: absolute; top: 120%; right: 0; background: var(--card-bg);
-            border: 1px solid #333; border-radius: 8px; width: 180px; padding: 10px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            display: none; position: absolute; top: 100%; right: 0; background: var(--card-bg);
+            border: 1px solid #333; border-radius: 8px; width: 190px; padding: 10px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            margin-top: -5px; /* Boşluğu kapattım */
         }
         .user-profile:hover .profile-dropdown { display: block; }
-        .profile-dropdown a { display: block; padding: 10px 20px; color: #aaa; text-decoration: none; font-size: 0.85rem; transition: 0.3s; }
+        .profile-dropdown a { display: block; padding: 12px 20px; color: #aaa; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
         .profile-dropdown a:hover { background: rgba(255,255,255,0.05); color: #fff; }
-        .profile-dropdown .logout { color: #ff4757; border-top: 1px solid #222; margin-top: 5px; padding-top: 10px; }
+        .profile-dropdown .logout { color: var(--danger); border-top: 1px solid #222; margin-top: 5px; padding-top: 10px; }
 
-        /* --- SAYFA YAPILARI (SPA MANTIĞI) --- */
-        .page { display: none; animation: fadeIn 0.5s ease; min-height: 70vh; }
-        .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* ANA SAYFA BÖLÜMLERİ */
-        .hero { text-align: center; padding: 120px 0 60px; }
-        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900; margin-bottom: 20px; 
-                   background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px;}
-        .hero p { color: #888; font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.8; }
-
-        .course-section {
-            display: flex; align-items: center; gap: 50px; background: rgba(18,18,24,0.6);
-            padding: 50px; border-radius: 20px; margin: 60px 0; border: 1px solid var(--border); backdrop-filter: blur(10px);
+        /* --- ŞIK BİLDİRİM EKRANI (TOAST) --- */
+        #customToast {
+            position: fixed; top: 30px; right: -400px; background: var(--card-bg);
+            border-left: 4px solid var(--success); padding: 15px 25px; border-radius: 8px;
+            color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.6); z-index: 9999;
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; align-items: center; gap: 15px; font-weight: 600;
         }
+        #customToast.show { right: 30px; }
+        #customToast i { font-size: 1.5rem; color: var(--success); }
+        #customToast.error { border-left-color: var(--danger); }
+        #customToast.error i { color: var(--danger); }
+
+        /* --- SAYFA YAPILARI --- */
+        .page { display: none; animation: fadeIn 0.4s ease; min-height: 70vh; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 1. ANA SAYFA */
+        .hero { text-align: center; padding: 120px 0 60px; }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px;}
+        .hero p { color: #888; font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.8; }
+        
+        .course-section { display: flex; align-items: center; gap: 50px; background: rgba(18,18,24,0.6); padding: 50px; border-radius: 20px; margin: 60px 0; border: 1px solid var(--border); backdrop-filter: blur(10px); }
         .course-content { flex: 1; }
         .course-content h2 { font-family: 'Orbitron', sans-serif; color: #fff; margin-bottom: 20px; font-size: 2rem; }
         .course-content h2 span { color: var(--primary); }
@@ -105,10 +119,10 @@
         .course-img { flex: 1; text-align: right; }
         .course-img img { width: 100%; max-width: 500px; border-radius: 15px; border: 1px solid #333; opacity: 0.8; }
 
-        /* SATIN AL SAYFASI */
-        .page-title { text-align: center; font-family: 'Orbitron', sans-serif; font-size: 3rem; margin: 80px 0 40px; color: #fff; }
+        /* 2. SATIN AL (SHOP) SAYFASI */
+        .page-title { text-align: center; font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin: 80px 0 40px; color: #fff; }
         .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
-        .price-card { background: var(--card-bg); padding: 50px 30px; border-radius: 15px; text-align: center; border: 1px solid #222; position: relative; transition: 0.3s; }
+        .price-card { background: var(--card-bg); padding: 50px 30px; border-radius: 15px; text-align: center; border: 1px solid #222; transition: 0.3s; }
         .price-card:hover { border-color: var(--primary); transform: translateY(-10px); }
         .price-card h3 { font-size: 1.2rem; margin-bottom: 20px; color: #ccc; }
         .price-card .price { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; color: #fff; margin-bottom: 10px; }
@@ -119,53 +133,54 @@
         .price-card.premium { border-color: var(--primary); background: linear-gradient(180deg, #121218 0%, #1e102e 100%); }
         .price-card.premium .buy-btn { background: var(--primary); color: #fff; }
 
-        /* İNDİRME SAYFASI */
+        /* 3. İNDİRME SAYFASI */
         .download-wrapper { max-width: 800px; margin: 0 auto 100px; }
         .dl-card { background: var(--card-bg); border: 1px solid var(--primary); padding: 30px; border-radius: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         .dl-info h4 { font-size: 1.3rem; margin-bottom: 10px; }
         .dl-info p { color: #888; font-size: 0.9rem; }
-        .dl-button { background: #00ff88; color: #000; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 900; transition: 0.3s; }
+        .dl-button { background: var(--success); color: #000; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 900; transition: 0.3s; border: none; cursor:pointer;}
         .dl-button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 136, 0.4); }
 
-        /* --- CS:GO KASA AÇMA SİSTEMİ (ŞANS OYUNLARI) --- */
+        /* 4. ŞANS OYUNLARI SAYFASI */
         .case-wrapper { max-width: 900px; margin: 0 auto 100px; text-align: center; }
         .case-info { color: #888; margin-bottom: 40px; }
-        .case-container {
-            width: 100%; height: 200px; background: #0d0d12; border: 2px solid #333; border-radius: 10px;
-            position: relative; overflow: hidden; display: flex; align-items: center;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
-        }
-        .case-center-line {
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 4px; height: 100%; background: var(--gold); z-index: 10;
-            box-shadow: 0 0 15px var(--gold);
-        }
+        .case-container { width: 100%; height: 200px; background: #0d0d12; border: 2px solid #333; border-radius: 10px; position: relative; overflow: hidden; display: flex; align-items: center; box-shadow: inset 0 0 50px rgba(0,0,0,0.8); }
+        .case-center-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: var(--gold); z-index: 10; box-shadow: 0 0 15px var(--gold); }
         .case-strip { display: flex; align-items: center; height: 150px; transition: transform 6s cubic-bezier(0.15, 0.9, 0.15, 1); }
-        .case-item {
-            width: 150px; height: 150px; flex-shrink: 0; margin: 0 5px; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; border-radius: 8px; font-weight: bold; border-bottom: 5px solid;
-            background: linear-gradient(180deg, #1a1a24 0%, #111 100%);
-        }
+        .case-item { width: 150px; height: 150px; flex-shrink: 0; margin: 0 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 8px; font-weight: bold; border-bottom: 5px solid; background: linear-gradient(180deg, #1a1a24 0%, #111 100%); }
         .item-icon { font-size: 2.5rem; margin-bottom: 10px; }
         .item-text { font-size: 0.85rem; text-align: center; }
         
-        /* Nadirlik Renkleri */
-        .rarity-common { border-color: #666; color: #888; } /* Boş */
-        .rarity-rare { border-color: var(--blue); color: var(--blue); text-shadow: 0 0 10px var(--blue); } /* 1 Gün */
-        .rarity-epic { border-color: var(--primary); color: var(--primary); text-shadow: 0 0 10px var(--primary); } /* 7 Gün */
-        .rarity-legendary { border-color: var(--gold); color: var(--gold); text-shadow: 0 0 15px var(--gold); background: linear-gradient(180deg, #2a2010 0%, #111 100%); } /* 1 Ay */
+        .rarity-common { border-color: #666; color: #888; } 
+        .rarity-rare { border-color: var(--blue); color: var(--blue); text-shadow: 0 0 10px var(--blue); } 
+        .rarity-epic { border-color: var(--primary); color: var(--primary); text-shadow: 0 0 10px var(--primary); } 
+        .rarity-legendary { border-color: var(--gold); color: var(--gold); text-shadow: 0 0 15px var(--gold); background: linear-gradient(180deg, #2a2010 0%, #111 100%); } 
 
         .spin-btn { margin-top: 40px; background: var(--gold); color: #000; padding: 20px 60px; border: none; border-radius: 10px; font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
         .spin-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 183, 3, 0.5); }
         .spin-btn:disabled { background: #444; color: #222; cursor: not-allowed; transform: none; box-shadow: none; }
         #caseResultText { margin-top: 30px; font-size: 1.5rem; font-weight: 900; font-family: 'Orbitron', sans-serif; height: 35px;}
 
-        /* --- MODAL (GİRİŞ) --- */
+        /* --- 5. SİPARİŞLERİM SAYFASI (YENİ) --- */
+        .orders-wrapper { max-width: 900px; margin: 0 auto 100px; }
+        .order-section { margin-bottom: 50px; }
+        .order-section h3 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .order-card { background: var(--card-bg); border: 1px solid #222; border-radius: 10px; padding: 25px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; transition: 0.3s; }
+        .order-card:hover { border-color: #555; background: #181822; }
+        .active-order { border-color: var(--primary); background: linear-gradient(90deg, #121218 0%, #1a0f2e 100%); }
+        .order-info h4 { font-size: 1.1rem; margin-bottom: 5px; color: #fff; }
+        .order-info p { color: #888; font-size: 0.85rem; }
+        .order-status { padding: 8px 15px; border-radius: 5px; font-size: 0.8rem; font-weight: 900; text-transform: uppercase; }
+        .status-active { background: rgba(188, 111, 241, 0.2); color: var(--primary); border: 1px solid var(--primary); }
+        .status-past { background: rgba(255, 255, 255, 0.05); color: #888; border: 1px solid #444; }
+
+        /* MODAL (GİRİŞ) */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
         .modal-box { background: #0d0d12; padding: 40px; border-radius: 15px; width: 100%; max-width: 400px; border: 1px solid var(--border); position: relative; }
         .modal-box h2 { color: #fff; margin-bottom: 25px; font-family: 'Orbitron', sans-serif; }
         .input-group { margin-bottom: 20px; }
         .input-group input { width: 100%; padding: 15px; background: #15151c; border: 1px solid #333; border-radius: 8px; color: #fff; outline: none; }
+        .input-group input:focus { border-color: var(--primary); }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; color: #666; cursor: pointer; }
 
         footer { text-align: center; padding: 40px 0; border-top: 1px solid #111; color: #444; font-size: 0.8rem; }
@@ -174,6 +189,11 @@
 <body>
 
     <div class="bg-layer"></div>
+
+    <div id="customToast">
+        <i class="fas fa-check-circle" id="toastIcon"></i>
+        <span id="toastMessage">İşlem başarılı!</span>
+    </div>
 
     <div class="container">
         <nav>
@@ -200,12 +220,14 @@
 
                 <div class="user-profile" id="profileSection">
                     <div class="avatar" id="avatarLetter">O</div>
-                    <span style="font-weight: 600; font-size: 0.9rem;" id="profileName">Omer13ds</span>
-                    <i class="fas fa-chevron-down" style="font-size: 0.7rem; color: #888;"></i>
+                    <span style="font-weight: 600; font-size: 0.9rem;" id="profileName">Kullanıcı</span>
+                    <span class="admin-badge" id="adminBadge">ADMIN</span>
+                    <i class="fas fa-chevron-down" style="font-size: 0.7rem; color: #888; margin-left: 5px;"></i>
+                    
                     <div class="profile-dropdown">
-                        <a href="#"><i class="fas fa-box"></i> Siparişlerim</a>
+                        <a onclick="switchPage('orders')"><i class="fas fa-box"></i> Siparişlerim</a>
                         <a href="#"><i class="fas fa-headset"></i> Destek Talebi</a>
-                        <a href="#" class="logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                        <a onclick="logout()" class="logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
                     </div>
                 </div>
             </div>
@@ -218,7 +240,6 @@
                     <h1>KODUN ÖTESİNE GEÇ.</h1>
                     <p>Sensisoftware ile yazılımın arka planındaki karanlık sanatı keşfet. Yalnızca seçkin mühendislerin erişebildiği özel altyapıya hoş geldin.</p>
                 </main>
-
                 <section class="course-section">
                     <div class="course-content">
                         <h2>YENİ NESİL EĞİTİM:<br><span>SENSİ TERSİNE MÜHENDİSLİK</span></h2>
@@ -226,9 +247,7 @@
                         <button class="btn-outline" style="padding: 12px 25px; border-radius: 8px;">Eğitimi İncele</button>
                         <p class="coming-soon"><i class="fas fa-hourglass-half"></i> ÇOK YAKINDA.</p>
                     </div>
-                    <div class="course-img">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800" alt="Code Background">
-                    </div>
+                    <div class="course-img"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800" alt="Code Background"></div>
                 </section>
             </div>
 
@@ -250,7 +269,7 @@
                     <div class="price-card premium">
                         <h3 style="color:var(--gold);">1 Aylık Sensi Key</h3>
                         <div class="price">489.00 <span>TL</span></div>
-                        <ul><li><i class="fas fa-check"></i> 30 Gün Premium Erişim</li><li><i class="fas fa-check"></i> Beta Yazılımlara Giriş</li><li><i class="fas fa-check"></i> VIP Discord Rolü</li></ul>
+                        <ul><li><i class="fas fa-check"></i> 30 Gün Premium Erişim</li><li><i class="fas fa-check"></i> VIP Discord Rolü</li></ul>
                         <button class="buy-btn">Sepete Ekle</button>
                     </div>
                 </section>
@@ -262,16 +281,9 @@
                     <div class="dl-card">
                         <div class="dl-info">
                             <h4>SensiSoftware Engine v2.0 (Stable)</h4>
-                            <p>Windows 10/11 Uyumlu | 45 MB | Herkese Açık</p>
+                            <p>Windows 10/11 Uyumlu | 45 MB | Lisans Gerektirir</p>
                         </div>
-                        <a href="SENIN_LINKIN" class="dl-button"><i class="fas fa-download"></i> İndir</a>
-                    </div>
-                    <div class="dl-card" style="opacity: 0.6;">
-                        <div class="dl-info">
-                            <h4>SensiSoftware Beta Client</h4>
-                            <p>Sadece 1 Aylık Premium üyeler içindir.</p>
-                        </div>
-                        <a href="#" class="dl-button" style="background: #444; color: #aaa; pointer-events: none;"><i class="fas fa-lock"></i> Kilitli</a>
+                        <button class="dl-button" onclick="showToast('İndirme işlemi başlatılıyor...', 'success')"><i class="fas fa-download"></i> İndir</button>
                     </div>
                 </div>
             </div>
@@ -280,15 +292,48 @@
                 <h2 class="page-title" style="color: var(--gold);">SENSİ KASA AÇILIŞI</h2>
                 <div class="case-wrapper">
                     <p class="case-info">Her kullanıcı haftada 1 kez bu kasayı açabilir. Envanterine nadir bir lisans ekleme şansını yakala!</p>
-                    
                     <div class="case-container">
                         <div class="case-center-line"></div>
-                        <div class="case-strip" id="caseStrip">
-                            </div>
+                        <div class="case-strip" id="caseStrip"></div>
                     </div>
-
                     <div id="caseResultText"></div>
                     <button class="spin-btn" id="openCaseBtn" onclick="startCaseOpening()">KASAYI AÇ</button>
+                </div>
+            </div>
+
+            <div id="page-orders" class="page">
+                <h2 class="page-title" style="font-size: 2.5rem;">SİPARİŞ GEÇMİŞİ</h2>
+                <div class="orders-wrapper">
+                    
+                    <div class="order-section">
+                        <h3 style="color: var(--primary);">AKTİF LİSANSLAR</h3>
+                        <div class="order-card active-order">
+                            <div class="order-info">
+                                <h4>1 Aylık Sensi Key <span style="font-size:0.8rem; color:#888;">(#ORD-9982)</span></h4>
+                                <p>Satın Alım: Bugün | Bitiş: 30 Gün Sonra</p>
+                            </div>
+                            <div class="order-status status-active">KULLANIMDA</div>
+                        </div>
+                    </div>
+
+                    <div class="order-section">
+                        <h3 style="color: #666;">GEÇMİŞ SİPARİŞLER</h3>
+                        <div class="order-card">
+                            <div class="order-info">
+                                <h4>7 Günlük Sensi Key <span style="font-size:0.8rem; color:#888;">(#ORD-5123)</span></h4>
+                                <p>Satın Alım: 12 Şubat 2026 | Bitiş: 19 Şubat 2026</p>
+                            </div>
+                            <div class="order-status status-past">SÜRESİ DOLDU</div>
+                        </div>
+                        <div class="order-card">
+                            <div class="order-info">
+                                <h4>1 Günlük Sensi Key <span style="font-size:0.8rem; color:#888;">(#ORD-2091)</span></h4>
+                                <p>Satın Alım: 01 Ocak 2026 | Bitiş: 02 Ocak 2026</p>
+                            </div>
+                            <div class="order-status status-past">SÜRESİ DOLDU</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -311,139 +356,132 @@
 
     <script>
         let isLoggedIn = false;
-        let currentUser = "";
+        let isAdmin = false; // ADMIN KONTROLÜ
 
-        // --- SAYFA DEĞİŞTİRME MANTIĞI (SPA) ---
-        function switchPage(pageId) {
-            // Tüm sayfaları gizle
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            // İstenen sayfayı göster
-            document.getElementById('page-' + pageId).classList.add('active');
-            window.scrollTo(0,0); // Sayfa değişince en üste kay
-        }
-
-        // Giriş Gerektiren Sayfalara Tıklanınca
-        function requireLogin(targetPage) {
-            if(isLoggedIn) {
-                switchPage(targetPage);
+        // ŞIK BİLDİRİM (TOAST) FONKSİYONU
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('customToast');
+            document.getElementById('toastMessage').innerText = message;
+            
+            if(type === 'error') {
+                toast.classList.add('error');
+                document.getElementById('toastIcon').className = "fas fa-exclamation-circle";
             } else {
-                alert("Kanka bu sayfayı görüntülemek için önce Giriş Yapman lazım!");
-                openAuthModal('GİRİŞ YAP');
+                toast.classList.remove('error');
+                document.getElementById('toastIcon').className = "fas fa-check-circle";
             }
+
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3500);
         }
 
-        // --- GİRİŞ / ÇIKIŞ İŞLEMLERİ ---
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function requireLogin(targetPage) {
+            if(isLoggedIn) { switchPage(targetPage); } 
+            else { showToast("Bu sayfaya girmek için giriş yapmalısın!", "error"); openAuthModal('GİRİŞ YAP'); }
+        }
+
         function openAuthModal(title) {
             document.getElementById('authModal').style.display = 'flex';
             document.getElementById('authTitle').innerText = title;
         }
 
+        // GİRİŞ VE ADMİN KONTROLÜ
         function login() {
             let user = document.getElementById('username').value;
-            if(user === "") { alert("Kullanıcı adı gir kanka!"); return; }
+            let pass = document.getElementById('password').value;
+            
+            if(user === "") { showToast("Kullanıcı adı boş bırakılamaz!", "error"); return; }
             
             isLoggedIn = true;
-            currentUser = user;
             
-            // Profil alanını güncelle
+            // ADMIN SİSTEMİ (omer13ds / oyaali12)
+            if(user === "omer13ds" && pass === "oyaali12") {
+                isAdmin = true;
+                document.getElementById('adminBadge').style.display = 'inline-block';
+                showToast("Admin hesabı doğrulandı. Sınırsız yetki aktif.", "success");
+            } else {
+                isAdmin = false;
+                document.getElementById('adminBadge').style.display = 'none';
+                showToast("Hoş geldin " + user + "!", "success");
+            }
+            
             document.getElementById('authSection').style.display = 'none';
             document.getElementById('profileSection').style.display = 'flex';
             document.getElementById('profileName').innerText = user;
             document.getElementById('avatarLetter').innerText = user.charAt(0).toUpperCase();
-            
             document.getElementById('authModal').style.display = 'none';
-            alert("Hoş geldin " + user + "!");
         }
 
         function logout() {
-            isLoggedIn = false;
+            isLoggedIn = false; isAdmin = false;
             document.getElementById('authSection').style.display = 'flex';
             document.getElementById('profileSection').style.display = 'none';
-            switchPage('home'); // Çıkış yapınca anasayfaya at
-            alert("Başarıyla çıkış yapıldı.");
+            switchPage('home'); 
+            showToast("Başarıyla çıkış yapıldı.", "success");
         }
 
-        // --- CS:GO KASA AÇMA SİSTEMİ MANTIĞI ---
+        // --- CS:GO KASA AÇMA SİSTEMİ ---
         const caseStrip = document.getElementById('caseStrip');
         const openBtn = document.getElementById('openCaseBtn');
         const resultText = document.getElementById('caseResultText');
         
-        // Eşyaları oluşturma fonksiyonu
         function createCaseItems() {
-            caseStrip.innerHTML = "";
-            caseStrip.style.transition = "none";
-            caseStrip.style.transform = "translateX(0)";
-
-            // 70 tane rastgele kutu oluşturacağız
+            caseStrip.innerHTML = ""; caseStrip.style.transition = "none"; caseStrip.style.transform = "translateX(0)";
             for(let i=0; i<70; i++) {
                 let div = document.createElement('div');
                 div.className = "case-item ";
-                
-                // Olasılık Dağıtımı (Görsel olarak)
                 let rand = Math.random() * 100;
-                if(rand < 2) { 
-                    div.className += "rarity-legendary"; 
-                    div.innerHTML = `<i class="fas fa-crown item-icon"></i><div class="item-text">1 Aylık Key</div>`;
-                } else if(rand < 10) {
-                    div.className += "rarity-epic";
-                    div.innerHTML = `<i class="fas fa-gem item-icon"></i><div class="item-text">7 Günlük Key</div>`;
-                } else if(rand < 30) {
-                    div.className += "rarity-rare";
-                    div.innerHTML = `<i class="fas fa-key item-icon"></i><div class="item-text">1 Günlük Key</div>`;
-                } else {
-                    div.className += "rarity-common";
-                    div.innerHTML = `<i class="fas fa-times item-icon"></i><div class="item-text">Boş Çıktı</div>`;
-                }
+                if(rand < 2) { div.className += "rarity-legendary"; div.innerHTML = `<i class="fas fa-crown item-icon"></i><div class="item-text">1 Aylık Key</div>`; } 
+                else if(rand < 10) { div.className += "rarity-epic"; div.innerHTML = `<i class="fas fa-gem item-icon"></i><div class="item-text">7 Günlük Key</div>`; } 
+                else if(rand < 30) { div.className += "rarity-rare"; div.innerHTML = `<i class="fas fa-key item-icon"></i><div class="item-text">1 Günlük Key</div>`; } 
+                else { div.className += "rarity-common"; div.innerHTML = `<i class="fas fa-times item-icon"></i><div class="item-text">Boş Çıktı</div>`; }
                 caseStrip.appendChild(div);
             }
         }
 
         function startCaseOpening() {
-            // Haftalık Kontrol
             let lastOpen = localStorage.getItem("lastCaseTime");
             let now = new Date().getTime();
-            if(lastOpen && (now - lastOpen < 7 * 24 * 60 * 60 * 1000)) {
-                alert("Hakkın bitmiş kanka! Haftaya tekrar gel.");
+            
+            // ADMIN KONTROLÜ: Eğer adminse süre beklemez
+            if(lastOpen && (now - lastOpen < 7 * 24 * 60 * 60 * 1000) && !isAdmin) {
+                showToast("Hakkın bitmiş kanka! Haftaya tekrar gel.", "error");
                 return;
             }
 
             openBtn.disabled = true;
-            resultText.innerText = "Açılıyor...";
+            resultText.innerText = "Kasa Açılıyor...";
             resultText.style.color = "#fff";
-            
             createCaseItems();
 
-            // Biraz bekleyip animasyonu tetikle
             setTimeout(() => {
-                // Her kutu 150px genişliğinde + 10px margin = 160px. 
-                // Hedefimiz 55. kutu civarı dursun
-                let itemWidth = 160;
-                let targetIndex = 55;
-                
-                // Çizgiyi tam kutunun ortasına denk getirmek için rastgele offset
+                let itemWidth = 160; let targetIndex = 55;
                 let offset = Math.floor(Math.random() * 100) - 50; 
                 let translateValue = (targetIndex * itemWidth) - (caseStrip.parentElement.offsetWidth / 2) + (itemWidth / 2) + offset;
 
                 caseStrip.style.transition = "transform 6s cubic-bezier(0.15, 0.9, 0.15, 1)";
                 caseStrip.style.transform = `translateX(-${translateValue}px)`;
 
-                // Animasyon bitince sonucu göster
                 setTimeout(() => {
                     localStorage.setItem("lastCaseTime", now);
-                    let winningBox = caseStrip.children[targetIndex];
-                    let prize = winningBox.innerText;
+                    let prize = caseStrip.children[targetIndex].innerText;
 
                     if(prize.includes("1 Aylık")) { resultText.innerText = "EFSANEVİ! 1 AYLIK KEY ÇIKTI!"; resultText.style.color = "var(--gold)"; }
                     else if(prize.includes("7 Günlük")) { resultText.innerText = "SÜPER! 7 GÜNLÜK KEY ÇIKTI!"; resultText.style.color = "var(--primary)"; }
                     else if(prize.includes("1 Günlük")) { resultText.innerText = "ŞANSLISIN! 1 GÜNLÜK KEY ÇIKTI!"; resultText.style.color = "var(--blue)"; }
                     else { resultText.innerText = "BOŞ ÇIKTI... Şansına Küs."; resultText.style.color = "#666"; }
                     
-                    openBtn.innerText = "TEKRAR AÇ (7 GÜN SONRA)";
-                }, 6000); // 6 Saniye kayma süresi
+                    openBtn.disabled = false;
+                    openBtn.innerText = isAdmin ? "ADMİN MODU: TEKRAR AÇ" : "TEKRAR AÇ (7 GÜN SONRA)";
+                }, 6000); 
             }, 100);
         }
-        
-        // Sayfa yüklendiğinde kasayı hazırla
         createCaseItems();
     </script>
 </body>

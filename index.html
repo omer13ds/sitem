@@ -26,123 +26,82 @@
             --neon-shadow: 0 0 20px rgba(188, 111, 241, 0.4);
         }
 
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Inter', sans-serif; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
 
-        body { 
-            background: var(--bg); 
-            color: #fff; 
-            overflow-x: hidden; 
-            scroll-behavior: smooth; 
-        }
+        /* YETKİ (ROLE) CSS SİSTEMİ İPTAL EDİLDİ - HER ŞEY JS İLE GÜVENLİ ŞEKİLDE GİZLENECEK */
+        /* Sadece varsayılan gizleme sınıfları, bozma yapmaz */
+        .hide-element { display: none !important; }
 
         /* --- 2. LÜKS ARKA PLAN EFEKTİ --- */
         .bg-layer {
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            z-index: -1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at 50% 0%, #2a0e45 0%, #09090e 60%),
                         linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
                         linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
             background-size: 100% 100%, 40px 40px, 40px 40px;
         }
 
-        .container { 
-            max-width: 1300px; 
-            margin: 0 auto; 
-            padding: 0 30px; 
-        }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 30px; }
 
         /* --- 3. ÜST MENÜ (GLASSMORPHISM) --- */
         nav {
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            position: sticky; top: 0; background: rgba(9, 9, 14, 0.85); 
-            backdrop-filter: blur(20px); z-index: 100;
+            position: sticky; top: 0; background: rgba(9, 9, 14, 0.85); backdrop-filter: blur(20px); z-index: 100;
             box-shadow: 0 5px 20px rgba(0,0,0,0.4);
         }
         
         .logo { 
             font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; 
-            letter-spacing: 2px; cursor: pointer; padding: 25px 0; margin-left: 10px;
+            letter-spacing: 2px; cursor: pointer; padding: 25px 0; 
+            margin-left: 20px; /* LOGO YAPIŞMASI DÜZELTİLDİ */
         }
         .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
         
-        .nav-right { display: flex; align-items: center; gap: 25px; margin-right: 10px; }
+        .nav-right { display: flex; align-items: center; gap: 25px; margin-right: 20px; }
         .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; }
         .nav-links li { position: relative; padding: 30px 0; } 
         
-        .nav-links a { 
-            display: inline-block; color: #ccc; text-decoration: none; font-size: 0.85rem; 
-            font-weight: 700; text-transform: uppercase; transition: 0.3s; cursor: pointer; letter-spacing: 0.5px;
-        }
+        .nav-links a { display: inline-block; color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; cursor: pointer; letter-spacing: 0.5px;}
         .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
         .dropdown-menu {
-            display: none; position: absolute; top: 100%; left: 0; background: var(--card-bg); 
-            backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 10px; 
-            min-width: 250px; padding: 10px 0; box-shadow: 0 15px 40px rgba(0,0,0,0.6); 
-            margin-top: -5px; animation: fadeInDown 0.3s ease forwards;
+            display: none; position: absolute; top: 100%; left: 0; background: var(--card-bg); backdrop-filter: blur(15px);
+            border: 1px solid var(--border); border-radius: 10px; min-width: 250px; padding: 10px 0; box-shadow: 0 15px 40px rgba(0,0,0,0.6); margin-top: -5px; animation: fadeInDown 0.3s ease forwards;
         }
         .nav-links li:hover .dropdown-menu { display: block; }
-        .dropdown-menu a { 
-            display: block; padding: 15px 25px; color: #aaa; text-transform: none; 
-            font-weight: 600; font-size: 0.95rem; border-left: 3px solid transparent;
-        }
-        .dropdown-menu a:hover { 
-            background: rgba(188, 111, 241, 0.1); color: #fff; padding-left: 30px; border-left-color: var(--primary); 
-        }
+        .dropdown-menu a { display: block; padding: 15px 25px; color: #aaa; text-transform: none; font-weight: 600; font-size: 0.95rem; border-left: 3px solid transparent;}
+        .dropdown-menu a:hover { background: rgba(188, 111, 241, 0.1); color: #fff; padding-left: 30px; border-left-color: var(--primary); }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
 
         /* GİRİŞ & PROFİL BUTONLARI */
         .auth-btns { display: flex; gap: 15px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 25px; }
-        .btn-outline, .btn-solid { 
-            display: inline-flex; align-items: center; justify-content: center; text-decoration: none; 
-            padding: 12px 25px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; 
-            cursor: pointer; transition: 0.4s; text-transform: uppercase; border: none; letter-spacing: 1px;
-        }
+        .btn-outline, .btn-solid { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: 0.4s; text-transform: uppercase; border: none; letter-spacing: 1px;}
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-outline:hover { background: var(--primary); color: #fff; box-shadow: var(--neon-shadow); }
         .btn-solid { background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; box-shadow: var(--neon-shadow); }
         .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(188, 111, 241, 0.6); }
 
         .user-profile { display: none; align-items: center; gap: 10px; cursor: pointer; position: relative; padding: 25px 0; }
-        .avatar { 
-            width: 45px; height: 45px; background: linear-gradient(45deg, var(--primary), var(--accent)); 
-            border-radius: 50%; display: flex; justify-content: center; align-items: center; 
-            font-weight: 900; color: #fff; box-shadow: 0 0 15px rgba(188, 111, 241, 0.5); 
-            font-size: 1.2rem; border: 2px solid rgba(255,255,255,0.2);
-        }
+        .avatar { width: 45px; height: 45px; background: linear-gradient(45deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; color: #fff; box-shadow: 0 0 15px rgba(188, 111, 241, 0.5); font-size: 1.2rem; border: 2px solid rgba(255,255,255,0.2);}
         
-        .role-badge { 
-            display: none; color: #fff; font-size: 0.7rem; padding: 4px 8px; border-radius: 6px; 
-            font-weight: 900; letter-spacing: 1px; margin-left: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
+        .role-badge { display: none; color: #fff; font-size: 0.7rem; padding: 4px 8px; border-radius: 6px; font-weight: 900; letter-spacing: 1px; margin-left: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.5);}
+        .badge-kurucu { background: linear-gradient(45deg, #ff0044, var(--danger)); }
+        .badge-admin { background: linear-gradient(45deg, var(--primary), #6600cc); } 
+        .badge-mod { background: linear-gradient(45deg, var(--gold), #ffaa00); color: #000; }
 
         .profile-dropdown {
-            display: none; position: absolute; top: 100%; right: 0; background: var(--card-bg); 
-            backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 12px; 
-            width: 240px; padding: 10px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.7); 
-            margin-top: -5px; animation: fadeInDown 0.3s ease forwards; z-index: 1000;
+            display: none; position: absolute; top: 100%; right: 0; background: var(--card-bg); backdrop-filter: blur(15px);
+            border: 1px solid var(--border); border-radius: 12px; width: 240px; padding: 10px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.7); margin-top: -5px; animation: fadeInDown 0.3s ease forwards; z-index: 1000;
         }
         .user-profile:hover .profile-dropdown { display: block; }
-        .profile-dropdown a { 
-            display: block; padding: 15px 25px; color: #aaa; text-decoration: none; 
-            font-size: 0.95rem; font-weight: 600; transition: 0.3s; cursor: pointer; border-left: 3px solid transparent;
-        }
+        .profile-dropdown a { display: block; padding: 15px 25px; color: #aaa; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.3s; cursor: pointer; border-left: 3px solid transparent;}
         .profile-dropdown a:hover { background: rgba(255,255,255,0.05); color: #fff; padding-left: 30px; border-left-color: var(--primary); }
 
         /* TOAST BİLDİRİM */
         #customToast {
-            position: fixed; top: 30px; right: -400px; background: rgba(18,18,24,0.95); backdrop-filter: blur(10px); 
-            border-left: 4px solid var(--success); padding: 20px 30px; border-radius: 10px; color: #fff; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 9999; transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            display: flex; align-items: center; gap: 15px; font-weight: 700; border: 1px solid rgba(255,255,255,0.05);
+            position: fixed; top: 30px; right: -400px; background: rgba(18,18,24,0.95); backdrop-filter: blur(10px); border-left: 4px solid var(--success); padding: 20px 30px; border-radius: 10px; color: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 9999; transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 15px; font-weight: 700; border: 1px solid rgba(255,255,255,0.05);
         }
         #customToast.show { right: 30px; }
         #customToast i { font-size: 1.8rem; color: var(--success); }
@@ -168,7 +127,7 @@
         .stats-section { display: flex; justify-content: space-around; background: linear-gradient(90deg, transparent, rgba(188, 111, 241, 0.05), transparent); padding: 70px 0; margin: 100px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);}
         .stat-item h4 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 25px var(--primary);}
 
-        /* --- 5. DİSCORD & LİSANS KARTLARI --- */
+        /* DİSCORD & LİSANS KARTLARI */
         .discord-grid, .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 50px;}
         .ds-card, .price-card { background: var(--card-bg); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border); transition: 0.4s; backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;}
         .ds-card:hover, .price-card:hover { border-color: var(--primary); transform: translateY(-10px); box-shadow: 0 20px 50px rgba(188, 111, 241, 0.15); }
@@ -191,7 +150,7 @@
         .price-card.premium h3, .price-card.premium .price, .price-card.premium ul li i { color: var(--gold); text-shadow: 0 0 15px rgba(255,183,3,0.3);}
         .price-card.premium .buy-btn { background: var(--gold); color: #000; border: none; box-shadow: 0 5px 20px rgba(255, 183, 3, 0.4);}
 
-        /* --- 6. SEPETİM --- */
+        /* SEPETİM */
         .cart-wrapper { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
         .cart-items-container { flex: 2; display: flex; flex-direction: column; gap: 20px; min-width: 300px;}
         .cart-summary { flex: 1; background: var(--card-bg); padding: 40px; border-radius: 20px; border: 1px solid var(--primary); position: sticky; top: 120px; backdrop-filter: blur(15px); box-shadow: 0 10px 50px rgba(188, 111, 241, 0.15); min-width: 300px;}
@@ -212,37 +171,33 @@
         .status-active { background: rgba(188, 111, 241, 0.15); color: var(--primary); border: 1px solid var(--primary); box-shadow: 0 0 15px rgba(188,111,241,0.2);}
         .status-banned { background: rgba(255, 71, 87, 0.15); color: var(--danger); border: 1px solid var(--danger); box-shadow: 0 0 15px rgba(255,71,87,0.2);}
 
-        /* --- 7. YÖNETİM PANELİ (KUSURSUZ GRID MİMARİSİ) --- */
+        /* --- 6. YÖNETİM PANELİ (BETON GİBİ GRID MİMARİSİ) --- */
         .admin-layout { 
-            display: grid; 
-            grid-template-columns: 280px 1fr; 
-            gap: 40px; 
-            align-items: start; 
+            display: flex; gap: 40px; align-items: flex-start;
         }
-        @media (max-width: 900px) { .admin-layout { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .admin-layout { flex-direction: column; } }
         
         .admin-sidebar { 
-            background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
+            width: 280px; flex-shrink: 0; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
             padding: 30px; position: sticky; top: 110px; backdrop-filter: blur(15px);
         }
         .admin-sidebar h3 { color: var(--danger); font-family: 'Orbitron', sans-serif; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid rgba(255, 71, 87, 0.2); font-size: 1.3rem; text-align: center; letter-spacing: 1px;}
         .admin-nav { list-style: none; }
-        .admin-nav li { margin-bottom: 15px; display: none; /* JS ile açılır */ }
+        .admin-nav li { margin-bottom: 15px; }
         .admin-nav a { display: block; padding: 18px; background: rgba(255,255,255,0.03); color: #aaa; border-radius: 12px; transition: 0.3s; cursor: pointer; border: 1px solid transparent; font-weight: 700; font-size: 0.95rem;}
         .admin-nav a.active, .admin-nav a:hover { background: rgba(188, 111, 241, 0.15); color: #fff; border-color: var(--primary); box-shadow: 0 5px 15px rgba(188, 111, 241, 0.2);}
         .admin-nav i { margin-right: 15px; color: var(--primary); width: 20px; text-align: center; font-size: 1.1rem;}
 
         .admin-content { 
-            background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
+            flex: 1; min-width: 0; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
             padding: 40px; min-height: 700px; backdrop-filter: blur(15px); box-shadow: 0 10px 50px rgba(0,0,0,0.2);
-            min-width: 0; overflow: hidden; /* Taşmaları engeller */
         }
         
-        .admin-section { display: none !important; animation: fadeIn 0.4s ease; } 
-        .admin-section.active { display: block !important; }
+        .admin-section { display: none; animation: fadeIn 0.4s ease; } 
+        .admin-section.active { display: block; }
         
-        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(255,255,255,0.05); padding-bottom: 30px; margin-bottom: 40px; flex-wrap: wrap; gap: 20px;}
-        .admin-header h4 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; color: #fff;}
+        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(255,255,255,0.05); padding-bottom: 20px; margin-bottom: 30px; flex-wrap: wrap; gap: 20px;}
+        .admin-header h4 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff;}
         
         .table-responsive { width: 100%; overflow-x: auto; padding-bottom: 10px;}
         .admin-table { width: 100%; border-collapse: collapse; min-width: 600px; }
@@ -250,7 +205,7 @@
         .admin-table th { color: #888; font-size: 0.85rem; text-transform: uppercase; font-weight: 800;}
         .admin-table td { color: #ccc; font-size: 1rem; }
         
-        .action-btn { padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; font-weight: 800; margin-right: 8px; transition: 0.3s; font-size: 0.9rem;}
+        .action-btn { padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; font-weight: 800; margin-right: 8px; transition: 0.3s; font-size: 0.9rem; display: inline-block;}
         .btn-danger { background: rgba(255, 71, 87, 0.1); color: var(--danger); border: 1px solid var(--danger); }
         .btn-danger:hover { background: var(--danger); color: #fff; box-shadow: 0 0 15px var(--danger);}
         .btn-success { background: rgba(0, 255, 136, 0.1); color: var(--success); border: 1px solid var(--success); }
@@ -266,8 +221,9 @@
         .control-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); padding: 35px; border-radius: 15px; display: flex; gap: 20px; align-items: center; margin-bottom: 50px; flex-wrap: wrap; }
         .control-box .search-input { flex: 2; min-width: 250px; width: auto; }
         .control-box select { flex: 1; min-width: 200px; padding: 15px 20px; border-radius: 10px; background: rgba(0,0,0,0.4); color: #fff; border: 1px solid rgba(255,255,255,0.1); outline: none; font-size:1rem; cursor: pointer; transition: 0.3s;}
+        .control-box select:focus { border-color: var(--primary); }
 
-        /* --- 8. MODALLAR --- */
+        /* --- 7. MODAL TASARIMLARI --- */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; }
         .modal-box { background: rgba(13, 13, 18, 0.95); padding: 50px 60px; border-radius: 25px; width: 100%; max-width: 500px; border: 1px solid var(--border); position: relative; text-align: center; box-shadow: 0 0 80px rgba(188, 111, 241, 0.2); }
         .auth-tabs { display: flex; margin-bottom: 40px; border-bottom: 2px solid #222; }
@@ -281,45 +237,57 @@
         .close-btn:hover { color: var(--danger); transform: scale(1.1);}
         .modal-select { width: 100%; padding: 20px; background: #15151c; border: 1px solid #222; border-radius: 10px; color: #fff; outline: none; margin-bottom: 25px; font-size: 1.05rem; cursor: pointer;}
 
-        /* --- 9. CANLI DESTEK --- */
+        /* --- 8. CANLI DESTEK SİSTEMİ --- */
         .chat-widget-btn {
             position: fixed; bottom: 40px; right: 40px; width: 70px; height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 2rem; color: #fff; cursor: pointer; box-shadow: 0 10px 30px rgba(188, 111, 241, 0.5); transition: 0.4s; z-index: 1000; border: 2px solid rgba(255,255,255,0.2);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 2rem; color: #fff; cursor: pointer; box-shadow: 0 10px 30px rgba(188, 111, 241, 0.5);
+            transition: 0.4s; z-index: 1000; border: 2px solid rgba(255,255,255,0.2);
         }
         .chat-widget-btn:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 40px rgba(188, 111, 241, 0.7); }
         
         .chat-box {
             position: fixed; bottom: 130px; right: 40px; width: 380px; height: 520px;
             background: rgba(18, 18, 24, 0.95); border: 1px solid var(--primary); border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8); z-index: 1000; display: flex; flex-direction: column; overflow: hidden; animation: fadeIn 0.4s ease; backdrop-filter: blur(25px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8); z-index: 1000; display: flex; flex-direction: column;
+            overflow: hidden; animation: fadeIn 0.4s ease; backdrop-filter: blur(25px);
         }
-        .chat-header { background: linear-gradient(90deg, var(--primary), var(--accent)); color: #fff; padding: 20px 25px; font-weight: 900; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; }
-        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.4); }
+        .chat-header {
+            background: linear-gradient(90deg, var(--primary), var(--accent)); color: #fff; padding: 20px 25px; 
+            font-weight: 900; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;
+            display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem;
+        }
+        .chat-messages {
+            flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;
+            background: rgba(0,0,0,0.4);
+        }
         .chat-msg { padding: 12px 18px; border-radius: 12px; font-size: 0.95rem; max-width: 85%; word-wrap: break-word; line-height: 1.5;}
         .msg-user { background: var(--primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 0; box-shadow: 0 5px 15px rgba(188,111,241,0.2);}
         .msg-admin { background: rgba(255,255,255,0.05); color: #fff; align-self: flex-start; border-bottom-left-radius: 0; border: 1px solid rgba(255,255,255,0.1);}
+        
         .chat-input-area { display: flex; padding: 20px; background: rgba(0,0,0,0.6); border-top: 1px solid rgba(255,255,255,0.05); align-items: center;}
         .chat-input-area input { flex: 1; padding: 15px 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 25px; color: #fff; outline: none; font-size: 1rem; transition: 0.3s;}
         .chat-input-area input:focus { border-color: var(--primary); }
         .chat-input-area button { background: var(--primary); border: none; color: #fff; width: 50px; height: 50px; border-radius: 50%; margin-left: 15px; cursor: pointer; transition: 0.3s; font-size: 1.2rem; display: flex; justify-content: center; align-items: center;}
         .chat-input-area button:hover { background: var(--accent); transform: scale(1.1); box-shadow: 0 0 15px var(--primary);}
 
-        /* YETKİLİ SOHBETİ */
+        /* YETKİLİ SOHBETİ (PANEL İÇİ) */
         .staff-chat-container { display: flex; flex-direction: column; height: 450px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; overflow: hidden;}
         .staff-chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         .staff-msg { padding: 15px; border-radius: 12px; font-size: 0.95rem; line-height: 1.5; background: rgba(255,255,255,0.05); border-left: 4px solid var(--discord);}
         .staff-msg strong { color: var(--gold); display: block; margin-bottom: 5px; font-family: 'Orbitron'; font-size: 0.85rem; letter-spacing: 1px;}
         .staff-input-area { display: flex; padding: 20px; background: rgba(0,0,0,0.5); border-top: 1px solid rgba(255,255,255,0.05); align-items: center; }
 
-        /* --- 10. ŞANS KASASI --- */
-        .case-wrapper { background:var(--card-bg); padding:50px; border-radius:25px; border:1px solid var(--gold); box-shadow:0 10px 50px rgba(255,183,3,0.15); backdrop-filter:blur(15px); text-align: center; max-width: 900px; margin: 0 auto; }
+        /* --- 9. ŞANS KASASI DÜZELTMESİ (TAŞMA YOK, YAZILAR ALT ALTA) --- */
+        .case-wrapper { background:var(--card-bg); padding:50px; border-radius:25px; border:1px solid var(--gold); box-shadow:0 10px 40px rgba(255,183,3,0.15); backdrop-filter:blur(15px); text-align: center; max-width: 900px; margin: 0 auto; }
         .case-container { width: 100%; height: 220px; background: #0d0d12; border: 2px solid #333; border-radius: 10px; position: relative; overflow: hidden; display: flex; align-items: center; box-shadow: inset 0 0 80px rgba(0,0,0,0.8); }
         .case-center-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: var(--gold); z-index: 10; box-shadow: 0 0 20px var(--gold); }
         .case-strip { display: flex; align-items: center; height: 180px; transition: transform 6s cubic-bezier(0.15, 0.9, 0.15, 1); }
-        .case-item { width: 150px; height: 150px; flex-shrink: 0; margin: 0 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 8px; font-weight: bold; border-bottom: 5px solid; background: linear-gradient(180deg, #1a1a24 0%, #111 100%); text-align: center; padding: 10px; overflow: hidden; }
-        .item-icon { font-size: 2.2rem; margin-bottom: 8px; }
-        .item-text { font-size: 0.85rem; line-height: 1.3; }
+        .case-item { width: 150px; height: 150px; flex-shrink: 0; margin: 0 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 8px; font-weight: bold; border-bottom: 5px solid; background: linear-gradient(180deg, #1a1a24 0%, #111 100%); text-align: center; padding: 10px;}
+        .item-icon { font-size: 2.5rem; margin-bottom: 8px; }
+        .item-text { font-size: 0.9rem; line-height: 1.3; }
+        
         .rarity-common { border-color: #666; color: #888; } 
         .rarity-rare { border-color: var(--blue); color: var(--blue); text-shadow: 0 0 10px var(--blue); } 
         .rarity-epic { border-color: var(--primary); color: var(--primary); text-shadow: 0 0 10px var(--primary); } 
@@ -328,7 +296,7 @@
         footer { text-align: center; padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.05); color: #666; font-size: 0.9rem; letter-spacing: 1px; }
     </style>
 </head>
-<body class="role-user">
+<body>
 
     <div class="bg-layer"></div>
     
@@ -371,8 +339,7 @@
                     <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: #888; margin-left: 8px;"></i>
                     
                     <div class="profile-dropdown">
-                        <a onclick="switchPage('admin')" class="req-admin-link" id="adminMenuBtn" style="display:none;"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
-                        
+                        <a onclick="switchPage('admin')" id="adminMenuBtn" style="display:none;"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
                         <a onclick="switchPage('cart')"><i class="fas fa-shopping-cart"></i> Sepetim <span id="cartCountBadge" style="background:var(--danger); color:#fff; padding:3px 8px; border-radius:10px; font-size:0.75rem; margin-left:5px; display:none; font-weight:bold;">0</span></a>
                         <a onclick="switchPage('orders')"><i class="fas fa-box"></i> Siparişlerim</a>
                         <a onclick="logout()" style="color:var(--danger); border-top:1px solid rgba(255,255,255,0.1); margin-top:10px; padding-top:15px;"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
@@ -473,7 +440,7 @@
                     
                     <div class="admin-sidebar">
                         <h3>KONTROL MENÜSÜ</h3>
-                        <ul class="admin-nav" id="adminSidebarNav">
+                        <ul class="admin-nav" id="adminNavList">
                             </ul>
                     </div>
 
@@ -482,14 +449,14 @@
                         <div id="adm-keys" class="admin-section">
                             <div class="admin-header">
                                 <h4>LİSANS YÖNETİMİ</h4>
-                                <div style="display:flex; gap:15px; flex-wrap:wrap;">
+                                <div id="adminKeyBtnWrapper" style="display:flex; gap:15px; flex-wrap:wrap;">
                                     <input type="text" id="keySearch" class="search-input" placeholder="Kullanıcı veya Key Ara..." onkeyup="filterTable('keySearch', 'admKeysTbody')">
                                     <button class="btn-solid" style="background:linear-gradient(135deg, var(--success), #00cc6a); box-shadow: 0 0 15px rgba(0,255,136,0.3);" onclick="openAdminKeyModal()"><i class="fas fa-plus"></i> Yeni Key Üret</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
                                 <table class="admin-table">
-                                    <thead><tr><th>Kullanıcı</th><th>Lisans Anahtarı</th><th>Paket</th><th>Durum</th><th>İşlem</th></tr></thead>
+                                    <thead><tr><th>Kullanıcı</th><th>Lisans Anahtarı</th><th>Paket</th><th>Durum</th><th id="thKeyAction">İşlem</th></tr></thead>
                                     <tbody id="admKeysTbody"></tbody>
                                 </table>
                             </div>
@@ -500,10 +467,10 @@
                                 <h4>KAYITLI ÜYELER</h4>
                                 <input type="text" id="userSearch" class="search-input" placeholder="Üye Ara..." onkeyup="filterTable('userSearch', 'admUsersTbody')">
                             </div>
-                            <p style="color:#aaa; margin-bottom: 20px;">* Şifreler yetki durumunuza göre gösterilir veya gizlenir.</p>
+                            <p style="color:#aaa; margin-bottom: 20px;">* Şifreler ve yönetim butonları yetkinize göre gizlenir veya gösterilir.</p>
                             <div class="table-responsive">
                                 <table class="admin-table">
-                                    <thead><tr><th>Kullanıcı Adı</th><th>Şifre</th><th>Rol</th><th id="thUserActions">İşlem</th></tr></thead>
+                                    <thead><tr><th>Kullanıcı Adı</th><th>Şifre</th><th>Rol</th><th id="thUserAction">İşlem</th></tr></thead>
                                     <tbody id="admUsersTbody"></tbody>
                                 </table>
                             </div>
@@ -516,14 +483,14 @@
                             </p>
                             <div class="control-box">
                                 <input type="text" id="roleUserTarget" class="search-input" placeholder="Kullanıcı Adı Girin" onkeypress="if(event.key==='Enter') assignRole()">
-                                <select id="roleSelectTarget" class="modal-select" style="margin-bottom:0;">
+                                <select id="roleSelectTarget" class="search-input" style="margin-bottom:0;">
                                     <option value="user">Normal Üye Yap</option>
                                     <option value="mod">Moderatör Yap</option>
                                     <option value="admin">Admin Yap</option>
                                 </select>
                                 <button class="btn-solid" onclick="assignRole()">Uygula</button>
                             </div>
-                            <h4 style="margin-top:50px; margin-bottom:20px; color:var(--primary); font-family:'Orbitron', sans-serif; font-size:1.3rem;">Mevcut Yetkililer</h4>
+                            <h4 style="margin-top:50px; margin-bottom:20px; color:var(--primary); font-family:'Orbitron'; font-size:1.3rem;">Mevcut Yetkililer Listesi</h4>
                             <div class="table-responsive">
                                 <table class="admin-table">
                                     <thead><tr><th>Kullanıcı Adı</th><th>Atanan Rol</th></tr></thead>
@@ -536,7 +503,7 @@
                             <div class="admin-header"><h4>KUPON OLUŞTURMA</h4></div>
                             <div class="control-box">
                                 <input type="text" id="newCouponCode" class="search-input" placeholder="Kupon Kodu Belirle (Örn: SENSI25)" onkeypress="if(event.key==='Enter') createCoupon()">
-                                <select id="newCouponPerc" class="modal-select" style="margin-bottom:0;">
+                                <select id="newCouponPerc" class="search-input" style="margin-bottom:0;">
                                     <option value="10">%10 İndirim</option>
                                     <option value="20">%20 İndirim</option>
                                     <option value="25">%25 İndirim</option>
@@ -546,7 +513,7 @@
                             </div>
                             <div class="table-responsive">
                                 <table class="admin-table">
-                                    <thead><tr><th>Kupon Kodu</th><th>İndirim Miktarı</th><th>İşlem</th></tr></thead>
+                                    <thead><tr><th>Kupon Kodu</th><th>İndirim Miktarı</th><th id="thCouponAction">İşlem</th></tr></thead>
                                     <tbody id="admCouponsTbody"></tbody>
                                 </table>
                             </div>
@@ -589,34 +556,19 @@
             
             <div id="page-case" class="page">
                 <h2 class="page-title" style="color:var(--gold); text-shadow:0 0 25px rgba(255,183,3,0.3);">SENSİ KASA AÇILIŞI</h2>
-                <div class="case-wrapper">
+                <div class="case-wrapper" style="background:var(--card-bg); padding:50px; border-radius:25px; border:1px solid var(--gold); box-shadow:0 10px 50px rgba(255,183,3,0.15); backdrop-filter:blur(15px); text-align:center; max-width:900px; margin:0 auto;">
                     <p style="color:#ccc; margin-bottom:40px; font-size:1.1rem;">Haftada 1 kez açılabilir. Belki Lifetime (Sınırsız) senin olur!</p>
-                    <div class="case-container">
-                        <div class="case-center-line"></div>
-                        <div class="case-strip" id="caseStrip"></div>
+                    <div class="case-container" style="width:100%; height:220px; background:#0d0d12; border:2px solid #333; border-radius:10px; position:relative; overflow:hidden; display:flex; align-items:center; box-shadow:inset 0 0 80px rgba(0,0,0,0.8);">
+                        <div class="case-center-line" style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:4px; height:100%; background:var(--gold); z-index:10; box-shadow:0 0 20px var(--gold);"></div>
+                        <div class="case-strip" id="caseStrip" style="display:flex; align-items:center; height:180px; transition:transform 6s cubic-bezier(0.15, 0.9, 0.15, 1);"></div>
                     </div>
-                    <div id="caseResultText"></div>
+                    <div id="caseResultText" style="margin-top:40px; font-size:1.8rem; font-weight:900; font-family:'Orbitron'; letter-spacing:2px; min-height:40px;"></div>
                     <button class="btn-solid" id="openCaseBtn" style="margin-top:40px; background:linear-gradient(135deg, var(--gold), #ff8800); color:#000; padding:25px 60px; font-size:1.3rem; letter-spacing:2px; box-shadow:0 0 30px rgba(255,183,3,0.4);" onclick="startCaseOpening()">KASAYI AÇ</button>
                 </div>
             </div>
 
-            <div id="page-reverse" class="page">
-                <h2 class="page-title">REVERSE ENGINEERING</h2>
-                <div style="text-align:center; padding:150px; background:var(--card-bg); border-radius:25px; border:1px solid var(--primary); backdrop-filter:blur(15px); box-shadow:0 10px 50px rgba(188,111,241,0.1);">
-                    <i class="fas fa-microchip" style="font-size:7rem; color:var(--primary); margin-bottom:35px; filter:drop-shadow(0 0 30px rgba(188,111,241,0.5));"></i>
-                    <h2 style="font-family:'Orbitron'; font-size:2.8rem; margin-bottom:20px; color:#fff;">SİSTEM MİMARİSİ EĞİTİMİ</h2>
-                    <p style="color:#aaa; font-size:1.3rem; letter-spacing:1px;">Çok Yakında Sensisoftware Akademisinde.</p>
-                </div>
-            </div>
-
-            <div id="page-server" class="page">
-                <h2 class="page-title" style="color:var(--gold); text-shadow:0 0 25px rgba(255,183,3,0.3);">SERVER HİZMETLERİ</h2>
-                <div style="text-align:center; padding:150px; background:var(--card-bg); border-radius:25px; border:1px solid var(--gold); backdrop-filter:blur(15px); box-shadow:0 10px 50px rgba(255,183,3,0.1);">
-                    <i class="fas fa-server" style="font-size:7rem; color:var(--gold); margin-bottom:35px; filter:drop-shadow(0 0 30px rgba(255,183,3,0.5));"></i>
-                    <h2 style="font-family:'Orbitron'; font-size:2.8rem; margin-bottom:20px; color:var(--gold);">ALTYAPI ÇALIŞMASI</h2>
-                    <p style="color:#aaa; font-size:1.3rem; letter-spacing:1px;">DDoS korumalı yüksek performanslı sunucu kiralama hizmetlerimiz hazırlanıyor.</p>
-                </div>
-            </div>
+            <div id="page-reverse" class="page"><h2 class="page-title">REVERSE ENGINEERING</h2><div style="text-align:center; padding:150px; background:var(--card-bg); border-radius:25px; border:1px solid var(--primary); backdrop-filter:blur(15px); box-shadow:0 10px 50px rgba(188,111,241,0.1);"><i class="fas fa-microchip" style="font-size:7rem; color:var(--primary); margin-bottom:35px; filter:drop-shadow(0 0 30px rgba(188,111,241,0.5));"></i><h2 style="font-family:'Orbitron'; font-size:2.8rem; margin-bottom:20px; color:#fff;">SİSTEM MİMARİSİ EĞİTİMİ</h2><p style="color:#aaa; font-size:1.3rem; letter-spacing:1px;">Çok Yakında Sensisoftware Akademisinde.</p></div></div>
+            <div id="page-server" class="page"><h2 class="page-title" style="color:var(--gold); text-shadow:0 0 25px rgba(255,183,3,0.3);">SERVER HİZMETLERİ</h2><div style="text-align:center; padding:150px; background:var(--card-bg); border-radius:25px; border:1px solid var(--gold); backdrop-filter:blur(15px); box-shadow:0 10px 50px rgba(255,183,3,0.1);"><i class="fas fa-server" style="font-size:7rem; color:var(--gold); margin-bottom:35px; filter:drop-shadow(0 0 30px rgba(255,183,3,0.5));"></i><h2 style="font-family:'Orbitron'; font-size:2.8rem; margin-bottom:20px; color:var(--gold);">ALTYAPI ÇALIŞMASI</h2><p style="color:#aaa; font-size:1.3rem; letter-spacing:1px;">DDoS korumalı yüksek performanslı sunucu kiralama hizmetlerimiz hazırlanıyor.</p></div></div>
         </div>
         <footer>&copy; 2026 SENSISOFTWARE. THE ENGINEERING HUB.</footer>
     </div>
@@ -624,35 +576,17 @@
     <div id="authModal" class="modal">
         <div class="modal-box">
             <span class="close-btn" onclick="closeModal('authModal')">&times;</span>
-            
-            <div class="auth-tabs">
-                <div class="auth-tab active" id="tLog" onclick="switchAuth('login')">GİRİŞ YAP</div>
-                <div class="auth-tab" id="tReg" onclick="switchAuth('register')">KAYIT OL</div>
-            </div>
-            
+            <div class="auth-tabs"><div class="auth-tab active" id="tLog" onclick="switchAuth('login')">GİRİŞ YAP</div><div class="auth-tab" id="tReg" onclick="switchAuth('register')">KAYIT OL</div></div>
             <div id="formLogin">
                 <h2 style="margin-bottom:35px; font-family:'Orbitron'; font-size:2.2rem; letter-spacing:2px; color:#fff;">HOŞ GELDİN</h2>
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="lUs" placeholder="Kullanıcı Adı" onkeypress="if(event.key==='Enter') doLogin()">
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="lPs" placeholder="Şifre" onkeypress="if(event.key==='Enter') doLogin()">
-                </div>
+                <div class="input-group"><i class="fas fa-user"></i><input type="text" id="lUs" placeholder="Kullanıcı Adı" onkeypress="if(event.key==='Enter') doLogin()"></div>
+                <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="lPs" placeholder="Şifre" onkeypress="if(event.key==='Enter') doLogin()"></div>
                 <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; margin-top:20px; letter-spacing:2px;" onclick="doLogin()">SİSTEME BAĞLAN</button>
             </div>
-            
             <div id="formReg" style="display:none;">
                 <h2 style="margin-bottom:35px; font-family:'Orbitron'; font-size:2.2rem; letter-spacing:2px; color:#fff;">ARAMIZA KATIL</h2>
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="rUs" placeholder="Kullanıcı Adı Belirle" onkeypress="if(event.key==='Enter') doReg()">
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="rPs" placeholder="Şifre Belirle" onkeypress="if(event.key==='Enter') doReg()">
-                </div>
+                <div class="input-group"><i class="fas fa-user"></i><input type="text" id="rUs" placeholder="Kullanıcı Adı Belirle" onkeypress="if(event.key==='Enter') doReg()"></div>
+                <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="rPs" placeholder="Şifre Belirle" onkeypress="if(event.key==='Enter') doReg()"></div>
                 <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background:linear-gradient(135deg, var(--success), #00cc6a); margin-top:20px; letter-spacing:2px; box-shadow: 0 0 25px rgba(0,255,136,0.3);" onclick="doReg()">KAYDINI TAMAMLA</button>
             </div>
         </div>
@@ -662,15 +596,8 @@
         <div class="modal-box" style="border-color:var(--success); box-shadow: 0 0 80px rgba(0, 255, 136, 0.2);">
             <span class="close-btn" onclick="closeModal('adminKeyModal')">&times;</span>
             <h2 style="color:var(--success); margin-bottom:35px; font-family:'Orbitron'; font-size:2rem; letter-spacing:2px; text-shadow:0 0 15px rgba(0,255,136,0.5);">LİSANS ÜRET</h2>
-            <div class="input-group">
-                <i class="fas fa-user" style="color:var(--success);"></i>
-                <input type="text" id="akUs" placeholder="Kime tanımlanacak?" onkeypress="if(event.key==='Enter') genKey()" style="border-color:rgba(0,255,136,0.3);">
-            </div>
-            <select id="akDy" class="modal-select" style="border-color:rgba(0,255,136,0.3);">
-                <option value="1">1 Günlük Lisans</option>
-                <option value="7">7 Günlük Lisans</option>
-                <option value="30">30 Günlük Lisans</option>
-            </select>
+            <div class="input-group"><i class="fas fa-user" style="color:var(--success);"></i><input type="text" id="akUs" placeholder="Kime tanımlanacak?" onkeypress="if(event.key==='Enter') genKey()" style="border-color:rgba(0,255,136,0.3);"></div>
+            <select id="akDy" class="search-input" style="width:100%; margin-bottom: 25px; padding: 20px; font-size: 1.1rem; border-color:rgba(0,255,136,0.3);"><option value="1">1 Günlük Lisans</option><option value="7">7 Günlük Lisans</option><option value="30">30 Günlük Lisans</option></select>
             <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background:linear-gradient(135deg, var(--success), #00cc6a); letter-spacing:2px; box-shadow: 0 0 25px rgba(0,255,136,0.3);" onclick="genKey()">ONAYLA VE ZİMMETLE</button>
         </div>
     </div>
@@ -680,23 +607,15 @@
             <span class="close-btn" onclick="closeModal('fakePaymentModal')">&times;</span>
             <i class="fas fa-shield-alt" style="font-size: 5rem; color: var(--danger); margin-bottom: 25px; filter:drop-shadow(0 0 25px rgba(255,71,87,0.5));"></i>
             <h2 style="color:var(--danger); margin-bottom:20px; font-family:'Orbitron'; letter-spacing:2px; font-size:2rem;">GÜVENLİK BİLDİRİMİ</h2>
-            <p style="color:#ccc; font-size:1.1rem; margin-bottom:35px; line-height: 1.8; max-width: 80%; margin-left: auto; margin-right: auto;">
-                Otomatik Sanal Pos altyapımız şu anda güvenlik testindedir. Satın alma işlemleri için lütfen yetkililerimizle <strong>Discord</strong> üzerinden iletişime geçin.
-            </p>
+            <p style="color:#ccc; font-size:1.1rem; margin-bottom:35px; line-height: 1.8;">Sanal Pos altyapımız şu anda güvenlik testindedir. Satın alma işlemleri için lütfen yetkililerimizle <strong>Discord</strong> üzerinden iletişime geçin.</p>
             <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background: var(--discord); letter-spacing:2px; box-shadow: 0 0 25px rgba(88,101,242,0.4);" onclick="closeModal('fakePaymentModal')"><i class="fab fa-discord"></i> DİSCORD'A GİT</button>
         </div>
     </div>
 
-    <div id="chatWidgetBtn" class="chat-widget-btn" onclick="toggleChat()" style="display:none;">
-        <i class="fas fa-comments"></i>
-    </div>
-    
+    <div id="chatWidgetBtn" class="chat-widget-btn" onclick="toggleChat()" style="display:none;"><i class="fas fa-comments"></i></div>
     <div id="chatBox" class="chat-box" style="display:none;">
-        <div class="chat-header">
-            <span id="chatHeaderTitle"><i class="fas fa-headset" style="margin-right:8px;"></i> Sensi Destek Hattı</span>
-            <i class="fas fa-times" onclick="toggleChat()" style="cursor:pointer; font-size:1.3rem;"></i>
-        </div>
-        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-header"><span id="chatHeaderTitle"><i class="fas fa-headset" style="margin-right:8px;"></i> Sensi Destek Hattı</span><i class="fas fa-times" onclick="toggleChat()" style="cursor:pointer; font-size:1.3rem;"></i></div>
+        <div class="chat-messages" id="chatMessages"><div class="chat-msg msg-admin">Merhaba, Sensisoftware'a hoş geldin. Sana nasıl yardımcı olabiliriz?</div></div>
         <div class="chat-input-area" id="chatInputArea">
             <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." onkeypress="if(event.key==='Enter') sendChatMessage()">
             <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
@@ -723,11 +642,12 @@
         let activeDiscount = 0;
         let activeChatUser = null; 
 
-        // BİLDİRİM SİSTEMİ
+        // BİLDİRİM SESİ
         const notifAudio = new Audio("https://actions.google.com/sounds/v1/ui/message_notification.ogg");
 
+        // YENİ BİLDİRİM SİSTEMİ (HER KOŞULDA ÇALIŞIR)
         function playNotification(title, body) {
-            notifAudio.play().catch(e => console.log("İlk tık bekleniyor.", e));
+            notifAudio.play().catch(e => console.log("Otomatik ses engellendi."));
             showToast("Yeni Mesaj: " + title, "success");
             
             if (document.hidden && Notification.permission === "granted") {
@@ -752,7 +672,7 @@
             setTimeout(() => t.className = '', 3500);
         }
 
-        // JS YETKİLENDİRME (HTML ÜRETİRKEN YAPIYORUZ)
+        // --- YENİ JS TABANLI GÜVENLİ MENÜ GİZLEME VE GÖSTERME ---
         function switchPage(p) {
             document.querySelectorAll('.page').forEach(e => e.classList.remove('active'));
             document.getElementById('page-'+p).classList.add('active');
@@ -765,32 +685,29 @@
             }
             if(p === 'orders') fetchOrders();
         }
-        
+
+        // Admin menüsünü JS ile çizeriz, böylece CSS ile zorla gizlemeye çalışırken tablolar patlamaz.
         function renderAdminSidebar() {
             let menuHtml = '';
             
             if (userRole === 'kurucu' || userRole === 'admin') {
                 menuHtml += `<li><a onclick="switchAdminTab('adm-keys')" id="nav-adm-keys" class="active"><i class="fas fa-key"></i> Lisans Yönetimi</a></li>`;
             }
-            
             if (userRole === 'kurucu' || userRole === 'admin' || userRole === 'mod') {
                 menuHtml += `<li><a onclick="switchAdminTab('adm-users')" id="nav-adm-users" class="${userRole==='mod'?'active':''}"><i class="fas fa-users"></i> Üyeler ve Şifreler</a></li>`;
             }
-            
             if (userRole === 'kurucu') {
                 menuHtml += `<li><a onclick="switchAdminTab('adm-roles')" id="nav-adm-roles"><i class="fas fa-gavel"></i> Yetki Kontrolü</a></li>`;
             }
-            
             if (userRole === 'kurucu' || userRole === 'admin') {
                 menuHtml += `<li><a onclick="switchAdminTab('adm-coupons')" id="nav-adm-coupons"><i class="fas fa-ticket-alt"></i> Kupon Sistemi</a></li>`;
             }
-            
             if (userRole === 'kurucu' || userRole === 'admin' || userRole === 'mod') {
                 menuHtml += `<li><a onclick="switchAdminTab('adm-tickets')" id="nav-adm-tickets" style="color:var(--blue);"><i class="fas fa-headset"></i> Destek Talepleri</a></li>`;
                 menuHtml += `<li><a onclick="switchAdminTab('adm-staff-chat')" id="nav-adm-staff-chat" style="color:var(--gold);"><i class="fas fa-comments"></i> Yetkili Sohbeti</a></li>`;
             }
             
-            document.getElementById('adminSidebarNav').innerHTML = menuHtml;
+            document.getElementById('adminNavList').innerHTML = menuHtml;
             
             document.querySelectorAll('.admin-section').forEach(e => e.classList.remove('active'));
             if (userRole === 'kurucu' || userRole === 'admin') {
@@ -798,12 +715,26 @@
             } else if (userRole === 'mod') {
                 document.getElementById('adm-users').classList.add('active');
             }
+            
+            updateTableHeaders();
+        }
+
+        function updateTableHeaders() {
+            const btnKeys = document.getElementById('adminKeyBtnWrapper');
+            const thKeyAction = document.getElementById('thKeyAction');
+            if(btnKeys) btnKeys.style.display = (userRole === 'kurucu' || userRole === 'admin') ? 'flex' : 'none';
+            if(thKeyAction) thKeyAction.style.display = (userRole === 'kurucu' || userRole === 'admin') ? 'table-cell' : 'none';
+            
+            const thUserAction = document.getElementById('thUserAction');
+            if(thUserAction) thUserAction.style.display = (userRole === 'kurucu' || userRole === 'admin') ? 'table-cell' : 'none';
+
+            const thCouponAction = document.getElementById('thCouponAction');
+            if(thCouponAction) thCouponAction.style.display = (userRole === 'kurucu' || userRole === 'admin') ? 'table-cell' : 'none';
         }
 
         function switchAdminTab(t) {
             document.querySelectorAll('.admin-section').forEach(e => e.classList.remove('active'));
-            const elements = document.querySelectorAll('.admin-nav a');
-            if(elements) elements.forEach(e => e.classList.remove('active'));
+            document.querySelectorAll('.admin-nav a').forEach(e => e.classList.remove('active'));
             
             const targetSec = document.getElementById(t);
             const targetNav = document.getElementById('nav-'+t);
@@ -813,8 +744,7 @@
         }
 
         function requireLogin(targetPage) {
-            if(currentUser) switchPage(targetPage); 
-            else { showToast("Bu sayfaya girmek için giriş yapmalısın!", "error"); openAuthModal('login'); }
+            if(currentUser) { switchPage(targetPage); } else { showToast("Bu sayfaya girmek için giriş yapmalısın!", "error"); openAuthModal('login'); }
         }
 
         function closeModal(m) { document.getElementById(m).style.display = 'none'; }
@@ -827,7 +757,7 @@
             document.getElementById('tReg').className = m === 'login' ? 'auth-tab' : 'auth-tab active';
         }
 
-        // --- KAYIT & GİRİŞ ---
+        // --- KAYIT SİSTEMİ (HAYALET HESAP FİXİ EKLENDİ) ---
         function doReg() {
             const u = document.getElementById('rUs').value.trim(); 
             const p = document.getElementById('rPs').value;
@@ -850,9 +780,7 @@
                             if(userSnap.exists()) showToast("Bu bilgisayardan zaten üyelik oluşturulmuş!", "error");
                             else finalizeRegistration(u, p, hwid);
                         });
-                    } else {
-                        finalizeRegistration(u, p, hwid);
-                    }
+                    } else finalizeRegistration(u, p, hwid);
                 });
             });
         }
@@ -861,7 +789,7 @@
             db.ref('users/'+u).once('value', snap => {
                 if(snap.exists()) return showToast("Bu isim daha önce alınmış!", "error");
                 
-                const role = u === 'omer13ds' ? 'kurucu' : 'user';
+                const role = u === 'omer13ds' ? 'kurucu' : 'user'; // MÜTLAK KURUCU
                 db.ref('users/'+u).set({ password: p, role: role, hwid: hwid }).then(() => {
                     localStorage.setItem('sensi_hwid', hwid);
                     db.ref('hwids/'+hwid).set({ user: u });
@@ -880,8 +808,8 @@
             db.ref('users/'+u).once('value', s => {
                 if(s.exists() && s.val().password === p) {
                     let r = s.val().role || 'user';
-                    if (u === 'omer13ds') r = 'kurucu'; // ZORUNLU KURUCU
                     
+                    if (u === 'omer13ds') r = 'kurucu'; // MÜTLAK KURUCU
                     if(r === 'banned') return showToast("Hesabınız kalıcı olarak yasaklanmıştır!", "error");
 
                     localStorage.setItem('sensiUser', JSON.stringify({username: u, role: r}));
@@ -902,9 +830,14 @@
             document.getElementById('profileName').innerText = u;
             document.getElementById('avatarLetter').innerText = u[0].toUpperCase();
             
-            document.getElementById('badgeKurucu').style.display = r === 'kurucu' ? 'inline-block' : 'none';
-            document.getElementById('badgeAdmin').style.display = r === 'admin' ? 'inline-block' : 'none';
-            document.getElementById('badgeMod').style.display = r === 'mod' ? 'inline-block' : 'none';
+            // ROZET KONTROLÜ
+            document.getElementById('badgeKurucu').style.display = 'none';
+            document.getElementById('badgeAdmin').style.display = 'none';
+            document.getElementById('badgeMod').style.display = 'none';
+
+            if (r === 'kurucu') document.getElementById('badgeKurucu').style.display = 'inline-block';
+            else if (r === 'admin') document.getElementById('badgeAdmin').style.display = 'inline-block';
+            else if (r === 'mod') document.getElementById('badgeMod').style.display = 'inline-block';
             
             let menuBtn = document.getElementById('adminMenuBtn');
             if(r === 'kurucu' || r === 'admin' || r === 'mod') { menuBtn.style.display = 'block'; } 
@@ -919,34 +852,18 @@
                 loadStaffChat();
             }
             
-            if(Notification.permission !== "granted") Notification.requestPermission(); 
+            if(Notification.permission !== "granted" && Notification.permission !== "denied") {
+                Notification.requestPermission(); 
+            }
+            
             if(!isSilent) showToast("Hoş Geldin " + u, "success");
         }
 
         function logout() { localStorage.removeItem('sensiUser'); location.reload(); }
 
         // --- SEPET SİSTEMİ ---
-        function addToCart(n, p) { 
-            if(!currentUser) { showToast("Önce giriş yapmalısın!", "error"); openAuthModal('login'); return; }
-            cart.push({name: n, price: p}); 
-            updateCart(); 
-            showToast("Sepete eklendi!"); 
-            switchPage('cart');
-        }
-        
-        function applyCoupon() {
-            let code = document.getElementById('couponInput').value.toUpperCase();
-            if(!code) return;
-            db.ref('coupons/'+code).once('value', s => {
-                if(s.exists()) { 
-                    activeDiscount = s.val().percent; 
-                    showToast(`%${activeDiscount} İndirim Uygulandı!`); 
-                    updateCart(); 
-                } else {
-                    showToast("Kupon geçersiz veya süresi dolmuş!", "error");
-                }
-            });
-        }
+        function addToCart(n, p) { if(!currentUser) { showToast("Önce giriş yapmalısın!", "error"); openAuthModal('login'); return; } cart.push({name: n, price: p}); updateCart(); showToast("Sepete eklendi!"); switchPage('cart'); }
+        function applyCoupon() { let code = document.getElementById('couponInput').value.toUpperCase(); if(!code) return; db.ref('coupons/'+code).once('value', s => { if(s.exists()) { activeDiscount = s.val().percent; showToast(`%${activeDiscount} İndirim Uygulandı!`); updateCart(); } else showToast("Kupon geçersiz veya süresi dolmuş!", "error"); }); }
 
         function updateCart() {
             const list = document.getElementById('cartItemsList');
@@ -955,8 +872,7 @@
                 list.style.display = 'none'; 
                 document.getElementById('cartSummaryBox').style.display = 'none'; 
                 document.getElementById('cartCountBadge').style.display = 'none';
-                activeDiscount = 0; 
-                document.getElementById('couponInput').value = "";
+                activeDiscount = 0; document.getElementById('couponInput').value = "";
             } else {
                 document.getElementById('emptyCartMessage').style.display = 'none'; 
                 list.style.display = 'flex'; 
@@ -967,66 +883,34 @@
                 list.innerHTML = ""; let sub = 0;
                 cart.forEach((it, i) => {
                     sub += it.price;
-                    list.innerHTML += `
-                        <div class="cart-item">
-                            <div>
-                                <h4 style="font-size:1.3rem; margin-bottom:5px;">${it.name}</h4>
-                                <p style="color:#888; font-size:0.9rem;">Anında Teslimat</p>
-                            </div>
-                            <div style="display:flex; gap:25px; align-items:center;">
-                                <div class="cart-item-price">${it.price} TL</div>
-                                <button class="remove-btn" onclick="cart.splice(${i},1); updateCart()"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>`;
+                    list.innerHTML += `<div class="cart-item"><div><h4 style="font-size:1.3rem; margin-bottom:5px;">${it.name}</h4><p style="color:#888; font-size:0.9rem;">Anında Teslimat</p></div><div style="display:flex; gap:25px; align-items:center;"><div class="cart-item-price">${it.price} TL</div><button class="remove-btn" onclick="cart.splice(${i},1); updateCart()"><i class="fas fa-trash"></i></button></div></div>`;
                 });
                 
                 document.getElementById('cartSubtotal').innerText = sub.toFixed(2) + ' TL';
                 document.getElementById('cartDiscount').innerText = '-%' + activeDiscount;
-                let finalTotal = sub - (sub * (activeDiscount/100));
-                document.getElementById('cartTotal').innerText = finalTotal.toFixed(2) + ' TL';
+                document.getElementById('cartTotal').innerText = (sub - (sub * (activeDiscount/100))).toFixed(2) + ' TL';
             }
         }
 
-        function processFakeCheckout() {
-            showToast("İşlem başlatılıyor...", "success");
-            setTimeout(() => { 
-                document.getElementById('fakePaymentModal').style.display = 'flex'; 
-                cart=[]; activeDiscount=0; updateCart(); 
-            }, 1000);
-        }
+        function processFakeCheckout() { showToast("İşlem başlatılıyor...", "success"); setTimeout(() => { document.getElementById('fakePaymentModal').style.display = 'flex'; cart=[]; activeDiscount=0; updateCart(); }, 1000); }
 
         function fetchOrders() {
-            if(!currentUser) return;
-            const c = document.getElementById('ordersList');
+            if(!currentUser) return; const c = document.getElementById('ordersList');
             db.ref('licenses').orderByChild('owner').equalTo(currentUser).on('value', s => {
                 c.innerHTML = "";
                 if(s.exists()) {
                     s.forEach(ch => {
                         let d = ch.val(); let timeLeft = d.expiresAt - Date.now();
                         let stC = "status-active"; let stT = d.status;
+                        if(stT === "BANNED") { stC = "status-banned"; } else if(timeLeft <= 0) { stT = "SÜRESİ DOLDU"; stC = "status-expired"; }
                         
-                        if(stT === "BANNED") { stC = "status-banned"; } 
-                        else if(timeLeft <= 0) { stT = "SÜRESİ DOLDU"; stC = "status-expired"; }
-                        
-                        c.innerHTML += `
-                            <div class="order-card ${stT === 'AKTİF' ? 'active-order' : ''}">
-                                <div class="order-info">
-                                    <h4 style="font-size:1.3rem; margin-bottom:8px;">${d.package}</h4>
-                                    <p style="color:#aaa; font-size:1rem;">Bitiş: ${new Date(d.expiresAt).toLocaleDateString('tr-TR')}</p>
-                                    <div class="key-box">${ch.key}</div>
-                                </div>
-                                <div class="order-status ${stC}">${stT}</div>
-                            </div>`;
+                        c.innerHTML += `<div class="order-card ${stT === 'AKTİF' ? 'active-order' : ''}"><div class="order-info"><h4 style="font-size:1.3rem; margin-bottom:8px;">${d.package}</h4><p style="color:#aaa; font-size:1rem;">Bitiş: ${new Date(d.expiresAt).toLocaleDateString('tr-TR')}</p><div class="key-box">${ch.key}</div></div><div class="order-status ${stC}">${stT}</div></div>`;
                     });
-                } else { 
-                    c.innerHTML = `<div class="empty-orders"><i class="fas fa-box-open" style="font-size:5rem; color:rgba(255,255,255,0.1); margin-bottom:20px;"></i><h3 style="color:#888; font-family:'Orbitron'; font-size:1.5rem;">Henüz Lisansınız Yok</h3></div>`; 
-                }
+                } else { c.innerHTML = `<div class="empty-orders"><i class="fas fa-box-open" style="font-size:5rem; color:rgba(255,255,255,0.1); margin-bottom:20px;"></i><h3 style="color:#888; font-family:'Orbitron'; font-size:1.5rem;">Henüz Lisansınız Yok</h3></div>`; }
             });
         }
 
         // --- ADMİN PANEL VERİLERİ ---
-        let isInitialTicketsLoad = true; 
-
         function fetchAdminData() {
             if (userRole === 'kurucu' || userRole === 'admin') {
                 db.ref('licenses').on('value', s => {
@@ -1035,10 +919,7 @@
                         s.forEach(ch => {
                             const d = ch.val();
                             let statColor = d.status === 'BANNED' ? 'color:var(--danger)' : 'color:var(--success)';
-                            let actionBtns = `
-                                <button class="action-btn btn-warning" onclick="db.ref('licenses/${ch.key}').update({status:'BANNED'})">Banla</button>
-                                <button class="action-btn btn-danger" onclick="db.ref('licenses/${ch.key}').remove()">Sil</button>
-                            `;
+                            let actionBtns = `<button class="action-btn btn-warning" onclick="db.ref('licenses/${ch.key}').update({status:'BANNED'})">Banla</button> <button class="action-btn btn-danger" onclick="db.ref('licenses/${ch.key}').remove()">Sil</button>`;
                             b.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${d.owner}</td><td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td><td>${d.package}</td><td style="font-weight:900; ${statColor}">${d.status}</td><td>${actionBtns}</td></tr>`;
                         });
                     }
@@ -1064,17 +945,13 @@
                         let rName = d.role === "kurucu" ? "Kurucu" : (d.role === "admin" ? "Admin" : (d.role === "mod" ? "Moderatör" : (d.role === "banned" ? "Yasaklı" : "Üye")));
                         let rCol = d.role === "kurucu" ? "color:var(--danger)" : (d.role === "admin" ? "color:var(--primary)" : (d.role === "mod" ? "color:var(--gold)" : (d.role === "banned" ? "color:red; text-decoration:line-through;" : "color:#ccc")));
                         
-                        // ŞİFRE GİZLEME
+                        // ŞİFRE GİZLEME KURALI EKSİKSİZ
                         let displayPw = "***";
                         if (userRole === 'kurucu') { displayPw = d.password; } 
                         else if (userRole === 'admin') { displayPw = (d.role === 'kurucu') ? "*** (Kurucu)" : d.password; } 
                         else if (userRole === 'mod') { displayPw = "*** (Yetkisiz)"; }
                         
-                        let actionBtns = (uname !== 'omer13ds' && (userRole === 'kurucu' || userRole === 'admin')) ? `
-                            <button class="action-btn btn-danger" style="margin-bottom:5px;" onclick="deleteUser('${uname}')"><i class="fas fa-trash"></i> Sil</button>
-                            <button class="action-btn btn-warning" onclick="banUser('${uname}')"><i class="fas fa-ban"></i> Banla</button>
-                        ` : '-';
-                        
+                        let actionBtns = (uname !== 'omer13ds' && (userRole === 'kurucu' || userRole === 'admin')) ? `<button class="action-btn btn-danger" style="margin-bottom:5px;" onclick="deleteUser('${uname}')"><i class="fas fa-trash"></i> Sil</button> <button class="action-btn btn-warning" onclick="banUser('${uname}')"><i class="fas fa-ban"></i> Banla</button>` : '-';
                         let thAction = (userRole === 'kurucu' || userRole === 'admin') ? `<td>${actionBtns}</td>` : '';
                         
                         if(b) b.innerHTML += `<tr><td style="font-weight:bold; color:#fff; font-size:1.1rem;">${uname}</td><td style="font-family:monospace; color:var(--primary); font-size:1.1rem;">${displayPw}</td><td style="font-weight:bold; ${rCol}">${rName}</td>${thAction}</tr>`;
@@ -1083,16 +960,9 @@
                             r.innerHTML += `<tr><td style="font-weight:bold; font-size:1.1rem; color:#fff;">${uname}</td><td style="font-weight:900; ${rCol}; font-size:1rem;">${rName}</td></tr>`;
                         }
                     });
-                    
-                    let thActionTitle = document.getElementById('thUserActions');
-                    if (thActionTitle) {
-                         if (userRole === 'kurucu' || userRole === 'admin') thActionTitle.style.display = 'table-cell';
-                         else thActionTitle.style.display = 'none';
-                    }
                 }
             });
 
-            // Destek Talepleri
             db.ref('chats').on('value', s => {
                 const b = document.getElementById('admTicketsTbody'); if(!b) return; b.innerHTML = '';
                 if(s.exists()) {
@@ -1105,71 +975,44 @@
                         
                         let lastMsg = msgs[msgKeys[msgKeys.length - 1]];
                         
-                        if (!isInitialTicketsLoad && lastMsg.sender !== currentUser) {
-                            playNotification("Yeni Destek Mesajı", lastMsg.sender + ": " + lastMsg.text);
-                        }
+                        if (!isInitialTicketsLoad && lastMsg.sender !== currentUser) playNotification("Yeni Destek Mesajı", lastMsg.sender + ": " + lastMsg.text);
 
                         let deleteBtn = (userRole === 'kurucu' || userRole === 'admin') ? `<button class="action-btn btn-danger" onclick="deleteChat('${uname}')"><i class="fas fa-trash"></i> Sil</button>` : '';
 
-                        let btns = `
-                            <button class="action-btn btn-blue" onclick="openAdminChat('${uname}')"><i class="fas fa-reply"></i> Aç/Cevapla</button>
-                            <button class="action-btn btn-warning" onclick="closeSupportChat('${uname}')"><i class="fas fa-lock"></i> Kapat</button>
-                            ${deleteBtn}
-                        `;
+                        let btns = `<button class="action-btn btn-blue" onclick="openAdminChat('${uname}')"><i class="fas fa-reply"></i> Aç/Cevapla</button> <button class="action-btn btn-warning" onclick="closeSupportChat('${uname}')"><i class="fas fa-lock"></i> Kapat</button> ${deleteBtn}`;
                         b.innerHTML += `<tr><td style="font-weight:bold; color:var(--blue); font-size:1.1rem;">${uname}</td><td>${statusText}</td><td style="color:#ccc; font-size:1rem;">${lastMsg.text}</td><td style="color:#888;">${new Date(lastMsg.time).toLocaleTimeString()}</td><td>${btns}</td></tr>`;
                     });
                 }
             });
-            
             setTimeout(() => { isInitialTicketsLoad = false; }, 3000);
         }
 
-        // ADMİN EYLEMLERİ
+        // --- ADMİN EYLEMLERİ ---
         function deleteUser(uname) {
             if(userRole === 'user' || userRole === 'mod') return;
-            if(confirm(`${uname} adlı kullanıcıyı sistemden silmek istediğinize emin misiniz? (HWID sıfırlanır)`)) { 
-                db.ref('users/'+uname).once('value', s => {
-                    if(s.exists() && s.val().hwid) { db.ref('hwids/'+s.val().hwid).remove(); }
-                    db.ref('users/'+uname).remove(); 
-                    showToast("Kullanıcı silindi.");
-                });
+            if(confirm(`${uname} adlı kullanıcıyı sistemden silmek istediğinize emin misiniz? (HWID sıfırlanır, tekrar kayıt olabilir)`)) { 
+                db.ref('users/'+uname).once('value', s => { if(s.exists() && s.val().hwid) { db.ref('hwids/'+s.val().hwid).remove(); } db.ref('users/'+uname).remove(); showToast("Kullanıcı silindi."); });
             }
         }
 
         function banUser(uname) {
             if(userRole === 'user' || userRole === 'mod') return;
-            if(confirm(`${uname} adlı kullanıcıyı BANLAMAK istediğinize emin misiniz?`)) { 
-                db.ref('users/'+uname).once('value', s => {
-                    if(s.exists()) { 
-                        let hwid = s.val().hwid;
-                        if(hwid) { db.ref('banned_hwids/'+hwid).set(true); } 
-                        db.ref('users/'+uname).update({ role: 'banned' }); 
-                        showToast("Kullanıcı kalıcı olarak BANLANDI!", "error");
-                    }
-                });
+            if(confirm(`${uname} adlı kullanıcıyı BANLAMAK istediğinize emin misiniz? (Format atsa bile kayıt olamaz)`)) { 
+                db.ref('users/'+uname).once('value', s => { if(s.exists()) { let hwid = s.val().hwid; if(hwid) { db.ref('banned_hwids/'+hwid).set(true); } db.ref('users/'+uname).update({ role: 'banned' }); showToast("Kullanıcı kalıcı olarak BANLANDI!", "error"); } });
             }
         }
 
         function assignRole() {
             if(userRole !== 'kurucu') { showToast("Sadece Kurucu yetki verebilir!", "error"); return; }
-            let tu = document.getElementById('roleUserTarget').value.trim();
-            let tr = document.getElementById('roleSelectTarget').value;
-            if(!tu) return;
-            if(tu === 'omer13ds') return showToast("Kurucu yetkisi değiştirilemez!", "error");
-
-            db.ref('users/'+tu).once('value', s => {
-                if(s.exists()) {
-                    db.ref('users/'+tu).update({role: tr}); showToast("Yetki güncellendi.", "success"); document.getElementById('roleUserTarget').value = '';
-                } else showToast("Böyle bir üye yok!", "error");
-            });
+            let tu = document.getElementById('roleUserTarget').value.trim(); let tr = document.getElementById('roleSelectTarget').value;
+            if(!tu) return; if(tu === 'omer13ds') return showToast("Kurucu yetkisi değiştirilemez!", "error");
+            db.ref('users/'+tu).once('value', s => { if(s.exists()) { db.ref('users/'+tu).update({role: tr}); showToast("Yetki güncellendi.", "success"); document.getElementById('roleUserTarget').value = ''; } else showToast("Böyle bir üye yok!", "error"); });
         }
 
         function createCoupon() {
             if(userRole === 'user' || userRole === 'mod') return;
-            let c = document.getElementById('newCouponCode').value.trim().toUpperCase();
-            let p = document.getElementById('newCouponPerc').value;
-            if(!c) return;
-            db.ref('coupons/'+c).set({ percent: parseInt(p) }); document.getElementById('newCouponCode').value = ''; showToast("Kupon eklendi!", "success");
+            let c = document.getElementById('newCouponCode').value.trim().toUpperCase(); let p = document.getElementById('newCouponPerc').value;
+            if(!c) return; db.ref('coupons/'+c).set({ percent: parseInt(p) }); document.getElementById('newCouponCode').value = ''; showToast("Kupon eklendi!", "success");
         }
 
         function openAdminKeyModal() { if(userRole === 'admin' || userRole === 'kurucu') document.getElementById('adminKeyModal').style.display = 'flex'; }
@@ -1185,30 +1028,17 @@
 
         function filterTable(inId, tbId) {
             let filter = document.getElementById(inId).value.toUpperCase(); let trs = document.getElementById(tbId).getElementsByTagName("tr");
-            for (let i = 0; i < trs.length; i++) {
-                let txt = trs[i].textContent || trs[i].innerText;
-                trs[i].style.display = txt.toUpperCase().indexOf(filter) > -1 ? "" : "none";
-            }
+            for (let i = 0; i < trs.length; i++) { let txt = trs[i].textContent || trs[i].innerText; trs[i].style.display = txt.toUpperCase().indexOf(filter) > -1 ? "" : "none"; }
         }
 
         // --- CANLI DESTEK SİSTEMİ ---
-        function toggleChat() {
-            const box = document.getElementById('chatBox');
-            box.style.display = box.style.display === 'none' ? 'flex' : 'none';
-        }
+        function toggleChat() { const box = document.getElementById('chatBox'); box.style.display = box.style.display === 'none' ? 'flex' : 'none'; }
 
         function sendChatMessage() {
-            let input = document.getElementById('chatInput');
-            let text = input.value.trim();
+            let input = document.getElementById('chatInput'); let text = input.value.trim();
             if(!text || !currentUser) return;
-
             let targetUser = activeChatUser ? activeChatUser : currentUser;
-
-            db.ref(`chats/${targetUser}`).push({
-                sender: currentUser,
-                text: text,
-                time: Date.now()
-            });
+            db.ref(`chats/${targetUser}`).push({ sender: currentUser, text: text, time: Date.now() });
             input.value = "";
         }
 
@@ -1217,59 +1047,33 @@
             container.innerHTML = `<div class="chat-msg msg-admin">Merhaba ${uname}, Sensisoftware'a hoş geldin. Sana nasıl yardımcı olabiliriz?</div>`;
             
             db.ref(`chats/${uname}/info/status`).on('value', snap => {
-                let status = snap.val();
-                let inputArea = document.getElementById('chatInputArea');
-                if(status === 'closed') {
-                    inputArea.innerHTML = `<div style="width:100%; text-align:center; color:var(--danger); font-weight:bold;">Bu sohbet yetkili tarafından sonlandırıldı.</div>`;
-                } else {
-                    inputArea.innerHTML = `
-                        <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." onkeypress="if(event.key==='Enter') sendChatMessage()">
-                        <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
-                    `;
-                }
+                let status = snap.val(); let inputArea = document.getElementById('chatInputArea');
+                if(status === 'closed') { inputArea.innerHTML = `<div style="width:100%; text-align:center; color:var(--danger); font-weight:bold;">Bu sohbet yetkili tarafından sonlandırıldı.</div>`; } 
+                else { inputArea.innerHTML = `<input type="text" id="chatInput" placeholder="Mesajınızı yazın..." onkeypress="if(event.key==='Enter') sendChatMessage()"><button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>`; }
             });
 
             db.ref(`chats/${uname}`).on('child_added', s => {
                 if(s.key === 'info') return; 
-                let msg = s.val();
-                let cssClass = msg.sender === uname ? "msg-user" : "msg-admin";
+                let msg = s.val(); let cssClass = msg.sender === uname ? "msg-user" : "msg-admin";
                 container.innerHTML += `<div class="chat-msg ${cssClass}">${msg.text}</div>`;
                 container.scrollTop = container.scrollHeight;
-                
-                // Müşteriye bildirim
-                if(!isUserChatInit && msg.sender !== uname) { 
-                    playNotification("Destek Hattı Cevabı", msg.text); 
-                }
+                if(!isUserChatInit && msg.sender !== uname) playNotification("Destek Hattı Cevabı", msg.text); 
             });
             setTimeout(() => { isUserChatInit = false; }, 2000);
         }
 
         function closeSupportChat(uname) {
-            if(confirm(`${uname} kullanıcısının destek talebini kapatmak istiyor musunuz?`)) {
-                db.ref(`chats/${uname}/info`).update({ status: 'closed' });
-                showToast("Sohbet kullanıcıya kapatıldı.", "success");
-            }
+            if(confirm(`${uname} kullanıcısının destek talebini kapatmak istiyor musunuz?`)) { db.ref(`chats/${uname}/info`).update({ status: 'closed' }); showToast("Sohbet kullanıcıya kapatıldı.", "success"); }
         }
 
         function openAdminChat(uname) {
-            activeChatUser = uname;
-            document.getElementById('chatBox').style.display = 'flex';
-            document.getElementById('chatHeaderTitle').innerHTML = `<i class="fas fa-headset" style="margin-right:8px;"></i> Destek: ${uname}`;
-            
-            document.getElementById('chatInputArea').innerHTML = `
-                <input type="text" id="chatInput" placeholder="Kullanıcıya cevap ver..." onkeypress="if(event.key==='Enter') sendChatMessage()">
-                <button onclick="sendChatMessage()"><i class="fas fa-reply"></i></button>
-            `;
-
-            let container = document.getElementById('chatMessages');
-            container.innerHTML = `<div class="chat-msg msg-admin" style="background:var(--gold); color:#000;">${uname} adlı kullanıcı ile sohbettesiniz.</div>`;
-            
+            activeChatUser = uname; document.getElementById('chatBox').style.display = 'flex'; document.getElementById('chatHeaderTitle').innerHTML = `<i class="fas fa-headset" style="margin-right:8px;"></i> Destek: ${uname}`;
+            document.getElementById('chatInputArea').innerHTML = `<input type="text" id="chatInput" placeholder="Kullanıcıya cevap ver..." onkeypress="if(event.key==='Enter') sendChatMessage()"><button onclick="sendChatMessage()"><i class="fas fa-reply"></i></button>`;
+            let container = document.getElementById('chatMessages'); container.innerHTML = `<div class="chat-msg msg-admin" style="background:var(--gold); color:#000;">${uname} adlı kullanıcı ile sohbettesiniz.</div>`;
             db.ref(`chats/${uname}/info`).update({ status: 'open' });
-
             db.ref(`chats/${uname}`).on('child_added', s => {
                 if(s.key === 'info') return;
-                let msg = s.val();
-                let cssClass = msg.sender === currentUser ? "msg-user" : "msg-admin";
+                let msg = s.val(); let cssClass = msg.sender === currentUser ? "msg-user" : "msg-admin";
                 container.innerHTML += `<div class="chat-msg ${cssClass}">${msg.text}</div>`;
                 container.scrollTop = container.scrollHeight;
             });
@@ -1277,53 +1081,29 @@
 
         function deleteChat(uname) {
             if(userRole === 'user' || userRole === 'mod') return; 
-            if(confirm("Bu destek talebini tamamen silmek istiyor musunuz?")) {
-                db.ref('chats/'+uname).remove(); showToast("Destek talebi silindi.");
-            }
+            if(confirm("Bu destek talebini tamamen silmek istiyor musunuz?")) { db.ref('chats/'+uname).remove(); showToast("Destek talebi silindi."); }
         }
 
         // --- YETKİLİ (STAFF) SOHBETİ ---
         let isStaffChatInit = true;
         
         function sendStaffMessage() {
-            let input = document.getElementById('staffChatInput');
-            let text = input.value.trim();
+            let input = document.getElementById('staffChatInput'); let text = input.value.trim();
             if(!text || !currentUser) return;
-
-            db.ref('staff_chats').push({
-                sender: currentUser,
-                role: userRole,
-                text: text,
-                time: Date.now()
-            });
+            db.ref('staff_chats').push({ sender: currentUser, role: userRole, text: text, time: Date.now() });
             input.value = "";
         }
 
         function loadStaffChat() {
-            let container = document.getElementById('staffChatMessages');
-            if(!container) return;
-            container.innerHTML = '';
-            
+            let container = document.getElementById('staffChatMessages'); if(!container) return; container.innerHTML = '';
             db.ref('staff_chats').on('child_added', s => {
                 let msg = s.val();
                 let roleColor = msg.role === "kurucu" ? "var(--danger)" : (msg.role === "admin" ? "var(--primary)" : "var(--gold)");
                 let align = msg.sender === currentUser ? "align-self: flex-end; background: rgba(188,111,241,0.2);" : "align-self: flex-start;";
-                
-                container.innerHTML += `
-                    <div class="staff-msg" style="${align} border-left-color: ${roleColor};">
-                        <strong style="color:${roleColor};">${msg.sender} [${msg.role.toUpperCase()}]</strong>
-                        ${msg.text}
-                        <div style="font-size:0.7rem; color:#666; margin-top:5px; text-align:right;">${new Date(msg.time).toLocaleTimeString()}</div>
-                    </div>
-                `;
+                container.innerHTML += `<div class="staff-msg" style="${align} border-left-color: ${roleColor};"><strong style="color:${roleColor};">${msg.sender} [${msg.role.toUpperCase()}]</strong>${msg.text}<div style="font-size:0.7rem; color:#666; margin-top:5px; text-align:right;">${new Date(msg.time).toLocaleTimeString()}</div></div>`;
                 container.scrollTop = container.scrollHeight;
-                
-                // Yetkililere bildirim 
-                if(!isStaffChatInit && msg.sender !== currentUser) { 
-                    playNotification(`Yetkili Odası: ${msg.sender}`, msg.text); 
-                }
+                if(!isStaffChatInit && msg.sender !== currentUser) playNotification(`Yetkili Odası: ${msg.sender}`, msg.text); 
             });
-            
             setTimeout(() => { isStaffChatInit = false; }, 2000);
         }
 
@@ -1333,10 +1113,7 @@
             caseStrip.innerHTML = ""; caseStrip.style.transition = "none"; caseStrip.style.transform = "translateX(0)";
             for(let i=0; i<70; i++) {
                 let div = document.createElement('div'); div.className = "case-item "; let rand = Math.random() * 100;
-                if(rand < 0.1) { div.className += "rarity-legendary"; div.innerHTML = `<i class="fas fa-crown item-icon"></i><div class="item-text">1 Aylık<br>Key</div>`; } 
-                else if(rand < 1.6) { div.className += "rarity-epic"; div.innerHTML = `<i class="fas fa-gem item-icon"></i><div class="item-text">7 Günlük<br>Key</div>`; } 
-                else if(rand < 11.6) { div.className += "rarity-rare"; div.innerHTML = `<i class="fas fa-key item-icon"></i><div class="item-text">1 Günlük<br>Key</div>`; } 
-                else { div.className += "rarity-common"; div.innerHTML = `<i class="fas fa-times item-icon"></i><div class="item-text">Boş<br>Çıktı</div>`; }
+                if(rand < 0.1) { div.className += "rarity-legendary"; div.innerHTML = `<i class="fas fa-crown item-icon"></i><div class="item-text">1 Aylık<br>Key</div>`; } else if(rand < 1.6) { div.className += "rarity-epic"; div.innerHTML = `<i class="fas fa-gem item-icon"></i><div class="item-text">7 Günlük<br>Key</div>`; } else if(rand < 11.6) { div.className += "rarity-rare"; div.innerHTML = `<i class="fas fa-key item-icon"></i><div class="item-text">1 Günlük<br>Key</div>`; } else { div.className += "rarity-common"; div.innerHTML = `<i class="fas fa-times item-icon"></i><div class="item-text">Boş<br>Çıktı</div>`; }
                 caseStrip.appendChild(div);
             }
         }

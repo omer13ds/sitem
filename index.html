@@ -30,11 +30,8 @@
         body { background: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
 
         /* --- 2. KUSURSUZ YETKİ CSS SİSTEMİ (ASLA DÜZENİ BOZMAZ) --- */
-        /* Kurucu değilse kurucu objelerini gizle */
         body:not(.role-kurucu) .req-kurucu { display: none !important; }
-        /* Kurucu veya Admin değilse admin objelerini gizle */
         body:not(.role-kurucu):not(.role-admin) .req-admin { display: none !important; }
-        /* Yetkili (Mod, Admin, Kurucu) değilse mod objelerini gizle */
         body:not(.role-kurucu):not(.role-admin):not(.role-mod) .req-mod { display: none !important; }
 
         /* LÜKS ARKA PLAN EFEKTİ VE GLOW */
@@ -53,7 +50,7 @@
 
         .container { max-width: 1300px; margin: 0 auto; padding: 0 30px; position: relative; }
 
-        /* --- 3. ÜST MENÜ (GLASSMORPHISM) --- */
+        /* --- 3. ÜST MENÜ --- */
         nav {
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -123,7 +120,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .page-title { text-align: center; font-family: 'Orbitron', sans-serif; font-size: 3rem; margin: 80px 0 50px; color: #fff; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 20px rgba(188, 111, 241, 0.3);}
 
-        /* YENİLENEN ANA SAYFA (HERO) KISMI */
+        /* ANA SAYFA */
         .hero { text-align: center; padding: 140px 0 80px; position: relative; }
         .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 5.5rem; font-weight: 900; margin-bottom: 25px; background: linear-gradient(to right, #fff, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; filter: drop-shadow(0 0 25px rgba(188,111,241,0.5));}
         .hero p { color: #bbb; font-size: 1.3rem; max-width: 800px; margin: 0 auto 40px; line-height: 1.8; }
@@ -182,14 +179,17 @@
         .status-active { background: rgba(188, 111, 241, 0.15); color: var(--primary); border: 1px solid var(--primary); box-shadow: 0 0 15px rgba(188,111,241,0.2);}
         .status-banned { background: rgba(255, 71, 87, 0.15); color: var(--danger); border: 1px solid var(--danger); box-shadow: 0 0 15px rgba(255,71,87,0.2);}
 
-        /* --- 6. YÖNETİM PANELİ (KUSURSUZ GRID YAPISI) --- */
+        /* --- 6. YÖNETİM PANELİ (KUSURSUZ GRID MİMARİSİ) --- */
         .admin-layout { 
-            display: flex; gap: 40px; align-items: flex-start;
+            display: grid; 
+            grid-template-columns: 280px 1fr; 
+            gap: 40px; 
+            align-items: start; 
         }
-        @media (max-width: 900px) { .admin-layout { flex-direction: column; } }
+        @media (max-width: 900px) { .admin-layout { grid-template-columns: 1fr; } }
         
         .admin-sidebar { 
-            width: 280px; flex-shrink: 0; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
+            background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
             padding: 30px; position: sticky; top: 110px; backdrop-filter: blur(15px);
         }
         .admin-sidebar h3 { color: var(--danger); font-family: 'Orbitron', sans-serif; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid rgba(255, 71, 87, 0.2); font-size: 1.3rem; text-align: center; letter-spacing: 1px;}
@@ -200,12 +200,14 @@
         .admin-nav i { margin-right: 15px; color: var(--primary); width: 20px; text-align: center; font-size: 1.1rem;}
 
         .admin-content { 
-            flex: 1; min-width: 0; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
+            background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
             padding: 40px; min-height: 700px; backdrop-filter: blur(15px); box-shadow: 0 10px 50px rgba(0,0,0,0.2);
+            min-width: 0; overflow: hidden; 
         }
         
-        .admin-section { display: none; animation: fadeIn 0.4s ease; } 
-        .admin-section.active { display: block; }
+        /* Sekmeler JS ile '.active' alır. Diğerleri display: none olur. Asla karışmaz. */
+        .admin-section { display: none !important; animation: fadeIn 0.4s ease; } 
+        .admin-section.active { display: block !important; }
         
         .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(255,255,255,0.05); padding-bottom: 20px; margin-bottom: 30px; flex-wrap: wrap; gap: 20px;}
         .admin-header h4 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff;}
@@ -234,7 +236,7 @@
         .control-box select { flex: 1; min-width: 150px; padding: 12px 20px; border-radius: 8px; background: rgba(0,0,0,0.4); color: #fff; border: 1px solid rgba(255,255,255,0.1); outline: none; font-size:1rem; cursor: pointer; transition: 0.3s;}
         .control-box select:focus { border-color: var(--primary); }
 
-        /* --- 7. MODALLAR --- */
+        /* --- 7. MODAL TASARIMLARI --- */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; }
         .modal-box { background: rgba(13, 13, 18, 0.95); padding: 50px 60px; border-radius: 20px; width: 100%; max-width: 450px; border: 1px solid var(--border); position: relative; text-align: center; box-shadow: 0 0 50px rgba(188, 111, 241, 0.15); }
         .auth-tabs { display: flex; margin-bottom: 40px; border-bottom: 2px solid #222; }
@@ -249,7 +251,7 @@
         .close-btn:hover { color: var(--danger); transform: scale(1.1);}
         .modal-select { width: 100%; padding: 18px; background: #15151c; border: 1px solid #222; border-radius: 10px; color: #fff; outline: none; margin-bottom: 25px; font-size: 1.05rem; cursor: pointer;}
 
-        /* --- 8. CANLI DESTEK (WHATSAPP TARZI) --- */
+        /* --- 8. CANLI DESTEK & WHATSAPP SOHBET YÜZÜ --- */
         .chat-widget-btn {
             position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -270,19 +272,11 @@
             font-weight: 900; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;
             display: flex; justify-content: space-between; align-items: center; font-size: 1rem;
         }
-        
-        .online-dot {
-            width: 10px; height: 10px; background: var(--success); border-radius: 50%; display: inline-block;
-            box-shadow: 0 0 10px var(--success); margin-right: 10px;
-            animation: blink 2s infinite;
-        }
+        .online-dot { width: 10px; height: 10px; background: var(--success); border-radius: 50%; display: inline-block; box-shadow: 0 0 10px var(--success); margin-right: 10px; animation: blink 2s infinite;}
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        .chat-messages {
-            flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;
-            background: rgba(0,0,0,0.4); scroll-behavior: smooth;
-        }
-        .chat-msg { padding: 12px 18px; border-radius: 15px; font-size: 0.95rem; max-width: 85%; word-wrap: break-word; line-height: 1.5; position: relative;}
+        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.4); scroll-behavior: smooth;}
+        .chat-msg { padding: 10px 15px; border-radius: 15px; font-size: 0.9rem; max-width: 85%; word-wrap: break-word; line-height: 1.5; position: relative;}
         .msg-user { background: var(--primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 0; box-shadow: 0 5px 15px rgba(188,111,241,0.2);}
         .msg-admin { background: rgba(255,255,255,0.08); color: #fff; align-self: flex-start; border-bottom-left-radius: 0; border: 1px solid rgba(255,255,255,0.1);}
         .chat-time { display: block; font-size: 0.7rem; color: rgba(255,255,255,0.6); margin-top: 5px; text-align: right; }
@@ -305,14 +299,7 @@
         .case-container { width: 100%; height: 200px; background: #0d0d12; border: 2px solid #333; border-radius: 10px; position: relative; overflow: hidden; display: flex; align-items: center; box-shadow: inset 0 0 60px rgba(0,0,0,0.8); }
         .case-center-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: var(--gold); z-index: 10; box-shadow: 0 0 15px var(--gold); }
         .case-strip { display: flex; align-items: center; height: 160px; transition: transform 6s cubic-bezier(0.15, 0.9, 0.15, 1); }
-        
-        .case-item { 
-            width: 140px; height: 140px; flex-shrink: 0; margin: 0 5px; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            border-radius: 8px; font-weight: bold; border-bottom: 5px solid; 
-            background: linear-gradient(180deg, #1a1a24 0%, #111 100%); 
-            text-align: center; padding: 5px; overflow: hidden;
-        }
+        .case-item { width: 140px; height: 140px; flex-shrink: 0; margin: 0 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 8px; font-weight: bold; border-bottom: 5px solid; background: linear-gradient(180deg, #1a1a24 0%, #111 100%); text-align: center; padding: 5px; overflow: hidden; }
         .item-icon { font-size: 2rem; margin-bottom: 5px; }
         .item-text { font-size: 0.85rem; line-height: 1.3; }
         
@@ -367,7 +354,7 @@
                     <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: #888; margin-left: 8px;"></i>
                     
                     <div class="profile-dropdown">
-                        <a onclick="switchPage('admin')" class="req-mod" id="adminMenuBtn" style="display:none;"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
+                        <a onclick="switchPage('admin')" class="req-mod"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
                         <a onclick="switchPage('cart')"><i class="fas fa-shopping-cart"></i> Sepetim <span id="cartCountBadge" style="background:var(--danger); color:#fff; padding:3px 8px; border-radius:10px; font-size:0.75rem; margin-left:5px; display:none; font-weight:bold;">0</span></a>
                         <a onclick="switchPage('orders')"><i class="fas fa-box"></i> Siparişlerim</a>
                         <a onclick="logout()" style="color:var(--danger); border-top:1px solid rgba(255,255,255,0.1); margin-top:10px; padding-top:15px;"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
@@ -382,7 +369,7 @@
                     <div class="hero-glow"></div>
                     <h1>KODUN ÖTESİNE GEÇ.</h1>
                     <p>Sensisoftware ile yazılımın arka planındaki karanlık sanatı keşfet. Yalnızca seçkin mühendislerin erişebildiği özel altyapıya hoş geldin.</p>
-                    <div class="hero-actions" id="heroActionBtns">
+                    <div class="hero-actions">
                         <button class="btn-solid" onclick="switchPage('shop')">LİSANSLARI İNCELE</button>
                         <button class="btn-outline" onclick="openAuthModal('login')">SİSTEME GEÇİŞ YAP</button>
                     </div>
@@ -489,7 +476,7 @@
                         <div id="adm-keys" class="admin-section active">
                             <div class="admin-header">
                                 <h4>LİSANS YÖNETİMİ</h4>
-                                <div class="req-admin flex-box" style="gap:15px; flex-wrap:wrap; display:flex;">
+                                <div class="req-admin flex-box" style="gap:15px; flex-wrap:wrap;">
                                     <input type="text" id="keySearch" class="search-input" placeholder="Kullanıcı veya Key Ara..." onkeyup="filterTable('keySearch', 'admKeysTbody')">
                                     <button class="btn-solid" style="background:linear-gradient(135deg, var(--success), #00cc6a); box-shadow: 0 0 15px rgba(0,255,136,0.3);" onclick="openAdminKeyModal()"><i class="fas fa-plus"></i> Yeni Key Üret</button>
                                 </div>
@@ -678,7 +665,7 @@
             <h2 style="color:var(--success); margin-bottom:35px; font-family:'Orbitron'; font-size:2rem; letter-spacing:2px; text-shadow:0 0 15px rgba(0,255,136,0.5);">LİSANS ÜRET</h2>
             <div class="input-group">
                 <i class="fas fa-user" style="color:var(--success);"></i>
-                <input type="text" id="akUs" placeholder="Kime tanımlanacak? (Kullanıcı Adı)" onkeypress="if(event.key==='Enter') genKey()" style="border-color:rgba(0,255,136,0.3);">
+                <input type="text" id="akUs" placeholder="Kime tanımlanacak?" onkeypress="if(event.key==='Enter') genKey()" style="border-color:rgba(0,255,136,0.3);">
             </div>
             <select id="akDy" class="search-input" style="width:100%; margin-bottom: 25px; padding: 20px; font-size: 1.1rem; border-color:rgba(0,255,136,0.3);">
                 <option value="1">1 Günlük Lisans</option>
@@ -694,8 +681,8 @@
             <span class="close-btn" onclick="closeModal('fakePaymentModal')">&times;</span>
             <i class="fas fa-shield-alt" style="font-size: 5rem; color: var(--danger); margin-bottom: 25px; filter:drop-shadow(0 0 25px rgba(255,71,87,0.5));"></i>
             <h2 style="color:var(--danger); margin-bottom:20px; font-family:'Orbitron'; letter-spacing:2px; font-size:2rem;">GÜVENLİK BİLDİRİMİ</h2>
-            <p style="color:#ccc; font-size:1.1rem; margin-bottom:35px; line-height: 1.8; max-width: 80%; margin-left: auto; margin-right: auto;">
-                Otomatik Sanal Pos altyapımız şu anda güvenlik testindedir. Satın alma işlemleri için lütfen yetkililerimizle <strong>Discord</strong> üzerinden iletişime geçin.
+            <p style="color:#ccc; font-size:1.1rem; margin-bottom:35px; line-height: 1.8;">
+                Sanal Pos altyapımız şu anda güvenlik testindedir. Satın alma işlemleri için lütfen yetkililerimizle <strong>Discord</strong> üzerinden iletişime geçin.
             </p>
             <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background: var(--discord); letter-spacing:2px; box-shadow: 0 0 25px rgba(88,101,242,0.4);" onclick="closeModal('fakePaymentModal')"><i class="fab fa-discord"></i> DİSCORD'A GİT</button>
         </div>
@@ -764,28 +751,11 @@
             let saved = localStorage.getItem('sensiUser');
             if(saved) {
                 let parsed = JSON.parse(saved);
-                // KURUCU ZORLAMASI: Eğer önceden admin falan kaldıysa onu ez.
+                // KURUCU ZORLAMASI (Önceden admin kalmışsa kurucuya çek)
                 if (parsed.username === 'omer13ds') parsed.role = 'kurucu';
                 applyLogin(parsed.username, parsed.role, true);
-            } else {
-                updateHeroButtons(false);
             }
         };
-
-        function updateHeroButtons(isLogged, role) {
-            let heroBox = document.getElementById('heroActionBtns');
-            if(!heroBox) return;
-            if(isLogged && (role === 'kurucu' || role === 'admin' || role === 'mod')) {
-                heroBox.innerHTML = `<button class="btn-solid" onclick="switchPage('admin')">PANELİME GİT</button>`;
-            } else if (isLogged) {
-                heroBox.innerHTML = `<button class="btn-solid" onclick="switchPage('shop')">MAĞAZAYA GİT</button>`;
-            } else {
-                heroBox.innerHTML = `
-                    <button class="btn-solid" onclick="switchPage('shop')">LİSANSLARI İNCELE</button>
-                    <button class="btn-outline" onclick="openAuthModal('login')">SİSTEME GEÇİŞ YAP</button>
-                `;
-            }
-        }
 
         function showToast(msg, type='success') {
             const t = document.getElementById('customToast'); 
@@ -794,7 +764,7 @@
             setTimeout(() => t.className = '', 3500);
         }
 
-        // JS İLE KONTROLLÜ TAB GEÇİŞİ (KAYMA %100 ENGELLENDİ)
+        // JS İLE KONTROLLÜ TAB GEÇİŞİ
         function switchPage(p) {
             document.querySelectorAll('.page').forEach(e => e.classList.remove('active'));
             document.getElementById('page-'+p).classList.add('active');
@@ -877,7 +847,7 @@
             db.ref('users/'+u).once('value', snap => {
                 if(snap.exists()) return showToast("Bu isim daha önce alınmış!", "error");
                 
-                const role = u === 'omer13ds' ? 'kurucu' : 'user';
+                const role = u === 'omer13ds' ? 'kurucu' : 'user'; // MÜTLAK KURUCU
                 db.ref('users/'+u).set({ password: p, role: role, hwid: hwid }).then(() => {
                     localStorage.setItem('sensi_hwid', hwid);
                     db.ref('hwids/'+hwid).set({ user: u });
@@ -897,7 +867,7 @@
                 if(s.exists() && s.val().password === p) {
                     let r = s.val().role || 'user';
                     
-                    if (u === 'omer13ds') r = 'kurucu'; // MUTLAK KURUCU
+                    if (u === 'omer13ds') r = 'kurucu'; // MÜTLAK KURUCU
                     if(r === 'banned') return showToast("Hesabınız kalıcı olarak yasaklanmıştır!", "error");
 
                     localStorage.setItem('sensiUser', JSON.stringify({username: u, role: r}));
@@ -913,17 +883,13 @@
             currentUser = u; 
             userRole = r;
             
-            // KUSURSUZ YETKİ ZIRHI (CSS'i JS'den okur)
+            // KUSURSUZ YETKİ ZIRHI (CSS'i tetikler)
             document.body.className = "role-" + r; 
             
             document.getElementById('authSection').style.display = 'none';
             document.getElementById('profileSection').style.display = 'flex';
             document.getElementById('profileName').innerText = u;
             document.getElementById('avatarLetter').innerText = u[0].toUpperCase();
-            
-            let menuBtn = document.getElementById('adminMenuBtn');
-            if(r === 'kurucu' || r === 'admin' || r === 'mod') { menuBtn.style.display = 'block'; } 
-            else { menuBtn.style.display = 'none'; }
             
             if(r === 'user') {
                 document.getElementById('chatWidgetBtn').style.display = 'flex';
@@ -933,8 +899,6 @@
                 document.getElementById('chatWidgetBtn').style.display = 'none'; 
                 loadStaffChat();
             }
-            
-            updateHeroButtons(true, r);
             
             if(Notification.permission !== "granted" && Notification.permission !== "denied") {
                 Notification.requestPermission(); 
@@ -1048,7 +1012,6 @@
         let isInitialTicketsLoad = true; 
 
         function fetchAdminData() {
-            // SADECE KURUCU VEYA ADMİN GÖRÜR
             if (userRole === 'kurucu' || userRole === 'admin') {
                 db.ref('licenses').on('value', s => {
                     const b = document.getElementById('admKeysTbody'); if(!b) return; b.innerHTML = '';
@@ -1085,7 +1048,7 @@
                         let rName = d.role === "kurucu" ? "Kurucu" : (d.role === "admin" ? "Admin" : (d.role === "mod" ? "Moderatör" : (d.role === "banned" ? "Yasaklı" : "Üye")));
                         let rCol = d.role === "kurucu" ? "color:var(--danger)" : (d.role === "admin" ? "color:var(--primary)" : (d.role === "mod" ? "color:var(--gold)" : (d.role === "banned" ? "color:red; text-decoration:line-through;" : "color:#ccc")));
                         
-                        // ŞİFRE GİZLEME MANTIĞI (HİÇBİR YETKİLİ DİĞER YETKİLİYİ GÖREMEZ)
+                        // ŞİFRE GİZLEME MANTIĞI: (MUTLAK GİZLİLİK) Hiçbir yetkili birbirini göremez.
                         let isTargetStaff = (d.role === 'kurucu' || d.role === 'admin' || d.role === 'mod');
                         let displayPw = "***";
                         
@@ -1128,6 +1091,7 @@
                         
                         let lastMsg = msgs[msgKeys[msgKeys.length - 1]];
                         
+                        // BİLDİRİM - Herhangi bir admin/mod sayfadaysa ses çalar
                         if (!isInitialTicketsLoad && lastMsg.sender !== currentUser) {
                             playNotification("Yeni Destek Mesajı", lastMsg.sender + ": " + lastMsg.text);
                         }

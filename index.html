@@ -3,171 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sensisoftware | Private Access</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Sensisoftware | Premium Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;900&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #bc6ff1;
-            --accent: #892cdc;
-            --bg: #020202;
-            --glass: rgba(255, 255, 255, 0.02);
-            --border: rgba(188, 111, 241, 0.2);
+            --primary: #bc6ff1; /* Parlak Mor */
+            --accent: #892cdc;  /* Derin Mor */
+            --bg: #030303;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(188, 111, 241, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: #fff; overflow-x: hidden; }
 
-        /* Arka Plan Efekti */
-        .bg-overlay {
+        /* Arkadaki Mor Sis Efekti */
+        .glow-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 30%, #1a0b2e 0%, transparent 40%),
-                        radial-gradient(circle at 80% 70%, #0d061a 0%, transparent 40%);
+            background: radial-gradient(circle at 50% -20%, #1c0e36 0%, transparent 60%);
             z-index: -1;
         }
 
         .container { max-width: 1300px; margin: 0 auto; padding: 0 30px; }
 
-        /* Navbar */
+        /* --- ÜST MENÜ (TAM İSTEDİĞİN GİBİ HİZALANDI) --- */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 0; position: sticky; top: 0; z-index: 1000;
-            backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 30px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 900; letter-spacing: 3px; }
-        .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; letter-spacing: 3px; }
+        .logo span { color: var(--primary); text-shadow: 0 0 20px var(--primary); }
 
-        .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+        .nav-right { display: flex; align-items: center; gap: 40px; }
+        
+        .nav-links { display: flex; gap: 30px; list-style: none; }
         .nav-links a { 
-            color: #aaa; text-decoration: none; font-size: 0.85rem; font-weight: 600; 
-            text-transform: uppercase; transition: 0.3s; 
+            color: #ccc; text-decoration: none; font-size: 0.9rem; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; 
         }
-        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+        .nav-links .highlight { color: var(--primary); font-weight: 800; } /* Programı İndir Kısmı Parlak */
 
-        /* Auth Butonları */
-        .auth-btns { display: flex; gap: 15px; margin-left: 20px; }
-        .btn-login { 
-            padding: 10px 25px; border-radius: 8px; border: 1px solid var(--primary);
-            color: var(--primary); text-decoration: none; font-size: 0.85rem; font-weight: 700;
-            transition: 0.3s;
+        /* Giriş / Kayıt Butonları */
+        .auth-btns { display: flex; gap: 15px; border-left: 1px solid #333; padding-left: 30px; }
+        .btn-outline, .btn-solid {
+            padding: 10px 25px; border-radius: 5px; font-weight: 800; font-size: 0.85rem;
+            cursor: pointer; transition: 0.4s; text-transform: uppercase;
         }
-        .btn-login:hover { background: var(--primary); color: #fff; box-shadow: 0 0 20px var(--primary); }
+        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: rgba(188, 111, 241, 0.1); box-shadow: 0 0 15px rgba(188, 111, 241, 0.4); }
+        
+        .btn-solid { background: var(--primary); border: 1px solid var(--primary); color: #fff; }
+        .btn-solid:hover { background: #a555e0; box-shadow: 0 0 20px rgba(188, 111, 241, 0.6); }
 
-        /* Hero */
-        .hero { text-align: center; padding: 180px 0 100px; }
+        /* --- ORTA KISIM (BUTON YOK, SADECE PREMİUM YAZI) --- */
+        .hero { text-align: center; padding: 180px 0 120px; }
         .hero h1 { 
-            font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900; 
-            letter-spacing: -2px; margin-bottom: 20px;
-            background: linear-gradient(to right, #fff 30%, var(--primary));
+            font-family: 'Orbitron', sans-serif; font-size: 5rem; font-weight: 900; 
+            background: linear-gradient(to bottom, #fff, var(--primary));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 30px; letter-spacing: 2px;
         }
-        .hero p { color: #666; font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+        .hero p { color: #888; font-size: 1.2rem; max-width: 700px; margin: 0 auto; line-height: 1.8; }
 
-        /* Modal (Giriş Paneli) */
+        /* --- ÖZELLİKLER KARTLARI --- */
+        .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
+        .card {
+            background: var(--glass); padding: 50px 30px; border-radius: 15px; text-align: center;
+            border: 1px solid rgba(255,255,255,0.02); transition: 0.4s;
+        }
+        .card:hover { border-color: var(--primary); transform: translateY(-10px); background: #0c0c10; }
+        .card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+        .card h3 { font-family: 'Orbitron', sans-serif; margin-bottom: 15px; letter-spacing: 1px; }
+        .card p { color: #777; font-size: 0.95rem; }
+
+        /* --- GİRİŞ/KAYIT PANELİ (MODAL) --- */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 2000;
+            justify-content: center; align-items: center;
         }
-        .modal-content {
-            background: #0a0a0c; padding: 50px; border-radius: 20px; border: 1px solid var(--border);
-            width: 100%; max-width: 400px; text-align: center;
-            box-shadow: 0 0 50px rgba(188, 111, 241, 0.1);
+        .modal-box {
+            background: #09090b; padding: 50px 40px; border-radius: 15px; width: 100%; max-width: 400px;
+            text-align: center; border: 1px solid var(--border);
+            box-shadow: 0 0 50px rgba(188, 111, 241, 0.15); position: relative;
         }
-        .modal-content h2 { font-family: 'Orbitron', sans-serif; margin-bottom: 30px; color: var(--primary); }
-        .modal-content input {
-            width: 100%; padding: 15px; margin-bottom: 15px; background: #111;
-            border: 1px solid #222; border-radius: 8px; color: #fff; outline: none;
+        .modal-box h2 { font-family: 'Orbitron', sans-serif; color: var(--primary); margin-bottom: 30px; font-size: 1.8rem;}
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; color: #666; cursor: pointer; }
+        .close-btn:hover { color: #fff; }
+        
+        /* Sadece Kullanıcı Adı ve Şifre */
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; color: #888; font-size: 0.8rem; margin-bottom: 8px; text-transform: uppercase; font-weight: 600;}
+        .input-group input {
+            width: 100%; padding: 15px; background: #111; border: 1px solid #222;
+            border-radius: 5px; color: #fff; font-size: 1rem; outline: none; transition: 0.3s;
         }
-        .modal-content input:focus { border-color: var(--primary); }
-        .btn-submit {
-            width: 100%; padding: 15px; background: var(--primary); border: none;
-            border-radius: 8px; color: #fff; font-weight: 800; cursor: pointer; transition: 0.3s;
+        .input-group input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(188, 111, 241, 0.3); }
+        
+        .submit-btn {
+            width: 100%; padding: 15px; background: var(--primary); border: none; border-radius: 5px;
+            color: #fff; font-weight: 900; font-size: 1rem; cursor: pointer; transition: 0.3s; text-transform: uppercase;
         }
-        .btn-submit:hover { opacity: 0.8; }
-        .close-modal { margin-top: 20px; color: #444; cursor: pointer; display: block; font-size: 0.8rem; }
+        .submit-btn:hover { background: #a555e0; box-shadow: 0 0 20px rgba(188, 111, 241, 0.6); }
 
-        /* Kartlar Bölümü */
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .card { background: var(--glass); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.03); }
-        .card i { color: var(--primary); font-size: 2rem; margin-bottom: 20px; }
-
-        footer { text-align: center; padding: 100px 0; color: #222; font-family: 'Orbitron', sans-serif; letter-spacing: 5px; }
+        footer { text-align: center; padding: 50px 0; border-top: 1px solid #111; color: #444; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<div class="bg-overlay"></div>
+    <div class="glow-bg"></div>
 
-<div class="container">
-    <nav>
-        <div class="logo">SENSI<span>SOFTWARE</span></div>
-        <ul class="nav-links">
-            <li><a href="javascript:void(0)" onclick="checkAccess()">Programı İndir</a></li>
-            <li><a href="#features">Özellikler</a></li>
-            <li><a href="#about">Destek</a></li>
-            <div class="auth-btns">
-                <a href="javascript:void(0)" onclick="openModal()" class="btn-login">GİRİŞ YAP</a>
-                <a href="javascript:void(0)" onclick="openModal()" class="btn-login" style="background:transparent;">KAYIT OL</a>
+    <div class="container">
+        <nav>
+            <div class="logo">SENSI<span>SOFTWARE</span></div>
+            
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#" class="highlight" onclick="tryDownload()">Programı İndir</a></li>
+                    <li><a href="#features">Özellikler</a></li>
+                    <li><a href="#contact">İletişim</a></li>
+                </ul>
+                <div class="auth-btns">
+                    <button class="btn-outline" onclick="openModal('GİRİŞ YAP')">Giriş Yap</button>
+                    <button class="btn-solid" onclick="openModal('KAYIT OL')">Kayıt Ol</button>
+                </div>
             </div>
-        </ul>
-    </nav>
+        </nav>
 
-    <main class="hero">
-        <h1>UNLEASH POWER.</h1>
-        <p>Dünyanın en gelişmiş yazılım altyapısına erişmek için giriş yapın. Sınırlı kullanıcı, maksimum performans.</p>
-    </main>
+        <main class="hero">
+            <h1>SİSTEME<br>HÜKMET.</h1>
+            <p>Sensisoftware ile sınırları aşın. Sadece ayrıcalıklı kullanıcılar için tasarlanmış, dünyanın en gelişmiş, en güvenli ve en gizli yazılım ekosistemine hoş geldiniz.</p>
+        </main>
 
-    <section id="features" class="features">
-        <div class="card">
-            <i class="fas fa-bolt"></i>
-            <h3>Anlık Senkronize</h3>
-            <p>Bulut tabanlı altyapı ile verileriniz her an güvende.</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-lock"></i>
-            <h3>Özel Şifreleme</h3>
-            <p>Sadece sizin erişebileceğiniz uçtan uca koruma sistemi.</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-code"></i>
-            <h3>Kernel Driver</h3>
-            <p>En alt seviyede çalışan, fark edilmeyen güçlü mimari.</p>
-        </div>
-    </section>
+        <section id="features" class="features">
+            <div class="card">
+                <i class="fas fa-microchip"></i>
+                <h3>Ultra Optimize</h3>
+                <p>Sistem kaynaklarını asla yormaz, arka planda hayalet gibi çalışır.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-shield-halved"></i>
+                <h3>Tam Koruma</h3>
+                <p>Verileriniz ve kimliğiniz üst düzey algoritmalarla şifrelenir.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-server"></i>
+                <h3>Bulut Altyapısı</h3>
+                <p>Her şey anlık olarak uzak sunucularımızdan güncellenir ve hazır bekler.</p>
+            </div>
+        </section>
 
-    <footer>SENSISOFTWARE</footer>
-</div>
-
-<div id="loginModal" class="modal">
-    <div class="modal-content">
-        <h2>ERİŞİM PANELİ</h2>
-        <input type="text" placeholder="Kullanıcı Adı">
-        <input type="password" placeholder="Şifre">
-        <button class="btn-submit" onclick="loginSuccess()">SİSTEME GİRİŞ YAP</button>
-        <span class="close-modal" onclick="closeModal()">İptal Et ve Dön</span>
+        <footer id="contact">
+            &copy; 2026 SENSISOFTWARE. TÜM HAKLARI SAKLIDIR.
+        </footer>
     </div>
-</div>
 
-<script>
-    function openModal() { document.getElementById('loginModal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('loginModal').style.display = 'none'; }
-    
-    function loginSuccess() {
-        alert("Giriş Başarılı! Artık programı indirebilirsiniz.");
-        localStorage.setItem("isLoggedIn", "true");
-        closeModal();
-    }
+    <div id="authModal" class="modal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">GİRİŞ YAP</h2>
+            
+            <div class="input-group">
+                <label>Kullanıcı Adı</label>
+                <input type="text" id="username" placeholder="Kullanıcı adınızı girin">
+            </div>
+            <div class="input-group">
+                <label>Şifre</label>
+                <input type="password" id="password" placeholder="Şifrenizi girin">
+            </div>
+            
+            <button class="submit-btn" onclick="processAuth()">ONAYLA</button>
+        </div>
+    </div>
 
-    function checkAccess() {
-        if(localStorage.getItem("isLoggedIn") === "true") {
-            window.location.href = "LINK_BURAYA"; // Buraya indirme linkini koy
-        } else {
-            alert("Hata: Programı indirebilmek için önce giriş yapmalısınız!");
-            openModal();
+    <script>
+        // Giriş yapılıp yapılmadığını tutan değişken
+        let isLoggedIn = false;
+
+        // Modalı Açar (Başlığı giriş veya kayıt ol olarak değiştirir)
+        function openModal(titleText) {
+            document.getElementById('authModal').style.display = 'flex';
+            document.getElementById('modalTitle').innerText = titleText;
         }
-    }
-</script>
+
+        // Modalı Kapatır
+        function closeModal() {
+            document.getElementById('authModal').style.display = 'none';
+        }
+
+        // Giriş/Kayıt İşlemini Simüle Eder
+        function processAuth() {
+            let user = document.getElementById('username').value;
+            let pass = document.getElementById('password').value;
+
+            if(user === "" || pass === "") {
+                alert("Kanka boş alan bırakma, kullanıcı adı ve şifreyi gir!");
+                return;
+            }
+
+            isLoggedIn = true; // Sisteme giriş yapıldı
+            alert("İşlem Başarılı! Sisteme bağlandın kanka, artık programı indirebilirsin.");
+            closeModal();
+        }
+
+        // İndirme Butonuna Basıldığında Çalışan Kontrol
+        function tryDownload() {
+            if(isLoggedIn) {
+                // Giriş yapıldıysa indirme linkine yönlendirir
+                window.location.href = "BURAYA_INDİRME_LINKINI_KOYACAKSIN"; 
+            } else {
+                // Giriş yapılmadıysa hata verir ve giriş panelini açar
+                alert("Erişim Reddedildi! Programı indirebilmek için önce Giriş Yapmalısın.");
+                openModal('GİRİŞ YAP');
+            }
+        }
+    </script>
 
 </body>
 </html>

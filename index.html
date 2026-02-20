@@ -29,15 +29,16 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* YETKİ (ROLE) CSS SİSTEMİ - İÇ İÇE GEÇMEYİ ENGELLEYEN ANA ÇÖZÜM */
-        .req-admin, .req-mod { display: none !important; }
-        body.role-admin .req-admin.flex-box { display: flex !important; }
-        body.role-admin .req-admin.block-box { display: block !important; }
-        body.role-admin th.req-admin, body.role-admin td.req-admin { display: table-cell !important; }
-        body.role-admin li.req-admin { display: list-item !important; }
-
-        body.role-admin .req-mod, body.role-mod .req-mod { display: block !important; }
-        body.role-admin li.req-mod, body.role-mod li.req-mod { display: list-item !important; }
+        /* YETKİ (ROLE) CSS SİSTEMİ - KUSURSUZ GİZLEME */
+        .admin-only, .mod-only { display: none !important; }
+        
+        body.role-admin .admin-only { display: inline-block !important; }
+        body.role-admin div.admin-only { display: flex !important; }
+        body.role-admin li.admin-only { display: list-item !important; }
+        body.role-admin th.admin-only, body.role-admin td.admin-only { display: table-cell !important; }
+        
+        body.role-mod .mod-only, body.role-admin .mod-only { display: block !important; }
+        body.role-mod li.mod-only, body.role-admin li.mod-only { display: list-item !important; }
 
         /* LÜKS ARKA PLAN EFEKTİ */
         .bg-layer {
@@ -78,7 +79,12 @@
 
         /* GİRİŞ & PROFİL */
         .auth-btns { display: flex; gap: 15px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 25px; }
-        .btn-outline, .btn-solid { padding: 12px 25px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: 0.4s; text-transform: uppercase; border: none; letter-spacing: 1px;}
+        
+        /* BUTON FIX: İNDİRME GİBİ LİNKLERİN DE DÜZGÜN TIKLANMASI İÇİN INLINE-BLOCK */
+        .btn-outline, .btn-solid { 
+            display: inline-block; text-align: center; text-decoration: none;
+            padding: 12px 25px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: 0.4s; text-transform: uppercase; border: none; letter-spacing: 1px;
+        }
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-outline:hover { background: var(--primary); color: #fff; box-shadow: var(--neon-shadow); }
         .btn-solid { background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; box-shadow: var(--neon-shadow); }
@@ -119,7 +125,7 @@
         .hero p { color: #aaa; font-size: 1.2rem; max-width: 750px; margin: 0 auto; line-height: 1.8; }
         
         .home-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; }
-        .feature-card { background: var(--card-bg); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border); backdrop-filter: blur(15px); transition: 0.4s; }
+        .feature-card { background: var(--card-bg); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border); backdrop-filter: blur(15px); transition: 0.4s; position: relative; overflow: hidden;}
         .feature-card:hover { border-color: var(--primary); transform: translateY(-10px); box-shadow: 0 20px 50px rgba(188, 111, 241, 0.15); }
         .feature-card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 25px; filter: drop-shadow(0 0 15px var(--primary)); }
         .feature-card h3 { font-family: 'Orbitron', sans-serif; margin-bottom: 15px; font-size: 1.3rem;}
@@ -129,7 +135,7 @@
         .stat-item h4 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 25px var(--primary);}
         .stat-item p { color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- 4. DISCORD VE SHOP KARTLARI (LÜKS GÖRÜNÜM) --- */
+        /* --- 4. DISCORD VE SHOP KARTLARI --- */
         .discord-grid, .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 50px;}
         .ds-card, .price-card { background: var(--card-bg); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border); transition: 0.4s; backdrop-filter: blur(15px); display: flex; flex-direction: column; position: relative; overflow: hidden;}
         .ds-card:hover, .price-card:hover { border-color: var(--primary); transform: translateY(-10px); box-shadow: 0 20px 50px rgba(188, 111, 241, 0.15); }
@@ -202,7 +208,7 @@
         .admin-content { 
             flex: 1; min-width: 300px; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
             padding: 50px; min-height: 700px; backdrop-filter: blur(15px); box-shadow: 0 10px 50px rgba(0,0,0,0.2);
-            overflow-x: auto; /* Tabloların taşmasını engeller */
+            overflow-x: auto; 
         }
         
         .admin-section { display: none; animation: fadeIn 0.4s ease; } 
@@ -257,6 +263,8 @@
         
         .close-btn { position: absolute; top: 25px; right: 30px; font-size: 2rem; color: #666; cursor: pointer; transition: 0.3s; z-index: 10;}
         .close-btn:hover { color: var(--danger); transform: scale(1.1);}
+        
+        .modal-select { width: 100%; padding: 20px; background: #15151c; border: 1px solid #222; border-radius: 10px; color: #fff; outline: none; margin-bottom: 25px; font-size: 1.05rem; cursor: pointer;}
 
         /* --- 9. CANLI DESTEK (LIVE CHAT) SİSTEMİ --- */
         .chat-widget-btn {
@@ -336,7 +344,7 @@
                     <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: #888; margin-left: 8px;"></i>
                     
                     <div class="profile-dropdown">
-                        <a onclick="switchPage('admin')" class="req-admin block-box" id="adminMenuBtn"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
+                        <a onclick="switchPage('admin')" class="admin-only" id="adminMenuBtn"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
                         <a onclick="switchPage('cart')"><i class="fas fa-shopping-cart"></i> Sepetim <span id="cartCountBadge" style="background:var(--danger); color:#fff; padding:3px 8px; border-radius:10px; font-size:0.75rem; margin-left:5px; display:none; font-weight:bold;">0</span></a>
                         <a onclick="switchPage('orders')"><i class="fas fa-box"></i> Siparişlerim</a>
                         <a onclick="logout()" style="color:var(--danger); border-top:1px solid rgba(255,255,255,0.1); margin-top:10px; padding-top:15px;"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
@@ -409,8 +417,8 @@
                         <h3>1 Günlük Sensi Key</h3>
                         <div class="price">49.99 <span>TL</span></div>
                         <ul>
-                            <li><i class="fas fa-check"></i> 24 Saat Tam Erişim</li>
-                            <li><i class="fas fa-check"></i> Anında Teslimat</li>
+                            <li><i class="fas fa-check" style="color:var(--primary);"></i> 24 Saat Tam Erişim</li>
+                            <li><i class="fas fa-check" style="color:var(--primary);"></i> Anında Teslimat</li>
                         </ul>
                         <button class="buy-btn" onclick="addToCart('1 Günlük Sensi Key', 49.99)">Sepete Ekle</button>
                     </div>
@@ -418,17 +426,17 @@
                         <h3>7 Günlük Sensi Key</h3>
                         <div class="price">189.99 <span>TL</span></div>
                         <ul>
-                            <li><i class="fas fa-check"></i> 7 Gün Tam Erişim</li>
-                            <li><i class="fas fa-check"></i> 7/24 Destek</li>
+                            <li><i class="fas fa-check" style="color:var(--primary);"></i> 7 Gün Tam Erişim</li>
+                            <li><i class="fas fa-check" style="color:var(--primary);"></i> 7/24 Destek</li>
                         </ul>
                         <button class="buy-btn" onclick="addToCart('7 Günlük Sensi Key', 189.99)">Sepete Ekle</button>
                     </div>
                     <div class="price-card premium">
                         <h3>1 Aylık Sensi Key</h3>
-                        <div class="price">489.00 <span>TL</span></div>
+                        <div class="price" style="color:var(--gold);">489.00 <span>TL</span></div>
                         <ul>
-                            <li><i class="fas fa-check"></i> 30 Gün VIP Erişim</li>
-                            <li><i class="fas fa-check"></i> Özel Discord Rolü</li>
+                            <li><i class="fas fa-check" style="color:var(--gold);"></i> 30 Gün VIP Erişim</li>
+                            <li><i class="fas fa-check" style="color:var(--gold);"></i> Özel Discord Rolü</li>
                         </ul>
                         <button class="buy-btn" onclick="addToCart('1 Aylık Sensi Key', 489.00)">Sepete Ekle</button>
                     </div>
@@ -457,7 +465,7 @@
                             <span>İndirim</span><span id="cartDiscount" style="font-weight:bold;">-0%</span>
                         </div>
                         <div class="summary-total">
-                            <span>TOPLAM</span><span id="cartTotal">0 TL</span>
+                            <span>TOPLAM</span><span id="cartTotal" style="color:var(--primary); text-shadow:0 0 15px var(--primary);">0 TL</span>
                         </div>
                         
                         <div class="coupon-area">
@@ -479,9 +487,9 @@
                         <ul class="admin-nav">
                             <li><a onclick="switchAdminTab('adm-keys')" id="nav-adm-keys" class="active"><i class="fas fa-key"></i> Lisans Yönetimi</a></li>
                             <li><a onclick="switchAdminTab('adm-users')" id="nav-adm-users"><i class="fas fa-users"></i> Üyeler ve Şifreler</a></li>
-                            <li class="req-admin"><a onclick="switchAdminTab('adm-roles')" id="nav-adm-roles"><i class="fas fa-gavel"></i> Yetki Kontrolü</a></li>
-                            <li class="req-admin"><a onclick="switchAdminTab('adm-coupons')" id="nav-adm-coupons"><i class="fas fa-ticket-alt"></i> Kupon Sistemi</a></li>
-                            <li class="req-mod"><a onclick="switchAdminTab('adm-tickets')" id="nav-adm-tickets" style="color:var(--blue);"><i class="fas fa-headset"></i> Destek Talepleri</a></li>
+                            <li class="admin-only"><a onclick="switchAdminTab('adm-roles')" id="nav-adm-roles"><i class="fas fa-gavel"></i> Yetki Kontrolü</a></li>
+                            <li class="admin-only"><a onclick="switchAdminTab('adm-coupons')" id="nav-adm-coupons"><i class="fas fa-ticket-alt"></i> Kupon Sistemi</a></li>
+                            <li class="mod-only admin-only"><a onclick="switchAdminTab('adm-tickets')" id="nav-adm-tickets" style="color:var(--blue);"><i class="fas fa-headset"></i> Destek Talepleri</a></li>
                         </ul>
                     </div>
 
@@ -492,7 +500,7 @@
                                 <h4>LİSANS YÖNETİMİ</h4>
                                 <div style="display:flex; gap:15px; flex-wrap:wrap;">
                                     <input type="text" id="keySearch" class="search-input" placeholder="Kullanıcı veya Key Ara..." onkeyup="filterTable('keySearch', 'admKeysTbody')">
-                                    <button class="btn-solid req-admin inline" style="background:linear-gradient(135deg, var(--success), #00cc6a); box-shadow: 0 0 15px rgba(0,255,136,0.3);" onclick="openAdminKeyModal()"><i class="fas fa-plus"></i> Yeni Key Üret</button>
+                                    <button class="btn-solid admin-only" style="background:linear-gradient(135deg, var(--success), #00cc6a); box-shadow: 0 0 15px rgba(0,255,136,0.3);" onclick="openAdminKeyModal()"><i class="fas fa-plus"></i> Yeni Key Üret</button>
                                 </div>
                             </div>
                             <table class="admin-table">
@@ -502,7 +510,7 @@
                                         <th>Lisans Anahtarı</th>
                                         <th>Paket</th>
                                         <th>Durum</th>
-                                        <th class="req-admin">İşlem</th>
+                                        <th class="admin-only">İşlem</th>
                                     </tr>
                                 </thead>
                                 <tbody id="admKeysTbody"></tbody>
@@ -520,14 +528,14 @@
                                         <th>Kullanıcı Adı</th>
                                         <th>Şifre</th>
                                         <th>Rol</th>
-                                        <th class="req-admin">İşlem</th>
+                                        <th class="admin-only">İşlem</th>
                                     </tr>
                                 </thead>
                                 <tbody id="admUsersTbody"></tbody>
                             </table>
                         </div>
 
-                        <div id="adm-roles" class="admin-section">
+                        <div id="adm-roles" class="admin-section admin-only">
                             <div class="admin-header">
                                 <h4>YETKİLENDİRME SİSTEMİ</h4>
                             </div>
@@ -557,7 +565,7 @@
                             </table>
                         </div>
 
-                        <div id="adm-coupons" class="admin-section">
+                        <div id="adm-coupons" class="admin-section admin-only">
                             <div class="admin-header">
                                 <h4>KUPON OLUŞTURMA</h4>
                             </div>
@@ -578,14 +586,14 @@
                                     <tr>
                                         <th>Kupon Kodu</th>
                                         <th>İndirim Miktarı</th>
-                                        <th class="req-admin">İşlem</th>
+                                        <th class="admin-only">İşlem</th>
                                     </tr>
                                 </thead>
                                 <tbody id="admCouponsTbody"></tbody>
                             </table>
                         </div>
 
-                        <div id="adm-tickets" class="admin-section">
+                        <div id="adm-tickets" class="admin-section mod-only admin-only">
                             <div class="admin-header">
                                 <h4 style="color:var(--blue);">BEKLEYEN DESTEK MESAJLARI</h4>
                             </div>
@@ -617,7 +625,7 @@
                         <h4 style="font-size:1.8rem; margin-bottom:10px; font-family:'Orbitron'; color:#fff;">SensiSoftware Engine v2.0</h4>
                         <p style="color:#aaa; font-size:1.1rem;">Windows 10/11 Uyumlu | Auto-Update</p>
                     </div>
-                    <a href="https://cdn.discordapp.com/attachments/1416860887695753270/1474376980471222282/SensiSoftware.rar" class="btn-solid" style="padding:20px 40px; font-size:1.2rem;"><i class="fas fa-download"></i> İndir</a>
+                    <a href="https://cdn.discordapp.com/attachments/1416860887695753270/1474376980471222282/SensiSoftware.rar" class="btn-solid" style="padding:20px 40px; font-size:1.2rem; display:inline-block; text-decoration:none;"><i class="fas fa-download"></i> İndir</a>
                 </div>
             </div>
 
@@ -714,7 +722,7 @@
             <span class="close-btn" onclick="closeModal('fakePaymentModal')">&times;</span>
             <i class="fas fa-shield-alt" style="font-size: 5rem; color: var(--danger); margin-bottom: 25px; filter:drop-shadow(0 0 25px rgba(255,71,87,0.5));"></i>
             <h2 style="color:var(--danger); margin-bottom:20px; font-family:'Orbitron'; letter-spacing:2px; font-size:2rem;">GÜVENLİK BİLDİRİMİ</h2>
-            <p style="color:#ccc; font-size:1.1rem; margin-bottom:35px; line-height: 1.8;">
+            <p style="color:#ccc; font-size:1.1rem; margin-bottom:35px; line-height: 1.8; max-width: 80%; margin-left: auto; margin-right: auto;">
                 Otomatik Sanal Pos altyapımız şu anda güvenlik testindedir. Satın alma işlemleri için lütfen yetkililerimizle <strong>Discord</strong> üzerinden iletişime geçin.
             </p>
             <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background: var(--discord); letter-spacing:2px; box-shadow: 0 0 25px rgba(88,101,242,0.4);" onclick="closeModal('fakePaymentModal')"><i class="fab fa-discord"></i> DİSCORD'A GİT</button>
@@ -842,7 +850,7 @@
             });
         }
 
-        // --- EN ÖNEMLİ DÜZELTME: YETKİ KONTROLÜ (CSS CLASS İLE YÖNETİLİYOR) ---
+        // --- KUSURSUZ YETKİ KONTROL SİSTEMİ (CSS CLASS ÜZERİNDEN) ---
         function applyLogin(u, r, isSilent) {
             currentUser = u; 
             userRole = r;
@@ -858,7 +866,7 @@
             document.getElementById('badgeMod').style.display = r === 'mod' ? 'inline-block' : 'none';
             
             let menuBtn = document.getElementById('adminMenuBtn');
-            if(r === 'admin' || r === 'mod') { menuBtn.classList.remove('req-admin'); menuBtn.style.display = 'block'; } 
+            if(r === 'admin' || r === 'mod') { menuBtn.style.display = 'block'; } 
             else { menuBtn.style.display = 'none'; }
             
             document.getElementById('chatWidgetBtn').style.display = 'flex';
@@ -918,8 +926,8 @@
                     list.innerHTML += `
                         <div class="cart-item">
                             <div>
-                                <h4>${it.name}</h4>
-                                <p style="color:#888; font-size:0.9rem; margin-top:5px;">Anında Teslimat</p>
+                                <h4 style="font-size:1.3rem; margin-bottom:5px;">${it.name}</h4>
+                                <p style="color:#888; font-size:0.9rem;">Anında Teslimat</p>
                             </div>
                             <div style="display:flex; gap:25px; align-items:center;">
                                 <div class="cart-item-price">${it.price} TL</div>
@@ -990,10 +998,10 @@
                         const d = ch.val();
                         let statColor = d.status === 'BANNED' ? 'color:var(--danger)' : 'color:var(--success)';
                         let actionBtns = `
-                            <button class="action-btn btn-warning req-admin inline" onclick="db.ref('licenses/${ch.key}').update({status:'BANNED'})">Banla</button>
-                            <button class="action-btn btn-danger req-admin inline" onclick="db.ref('licenses/${ch.key}').remove()">Sil</button>
+                            <button class="action-btn btn-warning" onclick="db.ref('licenses/${ch.key}').update({status:'BANNED'})">Banla</button>
+                            <button class="action-btn btn-danger" onclick="db.ref('licenses/${ch.key}').remove()">Sil</button>
                         `;
-                        b.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${d.owner}</td><td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td><td>${d.package}</td><td style="font-weight:900; ${statColor}">${d.status}</td><td class="req-admin">${actionBtns}</td></tr>`;
+                        b.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${d.owner}</td><td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td><td>${d.package}</td><td style="font-weight:900; ${statColor}">${d.status}</td><td class="admin-only">${actionBtns}</td></tr>`;
                     });
                 }
             });
@@ -1006,9 +1014,9 @@
                         const uname = ch.key; const d = ch.val();
                         let rName = d.role === "admin" ? "Kurucu" : (d.role === "mod" ? "Moderatör" : "Üye");
                         let rCol = d.role === "admin" ? "color:var(--danger)" : (d.role === "mod" ? "color:var(--gold)" : "color:#ccc");
-                        let delBtn = uname !== 'omer13ds' ? `<button class="action-btn btn-danger req-admin inline" onclick="deleteUser('${uname}')"><i class="fas fa-trash"></i> Sil</button>` : '-';
+                        let delBtn = uname !== 'omer13ds' ? `<button class="action-btn btn-danger" onclick="deleteUser('${uname}')"><i class="fas fa-trash"></i> Sil</button>` : '-';
                         
-                        b.innerHTML += `<tr><td style="font-weight:bold; color:#fff; font-size:1.1rem;">${uname}</td><td style="font-family:monospace; color:var(--primary); font-size:1.1rem;">${d.password}</td><td style="font-weight:bold; ${rCol}">${rName}</td><td class="req-admin">${delBtn}</td></tr>`;
+                        b.innerHTML += `<tr><td style="font-weight:bold; color:#fff; font-size:1.1rem;">${uname}</td><td style="font-family:monospace; color:var(--primary); font-size:1.1rem;">${d.password}</td><td style="font-weight:bold; ${rCol}">${rName}</td><td class="admin-only">${delBtn}</td></tr>`;
                         if(d.role === 'admin' || d.role === 'mod') r.innerHTML += `<tr><td style="font-weight:bold; font-size:1.1rem; color:#fff;">${uname}</td><td style="font-weight:900; ${rCol}; font-size:1rem;">${rName}</td></tr>`;
                     });
                 }
@@ -1018,8 +1026,8 @@
                 const b = document.getElementById('admCouponsTbody'); b.innerHTML = '';
                 if(s.exists()) {
                     s.forEach(ch => {
-                        let delBtn = `<button class="action-btn btn-danger req-admin inline" onclick="db.ref('coupons/${ch.key}').remove()"><i class="fas fa-trash"></i> Sil</button>`;
-                        b.innerHTML += `<tr><td style="font-weight:bold; color:var(--success); font-size:1.2rem; letter-spacing:1px;">${ch.key}</td><td style="font-weight:bold; font-size:1.1rem; color:#fff;">%${ch.val().percent} İndirim</td><td class="req-admin">${delBtn}</td></tr>`;
+                        let delBtn = `<button class="action-btn btn-danger" onclick="db.ref('coupons/${ch.key}').remove()"><i class="fas fa-trash"></i> Sil</button>`;
+                        b.innerHTML += `<tr><td style="font-weight:bold; color:var(--success); font-size:1.2rem; letter-spacing:1px;">${ch.key}</td><td style="font-weight:bold; font-size:1.1rem; color:#fff;">%${ch.val().percent} İndirim</td><td class="admin-only">${delBtn}</td></tr>`;
                     });
                 }
             });
@@ -1064,6 +1072,7 @@
         }
 
         function openAdminKeyModal() { if(userRole === 'admin') document.getElementById('adminKeyModal').style.display = 'flex'; }
+        
         function genKey() {
             if(userRole !== 'admin') return;
             const u = document.getElementById('akUs').value; const d = parseInt(document.getElementById('akDy').value);

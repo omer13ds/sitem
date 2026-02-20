@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    background-color: #0b0b0e;
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container { text-align: center; }
+
+h1 { font-size: 3rem; margin-bottom: 10px; color: #a855f7; }
+
+.card {
+    background: #16161d;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #2d2d3a;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.download-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 40px;
+    background: linear-gradient(45deg, #a855f7, #6366f1);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.download-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(168, 85, 247, 0.4);
+}

@@ -29,12 +29,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* YETKİ (ROLE) CSS SİSTEMİ - KUSURSUZ GİZLEME VE GÖSTERME */
+        /* YETKİ CSS'İ - İÇ İÇE GEÇMEYİ BOZMAYAN KUSURSUZ YAPI */
         .admin-only, .mod-only { display: none !important; }
         
         body.role-admin .admin-only { display: block !important; }
-        body.role-admin span.admin-only, body.role-admin a.admin-only, body.role-admin button.admin-only { display: inline-block !important; }
-        body.role-admin div.admin-flex { display: flex !important; }
+        body.role-admin span.admin-only, body.role-admin button.admin-only { display: inline-block !important; }
         body.role-admin li.admin-only { display: list-item !important; }
         body.role-admin th.admin-only, body.role-admin td.admin-only { display: table-cell !important; }
         
@@ -62,15 +61,16 @@
         
         .logo { 
             font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; 
-            letter-spacing: 2px; cursor: pointer; padding: 25px 0;
-            margin-left: 20px; /* S HARFİNİN YAPIŞMASINI ENGELLEYEN KISIM */
+            letter-spacing: 2px; cursor: pointer; padding: 25px 0; margin-left: 20px;
         }
         .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
         
         .nav-right { display: flex; align-items: center; gap: 25px; margin-right: 20px; }
         .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; }
         .nav-links li { position: relative; padding: 30px 0; } 
-        .nav-links a { color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; cursor: pointer; letter-spacing: 0.5px;}
+        
+        /* TIKLANMA ALANI DÜZELTİLDİ (display: inline-block eklendi) */
+        .nav-links a { display: inline-block; color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; cursor: pointer; letter-spacing: 0.5px;}
         .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
         .dropdown-menu {
@@ -83,10 +83,9 @@
         .dropdown-menu a:hover { background: rgba(188, 111, 241, 0.1); color: #fff; padding-left: 30px; border-left-color: var(--primary); }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* GİRİŞ & PROFİL & BUTONLAR */
+        /* GİRİŞ & PROFİL */
         .auth-btns { display: flex; gap: 15px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 25px; }
         
-        /* İNDİRME BUTONU GİBİ LİNKLER İÇİN INLINE-BLOCK FIX */
         .btn-outline, .btn-solid { 
             display: inline-block; text-align: center; text-decoration: none;
             padding: 12px 25px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: 0.4s; text-transform: uppercase; border: none; letter-spacing: 1px;
@@ -100,8 +99,8 @@
         .avatar { width: 45px; height: 45px; background: linear-gradient(45deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; color: #fff; box-shadow: 0 0 15px rgba(188, 111, 241, 0.5); font-size: 1.2rem; border: 2px solid rgba(255,255,255,0.2);}
         
         .role-badge { display: none; color: #fff; font-size: 0.7rem; padding: 4px 8px; border-radius: 6px; font-weight: 900; letter-spacing: 1px; margin-left: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.5);}
-        .badge-admin { background: linear-gradient(45deg, var(--danger), #ff0044); display: none; } 
-        .badge-mod { background: linear-gradient(45deg, var(--gold), #ffaa00); color: #000; display: none;}
+        .badge-admin { background: linear-gradient(45deg, var(--danger), #ff0044); } 
+        .badge-mod { background: linear-gradient(45deg, var(--gold), #ffaa00); color: #000; }
 
         .profile-dropdown {
             display: none; position: absolute; top: 100%; right: 0; background: var(--card-bg); backdrop-filter: blur(15px);
@@ -113,19 +112,20 @@
 
         /* TOAST BİLDİRİM */
         #customToast {
-            position: fixed; top: 30px; right: -400px; background: rgba(18,18,24,0.95); backdrop-filter: blur(10px); border-left: 4px solid var(--success); padding: 20px 30px; border-radius: 10px; color: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 9999; transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 15px; font-weight: 700; border-top: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: fixed; top: 30px; right: -400px; background: rgba(18,18,24,0.95); backdrop-filter: blur(10px); border-left: 4px solid var(--success); padding: 20px 30px; border-radius: 10px; color: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 9999; transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 15px; font-weight: 700; border: 1px solid rgba(255,255,255,0.05);
         }
         #customToast.show { right: 30px; }
         #customToast i { font-size: 1.8rem; color: var(--success); }
         #customToast.error { border-left-color: var(--danger); }
         #customToast.error i { color: var(--danger); }
 
-        /* --- 3. SAYFA GENEL VE ANA SAYFA --- */
+        /* --- 3. SAYFALAR GENEL --- */
         .page { display: none; animation: fadeIn 0.4s ease; min-height: 70vh; padding-bottom: 100px; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .page-title { text-align: center; font-family: 'Orbitron', sans-serif; font-size: 3rem; margin: 80px 0 50px; color: #fff; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 20px rgba(188, 111, 241, 0.3);}
 
+        /* ANA SAYFA */
         .hero { text-align: center; padding: 140px 0 80px; }
         .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 5rem; font-weight: 900; margin-bottom: 25px; background: linear-gradient(to right, #fff, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; filter: drop-shadow(0 0 15px rgba(188,111,241,0.3));}
         .hero p { color: #aaa; font-size: 1.2rem; max-width: 750px; margin: 0 auto; line-height: 1.8; }
@@ -141,9 +141,9 @@
         .stat-item h4 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 25px var(--primary);}
         .stat-item p { color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- 4. DISCORD VE SHOP KARTLARI (LÜKS GÖRÜNÜM) --- */
+        /* --- 4. DİSCORD & LİSANS KARTLARI (LÜKS) --- */
         .discord-grid, .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 50px;}
-        .ds-card, .price-card { background: var(--card-bg); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border); transition: 0.4s; backdrop-filter: blur(15px); display: flex; flex-direction: column; position: relative; overflow: hidden;}
+        .ds-card, .price-card { background: var(--card-bg); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border); transition: 0.4s; backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;}
         .ds-card:hover, .price-card:hover { border-color: var(--primary); transform: translateY(-10px); box-shadow: 0 20px 50px rgba(188, 111, 241, 0.15); }
         
         .ds-icon { width: 90px; height: 90px; background: rgba(88, 101, 242, 0.15); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px; color: var(--discord); font-size: 3rem; box-shadow: 0 0 25px rgba(88, 101, 242, 0.3);}
@@ -156,10 +156,10 @@
         .price-card ul li { padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 15px;}
         .price-card ul li i { color: var(--primary); font-size: 1.2rem; }
         
-        .ds-btn { width: 100%; padding: 18px; background: var(--discord); color: #fff; border: none; border-radius: 10px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 1.1rem; letter-spacing: 1px; box-shadow: 0 5px 20px rgba(88, 101, 242, 0.4); margin-top: auto;}
+        .ds-btn { width: 100%; padding: 18px; background: var(--discord); color: #fff; border: none; border-radius: 10px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 1.1rem; letter-spacing: 1px; box-shadow: 0 5px 20px rgba(88, 101, 242, 0.4);}
         .ds-btn:hover { background: #4752c4; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(88, 101, 242, 0.6);}
         
-        .buy-btn { width: 100%; padding: 18px; background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 10px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 1.1rem; letter-spacing: 1px; box-shadow: 0 0 15px rgba(188, 111, 241, 0.2); margin-top: auto;}
+        .buy-btn { width: 100%; padding: 18px; background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 10px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 1.1rem; letter-spacing: 1px; box-shadow: 0 0 15px rgba(188, 111, 241, 0.2);}
         .buy-btn:hover { background: var(--primary); color: #fff; box-shadow: 0 0 30px var(--primary);}
         
         .price-card.premium { border: 2px solid var(--gold); background: linear-gradient(160deg, rgba(18, 18, 24, 0.9), rgba(40, 30, 10, 0.5)); }
@@ -217,6 +217,7 @@
             overflow-x: auto; 
         }
         
+        /* BU KISIM SEKMELERİN ÜST ÜSTE BİNMESİNİ KESİN ENGELLER */
         .admin-section { display: none; animation: fadeIn 0.4s ease; } 
         .admin-section.active { display: block; }
         
@@ -228,7 +229,7 @@
         .admin-table th { color: #888; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800;}
         .admin-table td { color: #ccc; font-size: 1rem; }
         
-        .action-btn { padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; font-weight: 800; margin-right: 8px; transition: 0.3s; font-size: 0.9rem;}
+        .action-btn { padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; font-weight: 800; margin-right: 8px; transition: 0.3s; font-size: 0.9rem; display: inline-block;}
         .btn-danger { background: rgba(255, 71, 87, 0.1); color: var(--danger); border: 1px solid var(--danger); }
         .btn-danger:hover { background: var(--danger); color: #fff; box-shadow: 0 0 15px var(--danger);}
         .btn-success { background: rgba(0, 255, 136, 0.1); color: var(--success); border: 1px solid var(--success); }
@@ -241,11 +242,10 @@
         .search-input { padding: 15px 25px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; outline: none; width: 300px; font-family: 'Inter', sans-serif; transition: 0.3s; font-size: 1rem;}
         .search-input:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(188, 111, 241, 0.3); }
 
-        /* YETKİ VE KUPON KUTULARI (FLEX-WRAP İLE KARIŞMA ÖNLENDİ) */
         .control-box { 
             background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); 
             padding: 35px; border-radius: 15px; display: flex; gap: 20px; align-items: center; 
-            margin-bottom: 50px; flex-wrap: wrap; /* İÇ İÇE GİRMEYİ KESİN ENGELLER */
+            margin-bottom: 50px; flex-wrap: wrap; 
         }
         
         .control-box .search-input { flex: 2; min-width: 250px; width: auto; }
@@ -506,7 +506,7 @@
                         <div id="adm-keys" class="admin-section active">
                             <div class="admin-header">
                                 <h4>LİSANS YÖNETİMİ</h4>
-                                <div class="admin-flex admin-only" style="gap:15px; flex-wrap:wrap; display:none;">
+                                <div class="admin-only" style="gap:15px; flex-wrap:wrap; display:none;">
                                     <input type="text" id="keySearch" class="search-input" placeholder="Kullanıcı veya Key Ara..." onkeyup="filterTable('keySearch', 'admKeysTbody')">
                                     <button class="btn-solid" style="background:linear-gradient(135deg, var(--success), #00cc6a); box-shadow: 0 0 15px rgba(0,255,136,0.3);" onclick="openAdminKeyModal()"><i class="fas fa-plus"></i> Yeni Key Üret</button>
                                 </div>
@@ -543,7 +543,7 @@
                             </table>
                         </div>
 
-                        <div id="adm-roles" class="admin-section admin-only">
+                        <div id="adm-roles" class="admin-section">
                             <div class="admin-header">
                                 <h4>YETKİLENDİRME SİSTEMİ</h4>
                             </div>
@@ -573,7 +573,7 @@
                             </table>
                         </div>
 
-                        <div id="adm-coupons" class="admin-section admin-only">
+                        <div id="adm-coupons" class="admin-section">
                             <div class="admin-header">
                                 <h4>KUPON OLUŞTURMA</h4>
                             </div>
@@ -601,11 +601,11 @@
                             </table>
                         </div>
 
-                        <div id="adm-tickets" class="admin-section mod-only">
+                        <div id="adm-tickets" class="admin-section">
                             <div class="admin-header">
                                 <h4 style="color:var(--blue);">BEKLEYEN DESTEK MESAJLARI</h4>
                             </div>
-                            <p style="color:#aaa; margin-bottom: 20px;">Kullanıcıların canlı destekten yazdığı mesajlar buraya düşer. Cevapla butonuna basarak direkt adamın ekranına mesaj gönderebilirsin.</p>
+                            <p style="color:#aaa; margin-bottom: 20px;">Kullanıcıların canlı destekten yazdığı mesajlar buraya düşer. Cevapla butonuna basarak direkt adamın ekranına mesaj gönderebilirsiniz.</p>
                             <table class="admin-table">
                                 <thead>
                                     <tr>
@@ -775,9 +775,9 @@
         let userRole = "user";
         let cart = [];
         let activeDiscount = 0;
-        let activeChatUser = null; // Adminin kiminle chatleştiğini tutar
+        let activeChatUser = null; 
 
-        // YENİLEMEDE OTURUMU TUTAN SİSTEM (F5 FIX)
+        // YENİLEMEDE OTURUMU TUTAN SİSTEM 
         window.onload = () => { 
             let saved = localStorage.getItem('sensiUser');
             if(saved) {
@@ -805,6 +805,15 @@
             if(p === 'orders') fetchOrders();
         }
 
+        function requireLogin(targetPage) {
+            if(currentUser) {
+                switchPage(targetPage);
+            } else {
+                showToast("Bu sayfaya girmek için giriş yapmalısın!", "error");
+                openAuthModal('login');
+            }
+        }
+
         function closeModal(m) { document.getElementById(m).style.display = 'none'; }
         function openAuthModal(mode) { document.getElementById('authModal').style.display = 'flex'; switchAuth(mode); }
         
@@ -815,7 +824,7 @@
             document.getElementById('tReg').className = m === 'login' ? 'auth-tab' : 'auth-tab active';
         }
 
-        // --- KAYIT SİSTEMİ VE ANTİ-SPAM (BAN SİSTEMİ EKLENDİ) ---
+        // --- KAYIT SİSTEMİ VE ANTİ-SPAM (BAN VE SİLME DESTEKLİ) ---
         function doReg() {
             const u = document.getElementById('rUs').value.trim(); 
             const p = document.getElementById('rPs').value;
@@ -830,7 +839,7 @@
             db.ref('banned_hwids/' + hwid).once('value', banSnap => {
                 if(banSnap.exists()) return showToast("Bu cihaz sistemden KALICI OLARAK uzaklaştırılmıştır!", "error");
                 
-                // 2. HWID zaten kayıtlı mı kontrol et (Spam Engeli)
+                // 2. HWID zaten kayıtlı mı kontrol et
                 db.ref('hwids/' + hwid).once('value', s => {
                     if(s.exists() && u !== 'omer13ds') return showToast("Bu bilgisayardan zaten üyelik oluşturulmuş!", "error");
                     
@@ -876,12 +885,15 @@
             currentUser = u; 
             userRole = r;
             
-            document.body.className = "role-" + r; // CSS yetki sistemi devreye girer
+            document.body.className = "role-" + r; // BÜTÜN CSS YETKİLERİ BURADAN ÇALIŞIR
             
             document.getElementById('authSection').style.display = 'none';
             document.getElementById('profileSection').style.display = 'flex';
             document.getElementById('profileName').innerText = u;
             document.getElementById('avatarLetter').innerText = u[0].toUpperCase();
+            
+            document.getElementById('badgeAdmin').style.display = r === 'admin' ? 'inline-block' : 'none';
+            document.getElementById('badgeMod').style.display = r === 'mod' ? 'inline-block' : 'none';
             
             // Eğer normal user ise canlı destek ikonunu aç
             if(r === 'user') {
@@ -889,8 +901,7 @@
                 activeChatUser = null; 
                 loadChatHistory(u);
             } else {
-                // Admin veya Mod ise balonu gizle, onlar panelden cevap verecek.
-                document.getElementById('chatWidgetBtn').style.display = 'none';
+                document.getElementById('chatWidgetBtn').style.display = 'none'; // Admin panelden bakar
             }
             
             if(!isSilent) showToast("Hoş Geldin " + u, "success");
@@ -1003,12 +1014,16 @@
             });
         }
 
-        // --- ADMİN PANELİ ---
+        // --- ADMİN PANELİ FONKSİYONLARI ---
         function switchAdminTab(t) {
             document.querySelectorAll('.admin-section').forEach(e => e.classList.remove('active'));
             document.querySelectorAll('.admin-nav a').forEach(e => e.classList.remove('active'));
-            document.getElementById(t).classList.add('active');
-            document.getElementById('nav-'+t).classList.add('active');
+            
+            const targetSec = document.getElementById(t);
+            const targetNav = document.getElementById('nav-'+t);
+            
+            if(targetSec) targetSec.classList.add('active');
+            if(targetNav) targetNav.classList.add('active');
         }
 
         function fetchAdminData() {
@@ -1020,10 +1035,10 @@
                         const d = ch.val();
                         let statColor = d.status === 'BANNED' ? 'color:var(--danger)' : 'color:var(--success)';
                         let actionBtns = `
-                            <button class="action-btn btn-warning" onclick="db.ref('licenses/${ch.key}').update({status:'BANNED'})">Banla</button>
-                            <button class="action-btn btn-danger" onclick="db.ref('licenses/${ch.key}').remove()">Sil</button>
+                            <button class="action-btn btn-warning admin-only" onclick="db.ref('licenses/${ch.key}').update({status:'BANNED'})">Banla</button>
+                            <button class="action-btn btn-danger admin-only" onclick="db.ref('licenses/${ch.key}').remove()">Sil</button>
                         `;
-                        b.innerHTML += `<tr><td style="font-weight:bold;">${d.owner}</td><td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td><td>${d.package}</td><td style="font-weight:900; ${statColor}">${d.status}</td><td class="admin-only">${actionBtns}</td></tr>`;
+                        b.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${d.owner}</td><td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td><td>${d.package}</td><td style="font-weight:900; ${statColor}">${d.status}</td><td class="admin-only">${actionBtns}</td></tr>`;
                     });
                 }
             });
@@ -1054,7 +1069,7 @@
                 const b = document.getElementById('admCouponsTbody'); b.innerHTML = '';
                 if(s.exists()) {
                     s.forEach(ch => {
-                        let delBtn = `<button class="action-btn btn-danger" onclick="db.ref('coupons/${ch.key}').remove()"><i class="fas fa-trash"></i> Sil</button>`;
+                        let delBtn = `<button class="action-btn btn-danger admin-only" onclick="db.ref('coupons/${ch.key}').remove()"><i class="fas fa-trash"></i> Sil</button>`;
                         b.innerHTML += `<tr><td style="font-weight:bold; color:var(--success); font-size:1.2rem; letter-spacing:1px;">${ch.key}</td><td style="font-weight:bold; font-size:1.1rem; color:#fff;">%${ch.val().percent} İndirim</td><td class="admin-only">${delBtn}</td></tr>`;
                     });
                 }
@@ -1077,11 +1092,10 @@
             });
         }
 
-        // ADMİN EYLEMLERİ (HWID SİLME VE KALICI BAN EKLENDİ)
+        // ADMİN EYLEMLERİ (HWID SİLME VE KALICI BAN)
         function deleteUser(uname) {
             if(userRole !== 'admin') return;
-            if(confirm(`${uname} adlı kullanıcıyı sistemden silmek istediğinize emin misiniz? (Tekrar üye olabilirler)`)) { 
-                // Cihaz HWID'sini bul ve sil (Tekrar üye olabilsin diye)
+            if(confirm(`${uname} adlı kullanıcıyı sistemden silmek istediğinize emin misiniz? (HWID sıfırlanır, tekrar kayıt olabilir)`)) { 
                 db.ref('users/'+uname).once('value', s => {
                     if(s.exists() && s.val().hwid) { db.ref('hwids/'+s.val().hwid).remove(); }
                     db.ref('users/'+uname).remove(); 
@@ -1092,11 +1106,11 @@
 
         function banUser(uname) {
             if(userRole !== 'admin') return;
-            if(confirm(`${uname} adlı kullanıcıyı BANLAMAK istediğinize emin misiniz? (Bir daha asla kayıt olamazlar)`)) { 
+            if(confirm(`${uname} adlı kullanıcıyı BANLAMAK istediğinize emin misiniz? (Format atsa bile kayıt olamaz)`)) { 
                 db.ref('users/'+uname).once('value', s => {
                     if(s.exists()) { 
                         let hwid = s.val().hwid;
-                        if(hwid) { db.ref('banned_hwids/'+hwid).set(true); } // HWID Kara listeye alındı
+                        if(hwid) { db.ref('banned_hwids/'+hwid).set(true); } 
                         db.ref('users/'+uname).update({ role: 'banned' }); 
                         showToast("Kullanıcı kalıcı olarak BANLANDI!", "error");
                     }
@@ -1156,7 +1170,6 @@
             let text = input.value.trim();
             if(!text || !currentUser) return;
 
-            // Admin cevap veriyorsa target activeChatUser'dır, normal kullanıcı yazıyorsa kendisidir
             let targetUser = activeChatUser ? activeChatUser : currentUser;
 
             db.ref(`chats/${targetUser}`).push({
@@ -1190,7 +1203,6 @@
             
             db.ref(`chats/${uname}`).on('child_added', s => {
                 let msg = s.val();
-                // Admin ekranında adminin kendi yazdığı sağda (msg-user), adamın yazdığı solda (msg-admin) gözükür.
                 let cssClass = msg.sender === currentUser ? "msg-user" : "msg-admin";
                 container.innerHTML += `<div class="chat-msg ${cssClass}">${msg.text}</div>`;
                 container.scrollTop = container.scrollHeight;
@@ -1198,7 +1210,7 @@
         }
 
         function deleteChat(uname) {
-            if(confirm("Bu destek talebini (sohbeti) silmek istiyor musunuz?")) {
+            if(confirm("Bu destek talebini silmek istiyor musunuz?")) {
                 db.ref('chats/'+uname).remove(); showToast("Destek talebi silindi.");
             }
         }

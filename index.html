@@ -124,9 +124,6 @@
         .hero { text-align: center; padding: 140px 0 80px; position: relative; }
         .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 5.5rem; font-weight: 900; margin-bottom: 25px; background: linear-gradient(to right, #fff, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; filter: drop-shadow(0 0 25px rgba(188,111,241,0.5));}
         .hero p { color: #bbb; font-size: 1.3rem; max-width: 800px; margin: 0 auto 40px; line-height: 1.8; }
-        .hero-actions { display: flex; justify-content: center; gap: 20px; }
-        .hero-actions .btn-solid { padding: 18px 40px; font-size: 1.1rem; }
-        .hero-actions .btn-outline { padding: 18px 40px; font-size: 1.1rem; border-width: 2px;}
         
         .home-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; }
         .feature-card { background: var(--card-bg); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border); backdrop-filter: blur(15px); transition: 0.4s; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
@@ -194,7 +191,7 @@
         }
         .admin-sidebar h3 { color: var(--danger); font-family: 'Orbitron', sans-serif; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid rgba(255, 71, 87, 0.2); font-size: 1.3rem; text-align: center; letter-spacing: 1px;}
         .admin-nav { list-style: none; }
-        .admin-nav li { margin-bottom: 15px; }
+        .admin-nav li { margin-bottom: 15px; display: none; }
         .admin-nav a { display: block; padding: 18px; background: rgba(255,255,255,0.03); color: #aaa; border-radius: 12px; transition: 0.3s; cursor: pointer; border: 1px solid transparent; font-weight: 700; font-size: 0.95rem;}
         .admin-nav a.active, .admin-nav a:hover { background: rgba(188, 111, 241, 0.15); color: #fff; border-color: var(--primary); box-shadow: 0 5px 15px rgba(188, 111, 241, 0.2);}
         .admin-nav i { margin-right: 15px; color: var(--primary); width: 20px; text-align: center; font-size: 1.1rem;}
@@ -202,10 +199,9 @@
         .admin-content { 
             background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
             padding: 40px; min-height: 700px; backdrop-filter: blur(15px); box-shadow: 0 10px 50px rgba(0,0,0,0.2);
-            min-width: 0; overflow: hidden; 
+            min-width: 0; overflow: hidden; /* Taşmaları engeller */
         }
         
-        /* Sekmeler JS ile '.active' alır. Diğerleri display: none olur. Asla karışmaz. */
         .admin-section { display: none !important; animation: fadeIn 0.4s ease; } 
         .admin-section.active { display: block !important; }
         
@@ -218,7 +214,7 @@
         .admin-table th { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
         .admin-table td { color: #ccc; font-size: 0.95rem; }
         
-        .action-btn { padding: 8px 12px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; margin-right: 5px; transition: 0.3s; }
+        .action-btn { padding: 8px 12px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; margin-right: 5px; transition: 0.3s; display: inline-block;}
         .btn-danger { background: rgba(255, 71, 87, 0.1); color: var(--danger); border: 1px solid var(--danger); }
         .btn-danger:hover { background: var(--danger); color: #fff; }
         .btn-success { background: rgba(0, 255, 136, 0.1); color: var(--success); border: 1px solid var(--success); }
@@ -236,7 +232,7 @@
         .control-box select { flex: 1; min-width: 150px; padding: 12px 20px; border-radius: 8px; background: rgba(0,0,0,0.4); color: #fff; border: 1px solid rgba(255,255,255,0.1); outline: none; font-size:1rem; cursor: pointer; transition: 0.3s;}
         .control-box select:focus { border-color: var(--primary); }
 
-        /* --- 7. MODAL TASARIMLARI --- */
+        /* --- 7. MODALLAR --- */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; }
         .modal-box { background: rgba(13, 13, 18, 0.95); padding: 50px 60px; border-radius: 20px; width: 100%; max-width: 450px; border: 1px solid var(--border); position: relative; text-align: center; box-shadow: 0 0 50px rgba(188, 111, 241, 0.15); }
         .auth-tabs { display: flex; margin-bottom: 40px; border-bottom: 2px solid #222; }
@@ -251,7 +247,7 @@
         .close-btn:hover { color: var(--danger); transform: scale(1.1);}
         .modal-select { width: 100%; padding: 18px; background: #15151c; border: 1px solid #222; border-radius: 10px; color: #fff; outline: none; margin-bottom: 25px; font-size: 1.05rem; cursor: pointer;}
 
-        /* --- 8. CANLI DESTEK & WHATSAPP SOHBET YÜZÜ --- */
+        /* --- 8. CANLI DESTEK --- */
         .chat-widget-btn {
             position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -287,7 +283,7 @@
         .chat-input-area button { background: var(--primary); border: none; color: #fff; width: 45px; height: 45px; border-radius: 50%; margin-left: 10px; cursor: pointer; transition: 0.3s; font-size: 1.1rem; display: flex; justify-content: center; align-items: center;}
         .chat-input-area button:hover { background: var(--accent); transform: scale(1.1); box-shadow: 0 0 15px var(--primary);}
 
-        /* YETKİLİ SOHBETİ (PANEL İÇİ) */
+        /* YETKİLİ SOHBETİ */
         .staff-chat-container { display: flex; flex-direction: column; height: 450px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; overflow: hidden;}
         .staff-chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth;}
         .staff-msg { padding: 15px; border-radius: 12px; font-size: 0.95rem; line-height: 1.5; background: rgba(255,255,255,0.05); border-left: 4px solid var(--discord);}
@@ -354,7 +350,7 @@
                     <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: #888; margin-left: 8px;"></i>
                     
                     <div class="profile-dropdown">
-                        <a onclick="switchPage('admin')" class="req-mod"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
+                        <a onclick="switchPage('admin')" class="req-mod" id="adminMenuBtn" style="display:none;"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
                         <a onclick="switchPage('cart')"><i class="fas fa-shopping-cart"></i> Sepetim <span id="cartCountBadge" style="background:var(--danger); color:#fff; padding:3px 8px; border-radius:10px; font-size:0.75rem; margin-left:5px; display:none; font-weight:bold;">0</span></a>
                         <a onclick="switchPage('orders')"><i class="fas fa-box"></i> Siparişlerim</a>
                         <a onclick="logout()" style="color:var(--danger); border-top:1px solid rgba(255,255,255,0.1); margin-top:10px; padding-top:15px;"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
@@ -369,10 +365,7 @@
                     <div class="hero-glow"></div>
                     <h1>KODUN ÖTESİNE GEÇ.</h1>
                     <p>Sensisoftware ile yazılımın arka planındaki karanlık sanatı keşfet. Yalnızca seçkin mühendislerin erişebildiği özel altyapıya hoş geldin.</p>
-                    <div class="hero-actions">
-                        <button class="btn-solid" onclick="switchPage('shop')">LİSANSLARI İNCELE</button>
-                        <button class="btn-outline" onclick="openAuthModal('login')">SİSTEME GEÇİŞ YAP</button>
-                    </div>
+                    
                 </main>
                 <div class="home-features">
                     <div class="feature-card"><i class="fas fa-shield-halved"></i><h3>Tam Koruma</h3><p>Kernel seviyesindeki sürücülerimizle tespit edilemez bir yapı sunuyoruz. Verileriniz daima güvende.</p></div>
@@ -461,29 +454,23 @@
                     
                     <div class="admin-sidebar">
                         <h3>KONTROL MENÜSÜ</h3>
-                        <ul class="admin-nav">
-                            <li class="req-admin"><a onclick="switchAdminTab('adm-keys')" id="nav-adm-keys" class="active"><i class="fas fa-key"></i> Lisans Yönetimi</a></li>
-                            <li class="req-mod"><a onclick="switchAdminTab('adm-users')" id="nav-adm-users"><i class="fas fa-users"></i> Üyeler ve Şifreler</a></li>
-                            <li class="req-kurucu"><a onclick="switchAdminTab('adm-roles')" id="nav-adm-roles"><i class="fas fa-gavel"></i> Yetki Kontrolü</a></li>
-                            <li class="req-admin"><a onclick="switchAdminTab('adm-coupons')" id="nav-adm-coupons"><i class="fas fa-ticket-alt"></i> Kupon Sistemi</a></li>
-                            <li class="req-mod"><a onclick="switchAdminTab('adm-tickets')" id="nav-adm-tickets" style="color:var(--blue);"><i class="fas fa-headset"></i> Destek Talepleri</a></li>
-                            <li class="req-mod"><a onclick="switchAdminTab('adm-staff-chat')" id="nav-adm-staff-chat" style="color:var(--gold);"><i class="fas fa-comments"></i> Yetkili Sohbeti</a></li>
-                        </ul>
+                        <ul class="admin-nav" id="adminNavList">
+                            </ul>
                     </div>
 
                     <div class="admin-content">
                         
-                        <div id="adm-keys" class="admin-section active">
+                        <div id="adm-keys" class="admin-section">
                             <div class="admin-header">
                                 <h4>LİSANS YÖNETİMİ</h4>
-                                <div class="req-admin flex-box" style="gap:15px; flex-wrap:wrap;">
+                                <div id="adminKeyBtnWrapper" style="display:none; gap:15px; flex-wrap:wrap;">
                                     <input type="text" id="keySearch" class="search-input" placeholder="Kullanıcı veya Key Ara..." onkeyup="filterTable('keySearch', 'admKeysTbody')">
                                     <button class="btn-solid" style="background:linear-gradient(135deg, var(--success), #00cc6a); box-shadow: 0 0 15px rgba(0,255,136,0.3);" onclick="openAdminKeyModal()"><i class="fas fa-plus"></i> Yeni Key Üret</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
                                 <table class="admin-table">
-                                    <thead><tr><th>Kullanıcı</th><th>Lisans Anahtarı</th><th>Paket</th><th>Durum</th><th class="req-admin">İşlem</th></tr></thead>
+                                    <thead><tr><th>Kullanıcı</th><th>Lisans Anahtarı</th><th>Paket</th><th>Durum</th><th id="thKeyAction" style="display:none;">İşlem</th></tr></thead>
                                     <tbody id="admKeysTbody"></tbody>
                                 </table>
                             </div>
@@ -494,10 +481,10 @@
                                 <h4>KAYITLI ÜYELER</h4>
                                 <input type="text" id="userSearch" class="search-input" placeholder="Üye Ara..." onkeyup="filterTable('userSearch', 'admUsersTbody')">
                             </div>
-                            <p style="color:#aaa; margin-bottom: 20px;">* Yetkililerin (Kurucu, Admin, Mod) şifrelerini diğer yetkililer göremez.</p>
+                            <p style="color:#aaa; margin-bottom: 20px;">* Şifreler ve yönetim butonları yetkinize göre gizlenir veya gösterilir.</p>
                             <div class="table-responsive">
                                 <table class="admin-table">
-                                    <thead><tr><th>Kullanıcı Adı</th><th>Şifre</th><th>Rol</th><th class="req-admin">İşlem</th></tr></thead>
+                                    <thead><tr><th>Kullanıcı Adı</th><th>Şifre</th><th>Rol</th><th id="thUserAction" style="display:none;">İşlem</th></tr></thead>
                                     <tbody id="admUsersTbody"></tbody>
                                 </table>
                             </div>
@@ -506,7 +493,7 @@
                         <div id="adm-roles" class="admin-section">
                             <div class="admin-header"><h4>YETKİLENDİRME SİSTEMİ</h4></div>
                             <p style="color:#aaa; margin-bottom: 30px; line-height:1.7; font-size:1.05rem;">
-                                Buradan sisteme kayıtlı bir üyeyi yetkilendirebilirsiniz. Bu alan sadece <strong style="color:var(--danger)">Kurucu</strong> yetkisine açıktır.
+                                Buradan sisteme kayıtlı bir üyeyi yetkilendirebilirsiniz. Bu alan sadece Kurucu yetkisine açıktır.
                             </p>
                             <div class="control-box">
                                 <input type="text" id="roleUserTarget" class="search-input" placeholder="Kullanıcı Adı Girin" onkeypress="if(event.key==='Enter') assignRole()">
@@ -540,7 +527,7 @@
                             </div>
                             <div class="table-responsive">
                                 <table class="admin-table">
-                                    <thead><tr><th>Kupon Kodu</th><th>İndirim Miktarı</th><th class="req-admin">İşlem</th></tr></thead>
+                                    <thead><tr><th>Kupon Kodu</th><th>İndirim Miktarı</th><th id="thCouponAction" style="display:none;">İşlem</th></tr></thead>
                                     <tbody id="admCouponsTbody"></tbody>
                                 </table>
                             </div>
@@ -751,7 +738,7 @@
             let saved = localStorage.getItem('sensiUser');
             if(saved) {
                 let parsed = JSON.parse(saved);
-                // KURUCU ZORLAMASI (Önceden admin kalmışsa kurucuya çek)
+                // KURUCU ZORLAMASI
                 if (parsed.username === 'omer13ds') parsed.role = 'kurucu';
                 applyLogin(parsed.username, parsed.role, true);
             }
@@ -764,7 +751,7 @@
             setTimeout(() => t.className = '', 3500);
         }
 
-        // JS İLE KONTROLLÜ TAB GEÇİŞİ
+        // --- YENİ JS TABANLI GÜVENLİ MENÜ GİZLEME VE GÖSTERME ---
         function switchPage(p) {
             document.querySelectorAll('.page').forEach(e => e.classList.remove('active'));
             document.getElementById('page-'+p).classList.add('active');
@@ -772,22 +759,56 @@
             
             if(p === 'admin') {
                 if(userRole === 'user') { switchPage('home'); return; }
-                
-                // Menü sekmelerini kapat ve role göre ilk sekmeyi aç
-                document.querySelectorAll('.admin-section').forEach(e => e.classList.remove('active'));
-                document.querySelectorAll('.admin-nav a').forEach(e => e.classList.remove('active'));
-                
-                if (userRole === 'kurucu' || userRole === 'admin') {
-                    document.getElementById('adm-keys').classList.add('active');
-                    document.getElementById('nav-adm-keys').classList.add('active');
-                } else if (userRole === 'mod') {
-                    document.getElementById('adm-users').classList.add('active');
-                    document.getElementById('nav-adm-users').classList.add('active');
-                }
-                
+                renderAdminSidebar();
                 fetchAdminData();
             }
             if(p === 'orders') fetchOrders();
+        }
+
+        // Admin menüsünü JS ile çizeriz
+        function renderAdminSidebar() {
+            let menuHtml = '';
+            
+            if (userRole === 'kurucu' || userRole === 'admin') {
+                menuHtml += `<li id="nav-li-keys"><a onclick="switchAdminTab('adm-keys')" id="nav-adm-keys" class="active"><i class="fas fa-key"></i> Lisans Yönetimi</a></li>`;
+            }
+            if (userRole === 'kurucu' || userRole === 'admin' || userRole === 'mod') {
+                menuHtml += `<li id="nav-li-users"><a onclick="switchAdminTab('adm-users')" id="nav-adm-users" class="${userRole==='mod'?'active':''}"><i class="fas fa-users"></i> Üyeler ve Şifreler</a></li>`;
+            }
+            if (userRole === 'kurucu') {
+                menuHtml += `<li id="nav-li-roles"><a onclick="switchAdminTab('adm-roles')" id="nav-adm-roles"><i class="fas fa-gavel"></i> Yetki Kontrolü</a></li>`;
+            }
+            if (userRole === 'kurucu' || userRole === 'admin') {
+                menuHtml += `<li id="nav-li-coupons"><a onclick="switchAdminTab('adm-coupons')" id="nav-adm-coupons"><i class="fas fa-ticket-alt"></i> Kupon Sistemi</a></li>`;
+            }
+            if (userRole === 'kurucu' || userRole === 'admin' || userRole === 'mod') {
+                menuHtml += `<li id="nav-li-tickets"><a onclick="switchAdminTab('adm-tickets')" id="nav-adm-tickets" style="color:var(--blue);"><i class="fas fa-headset"></i> Destek Talepleri</a></li>`;
+                menuHtml += `<li id="nav-li-staff"><a onclick="switchAdminTab('adm-staff-chat')" id="nav-adm-staff-chat" style="color:var(--gold);"><i class="fas fa-comments"></i> Yetkili Sohbeti</a></li>`;
+            }
+            
+            document.getElementById('adminNavList').innerHTML = menuHtml;
+            
+            document.querySelectorAll('.admin-section').forEach(e => e.classList.remove('active'));
+            if (userRole === 'kurucu' || userRole === 'admin') {
+                document.getElementById('adm-keys').classList.add('active');
+            } else if (userRole === 'mod') {
+                document.getElementById('adm-users').classList.add('active');
+            }
+            
+            updateTableHeaders();
+        }
+
+        function updateTableHeaders() {
+            const btnKeys = document.getElementById('adminKeyBtnWrapper');
+            const thKeyAction = document.getElementById('thKeyAction');
+            if(btnKeys) btnKeys.style.display = (userRole === 'kurucu' || userRole === 'admin') ? 'flex' : 'none';
+            if(thKeyAction) thKeyAction.style.display = (userRole === 'kurucu' || userRole === 'admin') ? 'table-cell' : 'none';
+            
+            const thUserAction = document.getElementById('thUserAction');
+            if(thUserAction) thUserAction.style.display = (userRole === 'kurucu' || userRole === 'admin') ? 'table-cell' : 'none';
+
+            const thCouponAction = document.getElementById('thCouponAction');
+            if(thCouponAction) thCouponAction.style.display = (userRole === 'kurucu' || userRole === 'admin') ? 'table-cell' : 'none';
         }
 
         function switchAdminTab(t) {
@@ -847,7 +868,7 @@
             db.ref('users/'+u).once('value', snap => {
                 if(snap.exists()) return showToast("Bu isim daha önce alınmış!", "error");
                 
-                const role = u === 'omer13ds' ? 'kurucu' : 'user'; // MÜTLAK KURUCU
+                const role = u === 'omer13ds' ? 'kurucu' : 'user';
                 db.ref('users/'+u).set({ password: p, role: role, hwid: hwid }).then(() => {
                     localStorage.setItem('sensi_hwid', hwid);
                     db.ref('hwids/'+hwid).set({ user: u });
@@ -867,7 +888,7 @@
                 if(s.exists() && s.val().password === p) {
                     let r = s.val().role || 'user';
                     
-                    if (u === 'omer13ds') r = 'kurucu'; // MÜTLAK KURUCU
+                    if (u === 'omer13ds') r = 'kurucu'; // MUTLAK KURUCU
                     if(r === 'banned') return showToast("Hesabınız kalıcı olarak yasaklanmıştır!", "error");
 
                     localStorage.setItem('sensiUser', JSON.stringify({username: u, role: r}));
@@ -883,13 +904,26 @@
             currentUser = u; 
             userRole = r;
             
-            // KUSURSUZ YETKİ ZIRHI (CSS'i tetikler)
+            // KUSURSUZ YETKİ ZIRHI
             document.body.className = "role-" + r; 
             
             document.getElementById('authSection').style.display = 'none';
             document.getElementById('profileSection').style.display = 'flex';
             document.getElementById('profileName').innerText = u;
             document.getElementById('avatarLetter').innerText = u[0].toUpperCase();
+            
+            // ROZET KONTROLÜ
+            document.getElementById('badgeKurucu').style.display = 'none';
+            document.getElementById('badgeAdmin').style.display = 'none';
+            document.getElementById('badgeMod').style.display = 'none';
+
+            if (r === 'kurucu') document.getElementById('badgeKurucu').style.display = 'inline-block';
+            else if (r === 'admin') document.getElementById('badgeAdmin').style.display = 'inline-block';
+            else if (r === 'mod') document.getElementById('badgeMod').style.display = 'inline-block';
+            
+            let menuBtn = document.getElementById('adminMenuBtn');
+            if(r === 'kurucu' || r === 'admin' || r === 'mod') { menuBtn.style.display = 'block'; } 
+            else { menuBtn.style.display = 'none'; }
             
             if(r === 'user') {
                 document.getElementById('chatWidgetBtn').style.display = 'flex';
@@ -1023,7 +1057,7 @@
                                 <button class="action-btn btn-warning" onclick="db.ref('licenses/${ch.key}').update({status:'BANNED'})">Banla</button>
                                 <button class="action-btn btn-danger" onclick="db.ref('licenses/${ch.key}').remove()">Sil</button>
                             `;
-                            b.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${d.owner}</td><td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td><td>${d.package}</td><td style="font-weight:900; ${statColor}">${d.status}</td><td class="req-admin">${actionBtns}</td></tr>`;
+                            b.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${d.owner}</td><td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td><td>${d.package}</td><td style="font-weight:900; ${statColor}">${d.status}</td><td>${actionBtns}</td></tr>`;
                         });
                     }
                 });
@@ -1033,7 +1067,7 @@
                     if(s.exists()) {
                         s.forEach(ch => {
                             let delBtn = `<button class="action-btn btn-danger" onclick="db.ref('coupons/${ch.key}').remove()"><i class="fas fa-trash"></i> Sil</button>`;
-                            b.innerHTML += `<tr><td style="font-weight:bold; color:var(--success); font-size:1.2rem; letter-spacing:1px;">${ch.key}</td><td style="font-weight:bold; font-size:1.1rem; color:#fff;">%${ch.val().percent} İndirim</td><td class="req-admin">${delBtn}</td></tr>`;
+                            b.innerHTML += `<tr><td style="font-weight:bold; color:var(--success); font-size:1.2rem; letter-spacing:1px;">${ch.key}</td><td style="font-weight:bold; font-size:1.1rem; color:#fff;">%${ch.val().percent} İndirim</td><td>${delBtn}</td></tr>`;
                         });
                     }
                 });
@@ -1048,7 +1082,7 @@
                         let rName = d.role === "kurucu" ? "Kurucu" : (d.role === "admin" ? "Admin" : (d.role === "mod" ? "Moderatör" : (d.role === "banned" ? "Yasaklı" : "Üye")));
                         let rCol = d.role === "kurucu" ? "color:var(--danger)" : (d.role === "admin" ? "color:var(--primary)" : (d.role === "mod" ? "color:var(--gold)" : (d.role === "banned" ? "color:red; text-decoration:line-through;" : "color:#ccc")));
                         
-                        // ŞİFRE GİZLEME MANTIĞI: (MUTLAK GİZLİLİK) Hiçbir yetkili birbirini göremez.
+                        // ŞİFRE GİZLEME MANTIĞI: (MUTLAK GİZLİLİK)
                         let isTargetStaff = (d.role === 'kurucu' || d.role === 'admin' || d.role === 'mod');
                         let displayPw = "***";
                         
@@ -1065,7 +1099,7 @@
                             <button class="action-btn btn-warning" onclick="banUser('${uname}')"><i class="fas fa-ban"></i> Banla</button>
                         ` : '-';
                         
-                        let thAction = (userRole === 'kurucu' || userRole === 'admin') ? `<td class="req-admin">${actionBtns}</td>` : '<td class="req-admin">-</td>';
+                        let thAction = (userRole === 'kurucu' || userRole === 'admin') ? `<td>${actionBtns}</td>` : '';
                         
                         if(b) b.innerHTML += `<tr><td style="font-weight:bold; color:#fff; font-size:1.1rem;">${uname}</td><td style="font-family:monospace; color:var(--primary); font-size:1.1rem;">${displayPw}</td><td style="font-weight:bold; ${rCol}">${rName}</td>${thAction}</tr>`;
                         

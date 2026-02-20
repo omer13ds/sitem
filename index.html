@@ -3,157 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sensisoftware | The Future of Tech</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+    <title>Sensisoftware | Private Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #bc6ff1; /* Parlak Mor */
-            --accent: #892cdc;  /* Derin Mor */
-            --bg: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
+            --primary: #bc6ff1;
+            --accent: #892cdc;
+            --bg: #020202;
+            --glass: rgba(255, 255, 255, 0.02);
+            --border: rgba(188, 111, 241, 0.2);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
+        body { background: var(--bg); color: #fff; overflow-x: hidden; }
 
-        /* ARKA PLAN: Hareketli Mesh Efekti */
-        #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
+        /* Arka Plan Efekti */
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 20% 30%, #1a0b2e 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, #0d061a 0%, transparent 40%);
+            z-index: -1;
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 30px; }
 
-        /* Navbar: Cam Efekti (Glassmorphism) */
+        /* Navbar */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 0; position: sticky; top: 0; z-index: 100;
-            backdrop-filter: blur(10px);
+            padding: 25px 0; position: sticky; top: 0; z-index: 1000;
+            backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: 4px; }
-        .logo span { color: var(--primary); text-shadow: 0 0 20px var(--primary); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 900; letter-spacing: 3px; }
+        .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
 
-        /* Hero: Büyük ve Etkileyici */
-        .hero { text-align: center; padding: 150px 0 100px; animation: fadeIn 1.5s ease; }
+        .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+        .nav-links a { 
+            color: #aaa; text-decoration: none; font-size: 0.85rem; font-weight: 600; 
+            text-transform: uppercase; transition: 0.3s; 
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Auth Butonları */
+        .auth-btns { display: flex; gap: 15px; margin-left: 20px; }
+        .btn-login { 
+            padding: 10px 25px; border-radius: 8px; border: 1px solid var(--primary);
+            color: var(--primary); text-decoration: none; font-size: 0.85rem; font-weight: 700;
+            transition: 0.3s;
+        }
+        .btn-login:hover { background: var(--primary); color: #fff; box-shadow: 0 0 20px var(--primary); }
+
+        /* Hero */
+        .hero { text-align: center; padding: 180px 0 100px; }
         .hero h1 { 
-            font-family: 'Orbitron', sans-serif; font-size: 5rem; font-weight: 900; 
-            background: linear-gradient(to bottom, #fff, var(--primary));
+            font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900; 
+            letter-spacing: -2px; margin-bottom: 20px;
+            background: linear-gradient(to right, #fff 30%, var(--primary));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 20px; letter-spacing: -2px;
         }
-        .hero p { color: #aaa; font-size: 1.3rem; max-width: 700px; margin: 0 auto 50px; }
+        .hero p { color: #666; font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
 
-        /* Buton: Neon Parlama */
-        .dl-btn {
-            background: var(--primary); color: #fff; padding: 25px 80px;
-            border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 1.4rem;
-            box-shadow: 0 0 30px rgba(188, 111, 241, 0.4);
-            transition: 0.5s; display: inline-flex; align-items: center; gap: 15px;
-            position: relative; overflow: hidden;
+        /* Modal (Giriş Paneli) */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center;
         }
-        .dl-btn:hover { 
-            transform: scale(1.05) translateY(-5px); 
-            box-shadow: 0 0 60px rgba(188, 111, 241, 0.7);
+        .modal-content {
+            background: #0a0a0c; padding: 50px; border-radius: 20px; border: 1px solid var(--border);
+            width: 100%; max-width: 400px; text-align: center;
+            box-shadow: 0 0 50px rgba(188, 111, 241, 0.1);
         }
+        .modal-content h2 { font-family: 'Orbitron', sans-serif; margin-bottom: 30px; color: var(--primary); }
+        .modal-content input {
+            width: 100%; padding: 15px; margin-bottom: 15px; background: #111;
+            border: 1px solid #222; border-radius: 8px; color: #fff; outline: none;
+        }
+        .modal-content input:focus { border-color: var(--primary); }
+        .btn-submit {
+            width: 100%; padding: 15px; background: var(--primary); border: none;
+            border-radius: 8px; color: #fff; font-weight: 800; cursor: pointer; transition: 0.3s;
+        }
+        .btn-submit:hover { opacity: 0.8; }
+        .close-modal { margin-top: 20px; color: #444; cursor: pointer; display: block; font-size: 0.8rem; }
 
-        /* Özellikler: Modern Kartlar */
-        .features { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 30px; margin-bottom: 100px; 
-        }
-        .card {
-            background: var(--glass); padding: 50px; border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05); text-align: center;
-            transition: 0.4s; position: relative;
-        }
-        .card:hover { 
-            background: rgba(188, 111, 241, 0.05); border-color: var(--primary); 
-            transform: translateY(-15px); 
-        }
-        .card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 25px; }
+        /* Kartlar Bölümü */
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .card { background: var(--glass); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.03); }
+        .card i { color: var(--primary); font-size: 2rem; margin-bottom: 20px; }
 
-        /* Animasyonlar */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        footer { text-align: center; padding: 80px 0; border-top: 1px solid #111; color: #444; font-weight: 900; letter-spacing: 2px; }
-
-        /* Mobil Ayar */
-        @media (max-width: 768px) { .hero h1 { font-size: 3rem; } }
+        footer { text-align: center; padding: 100px 0; color: #222; font-family: 'Orbitron', sans-serif; letter-spacing: 5px; }
     </style>
 </head>
 <body>
 
-    <canvas id="canvas-bg"></canvas>
+<div class="bg-overlay"></div>
 
-    <div class="container">
-        <nav>
-            <div class="logo">SENSI<span>SOFTWARE</span></div>
-        </nav>
+<div class="container">
+    <nav>
+        <div class="logo">SENSI<span>SOFTWARE</span></div>
+        <ul class="nav-links">
+            <li><a href="javascript:void(0)" onclick="checkAccess()">Programı İndir</a></li>
+            <li><a href="#features">Özellikler</a></li>
+            <li><a href="#about">Destek</a></li>
+            <div class="auth-btns">
+                <a href="javascript:void(0)" onclick="openModal()" class="btn-login">GİRİŞ YAP</a>
+                <a href="javascript:void(0)" onclick="openModal()" class="btn-login" style="background:transparent;">KAYIT OL</a>
+            </div>
+        </ul>
+    </nav>
 
-        <main class="hero">
-            <h1>DOMINATE EVERYTHING.</h1>
-            <p>Sınırları zorlamak için tasarlandı. Sensisoftware ile hızın ve gücün yeni tanımını yapın.</p>
-            
-            <a href="LINK_BURAYA" class="dl-btn">
-                <i class="fas fa-cloud-download-alt"></i> DOWNLOAD NOW
-            </a>
-        </main>
+    <main class="hero">
+        <h1>UNLEASH POWER.</h1>
+        <p>Dünyanın en gelişmiş yazılım altyapısına erişmek için giriş yapın. Sınırlı kullanıcı, maksimum performans.</p>
+    </main>
 
-        <div class="features">
-            <div class="card">
-                <i class="fas fa-microchip"></i>
-                <h3>AI OPTIMIZED</h3>
-                <p>Sistem kaynaklarını yapay zeka ile yönetir, işlemci yükünü %40 azaltır.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-user-shield"></i>
-                <h3>STEALTH MODE</h3>
-                <p>Tespit edilemez mimari ile tam gizlilik ve koruma sağlar.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-sync"></i>
-                <h3>AUTO UPDATE</h3>
-                <p>Bulut tabanlı sistemi sayesinde her zaman en güncel sürümü kullanın.</p>
-            </div>
+    <section id="features" class="features">
+        <div class="card">
+            <i class="fas fa-bolt"></i>
+            <h3>Anlık Senkronize</h3>
+            <p>Bulut tabanlı altyapı ile verileriniz her an güvende.</p>
         </div>
+        <div class="card">
+            <i class="fas fa-lock"></i>
+            <h3>Özel Şifreleme</h3>
+            <p>Sadece sizin erişebileceğiniz uçtan uca koruma sistemi.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-code"></i>
+            <h3>Kernel Driver</h3>
+            <p>En alt seviyede çalışan, fark edilmeyen güçlü mimari.</p>
+        </div>
+    </section>
 
-        <footer>
-            SENSISOFTWARE &copy; 2026
-        </footer>
+    <footer>SENSISOFTWARE</footer>
+</div>
+
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <h2>ERİŞİM PANELİ</h2>
+        <input type="text" placeholder="Kullanıcı Adı">
+        <input type="password" placeholder="Şifre">
+        <button class="btn-submit" onclick="loginSuccess()">SİSTEME GİRİŞ YAP</button>
+        <span class="close-modal" onclick="closeModal()">İptal Et ve Dön</span>
     </div>
+</div>
 
-    <script>
-        // Arka Plan Parçacık Efekti (Basit Bir JS Animasyonu)
-        const canvas = document.getElementById('canvas-bg');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+<script>
+    function openModal() { document.getElementById('loginModal').style.display = 'flex'; }
+    function closeModal() { document.getElementById('loginModal').style.display = 'none'; }
+    
+    function loginSuccess() {
+        alert("Giriş Başarılı! Artık programı indirebilirsiniz.");
+        localStorage.setItem("isLoggedIn", "true");
+        closeModal();
+    }
 
-        let particles = [];
-        for(let i=0; i<100; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 2,
-                speedX: Math.random() * 0.5 - 0.25,
-                speedY: Math.random() * 0.5 - 0.25
-            });
+    function checkAccess() {
+        if(localStorage.getItem("isLoggedIn") === "true") {
+            window.location.href = "LINK_BURAYA"; // Buraya indirme linkini koy
+        } else {
+            alert("Hata: Programı indirebilmek için önce giriş yapmalısınız!");
+            openModal();
         }
+    }
+</script>
 
-        function animate() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.fillStyle = '#bc6ff1';
-            particles.forEach(p => {
-                p.x += p.speedX;
-                p.y += p.speedY;
-                if(p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-                if(p.y < 0 || p.y > canvas.height) p.speedY *= -1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-                ctx.fill();
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
 </body>
 </html>

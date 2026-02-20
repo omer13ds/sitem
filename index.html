@@ -29,11 +29,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* YETKİ (ROLE) CSS SİSTEMİ - KUSURSUZ GİZLEME */
+        /* YETKİ (ROLE) CSS SİSTEMİ - KUSURSUZ GİZLEME VE GÖSTERME */
         .admin-only, .mod-only { display: none !important; }
         
-        body.role-admin .admin-only { display: inline-block !important; }
-        body.role-admin div.admin-only { display: flex !important; }
+        body.role-admin .admin-only { display: block !important; }
+        body.role-admin span.admin-only, body.role-admin a.admin-only, body.role-admin button.admin-only { display: inline-block !important; }
+        body.role-admin div.admin-flex { display: flex !important; }
         body.role-admin li.admin-only { display: list-item !important; }
         body.role-admin th.admin-only, body.role-admin td.admin-only { display: table-cell !important; }
         
@@ -58,10 +59,15 @@
             position: sticky; top: 0; background: rgba(9, 9, 14, 0.85); backdrop-filter: blur(20px); z-index: 100;
             box-shadow: 0 5px 20px rgba(0,0,0,0.4);
         }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: 2px; cursor: pointer; padding: 25px 0;}
+        
+        .logo { 
+            font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; 
+            letter-spacing: 2px; cursor: pointer; padding: 25px 0;
+            margin-left: 20px; /* S HARFİNİN YAPIŞMASINI ENGELLEYEN KISIM */
+        }
         .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
         
-        .nav-right { display: flex; align-items: center; gap: 25px; }
+        .nav-right { display: flex; align-items: center; gap: 25px; margin-right: 20px; }
         .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; }
         .nav-links li { position: relative; padding: 30px 0; } 
         .nav-links a { color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; cursor: pointer; letter-spacing: 0.5px;}
@@ -77,10 +83,10 @@
         .dropdown-menu a:hover { background: rgba(188, 111, 241, 0.1); color: #fff; padding-left: 30px; border-left-color: var(--primary); }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* GİRİŞ & PROFİL */
+        /* GİRİŞ & PROFİL & BUTONLAR */
         .auth-btns { display: flex; gap: 15px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 25px; }
         
-        /* BUTON FIX: İNDİRME GİBİ LİNKLERİN DE DÜZGÜN TIKLANMASI İÇİN INLINE-BLOCK */
+        /* İNDİRME BUTONU GİBİ LİNKLER İÇİN INLINE-BLOCK FIX */
         .btn-outline, .btn-solid { 
             display: inline-block; text-align: center; text-decoration: none;
             padding: 12px 25px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: 0.4s; text-transform: uppercase; border: none; letter-spacing: 1px;
@@ -93,7 +99,7 @@
         .user-profile { display: none; align-items: center; gap: 10px; cursor: pointer; position: relative; padding: 25px 0; }
         .avatar { width: 45px; height: 45px; background: linear-gradient(45deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; color: #fff; box-shadow: 0 0 15px rgba(188, 111, 241, 0.5); font-size: 1.2rem; border: 2px solid rgba(255,255,255,0.2);}
         
-        .role-badge { color: #fff; font-size: 0.7rem; padding: 4px 8px; border-radius: 6px; font-weight: 900; letter-spacing: 1px; margin-left: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.5);}
+        .role-badge { display: none; color: #fff; font-size: 0.7rem; padding: 4px 8px; border-radius: 6px; font-weight: 900; letter-spacing: 1px; margin-left: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.5);}
         .badge-admin { background: linear-gradient(45deg, var(--danger), #ff0044); display: none; } 
         .badge-mod { background: linear-gradient(45deg, var(--gold), #ffaa00); color: #000; display: none;}
 
@@ -135,7 +141,7 @@
         .stat-item h4 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 25px var(--primary);}
         .stat-item p { color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- 4. DISCORD VE SHOP KARTLARI --- */
+        /* --- 4. DISCORD VE SHOP KARTLARI (LÜKS GÖRÜNÜM) --- */
         .discord-grid, .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 50px;}
         .ds-card, .price-card { background: var(--card-bg); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border); transition: 0.4s; backdrop-filter: blur(15px); display: flex; flex-direction: column; position: relative; overflow: hidden;}
         .ds-card:hover, .price-card:hover { border-color: var(--primary); transform: translateY(-10px); box-shadow: 0 20px 50px rgba(188, 111, 241, 0.15); }
@@ -229,6 +235,8 @@
         .btn-success:hover { background: var(--success); color: #000; box-shadow: 0 0 15px var(--success);}
         .btn-warning { background: rgba(255, 183, 3, 0.1); color: var(--gold); border: 1px solid var(--gold); }
         .btn-warning:hover { background: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold);}
+        .btn-blue { background: rgba(0, 210, 255, 0.1); color: var(--blue); border: 1px solid var(--blue); }
+        .btn-blue:hover { background: var(--blue); color: #000; box-shadow: 0 0 15px var(--blue);}
 
         .search-input { padding: 15px 25px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; outline: none; width: 300px; font-family: 'Inter', sans-serif; transition: 0.3s; font-size: 1rem;}
         .search-input:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(188, 111, 241, 0.3); }
@@ -304,7 +312,7 @@
         footer { text-align: center; padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.05); color: #666; font-size: 0.9rem; letter-spacing: 1px; }
     </style>
 </head>
-<body>
+<body class="role-user">
 
     <div class="bg-layer"></div>
     
@@ -344,7 +352,7 @@
                     <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: #888; margin-left: 8px;"></i>
                     
                     <div class="profile-dropdown">
-                        <a onclick="switchPage('admin')" class="admin-only" id="adminMenuBtn"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
+                        <a onclick="switchPage('admin')" class="mod-only admin-only" id="adminMenuBtn"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
                         <a onclick="switchPage('cart')"><i class="fas fa-shopping-cart"></i> Sepetim <span id="cartCountBadge" style="background:var(--danger); color:#fff; padding:3px 8px; border-radius:10px; font-size:0.75rem; margin-left:5px; display:none; font-weight:bold;">0</span></a>
                         <a onclick="switchPage('orders')"><i class="fas fa-box"></i> Siparişlerim</a>
                         <a onclick="logout()" style="color:var(--danger); border-top:1px solid rgba(255,255,255,0.1); margin-top:10px; padding-top:15px;"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
@@ -489,7 +497,7 @@
                             <li><a onclick="switchAdminTab('adm-users')" id="nav-adm-users"><i class="fas fa-users"></i> Üyeler ve Şifreler</a></li>
                             <li class="admin-only"><a onclick="switchAdminTab('adm-roles')" id="nav-adm-roles"><i class="fas fa-gavel"></i> Yetki Kontrolü</a></li>
                             <li class="admin-only"><a onclick="switchAdminTab('adm-coupons')" id="nav-adm-coupons"><i class="fas fa-ticket-alt"></i> Kupon Sistemi</a></li>
-                            <li class="mod-only admin-only"><a onclick="switchAdminTab('adm-tickets')" id="nav-adm-tickets" style="color:var(--blue);"><i class="fas fa-headset"></i> Destek Talepleri</a></li>
+                            <li class="mod-only"><a onclick="switchAdminTab('adm-tickets')" id="nav-adm-tickets" style="color:var(--blue);"><i class="fas fa-headset"></i> Destek Talepleri</a></li>
                         </ul>
                     </div>
 
@@ -498,9 +506,9 @@
                         <div id="adm-keys" class="admin-section active">
                             <div class="admin-header">
                                 <h4>LİSANS YÖNETİMİ</h4>
-                                <div style="display:flex; gap:15px; flex-wrap:wrap;">
+                                <div class="admin-flex admin-only" style="gap:15px; flex-wrap:wrap; display:none;">
                                     <input type="text" id="keySearch" class="search-input" placeholder="Kullanıcı veya Key Ara..." onkeyup="filterTable('keySearch', 'admKeysTbody')">
-                                    <button class="btn-solid admin-only" style="background:linear-gradient(135deg, var(--success), #00cc6a); box-shadow: 0 0 15px rgba(0,255,136,0.3);" onclick="openAdminKeyModal()"><i class="fas fa-plus"></i> Yeni Key Üret</button>
+                                    <button class="btn-solid" style="background:linear-gradient(135deg, var(--success), #00cc6a); box-shadow: 0 0 15px rgba(0,255,136,0.3);" onclick="openAdminKeyModal()"><i class="fas fa-plus"></i> Yeni Key Üret</button>
                                 </div>
                             </div>
                             <table class="admin-table">
@@ -545,7 +553,7 @@
                             
                             <div class="control-box">
                                 <input type="text" id="roleUserTarget" class="search-input" placeholder="Kullanıcı Adı Girin" onkeypress="if(event.key==='Enter') assignRole()">
-                                <select id="roleSelectTarget">
+                                <select id="roleSelectTarget" class="modal-select" style="margin-bottom:0;">
                                     <option value="user">Normal Üye Yap</option>
                                     <option value="mod">Moderatör Yap</option>
                                     <option value="admin">Admin Yap</option>
@@ -572,7 +580,7 @@
                             
                             <div class="control-box">
                                 <input type="text" id="newCouponCode" class="search-input" placeholder="Kupon Kodu Belirle (Örn: SENSI25)" onkeypress="if(event.key==='Enter') createCoupon()">
-                                <select id="newCouponPerc">
+                                <select id="newCouponPerc" class="modal-select" style="margin-bottom:0;">
                                     <option value="10">%10 İndirim</option>
                                     <option value="20">%20 İndirim</option>
                                     <option value="25">%25 İndirim</option>
@@ -593,16 +601,18 @@
                             </table>
                         </div>
 
-                        <div id="adm-tickets" class="admin-section mod-only admin-only">
+                        <div id="adm-tickets" class="admin-section mod-only">
                             <div class="admin-header">
                                 <h4 style="color:var(--blue);">BEKLEYEN DESTEK MESAJLARI</h4>
                             </div>
+                            <p style="color:#aaa; margin-bottom: 20px;">Kullanıcıların canlı destekten yazdığı mesajlar buraya düşer. Cevapla butonuna basarak direkt adamın ekranına mesaj gönderebilirsin.</p>
                             <table class="admin-table">
                                 <thead>
                                     <tr>
                                         <th>Gönderen Üye</th>
                                         <th>Son Mesaj</th>
                                         <th>Tarih</th>
+                                        <th>İşlem</th>
                                     </tr>
                                 </thead>
                                 <tbody id="admTicketsTbody"></tbody>
@@ -625,7 +635,7 @@
                         <h4 style="font-size:1.8rem; margin-bottom:10px; font-family:'Orbitron'; color:#fff;">SensiSoftware Engine v2.0</h4>
                         <p style="color:#aaa; font-size:1.1rem;">Windows 10/11 Uyumlu | Auto-Update</p>
                     </div>
-                    <a href="https://cdn.discordapp.com/attachments/1416860887695753270/1474376980471222282/SensiSoftware.rar" class="btn-solid" style="padding:20px 40px; font-size:1.2rem; display:inline-block; text-decoration:none;"><i class="fas fa-download"></i> İndir</a>
+                    <a href="https://cdn.discordapp.com/attachments/1416860887695753270/1474376980471222282/SensiSoftware.rar" class="btn-solid" style="padding:20px 40px; font-size:1.2rem; text-decoration:none;"><i class="fas fa-download"></i> İndir</a>
                 </div>
             </div>
 
@@ -735,7 +745,7 @@
     
     <div id="chatBox" class="chat-box" style="display:none;">
         <div class="chat-header">
-            <span><i class="fas fa-headset" style="margin-right:8px;"></i> Sensi Destek Hattı</span>
+            <span id="chatHeaderTitle"><i class="fas fa-headset" style="margin-right:8px;"></i> Sensi Destek Hattı</span>
             <i class="fas fa-times" onclick="toggleChat()" style="cursor:pointer; font-size:1.3rem;"></i>
         </div>
         <div class="chat-messages" id="chatMessages">
@@ -765,6 +775,7 @@
         let userRole = "user";
         let cart = [];
         let activeDiscount = 0;
+        let activeChatUser = null; // Adminin kiminle chatleştiğini tutar
 
         // YENİLEMEDE OTURUMU TUTAN SİSTEM (F5 FIX)
         window.onload = () => { 
@@ -804,7 +815,7 @@
             document.getElementById('tReg').className = m === 'login' ? 'auth-tab' : 'auth-tab active';
         }
 
-        // --- KAYIT SİSTEMİ VE ANTİ-SPAM (1 CİHAZ 1 HESAP) ---
+        // --- KAYIT SİSTEMİ VE ANTİ-SPAM (BAN SİSTEMİ EKLENDİ) ---
         function doReg() {
             const u = document.getElementById('rUs').value.trim(); 
             const p = document.getElementById('rPs').value;
@@ -815,19 +826,26 @@
             let hwid = localStorage.getItem('sensi_hwid');
             if(!hwid) { hwid = "DEV-" + Math.random().toString(36).slice(2); }
 
-            db.ref('hwids/' + hwid).once('value', s => {
-                if(s.exists() && u !== 'omer13ds') return showToast("Bu bilgisayardan zaten üyelik oluşturulmuş!", "error");
+            // 1. Önce HWID Banlı mı Kontrol Et
+            db.ref('banned_hwids/' + hwid).once('value', banSnap => {
+                if(banSnap.exists()) return showToast("Bu cihaz sistemden KALICI OLARAK uzaklaştırılmıştır!", "error");
                 
-                db.ref('users/'+u).once('value', snap => {
-                    if(snap.exists()) return showToast("Bu isim daha önce alınmış!", "error");
+                // 2. HWID zaten kayıtlı mı kontrol et (Spam Engeli)
+                db.ref('hwids/' + hwid).once('value', s => {
+                    if(s.exists() && u !== 'omer13ds') return showToast("Bu bilgisayardan zaten üyelik oluşturulmuş!", "error");
                     
-                    const role = u === 'omer13ds' ? 'admin' : 'user';
-                    db.ref('users/'+u).set({ password: p, role: role, hwid: hwid }).then(() => {
-                        localStorage.setItem('sensi_hwid', hwid);
-                        db.ref('hwids/'+hwid).set({ user: u });
-                        showToast("Kayıt başarılı! Lütfen giriş yapın."); 
-                        switchAuth('login');
-                        document.getElementById('lUs').value = u;
+                    // 3. Kullanıcı adı var mı kontrol et
+                    db.ref('users/'+u).once('value', snap => {
+                        if(snap.exists()) return showToast("Bu isim daha önce alınmış!", "error");
+                        
+                        const role = u === 'omer13ds' ? 'admin' : 'user';
+                        db.ref('users/'+u).set({ password: p, role: role, hwid: hwid }).then(() => {
+                            localStorage.setItem('sensi_hwid', hwid);
+                            db.ref('hwids/'+hwid).set({ user: u });
+                            showToast("Kayıt başarılı! Lütfen giriş yapın."); 
+                            switchAuth('login');
+                            document.getElementById('lUs').value = u;
+                        });
                     });
                 });
             });
@@ -841,6 +859,9 @@
             db.ref('users/'+u).once('value', s => {
                 if(s.exists() && s.val().password === p) {
                     const r = s.val().role || 'user';
+                    
+                    if(r === 'banned') return showToast("Hesabınız kalıcı olarak yasaklanmıştır!", "error");
+
                     localStorage.setItem('sensiUser', JSON.stringify({username: u, role: r}));
                     applyLogin(u, r, false); 
                     closeModal('authModal');
@@ -862,15 +883,15 @@
             document.getElementById('profileName').innerText = u;
             document.getElementById('avatarLetter').innerText = u[0].toUpperCase();
             
-            document.getElementById('badgeAdmin').style.display = r === 'admin' ? 'inline-block' : 'none';
-            document.getElementById('badgeMod').style.display = r === 'mod' ? 'inline-block' : 'none';
-            
-            let menuBtn = document.getElementById('adminMenuBtn');
-            if(r === 'admin' || r === 'mod') { menuBtn.style.display = 'block'; } 
-            else { menuBtn.style.display = 'none'; }
-            
-            document.getElementById('chatWidgetBtn').style.display = 'flex';
-            loadChatHistory();
+            // Eğer normal user ise canlı destek ikonunu aç
+            if(r === 'user') {
+                document.getElementById('chatWidgetBtn').style.display = 'flex';
+                activeChatUser = null; 
+                loadChatHistory(u);
+            } else {
+                // Admin veya Mod ise balonu gizle, onlar panelden cevap verecek.
+                document.getElementById('chatWidgetBtn').style.display = 'none';
+            }
             
             if(!isSilent) showToast("Hoş Geldin " + u, "success");
         }
@@ -991,6 +1012,7 @@
         }
 
         function fetchAdminData() {
+            // Lisanslar
             db.ref('licenses').on('value', s => {
                 const b = document.getElementById('admKeysTbody'); b.innerHTML = '';
                 if(s.exists()) {
@@ -1001,27 +1023,33 @@
                             <button class="action-btn btn-warning" onclick="db.ref('licenses/${ch.key}').update({status:'BANNED'})">Banla</button>
                             <button class="action-btn btn-danger" onclick="db.ref('licenses/${ch.key}').remove()">Sil</button>
                         `;
-                        b.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${d.owner}</td><td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td><td>${d.package}</td><td style="font-weight:900; ${statColor}">${d.status}</td><td class="admin-only">${actionBtns}</td></tr>`;
+                        b.innerHTML += `<tr><td style="font-weight:bold;">${d.owner}</td><td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td><td>${d.package}</td><td style="font-weight:900; ${statColor}">${d.status}</td><td class="admin-only">${actionBtns}</td></tr>`;
                     });
                 }
             });
             
+            // Üyeler
             db.ref('users').on('value', s => {
                 const b = document.getElementById('admUsersTbody'); const r = document.getElementById('admRolesTbody'); 
                 b.innerHTML = ''; r.innerHTML = '';
                 if(s.exists()) {
                     s.forEach(ch => {
                         const uname = ch.key; const d = ch.val();
-                        let rName = d.role === "admin" ? "Kurucu" : (d.role === "mod" ? "Moderatör" : "Üye");
-                        let rCol = d.role === "admin" ? "color:var(--danger)" : (d.role === "mod" ? "color:var(--gold)" : "color:#ccc");
-                        let delBtn = uname !== 'omer13ds' ? `<button class="action-btn btn-danger" onclick="deleteUser('${uname}')"><i class="fas fa-trash"></i> Sil</button>` : '-';
+                        let rName = d.role === "admin" ? "Kurucu" : (d.role === "mod" ? "Moderatör" : (d.role === "banned" ? "Yasaklı" : "Üye"));
+                        let rCol = d.role === "admin" ? "color:var(--danger)" : (d.role === "mod" ? "color:var(--gold)" : (d.role === "banned" ? "color:red; text-decoration:line-through;" : "color:#ccc"));
                         
-                        b.innerHTML += `<tr><td style="font-weight:bold; color:#fff; font-size:1.1rem;">${uname}</td><td style="font-family:monospace; color:var(--primary); font-size:1.1rem;">${d.password}</td><td style="font-weight:bold; ${rCol}">${rName}</td><td class="admin-only">${delBtn}</td></tr>`;
+                        let actionBtns = uname !== 'omer13ds' ? `
+                            <button class="action-btn btn-danger admin-only" style="margin-bottom:5px;" onclick="deleteUser('${uname}')"><i class="fas fa-trash"></i> Sil</button>
+                            <button class="action-btn btn-warning admin-only" onclick="banUser('${uname}')"><i class="fas fa-ban"></i> Banla</button>
+                        ` : '-';
+                        
+                        b.innerHTML += `<tr><td style="font-weight:bold; color:#fff; font-size:1.1rem;">${uname}</td><td style="font-family:monospace; color:var(--primary); font-size:1.1rem;">${d.password}</td><td style="font-weight:bold; ${rCol}">${rName}</td><td class="admin-only">${actionBtns}</td></tr>`;
                         if(d.role === 'admin' || d.role === 'mod') r.innerHTML += `<tr><td style="font-weight:bold; font-size:1.1rem; color:#fff;">${uname}</td><td style="font-weight:900; ${rCol}; font-size:1rem;">${rName}</td></tr>`;
                     });
                 }
             });
 
+            // Kuponlar
             db.ref('coupons').on('value', s => {
                 const b = document.getElementById('admCouponsTbody'); b.innerHTML = '';
                 if(s.exists()) {
@@ -1032,21 +1060,48 @@
                 }
             });
             
+            // Destek Talepleri (Admin & Mod Görebilir, Silebilir, Cevaplayabilir)
             db.ref('chats').on('value', s => {
                 const b = document.getElementById('admTicketsTbody'); b.innerHTML = '';
                 if(s.exists()) {
                     s.forEach(ch => {
                         let uname = ch.key; let msgs = ch.val();
                         let lastMsg = Object.values(msgs).pop();
-                        b.innerHTML += `<tr><td style="font-weight:bold; color:var(--blue); font-size:1.1rem;">${uname}</td><td style="color:#ccc; font-size:1rem;">${lastMsg.text}</td><td style="color:#888;">${new Date(lastMsg.time).toLocaleTimeString()}</td></tr>`;
+                        let btns = `
+                            <button class="action-btn btn-blue" onclick="openAdminChat('${uname}')"><i class="fas fa-reply"></i> Cevapla</button>
+                            <button class="action-btn btn-danger" onclick="deleteChat('${uname}')"><i class="fas fa-trash"></i> Sil</button>
+                        `;
+                        b.innerHTML += `<tr><td style="font-weight:bold; color:var(--blue); font-size:1.1rem;">${uname}</td><td style="color:#ccc; font-size:1rem;">${lastMsg.text}</td><td style="color:#888;">${new Date(lastMsg.time).toLocaleTimeString()}</td><td>${btns}</td></tr>`;
                     });
                 }
             });
         }
 
+        // ADMİN EYLEMLERİ (HWID SİLME VE KALICI BAN EKLENDİ)
         function deleteUser(uname) {
             if(userRole !== 'admin') return;
-            if(confirm(`${uname} adlı kullanıcıyı sistemden komple silmek istediğine emin misin?`)) { db.ref('users/'+uname).remove(); showToast("Kullanıcı silindi.");}
+            if(confirm(`${uname} adlı kullanıcıyı sistemden silmek istediğinize emin misiniz? (Tekrar üye olabilirler)`)) { 
+                // Cihaz HWID'sini bul ve sil (Tekrar üye olabilsin diye)
+                db.ref('users/'+uname).once('value', s => {
+                    if(s.exists() && s.val().hwid) { db.ref('hwids/'+s.val().hwid).remove(); }
+                    db.ref('users/'+uname).remove(); 
+                    showToast("Kullanıcı silindi.");
+                });
+            }
+        }
+
+        function banUser(uname) {
+            if(userRole !== 'admin') return;
+            if(confirm(`${uname} adlı kullanıcıyı BANLAMAK istediğinize emin misiniz? (Bir daha asla kayıt olamazlar)`)) { 
+                db.ref('users/'+uname).once('value', s => {
+                    if(s.exists()) { 
+                        let hwid = s.val().hwid;
+                        if(hwid) { db.ref('banned_hwids/'+hwid).set(true); } // HWID Kara listeye alındı
+                        db.ref('users/'+uname).update({ role: 'banned' }); 
+                        showToast("Kullanıcı kalıcı olarak BANLANDI!", "error");
+                    }
+                });
+            }
         }
 
         function assignRole() {
@@ -1090,7 +1145,7 @@
             }
         }
 
-        // --- CANLI DESTEK SİSTEMİ ---
+        // --- CANLI DESTEK SİSTEMİ (ADMİN YANITLAMA GÜNCELLEMESİ) ---
         function toggleChat() {
             const box = document.getElementById('chatBox');
             box.style.display = box.style.display === 'none' ? 'flex' : 'none';
@@ -1101,7 +1156,10 @@
             let text = input.value.trim();
             if(!text || !currentUser) return;
 
-            db.ref(`chats/${currentUser}`).push({
+            // Admin cevap veriyorsa target activeChatUser'dır, normal kullanıcı yazıyorsa kendisidir
+            let targetUser = activeChatUser ? activeChatUser : currentUser;
+
+            db.ref(`chats/${targetUser}`).push({
                 sender: currentUser,
                 text: text,
                 time: Date.now()
@@ -1109,17 +1167,40 @@
             input.value = "";
         }
 
-        function loadChatHistory() {
-            if(!currentUser) return;
+        function loadChatHistory(uname) {
             let container = document.getElementById('chatMessages');
-            container.innerHTML = `<div class="chat-msg msg-admin">Merhaba ${currentUser}, Sensisoftware'a hoş geldin. Sana nasıl yardımcı olabiliriz?</div>`;
+            container.innerHTML = `<div class="chat-msg msg-admin">Merhaba ${uname}, Sensisoftware'a hoş geldin. Sana nasıl yardımcı olabiliriz?</div>`;
             
-            db.ref(`chats/${currentUser}`).on('child_added', s => {
+            db.ref(`chats/${uname}`).on('child_added', s => {
                 let msg = s.val();
+                let cssClass = msg.sender === uname ? "msg-user" : "msg-admin";
+                container.innerHTML += `<div class="chat-msg ${cssClass}">${msg.text}</div>`;
+                container.scrollTop = container.scrollHeight;
+            });
+        }
+
+        // Admin Panelinden Sohbet Açma ve Silme
+        function openAdminChat(uname) {
+            activeChatUser = uname;
+            document.getElementById('chatBox').style.display = 'flex';
+            document.getElementById('chatHeaderTitle').innerHTML = `<i class="fas fa-headset" style="margin-right:8px;"></i> Destek: ${uname}`;
+            
+            let container = document.getElementById('chatMessages');
+            container.innerHTML = `<div class="chat-msg msg-admin" style="background:var(--gold); color:#000;">${uname} adlı kullanıcı ile sohbettesiniz.</div>`;
+            
+            db.ref(`chats/${uname}`).on('child_added', s => {
+                let msg = s.val();
+                // Admin ekranında adminin kendi yazdığı sağda (msg-user), adamın yazdığı solda (msg-admin) gözükür.
                 let cssClass = msg.sender === currentUser ? "msg-user" : "msg-admin";
                 container.innerHTML += `<div class="chat-msg ${cssClass}">${msg.text}</div>`;
                 container.scrollTop = container.scrollHeight;
             });
+        }
+
+        function deleteChat(uname) {
+            if(confirm("Bu destek talebini (sohbeti) silmek istiyor musunuz?")) {
+                db.ref('chats/'+uname).remove(); showToast("Destek talebi silindi.");
+            }
         }
 
         // CS:GO KASA AÇMA

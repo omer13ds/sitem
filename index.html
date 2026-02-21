@@ -739,15 +739,23 @@
         <div class="modal-box" style="border-color:var(--success); box-shadow: 0 0 80px rgba(0, 255, 136, 0.2);">
             <span class="close-btn" onclick="closeModal('adminKeyModal')">&times;</span>
             <h2 style="color:var(--success); margin-bottom:35px; font-family:'Orbitron'; font-size:2rem; letter-spacing:2px; text-shadow:0 0 15px rgba(0,255,136,0.5);">LİSANS ÜRET</h2>
+            
             <div class="input-group">
                 <i class="fas fa-user" style="color:var(--success);"></i>
                 <input type="text" id="akUs" placeholder="Kime tanımlanacak?" onkeypress="if(event.key==='Enter') genKey()" style="border-color:rgba(0,255,136,0.3);">
             </div>
+            
+            <select id="akType" class="search-input" style="width:100%; margin-bottom: 20px; padding: 20px; font-size: 1.1rem; border-color:rgba(0,255,136,0.3);">
+                <option value="program">💻 Sensi Program Lisansı</option>
+                <option value="discord">🤖 Discord Bot Lisansı</option>
+            </select>
+
             <select id="akDy" class="search-input" style="width:100%; margin-bottom: 25px; padding: 20px; font-size: 1.1rem; border-color:rgba(0,255,136,0.3);">
                 <option value="1">1 Günlük Lisans</option>
                 <option value="7">7 Günlük Lisans</option>
                 <option value="30">30 Günlük Lisans</option>
             </select>
+            
             <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background:linear-gradient(135deg, var(--success), #00cc6a); letter-spacing:2px; box-shadow: 0 0 25px rgba(0,255,136,0.3);" onclick="genKey()">ONAYLA VE ZİMMETLE</button>
         </div>
     </div>
@@ -1237,13 +1245,30 @@
 
         function openAdminKeyModal() { if(userRole === 'admin' || userRole === 'kurucu') document.getElementById('adminKeyModal').style.display = 'flex'; }
         
+        // --- GÜNCELLENMİŞ genKey() FONKSİYONU ---
         function genKey() {
             if(userRole === 'user' || userRole === 'mod') return;
-            const u = document.getElementById('akUs').value; const d = parseInt(document.getElementById('akDy').value);
+            const u = document.getElementById('akUs').value; 
+            const d = parseInt(document.getElementById('akDy').value);
+            const type = document.getElementById('akType').value;
+            
             if(!u) return showToast("Kullanıcı adı girin!", "error");
-            const k = "SENSI-" + Math.random().toString(36).toUpperCase().slice(2,10);
-            db.ref('licenses/'+k).set({ owner: u, package: d+" Günlük Özel", status: "AKTİF", expiresAt: Date.now() + (d*86400000) });
-            closeModal('adminKeyModal'); showToast("Key başarıyla üretildi!");
+            
+            const prefix = type === 'discord' ? 'DS-' : 'SENSI-';
+            const k = prefix + Math.random().toString(36).toUpperCase().slice(2,10);
+            
+            const pkgName = type === 'discord' ? d + " Günlük Discord Bot" : d + " Günlük Program";
+
+            db.ref('licenses/'+k).set({ 
+                owner: u, 
+                package: pkgName, 
+                type: type, 
+                status: "AKTİF", 
+                expiresAt: Date.now() + (d*86400000) 
+            });
+            
+            closeModal('adminKeyModal'); 
+            showToast(type === 'discord' ? "Discord Key Üretildi!" : "Program Lisansı Üretildi!");
         }
 
         function filterTable(inId, tbId) {

@@ -30,24 +30,20 @@
         body { background: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
 
         /* --- 2. KUSURSUZ YETKİ CSS SİSTEMİ (ASLA DÜZENİ BOZMAZ) --- */
-        /* Varsayılan olarak tüm yetki gerektiren objeleri gizle */
         .req-kurucu, .req-admin, .req-mod { display: none !important; }
 
-        /* KURUCU YETKİSİ: Her şeyi orijinal formunda gösterir */
         body.role-kurucu .req-kurucu, body.role-kurucu .req-admin, body.role-kurucu .req-mod { display: block !important; }
         body.role-kurucu li.req-kurucu, body.role-kurucu li.req-admin, body.role-kurucu li.req-mod { display: list-item !important; }
         body.role-kurucu th.req-kurucu, body.role-kurucu td.req-kurucu, body.role-kurucu th.req-admin, body.role-kurucu td.req-admin, body.role-kurucu th.req-mod, body.role-kurucu td.req-mod { display: table-cell !important; }
         body.role-kurucu div.req-kurucu.flex-box, body.role-kurucu div.req-admin.flex-box, body.role-kurucu div.req-mod.flex-box { display: flex !important; }
         body.role-kurucu button.req-kurucu, body.role-kurucu a.req-kurucu, body.role-kurucu button.req-admin, body.role-kurucu a.req-admin, body.role-kurucu button.req-mod, body.role-kurucu a.req-mod { display: inline-block !important; }
 
-        /* ADMIN YETKİSİ: Admin ve Mod objelerini gösterir */
         body.role-admin .req-admin, body.role-admin .req-mod { display: block !important; }
         body.role-admin li.req-admin, body.role-admin li.req-mod { display: list-item !important; }
         body.role-admin th.req-admin, body.role-admin td.req-admin, body.role-admin th.req-mod, body.role-admin td.req-mod { display: table-cell !important; }
         body.role-admin div.req-admin.flex-box, body.role-admin div.req-mod.flex-box { display: flex !important; }
         body.role-admin button.req-admin, body.role-admin a.req-admin, body.role-admin button.req-mod, body.role-admin a.req-mod { display: inline-block !important; }
 
-        /* MOD YETKİSİ: Sadece Mod objelerini gösterir */
         body.role-mod .req-mod { display: block !important; }
         body.role-mod li.req-mod { display: list-item !important; }
         body.role-mod th.req-mod, body.role-mod td.req-mod { display: table-cell !important; }
@@ -110,7 +106,6 @@
         .user-profile { display: none; align-items: center; gap: 10px; cursor: pointer; position: relative; padding: 25px 0; }
         .avatar { width: 45px; height: 45px; background: linear-gradient(45deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; color: #fff; box-shadow: 0 0 15px rgba(188, 111, 241, 0.5); font-size: 1.2rem; border: 2px solid rgba(255,255,255,0.2);}
         
-        /* ROZET CSS'LERİ */
         .role-badge { display: none; color: #fff; font-size: 0.7rem; padding: 4px 8px; border-radius: 6px; font-weight: 900; letter-spacing: 1px; margin-left: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.5);}
         body.role-kurucu #badgeKurucu { display: inline-block; background: linear-gradient(45deg, #ff0044, var(--danger)); }
         body.role-admin #badgeAdmin { display: inline-block; background: linear-gradient(45deg, var(--primary), #6600cc); } 
@@ -140,18 +135,58 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .page-title { text-align: center; font-family: 'Orbitron', sans-serif; font-size: 3rem; margin: 80px 0 50px; color: #fff; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 20px rgba(188, 111, 241, 0.3);}
 
-        /* ANA SAYFA - BUTONLAR TAMAMEN SİLİNDİ, TERTEMİZ! */
-        .hero { text-align: center; padding: 140px 0 80px; position: relative; }
+        /* --- ANA SAYFA: MİLYAR DOLARLIK GÖRÜNÜM --- */
+        .hero { text-align: center; padding: 120px 0 80px; position: relative; }
+        .hero-badge { display: inline-block; padding: 8px 15px; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 20px; color: var(--success); font-family: monospace; font-size: 0.85rem; margin-bottom: 25px; letter-spacing: 2px; box-shadow: 0 0 15px rgba(0,255,136,0.2); animation: pulseBadge 2s infinite; }
+        @keyframes pulseBadge { 0% { box-shadow: 0 0 10px rgba(0,255,136,0.2); } 50% { box-shadow: 0 0 25px rgba(0,255,136,0.5); } 100% { box-shadow: 0 0 10px rgba(0,255,136,0.2); } }
         .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 5.5rem; font-weight: 900; margin-bottom: 25px; background: linear-gradient(to right, #fff, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; filter: drop-shadow(0 0 25px rgba(188,111,241,0.5));}
-        .hero p { color: #bbb; font-size: 1.3rem; max-width: 800px; margin: 0 auto; line-height: 1.8; }
+        .hero p { color: #bbb; font-size: 1.3rem; max-width: 800px; margin: 0 auto 40px; line-height: 1.8; }
         
-        .home-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; }
-        .feature-card { background: var(--card-bg); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border); backdrop-filter: blur(15px); transition: 0.4s; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
-        .feature-card:hover { border-color: var(--primary); transform: translateY(-10px); box-shadow: 0 20px 50px rgba(188, 111, 241, 0.15); }
-        .feature-card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 25px; filter: drop-shadow(0 0 15px var(--primary)); }
+        .hero-actions { display: flex; justify-content: center; gap: 20px; margin-bottom: 60px; }
+        .hero-actions .btn-solid { padding: 18px 40px; font-size: 1.1rem; border-radius: 12px; }
+        .hero-actions .btn-outline { padding: 18px 40px; font-size: 1.1rem; border-radius: 12px; border-color: rgba(255,255,255,0.2); color: #fff; }
+        .hero-actions .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--primary); box-shadow: 0 0 20px rgba(188,111,241,0.3); }
+
+        /* Canlı Terminal Simülasyonu */
+        .terminal-mockup { max-width: 700px; margin: 0 auto; background: rgba(10, 10, 15, 0.8); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(188, 111, 241, 0.15); text-align: left; }
+        .terminal-header { background: rgba(0,0,0,0.5); padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .terminal-dots { display: flex; gap: 8px; }
+        .terminal-dots span { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #ff5f56; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #27c93f; }
+        .terminal-title { flex: 1; text-align: center; color: #888; font-family: monospace; font-size: 0.85rem; letter-spacing: 1px; }
+        .terminal-body { padding: 25px; font-family: monospace; color: #00d2ff; font-size: 0.95rem; line-height: 1.8; }
+        .term-ok { color: var(--success); font-weight: bold; float: right; }
+        .term-anim-1 { animation: showLine 0.1s forwards; opacity: 0; }
+        .term-anim-2 { animation: showLine 0.1s forwards 0.8s; opacity: 0; }
+        .term-anim-3 { animation: showLine 0.1s forwards 1.6s; opacity: 0; }
+        .term-anim-4 { animation: showLine 0.1s forwards 2.2s; opacity: 0; }
+        .term-anim-5 { animation: showLine 0.1s forwards 3s; opacity: 0; color: #fff; }
+        .term-cursor { display: inline-block; width: 10px; height: 15px; background: #fff; vertical-align: middle; margin-left: 5px; animation: blinkCursor 1s infinite; }
+        @keyframes showLine { to { opacity: 1; } }
+        @keyframes blinkCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* 3D Cam Kartlar */
+        .home-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; perspective: 1000px; }
+        .feature-card { background: rgba(18, 18, 24, 0.6); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(25px); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
+        .feature-card:hover { border-color: var(--primary); transform: translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.03); box-shadow: 0 30px 60px rgba(188, 111, 241, 0.15), inset 0 0 30px rgba(188, 111, 241, 0.1); z-index: 10; }
+        .feature-card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 25px; filter: drop-shadow(0 0 15px var(--primary)); transition: 0.3s; }
+        .feature-card:hover i { transform: scale(1.1); color: #fff; filter: drop-shadow(0 0 25px var(--primary)); }
         
-        .stats-section { display: flex; justify-content: space-around; background: linear-gradient(90deg, transparent, rgba(188, 111, 241, 0.05), transparent); padding: 70px 0; margin: 100px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);}
-        .stat-item h4 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 25px var(--primary);}
+        /* Neon Performans Barları */
+        .stats-section { display: flex; justify-content: space-around; background: linear-gradient(90deg, transparent, rgba(188, 111, 241, 0.05), transparent); padding: 80px 0; margin: 120px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);}
+        .stat-item { flex: 1; text-align: center; padding: 0 40px; border-right: 1px solid rgba(255,255,255,0.05); }
+        .stat-item:last-child { border-right: none; }
+        .stat-item h4 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; color: #fff; margin-bottom: 5px; text-shadow: 0 0 25px rgba(255,255,255,0.3);}
+        .stat-item p { color: #888; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 15px; }
+        .stat-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; position: relative; }
+        .stat-bar-fill { height: 100%; background: var(--primary); width: 0; border-radius: 10px; box-shadow: 0 0 15px var(--primary); transition: width 2s ease-out; }
+        
+        /* Kurumsal VIP Alanı */
+        .vip-enterprise { margin: 100px 0 40px; padding: 60px; background: linear-gradient(135deg, rgba(15,15,20,0.9), rgba(42,14,69,0.4)); border-radius: 30px; border: 1px solid rgba(188, 111, 241, 0.2); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 0 50px rgba(188, 111, 241, 0.05); backdrop-filter: blur(20px); }
+        .vip-text h2 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
+        .vip-text p { color: #aaa; font-size: 1.2rem; max-width: 600px; line-height: 1.6; }
+        .vip-btn { padding: 20px 40px; background: #fff; color: #000; font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; border-radius: 15px; text-decoration: none; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 0 25px rgba(255,255,255,0.2); letter-spacing: 1px; }
+        .vip-btn:hover { background: var(--primary); color: #fff; box-shadow: 0 0 40px var(--primary); transform: scale(1.05); }
 
         /* DİSCORD & LİSANS KARTLARI */
         .discord-grid, .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 50px;}
@@ -219,7 +254,7 @@
         .admin-content { 
             background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
             padding: 40px; min-height: 700px; backdrop-filter: blur(15px); box-shadow: 0 10px 50px rgba(0,0,0,0.2);
-            min-width: 0; overflow: hidden; /* Taşmaları engeller */
+            min-width: 0; overflow: hidden;
         }
         
         .admin-section { display: none !important; animation: fadeIn 0.4s ease; } 
@@ -383,21 +418,61 @@
             <div id="page-home" class="page active">
                 <main class="hero">
                     <div class="hero-glow"></div>
+                    <div class="hero-badge"><i class="fas fa-lock"></i> KERNEL LEVEL SECURITY ACTIVE</div>
                     <h1>KODUN ÖTESİNE GEÇ.</h1>
-                    <p>Sensisoftware ile yazılımın arka planındaki karanlık sanatı keşfet. Yalnızca seçkin mühendislerin erişebildiği özel altyapıya hoş geldin.</p>
-                    </main>
-                <div class="home-features">
-                    <div class="feature-card"><i class="fas fa-shield-halved"></i><h3>Tam Koruma</h3><p>Kernel seviyesindeki sürücülerimizle tespit edilemez bir yapı sunuyoruz. Verileriniz daima güvende.</p></div>
-                    <div class="feature-card"><i class="fas fa-bolt"></i><h3>Ultra Optimize</h3><p>Sistem kaynaklarını minimum düzeyde kullanarak maksimum performans alırsınız.</p></div>
-                    <div class="feature-card"><i class="fas fa-cloud"></i><h3>Anlık Senkronize</h3><p>Bulut üzerinden tüm güncellemeleri anında alırsınız. Kapat aç derdine son.</p></div>
+                    <p>Sensisoftware ile yazılımın arka planındaki karanlık sanatı keşfet. Yalnızca seçkin mühendislerin erişebildiği özel ve şifrelenmiş altyapıya hoş geldin.</p>
+                    
+                    <div class="hero-actions">
+                        <button class="btn-solid" onclick="document.getElementById('home-features').scrollIntoView({behavior: 'smooth'})">Altyapıyı İncele <i class="fas fa-arrow-right" style="margin-left:8px;"></i></button>
+                        <button class="btn-outline" onclick="openAuthModal('login')"><i class="fas fa-terminal" style="margin-right:8px;"></i> Terminale Bağlan</button>
+                    </div>
+
+                    <div class="terminal-mockup">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+                            </div>
+                            <div class="terminal-title">sensi-core.exe — root@sensisoftware</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="term-anim-1">Initializing SensiEngine v3.1.0... <span class="term-ok">[OK]</span></div>
+                            <div class="term-anim-2">Bypassing standard security protocols... <span class="term-ok">[OK]</span></div>
+                            <div class="term-anim-3">Loading kernel-level drivers... <span class="term-ok">[OK]</span></div>
+                            <div class="term-anim-4">Establishing encrypted P2P connection... <span class="term-ok">[OK]</span></div>
+                            <div class="term-anim-5"><br>> System ready. Awaiting command_ <span class="term-cursor"></span></div>
+                        </div>
+                    </div>
+                </main>
+                
+                <div class="home-features" id="home-features">
+                    <div class="feature-card"><i class="fas fa-shield-halved"></i><h3 style="margin-bottom:15px; font-family:'Orbitron';">Tam Koruma</h3><p style="color:#aaa; line-height:1.6;">Kernel seviyesindeki sürücülerimizle tespit edilemez bir yapı sunuyoruz. Verileriniz daima güvende.</p></div>
+                    <div class="feature-card"><i class="fas fa-bolt"></i><h3 style="margin-bottom:15px; font-family:'Orbitron';">Ultra Optimize</h3><p style="color:#aaa; line-height:1.6;">Sistem kaynaklarını minimum düzeyde kullanarak oyunda veya sunucuda maksimum performans alırsınız.</p></div>
+                    <div class="feature-card"><i class="fas fa-cloud"></i><h3 style="margin-bottom:15px; font-family:'Orbitron';">Bulut Senkronu</h3><p style="color:#aaa; line-height:1.6;">Tüm güncellemeleri anında alırsınız. Herhangi bir program kapatıp açma derdine kalıcı olarak son.</p></div>
                 </div>
+                
                 <div class="stats-section">
-                    <div class="stat-item"><h4>%99.9</h4><p>Uptime Süresi</p></div>
-                    <div class="stat-item"><h4>500+</h4><p>Aktif Kullanıcı</p></div>
-                    <div class="stat-item"><h4><i class="fas fa-infinity" style="font-size:3rem; color:var(--primary); filter:drop-shadow(0 0 15px var(--primary));"></i></h4><p>Sınırsız Potansiyel</p></div>
+                    <div class="stat-item">
+                        <h4>%99.9</h4><p>Uptime Süresi</p>
+                        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 99.9%;"></div></div>
+                    </div>
+                    <div class="stat-item">
+                        <h4>0.1ms</h4><p>Sistem Gecikmesi</p>
+                        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 15%; background:var(--blue); box-shadow:0 0 15px var(--blue);"></div></div>
+                    </div>
+                    <div class="stat-item">
+                        <h4 style="color:var(--success); text-shadow:0 0 25px rgba(0,255,136,0.3);"><i class="fas fa-check-circle"></i></h4><p style="color:var(--success);">Bypass Durumu</p>
+                        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 100%; background:var(--success); box-shadow:0 0 15px var(--success);"></div></div>
+                    </div>
+                </div>
+
+                <div class="vip-enterprise">
+                    <div class="vip-text">
+                        <h2>KURUMSAL ÇÖZÜMLER</h2>
+                        <p>Büyük çaplı şirket projeleri, özel sunucu altyapıları ve kişiye özel şifrelenmiş yazılım talepleriniz için VIP mühendislik departmanımızla iletişime geçin.</p>
+                    </div>
+                    <a href="javascript:void(0)" class="vip-btn" onclick="openAuthModal('login')">BİZE ULAŞIN</a>
                 </div>
             </div>
-
             <div id="page-discord" class="page">
                 <h2 class="page-title" style="color:var(--discord); text-shadow: 0 0 20px rgba(88,101,242,0.4);">DİSCORD BOT HİZMETLERİ</h2>
                 <div class="discord-grid">

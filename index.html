@@ -226,7 +226,7 @@
         .status-active { background: rgba(188, 111, 241, 0.15); color: var(--primary); border: 1px solid var(--primary); box-shadow: 0 0 15px rgba(188,111,241,0.2);}
         .status-banned { background: rgba(255, 71, 87, 0.15); color: var(--danger); border: 1px solid var(--danger); box-shadow: 0 0 15px rgba(255,71,87,0.2);}
 
-        /* --- 6. YÖNETİM PANELİ (BETON GİBİ GRID MİMARİSİ) --- */
+        /* --- 6. YÖNETİM PANELİ (GENİŞLETİLDİ) --- */
         .admin-layout { 
             display: grid; 
             grid-template-columns: 280px 1fr; 
@@ -249,7 +249,8 @@
         .admin-content { 
             background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
             padding: 40px; min-height: 700px; backdrop-filter: blur(15px); box-shadow: 0 10px 50px rgba(0,0,0,0.2);
-            min-width: 0; overflow: hidden;
+            min-width: 100%; /* GENİŞLETİLDİ */
+            overflow: hidden;
         }
         
         .admin-section { display: none !important; animation: fadeIn 0.4s ease; } 
@@ -259,7 +260,7 @@
         .admin-header h4 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff;}
         
         .table-responsive { width: 100%; overflow-x: auto; padding-bottom: 10px;}
-        .admin-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        .admin-table { width: 100%; border-collapse: collapse; min-width: 800px; } /* TABLO GENİŞLETİLDİ */
         .admin-table th, .admin-table td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .admin-table th { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
         .admin-table td { color: #ccc; font-size: 0.95rem; }
@@ -282,7 +283,7 @@
         .control-box select { flex: 1; min-width: 150px; padding: 12px 20px; border-radius: 8px; background: rgba(0,0,0,0.4); color: #fff; border: 1px solid rgba(255,255,255,0.1); outline: none; font-size:1rem; cursor: pointer; transition: 0.3s;}
         .control-box select:focus { border-color: var(--primary); }
 
-        /* --- 7. MODALLAR --- */
+        /* --- 7. MODALLAR (GÜNCELLENDİ) --- */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; }
         .modal-box { background: rgba(13, 13, 18, 0.95); padding: 50px 60px; border-radius: 20px; width: 100%; max-width: 450px; border: 1px solid var(--border); position: relative; text-align: center; box-shadow: 0 0 50px rgba(188, 111, 241, 0.15); }
         .auth-tabs { display: flex; margin-bottom: 40px; border-bottom: 2px solid #222; }
@@ -296,6 +297,15 @@
         .close-btn { position: absolute; top: 20px; right: 25px; font-size: 1.8rem; color: #666; cursor: pointer; transition: 0.3s; z-index: 10;}
         .close-btn:hover { color: var(--danger); transform: scale(1.1);}
         .modal-select { width: 100%; padding: 18px; background: #15151c; border: 1px solid #222; border-radius: 10px; color: #fff; outline: none; margin-bottom: 25px; font-size: 1.05rem; cursor: pointer;}
+
+        /* YENİ EKLENEN ONAY MODALI (EMİN MİSİN?) */
+        .confirm-modal-box { max-width: 400px; padding: 40px; }
+        .confirm-modal-box h3 { color: #fff; font-family: 'Orbitron'; margin-bottom: 15px; }
+        .confirm-modal-box p { color: #aaa; margin-bottom: 30px; line-height: 1.5; }
+        .confirm-btns { display: flex; gap: 15px; }
+        .confirm-btns button { flex: 1; padding: 15px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; transition: 0.3s; }
+        .btn-cancel { background: rgba(255,255,255,0.1); color: #fff; }
+        .btn-cancel:hover { background: rgba(255,255,255,0.2); }
 
         /* --- 8. CANLI DESTEK --- */
         .chat-widget-btn {
@@ -559,7 +569,7 @@
                             </div>
                             <div class="table-responsive">
                                 <table class="admin-table">
-                                    <thead><tr><th>Kullanıcı</th><th>Lisans Anahtarı</th><th>Paket</th><th>Durum</th><th class="req-admin">İşlem</th></tr></thead>
+                                    <thead><tr><th>Kullanıcı</th><th>Lisans Anahtarı</th><th>Paket / Tür</th><th>Kalan Süre / Durum</th><th class="req-admin">İşlem</th></tr></thead>
                                     <tbody id="admKeysTbody"></tbody>
                                 </table>
                             </div>
@@ -746,17 +756,46 @@
             </div>
             
             <select id="akType" class="search-input" style="width:100%; margin-bottom: 20px; padding: 20px; font-size: 1.1rem; border-color:rgba(0,255,136,0.3);">
-                <option value="program">💻 Sensi Program Lisansı</option>
                 <option value="discord">🤖 Discord Bot Lisansı</option>
+                <option value="program">💻 Sensi Program Lisansı</option>
             </select>
 
             <select id="akDy" class="search-input" style="width:100%; margin-bottom: 25px; padding: 20px; font-size: 1.1rem; border-color:rgba(0,255,136,0.3);">
                 <option value="1">1 Günlük Lisans</option>
                 <option value="7">7 Günlük Lisans</option>
                 <option value="30">30 Günlük Lisans</option>
-            </select>
+                <option value="99999">💎 Sınırsız (Lifetime) Lisans</option> </select>
             
             <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background:linear-gradient(135deg, var(--success), #00cc6a); letter-spacing:2px; box-shadow: 0 0 25px rgba(0,255,136,0.3);" onclick="genKey()">ONAYLA VE ZİMMETLE</button>
+        </div>
+    </div>
+
+    <div id="extendKeyModal" class="modal">
+        <div class="modal-box" style="border-color:var(--blue); box-shadow: 0 0 80px rgba(0, 210, 255, 0.2);">
+            <span class="close-btn" onclick="closeModal('extendKeyModal')">&times;</span>
+            <h2 style="color:var(--blue); margin-bottom:20px; font-family:'Orbitron'; font-size:2rem; letter-spacing:2px; text-shadow:0 0 15px rgba(0,210,255,0.5);">SÜRE UZAT</h2>
+            <p id="extendKeyDisplay" style="color:#aaa; font-family:monospace; margin-bottom:25px; font-size:1.2rem; letter-spacing: 2px;"></p>
+            
+            <select id="extendDays" class="search-input" style="width:100%; margin-bottom: 25px; padding: 20px; font-size: 1.1rem; border-color:rgba(0,210,255,0.3);">
+                <option value="7">+ 7 Gün Ekle</option>
+                <option value="15">+ 15 Gün Ekle</option>
+                <option value="30">+ 30 Gün Ekle</option>
+                <option value="99999">💎 Sınırsız Yap</option>
+            </select>
+            
+            <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background:linear-gradient(135deg, var(--blue), #0099cc); letter-spacing:2px; box-shadow: 0 0 25px rgba(0,210,255,0.3);" onclick="confirmExtend()">SÜREYİ GÜNCELLE</button>
+        </div>
+    </div>
+
+    <div id="confirmModal" class="modal">
+        <div class="modal-box confirm-modal-box" style="border-color:var(--danger); box-shadow: 0 0 80px rgba(255, 71, 87, 0.2);">
+            <i class="fas fa-exclamation-triangle" style="font-size:5rem; color:var(--danger); margin-bottom:20px; filter:drop-shadow(0 0 20px rgba(255,71,87,0.5));"></i>
+            <h3 id="confirmTitle" style="font-size:1.8rem; letter-spacing:1px; margin-bottom: 10px;">İşlemi Onaylıyor Musun?</h3>
+            <p id="confirmDesc" style="font-size:1.1rem;">Bu işlem geri alınamaz.</p>
+            <div class="confirm-btns">
+                <button class="btn-cancel" onclick="closeModal('confirmModal')">İptal</button>
+                <button class="btn-solid" id="confirmActionBtn" style="background:var(--danger); font-size: 1.1rem; letter-spacing: 1px;">Evet, Onaylıyorum</button>
+            </div>
         </div>
     </div>
 
@@ -810,11 +849,10 @@
         let cart = [];
         let activeDiscount = 0;
         let activeChatUser = null; 
+        let targetKeyForExtend = ""; // Süre uzatılacak key
 
-        // BİLDİRİM SİSTEMİ: SESSİZ MOTOR (HER ZAMAN ÇALIŞIR)
+        // BİLDİRİM SİSTEMİ
         const notifAudio = new Audio("https://actions.google.com/sounds/v1/ui/message_notification.ogg");
-        
-        // Ses kilidini kırmak için ekrana ilk tıklandığında motoru ısıt
         document.body.addEventListener('click', function() {
             if (!window.audioUnlocked) {
                 notifAudio.play().then(() => { notifAudio.pause(); notifAudio.currentTime = 0; }).catch(()=>{});
@@ -825,7 +863,6 @@
         function playNotification(title, body) {
             notifAudio.play().catch(e => console.log("İlk tık bekleniyor."));
             showToast("Yeni Mesaj: " + title, "success");
-            
             if (document.hidden && Notification.permission === "granted") {
                 new Notification(title, { body: body, icon: "https://cdn-icons-png.flaticon.com/512/1051/1051382.png" });
             }
@@ -835,7 +872,6 @@
             let saved = localStorage.getItem('sensiUser');
             if(saved) {
                 let parsed = JSON.parse(saved);
-                // KURUCU ZORLAMASI
                 if (parsed.username === 'omer13ds') parsed.role = 'kurucu';
                 applyLogin(parsed.username, parsed.role, true);
             }
@@ -855,12 +891,9 @@
             
             if(p === 'admin') {
                 if(userRole === 'user') { switchPage('home'); return; }
-                
-                // Menü sekmelerini kapat 
                 document.querySelectorAll('.admin-section').forEach(e => e.classList.remove('active'));
                 document.querySelectorAll('.admin-nav a').forEach(e => e.classList.remove('active'));
                 
-                // İlk girişte yetkiye göre ilk sekmeyi göster
                 if (userRole === 'kurucu' || userRole === 'admin') {
                     document.getElementById('adm-keys').classList.add('active');
                     document.getElementById('nav-adm-keys').classList.add('active');
@@ -868,7 +901,6 @@
                     document.getElementById('adm-users').classList.add('active');
                     document.getElementById('nav-adm-users').classList.add('active');
                 }
-                
                 fetchAdminData();
             }
             if(p === 'orders') fetchOrders();
@@ -877,10 +909,8 @@
         function switchAdminTab(t) {
             document.querySelectorAll('.admin-section').forEach(e => e.classList.remove('active'));
             document.querySelectorAll('.admin-nav a').forEach(e => e.classList.remove('active'));
-            
             const targetSec = document.getElementById(t);
             const targetNav = document.getElementById('nav-'+t);
-            
             if(targetSec) targetSec.classList.add('active');
             if(targetNav) targetNav.classList.add('active');
         }
@@ -903,7 +933,6 @@
         function doReg() {
             const u = document.getElementById('rUs').value.trim(); 
             const p = document.getElementById('rPs').value;
-            
             if(!u || !p) return showToast("Eksik bilgi girdiniz!", "error");
             if(u.includes(".") || u.includes("#") || u.includes("$") || u.includes("[")) return showToast("Geçersiz karakter!", "error");
 
@@ -912,12 +941,10 @@
 
             db.ref('banned_hwids/' + hwid).once('value', banSnap => {
                 if(banSnap.exists()) return showToast("Bu cihaz sistemden KALICI OLARAK uzaklaştırılmıştır!", "error");
-                
                 db.ref('hwids/' + hwid).once('value', s => {
                     if(s.exists() && u !== 'omer13ds') {
                         let val = s.val(); 
                         let linkedUser = typeof val === 'object' && val !== null ? val.user : val;
-                        
                         db.ref('users/' + linkedUser).once('value', userSnap => {
                             if(userSnap.exists()) showToast("Bu bilgisayardan zaten üyelik oluşturulmuş!", "error");
                             else finalizeRegistration(u, p, hwid);
@@ -930,8 +957,7 @@
         function finalizeRegistration(u, p, hwid) {
             db.ref('users/'+u).once('value', snap => {
                 if(snap.exists()) return showToast("Bu isim daha önce alınmış!", "error");
-                
-                const role = u === 'omer13ds' ? 'kurucu' : 'user'; // MÜTLAK KURUCU
+                const role = u === 'omer13ds' ? 'kurucu' : 'user';
                 db.ref('users/'+u).set({ password: p, role: role, hwid: hwid }).then(() => {
                     localStorage.setItem('sensi_hwid', hwid);
                     db.ref('hwids/'+hwid).set({ user: u });
@@ -946,30 +972,21 @@
             const u = document.getElementById('lUs').value.trim(); 
             const p = document.getElementById('lPs').value;
             if(!u || !p) return;
-            
             db.ref('users/'+u).once('value', s => {
                 if(s.exists() && s.val().password === p) {
                     let r = s.val().role || 'user';
-                    
-                    if (u === 'omer13ds') r = 'kurucu'; // MÜTLAK KURUCU
+                    if (u === 'omer13ds') r = 'kurucu';
                     if(r === 'banned') return showToast("Hesabınız kalıcı olarak yasaklanmıştır!", "error");
-
                     localStorage.setItem('sensiUser', JSON.stringify({username: u, role: r}));
                     applyLogin(u, r, false); 
                     closeModal('authModal');
-                } else {
-                    showToast("Kullanıcı adı veya şifre hatalı!", "error");
-                }
+                } else { showToast("Kullanıcı adı veya şifre hatalı!", "error"); }
             });
         }
 
         function applyLogin(u, r, isSilent) {
-            currentUser = u; 
-            userRole = r;
-            
-            // KUSURSUZ YETKİ ZIRHI 
+            currentUser = u; userRole = r;
             document.body.className = "role-" + r; 
-            
             document.getElementById('authSection').style.display = 'none';
             document.getElementById('profileSection').style.display = 'flex';
             document.getElementById('profileName').innerText = u;
@@ -983,11 +1000,7 @@
                 document.getElementById('chatWidgetBtn').style.display = 'none'; 
                 loadStaffChat();
             }
-            
-            if(Notification.permission !== "granted" && Notification.permission !== "denied") {
-                Notification.requestPermission(); 
-            }
-            
+            if(Notification.permission !== "granted" && Notification.permission !== "denied") Notification.requestPermission(); 
             if(!isSilent) showToast("Hoş Geldin " + u, "success");
         }
 
@@ -1007,12 +1020,8 @@
             if(!code) return;
             db.ref('coupons/'+code).once('value', s => {
                 if(s.exists()) { 
-                    activeDiscount = s.val().percent; 
-                    showToast(`%${activeDiscount} İndirim Uygulandı!`); 
-                    updateCart(); 
-                } else {
-                    showToast("Kupon geçersiz veya süresi dolmuş!", "error");
-                }
+                    activeDiscount = s.val().percent; showToast(`%${activeDiscount} İndirim Uygulandı!`); updateCart(); 
+                } else { showToast("Kupon geçersiz veya süresi dolmuş!", "error"); }
             });
         }
 
@@ -1036,20 +1045,15 @@
                     sub += it.price;
                     list.innerHTML += `
                         <div class="cart-item">
-                            <div>
-                                <h4 style="font-size:1.3rem; margin-bottom:5px;">${it.name}</h4>
-                                <p style="color:#888; font-size:0.9rem;">Anında Teslimat</p>
-                            </div>
+                            <div><h4 style="font-size:1.3rem; margin-bottom:5px;">${it.name}</h4><p style="color:#888; font-size:0.9rem;">Anında Teslimat</p></div>
                             <div style="display:flex; gap:25px; align-items:center;">
                                 <div class="cart-item-price">${it.price} TL</div>
                                 <button class="remove-btn" onclick="cart.splice(${i},1); updateCart()"><i class="fas fa-trash"></i></button>
                             </div>
                         </div>`;
                 });
-                
                 document.getElementById('cartSubtotal').innerText = sub.toFixed(2) + ' TL';
                 document.getElementById('cartDiscount').innerText = '-%' + activeDiscount;
-                
                 let finalTotal = sub - (sub * (activeDiscount/100));
                 document.getElementById('cartTotal').innerText = finalTotal.toFixed(2) + ' TL';
             }
@@ -1057,10 +1061,7 @@
 
         function processFakeCheckout() {
             showToast("İşlem başlatılıyor...", "success");
-            setTimeout(() => { 
-                document.getElementById('fakePaymentModal').style.display = 'flex'; 
-                cart=[]; activeDiscount=0; updateCart(); 
-            }, 1000);
+            setTimeout(() => { document.getElementById('fakePaymentModal').style.display = 'flex'; cart=[]; activeDiscount=0; updateCart(); }, 1000);
         }
 
         function fetchOrders() {
@@ -1072,15 +1073,18 @@
                     s.forEach(ch => {
                         let d = ch.val(); let timeLeft = d.expiresAt - Date.now();
                         let stC = "status-active"; let stT = d.status;
+                        let isLifetime = d.package.includes("99999");
                         
                         if(stT === "BANNED") { stC = "status-banned"; } 
-                        else if(timeLeft <= 0) { stT = "SÜRESİ DOLDU"; stC = "status-expired"; }
+                        else if(timeLeft <= 0 && !isLifetime) { stT = "SÜRESİ DOLDU"; stC = "status-banned"; }
                         
+                        let dateText = isLifetime ? "SINIRSIZ" : new Date(d.expiresAt).toLocaleDateString('tr-TR');
+
                         c.innerHTML += `
                             <div class="order-card ${stT === 'AKTİF' ? 'active-order' : ''}">
                                 <div class="order-info">
-                                    <h4 style="font-size:1.3rem; margin-bottom:8px;">${d.package}</h4>
-                                    <p style="color:#aaa; font-size:1rem;">Bitiş: ${new Date(d.expiresAt).toLocaleDateString('tr-TR')}</p>
+                                    <h4 style="font-size:1.3rem; margin-bottom:8px;">${d.package.replace("99999 Günlük (Sınırsız)", "Sınırsız Lisans")}</h4>
+                                    <p style="color:#aaa; font-size:1rem;">Bitiş: ${dateText}</p>
                                     <div class="key-box">${ch.key}</div>
                                 </div>
                                 <div class="order-status ${stC}">${stT}</div>
@@ -1092,7 +1096,7 @@
             });
         }
 
-        // --- ADMİN PANEL VERİLERİ ---
+        // --- ADMİN PANEL VERİLERİ (GÜNCELLENDİ) ---
         let isInitialTicketsLoad = true; 
 
         function fetchAdminData() {
@@ -1102,12 +1106,49 @@
                     if(s.exists()) {
                         s.forEach(ch => {
                             const d = ch.val();
+                            let isLifetime = d.package.includes("99999");
+                            
+                            let timeLeftText = "";
+                            let isExpired = false;
+                            
+                            if (isLifetime) {
+                                timeLeftText = `<span style="color:var(--gold); font-weight:bold;">💎 SINIRSIZ</span>`;
+                            } else {
+                                let remain = d.expiresAt - Date.now();
+                                if (remain <= 0) {
+                                    isExpired = true;
+                                    timeLeftText = `<span style="color:var(--danger); font-weight:bold;">SÜRE BİTTİ</span>`;
+                                } else {
+                                    let days = Math.ceil(remain / 86400000);
+                                    timeLeftText = `<span style="color:var(--blue); font-weight:bold;">${days} Gün Kaldı</span>`;
+                                }
+                            }
+
                             let statColor = d.status === 'BANNED' ? 'color:var(--danger)' : 'color:var(--success)';
+                            let typeIcon = d.type === 'discord' ? '<i class="fab fa-discord" style="color:var(--discord)"></i>' : '<i class="fas fa-desktop" style="color:#aaa"></i>';
+
+                            // GÜNCELLENMİŞ BUTONLAR
                             let actionBtns = `
-                                <button class="action-btn btn-warning" onclick="db.ref('licenses/${ch.key}').update({status:'BANNED'})">Banla</button>
-                                <button class="action-btn btn-danger" onclick="db.ref('licenses/${ch.key}').remove()">Sil</button>
+                                <button class="action-btn btn-blue" onclick="openExtendModal('${ch.key}')"><i class="fas fa-clock"></i> Uzat</button>
+                                <button class="action-btn btn-warning" onclick="askConfirm('Banla', '${ch.key}')"><i class="fas fa-ban"></i> Banla</button>
+                                <button class="action-btn btn-danger" onclick="askConfirm('Sil', '${ch.key}')"><i class="fas fa-trash"></i> Sil</button>
                             `;
-                            b.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${d.owner}</td><td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td><td>${d.package}</td><td style="font-weight:900; ${statColor}">${d.status}</td><td class="req-admin">${actionBtns}</td></tr>`;
+                            
+                            if (d.status === 'BANNED') {
+                                actionBtns = `
+                                    <button class="action-btn btn-success" onclick="askConfirm('Unban', '${ch.key}')"><i class="fas fa-check"></i> Banı Aç</button>
+                                    <button class="action-btn btn-danger" onclick="askConfirm('Sil', '${ch.key}')"><i class="fas fa-trash"></i> Sil</button>
+                                `;
+                                timeLeftText = `<span style="color:var(--danger); text-decoration:line-through;">DONDURULDU</span>`;
+                            }
+
+                            b.innerHTML += `<tr>
+                                <td style="font-weight:bold; color:#fff;">${d.owner}</td>
+                                <td style="color:var(--gold); font-family:monospace; font-size:1.1rem; letter-spacing:1px;">${ch.key}</td>
+                                <td>${typeIcon} ${isLifetime ? 'Sınırsız Paket' : d.package}</td>
+                                <td>${timeLeftText} <br> <span style="font-size:0.8rem; font-weight:900; ${statColor}">${d.status}</span></td>
+                                <td class="req-admin">${actionBtns}</td>
+                            </tr>`;
                         });
                     }
                 });
@@ -1132,27 +1173,19 @@
                         let rName = d.role === "kurucu" ? "Kurucu" : (d.role === "admin" ? "Admin" : (d.role === "mod" ? "Moderatör" : (d.role === "banned" ? "Yasaklı" : "Üye")));
                         let rCol = d.role === "kurucu" ? "color:var(--danger)" : (d.role === "admin" ? "color:var(--primary)" : (d.role === "mod" ? "color:var(--gold)" : (d.role === "banned" ? "color:red; text-decoration:line-through;" : "color:#ccc")));
                         
-                        // ŞİFRE GİZLEME MANTIĞI: (MUTLAK GİZLİLİK) Hiçbir yetkili birbirini göremez.
                         let isTargetStaff = (d.role === 'kurucu' || d.role === 'admin' || d.role === 'mod');
                         let displayPw = "***";
-                        
-                        if (userRole === 'kurucu') {
-                            displayPw = d.password; // Kurucu herkesi görür
-                        } else if (userRole === 'admin') {
-                            displayPw = isTargetStaff ? "*** (Yetkili)" : d.password; // Admin personeli göremez
-                        } else if (userRole === 'mod') {
-                            displayPw = "*** (Yetkisiz)"; // Mod kimseyi göremez
-                        }
+                        if (userRole === 'kurucu') { displayPw = d.password; } 
+                        else if (userRole === 'admin') { displayPw = isTargetStaff ? "*** (Yetkili)" : d.password; } 
+                        else if (userRole === 'mod') { displayPw = "*** (Yetkisiz)"; }
                         
                         let actionBtns = (uname !== 'omer13ds' && (userRole === 'kurucu' || userRole === 'admin')) ? `
                             <button class="action-btn btn-danger" style="margin-bottom:5px;" onclick="deleteUser('${uname}')"><i class="fas fa-trash"></i> Sil</button>
                             <button class="action-btn btn-warning" onclick="banUser('${uname}')"><i class="fas fa-ban"></i> Banla</button>
                         ` : '-';
-                        
                         let thAction = (userRole === 'kurucu' || userRole === 'admin') ? `<td class="req-admin">${actionBtns}</td>` : '<td class="req-admin">-</td>';
                         
                         if(b) b.innerHTML += `<tr><td style="font-weight:bold; color:#fff; font-size:1.1rem;">${uname}</td><td style="font-family:monospace; color:var(--primary); font-size:1.1rem;">${displayPw}</td><td style="font-weight:bold; ${rCol}">${rName}</td>${thAction}</tr>`;
-                        
                         if(r && (d.role === 'admin' || d.role === 'mod' || d.role === 'kurucu')) {
                             r.innerHTML += `<tr><td style="font-weight:bold; font-size:1.1rem; color:#fff;">${uname}</td><td style="font-weight:900; ${rCol}; font-size:1rem;">${rName}</td></tr>`;
                         }
@@ -1160,92 +1193,29 @@
                 }
             });
 
-            // Destek Talepleri
             db.ref('chats').on('value', s => {
                 const b = document.getElementById('admTicketsTbody'); if(!b) return; b.innerHTML = '';
                 if(s.exists()) {
                     s.forEach(ch => {
                         let uname = ch.key; let msgs = ch.val();
-                        
                         let isClosed = msgs.info && msgs.info.status === 'closed';
                         let statusText = isClosed ? `<span style="color:var(--danger); font-weight:bold;">KAPALI</span>` : `<span style="color:var(--success); font-weight:bold;">AÇIK</span>`;
-                        
                         let msgKeys = Object.keys(msgs).filter(k => k !== 'info');
                         if(msgKeys.length === 0) return; 
-                        
                         let lastMsg = msgs[msgKeys[msgKeys.length - 1]];
-                        
-                        // BİLDİRİM - Herhangi bir admin/mod sayfadaysa ses çalar
-                        if (!isInitialTicketsLoad && lastMsg.sender !== currentUser) {
-                            playNotification("Yeni Destek Mesajı", lastMsg.sender + ": " + lastMsg.text);
-                        }
-
+                        if (!isInitialTicketsLoad && lastMsg.sender !== currentUser) { playNotification("Yeni Destek Mesajı", lastMsg.sender + ": " + lastMsg.text); }
                         let deleteBtn = (userRole === 'kurucu' || userRole === 'admin') ? `<button class="action-btn btn-danger" onclick="deleteChat('${uname}')"><i class="fas fa-trash"></i> Sil</button>` : '';
-
-                        let btns = `
-                            <button class="action-btn btn-blue" onclick="openAdminChat('${uname}')"><i class="fas fa-reply"></i> Aç/Cevapla</button>
-                            <button class="action-btn btn-warning" onclick="closeSupportChat('${uname}')"><i class="fas fa-lock"></i> Kapat</button>
-                            ${deleteBtn}
-                        `;
+                        let btns = `<button class="action-btn btn-blue" onclick="openAdminChat('${uname}')"><i class="fas fa-reply"></i> Aç/Cevapla</button><button class="action-btn btn-warning" onclick="closeSupportChat('${uname}')"><i class="fas fa-lock"></i> Kapat</button>${deleteBtn}`;
                         b.innerHTML += `<tr><td style="font-weight:bold; color:var(--blue); font-size:1.1rem;">${uname}</td><td>${statusText}</td><td style="color:#ccc; font-size:1rem;">${lastMsg.text}</td><td style="color:#888;">${new Date(lastMsg.time).toLocaleTimeString()}</td><td>${btns}</td></tr>`;
                     });
                 }
             });
-            
             setTimeout(() => { isInitialTicketsLoad = false; }, 3000);
         }
 
-        // ADMİN EYLEMLERİ
-        function deleteUser(uname) {
-            if(userRole === 'user' || userRole === 'mod') return;
-            if(confirm(`${uname} adlı kullanıcıyı sistemden silmek istediğinize emin misiniz? (HWID sıfırlanır, tekrar kayıt olabilir)`)) { 
-                db.ref('users/'+uname).once('value', s => {
-                    if(s.exists() && s.val().hwid) { db.ref('hwids/'+s.val().hwid).remove(); }
-                    db.ref('users/'+uname).remove(); 
-                    showToast("Kullanıcı silindi.");
-                });
-            }
-        }
-
-        function banUser(uname) {
-            if(userRole === 'user' || userRole === 'mod') return;
-            if(confirm(`${uname} adlı kullanıcıyı BANLAMAK istediğinize emin misiniz? (Format atsa bile kayıt olamaz)`)) { 
-                db.ref('users/'+uname).once('value', s => {
-                    if(s.exists()) { 
-                        let hwid = s.val().hwid;
-                        if(hwid) { db.ref('banned_hwids/'+hwid).set(true); } 
-                        db.ref('users/'+uname).update({ role: 'banned' }); 
-                        showToast("Kullanıcı kalıcı olarak BANLANDI!", "error");
-                    }
-                });
-            }
-        }
-
-        function assignRole() {
-            if(userRole !== 'kurucu') { showToast("Sadece Kurucu yetki verebilir!", "error"); return; }
-            let tu = document.getElementById('roleUserTarget').value.trim();
-            let tr = document.getElementById('roleSelectTarget').value;
-            if(!tu) return;
-            if(tu === 'omer13ds') return showToast("Kurucu yetkisi değiştirilemez!", "error");
-
-            db.ref('users/'+tu).once('value', s => {
-                if(s.exists()) {
-                    db.ref('users/'+tu).update({role: tr}); showToast("Yetki güncellendi.", "success"); document.getElementById('roleUserTarget').value = '';
-                } else showToast("Böyle bir üye yok!", "error");
-            });
-        }
-
-        function createCoupon() {
-            if(userRole === 'user' || userRole === 'mod') return;
-            let c = document.getElementById('newCouponCode').value.trim().toUpperCase();
-            let p = document.getElementById('newCouponPerc').value;
-            if(!c) return;
-            db.ref('coupons/'+c).set({ percent: parseInt(p) }); document.getElementById('newCouponCode').value = ''; showToast("Kupon eklendi!", "success");
-        }
-
+        // --- LİSANS İŞLEMLERİ (YENİ EKLENDİ) ---
         function openAdminKeyModal() { if(userRole === 'admin' || userRole === 'kurucu') document.getElementById('adminKeyModal').style.display = 'flex'; }
         
-        // --- GÜNCELLENMİŞ genKey() FONKSİYONU ---
         function genKey() {
             if(userRole === 'user' || userRole === 'mod') return;
             const u = document.getElementById('akUs').value; 
@@ -1257,7 +1227,8 @@
             const prefix = type === 'discord' ? 'DS-' : 'SENSI-';
             const k = prefix + Math.random().toString(36).toUpperCase().slice(2,10);
             
-            const pkgName = type === 'discord' ? d + " Günlük Discord Bot" : d + " Günlük Program";
+            let pkgName = type === 'discord' ? d + " Günlük Discord Bot" : d + " Günlük Program";
+            if (d === 99999) pkgName = type === 'discord' ? "99999 Günlük (Sınırsız) Discord Bot" : "99999 Günlük (Sınırsız) Program";
 
             db.ref('licenses/'+k).set({ 
                 owner: u, 
@@ -1268,157 +1239,184 @@
             });
             
             closeModal('adminKeyModal'); 
-            showToast(type === 'discord' ? "Discord Key Üretildi!" : "Program Lisansı Üretildi!");
+            showToast("Lisans Üretildi!");
         }
 
-        function filterTable(inId, tbId) {
-            let filter = document.getElementById(inId).value.toUpperCase(); let trs = document.getElementById(tbId).getElementsByTagName("tr");
-            for (let i = 0; i < trs.length; i++) {
-                let txt = trs[i].textContent || trs[i].innerText;
-                trs[i].style.display = txt.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+        function openExtendModal(key) {
+            targetKeyForExtend = key;
+            document.getElementById('extendKeyDisplay').innerText = key;
+            document.getElementById('extendKeyModal').style.display = 'flex';
+        }
+
+        function confirmExtend() {
+            const addedDays = parseInt(document.getElementById('extendDays').value);
+            
+            db.ref(`licenses/${targetKeyForExtend}`).once('value', snap => {
+                if(snap.exists()) {
+                    let currentExpiry = snap.val().expiresAt;
+                    let currentType = snap.val().type;
+                    let newExpiry;
+                    let newPackage = snap.val().package;
+                    
+                    if(addedDays === 99999) {
+                        newExpiry = Date.now() + (99999 * 86400000);
+                        newPackage = currentType === 'discord' ? "99999 Günlük (Sınırsız) Discord Bot" : "99999 Günlük (Sınırsız) Program";
+                    } else {
+                        if (currentExpiry < Date.now()) { newExpiry = Date.now() + (addedDays * 86400000); } 
+                        else { newExpiry = currentExpiry + (addedDays * 86400000); }
+                        // Eski "Sınırsız" ibaresini kaldırıp sayıya döndürür
+                        newPackage = currentType === 'discord' ? "Özel Günlük Discord Bot" : "Özel Günlük Program";
+                    }
+                    
+                    db.ref(`licenses/${targetKeyForExtend}`).update({ expiresAt: newExpiry, package: newPackage, status: "AKTİF" });
+                    showToast("Süre başarıyla uzatıldı!");
+                    closeModal('extendKeyModal');
+                }
+            });
+        }
+
+        // --- ONAY KUTUSU (EMİN MİSİN?) ---
+        let pendingAction = null;
+        let pendingKey = null;
+
+        function askConfirm(action, key) {
+            pendingAction = action;
+            pendingKey = key;
+            
+            const title = document.getElementById('confirmTitle');
+            const desc = document.getElementById('confirmDesc');
+            const btn = document.getElementById('confirmActionBtn');
+            
+            document.getElementById('confirmModal').style.display = 'flex';
+            
+            if(action === 'Sil') {
+                title.innerText = "Lisansı Sil?";
+                desc.innerText = `${key} numaralı lisans veritabanından KALICI OLARAK silinecek.`;
+                btn.innerText = "Evet, Sil";
+                btn.style.background = "var(--danger)";
+            } else if(action === 'Banla') {
+                title.innerText = "Lisansı Banla?";
+                desc.innerText = `${key} numaralı lisans dondurulacak ve bot çalışmayı durduracak.`;
+                btn.innerText = "Evet, Banla";
+                btn.style.background = "var(--warning)";
+            } else if(action === 'Unban') {
+                title.innerText = "Banı Kaldır?";
+                desc.innerText = `${key} numaralı lisans tekrar aktif edilecek.`;
+                btn.innerText = "Evet, Aktif Et";
+                btn.style.background = "var(--success)";
             }
         }
 
-        // --- CANLI DESTEK SİSTEMİ ---
-        function toggleChat() {
-            const box = document.getElementById('chatBox');
-            box.style.display = box.style.display === 'none' ? 'flex' : 'none';
+        document.getElementById('confirmActionBtn').addEventListener('click', () => {
+            if(pendingAction === 'Sil') {
+                db.ref(`licenses/${pendingKey}`).remove();
+                showToast("Lisans silindi.");
+            } else if(pendingAction === 'Banla') {
+                db.ref(`licenses/${pendingKey}`).update({status:'BANNED'});
+                showToast("Lisans banlandı.");
+            } else if(pendingAction === 'Unban') {
+                db.ref(`licenses/${pendingKey}`).update({status:'AKTİF'});
+                showToast("Lisans tekrar aktif edildi.");
+            }
+            closeModal('confirmModal');
+        });
+
+        // ADMİN EYLEMLERİ
+        function deleteUser(uname) {
+            if(userRole === 'user' || userRole === 'mod') return;
+            if(confirm(`${uname} adlı kullanıcıyı sistemden silmek istediğinize emin misiniz? (HWID sıfırlanır)`)) { 
+                db.ref('users/'+uname).once('value', s => {
+                    if(s.exists() && s.val().hwid) { db.ref('hwids/'+s.val().hwid).remove(); }
+                    db.ref('users/'+uname).remove(); showToast("Kullanıcı silindi.");
+                });
+            }
+        }
+        function banUser(uname) {
+            if(userRole === 'user' || userRole === 'mod') return;
+            if(confirm(`${uname} adlı kullanıcıyı BANLAMAK istediğinize emin misiniz?`)) { 
+                db.ref('users/'+uname).once('value', s => {
+                    if(s.exists()) { 
+                        let hwid = s.val().hwid; if(hwid) { db.ref('banned_hwids/'+hwid).set(true); } 
+                        db.ref('users/'+uname).update({ role: 'banned' }); showToast("Kullanıcı BANLANDI!", "error");
+                    }
+                });
+            }
+        }
+        function assignRole() {
+            if(userRole !== 'kurucu') { showToast("Sadece Kurucu yetki verebilir!", "error"); return; }
+            let tu = document.getElementById('roleUserTarget').value.trim(); let tr = document.getElementById('roleSelectTarget').value;
+            if(!tu) return; if(tu === 'omer13ds') return showToast("Kurucu yetkisi değiştirilemez!", "error");
+            db.ref('users/'+tu).once('value', s => {
+                if(s.exists()) { db.ref('users/'+tu).update({role: tr}); showToast("Yetki güncellendi.", "success"); document.getElementById('roleUserTarget').value = ''; } 
+                else showToast("Böyle bir üye yok!", "error");
+            });
+        }
+        function createCoupon() {
+            if(userRole === 'user' || userRole === 'mod') return;
+            let c = document.getElementById('newCouponCode').value.trim().toUpperCase(); let p = document.getElementById('newCouponPerc').value;
+            if(!c) return; db.ref('coupons/'+c).set({ percent: parseInt(p) }); document.getElementById('newCouponCode').value = ''; showToast("Kupon eklendi!", "success");
         }
 
+        // --- CANLI DESTEK SİSTEMİ ---
+        function toggleChat() { const box = document.getElementById('chatBox'); box.style.display = box.style.display === 'none' ? 'flex' : 'none'; }
         function sendChatMessage() {
-            let input = document.getElementById('chatInput');
-            let text = input.value.trim();
-            if(!text || !currentUser) return;
-
-            let targetUser = activeChatUser ? activeChatUser : currentUser;
-
-            db.ref(`chats/${targetUser}`).push({
-                sender: currentUser,
-                text: text,
-                time: Date.now()
-            });
-            input.value = "";
+            let input = document.getElementById('chatInput'); let text = input.value.trim();
+            if(!text || !currentUser) return; let targetUser = activeChatUser ? activeChatUser : currentUser;
+            db.ref(`chats/${targetUser}`).push({ sender: currentUser, text: text, time: Date.now() }); input.value = "";
         }
 
         let isUserChatInit = true;
         function loadChatHistory(uname) {
             let container = document.getElementById('chatMessages');
             container.innerHTML = `<div class="chat-msg msg-admin" style="background:rgba(255,255,255,0.05); color:#fff; border:none; box-shadow:none;">Merhaba ${uname}, Sensisoftware'a hoş geldin. Sana nasıl yardımcı olabiliriz?</div>`;
-            
             db.ref(`chats/${uname}/info/status`).on('value', snap => {
-                let status = snap.val();
-                let inputArea = document.getElementById('chatInputArea');
-                if(status === 'closed') {
-                    inputArea.innerHTML = `<div style="width:100%; text-align:center; color:var(--danger); font-weight:bold;">Bu sohbet yetkili tarafından sonlandırıldı.</div>`;
-                } else {
-                    inputArea.innerHTML = `
-                        <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." onkeypress="if(event.key==='Enter') sendChatMessage()">
-                        <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
-                    `;
-                }
+                let status = snap.val(); let inputArea = document.getElementById('chatInputArea');
+                if(status === 'closed') { inputArea.innerHTML = `<div style="width:100%; text-align:center; color:var(--danger); font-weight:bold;">Sohbet sonlandırıldı.</div>`; } 
+                else { inputArea.innerHTML = `<input type="text" id="chatInput" placeholder="Mesajınızı yazın..." onkeypress="if(event.key==='Enter') sendChatMessage()"><button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>`; }
             });
-
             db.ref(`chats/${uname}`).on('child_added', s => {
-                if(s.key === 'info') return; 
-                let msg = s.val();
-                let cssClass = msg.sender === uname ? "msg-user" : "msg-admin";
+                if(s.key === 'info') return; let msg = s.val(); let cssClass = msg.sender === uname ? "msg-user" : "msg-admin";
                 let t = new Date(msg.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
                 container.innerHTML += `<div class="chat-msg ${cssClass}">${msg.text}<span class="chat-time" style="color: ${msg.sender===uname?'rgba(255,255,255,0.8)':'rgba(255,255,255,0.5)'}">${t}</span></div>`;
                 container.scrollTop = container.scrollHeight;
-                
-                // Müşteriye bildirim
-                if(!isUserChatInit && msg.sender !== uname) { 
-                    playNotification("Destek Hattı Cevabı", msg.text); 
-                }
+                if(!isUserChatInit && msg.sender !== uname) { playNotification("Destek Hattı Cevabı", msg.text); }
             });
             setTimeout(() => { isUserChatInit = false; }, 2000);
         }
-
-        function closeSupportChat(uname) {
-            if(confirm(`${uname} kullanıcısının destek talebini kapatmak istiyor musunuz?`)) {
-                db.ref(`chats/${uname}/info`).update({ status: 'closed' });
-                showToast("Sohbet kullanıcıya kapatıldı.", "success");
-            }
-        }
-
+        function closeSupportChat(uname) { if(confirm(`${uname} kullanıcısının destek talebini kapatmak istiyor musunuz?`)) { db.ref(`chats/${uname}/info`).update({ status: 'closed' }); showToast("Sohbet kullanıcıya kapatıldı.", "success"); } }
         function openAdminChat(uname) {
-            activeChatUser = uname;
-            document.getElementById('chatBox').style.display = 'flex';
-            document.getElementById('chatHeaderTitle').innerHTML = `Destek: ${uname}`;
-            
-            document.getElementById('chatInputArea').innerHTML = `
-                <input type="text" id="chatInput" placeholder="Kullanıcıya cevap ver..." onkeypress="if(event.key==='Enter') sendChatMessage()">
-                <button onclick="sendChatMessage()"><i class="fas fa-reply"></i></button>
-            `;
-
-            let container = document.getElementById('chatMessages');
-            container.innerHTML = `<div class="chat-msg msg-admin" style="background:var(--gold); color:#000;">${uname} adlı kullanıcı ile sohbettesiniz.</div>`;
-            
+            activeChatUser = uname; document.getElementById('chatBox').style.display = 'flex'; document.getElementById('chatHeaderTitle').innerHTML = `Destek: ${uname}`;
+            document.getElementById('chatInputArea').innerHTML = `<input type="text" id="chatInput" placeholder="Cevap ver..." onkeypress="if(event.key==='Enter') sendChatMessage()"><button onclick="sendChatMessage()"><i class="fas fa-reply"></i></button>`;
+            let container = document.getElementById('chatMessages'); container.innerHTML = `<div class="chat-msg msg-admin" style="background:var(--gold); color:#000;">${uname} ile sohbettesiniz.</div>`;
             db.ref(`chats/${uname}/info`).update({ status: 'open' });
-
             db.ref(`chats/${uname}`).on('child_added', s => {
-                if(s.key === 'info') return;
-                let msg = s.val();
-                let cssClass = msg.sender === currentUser ? "msg-user" : "msg-admin";
+                if(s.key === 'info') return; let msg = s.val(); let cssClass = msg.sender === currentUser ? "msg-user" : "msg-admin";
                 let t = new Date(msg.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
                 container.innerHTML += `<div class="chat-msg ${cssClass}">${msg.text}<span class="chat-time" style="color: ${msg.sender===currentUser?'rgba(255,255,255,0.8)':'rgba(255,255,255,0.5)'}">${t}</span></div>`;
                 container.scrollTop = container.scrollHeight;
             });
         }
+        function deleteChat(uname) { if(userRole === 'user' || userRole === 'mod') return; if(confirm("Talebi tamamen silmek istiyor musunuz?")) { db.ref('chats/'+uname).remove(); showToast("Talep silindi."); } }
 
-        function deleteChat(uname) {
-            if(userRole === 'user' || userRole === 'mod') return; 
-            if(confirm("Bu destek talebini tamamen silmek istiyor musunuz?")) {
-                db.ref('chats/'+uname).remove(); showToast("Destek talebi silindi.");
-            }
-        }
-
-        // --- YETKİLİ (STAFF) SOHBETİ ---
+        // --- YETKİLİ SOHBETİ ---
         let isStaffChatInit = true;
-        
         function sendStaffMessage() {
-            let input = document.getElementById('staffChatInput');
-            let text = input.value.trim();
-            if(!text || !currentUser) return;
-
-            db.ref('staff_chats').push({
-                sender: currentUser,
-                role: userRole,
-                text: text,
-                time: Date.now()
-            });
-            input.value = "";
+            let input = document.getElementById('staffChatInput'); let text = input.value.trim();
+            if(!text || !currentUser) return; db.ref('staff_chats').push({ sender: currentUser, role: userRole, text: text, time: Date.now() }); input.value = "";
         }
-
         function loadStaffChat() {
-            let container = document.getElementById('staffChatMessages');
-            if(!container) return;
-            container.innerHTML = '';
-            
+            let container = document.getElementById('staffChatMessages'); if(!container) return; container.innerHTML = '';
             db.ref('staff_chats').on('child_added', s => {
-                let msg = s.val();
-                let roleColor = msg.role === "kurucu" ? "var(--danger)" : (msg.role === "admin" ? "var(--primary)" : "var(--gold)");
+                let msg = s.val(); let roleColor = msg.role === "kurucu" ? "var(--danger)" : (msg.role === "admin" ? "var(--primary)" : "var(--gold)");
                 let align = msg.sender === currentUser ? "align-self: flex-end; background: rgba(188,111,241,0.2);" : "align-self: flex-start;";
-                
-                container.innerHTML += `
-                    <div class="staff-msg" style="${align} border-left-color: ${roleColor};">
-                        <strong style="color:${roleColor};">${msg.sender} [${msg.role.toUpperCase()}]</strong>
-                        ${msg.text}
-                        <div style="font-size:0.7rem; color:#666; margin-top:5px; text-align:right;">${new Date(msg.time).toLocaleTimeString()}</div>
-                    </div>
-                `;
+                container.innerHTML += `<div class="staff-msg" style="${align} border-left-color: ${roleColor};"><strong style="color:${roleColor};">${msg.sender} [${msg.role.toUpperCase()}]</strong>${msg.text}<div style="font-size:0.7rem; color:#666; margin-top:5px; text-align:right;">${new Date(msg.time).toLocaleTimeString()}</div></div>`;
                 container.scrollTop = container.scrollHeight;
-                
-                // Yetkililere bildirim (Kendi yazmadığı mesajlar için)
-                if(!isStaffChatInit && msg.sender !== currentUser) { 
-                    playNotification(`Yetkili Odası: ${msg.sender}`, msg.text); 
-                }
+                if(!isStaffChatInit && msg.sender !== currentUser) { playNotification(`Yetkili Odası: ${msg.sender}`, msg.text); }
             });
-            
             setTimeout(() => { isStaffChatInit = false; }, 2000);
         }
 
-        // --- CS:GO KASA AÇMA ---
+        // --- ŞANS KASASI ---
         const caseStrip = document.getElementById('caseStrip'); const openBtn = document.getElementById('openCaseBtn'); const resultText = document.getElementById('caseResultText');
         function createCaseItems() {
             caseStrip.innerHTML = ""; caseStrip.style.transition = "none"; caseStrip.style.transform = "translateX(0)";

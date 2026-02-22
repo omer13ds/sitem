@@ -29,7 +29,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* --- 2. KUSURSUZ YETKİ CSS SİSTEMİ (ASLA DÜZENİ BOZMAZ) --- */
+        /* --- 2. KUSURSUZ YETKİ CSS SİSTEMİ --- */
         .req-kurucu, .req-admin, .req-mod { display: none !important; }
 
         body.role-kurucu .req-kurucu, body.role-kurucu .req-admin, body.role-kurucu .req-mod { display: block !important; }
@@ -50,7 +50,7 @@
         body.role-mod div.req-mod.flex-box { display: flex !important; }
         body.role-mod button.req-mod, body.role-mod a.req-mod { display: inline-block !important; }
 
-        /* --- 3. LÜKS ARKA PLAN EFEKTİ VE GLOW --- */
+        /* --- 3. LÜKS ARKA PLAN EFEKTİ --- */
         .bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at 50% 0%, #2a0e45 0%, #09090e 60%),
@@ -64,7 +64,8 @@
             background: radial-gradient(circle, rgba(188, 111, 241, 0.15) 0%, transparent 70%); z-index: -1; pointer-events: none;
         }
 
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 30px; position: relative; }
+        /* VİZYON GÜNCELLEMESİ: GENİŞ EKRAN (1550px) */
+        .container { max-width: 1550px; margin: 0 auto; padding: 0 30px; position: relative; }
 
         /* --- 4. ÜST MENÜ --- */
         nav {
@@ -142,7 +143,6 @@
         .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 5.5rem; font-weight: 900; margin-bottom: 25px; background: linear-gradient(to right, #fff, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; filter: drop-shadow(0 0 25px rgba(188,111,241,0.5));}
         .hero p { color: #bbb; font-size: 1.3rem; max-width: 800px; margin: 0 auto 60px; line-height: 1.8; }
 
-        /* Canlı Terminal Simülasyonu */
         .terminal-mockup { max-width: 700px; margin: 0 auto; background: rgba(10, 10, 15, 0.8); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(188, 111, 241, 0.15); text-align: left; }
         .terminal-header { background: rgba(0,0,0,0.5); padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .terminal-dots { display: flex; gap: 8px; }
@@ -160,14 +160,12 @@
         @keyframes showLine { to { opacity: 1; } }
         @keyframes blinkCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* 3D Cam Kartlar */
         .home-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; perspective: 1000px; }
         .feature-card { background: rgba(18, 18, 24, 0.6); padding: 50px 40px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(25px); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
         .feature-card:hover { border-color: var(--primary); transform: translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.03); box-shadow: 0 30px 60px rgba(188, 111, 241, 0.15), inset 0 0 30px rgba(188, 111, 241, 0.1); z-index: 10; }
         .feature-card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 25px; filter: drop-shadow(0 0 15px var(--primary)); transition: 0.3s; }
         .feature-card:hover i { transform: scale(1.1); color: #fff; filter: drop-shadow(0 0 25px var(--primary)); }
         
-        /* Neon Performans Barları */
         .stats-section { display: flex; justify-content: space-around; background: linear-gradient(90deg, transparent, rgba(188, 111, 241, 0.05), transparent); padding: 80px 0; margin: 120px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);}
         .stat-item { flex: 1; text-align: center; padding: 0 40px; border-right: 1px solid rgba(255,255,255,0.05); }
         .stat-item:last-child { border-right: none; }
@@ -176,7 +174,6 @@
         .stat-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; position: relative; }
         .stat-bar-fill { height: 100%; background: var(--primary); width: 0; border-radius: 10px; box-shadow: 0 0 15px var(--primary); transition: width 2s ease-out; }
         
-        /* Kurumsal VIP Alanı */
         .vip-enterprise { margin: 100px 0 40px; padding: 60px; background: linear-gradient(135deg, rgba(15,15,20,0.9), rgba(42,14,69,0.4)); border-radius: 30px; border: 1px solid rgba(188, 111, 241, 0.2); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 0 50px rgba(188, 111, 241, 0.05); backdrop-filter: blur(20px); }
         .vip-text h2 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
         .vip-text p { color: #aaa; font-size: 1.2rem; max-width: 600px; line-height: 1.6; }
@@ -226,7 +223,7 @@
         .status-active { background: rgba(188, 111, 241, 0.15); color: var(--primary); border: 1px solid var(--primary); box-shadow: 0 0 15px rgba(188,111,241,0.2);}
         .status-banned { background: rgba(255, 71, 87, 0.15); color: var(--danger); border: 1px solid var(--danger); box-shadow: 0 0 15px rgba(255,71,87,0.2);}
 
-        /* --- 6. YÖNETİM PANELİ (GENİŞLETİLDİ) --- */
+        /* --- 6. YÖNETİM PANELİ --- */
         .admin-layout { 
             display: grid; 
             grid-template-columns: 280px 1fr; 
@@ -260,12 +257,15 @@
         .admin-header h4 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff;}
         
         .table-responsive { width: 100%; overflow-x: auto; padding-bottom: 10px;}
-        .admin-table { width: 100%; border-collapse: collapse; min-width: 800px; } /* TABLO GENİŞLETİLDİ */
-        .admin-table th, .admin-table td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        /* TABLO DAHA GENİŞ VE BUTONLAR FLEX YAPILDI */
+        .admin-table { width: 100%; border-collapse: collapse; min-width: 1050px; } 
+        .admin-table th, .admin-table td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
         .admin-table th { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
         .admin-table td { color: #ccc; font-size: 0.95rem; }
+        /* BUTON SÜTUNUNUN SIKIŞMASINI ENGELLER */
+        .admin-table th:last-child, .admin-table td:last-child { white-space: nowrap; min-width: 320px; }
         
-        .action-btn { padding: 8px 12px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; margin-right: 5px; transition: 0.3s; display: inline-block;}
+        .action-btn { padding: 8px 12px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; display: inline-block;}
         .btn-danger { background: rgba(255, 71, 87, 0.1); color: var(--danger); border: 1px solid var(--danger); }
         .btn-danger:hover { background: var(--danger); color: #fff; }
         .btn-success { background: rgba(0, 255, 136, 0.1); color: var(--success); border: 1px solid var(--success); }
@@ -283,7 +283,7 @@
         .control-box select { flex: 1; min-width: 150px; padding: 12px 20px; border-radius: 8px; background: rgba(0,0,0,0.4); color: #fff; border: 1px solid rgba(255,255,255,0.1); outline: none; font-size:1rem; cursor: pointer; transition: 0.3s;}
         .control-box select:focus { border-color: var(--primary); }
 
-        /* --- 7. MODALLAR (GÜNCELLENDİ) --- */
+        /* --- 7. MODALLAR (POP-UP) --- */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; }
         .modal-box { background: rgba(13, 13, 18, 0.95); padding: 50px 60px; border-radius: 20px; width: 100%; max-width: 450px; border: 1px solid var(--border); position: relative; text-align: center; box-shadow: 0 0 50px rgba(188, 111, 241, 0.15); }
         .auth-tabs { display: flex; margin-bottom: 40px; border-bottom: 2px solid #222; }
@@ -298,13 +298,13 @@
         .close-btn:hover { color: var(--danger); transform: scale(1.1);}
         .modal-select { width: 100%; padding: 18px; background: #15151c; border: 1px solid #222; border-radius: 10px; color: #fff; outline: none; margin-bottom: 25px; font-size: 1.05rem; cursor: pointer;}
 
-        /* YENİ EKLENEN ONAY MODALI (EMİN MİSİN?) */
+        /* ONAY MODALI (EMİN MİSİN?) */
         .confirm-modal-box { max-width: 400px; padding: 40px; }
-        .confirm-modal-box h3 { color: #fff; font-family: 'Orbitron'; margin-bottom: 15px; }
-        .confirm-modal-box p { color: #aaa; margin-bottom: 30px; line-height: 1.5; }
+        .confirm-modal-box h3 { color: #fff; font-family: 'Orbitron'; margin-bottom: 15px; font-size:1.8rem; }
+        .confirm-modal-box p { color: #aaa; margin-bottom: 30px; line-height: 1.5; font-size:1.1rem; }
         .confirm-btns { display: flex; gap: 15px; }
-        .confirm-btns button { flex: 1; padding: 15px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; transition: 0.3s; }
-        .btn-cancel { background: rgba(255,255,255,0.1); color: #fff; }
+        .confirm-btns button { flex: 1; padding: 15px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; transition: 0.3s; font-size:1.05rem; }
+        .btn-cancel { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
         .btn-cancel:hover { background: rgba(255,255,255,0.2); }
 
         /* --- 8. CANLI DESTEK --- */
@@ -473,6 +473,7 @@
                     <a href="javascript:void(0)" class="vip-btn" onclick="openAuthModal('login')">BİZE ULAŞIN</a>
                 </div>
             </div>
+
             <div id="page-discord" class="page">
                 <h2 class="page-title" style="color:var(--discord); text-shadow: 0 0 20px rgba(88,101,242,0.4);">DİSCORD BOT HİZMETLERİ</h2>
                 <div class="discord-grid">
@@ -764,7 +765,8 @@
                 <option value="1">1 Günlük Lisans</option>
                 <option value="7">7 Günlük Lisans</option>
                 <option value="30">30 Günlük Lisans</option>
-                <option value="99999">💎 Sınırsız (Lifetime) Lisans</option> </select>
+                <option value="99999">💎 Sınırsız (Lifetime) Lisans</option>
+            </select>
             
             <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background:linear-gradient(135deg, var(--success), #00cc6a); letter-spacing:2px; box-shadow: 0 0 25px rgba(0,255,136,0.3);" onclick="genKey()">ONAYLA VE ZİMMETLE</button>
         </div>
@@ -1096,7 +1098,7 @@
             });
         }
 
-        // --- ADMİN PANEL VERİLERİ (GÜNCELLENDİ) ---
+        // --- ADMİN PANEL VERİLERİ (FLEX BUTONLAR DÜZENLENDİ) ---
         let isInitialTicketsLoad = true; 
 
         function fetchAdminData() {
@@ -1127,17 +1129,21 @@
                             let statColor = d.status === 'BANNED' ? 'color:var(--danger)' : 'color:var(--success)';
                             let typeIcon = d.type === 'discord' ? '<i class="fab fa-discord" style="color:var(--discord)"></i>' : '<i class="fas fa-desktop" style="color:#aaa"></i>';
 
-                            // GÜNCELLENMİŞ BUTONLAR
+                            // BUTONLAR YAN YANA DURSUN DİYE FLEX DİV'E ALINDI
                             let actionBtns = `
-                                <button class="action-btn btn-blue" onclick="openExtendModal('${ch.key}')"><i class="fas fa-clock"></i> Uzat</button>
-                                <button class="action-btn btn-warning" onclick="askConfirm('Banla', '${ch.key}')"><i class="fas fa-ban"></i> Banla</button>
-                                <button class="action-btn btn-danger" onclick="askConfirm('Sil', '${ch.key}')"><i class="fas fa-trash"></i> Sil</button>
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="action-btn btn-blue" onclick="openExtendModal('${ch.key}')"><i class="fas fa-clock"></i> Uzat</button>
+                                    <button class="action-btn btn-warning" onclick="askConfirm('Banla', '${ch.key}')"><i class="fas fa-ban"></i> Banla</button>
+                                    <button class="action-btn btn-danger" onclick="askConfirm('Sil', '${ch.key}')"><i class="fas fa-trash"></i> Sil</button>
+                                </div>
                             `;
                             
                             if (d.status === 'BANNED') {
                                 actionBtns = `
-                                    <button class="action-btn btn-success" onclick="askConfirm('Unban', '${ch.key}')"><i class="fas fa-check"></i> Banı Aç</button>
-                                    <button class="action-btn btn-danger" onclick="askConfirm('Sil', '${ch.key}')"><i class="fas fa-trash"></i> Sil</button>
+                                    <div style="display: flex; gap: 8px;">
+                                        <button class="action-btn btn-success" onclick="askConfirm('Unban', '${ch.key}')"><i class="fas fa-check"></i> Banı Aç</button>
+                                        <button class="action-btn btn-danger" onclick="askConfirm('Sil', '${ch.key}')"><i class="fas fa-trash"></i> Sil</button>
+                                    </div>
                                 `;
                                 timeLeftText = `<span style="color:var(--danger); text-decoration:line-through;">DONDURULDU</span>`;
                             }
@@ -1213,7 +1219,7 @@
             setTimeout(() => { isInitialTicketsLoad = false; }, 3000);
         }
 
-        // --- LİSANS İŞLEMLERİ (YENİ EKLENDİ) ---
+        // --- LİSANS İŞLEMLERİ (SINIRSIZ EKLENDİ) ---
         function openAdminKeyModal() { if(userRole === 'admin' || userRole === 'kurucu') document.getElementById('adminKeyModal').style.display = 'flex'; }
         
         function genKey() {
@@ -1264,7 +1270,6 @@
                     } else {
                         if (currentExpiry < Date.now()) { newExpiry = Date.now() + (addedDays * 86400000); } 
                         else { newExpiry = currentExpiry + (addedDays * 86400000); }
-                        // Eski "Sınırsız" ibaresini kaldırıp sayıya döndürür
                         newPackage = currentType === 'discord' ? "Özel Günlük Discord Bot" : "Özel Günlük Program";
                     }
                     

@@ -61,15 +61,17 @@
             background: radial-gradient(circle, rgba(188, 111, 241, 0.15) 0%, transparent 70%); z-index: -1; pointer-events: none;
         }
 
-        .container { max-width: 1550px; margin: 0 auto; padding: 0 30px; position: relative; }
+        .container { max-width: 1550px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 10; }
+
+        /* GLOBAL BAKIM EKRANI (Ajan Kapısı) */
+        #global-maintenance-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 99999; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        #global-maintenance-screen h1 { font-family: 'Orbitron'; font-size: 4rem; color: var(--primary); margin-bottom: 20px; text-shadow: 0 0 30px rgba(188, 111, 241, 0.5); letter-spacing: 3px; }
+        #global-maintenance-screen p { color: #aaa; font-size: 1.2rem; max-width: 600px; line-height: 1.6; margin-bottom: 30px;}
+        #global-maintenance-screen .secret-login { position: absolute; bottom: 20px; right: 20px; font-size: 1.5rem; color: #1a1a24; cursor: default; transition: 0.3s; }
+        #global-maintenance-screen .secret-login:hover { color: #333; }
 
         /* --- 4. ÜST MENÜ --- */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            position: sticky; top: 0; background: rgba(9, 9, 14, 0.85); backdrop-filter: blur(20px); z-index: 100;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-        }
+        nav { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: sticky; top: 0; background: rgba(9, 9, 14, 0.85); backdrop-filter: blur(20px); z-index: 100; box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
         .logo { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: 2px; cursor: pointer; padding: 25px 0; margin-left: 20px;}
         .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
         .nav-right { display: flex; align-items: center; gap: 25px; margin-right: 20px; }
@@ -77,10 +79,7 @@
         .nav-links li { position: relative; padding: 30px 0; } 
         .nav-links a { display: inline-block; color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; cursor: pointer; letter-spacing: 0.5px;}
         .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-        .dropdown-menu {
-            display: none; position: absolute; top: 100%; left: 0; background: var(--card-bg); backdrop-filter: blur(15px);
-            border: 1px solid var(--border); border-radius: 10px; min-width: 250px; padding: 10px 0; box-shadow: 0 15px 40px rgba(0,0,0,0.6); margin-top: -5px; animation: fadeInDown 0.3s ease forwards;
-        }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--card-bg); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 10px; min-width: 250px; padding: 10px 0; box-shadow: 0 15px 40px rgba(0,0,0,0.6); margin-top: -5px; animation: fadeInDown 0.3s ease forwards; }
         .nav-links li:hover .dropdown-menu { display: block; }
         .dropdown-menu a { display: block; padding: 15px 25px; color: #aaa; text-transform: none; font-weight: 600; font-size: 0.95rem; border-left: 3px solid transparent;}
         .dropdown-menu a:hover { background: rgba(188, 111, 241, 0.1); color: #fff; padding-left: 30px; border-left-color: var(--primary); }
@@ -88,10 +87,7 @@
 
         /* GİRİŞ & PROFİL BUTONLARI */
         .auth-btns { display: flex; gap: 15px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 25px; }
-        .btn-outline, .btn-solid { 
-            display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
-            padding: 12px 25px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: 0.4s; text-transform: uppercase; border: none; letter-spacing: 1px;
-        }
+        .btn-outline, .btn-solid { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: 0.4s; text-transform: uppercase; border: none; letter-spacing: 1px; }
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-outline:hover { background: var(--primary); color: #fff; box-shadow: var(--neon-shadow); }
         .btn-solid { background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; box-shadow: var(--neon-shadow); }
@@ -105,19 +101,13 @@
         body.role-admin #badgeAdmin { display: inline-block; background: linear-gradient(45deg, var(--primary), #6600cc); } 
         body.role-mod #badgeMod { display: inline-block; background: linear-gradient(45deg, var(--gold), #ffaa00); color: #000; }
 
-        .profile-dropdown {
-            display: none; position: absolute; top: 100%; right: 0; background: var(--card-bg); backdrop-filter: blur(15px);
-            border: 1px solid var(--border); border-radius: 12px; width: 240px; padding: 10px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.7); margin-top: -5px; animation: fadeInDown 0.3s ease forwards; z-index: 1000;
-        }
+        .profile-dropdown { display: none; position: absolute; top: 100%; right: 0; background: var(--card-bg); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 12px; width: 240px; padding: 10px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.7); margin-top: -5px; animation: fadeInDown 0.3s ease forwards; z-index: 1000; }
         .user-profile:hover .profile-dropdown { display: block; }
         .profile-dropdown a { display: block; padding: 15px 25px; color: #aaa; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.3s; cursor: pointer; border-left: 3px solid transparent;}
         .profile-dropdown a:hover { background: rgba(255,255,255,0.05); color: #fff; padding-left: 30px; border-left-color: var(--primary); }
 
         /* TOAST BİLDİRİM */
-        #customToast {
-            position: fixed; top: 30px; right: -400px; background: rgba(18,18,24,0.95); backdrop-filter: blur(10px); 
-            border-left: 4px solid var(--success); padding: 20px 30px; border-radius: 10px; color: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 9999; transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 15px; font-weight: 700; border: 1px solid rgba(255,255,255,0.05);
-        }
+        #customToast { position: fixed; top: 30px; right: -400px; background: rgba(18,18,24,0.95); backdrop-filter: blur(10px); border-left: 4px solid var(--success); padding: 20px 30px; border-radius: 10px; color: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 999999; transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 15px; font-weight: 700; border: 1px solid rgba(255,255,255,0.05); }
         #customToast.show { right: 30px; }
         #customToast i { font-size: 1.8rem; color: var(--success); }
         #customToast.error { border-left-color: var(--danger); }
@@ -173,7 +163,7 @@
         .vip-btn { padding: 20px 40px; background: #fff; color: #000; font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; border-radius: 15px; text-decoration: none; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 0 25px rgba(255,255,255,0.2); letter-spacing: 1px; }
         .vip-btn:hover { background: var(--primary); color: #fff; box-shadow: 0 0 40px var(--primary); transform: scale(1.05); }
 
-        /* --- DİSCORD & LİSANS KARTLARI (VİZYON GÜNCELLEMESİ) --- */
+        /* --- DİSCORD & LİSANS KARTLARI (BÜYÜTÜLMÜŞ FİYATLAR & TESLİMAT BİLGİSİ) --- */
         .discord-grid, .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 50px;}
         .ds-card, .price-card { background: linear-gradient(180deg, rgba(25, 25, 35, 0.8) 0%, rgba(15, 15, 20, 0.95) 100%); padding: 50px 40px; border-radius: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; backdrop-filter: blur(20px); display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.5);}
         .ds-card:hover, .price-card:hover { transform: translateY(-15px); border-color: var(--primary); box-shadow: 0 25px 60px rgba(188, 111, 241, 0.2); z-index: 10; }
@@ -185,9 +175,15 @@
         .ds-icon { width: 90px; height: 90px; background: rgba(88, 101, 242, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px; color: var(--discord); font-size: 3rem; transition: 0.4s;}
         .ds-card:hover .ds-icon { background: var(--discord); color: #fff; box-shadow: 0 0 30px rgba(88, 101, 242, 0.6); transform: scale(1.1); }
         
-        .price { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900; color: #fff; margin: 20px 0; text-shadow: 0 0 20px rgba(255,255,255,0.2);}
-        .price span { font-size: 1.2rem; color: #888; font-weight: 500;}
-        .price-card ul { list-style: none; margin: 30px 0; color: #aaa; font-size: 1.05rem; text-align: left; flex-grow: 1;}
+        /* FİYATLAR BÜYÜTÜLDÜ (4.5rem) */
+        .price { font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900; color: #fff; margin: 15px 0; text-shadow: 0 0 25px rgba(255,255,255,0.3);}
+        .price span { font-size: 1.3rem; color: #888; font-weight: 600;}
+        
+        /* YENİ: OTOMATİK TESLİMAT İBARESİ */
+        .auto-delivery { color: var(--success); font-size: 0.95rem; font-weight: 800; margin-bottom: 25px; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; }
+        .auto-delivery i { font-size: 1.1rem; filter: drop-shadow(0 0 5px var(--success));}
+
+        .price-card ul { list-style: none; margin: 20px 0 30px; color: #aaa; font-size: 1.05rem; text-align: left; flex-grow: 1;}
         .price-card ul li { padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 15px;}
         .price-card ul li i { color: var(--primary); font-size: 1.2rem; }
         
@@ -204,6 +200,10 @@
         .price-card.premium .buy-btn:hover, .ds-card.premium .ds-btn:hover { background: var(--gold); color: #000; box-shadow: 0 10px 30px rgba(255, 183, 3, 0.4);}
         .ds-card.premium .ds-icon { background: rgba(255,183,3,0.1); color: var(--gold); }
         .ds-card.premium:hover .ds-icon { background: var(--gold); color: #000; box-shadow: 0 0 30px rgba(255,183,3,0.5);}
+
+        /* BAKIM MODU BUTONU (GRİ VE DEVRE DIŞI) */
+        .btn-disabled { background: rgba(255,255,255,0.05) !important; color: #666 !important; border: 1px solid #444 !important; cursor: not-allowed !important; box-shadow: none !important; transform: none !important; }
+        .btn-disabled:hover { background: rgba(255,255,255,0.05) !important; color: #666 !important; transform: none !important; box-shadow: none !important; border: 1px solid #444 !important;}
 
         /* SEPETİM */
         .cart-wrapper { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
@@ -227,19 +227,10 @@
         .status-active { background: rgba(188, 111, 241, 0.15); color: var(--primary); border: 1px solid var(--primary); box-shadow: 0 0 15px rgba(188,111,241,0.2);}
         .status-banned { background: rgba(255, 71, 87, 0.15); color: var(--danger); border: 1px solid var(--danger); box-shadow: 0 0 15px rgba(255,71,87,0.2);}
 
-        /* --- 6. YÖNETİM PANELİ (GENİŞLETİLDİ) --- */
-        .admin-layout { 
-            display: grid; 
-            grid-template-columns: 280px 1fr; 
-            gap: 40px; 
-            align-items: start; 
-        }
+        /* --- 6. YÖNETİM PANELİ --- */
+        .admin-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start; }
         @media (max-width: 900px) { .admin-layout { grid-template-columns: 1fr; } }
-        
-        .admin-sidebar { 
-            background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
-            padding: 30px; position: sticky; top: 110px; backdrop-filter: blur(15px);
-        }
+        .admin-sidebar { background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); padding: 30px; position: sticky; top: 110px; backdrop-filter: blur(15px); }
         .admin-sidebar h3 { color: var(--danger); font-family: 'Orbitron', sans-serif; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid rgba(255, 71, 87, 0.2); font-size: 1.3rem; text-align: center; letter-spacing: 1px;}
         .admin-nav { list-style: none; }
         .admin-nav li { margin-bottom: 15px; }
@@ -247,16 +238,9 @@
         .admin-nav a.active, .admin-nav a:hover { background: rgba(188, 111, 241, 0.15); color: #fff; border-color: var(--primary); box-shadow: 0 5px 15px rgba(188, 111, 241, 0.2);}
         .admin-nav i { margin-right: 15px; color: var(--primary); width: 20px; text-align: center; font-size: 1.1rem;}
 
-        .admin-content { 
-            background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); 
-            padding: 40px; min-height: 700px; backdrop-filter: blur(15px); box-shadow: 0 10px 50px rgba(0,0,0,0.2);
-            min-width: 100%; 
-            overflow: hidden;
-        }
-        
+        .admin-content { background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border); padding: 40px; min-height: 700px; backdrop-filter: blur(15px); box-shadow: 0 10px 50px rgba(0,0,0,0.2); min-width: 100%; overflow: hidden; }
         .admin-section { display: none !important; animation: fadeIn 0.4s ease; } 
         .admin-section.active { display: block !important; }
-        
         .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(255,255,255,0.05); padding-bottom: 20px; margin-bottom: 30px; flex-wrap: wrap; gap: 20px;}
         .admin-header h4 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff;}
         
@@ -279,13 +263,12 @@
 
         .search-input { padding: 12px 20px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; outline: none; width: 300px; font-family: 'Inter', sans-serif; transition: 0.3s; }
         .search-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(188, 111, 241, 0.2); }
-
         .control-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); padding: 25px; border-radius: 10px; display: flex; gap: 15px; align-items: center; margin-bottom: 30px; flex-wrap: wrap; }
         .control-box .search-input { flex: 2; min-width: 200px; width: auto; }
         .control-box select { flex: 1; min-width: 150px; padding: 12px 20px; border-radius: 8px; background: rgba(0,0,0,0.4); color: #fff; border: 1px solid rgba(255,255,255,0.1); outline: none; font-size:1rem; cursor: pointer; transition: 0.3s;}
         .control-box select:focus { border-color: var(--primary); }
 
-        /* YENİ EKLENEN ADMİN İSTATİSTİK PANELLERİ */
+        /* ADMİN İSTATİSTİK PANELLERİ */
         .admin-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
         .admin-stat-card { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; text-align: center; border-bottom: 3px solid; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
         .admin-stat-card h3 { font-family: 'Orbitron'; font-size: 2.5rem; margin-bottom: 5px; }
@@ -298,7 +281,7 @@
         .cms-card input { width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid var(--primary); color: #fff; border-radius: 8px; margin-bottom: 15px; font-size: 1.1rem; outline: none; }
 
         /* --- 7. MODALLAR --- */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 20000; justify-content: center; align-items: center; }
         .modal-box { background: rgba(13, 13, 18, 0.95); padding: 50px 60px; border-radius: 20px; width: 100%; max-width: 450px; border: 1px solid var(--border); position: relative; text-align: center; box-shadow: 0 0 50px rgba(188, 111, 241, 0.15); }
         .auth-tabs { display: flex; margin-bottom: 40px; border-bottom: 2px solid #222; }
         .auth-tab { flex: 1; padding: 15px 0; color: #666; font-weight: 900; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1px;}
@@ -321,42 +304,23 @@
         .btn-cancel:hover { background: rgba(255,255,255,0.2); }
 
         /* --- 8. CANLI DESTEK --- */
-        .chat-widget-btn {
-            position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 1.8rem; color: #fff; cursor: pointer; box-shadow: 0 10px 30px rgba(188, 111, 241, 0.5);
-            transition: 0.4s; z-index: 1000; border: 2px solid rgba(255,255,255,0.2);
-        }
+        .chat-widget-btn { position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; color: #fff; cursor: pointer; box-shadow: 0 10px 30px rgba(188, 111, 241, 0.5); transition: 0.4s; z-index: 1000; border: 2px solid rgba(255,255,255,0.2); }
         .chat-widget-btn:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 40px rgba(188, 111, 241, 0.7); }
-        
-        .chat-box {
-            position: fixed; bottom: 120px; right: 40px; width: 350px; height: 480px;
-            background: rgba(18, 18, 24, 0.95); border: 1px solid var(--primary); border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8); z-index: 1000; display: flex; flex-direction: column;
-            overflow: hidden; animation: fadeIn 0.4s ease; backdrop-filter: blur(25px);
-        }
-        .chat-header {
-            background: linear-gradient(90deg, var(--primary), var(--accent)); color: #fff; padding: 15px 20px; 
-            font-weight: 900; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;
-            display: flex; justify-content: space-between; align-items: center; font-size: 1rem;
-        }
+        .chat-box { position: fixed; bottom: 120px; right: 40px; width: 350px; height: 480px; background: rgba(18, 18, 24, 0.95); border: 1px solid var(--primary); border-radius: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.8); z-index: 1000; display: flex; flex-direction: column; overflow: hidden; animation: fadeIn 0.4s ease; backdrop-filter: blur(25px); }
+        .chat-header { background: linear-gradient(90deg, var(--primary), var(--accent)); color: #fff; padding: 15px 20px; font-weight: 900; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; }
         .online-dot { width: 10px; height: 10px; background: var(--success); border-radius: 50%; display: inline-block; box-shadow: 0 0 10px var(--success); margin-right: 10px; animation: blink 2s infinite;}
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
         .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.4); scroll-behavior: smooth;}
         .chat-msg { padding: 10px 15px; border-radius: 15px; font-size: 0.9rem; max-width: 85%; word-wrap: break-word; line-height: 1.5; position: relative;}
         .msg-user { background: var(--primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 0; box-shadow: 0 5px 15px rgba(188,111,241,0.2);}
         .msg-admin { background: rgba(255,255,255,0.08); color: #fff; align-self: flex-start; border-bottom-left-radius: 0; border: 1px solid rgba(255,255,255,0.1);}
         .chat-time { display: block; font-size: 0.7rem; color: rgba(255,255,255,0.6); margin-top: 5px; text-align: right; }
-
         .chat-input-area { display: flex; padding: 15px; background: rgba(0,0,0,0.6); border-top: 1px solid rgba(255,255,255,0.05); align-items: center;}
         .chat-input-area input { flex: 1; padding: 12px 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; color: #fff; outline: none; font-size: 0.95rem; transition: 0.3s;}
         .chat-input-area input:focus { border-color: var(--primary); }
         .chat-input-area button { background: var(--primary); border: none; color: #fff; width: 45px; height: 45px; border-radius: 50%; margin-left: 10px; cursor: pointer; transition: 0.3s; font-size: 1.1rem; display: flex; justify-content: center; align-items: center;}
         .chat-input-area button:hover { background: var(--accent); transform: scale(1.1); box-shadow: 0 0 15px var(--primary);}
 
-        /* YETKİLİ SOHBETİ */
         .staff-chat-container { display: flex; flex-direction: column; height: 450px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; overflow: hidden;}
         .staff-chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth;}
         .staff-msg { padding: 15px; border-radius: 12px; font-size: 0.95rem; line-height: 1.5; background: rgba(255,255,255,0.05); border-left: 4px solid var(--discord);}
@@ -371,7 +335,6 @@
         .case-item { width: 140px; height: 140px; flex-shrink: 0; margin: 0 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 8px; font-weight: bold; border-bottom: 5px solid; background: linear-gradient(180deg, #1a1a24 0%, #111 100%); text-align: center; padding: 5px; overflow: hidden; }
         .item-icon { font-size: 2rem; margin-bottom: 5px; }
         .item-text { font-size: 0.85rem; line-height: 1.3; }
-        
         .rarity-common { border-color: #666; color: #888; } 
         .rarity-rare { border-color: var(--blue); color: var(--blue); text-shadow: 0 0 10px var(--blue); } 
         .rarity-epic { border-color: var(--primary); color: var(--primary); text-shadow: 0 0 10px var(--primary); } 
@@ -383,13 +346,20 @@
 <body class="role-user">
 
     <div class="bg-layer"></div>
+
+    <div id="global-maintenance-screen">
+        <i class="fas fa-cog fa-spin" style="font-size: 6rem; color: var(--primary); margin-bottom: 30px;"></i>
+        <h1>SİSTEM BAKIMDA</h1>
+        <p>Sensisoftware altyapısında daha kaliteli bir hizmet için kapsamlı bir güncelleme çalışması yapılmaktadır. Lütfen daha sonra tekrar deneyiniz.</p>
+        <div class="secret-login" onclick="openAuthModal('login')"><i class="fas fa-lock"></i></div>
+    </div>
     
     <div id="customToast">
         <i class="fas fa-check-circle" id="toastIcon"></i>
         <span id="toastMessage"></span>
     </div>
 
-    <div class="container">
+    <div class="container" id="main-container">
         <nav>
             <div class="logo" onclick="switchPage('home')">SENSI<span>SOFTWARE</span></div>
             <div class="nav-right">
@@ -405,6 +375,7 @@
                     <li><a onclick="requireLogin('download')">Programı İndir</a></li>
                     <li><a onclick="switchPage('shop')">Satın Al</a></li>
                     <li><a onclick="requireLogin('case')" style="color: var(--gold);"><i class="fas fa-box-open"></i> Şans Oyunları</a></li>
+                    <li><a onclick="switchPage('admin')" class="req-admin" style="color:var(--danger);"><i class="fas fa-shield-alt"></i> Panel</a></li>
                 </ul>
                 
                 <div class="auth-btns" id="authSection">
@@ -415,15 +386,11 @@
                 <div class="user-profile" id="profileSection">
                     <div class="avatar" id="avatarLetter">?</div>
                     <span id="profileName" style="font-weight:800; font-size:0.95rem;">Kullanıcı</span>
-                    
                     <span class="role-badge badge-kurucu" id="badgeKurucu">KURUCU</span>
                     <span class="role-badge badge-admin" id="badgeAdmin">ADMIN</span>
                     <span class="role-badge badge-mod" id="badgeMod">MOD</span>
-                    
                     <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: #888; margin-left: 8px;"></i>
-                    
                     <div class="profile-dropdown">
-                        <a onclick="switchPage('admin')" class="req-mod"><i class="fas fa-user-shield"></i> Kontrol Paneli</a>
                         <a onclick="switchPage('cart')"><i class="fas fa-shopping-cart"></i> Sepetim <span id="cartCountBadge" style="background:var(--danger); color:#fff; padding:3px 8px; border-radius:10px; font-size:0.75rem; margin-left:5px; display:none; font-weight:bold;">0</span></a>
                         <a onclick="switchPage('orders')"><i class="fas fa-box"></i> Siparişlerim</a>
                         <a onclick="logout()" style="color:var(--danger); border-top:1px solid rgba(255,255,255,0.1); margin-top:10px; padding-top:15px;"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
@@ -493,21 +460,27 @@
                     <div class="ds-card">
                         <div class="card-badge">POPÜLER</div>
                         <div class="ds-icon"><i class="fas fa-ticket-alt"></i></div>
-                        <h3>Discord Ticket Botu</h3><div class="price"><span id="price-ticket">999</span> <span>TL / Ay</span></div>
+                        <h3>Discord Ticket Botu</h3>
+                        <div class="price"><span id="price-ticket">999</span> <span>TL / Ay</span></div>
+                        <div class="auto-delivery"><i class="fas fa-bolt"></i> 7/24 Otomatik Kurulum</div>
                         <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">Gelişmiş bilet sistemi, otomatik transkript ve yetkili atama modülleri.</p>
-                        <button class="ds-btn" onclick="addToCart('Discord Ticket Botu (Aylık)', document.getElementById('price-ticket').innerText)">Sepete Ekle</button>
+                        <button class="ds-btn btn-discord-monthly" onclick="addToCart('Discord Ticket Botu (Aylık)', document.getElementById('price-ticket').innerText, 'discord')">Sepete Ekle</button>
                     </div>
                     <div class="ds-card">
                         <div class="ds-icon"><i class="fas fa-music"></i></div>
-                        <h3>Discord Özel Müzik Botu</h3><div class="price"><span id="price-music">1299</span> <span>TL / Ay</span></div>
+                        <h3>Discord Özel Müzik Botu</h3>
+                        <div class="price"><span id="price-music">1299</span> <span>TL / Ay</span></div>
+                        <div class="auto-delivery"><i class="fas fa-bolt"></i> 7/24 Otomatik Kurulum</div>
                         <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">Size özel isim ve logo ile 7/24 kesintisiz, yüksek kaliteli (Lag-Free) müzik keyfi.</p>
-                        <button class="ds-btn" onclick="addToCart('Discord Müzik Botu (Aylık)', document.getElementById('price-music').innerText)">Sepete Ekle</button>
+                        <button class="ds-btn btn-discord-monthly" onclick="addToCart('Discord Müzik Botu (Aylık)', document.getElementById('price-music').innerText, 'discord')">Sepete Ekle</button>
                     </div>
                     <div class="ds-card premium" style="border-color:var(--discord);">
                         <div class="ds-icon" style="background:var(--discord); color:#fff; box-shadow: 0 0 30px rgba(88,101,242,0.6);"><i class="fas fa-robot"></i></div>
-                        <h3 style="color:var(--discord);">Özel Sunucu Botu</h3><div class="price" style="color:var(--discord);"><span id="price-custom">2799</span> <span>TL / Ay</span></div>
+                        <h3 style="color:var(--discord);">Özel Sunucu Botu</h3>
+                        <div class="price" style="color:var(--discord);"><span id="price-custom">2799</span> <span>TL / Ay</span></div>
+                        <div class="auto-delivery" style="color:var(--discord);"><i class="fas fa-bolt"></i> 7/24 Otomatik Kurulum</div>
                         <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">Sunucunuza özel ekonomi sistemi, moderasyon ve yapay zeka entegreli her şey dahil paket.</p>
-                        <button class="ds-btn" style="background:var(--discord); color:#fff;" onclick="addToCart('Discord Sunucu Botu (Aylık)', document.getElementById('price-custom').innerText)">Sepete Ekle</button>
+                        <button class="ds-btn btn-discord-monthly" style="background:var(--discord); color:#fff;" onclick="addToCart('Discord Sunucu Botu (Aylık)', document.getElementById('price-custom').innerText, 'discord')">Sepete Ekle</button>
                     </div>
                 </div>
 
@@ -515,20 +488,26 @@
                 <div class="discord-grid">
                     <div class="ds-card premium">
                         <div class="ds-icon" style="color:var(--gold); background:rgba(255,183,3,0.1);"><i class="fas fa-code"></i></div>
-                        <h3 style="color:var(--gold);">Ticket Bot (Açık Kaynak)</h3><div class="price" style="color:var(--gold);"><span id="price-ticket-life">8500</span> <span>TL</span></div>
+                        <h3 style="color:var(--gold);">Ticket Bot (Açık Kaynak)</h3>
+                        <div class="price" style="color:var(--gold);"><span id="price-ticket-life">8500</span> <span>TL</span></div>
+                        <div class="auto-delivery" style="color:var(--gold);"><i class="fas fa-bolt"></i> Anında Teslimat</div>
                         <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">Tüm kodlara erişim. Kendi sunucunuzda sınırsız barındırma ve düzenleme hakkı.</p>
-                        <button class="ds-btn" style="background:rgba(255,183,3,0.1); color:var(--gold); border-color:var(--gold);" onclick="addToCart('Ticket Bot (Sınırsız)', document.getElementById('price-ticket-life').innerText)">Sepete Ekle</button>
+                        <button class="ds-btn btn-discord-lifetime" style="background:rgba(255,183,3,0.1); color:var(--gold); border-color:var(--gold);" onclick="addToCart('Ticket Bot (Sınırsız)', document.getElementById('price-ticket-life').innerText, 'lifetime')">Sepete Ekle</button>
                     </div>
                     <div class="ds-card premium">
                         <div class="card-badge badge-gold">VIP TERCİH</div>
                         <div class="ds-icon" style="color:var(--gold); background:rgba(255,183,3,0.1);"><i class="fas fa-shield-alt"></i></div>
-                        <h3 style="color:var(--gold);">SensiGuard (Sınırsız)</h3><div class="price" style="color:var(--gold);"><span id="price-guard-life">12000</span> <span>TL</span></div>
+                        <h3 style="color:var(--gold);">SensiGuard (Sınırsız)</h3>
+                        <div class="price" style="color:var(--gold);"><span id="price-guard-life">12000</span> <span>TL</span></div>
+                        <div class="auto-delivery" style="color:var(--gold);"><i class="fas fa-bolt"></i> Anında Teslimat</div>
                         <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">Asla patlamayan, saniyesinde ban atan HWID korumalı özel Guard sisteminin tam lisansı.</p>
-                        <button class="ds-btn" style="background:rgba(255,183,3,0.1); color:var(--gold); border-color:var(--gold);" onclick="addToCart('SensiGuard (Sınırsız)', document.getElementById('price-guard-life').innerText)">Sepete Ekle</button>
+                        <button class="ds-btn btn-discord-lifetime" style="background:rgba(255,183,3,0.1); color:var(--gold); border-color:var(--gold);" onclick="addToCart('SensiGuard (Sınırsız)', document.getElementById('price-guard-life').innerText, 'lifetime')">Sepete Ekle</button>
                     </div>
                     <div class="ds-card premium">
                         <div class="ds-icon" style="color:var(--gold); background:rgba(255,183,3,0.1);"><i class="fas fa-server"></i></div>
-                        <h3 style="color:var(--gold);">Özel Proje & Altyapı</h3><div class="price" style="color:var(--gold);"><span id="price-project-life">25000</span> <span>TL+</span></div>
+                        <h3 style="color:var(--gold);">Özel Proje & Altyapı</h3>
+                        <div class="price" style="color:var(--gold);"><span id="price-project-life">25000</span> <span>TL+</span></div>
+                        <div class="auto-delivery" style="color:var(--gold);"><i class="fas fa-headset"></i> Canlı Destek Kurulumu</div>
                         <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">A'dan Z'ye sunucunuza özel baştan yazılmış bot ağı ve tam mülkiyet.</p>
                         <button class="ds-btn" style="background:var(--gold); color:#000; border:none;" onclick="openAuthModal('login')">Destekle İletişime Geç</button>
                     </div>
@@ -539,20 +518,26 @@
                 <h2 class="page-title">LİSANS ANAHTARLARI</h2>
                 <div class="pricing-grid">
                     <div class="price-card">
-                        <h3>1 Günlük Sensi Key</h3><div class="price"><span id="price-key-1">49.99</span> <span>TL</span></div>
-                        <ul><li><i class="fas fa-check" style="color:var(--primary);"></i> 24 Saat Tam Erişim</li><li><i class="fas fa-check" style="color:var(--primary);"></i> Anında Teslimat</li></ul>
-                        <button class="buy-btn" onclick="addToCart('1 Günlük Sensi Key', document.getElementById('price-key-1').innerText)">Sepete Ekle</button>
+                        <h3>1 Günlük Sensi Key</h3>
+                        <div class="price"><span id="price-key-1">49.99</span> <span>TL</span></div>
+                        <div class="auto-delivery"><i class="fas fa-bolt"></i> 7/24 Otomatik Teslimat</div>
+                        <ul><li><i class="fas fa-check" style="color:var(--primary);"></i> 24 Saat Tam Erişim</li><li><i class="fas fa-check" style="color:var(--primary);"></i> Anında Aktif</li></ul>
+                        <button class="buy-btn btn-program-key" onclick="addToCart('1 Günlük Sensi Key', document.getElementById('price-key-1').innerText, 'program')">Sepete Ekle</button>
                     </div>
                     <div class="price-card">
                         <div class="card-badge badge-blue">ÇOK SATAN</div>
-                        <h3>7 Günlük Sensi Key</h3><div class="price"><span id="price-key-7">189.99</span> <span>TL</span></div>
+                        <h3>7 Günlük Sensi Key</h3>
+                        <div class="price"><span id="price-key-7">189.99</span> <span>TL</span></div>
+                        <div class="auto-delivery"><i class="fas fa-bolt"></i> 7/24 Otomatik Teslimat</div>
                         <ul><li><i class="fas fa-check" style="color:var(--primary);"></i> 7 Gün Tam Erişim</li><li><i class="fas fa-check" style="color:var(--primary);"></i> 7/24 Destek</li></ul>
-                        <button class="buy-btn" onclick="addToCart('7 Günlük Sensi Key', document.getElementById('price-key-7').innerText)">Sepete Ekle</button>
+                        <button class="buy-btn btn-program-key" onclick="addToCart('7 Günlük Sensi Key', document.getElementById('price-key-7').innerText, 'program')">Sepete Ekle</button>
                     </div>
                     <div class="price-card premium">
-                        <h3>1 Aylık Sensi Key</h3><div class="price" style="color:var(--gold);"><span id="price-key-30">489.00</span> <span>TL</span></div>
+                        <h3>1 Aylık Sensi Key</h3>
+                        <div class="price" style="color:var(--gold);"><span id="price-key-30">489.00</span> <span>TL</span></div>
+                        <div class="auto-delivery" style="color:var(--gold);"><i class="fas fa-bolt"></i> 7/24 Otomatik Teslimat</div>
                         <ul><li><i class="fas fa-check" style="color:var(--gold);"></i> 30 Gün VIP Erişim</li><li><i class="fas fa-check" style="color:var(--gold);"></i> Özel Discord Rolü</li></ul>
-                        <button class="buy-btn" onclick="addToCart('1 Aylık Sensi Key', document.getElementById('price-key-30').innerText)">Sepete Ekle</button>
+                        <button class="buy-btn btn-program-key" onclick="addToCart('1 Aylık Sensi Key', document.getElementById('price-key-30').innerText, 'program')">Sepete Ekle</button>
                     </div>
                 </div>
             </div>
@@ -589,7 +574,8 @@
                         <ul class="admin-nav">
                             <li class="req-admin"><a onclick="switchAdminTab('adm-keys')" id="nav-adm-keys" class="active"><i class="fas fa-key"></i> Lisans Yönetimi</a></li>
                             <li class="req-mod"><a onclick="switchAdminTab('adm-users')" id="nav-adm-users"><i class="fas fa-users"></i> Üyeler ve Şifreler</a></li>
-                            <li class="req-kurucu"><a onclick="switchAdminTab('adm-store')" id="nav-adm-store" style="color:var(--success);"><i class="fas fa-store"></i> Mağaza Yönetimi</a></li> <li class="req-kurucu"><a onclick="switchAdminTab('adm-roles')" id="nav-adm-roles"><i class="fas fa-gavel"></i> Yetki Kontrolü</a></li>
+                            <li class="req-kurucu"><a onclick="switchAdminTab('adm-store')" id="nav-adm-store" style="color:var(--success);"><i class="fas fa-store"></i> Mağaza Yönetimi</a></li>
+                            <li class="req-kurucu"><a onclick="switchAdminTab('adm-roles')" id="nav-adm-roles"><i class="fas fa-gavel"></i> Yetki Kontrolü</a></li>
                             <li class="req-admin"><a onclick="switchAdminTab('adm-coupons')" id="nav-adm-coupons"><i class="fas fa-ticket-alt"></i> Kupon Sistemi</a></li>
                             <li class="req-mod"><a onclick="switchAdminTab('adm-tickets')" id="nav-adm-tickets" style="color:var(--blue);"><i class="fas fa-headset"></i> Destek Talepleri</a></li>
                             <li class="req-mod"><a onclick="switchAdminTab('adm-staff-chat')" id="nav-adm-staff-chat" style="color:var(--gold);"><i class="fas fa-comments"></i> Yetkili Sohbeti</a></li>
@@ -618,26 +604,20 @@
                             <div class="admin-header">
                                 <h4>KAYITLI ÜYELER VE İSTATİSTİKLER</h4>
                             </div>
-                            
                             <div class="admin-stats-grid">
                                 <div class="admin-stat-card" style="border-bottom-color: var(--primary);">
-                                    <h3 id="statTotalUsers" style="color:var(--primary);">0</h3>
-                                    <p>Toplam Kayıtlı Üye</p>
+                                    <h3 id="statTotalUsers" style="color:var(--primary);">0</h3><p>Toplam Kayıtlı Üye</p>
                                 </div>
                                 <div class="admin-stat-card" style="border-bottom-color: var(--success);">
-                                    <h3 id="statStaffs" style="color:var(--success);">0</h3>
-                                    <p>Aktif Yetkililer</p>
+                                    <h3 id="statStaffs" style="color:var(--success);">0</h3><p>Aktif Yetkililer</p>
                                 </div>
                                 <div class="admin-stat-card" style="border-bottom-color: var(--danger);">
-                                    <h3 id="statBanned" style="color:var(--danger);">0</h3>
-                                    <p>Yasaklı Üyeler</p>
+                                    <h3 id="statBanned" style="color:var(--danger);">0</h3><p>Yasaklı Üyeler</p>
                                 </div>
                             </div>
-
                             <div class="control-box">
                                 <input type="text" id="userSearch" class="search-input" placeholder="Üye Ara..." onkeyup="filterTable('userSearch', 'admUsersTbody')">
                             </div>
-                            
                             <p style="color:#aaa; margin-bottom: 20px;">* Şifreler ve yönetim butonları yetkinize göre gizlenir veya gösterilir.</p>
                             <div class="table-responsive">
                                 <table class="admin-table">
@@ -649,61 +629,67 @@
 
                         <div id="adm-store" class="admin-section">
                             <div class="admin-header">
-                                <h4 style="color:var(--success);">MAĞAZA VE FİYAT YÖNETİMİ</h4>
+                                <h4 style="color:var(--success);">MAĞAZA VE BAKIM YÖNETİMİ</h4>
                                 <button class="btn-solid" style="background:var(--success);" onclick="saveStorePrices()">Değişiklikleri Kaydet</button>
                             </div>
-                            <p style="color:#aaa; margin-bottom: 30px; line-height:1.6;">Buradan girdiğiniz fiyatlar anında sitedeki Mağaza ve Discord Hizmetleri sekmelerinde güncellenir. İşlem sadece <strong style="color:var(--danger)">Kurucu</strong> yetkisine açıktır.</p>
+                            <p style="color:#aaa; margin-bottom: 30px; line-height:1.6;">Buradan girdiğiniz fiyatlar ve bakım ayarları anında siteye yansır. Sadece <strong style="color:var(--danger)">Kurucu</strong> yetkisine açıktır.</p>
                             
                             <h4 style="color:var(--primary); font-family:'Orbitron'; margin-bottom:15px;">Discord Aylık Kiralama (TL)</h4>
                             <div class="cms-grid" style="margin-bottom:40px;">
-                                <div class="cms-card">
-                                    <label>Discord Ticket Botu</label>
-                                    <input type="text" id="cms-ticket" value="999">
-                                </div>
-                                <div class="cms-card">
-                                    <label>Discord Özel Müzik Botu</label>
-                                    <input type="text" id="cms-music" value="1299">
-                                </div>
-                                <div class="cms-card">
-                                    <label>Özel Sunucu Botu</label>
-                                    <input type="text" id="cms-custom" value="2799">
-                                </div>
+                                <div class="cms-card"><label>Discord Ticket Botu</label><input type="text" id="cms-ticket" value="999"></div>
+                                <div class="cms-card"><label>Discord Özel Müzik Botu</label><input type="text" id="cms-music" value="1299"></div>
+                                <div class="cms-card"><label>Özel Sunucu Botu</label><input type="text" id="cms-custom" value="2799"></div>
                             </div>
 
                             <h4 style="color:var(--gold); font-family:'Orbitron'; margin-bottom:15px;">Sınırsız / Açık Kaynak Lisanslar (TL)</h4>
                             <div class="cms-grid" style="margin-bottom:40px;">
-                                <div class="cms-card">
-                                    <label>Ticket Bot (Sınırsız)</label>
-                                    <input type="text" id="cms-ticket-life" value="8500">
-                                </div>
-                                <div class="cms-card">
-                                    <label>SensiGuard (Sınırsız)</label>
-                                    <input type="text" id="cms-guard-life" value="12000">
-                                </div>
+                                <div class="cms-card"><label>Ticket Bot (Sınırsız)</label><input type="text" id="cms-ticket-life" value="8500"></div>
+                                <div class="cms-card"><label>SensiGuard (Sınırsız)</label><input type="text" id="cms-guard-life" value="12000"></div>
                             </div>
 
                             <h4 style="color:#00d2ff; font-family:'Orbitron'; margin-bottom:15px;">Program Lisans Keyleri (TL)</h4>
+                            <div class="cms-grid" style="margin-bottom:40px;">
+                                <div class="cms-card"><label>1 Günlük Key</label><input type="text" id="cms-key-1" value="49.99"></div>
+                                <div class="cms-card"><label>7 Günlük Key</label><input type="text" id="cms-key-7" value="189.99"></div>
+                                <div class="cms-card"><label>1 Aylık Key</label><input type="text" id="cms-key-30" value="489.00"></div>
+                            </div>
+
+                            <h4 style="color:var(--danger); font-family:'Orbitron'; margin-bottom:15px; margin-top: 40px; padding-top:40px; border-top: 1px solid rgba(255,255,255,0.05);">SİSTEM BAKIM YÖNETİMİ</h4>
                             <div class="cms-grid">
-                                <div class="cms-card">
-                                    <label>1 Günlük Key</label>
-                                    <input type="text" id="cms-key-1" value="49.99">
+                                <div class="cms-card" style="border-color: var(--danger); box-shadow: 0 0 15px rgba(255,71,87,0.2);">
+                                    <label style="color: var(--danger);">Tüm Site (Global Bakım)</label>
+                                    <select id="cms-maint-global" class="search-input" style="width:100%; margin-bottom:0; border-color:var(--danger);">
+                                        <option value="false">🟢 AKTİF (Açık)</option>
+                                        <option value="true">🔴 BAKIMA AL (Kapalı)</option>
+                                    </select>
                                 </div>
                                 <div class="cms-card">
-                                    <label>7 Günlük Key</label>
-                                    <input type="text" id="cms-key-7" value="189.99">
+                                    <label>Discord Aylık Botlar</label>
+                                    <select id="cms-maint-discord" class="search-input" style="width:100%; margin-bottom:0;">
+                                        <option value="false">🟢 AKTİF</option>
+                                        <option value="true">🔴 BAKIMDA</option>
+                                    </select>
                                 </div>
                                 <div class="cms-card">
-                                    <label>1 Aylık Key</label>
-                                    <input type="text" id="cms-key-30" value="489.00">
+                                    <label>Sınırsız Lisanslar</label>
+                                    <select id="cms-maint-lifetime" class="search-input" style="width:100%; margin-bottom:0;">
+                                        <option value="false">🟢 AKTİF</option>
+                                        <option value="true">🔴 BAKIMDA</option>
+                                    </select>
+                                </div>
+                                <div class="cms-card">
+                                    <label>Program Lisansları</label>
+                                    <select id="cms-maint-program" class="search-input" style="width:100%; margin-bottom:0;">
+                                        <option value="false">🟢 AKTİF</option>
+                                        <option value="true">🔴 BAKIMDA</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
 
                         <div id="adm-roles" class="admin-section">
                             <div class="admin-header"><h4>YETKİLENDİRME SİSTEMİ</h4></div>
-                            <p style="color:#aaa; margin-bottom: 30px; line-height:1.7; font-size:1.05rem;">
-                                Buradan sisteme kayıtlı bir üyeyi yetkilendirebilirsiniz. Bu alan sadece <strong style="color:var(--danger)">Kurucu</strong> yetkisine açıktır.
-                            </p>
+                            <p style="color:#aaa; margin-bottom: 30px; line-height:1.7; font-size:1.05rem;">Buradan sisteme kayıtlı bir üyeyi yetkilendirebilirsiniz. Bu alan sadece <strong style="color:var(--danger)">Kurucu</strong> yetkisine açıktır.</p>
                             <div class="control-box">
                                 <input type="text" id="roleUserTarget" class="search-input" placeholder="Kullanıcı Adı Girin" onkeypress="if(event.key==='Enter') assignRole()">
                                 <select id="roleSelectTarget" class="search-input" style="margin-bottom:0;">
@@ -743,9 +729,7 @@
                         </div>
 
                         <div id="adm-tickets" class="admin-section">
-                            <div class="admin-header">
-                                <h4 style="color:var(--blue);">BEKLEYEN DESTEK MESAJLARI</h4>
-                            </div>
+                            <div class="admin-header"><h4 style="color:var(--blue);">BEKLEYEN DESTEK MESAJLARI</h4></div>
                             <p style="color:#aaa; margin-bottom: 20px;">Sohbeti Kapat butonuna basıldığında kullanıcının sohbet paneli kilitlenir ve size bir daha yazamaz.</p>
                             <div class="table-responsive">
                                 <table class="admin-table">
@@ -756,11 +740,8 @@
                         </div>
 
                         <div id="adm-staff-chat" class="admin-section">
-                            <div class="admin-header">
-                                <h4 style="color:var(--gold);">YETKİLİ İLETİŞİM KANALI</h4>
-                            </div>
+                            <div class="admin-header"><h4 style="color:var(--gold);">YETKİLİ İLETİŞİM KANALI</h4></div>
                             <p style="color:#aaa; margin-bottom: 20px;">Bu kanal sadece Mod, Admin ve Kurucu yetkisine sahip hesaplar tarafından görülebilir.</p>
-                            
                             <div class="staff-chat-container">
                                 <div class="staff-chat-messages" id="staffChatMessages"></div>
                                 <div class="staff-input-area">
@@ -829,27 +810,13 @@
             <span class="close-btn" onclick="closeModal('authModal')">&times;</span>
             <div class="auth-tabs"><div class="auth-tab active" id="tLog" onclick="switchAuth('login')">GİRİŞ YAP</div><div class="auth-tab" id="tReg" onclick="switchAuth('register')">KAYIT OL</div></div>
             <div id="formLogin">
-                <h2 style="margin-bottom:35px; font-family:'Orbitron'; font-size:2.2rem; letter-spacing:2px; color:#fff;">HOŞ GELDİN</h2>
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="lUs" placeholder="Kullanıcı Adı" onkeypress="if(event.key==='Enter') doLogin()">
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="lPs" placeholder="Şifre" onkeypress="if(event.key==='Enter') doLogin()">
-                </div>
+                <div class="input-group"><i class="fas fa-user"></i><input type="text" id="lUs" placeholder="Kullanıcı Adı" onkeypress="if(event.key==='Enter') doLogin()"></div>
+                <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="lPs" placeholder="Şifre" onkeypress="if(event.key==='Enter') doLogin()"></div>
                 <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; margin-top:20px; letter-spacing:2px;" onclick="doLogin()">SİSTEME BAĞLAN</button>
             </div>
             <div id="formReg" style="display:none;">
-                <h2 style="margin-bottom:35px; font-family:'Orbitron'; font-size:2.2rem; letter-spacing:2px; color:#fff;">ARAMIZA KATIL</h2>
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="rUs" placeholder="Kullanıcı Adı Belirle" onkeypress="if(event.key==='Enter') doReg()">
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="rPs" placeholder="Şifre Belirle" onkeypress="if(event.key==='Enter') doReg()">
-                </div>
+                <div class="input-group"><i class="fas fa-user"></i><input type="text" id="rUs" placeholder="Kullanıcı Adı Belirle" onkeypress="if(event.key==='Enter') doReg()"></div>
+                <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="rPs" placeholder="Şifre Belirle" onkeypress="if(event.key==='Enter') doReg()"></div>
                 <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background:linear-gradient(135deg, var(--success), #00cc6a); margin-top:20px; letter-spacing:2px; box-shadow: 0 0 25px rgba(0,255,136,0.3);" onclick="doReg()">KAYDINI TAMAMLA</button>
             </div>
         </div>
@@ -859,24 +826,20 @@
         <div class="modal-box" style="border-color:var(--success); box-shadow: 0 0 80px rgba(0, 255, 136, 0.2);">
             <span class="close-btn" onclick="closeModal('adminKeyModal')">&times;</span>
             <h2 style="color:var(--success); margin-bottom:35px; font-family:'Orbitron'; font-size:2rem; letter-spacing:2px; text-shadow:0 0 15px rgba(0,255,136,0.5);">LİSANS ÜRET</h2>
-            
             <div class="input-group">
                 <i class="fas fa-user" style="color:var(--success);"></i>
                 <input type="text" id="akUs" placeholder="Kime tanımlanacak?" onkeypress="if(event.key==='Enter') genKey()" style="border-color:rgba(0,255,136,0.3);">
             </div>
-            
             <select id="akType" class="search-input" style="width:100%; margin-bottom: 20px; padding: 20px; font-size: 1.1rem; border-color:rgba(0,255,136,0.3);">
                 <option value="discord">🤖 Discord Bot Lisansı</option>
                 <option value="program">💻 Sensi Program Lisansı</option>
             </select>
-
             <select id="akDy" class="search-input" style="width:100%; margin-bottom: 25px; padding: 20px; font-size: 1.1rem; border-color:rgba(0,255,136,0.3);">
                 <option value="1">1 Günlük Lisans</option>
                 <option value="7">7 Günlük Lisans</option>
                 <option value="30">30 Günlük Lisans</option>
                 <option value="99999">💎 Sınırsız (Lifetime) Lisans</option>
             </select>
-            
             <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background:linear-gradient(135deg, var(--success), #00cc6a); letter-spacing:2px; box-shadow: 0 0 25px rgba(0,255,136,0.3);" onclick="genKey()">ONAYLA VE ZİMMETLE</button>
         </div>
     </div>
@@ -886,14 +849,12 @@
             <span class="close-btn" onclick="closeModal('extendKeyModal')">&times;</span>
             <h2 style="color:var(--blue); margin-bottom:20px; font-family:'Orbitron'; font-size:2rem; letter-spacing:2px; text-shadow:0 0 15px rgba(0,210,255,0.5);">SÜRE UZAT</h2>
             <p id="extendKeyDisplay" style="color:#aaa; font-family:monospace; margin-bottom:25px; font-size:1.2rem; letter-spacing: 2px;"></p>
-            
             <select id="extendDays" class="search-input" style="width:100%; margin-bottom: 25px; padding: 20px; font-size: 1.1rem; border-color:rgba(0,210,255,0.3);">
                 <option value="7">+ 7 Gün Ekle</option>
                 <option value="15">+ 15 Gün Ekle</option>
                 <option value="30">+ 30 Gün Ekle</option>
                 <option value="99999">💎 Sınırsız Yap</option>
             </select>
-            
             <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background:linear-gradient(135deg, var(--blue), #0099cc); letter-spacing:2px; box-shadow: 0 0 25px rgba(0,210,255,0.3);" onclick="confirmExtend()">SÜREYİ GÜNCELLE</button>
         </div>
     </div>
@@ -915,23 +876,15 @@
             <span class="close-btn" onclick="closeModal('fakePaymentModal')">&times;</span>
             <i class="fas fa-shield-alt" style="font-size: 5rem; color: var(--danger); margin-bottom: 25px; filter:drop-shadow(0 0 25px rgba(255,71,87,0.5));"></i>
             <h2 style="color:var(--danger); margin-bottom:20px; font-family:'Orbitron'; letter-spacing:2px; font-size:2rem;">GÜVENLİK BİLDİRİMİ</h2>
-            <p style="color:#ccc; font-size:1.1rem; margin-bottom:35px; line-height: 1.8;">
-                Sanal Pos altyapımız şu anda güvenlik testindedir. Satın alma işlemleri için lütfen yetkililerimizle <strong>Discord</strong> üzerinden iletişime geçin.
-            </p>
+            <p style="color:#ccc; font-size:1.1rem; margin-bottom:35px; line-height: 1.8;">Sanal Pos altyapımız şu anda güvenlik testindedir. Satın alma işlemleri için lütfen yetkililerimizle <strong>Discord</strong> üzerinden iletişime geçin.</p>
             <button class="btn-solid" style="width:100%; padding:22px; font-size:1.2rem; background: var(--discord); letter-spacing:2px; box-shadow: 0 0 25px rgba(88,101,242,0.4);" onclick="closeModal('fakePaymentModal')"><i class="fab fa-discord"></i> DİSCORD'A GİT</button>
         </div>
     </div>
 
-    <div id="chatWidgetBtn" class="chat-widget-btn" onclick="toggleChat()" style="display:none;">
-        <i class="fas fa-comments"></i>
-    </div>
-    
+    <div id="chatWidgetBtn" class="chat-widget-btn" onclick="toggleChat()" style="display:none;"><i class="fas fa-comments"></i></div>
     <div id="chatBox" class="chat-box" style="display:none;">
         <div class="chat-header">
-            <div style="display:flex; align-items:center;">
-                <div class="online-dot"></div>
-                <span id="chatHeaderTitle" style="font-family:'Inter'; letter-spacing:0px;">Sensi Destek Hattı</span>
-            </div>
+            <div style="display:flex; align-items:center;"><div class="online-dot"></div><span id="chatHeaderTitle" style="font-family:'Inter'; letter-spacing:0px;">Sensi Destek Hattı</span></div>
             <i class="fas fa-times" onclick="toggleChat()" style="cursor:pointer; font-size:1.3rem;"></i>
         </div>
         <div class="chat-messages" id="chatMessages"></div>
@@ -962,41 +915,79 @@
         let activeChatUser = null; 
         let targetKeyForExtend = ""; 
 
-        // CMS VERİ ÇEKME MOTORU
+        // --- CMS (FİYAT VE BAKIM) MOTORU ---
+        window.maintenanceConfig = { global: false, discord: false, lifetime: false, program: false };
+
         function fetchStorePrices() {
             db.ref('store_settings').on('value', snap => {
                 if(snap.exists()) {
-                    const prices = snap.val();
-                    // Sitedeki fiyatları güncelle
-                    if(document.getElementById('price-ticket')) document.getElementById('price-ticket').innerText = prices.ticket || "999";
-                    if(document.getElementById('price-music')) document.getElementById('price-music').innerText = prices.music || "1299";
-                    if(document.getElementById('price-custom')) document.getElementById('price-custom').innerText = prices.custom || "2799";
+                    const data = snap.val();
                     
-                    if(document.getElementById('price-ticket-life')) document.getElementById('price-ticket-life').innerText = prices.ticketLife || "8500";
-                    if(document.getElementById('price-guard-life')) document.getElementById('price-guard-life').innerText = prices.guardLife || "12000";
-                    
-                    if(document.getElementById('price-key-1')) document.getElementById('price-key-1').innerText = prices.key1 || "49.99";
-                    if(document.getElementById('price-key-7')) document.getElementById('price-key-7').innerText = prices.key7 || "189.99";
-                    if(document.getElementById('price-key-30')) document.getElementById('price-key-30').innerText = prices.key30 || "489.00";
+                    // Fiyatları Sitede Güncelle
+                    if(document.getElementById('price-ticket')) document.getElementById('price-ticket').innerText = data.ticket || "999";
+                    if(document.getElementById('price-music')) document.getElementById('price-music').innerText = data.music || "1299";
+                    if(document.getElementById('price-custom')) document.getElementById('price-custom').innerText = data.custom || "2799";
+                    if(document.getElementById('price-ticket-life')) document.getElementById('price-ticket-life').innerText = data.ticketLife || "8500";
+                    if(document.getElementById('price-guard-life')) document.getElementById('price-guard-life').innerText = data.guardLife || "12000";
+                    if(document.getElementById('price-project-life')) document.getElementById('price-project-life').innerText = data.projectLife || "25000";
+                    if(document.getElementById('price-key-1')) document.getElementById('price-key-1').innerText = data.key1 || "49.99";
+                    if(document.getElementById('price-key-7')) document.getElementById('price-key-7').innerText = data.key7 || "189.99";
+                    if(document.getElementById('price-key-30')) document.getElementById('price-key-30').innerText = data.key30 || "489.00";
 
-                    // Admin CMS panelindeki inputları doldur (sayfa yenilenince eski değerler gelsin)
-                    if(document.getElementById('cms-ticket')) document.getElementById('cms-ticket').value = prices.ticket || "999";
-                    if(document.getElementById('cms-music')) document.getElementById('cms-music').value = prices.music || "1299";
-                    if(document.getElementById('cms-custom')) document.getElementById('cms-custom').value = prices.custom || "2799";
-                    if(document.getElementById('cms-ticket-life')) document.getElementById('cms-ticket-life').value = prices.ticketLife || "8500";
-                    if(document.getElementById('cms-guard-life')) document.getElementById('cms-guard-life').value = prices.guardLife || "12000";
-                    if(document.getElementById('cms-key-1')) document.getElementById('cms-key-1').value = prices.key1 || "49.99";
-                    if(document.getElementById('cms-key-7')) document.getElementById('cms-key-7').value = prices.key7 || "189.99";
-                    if(document.getElementById('cms-key-30')) document.getElementById('cms-key-30').value = prices.key30 || "489.00";
+                    // Admin CMS Inputlarını Doldur
+                    if(document.getElementById('cms-ticket')) document.getElementById('cms-ticket').value = data.ticket || "999";
+                    if(document.getElementById('cms-music')) document.getElementById('cms-music').value = data.music || "1299";
+                    if(document.getElementById('cms-custom')) document.getElementById('cms-custom').value = data.custom || "2799";
+                    if(document.getElementById('cms-ticket-life')) document.getElementById('cms-ticket-life').value = data.ticketLife || "8500";
+                    if(document.getElementById('cms-guard-life')) document.getElementById('cms-guard-life').value = data.guardLife || "12000";
+                    if(document.getElementById('cms-key-1')) document.getElementById('cms-key-1').value = data.key1 || "49.99";
+                    if(document.getElementById('cms-key-7')) document.getElementById('cms-key-7').value = data.key7 || "189.99";
+                    if(document.getElementById('cms-key-30')) document.getElementById('cms-key-30').value = data.key30 || "489.00";
+
+                    // Bakım Modu Konfigürasyonu
+                    window.maintenanceConfig = data.maintenance || { global: false, discord: false, lifetime: false, program: false };
+                    
+                    // Admin Bakım Select'lerini Doldur
+                    if(document.getElementById('cms-maint-global')) document.getElementById('cms-maint-global').value = window.maintenanceConfig.global.toString();
+                    if(document.getElementById('cms-maint-discord')) document.getElementById('cms-maint-discord').value = window.maintenanceConfig.discord.toString();
+                    if(document.getElementById('cms-maint-lifetime')) document.getElementById('cms-maint-lifetime').value = window.maintenanceConfig.lifetime.toString();
+                    if(document.getElementById('cms-maint-program')) document.getElementById('cms-maint-program').value = window.maintenanceConfig.program.toString();
+
+                    applyMaintenanceUI();
                 }
             });
         }
 
-        // CMS KAYDETME MOTORU (KURUCU)
+        function applyMaintenanceUI() {
+            // Global Bakım UI
+            if(window.maintenanceConfig.global && userRole !== 'kurucu' && userRole !== 'admin') {
+                document.getElementById('global-maintenance-screen').style.display = 'flex';
+                document.getElementById('main-container').style.display = 'none';
+            } else {
+                document.getElementById('global-maintenance-screen').style.display = 'none';
+                document.getElementById('main-container').style.display = 'block';
+                if(window.maintenanceConfig.global) showToast("DİKKAT: Site Bakım Modundadır!", "error");
+            }
+
+            // Bölgesel Bakım UI (Butonları Gri Yap)
+            document.querySelectorAll('.btn-discord-monthly').forEach(b => {
+                if(window.maintenanceConfig.discord) { b.classList.add('btn-disabled'); b.innerHTML = '<i class="fas fa-tools"></i> BAKIMDA'; }
+                else { b.classList.remove('btn-disabled'); b.innerHTML = 'Sepete Ekle'; }
+            });
+            document.querySelectorAll('.btn-discord-lifetime').forEach(b => {
+                if(window.maintenanceConfig.lifetime) { b.classList.add('btn-disabled'); b.innerHTML = '<i class="fas fa-tools"></i> BAKIMDA'; }
+                else { b.classList.remove('btn-disabled'); b.innerHTML = 'Sepete Ekle'; }
+            });
+            document.querySelectorAll('.btn-program-key').forEach(b => {
+                if(window.maintenanceConfig.program) { b.classList.add('btn-disabled'); b.innerHTML = '<i class="fas fa-tools"></i> BAKIMDA'; }
+                else { b.classList.remove('btn-disabled'); b.innerHTML = 'Sepete Ekle'; }
+            });
+        }
+
         function saveStorePrices() {
             if(userRole !== 'kurucu') return showToast("Bu işlem sadece Kurucu yetkisine açıktır!", "error");
             
-            const newPrices = {
+            const newSettings = {
                 ticket: document.getElementById('cms-ticket').value,
                 music: document.getElementById('cms-music').value,
                 custom: document.getElementById('cms-custom').value,
@@ -1004,11 +995,17 @@
                 guardLife: document.getElementById('cms-guard-life').value,
                 key1: document.getElementById('cms-key-1').value,
                 key7: document.getElementById('cms-key-7').value,
-                key30: document.getElementById('cms-key-30').value
+                key30: document.getElementById('cms-key-30').value,
+                maintenance: {
+                    global: document.getElementById('cms-maint-global').value === 'true',
+                    discord: document.getElementById('cms-maint-discord').value === 'true',
+                    lifetime: document.getElementById('cms-maint-lifetime').value === 'true',
+                    program: document.getElementById('cms-maint-program').value === 'true'
+                }
             };
 
-            db.ref('store_settings').set(newPrices).then(() => {
-                showToast("Fiyatlar anında güncellendi ve siteye yansıdı!");
+            db.ref('store_settings').set(newSettings).then(() => {
+                showToast("Tüm ayarlar anında siteye yansıdı!");
             });
         }
 
@@ -1030,12 +1027,14 @@
         }
 
         window.onload = () => { 
-            fetchStorePrices(); // Site açılır açılmaz fiyatları CMS'den çeker
+            fetchStorePrices(); 
             let saved = localStorage.getItem('sensiUser');
             if(saved) {
                 let parsed = JSON.parse(saved);
                 if (parsed.username === 'omer13ds') parsed.role = 'kurucu';
                 applyLogin(parsed.username, parsed.role, true);
+            } else {
+                applyMaintenanceUI(); // Login değilse direkt bakımı uygula
             }
         };
 
@@ -1091,7 +1090,6 @@
             document.getElementById('tReg').className = m === 'login' ? 'auth-tab' : 'auth-tab active';
         }
 
-        // --- KAYIT & GİRİŞ ---
         function doReg() {
             const u = document.getElementById('rUs').value.trim(); 
             const p = document.getElementById('rPs').value;
@@ -1162,6 +1160,7 @@
                 document.getElementById('chatWidgetBtn').style.display = 'none'; 
                 loadStaffChat();
             }
+            applyMaintenanceUI(); // Login olduktan sonra adminse bakımı bypass eder
             if(Notification.permission !== "granted" && Notification.permission !== "denied") Notification.requestPermission(); 
             if(!isSilent) showToast("Hoş Geldin " + u, "success");
         }
@@ -1169,7 +1168,14 @@
         function logout() { localStorage.removeItem('sensiUser'); location.reload(); }
 
         // --- SEPET SİSTEMİ ---
-        function addToCart(n, p) { 
+        function addToCart(n, p, type) { 
+            // BAKIM KONTROLÜ
+            if(window.maintenanceConfig) {
+                if(type === 'discord' && window.maintenanceConfig.discord) return showToast("Bu bölüm şu an bakımdadır!", "error");
+                if(type === 'lifetime' && window.maintenanceConfig.lifetime) return showToast("Bu bölüm şu an bakımdadır!", "error");
+                if(type === 'program' && window.maintenanceConfig.program) return showToast("Bu bölüm şu an bakımdadır!", "error");
+            }
+
             if(!currentUser) { showToast("Önce giriş yapmalısın!", "error"); openAuthModal('login'); return; }
             cart.push({name: n, price: parseFloat(p)}); 
             updateCart(); 
@@ -1235,7 +1241,7 @@
                     s.forEach(ch => {
                         let d = ch.val(); let timeLeft = d.expiresAt - Date.now();
                         let stC = "status-active"; let stT = d.status;
-                        let isLifetime = d.package.includes("99999");
+                        let isLifetime = d.package.includes("99999") || d.package.includes("Sınırsız");
                         
                         if(stT === "BANNED") { stC = "status-banned"; } 
                         else if(timeLeft <= 0 && !isLifetime) { stT = "SÜRESİ DOLDU"; stC = "status-banned"; }
@@ -1258,7 +1264,7 @@
             });
         }
 
-        // --- ADMİN PANEL VERİLERİ VE İSTATİSTİKLER ---
+        // --- ADMİN PANEL VERİLERİ ---
         let isInitialTicketsLoad = true; 
 
         function fetchAdminData() {
@@ -1268,7 +1274,7 @@
                     if(s.exists()) {
                         s.forEach(ch => {
                             const d = ch.val();
-                            let isLifetime = d.package.includes("99999");
+                            let isLifetime = d.package.includes("99999") || d.package.includes("Sınırsız");
                             
                             let timeLeftText = "";
                             
@@ -1327,7 +1333,7 @@
                 });
             }
             
-            // ÜYE İSTATİSTİKLERİNİ HESAPLA
+            // ÜYE İSTATİSTİKLERİ
             db.ref('users').on('value', s => {
                 const b = document.getElementById('admUsersTbody'); const r = document.getElementById('admRolesTbody'); 
                 if(b) b.innerHTML = ''; if(r) r.innerHTML = '';
@@ -1363,8 +1369,6 @@
                         }
                     });
                 }
-                
-                // İstatistikleri Ekrana Yazdır
                 if(document.getElementById('statTotalUsers')) document.getElementById('statTotalUsers').innerText = tUsers;
                 if(document.getElementById('statStaffs')) document.getElementById('statStaffs').innerText = tStaffs;
                 if(document.getElementById('statBanned')) document.getElementById('statBanned').innerText = tBans;
@@ -1390,7 +1394,7 @@
             setTimeout(() => { isInitialTicketsLoad = false; }, 3000);
         }
 
-        // --- LİSANS İŞLEMLERİ (SINIRSIZ EKLENDİ) ---
+        // --- LİSANS İŞLEMLERİ ---
         function openAdminKeyModal() { if(userRole === 'admin' || userRole === 'kurucu') document.getElementById('adminKeyModal').style.display = 'flex'; }
         
         function genKey() {
@@ -1407,100 +1411,59 @@
             let pkgName = type === 'discord' ? d + " Günlük Discord Bot" : d + " Günlük Program";
             if (d === 99999) pkgName = type === 'discord' ? "99999 Günlük (Sınırsız) Discord Bot" : "99999 Günlük (Sınırsız) Program";
 
-            db.ref('licenses/'+k).set({ 
-                owner: u, 
-                package: pkgName, 
-                type: type, 
-                status: "AKTİF", 
-                expiresAt: Date.now() + (d*86400000) 
-            });
-            
-            closeModal('adminKeyModal'); 
-            showToast("Lisans Üretildi!");
+            db.ref('licenses/'+k).set({ owner: u, package: pkgName, type: type, status: "AKTİF", expiresAt: Date.now() + (d*86400000) });
+            closeModal('adminKeyModal'); showToast("Lisans Üretildi!");
         }
 
         function openExtendModal(key) {
-            targetKeyForExtend = key;
-            document.getElementById('extendKeyDisplay').innerText = key;
-            document.getElementById('extendKeyModal').style.display = 'flex';
+            targetKeyForExtend = key; document.getElementById('extendKeyDisplay').innerText = key; document.getElementById('extendKeyModal').style.display = 'flex';
         }
 
         function confirmExtend() {
             const addedDays = parseInt(document.getElementById('extendDays').value);
-            
             db.ref(`licenses/${targetKeyForExtend}`).once('value', snap => {
                 if(snap.exists()) {
-                    let currentExpiry = snap.val().expiresAt;
-                    let currentType = snap.val().type;
-                    let newExpiry;
-                    let newPackage = snap.val().package;
+                    let currentExpiry = snap.val().expiresAt; let currentType = snap.val().type;
+                    let newExpiry; let newPackage = snap.val().package;
                     
                     if(addedDays === 99999) {
                         newExpiry = Date.now() + (99999 * 86400000);
                         newPackage = currentType === 'discord' ? "99999 Günlük (Sınırsız) Discord Bot" : "99999 Günlük (Sınırsız) Program";
                     } else {
-                        if (currentExpiry < Date.now()) { newExpiry = Date.now() + (addedDays * 86400000); } 
-                        else { newExpiry = currentExpiry + (addedDays * 86400000); }
+                        if (currentExpiry < Date.now()) { newExpiry = Date.now() + (addedDays * 86400000); } else { newExpiry = currentExpiry + (addedDays * 86400000); }
                         newPackage = currentType === 'discord' ? "Özel Günlük Discord Bot" : "Özel Günlük Program";
                     }
                     
                     db.ref(`licenses/${targetKeyForExtend}`).update({ expiresAt: newExpiry, package: newPackage, status: "AKTİF" });
-                    showToast("Süre başarıyla uzatıldı!");
-                    closeModal('extendKeyModal');
+                    showToast("Süre başarıyla uzatıldı!"); closeModal('extendKeyModal');
                 }
             });
         }
 
         // --- ONAY KUTUSU (EMİN MİSİN?) ---
-        let pendingAction = null;
-        let pendingKey = null;
+        let pendingAction = null; let pendingKey = null;
 
         function askConfirm(action, key) {
-            pendingAction = action;
-            pendingKey = key;
-            
-            const title = document.getElementById('confirmTitle');
-            const desc = document.getElementById('confirmDesc');
-            const btn = document.getElementById('confirmActionBtn');
-            
+            pendingAction = action; pendingKey = key;
+            const title = document.getElementById('confirmTitle'); const desc = document.getElementById('confirmDesc'); const btn = document.getElementById('confirmActionBtn');
             document.getElementById('confirmModal').style.display = 'flex';
             
-            if(action === 'Sil') {
-                title.innerText = "Lisansı Sil?";
-                desc.innerText = `${key} numaralı lisans veritabanından KALICI OLARAK silinecek.`;
-                btn.innerText = "Evet, Sil";
-                btn.style.background = "var(--danger)";
-            } else if(action === 'Banla') {
-                title.innerText = "Lisansı Banla?";
-                desc.innerText = `${key} numaralı lisans dondurulacak ve bot çalışmayı durduracak.`;
-                btn.innerText = "Evet, Banla";
-                btn.style.background = "var(--warning)";
-            } else if(action === 'Unban') {
-                title.innerText = "Banı Kaldır?";
-                desc.innerText = `${key} numaralı lisans tekrar aktif edilecek.`;
-                btn.innerText = "Evet, Aktif Et";
-                btn.style.background = "var(--success)";
-            }
+            if(action === 'Sil') { title.innerText = "Lisansı Sil?"; desc.innerText = `${key} kalıcı olarak silinecek.`; btn.innerText = "Evet, Sil"; btn.style.background = "var(--danger)"; } 
+            else if(action === 'Banla') { title.innerText = "Lisansı Banla?"; desc.innerText = `${key} dondurulacak ve bot duracak.`; btn.innerText = "Evet, Banla"; btn.style.background = "var(--warning)"; } 
+            else if(action === 'Unban') { title.innerText = "Banı Kaldır?"; desc.innerText = `${key} tekrar aktif edilecek.`; btn.innerText = "Evet, Aktif Et"; btn.style.background = "var(--success)"; }
         }
 
         document.getElementById('confirmActionBtn').addEventListener('click', () => {
-            if(pendingAction === 'Sil') {
-                db.ref(`licenses/${pendingKey}`).remove();
-                showToast("Lisans silindi.");
-            } else if(pendingAction === 'Banla') {
-                db.ref(`licenses/${pendingKey}`).update({status:'BANNED'});
-                showToast("Lisans banlandı.");
-            } else if(pendingAction === 'Unban') {
-                db.ref(`licenses/${pendingKey}`).update({status:'AKTİF'});
-                showToast("Lisans tekrar aktif edildi.");
-            }
+            if(pendingAction === 'Sil') { db.ref(`licenses/${pendingKey}`).remove(); showToast("Lisans silindi."); } 
+            else if(pendingAction === 'Banla') { db.ref(`licenses/${pendingKey}`).update({status:'BANNED'}); showToast("Lisans banlandı."); } 
+            else if(pendingAction === 'Unban') { db.ref(`licenses/${pendingKey}`).update({status:'AKTİF'}); showToast("Lisans aktif edildi."); }
             closeModal('confirmModal');
         });
 
         // ADMİN EYLEMLERİ
         function deleteUser(uname) {
             if(userRole === 'user' || userRole === 'mod') return;
-            if(confirm(`${uname} adlı kullanıcıyı sistemden silmek istediğinize emin misiniz? (HWID sıfırlanır)`)) { 
+            if(confirm(`${uname} adlı kullanıcıyı silmek istediğinize emin misiniz?`)) { 
                 db.ref('users/'+uname).once('value', s => {
                     if(s.exists() && s.val().hwid) { db.ref('hwids/'+s.val().hwid).remove(); }
                     db.ref('users/'+uname).remove(); showToast("Kullanıcı silindi.");
@@ -1509,7 +1472,7 @@
         }
         function banUser(uname) {
             if(userRole === 'user' || userRole === 'mod') return;
-            if(confirm(`${uname} adlı kullanıcıyı BANLAMAK istediğinize emin misiniz?`)) { 
+            if(confirm(`${uname} BANLANACAK, emin misiniz?`)) { 
                 db.ref('users/'+uname).once('value', s => {
                     if(s.exists()) { 
                         let hwid = s.val().hwid; if(hwid) { db.ref('banned_hwids/'+hwid).set(true); } 
@@ -1533,14 +1496,13 @@
             if(!c) return; db.ref('coupons/'+c).set({ percent: parseInt(p) }); document.getElementById('newCouponCode').value = ''; showToast("Kupon eklendi!", "success");
         }
 
-        // --- CANLI DESTEK SİSTEMİ ---
+        // --- CANLI DESTEK ---
         function toggleChat() { const box = document.getElementById('chatBox'); box.style.display = box.style.display === 'none' ? 'flex' : 'none'; }
         function sendChatMessage() {
             let input = document.getElementById('chatInput'); let text = input.value.trim();
             if(!text || !currentUser) return; let targetUser = activeChatUser ? activeChatUser : currentUser;
             db.ref(`chats/${targetUser}`).push({ sender: currentUser, text: text, time: Date.now() }); input.value = "";
         }
-
         let isUserChatInit = true;
         function loadChatHistory(uname) {
             let container = document.getElementById('chatMessages');

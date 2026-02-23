@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SensiSoftware | Premium Engineering Hub</title>
     
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/1176218401639764088/1475561011854446625/icon.ico?ex=699deec7&is=699c9d47&hm=b05988a86ccb05349de62eb8208c40b5bab1c0c1eb2bbc9fad9b3cae054bce4c&" type="image/png">
+    <link rel="icon" href="BURAYA_LOGONUN_LINKINI_YAPISTIR.png" type="image/png">
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;900&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,21 +17,21 @@
         /* --- 1. SAF SİYAH & BEYAZ (KESKİN KONTRAST) --- */
         :root {
             --primary: #ffffff;
-            --bg: #000000; /* SAF SİYAH */
-            --card-bg: #0a0a0a;
-            --border: #333333;
+            --bg: #000000;
+            --card-bg: #080808;
+            --border: #222222;
             --text-main: #ffffff;
             --text-muted: #888888;
             --discord: #ffffff;
             --danger: #555555;
             --success: #ffffff;
-            --neon-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+            --neon-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: var(--text-main); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* --- YETKİ SİSTEMİ --- */
+        /* YETKİ SİSTEMİ */
         .req-kurucu, .req-admin, .req-mod { display: none !important; }
         body.role-kurucu .req-kurucu, body.role-kurucu .req-admin, body.role-kurucu .req-mod { display: block !important; }
         body.role-kurucu li.req-kurucu, body.role-kurucu li.req-admin, body.role-kurucu li.req-mod { display: list-item !important; }
@@ -49,7 +49,7 @@
         body.role-mod div.req-mod.flex-box { display: flex !important; }
         body.role-mod button.req-mod, body.role-mod a.req-mod { display: inline-block !important; }
 
-        /* --- ARKA PLAN EFEKTİ --- */
+        /* ARKA PLAN */
         .bg-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at 50% 0%, #111 0%, #000 70%),
@@ -58,14 +58,9 @@
             background-size: 100% 100%, 50px 50px, 50px 50px;
         }
 
-        .hero-glow {
-            position: absolute; top: -150px; left: 50%; transform: translateX(-50%); width: 700px; height: 700px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%); z-index: -1; pointer-events: none;
-        }
-
         .container { max-width: 1500px; margin: 0 auto; padding: 0 30px; position: relative; }
 
-        /* --- ÜST MENÜ --- */
+        /* ÜST MENÜ */
         nav {
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--border);
@@ -88,7 +83,7 @@
         .dropdown-menu a:hover { background: #111; color: var(--primary); padding-left: 30px; border-left-color: var(--primary); }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* GİRİŞ & PROFİL BUTONLARI */
+        /* PROFİL & GİRİŞ */
         .auth-btns { display: flex; gap: 15px; border-left: 1px solid var(--border); padding-left: 25px; }
         .btn-outline, .btn-solid { 
             display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
@@ -100,7 +95,7 @@
         .btn-solid:hover { background: transparent; color: var(--primary); }
 
         .user-profile { display: none; align-items: center; gap: 10px; cursor: pointer; position: relative; padding: 25px 0; }
-        .avatar { width: 40px; height: 40px; background: #fff; color: #000; border-radius: 8px; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 1.2rem; }
+        .avatar { width: 40px; height: 40px; background: transparent; border:1px solid #444; color: #fff; border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; }
         
         .role-badge { display: none; color: #000; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; font-weight: 900; letter-spacing: 1px; margin-left: 5px; }
         body.role-kurucu #badgeKurucu { display: inline-block; background: #fff; }
@@ -125,7 +120,16 @@
         #customToast.error { border-left-color: #555; }
         #customToast.error i { color: #555; }
 
-        /* --- SAYFALAR GENEL --- */
+        /* GELİŞMİŞ SEPET POP-UP (SAĞ ÜST) */
+        .cart-toast { position:fixed; top:30px; right:-450px; width:350px; background:#050505; border:1px solid #333; border-radius:8px; box-shadow:0 20px 50px rgba(0,0,0,0.9); z-index:10000; transition:0.4s cubic-bezier(0.175,0.885,0.32,1.275); overflow:hidden; }
+        .cart-toast.show { right:30px; }
+        .cart-toast-header { background:#111; padding:15px 20px; font-family:'Orbitron'; color:#fff; border-bottom:1px solid #222; display:flex; justify-content:space-between; align-items:center; }
+        .cart-toast-body { padding:20px; }
+        .cart-toast-item { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; color:#ccc; font-size:0.95rem; }
+        .cart-toast-btn { width:100%; background:#fff; color:#000; border:none; padding:15px; border-radius:6px; font-weight:900; font-family:'Orbitron'; letter-spacing:1px; cursor:pointer; transition:0.3s; }
+        .cart-toast-btn:hover { background:#ccc; }
+
+        /* SAYFALAR GENEL */
         .page { display: none; animation: fadeIn 0.4s ease; min-height: 70vh; padding-bottom: 100px; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -136,8 +140,8 @@
         .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 5.5rem; font-weight: 900; margin-bottom: 25px; color: var(--primary); letter-spacing: 2px; text-shadow: 0 0 30px rgba(255,255,255,0.3);}
         .hero p { color: var(--text-muted); font-size: 1.3rem; max-width: 800px; margin: 0 auto 60px; line-height: 1.8; }
 
-        .terminal-mockup { max-width: 700px; margin: 0 auto; background: #050505; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 20px rgba(255, 255, 255, 0.05); text-align: left; }
-        .terminal-header { background: #111; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid var(--border); }
+        .terminal-mockup { max-width: 700px; margin: 0 auto; background: #050505; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.9); text-align: left; }
+        .terminal-header { background: #111; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #222; }
         .terminal-dots { display: flex; gap: 8px; }
         .terminal-dots span { width: 12px; height: 12px; border-radius: 50%; background: #444;}
         .terminal-title { flex: 1; text-align: center; color: #888; font-family: monospace; font-size: 0.85rem; letter-spacing: 1px; }
@@ -165,38 +169,47 @@
         .stat-bar-bg { width: 100%; height: 4px; background: #222; overflow: hidden; position: relative; }
         .stat-bar-fill { height: 100%; background: var(--primary); width: 0; box-shadow: 0 0 10px var(--primary); transition: width 2s ease-out; }
         
-        .vip-enterprise { margin: 100px 0 40px; padding: 60px; background: #050505; border-radius: 12px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .vip-text h2 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
-        .vip-text p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; line-height: 1.6; }
-
-        /* --- DİSCORD & LİSANS KARTLARI (KÜÇÜK, RESMİ, DEV FİYATLAR) --- */
-        .discord-grid, .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 50px;}
+        /* --- TRENDYOL TARZI LİSANS KARTLARI --- */
+        .discord-grid, .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px;}
         .ds-card, .price-card { background: var(--card-bg); padding: 40px 30px; border-radius: 8px; text-align: center; border: 1px solid var(--border); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.8);}
-        .ds-card:hover, .price-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 50px rgba(255, 255, 255, 0.08); z-index: 10; }
+        .ds-card:hover, .price-card:hover { border-color: var(--primary); box-shadow: 0 15px 40px rgba(255, 255, 255, 0.08); z-index: 10; }
         
-        .card-badge { position: absolute; top: 15px; right: -35px; background: var(--primary); color: #000; font-size: 0.75rem; font-weight: 900; padding: 6px 40px; transform: rotate(45deg); letter-spacing: 2px; z-index: 5;}
+        .card-badge { position: absolute; top: 15px; right: -35px; background: #fff; color: #000; font-size: 0.75rem; font-weight: 900; padding: 6px 40px; transform: rotate(45deg); letter-spacing: 2px; z-index: 5;}
 
-        .ds-icon { width: 70px; height: 70px; background: #111; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; color: var(--primary); font-size: 2.5rem; transition: 0.3s; border: 1px solid var(--border);}
-        .ds-card:hover .ds-icon { background: var(--primary); color: #000; box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+        .ds-icon { width: 80px; height: 80px; background: #111; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; color: var(--primary); font-size: 2.5rem; transition: 0.3s; border: 1px solid #333;}
+        .ds-card:hover .ds-icon, .price-card:hover .ds-icon { background: var(--primary); color: #000; box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
         
-        /* FİYATLAR DEV GİBİ YAPILDI */
-        .price { font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900; color: var(--primary); margin: 20px 0; text-shadow: 0 0 30px rgba(255,255,255,0.4);}
-        .price span { font-size: 1.5rem; color: var(--text-muted); font-weight: 600;}
+        .price-card h3, .ds-card h3 { font-family:'Orbitron'; font-size:1.4rem; color:#fff; margin-bottom:15px; }
+        .price-card p, .ds-card p { color:#888; font-size:0.95rem; line-height:1.5; margin-bottom:30px; flex-grow:1; }
         
-        .price-card ul { list-style: none; margin: 25px 0; color: #ccc; font-size: 1rem; text-align: left; flex-grow: 1;}
-        .price-card ul li { padding: 12px 0; border-bottom: 1px solid #222; display: flex; align-items: center; gap: 12px;}
-        .price-card ul li i { color: var(--primary); font-size: 1.1rem; }
+        .ds-btn { width: 100%; padding: 18px; border-radius: 6px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 1.05rem; border: none; letter-spacing: 1px; text-transform: uppercase; background: #111; color: #fff; border: 1px solid #333; }
+        .ds-btn:hover { background: #fff; color: #000; border-color: #fff; box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);}
         
-        .ds-btn, .buy-btn { width: 100%; padding: 18px; border-radius: 6px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 1.05rem; border: none; letter-spacing: 1px; text-transform: uppercase;}
-        .ds-btn { background: #111; color: var(--primary); border: 2px solid var(--border); }
-        .ds-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);}
-        .buy-btn { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-        .buy-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 25px rgba(255,255,255,0.3);}
+        /* TRENDYOL TARZI DETAY MODALI */
+        .product-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:3000; justify-content:center; align-items:center; backdrop-filter:blur(5px); }
+        .product-box { background:#0a0a0a; border:1px solid #333; border-radius:12px; width:900px; max-width:95%; display:flex; overflow:hidden; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.9); animation: fadeIn 0.3s ease; }
+        .product-left { flex:1; background:#111; display:flex; justify-content:center; align-items:center; padding:50px; border-right:1px solid #222; }
+        .product-left i { font-size:8rem; color:#fff; text-shadow:0 0 40px rgba(255,255,255,0.2); }
+        .product-right { flex:1.2; padding:50px; display:flex; flex-direction:column; justify-content:center; }
+        .product-title { font-family:'Orbitron'; font-size:2.2rem; color:#fff; margin-bottom:15px; }
+        .product-desc { color:#aaa; font-size:1.05rem; line-height:1.6; margin-bottom:30px; }
+        .product-price { font-family:'Orbitron'; font-size:4.5rem; color:#fff; font-weight:900; margin-bottom:10px; text-shadow:0 0 20px rgba(255,255,255,0.2); }
+        .product-price-sub { color:#666; font-size:1.2rem; margin-bottom:30px; font-weight:bold; }
+        .product-actions { display:flex; gap:15px; }
+        .product-actions button { flex:1; padding:20px; font-size:1.1rem; border-radius:6px; font-weight:bold; letter-spacing:1px; cursor:pointer; transition:0.3s; font-family:'Orbitron'; }
+        .btn-add-cart { background:transparent; border:2px solid #fff; color:#fff; }
+        .btn-add-cart:hover { background:#222; }
+        .btn-buy-now { background:#fff; border:2px solid #fff; color:#000; }
+        .btn-buy-now:hover { background:#ccc; border-color:#ccc; box-shadow:0 0 20px rgba(255,255,255,0.3);}
+        .close-product { position:absolute; top:20px; right:25px; font-size:2rem; color:#666; cursor:pointer; transition:0.3s; z-index:10; }
+        .close-product:hover { color:#fff; }
         
-        /* SEPETİM */
+        @media (max-width: 800px) { .product-box { flex-direction: column; } .product-left { padding:30px; } .product-right { padding:30px; } .product-price { font-size:3rem; } }
+
+        /* SEPETİM SAYFASI */
         .cart-wrapper { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
         .cart-items-container { flex: 2; display: flex; flex-direction: column; gap: 15px; min-width: 300px;}
-        .cart-summary { flex: 1; background: var(--card-bg); padding: 40px 30px; border-radius: 8px; border: 1px solid var(--primary); position: sticky; top: 120px; box-shadow: 0 10px 40px rgba(255, 255, 255, 0.05); min-width: 300px;}
+        .cart-summary { flex: 1; background: var(--card-bg); padding: 40px 30px; border-radius: 8px; border: 1px solid var(--border); position: sticky; top: 120px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); min-width: 300px;}
         .cart-item { background: #050505; padding: 25px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
         .cart-item-price { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--primary); }
         .remove-btn { background: #111; color: #888; border: 1px solid var(--border); padding: 10px 15px; border-radius: 6px; cursor: pointer; transition: 0.3s; font-size: 1.1rem;}
@@ -204,52 +217,56 @@
         .coupon-area { margin-top: 30px; display: flex; gap: 15px; }
         .coupon-input { flex: 1; padding: 15px 20px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 6px; outline: none; font-size: 1rem; transition: 0.3s;}
         .summary-row { display: flex; justify-content: space-between; margin-bottom: 20px; color: #ccc; font-size: 1.1rem;}
-        .summary-total { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 30px; border-top: 1px solid var(--border); font-size: 1.6rem; font-weight: bold; color: var(--primary); font-family: 'Orbitron', sans-serif;}
-        .empty-cart { text-align: center; padding: 100px; background: var(--card-bg); border-radius: 8px; border: 1px dashed var(--border); width: 100%; }
+        .summary-total { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 30px; border-top: 1px solid #222; font-size: 1.6rem; font-weight: bold; color: var(--primary); font-family: 'Orbitron', sans-serif;}
+        .empty-cart { text-align: center; padding: 100px; background: var(--card-bg); border-radius: 8px; border: 1px dashed #333; width: 100%; }
 
-        /* SİPARİŞLERİM */
-        .orders-wrapper { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;}
-        .order-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 30px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;}
-        .active-order { border-color: var(--primary); background: #080808; }
-        .key-box { background: #000; padding: 12px 20px; border-radius: 6px; font-family: monospace; color: var(--primary); letter-spacing: 3px; border: 1px solid var(--border); display: inline-block; margin-top: 15px; font-size: 1.2rem; }
+        /* YENİ SİPARİŞLERİM (AKORDİYON) */
+        .orders-wrapper { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;}
+        .order-card-v2 { background:#080808; border:1px solid #222; border-radius:8px; overflow:hidden; transition:0.3s; box-shadow:0 10px 30px rgba(0,0,0,0.5);}
+        .order-card-v2:hover { border-color:#444; }
+        .order-header { padding:25px 30px; display:flex; justify-content:space-between; align-items:center; background:#0a0a0a; }
+        .order-header h4 { font-size:1.3rem; margin-bottom:8px; color:#fff; font-family:'Orbitron';}
+        .order-header p { color:#888; font-size:0.95rem; }
+        .order-details { padding:0 30px; max-height:0; overflow:hidden; transition:max-height 0.4s ease, padding 0.4s ease; background:#050505; }
+        .order-details.open { padding:25px 30px; max-height:600px; border-top:1px solid #111; }
+        .detail-row { display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px dashed #222; flex-wrap:wrap; gap:15px;}
+        .detail-row:last-child { border-bottom:none; }
+        .detail-label { color:#aaa; font-weight:bold; font-size:1.05rem;}
+        .detail-val { color:#fff; font-family:monospace; font-size:1.2rem; letter-spacing:2px; background:#111; padding:8px 15px; border-radius:4px; border:1px solid #333;}
+        .copy-btn { background:#222; color:#fff; border:1px solid #444; padding:10px 20px; border-radius:4px; cursor:pointer; transition:0.3s; font-size:0.9rem; font-weight:bold;}
+        .copy-btn:hover { background:#fff; color:#000; }
+        .install-guide { background:#111; border:1px solid #222; padding:25px; border-radius:8px; margin-top:25px; color:#bbb; font-size:0.95rem; line-height:1.7; }
+        .install-guide h5 { color:#fff; margin-bottom:15px; font-family:'Orbitron'; font-size:1.1rem;}
         .order-status { padding: 10px 20px; border-radius: 6px; font-size: 0.85rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;}
         .status-active { background: #fff; color: #000; }
-        .status-banned { background: #333; color: #888; border: 1px solid #444; }
+        .status-banned { background: #222; color: #888; border: 1px solid #333; }
 
-        /* --- 6. YÖNETİM PANELİ (ESKİ NİZAM) --- */
-        .admin-layout { 
-            display: grid; 
-            grid-template-columns: 280px 1fr; 
-            gap: 30px; 
-            align-items: start; 
-        }
+        /* --- 6. YÖNETİM PANELİ --- */
+        .admin-layout { display: grid; grid-template-columns: 280px 1fr; gap: 30px; align-items: start; }
         @media (max-width: 900px) { .admin-layout { grid-template-columns: 1fr; } }
         
-        .admin-sidebar { 
-            background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border); 
-            padding: 30px; position: sticky; top: 110px;
-        }
+        .admin-sidebar { background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border); padding: 30px; position: sticky; top: 110px;}
         .admin-sidebar h3 { color: var(--primary); font-family: 'Orbitron', sans-serif; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border); font-size: 1.2rem; text-align: center; letter-spacing: 1px;}
         .admin-nav { list-style: none; }
         .admin-nav li { margin-bottom: 10px; }
         .admin-nav a { display: block; padding: 15px; background: #050505; color: var(--text-muted); border-radius: 6px; transition: 0.3s; cursor: pointer; border: 1px solid transparent; font-weight: 700; font-size: 0.9rem;}
-        .admin-nav a.active, .admin-nav a:hover { background: #111; color: var(--primary); border-color: var(--primary); }
+        .admin-nav a.active, .admin-nav a:hover { background: #111; color: var(--primary); border-color: #333; }
         .admin-nav i { margin-right: 15px; color: var(--primary); width: 20px; text-align: center; font-size: 1.1rem;}
 
-        .admin-content { 
-            background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border); 
-            padding: 40px; min-height: 700px;
-            min-width: 100%; 
-            overflow: hidden;
-        }
-        
+        .admin-content { background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border); padding: 40px; min-height: 700px; min-width: 100%; overflow: hidden;}
         .admin-section { display: none !important; animation: fadeIn 0.4s ease; } 
         .admin-section.active { display: block !important; }
         
         .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 30px; flex-wrap: wrap; gap: 20px;}
         .admin-header h4 { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: var(--primary);}
         
-        .table-responsive { width: 100%; overflow-x: auto; padding-bottom: 10px;}
+        /* SCROLL BAR DÜZELTMESİ (GÖZ YORMAYAN TASARIM) */
+        .table-responsive { width: 100%; overflow-x: auto; padding-bottom: 15px;}
+        .table-responsive::-webkit-scrollbar { height: 6px; }
+        .table-responsive::-webkit-scrollbar-track { background: #0a0a0a; border-radius:4px;}
+        .table-responsive::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        .table-responsive::-webkit-scrollbar-thumb:hover { background: #555; }
+
         .admin-table { width: 100%; border-collapse: collapse; min-width: 1050px; } 
         .admin-table th, .admin-table td { padding: 15px; text-align: left; border-bottom: 1px solid #222; vertical-align: middle; }
         .admin-table th { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
@@ -285,9 +302,9 @@
         .cms-card input, .cms-card select { width: 100%; padding: 15px; background: #000; border: 1px solid var(--border); color: var(--primary); border-radius: 6px; margin-bottom: 15px; font-size: 1.1rem; outline: none; transition: 0.3s; font-family: 'Orbitron'; font-weight: bold;}
         .cms-card input:focus, .cms-card select:focus { border-color: var(--primary); }
 
-        /* --- 7. MODALLAR --- */
+        /* --- MODALLAR --- */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-box { background: #0a0a0a; padding: 50px 60px; border-radius: 8px; width: 100%; max-width: 450px; border: 1px solid var(--border); position: relative; text-align: center; box-shadow: 0 0 50px rgba(255, 255, 255, 0.05); }
+        .modal-box { background: #0a0a0a; padding: 50px 60px; border-radius: 8px; width: 100%; max-width: 450px; border: 1px solid #333; position: relative; text-align: center; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
         .auth-tabs { display: flex; margin-bottom: 40px; border-bottom: 1px solid #333; }
         .auth-tab { flex: 1; padding: 15px 0; color: #666; font-weight: 900; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1px;}
         .auth-tab.active { color: var(--primary); border-bottom: 3px solid var(--primary); margin-bottom: -2px;}
@@ -307,35 +324,18 @@
         .btn-cancel { background: #111; color: #888; border: 1px solid #333; }
         .btn-cancel:hover { background: #333; color:#fff; }
 
-        /* --- 8. CANLI DESTEK --- */
-        .chat-widget-btn {
-            position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px;
-            background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 1.8rem; color: #000; cursor: pointer; box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
-            transition: 0.4s; z-index: 1000;
-        }
+        /* CANLI DESTEK */
+        .chat-widget-btn { position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; color: #000; cursor: pointer; box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2); transition: 0.4s; z-index: 1000; }
         .chat-widget-btn:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4); }
-        
-        .chat-box {
-            position: fixed; bottom: 120px; right: 40px; width: 350px; height: 480px;
-            background: #0a0a0a; border: 1px solid var(--border); border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.9); z-index: 1000; display: flex; flex-direction: column;
-            overflow: hidden; animation: fadeIn 0.4s ease;
-        }
-        .chat-header {
-            background: #fff; color: #000; padding: 15px 20px; 
-            font-weight: 900; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;
-            display: flex; justify-content: space-between; align-items: center; font-size: 1rem;
-        }
+        .chat-box { position: fixed; bottom: 120px; right: 40px; width: 350px; height: 480px; background: #0a0a0a; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.9); z-index: 1000; display: flex; flex-direction: column; overflow: hidden; animation: fadeIn 0.4s ease; }
+        .chat-header { background: #fff; color: #000; padding: 15px 20px; font-weight: 900; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; }
         .online-dot { width: 10px; height: 10px; background: #000; border-radius: 50%; display: inline-block; margin-right: 10px; animation: blink 2s infinite;}
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
         .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #000; scroll-behavior: smooth;}
         .chat-msg { padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; max-width: 85%; word-wrap: break-word; line-height: 1.5; position: relative;}
         .msg-user { background: #fff; color: #000; align-self: flex-end; border-bottom-right-radius: 0; }
         .msg-admin { background: #111; color: #fff; align-self: flex-start; border-bottom-left-radius: 0; border: 1px solid #333;}
         .chat-time { display: block; font-size: 0.7rem; color: rgba(100,100,100,0.8); margin-top: 5px; text-align: right; }
-
         .chat-input-area { display: flex; padding: 15px; background: #050505; border-top: 1px solid var(--border); align-items: center;}
         .chat-input-area input { flex: 1; padding: 12px 15px; background: #000; border: 1px solid var(--border); border-radius: 6px; color: #fff; outline: none; font-size: 0.95rem; transition: 0.3s;}
         .chat-input-area input:focus { border-color: #fff; }
@@ -348,7 +348,7 @@
         .staff-msg strong { color: #fff; display: block; margin-bottom: 5px; font-family: 'Orbitron'; font-size: 0.85rem; letter-spacing: 1px;}
         .staff-input-area { display: flex; padding: 20px; background: #050505; border-top: 1px solid var(--border); align-items: center; }
 
-        /* --- 9. ŞANS KASASI --- */
+        /* ŞANS KASASI */
         .case-wrapper { background:var(--card-bg); padding:40px; border-radius:8px; border:1px solid var(--border); box-shadow:0 10px 40px rgba(0,0,0,0.8); text-align: center; max-width: 800px; margin: 0 auto; }
         .case-container { width: 100%; height: 200px; background: #000; border: 1px solid var(--border); border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; box-shadow: inset 0 0 60px rgba(0,0,0,0.9); }
         .case-center-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: #fff; z-index: 10; box-shadow: 0 0 15px #fff; }
@@ -356,7 +356,6 @@
         .case-item { width: 140px; height: 140px; flex-shrink: 0; margin: 0 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 6px; font-weight: bold; border-bottom: 5px solid; background: #0a0a0a; text-align: center; padding: 5px; overflow: hidden; border:1px solid #222;}
         .item-icon { font-size: 2rem; margin-bottom: 5px; }
         .item-text { font-size: 0.85rem; line-height: 1.3; }
-        
         .rarity-common { border-bottom-color: #333; color: #666; } 
         .rarity-rare { border-bottom-color: #666; color: #999; } 
         .rarity-epic { border-bottom-color: #aaa; color: #ccc; } 
@@ -372,6 +371,20 @@
     <div id="customToast">
         <i class="fas fa-check-circle" id="toastIcon"></i>
         <span id="toastMessage"></span>
+    </div>
+
+    <div id="cartToast" class="cart-toast">
+        <div class="cart-toast-header">
+            <span><i class="fas fa-shopping-cart"></i> SEPETE EKLENDİ</span>
+            <i class="fas fa-times" style="cursor:pointer; color:#888;" onclick="closeCartToast()"></i>
+        </div>
+        <div class="cart-toast-body">
+            <div class="cart-toast-item">
+                <span id="ct-item-name" style="font-weight:bold; font-size:1.1rem;">Ürün Adı</span> 
+                <strong id="ct-item-price" style="color:#fff; font-size:1.2rem; font-family:'Orbitron';">0 TL</strong>
+            </div>
+            <button class="cart-toast-btn" onclick="switchPage('cart'); closeCartToast();">SEPETİMİ GÖRÜNTÜLE (<span id="ct-count">1</span>)</button>
+        </div>
     </div>
 
     <div class="container">
@@ -398,7 +411,7 @@
                 </div>
 
                 <div class="user-profile" id="profileSection">
-                    <div class="avatar" id="avatarLetter">?</div>
+                    <div class="avatar" id="avatarLetter"><i class="fas fa-user"></i></div>
                     <span id="profileName" style="font-weight:800; font-size:0.95rem;">Kullanıcı</span>
                     
                     <span class="role-badge badge-kurucu" id="badgeKurucu">KURUCU</span>
@@ -477,44 +490,44 @@
                     <div class="ds-card">
                         <div class="card-badge">POPÜLER</div>
                         <div class="ds-icon"><i class="fas fa-ticket-alt"></i></div>
-                        <h3>Discord Ticket Botu</h3><div class="price"><span id="price-ticket">999</span> <span>TL</span></div>
-                        <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">Gelişmiş bilet sistemi, otomatik transkript ve yetkili atama modülleri.</p>
-                        <button class="ds-btn" onclick="addToCart('Discord Ticket Botu (Aylık)', document.getElementById('price-ticket').innerText)">Sepete Ekle</button>
+                        <h3>Discord Ticket Botu</h3>
+                        <p>Gelişmiş bilet sistemi, otomatik transkript ve yetkili atama modülleri.</p>
+                        <button class="ds-btn" onclick="openProductModal('Discord Ticket Botu', 'price-ticket', 'Gelişmiş bilet sistemi, otomatik transkript ve yetkili atama modülleri. Bot 1 ay boyunca sunucunuzda aktif kalır.', 'fas fa-ticket-alt')">ÜRÜNÜ İNCELE</button>
                     </div>
                     <div class="ds-card">
                         <div class="ds-icon"><i class="fas fa-music"></i></div>
-                        <h3>Discord Özel Müzik Botu</h3><div class="price"><span id="price-music">1299</span> <span>TL</span></div>
-                        <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">Size özel isim ve logo ile 7/24 kesintisiz, yüksek kaliteli (Lag-Free) müzik keyfi.</p>
-                        <button class="ds-btn" onclick="addToCart('Discord Müzik Botu (Aylık)', document.getElementById('price-music').innerText)">Sepete Ekle</button>
+                        <h3>Discord Özel Müzik Botu</h3>
+                        <p>Size özel isim ve logo ile 7/24 kesintisiz, yüksek kaliteli (Lag-Free) müzik keyfi.</p>
+                        <button class="ds-btn" onclick="openProductModal('Discord Özel Müzik Botu', 'price-music', 'Sizin belirlediğiniz isim ve logo ile çalışır. 7/24 kesintisiz YouTube, Spotify desteği sunar.', 'fas fa-music')">ÜRÜNÜ İNCELE</button>
                     </div>
-                    <div class="ds-card premium">
+                    <div class="ds-card">
                         <div class="ds-icon"><i class="fas fa-robot"></i></div>
-                        <h3>Özel Sunucu Botu</h3><div class="price"><span id="price-custom">2799</span> <span>TL</span></div>
-                        <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">Sunucunuza özel ekonomi sistemi, moderasyon ve yapay zeka entegreli her şey dahil paket.</p>
-                        <button class="ds-btn" onclick="addToCart('Discord Sunucu Botu (Aylık)', document.getElementById('price-custom').innerText)">Sepete Ekle</button>
+                        <h3>Özel Sunucu Botu</h3>
+                        <p>Sunucunuza özel ekonomi sistemi, moderasyon ve yapay zeka entegreli her şey dahil paket.</p>
+                        <button class="ds-btn" onclick="openProductModal('Özel Sunucu Botu', 'price-custom', 'A\'dan Z\'ye sunucunuza özel baştan tasarlanmış tam donanımlı asistan bot.', 'fas fa-robot')">ÜRÜNÜ İNCELE</button>
                     </div>
                 </div>
 
                 <h2 class="page-title" style="margin-top: 120px;">AÇIK KAYNAK / SINIRSIZ</h2>
                 <div class="discord-grid">
-                    <div class="ds-card premium">
+                    <div class="ds-card">
                         <div class="ds-icon"><i class="fas fa-code"></i></div>
-                        <h3>Ticket Bot (Açık Kaynak)</h3><div class="price"><span id="price-ticket-life">8500</span> <span>TL</span></div>
-                        <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">Tüm kodlara erişim. Kendi sunucunuzda sınırsız barındırma ve düzenleme hakkı.</p>
-                        <button class="ds-btn" onclick="addToCart('Ticket Bot (Sınırsız)', document.getElementById('price-ticket-life').innerText)">Sepete Ekle</button>
+                        <h3>Ticket Bot (Açık Kaynak)</h3>
+                        <p>Tüm kodlara erişim. Kendi sunucunuzda sınırsız barındırma ve düzenleme hakkı.</p>
+                        <button class="ds-btn" onclick="openProductModal('Ticket Bot (Sınırsız)', 'price-ticket-life', 'Dosyalar size teslim edilir. Sınırsız lisans ve kendi altyapınızda barındırma imkanı.', 'fas fa-code')">ÜRÜNÜ İNCELE</button>
                     </div>
-                    <div class="ds-card premium">
-                        <div class="card-badge badge-blue">VIP TERCİH</div>
+                    <div class="ds-card">
+                        <div class="card-badge">VIP TERCİH</div>
                         <div class="ds-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3>SensiGuard (Sınırsız)</h3><div class="price"><span id="price-guard-life">12000</span> <span>TL</span></div>
-                        <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">Asla patlamayan, saniyesinde ban atan HWID korumalı özel Guard sisteminin tam lisansı.</p>
-                        <button class="ds-btn" onclick="addToCart('SensiGuard (Sınırsız)', document.getElementById('price-guard-life').innerText)">Sepete Ekle</button>
+                        <h3>SensiGuard (Sınırsız)</h3>
+                        <p>Asla patlamayan, saniyesinde ban atan HWID korumalı özel Guard sisteminin tam lisansı.</p>
+                        <button class="ds-btn" onclick="openProductModal('SensiGuard (Sınırsız)', 'price-guard-life', 'Sunucunuzu patlatılmaya karşı %100 koruyan, rol silme ve ban atma hızında rakipsiz sistem.', 'fas fa-shield-alt')">ÜRÜNÜ İNCELE</button>
                     </div>
-                    <div class="ds-card premium">
+                    <div class="ds-card">
                         <div class="ds-icon"><i class="fas fa-server"></i></div>
-                        <h3>Özel Proje & Altyapı</h3><div class="price"><span id="price-project-life">25000</span> <span>TL+</span></div>
-                        <p style="color:#aaa; line-height: 1.5; margin-bottom: 20px;">A'dan Z'ye sunucunuza özel baştan yazılmış bot ağı ve tam mülkiyet.</p>
-                        <button class="ds-btn" onclick="openAuthModal('login')">Destekle İletişime Geç</button>
+                        <h3>Özel Proje & Altyapı</h3>
+                        <p>A'dan Z'ye sunucunuza özel baştan yazılmış bot ağı ve tam mülkiyet.</p>
+                        <button class="ds-btn" style="background:#fff; color:#000;" onclick="openAuthModal('login')">DESTEKLE İLETİŞİME GEÇ</button>
                     </div>
                 </div>
             </div>
@@ -523,20 +536,46 @@
                 <h2 class="page-title">LİSANS ANAHTARLARI</h2>
                 <div class="pricing-grid">
                     <div class="price-card">
-                        <h3>1 Günlük Sensi Key</h3><div class="price"><span id="price-key-1">49.99</span> <span>TL</span></div>
-                        <ul><li><i class="fas fa-check"></i> 24 Saat Tam Erişim</li><li><i class="fas fa-check"></i> Anında Teslimat</li></ul>
-                        <button class="buy-btn" onclick="addToCart('1 Günlük Sensi Key', document.getElementById('price-key-1').innerText)">Sepete Ekle</button>
+                        <div class="ds-icon"><i class="fas fa-key"></i></div>
+                        <h3>1 Günlük Sensi Key</h3>
+                        <p>24 Saat boyunca programın tüm VIP özelliklerine anında erişim sağlarsınız.</p>
+                        <button class="ds-btn" onclick="openProductModal('1 Günlük Sensi Key', 'price-key-1', 'Ödemeden hemen sonra 24 saat geçerli lisans anahtarınız teslim edilir.', 'fas fa-key')">ÜRÜNÜ İNCELE</button>
                     </div>
                     <div class="price-card">
-                        <div class="card-badge badge-blue">ÇOK SATAN</div>
-                        <h3>7 Günlük Sensi Key</h3><div class="price"><span id="price-key-7">189.99</span> <span>TL</span></div>
-                        <ul><li><i class="fas fa-check"></i> 7 Gün Tam Erişim</li><li><i class="fas fa-check"></i> 7/24 Destek</li></ul>
-                        <button class="buy-btn" onclick="addToCart('7 Günlük Sensi Key', document.getElementById('price-key-7').innerText)">Sepete Ekle</button>
+                        <div class="card-badge">ÇOK SATAN</div>
+                        <div class="ds-icon"><i class="fas fa-gem"></i></div>
+                        <h3>7 Günlük Sensi Key</h3>
+                        <p>7 Gün boyunca kesintisiz tam erişim ve 7/24 öncelikli teknik destek.</p>
+                        <button class="ds-btn" onclick="openProductModal('7 Günlük Sensi Key', 'price-key-7', '1 haftalık sınırsız kullanım ve her türlü sorunda direkt yetkili bağlantısı.', 'fas fa-gem')">ÜRÜNÜ İNCELE</button>
                     </div>
-                    <div class="price-card premium">
-                        <h3>1 Aylık Sensi Key</h3><div class="price"><span id="price-key-30">489.00</span> <span>TL</span></div>
-                        <ul><li><i class="fas fa-check"></i> 30 Gün VIP Erişim</li><li><i class="fas fa-check"></i> Özel Discord Rolü</li></ul>
-                        <button class="buy-btn" onclick="addToCart('1 Aylık Sensi Key', document.getElementById('price-key-30').innerText)">Sepete Ekle</button>
+                    <div class="price-card">
+                        <div class="ds-icon"><i class="fas fa-crown"></i></div>
+                        <h3>1 Aylık Sensi Key</h3>
+                        <p>30 Gün VIP Erişim ve Discord sunucusunda "Premium" rolü kazanırsınız.</p>
+                        <button class="ds-btn" onclick="openProductModal('1 Aylık Sensi Key', 'price-key-30', 'Aylık dev paket. Teslimat anında gerçekleşir, sınırsız keyfi çıkarın.', 'fas fa-crown')">ÜRÜNÜ İNCELE</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:none;">
+                <span id="price-ticket">999</span><span id="price-music">1299</span><span id="price-custom">2799</span>
+                <span id="price-ticket-life">8500</span><span id="price-guard-life">12000</span><span id="price-project-life">25000</span>
+                <span id="price-key-1">49.99</span><span id="price-key-7">189.99</span><span id="price-key-30">489.00</span>
+            </div>
+
+            <div id="productModal" class="product-modal">
+                <div class="product-box">
+                    <i class="fas fa-times close-product" onclick="closeModal('productModal')"></i>
+                    <div class="product-left"><i id="pm-icon" class="fas fa-box"></i></div>
+                    <div class="product-right">
+                        <h2 class="product-title" id="pm-title">Ürün Adı</h2>
+                        <p class="product-desc" id="pm-desc">Ürün açıklaması...</p>
+                        <div class="product-price-sub">Fiyat:</div>
+                        <div class="product-price"><span id="pm-price">0</span> <span style="font-size:1.5rem; color:#888;">TL</span></div>
+                        <div class="product-actions" style="margin-top:30px;">
+                            <button class="btn-add-cart" id="pm-add-btn"><i class="fas fa-cart-plus"></i> SEPETE EKLE</button>
+                            <button class="btn-buy-now" id="pm-buy-btn"><i class="fas fa-bolt"></i> HEMEN AL</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -557,7 +596,7 @@
                         <div class="summary-total"><span>TOPLAM</span><span id="cartTotal" style="color:var(--primary);">0 TL</span></div>
                         <div class="coupon-area">
                             <input type="text" id="couponInput" class="coupon-input" placeholder="Kupon Kodu Girin" onkeypress="if(event.key==='Enter') applyCoupon()">
-                            <button class="btn-outline" style="padding:15px 25px;" onclick="applyCoupon()">Uygula</button>
+                            <button class="btn-solid" style="padding:15px 25px;" onclick="applyCoupon()">Uygula</button>
                         </div>
                         <button class="btn-solid" style="width:100%; margin-top:40px; padding:20px; font-size:1.1rem; letter-spacing:1px;" onclick="processFakeCheckout()"><i class="fas fa-lock"></i> SİPARİŞİ TAMAMLA</button>
                     </div>
@@ -969,19 +1008,17 @@
             db.ref('store_settings').on('value', snap => {
                 if(snap.exists()) {
                     const prices = snap.val();
-                    // Sitedeki fiyatları güncelle
+                    // Fiyatları gizli elementlere yazdır (JS buradan okuyup modala atacak)
                     if(document.getElementById('price-ticket')) document.getElementById('price-ticket').innerText = prices.ticket || "999";
                     if(document.getElementById('price-music')) document.getElementById('price-music').innerText = prices.music || "1299";
                     if(document.getElementById('price-custom')) document.getElementById('price-custom').innerText = prices.custom || "2799";
-                    
                     if(document.getElementById('price-ticket-life')) document.getElementById('price-ticket-life').innerText = prices.ticketLife || "8500";
                     if(document.getElementById('price-guard-life')) document.getElementById('price-guard-life').innerText = prices.guardLife || "12000";
-                    
                     if(document.getElementById('price-key-1')) document.getElementById('price-key-1').innerText = prices.key1 || "49.99";
                     if(document.getElementById('price-key-7')) document.getElementById('price-key-7').innerText = prices.key7 || "189.99";
                     if(document.getElementById('price-key-30')) document.getElementById('price-key-30').innerText = prices.key30 || "489.00";
 
-                    // Admin CMS panelindeki inputları doldur
+                    // Admin CMS paneli
                     if(document.getElementById('cms-ticket')) document.getElementById('cms-ticket').value = prices.ticket || "999";
                     if(document.getElementById('cms-music')) document.getElementById('cms-music').value = prices.music || "1299";
                     if(document.getElementById('cms-custom')) document.getElementById('cms-custom').value = prices.custom || "2799";
@@ -990,18 +1027,12 @@
                     if(document.getElementById('cms-key-1')) document.getElementById('cms-key-1').value = prices.key1 || "49.99";
                     if(document.getElementById('cms-key-7')) document.getElementById('cms-key-7').value = prices.key7 || "189.99";
                     if(document.getElementById('cms-key-30')) document.getElementById('cms-key-30').value = prices.key30 || "489.00";
-                    
-                    // Bakım Modları Ayarları
-                    if(document.getElementById('cms-site-maintenance')) document.getElementById('cms-site-maintenance').value = prices.siteMaintenance || "kapali";
-                    if(document.getElementById('cms-category-maintenance')) document.getElementById('cms-category-maintenance').value = prices.categoryMaintenance || "kapali";
                 }
             });
         }
 
-        // CMS KAYDETME MOTORU (KURUCU)
         function saveStorePrices() {
             if(userRole !== 'kurucu') return showToast("Bu işlem sadece Kurucu yetkisine açıktır!", "error");
-            
             const newPrices = {
                 ticket: document.getElementById('cms-ticket').value,
                 music: document.getElementById('cms-music').value,
@@ -1014,10 +1045,7 @@
                 siteMaintenance: document.getElementById('cms-site-maintenance').value,
                 categoryMaintenance: document.getElementById('cms-category-maintenance').value
             };
-
-            db.ref('store_settings').set(newPrices).then(() => {
-                showToast("Fiyatlar ve Sistem Ayarları güncellendi!");
-            });
+            db.ref('store_settings').set(newPrices).then(() => { showToast("Fiyatlar ve Sistem Ayarları güncellendi!"); });
         }
 
         // BİLDİRİM SİSTEMİ
@@ -1053,6 +1081,16 @@
             document.getElementById('toastMessage').innerText = msg;
             setTimeout(() => t.className = '', 3500);
         }
+        
+        function openCartToast(itemName, itemPrice) {
+            document.getElementById('ct-item-name').innerText = itemName;
+            document.getElementById('ct-item-price').innerText = itemPrice + " TL";
+            document.getElementById('ct-count').innerText = cart.length;
+            const t = document.getElementById('cartToast');
+            t.classList.add('show');
+            setTimeout(() => { closeCartToast(); }, 5000);
+        }
+        function closeCartToast() { document.getElementById('cartToast').classList.remove('show'); }
 
         function switchPage(p) {
             document.querySelectorAll('.page').forEach(e => e.classList.remove('active'));
@@ -1092,6 +1130,28 @@
         function closeModal(m) { document.getElementById(m).style.display = 'none'; }
         function openAuthModal(mode) { document.getElementById('authModal').style.display = 'flex'; switchAuth(mode); }
         
+        // --- TRENDYOL TARZI ÜRÜN MODALI ---
+        function openProductModal(title, priceId, desc, iconClass) {
+            document.getElementById('pm-title').innerText = title;
+            let price = document.getElementById(priceId).innerText;
+            document.getElementById('pm-price').innerText = price;
+            document.getElementById('pm-desc').innerText = desc;
+            document.getElementById('pm-icon').className = iconClass;
+            
+            // Butonlara event ataması
+            document.getElementById('pm-add-btn').onclick = function() {
+                addToCart(title, price);
+                closeModal('productModal');
+            };
+            document.getElementById('pm-buy-btn').onclick = function() {
+                addToCartSilent(title, price); // Toast açmadan ekler
+                closeModal('productModal');
+                switchPage('cart');
+            };
+            
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
         function switchAuth(m) {
             document.getElementById('formLogin').style.display = m === 'login' ? 'block' : 'none';
             document.getElementById('formReg').style.display = m === 'login' ? 'none' : 'block';
@@ -1160,7 +1220,6 @@
             document.getElementById('authSection').style.display = 'none';
             document.getElementById('profileSection').style.display = 'flex';
             document.getElementById('profileName').innerText = u;
-            document.getElementById('avatarLetter').innerText = u[0].toUpperCase();
             
             if(r === 'user') {
                 document.getElementById('chatWidgetBtn').style.display = 'flex';
@@ -1181,8 +1240,12 @@
             if(!currentUser) { showToast("Önce giriş yapmalısın!", "error"); openAuthModal('login'); return; }
             cart.push({name: n, price: parseFloat(p)}); 
             updateCart(); 
-            showToast("Sepete eklendi!"); 
-            switchPage('cart');
+            openCartToast(n, p); 
+        }
+        function addToCartSilent(n, p) {
+            if(!currentUser) { showToast("Önce giriş yapmalısın!", "error"); openAuthModal('login'); return; }
+            cart.push({name: n, price: parseFloat(p)}); 
+            updateCart(); 
         }
         
         function applyCoupon() {
@@ -1234,6 +1297,17 @@
             setTimeout(() => { document.getElementById('fakePaymentModal').style.display = 'flex'; cart=[]; activeDiscount=0; updateCart(); }, 1000);
         }
 
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            showToast("Panoya kopyalandı!");
+        }
+
+        function toggleOrder(id) {
+            let el = document.getElementById('order-det-'+id);
+            if(el.classList.contains('open')) { el.classList.remove('open'); }
+            else { el.classList.add('open'); }
+        }
+
         function fetchOrders() {
             if(!currentUser) return;
             const c = document.getElementById('ordersList');
@@ -1250,14 +1324,47 @@
                         
                         let dateText = isLifetime ? "SINIRSIZ" : new Date(d.expiresAt).toLocaleDateString('tr-TR');
 
+                        let inviteLink = "";
+                        let guide = "Satın aldığınız lisans anahtarını Sensisoftware programı içerisinden aktif edebilirsiniz.";
+                        
+                        if(d.package.includes("Ticket Bot")) {
+                            inviteLink = "https://discord.com/oauth2/authorize?client_id=1441077426930057268&permissions=8&integration_type=0&scope=bot+applications.commands";
+                            guide = "1. Yukarıdaki linkten botu sunucunuza davet edin.<br>2. Sunucuda <code>/kurulum</code> komutunu kullanarak botu başlatın.<br>3. Size verdiğimiz lisans anahtarınızı botun DM kutusuna göndererek veya panel üzerinden yetkilendirerek aktifleştirin.";
+                        } else if(d.package.includes("SensiGuard") || d.package.includes("Sunucu Botu")) {
+                            inviteLink = "https://discord.com/oauth2/authorize?client_id=1474894248146108591&permissions=8&integration_type=0&scope=bot+applications.commands";
+                            guide = "1. Guard botunu sunucunuza davet edin ve bot rolünü hiyerarşide en üste taşıyın.<br>2. <code>/guard-setup</code> yazarak koruma sistemini aktif edin.<br>3. Size verilen lisans kodunu sisteme girerek premium özellikleri açın.";
+                        }
+
+                        let linkHtml = inviteLink ? `
+                            <div class="detail-row">
+                                <span class="detail-label">Discord Davet Linki:</span>
+                                <button class="copy-btn" onclick="copyToClipboard('${inviteLink}')"><i class="fas fa-link"></i> Linki Kopyala</button>
+                            </div>
+                        ` : '';
+
                         c.innerHTML += `
-                            <div class="order-card ${stT === 'AKTİF' ? 'active-order' : ''}">
-                                <div class="order-info">
-                                    <h4 style="font-size:1.3rem; margin-bottom:8px;">${d.package.replace("99999 Günlük (Sınırsız)", "Sınırsız Lisans")}</h4>
-                                    <p style="color:#aaa; font-size:1rem;">Bitiş: ${dateText}</p>
-                                    <div class="key-box">${ch.key}</div>
+                            <div class="order-card-v2">
+                                <div class="order-header">
+                                    <div><h4>${d.package.replace("99999 Günlük (Sınırsız)", "Sınırsız Lisans")}</h4><p>Bitiş: ${dateText}</p></div>
+                                    <div style="display:flex; gap:15px; align-items:center;">
+                                        <div class="order-status ${stC}">${stT}</div>
+                                        <button class="btn-outline" style="padding:10px 20px;" onclick="toggleOrder('${ch.key}')">Detaylar <i class="fas fa-chevron-down" style="margin-left:5px;"></i></button>
+                                    </div>
                                 </div>
-                                <div class="order-status ${stC}">${stT}</div>
+                                <div class="order-details" id="order-det-${ch.key}">
+                                    <div class="detail-row">
+                                        <span class="detail-label">Lisans Anahtarı:</span>
+                                        <div style="display:flex; gap:10px; align-items:center;">
+                                            <span class="detail-val">${ch.key}</span>
+                                            <button class="copy-btn" onclick="copyToClipboard('${ch.key}')" style="padding:8px 12px;"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    </div>
+                                    ${linkHtml}
+                                    <div class="install-guide">
+                                        <h5><i class="fas fa-info-circle"></i> Kurulum Talimatları</h5>
+                                        ${guide}
+                                    </div>
+                                </div>
                             </div>`;
                     });
                 } else { 
@@ -1277,16 +1384,12 @@
                         s.forEach(ch => {
                             const d = ch.val();
                             let isLifetime = d.package.includes("99999");
-                            
                             let timeLeftText = "";
-                            
-                            if (isLifetime) {
-                                timeLeftText = `<span style="color:#fff; font-weight:bold;">💎 SINIRSIZ</span>`;
-                            } else {
+                            if (isLifetime) { timeLeftText = `<span style="color:#fff; font-weight:bold;">💎 SINIRSIZ</span>`; } 
+                            else {
                                 let remain = d.expiresAt - Date.now();
-                                if (remain <= 0) {
-                                    timeLeftText = `<span style="color:#666; font-weight:bold;">SÜRE BİTTİ</span>`;
-                                } else {
+                                if (remain <= 0) { timeLeftText = `<span style="color:#666; font-weight:bold;">SÜRE BİTTİ</span>`; } 
+                                else {
                                     let days = Math.ceil(remain / 86400000);
                                     timeLeftText = `<span style="color:#ccc; font-weight:bold;">${days} Gün Kaldı</span>`;
                                 }

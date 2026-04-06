@@ -87,6 +87,14 @@
         }
 
         a { text-decoration: none; color: inherit; }
+        
+        /* Yükleniyor animasyonu için ufak bir eklenti */
+        .loading-text {
+            color: var(--text-gray);
+            font-style: italic;
+            padding: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -111,45 +119,18 @@
                 </div>
             </div>
 
-            <div class="forum-card d-flex align-items-center justify-content-between">
-                <div>
-                    <span class="category-tag mb-2 d-inline-block">Reverse Engineering</span>
-                    <h5 class="fw-bold mb-1">C# ile Offset Analizi ve Memory Reading Temelleri</h5>
-                    <p class="text-muted small mb-0">Ömer Altuntaş tarafından 1 saat önce paylaşıldı</p>
-                </div>
-                <div class="text-end d-none d-md-block">
-                    <div class="stat-icon"><i class="far fa-comment-alt"></i> 14</div>
-                    <div class="stat-icon mt-1"><i class="far fa-eye"></i> 256</div>
-                </div>
-            </div>
-
-            <div class="forum-card d-flex align-items-center justify-content-between">
-                <div>
-                    <span class="category-tag mb-2 d-inline-block" style="border-color: #28a745; color: #28a745; background: rgba(40,167,69,0.1);">Python</span>
-                    <h5 class="fw-bold mb-1">Otomatik YouTube Shorts Oluşturma Botu (ElevenLabs API)</h5>
-                    <p class="text-muted small mb-0">DevriyeAdmin tarafından dün paylaşıldı</p>
-                </div>
-                <div class="text-end d-none d-md-block">
-                    <div class="stat-icon"><i class="far fa-comment-alt"></i> 42</div>
-                    <div class="stat-icon mt-1"><i class="far fa-eye"></i> 1.2k</div>
+            <div id="forum-posts-container">
+                <div class="loading-text">
+                    <i class="fas fa-spinner fa-spin me-2"></i> Veritabanından konular çekiliyor...
                 </div>
             </div>
             
-            <div class="forum-card d-flex align-items-center justify-content-between">
-                <div>
-                    <span class="category-tag mb-2 d-inline-block" style="border-color: #ffc107; color: #ffc107; background: rgba(255,193,7,0.1);">WPF / UI</span>
-                    <h5 class="fw-bold mb-1">Modern Dashboard Tasarımı İçin XAML İpuçları</h5>
-                    <p class="text-muted small mb-0">DesignMaster tarafından 3 gün önce paylaşıldı</p>
-                </div>
-                <div class="text-end d-none d-md-block">
-                    <div class="stat-icon"><i class="far fa-comment-alt"></i> 8</div>
-                    <div class="stat-icon mt-1"><i class="far fa-eye"></i> 450</div>
-                </div>
-            </div>
         </div>
 
         <div class="col-lg-4">
-            <button class="btn btn-sensi w-100 mb-4 py-3"><i class="fas fa-plus me-2"></i>Yeni Konu Oluştur</button>
+            <button class="btn btn-sensi w-100 mb-4 py-3" onclick="alert('Yakında burayı da aktifleştireceğiz kanka!')">
+                <i class="fas fa-plus me-2"></i>Yeni Konu Oluştur
+            </button>
             
             <div class="sidebar-box mb-4">
                 <h6 class="text-primary fw-bold mb-3 uppercase">Popüler Kategoriler</h6>
@@ -177,5 +158,79 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    // Supabase Bağlantı Bilgilerin
+    const supabaseUrl = 'https://bfalmjjzovgeuzwyqdwa.supabase.co';
+    const supabaseKey = 'sb_publishable_2jvOJu9Fl07k_wYNoV_wgw_PK365JZo';
+    const db = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Konuları veritabanından çekip ekrana basan fonksiyon
+    async function fetchPosts() {
+        const container = document.getElementById('forum-posts-container');
+        
+        try {
+            // 'posts' tablosundan tüm verileri çek ve tarihe göre yeniler en üstte olacak şekilde sırala
+            const { data, error } = await db
+                .from('posts')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            // İçerik gelirse "Yükleniyor" yazısını temizle
+            container.innerHTML = '';
+
+            // Veritabanı boşsa uyarı ver
+            if (data.length === 0) {
+                container.innerHTML = '<div class="loading-text">Henüz hiç konu açılmamış. İlk konuyu sen aç!</div>';
+                return;
+            }
+
+            // Gelen her bir konu (post) için HTML kartı oluştur
+            data.forEach(post => {
+                // Etikete göre dinamik renk ayarlaması (Bonus güzellik)
+                let tagColor = 'var(--primary-glow)';
+                let tagBg = 'rgba(0, 123, 255, 0.1)';
+                
+                if(post.category.toLowerCase().includes('python')) {
+                    tagColor = '#28a745'; 
+                    tagBg = 'rgba(40,167,69,0.1)';
+                } else if (post.category.toLowerCase().includes('ui') || post.category.toLowerCase().includes('wpf')) {
+                    tagColor = '#ffc107'; 
+                    tagBg = 'rgba(255,193,7,0.1)';
+                }
+
+                container.innerHTML += `
+                    <div class="forum-card d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="category-tag mb-2 d-inline-block" style="border-color: ${tagColor}; color: ${tagColor}; background: ${tagBg};">
+                                ${post.category}
+                            </span>
+                            <h5 class="fw-bold mb-1">${post.title}</h5>
+                            <p class="text-muted small mb-0">${post.author} tarafından paylaşıldı</p>
+                        </div>
+                        <div class="text-end d-none d-md-block">
+                            <div class="stat-icon"><i class="far fa-comment-alt"></i> ${post.comments_count || 0}</div>
+                            <div class="stat-icon mt-1"><i class="far fa-eye"></i> ${post.views || 0}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            console.log("Veriler başarıyla çekildi!");
+
+        } catch (error) {
+            console.error('Veri çekilirken hata oluştu:', error.message);
+            container.innerHTML = '<div class="loading-text text-danger">Konular yüklenirken bir hata oluştu!</div>';
+        }
+    }
+
+    // Sayfa açıldığında fonksiyonu otomatik çalıştır
+    window.onload = fetchPosts;
+</script>
+
 </body>
 </html>

@@ -128,7 +128,7 @@
         </div>
 
         <div class="col-lg-4">
-            <button class="btn btn-sensi w-100 mb-4 py-3" onclick="alert('Yakında burayı da aktifleştireceğiz kanka!')">
+            <button class="btn btn-sensi w-100 mb-4 py-3" id="btn-new-post-trigger">
                 <i class="fas fa-plus me-2"></i>Yeni Konu Oluştur
             </button>
             
@@ -183,42 +183,73 @@
   </div>
 </div>
 
+<div class="modal fade" id="newPostModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light" style="border: 1px solid var(--primary-glow);">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title fw-bold">Yeni Konu Paylaş</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="mb-3">
+            <label class="form-label text-muted small">Konu Başlığı</label>
+            <input type="text" id="post-title-input" class="form-control bg-dark text-light border-secondary" placeholder="Örn: FiveM Sunucu Kurulum Rehberi">
+          </div>
+          <div class="mb-4">
+            <label class="form-label text-muted small">Kategori</label>
+            <select id="post-category-input" class="form-select bg-dark text-light border-secondary">
+              <option value="Reverse Engineering">Reverse Engineering</option>
+              <option value="Csharp / .NET">Csharp / .NET</option>
+              <option value="Python Scripts">Python Scripts</option>
+              <option value="AI / YouTube Otomasyonu">AI / YouTube Otomasyonu</option>
+              <option value="FiveM / Game Servers">FiveM / Game Servers</option>
+              <option value="Tasarım / UI">Tasarım / UI</option>
+              <option value="Diğer">Diğer</option>
+            </select>
+          </div>
+          <div id="new-post-message" class="text-center small mb-3 fw-bold"></div>
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-sensi" id="btn-submit-post">Konuyu Gönder</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-    // 1. Supabase Bağlantısı
     const supabaseUrl = 'https://bfalmjjzovgeuzwyqdwa.supabase.co';
     const supabaseKey = 'sb_publishable_2jvOJu9Fl07k_wYNoV_wgw_PK365JZo';
     const db = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // 2. HTML Elementlerini Tanımlama
     const authSection = document.getElementById('auth-section');
     const authMessage = document.getElementById('auth-message');
     const emailInput = document.getElementById('email-input');
     const passwordInput = document.getElementById('password-input');
 
-    // 3. Kullanıcı Oturum Kontrolü
+    // Kullanıcı Oturum Kontrolü
     async function checkUser() {
         const { data: { user } } = await db.auth.getUser();
         
         if (user) {
-            // Kullanıcı giriş yapmış
             let username = user.email.split('@')[0];
             authSection.innerHTML = `
                 <span class="text-muted me-3 d-none d-md-inline">Hoş geldin, <strong class="text-white">${username}</strong></span>
                 <img src="https://ui-avatars.com/api/?name=${username}&background=0D8ABC&color=fff" class="rounded-circle me-3" width="35" alt="Profile">
                 <button class="btn btn-sm btn-outline-danger" onclick="logout()">Çıkış Yap</button>
             `;
+            return user; // Kullanıcıyı döndür ki başka yerlerde kullanabilelim
         } else {
-            // Kullanıcı giriş yapmamış
             authSection.innerHTML = `
                 <button class="btn btn-sensi btn-sm px-4" data-bs-toggle="modal" data-bs-target="#authModal">Giriş Yap</button>
             `;
+            return null;
         }
     }
 
-    // 4. Konuları Çekme (Forum Akışı)
+    // Konuları Çekme
     async function fetchPosts() {
         const container = document.getElementById('forum-posts-container');
         
@@ -241,10 +272,10 @@
                 let tagColor = 'var(--primary-glow)';
                 let tagBg = 'rgba(0, 123, 255, 0.1)';
                 
-                if(post.category.toLowerCase().includes('python')) {
+                if(post.category.toLowerCase().includes('python') || post.category.toLowerCase().includes('fivem')) {
                     tagColor = '#28a745'; 
                     tagBg = 'rgba(40,167,69,0.1)';
-                } else if (post.category.toLowerCase().includes('ui') || post.category.toLowerCase().includes('wpf')) {
+                } else if (post.category.toLowerCase().includes('ui') || post.category.toLowerCase().includes('ai')) {
                     tagColor = '#ffc107'; 
                     tagBg = 'rgba(255,193,7,0.1)';
                 }
@@ -272,15 +303,11 @@
         }
     }
 
-    // 5. Kayıt Ol İşlemi
+    // Kayıt Ol
     document.getElementById('btn-register').addEventListener('click', async () => {
         authMessage.innerText = "Kayıt yapılıyor...";
         authMessage.className = "text-warning small mb-3 fw-bold";
-        
-        const { data, error } = await db.auth.signUp({
-            email: emailInput.value,
-            password: passwordInput.value,
-        });
+        const { data, error } = await db.auth.signUp({ email: emailInput.value, password: passwordInput.value });
 
         if (error) {
             authMessage.innerText = "Hata: " + error.message;
@@ -291,41 +318,98 @@
         }
     });
 
-    // 6. Giriş Yap İşlemi
+    // Giriş Yap
     document.getElementById('btn-login').addEventListener('click', async () => {
         authMessage.innerText = "Giriş yapılıyor...";
         authMessage.className = "text-warning small mb-3 fw-bold";
-
-        const { data, error } = await db.auth.signInWithPassword({
-            email: emailInput.value,
-            password: passwordInput.value,
-        });
+        const { data, error } = await db.auth.signInWithPassword({ email: emailInput.value, password: passwordInput.value });
 
         if (error) {
             authMessage.innerText = "Giriş başarısız. Şifreyi kontrol et.";
             authMessage.className = "text-danger small mb-3 fw-bold";
         } else {
-            // Başarılı girişte modalı kapat ve ekranı güncelle
             var authModalElement = document.getElementById('authModal');
             var modal = bootstrap.Modal.getInstance(authModalElement) || new bootstrap.Modal(authModalElement);
             modal.hide();
-            
-            // Inputları temizle
-            emailInput.value = '';
-            passwordInput.value = '';
-            authMessage.innerText = '';
-            
+            emailInput.value = ''; passwordInput.value = ''; authMessage.innerText = '';
             checkUser();
         }
     });
 
-    // 7. Çıkış Yap İşlemi
+    // Çıkış Yap
     async function logout() {
         await db.auth.signOut();
         checkUser();
     }
 
-    // 8. Sistemi Başlat
+    // --------------------------------------------------------
+    // YENİ: KONU AÇMA SİSTEMİ KONTROLLERİ
+    // --------------------------------------------------------
+
+    // Yeni Konu Butonuna Tıklanınca
+    document.getElementById('btn-new-post-trigger').addEventListener('click', async () => {
+        const currentUser = await checkUser();
+        
+        if (currentUser) {
+            // Giriş yapmışsa Konu Açma modalını göster
+            var postModal = new bootstrap.Modal(document.getElementById('newPostModal'));
+            postModal.show();
+        } else {
+            // Giriş yapmamışsa uyarı ver ve Kayıt/Giriş modalını aç
+            alert("Kanka konu açmak için önce giriş yapman lazım!");
+            var authModal = new bootstrap.Modal(document.getElementById('authModal'));
+            authModal.show();
+        }
+    });
+
+    // Konuyu Veritabanına Gönder
+    document.getElementById('btn-submit-post').addEventListener('click', async () => {
+        const titleInput = document.getElementById('post-title-input').value;
+        const categoryInput = document.getElementById('post-category-input').value;
+        const postMessage = document.getElementById('new-post-message');
+
+        if (!titleInput) {
+            postMessage.innerText = "Konu başlığını boş bırakamazsın!";
+            postMessage.className = "text-danger small mb-3 fw-bold";
+            return;
+        }
+
+        postMessage.innerText = "Veritabanına işleniyor...";
+        postMessage.className = "text-warning small mb-3 fw-bold";
+
+        // Şu anki kullanıcı adını al (Mailin ilk kısmı)
+        const currentUser = await checkUser();
+        let username = currentUser.email.split('@')[0];
+
+        // Veritabanına Ekle (Insert)
+        const { data, error } = await db.from('posts').insert([
+            { 
+                title: titleInput, 
+                author: username, 
+                category: categoryInput,
+                views: 0,
+                comments_count: 0
+            }
+        ]);
+
+        if (error) {
+            postMessage.innerText = "Bir hata oluştu: " + error.message;
+            postMessage.className = "text-danger small mb-3 fw-bold";
+        } else {
+            // Başarılı olursa modalı kapat ve formu temizle
+            var postModalElement = document.getElementById('newPostModal');
+            var modal = bootstrap.Modal.getInstance(postModalElement);
+            modal.hide();
+            
+            document.getElementById('post-title-input').value = '';
+            postMessage.innerText = '';
+            
+            // Konuları yeniden çek ki eklediğimiz konu en üste düşsün
+            fetchPosts();
+        }
+    });
+
+    // Sistemi Başlat
     window.onload = () => {
         checkUser();
         fetchPosts();

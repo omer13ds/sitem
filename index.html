@@ -88,7 +88,6 @@
 
         a { text-decoration: none; color: inherit; }
         
-        /* Yükleniyor animasyonu için ufak bir eklenti */
         .loading-text {
             color: var(--text-gray);
             font-style: italic;
@@ -102,9 +101,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-sensi py-3">
     <div class="container">
         <a class="navbar-brand" href="#">SENSI <span class="text-primary">SOFTWARE</span></a>
-        <div class="d-flex align-items-center">
-            <span class="text-muted me-3 d-none d-md-inline">Hoş geldin, <strong>Geliştirici</strong></span>
-            <img src="https://ui-avatars.com/api/?name=Sensi&background=0D8ABC&color=fff" class="rounded-circle" width="35" alt="Profile">
+        
+        <div class="d-flex align-items-center" id="auth-section">
+            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                <span class="visually-hidden">Yükleniyor...</span>
+            </div>
         </div>
     </div>
 </nav>
@@ -124,7 +125,6 @@
                     <i class="fas fa-spinner fa-spin me-2"></i> Veritabanından konular çekiliyor...
                 </div>
             </div>
-            
         </div>
 
         <div class="col-lg-4">
@@ -157,22 +157,72 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light" style="border: 1px solid var(--primary-glow);">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title fw-bold">Sensi Forum'a Katıl</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="mb-3">
+          <label class="form-label text-muted small">E-posta Adresi</label>
+          <input type="email" id="email-input" class="form-control bg-dark text-light border-secondary" placeholder="ornek@mail.com">
+        </div>
+        <div class="mb-4">
+          <label class="form-label text-muted small">Şifre</label>
+          <input type="password" id="password-input" class="form-control bg-dark text-light border-secondary" placeholder="******">
+        </div>
+        <div id="auth-message" class="text-center small mb-3 fw-bold"></div>
+        <div class="d-grid gap-2">
+          <button type="button" class="btn btn-sensi" id="btn-login">Giriş Yap</button>
+          <button type="button" class="btn btn-outline-secondary" id="btn-register">Yeni Kayıt Ol</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-    // Supabase Bağlantı Bilgilerin
+    // 1. Supabase Bağlantısı
     const supabaseUrl = 'https://bfalmjjzovgeuzwyqdwa.supabase.co';
     const supabaseKey = 'sb_publishable_2jvOJu9Fl07k_wYNoV_wgw_PK365JZo';
     const db = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // Konuları veritabanından çekip ekrana basan fonksiyon
+    // 2. HTML Elementlerini Tanımlama
+    const authSection = document.getElementById('auth-section');
+    const authMessage = document.getElementById('auth-message');
+    const emailInput = document.getElementById('email-input');
+    const passwordInput = document.getElementById('password-input');
+
+    // 3. Kullanıcı Oturum Kontrolü
+    async function checkUser() {
+        const { data: { user } } = await db.auth.getUser();
+        
+        if (user) {
+            // Kullanıcı giriş yapmış
+            let username = user.email.split('@')[0];
+            authSection.innerHTML = `
+                <span class="text-muted me-3 d-none d-md-inline">Hoş geldin, <strong class="text-white">${username}</strong></span>
+                <img src="https://ui-avatars.com/api/?name=${username}&background=0D8ABC&color=fff" class="rounded-circle me-3" width="35" alt="Profile">
+                <button class="btn btn-sm btn-outline-danger" onclick="logout()">Çıkış Yap</button>
+            `;
+        } else {
+            // Kullanıcı giriş yapmamış
+            authSection.innerHTML = `
+                <button class="btn btn-sensi btn-sm px-4" data-bs-toggle="modal" data-bs-target="#authModal">Giriş Yap</button>
+            `;
+        }
+    }
+
+    // 4. Konuları Çekme (Forum Akışı)
     async function fetchPosts() {
         const container = document.getElementById('forum-posts-container');
         
         try {
-            // 'posts' tablosundan tüm verileri çek ve tarihe göre yeniler en üstte olacak şekilde sırala
             const { data, error } = await db
                 .from('posts')
                 .select('*')
@@ -180,18 +230,14 @@
 
             if (error) throw error;
 
-            // İçerik gelirse "Yükleniyor" yazısını temizle
             container.innerHTML = '';
 
-            // Veritabanı boşsa uyarı ver
             if (data.length === 0) {
                 container.innerHTML = '<div class="loading-text">Henüz hiç konu açılmamış. İlk konuyu sen aç!</div>';
                 return;
             }
 
-            // Gelen her bir konu (post) için HTML kartı oluştur
             data.forEach(post => {
-                // Etikete göre dinamik renk ayarlaması (Bonus güzellik)
                 let tagColor = 'var(--primary-glow)';
                 let tagBg = 'rgba(0, 123, 255, 0.1)';
                 
@@ -219,8 +265,6 @@
                     </div>
                 `;
             });
-            
-            console.log("Veriler başarıyla çekildi!");
 
         } catch (error) {
             console.error('Veri çekilirken hata oluştu:', error.message);
@@ -228,8 +272,64 @@
         }
     }
 
-    // Sayfa açıldığında fonksiyonu otomatik çalıştır
-    window.onload = fetchPosts;
+    // 5. Kayıt Ol İşlemi
+    document.getElementById('btn-register').addEventListener('click', async () => {
+        authMessage.innerText = "Kayıt yapılıyor...";
+        authMessage.className = "text-warning small mb-3 fw-bold";
+        
+        const { data, error } = await db.auth.signUp({
+            email: emailInput.value,
+            password: passwordInput.value,
+        });
+
+        if (error) {
+            authMessage.innerText = "Hata: " + error.message;
+            authMessage.className = "text-danger small mb-3 fw-bold";
+        } else {
+            authMessage.innerText = "Kayıt başarılı! Şimdi giriş yapabilirsin.";
+            authMessage.className = "text-success small mb-3 fw-bold";
+        }
+    });
+
+    // 6. Giriş Yap İşlemi
+    document.getElementById('btn-login').addEventListener('click', async () => {
+        authMessage.innerText = "Giriş yapılıyor...";
+        authMessage.className = "text-warning small mb-3 fw-bold";
+
+        const { data, error } = await db.auth.signInWithPassword({
+            email: emailInput.value,
+            password: passwordInput.value,
+        });
+
+        if (error) {
+            authMessage.innerText = "Giriş başarısız. Şifreyi kontrol et.";
+            authMessage.className = "text-danger small mb-3 fw-bold";
+        } else {
+            // Başarılı girişte modalı kapat ve ekranı güncelle
+            var authModalElement = document.getElementById('authModal');
+            var modal = bootstrap.Modal.getInstance(authModalElement) || new bootstrap.Modal(authModalElement);
+            modal.hide();
+            
+            // Inputları temizle
+            emailInput.value = '';
+            passwordInput.value = '';
+            authMessage.innerText = '';
+            
+            checkUser();
+        }
+    });
+
+    // 7. Çıkış Yap İşlemi
+    async function logout() {
+        await db.auth.signOut();
+        checkUser();
+    }
+
+    // 8. Sistemi Başlat
+    window.onload = () => {
+        checkUser();
+        fetchPosts();
+    };
 </script>
 
 </body>

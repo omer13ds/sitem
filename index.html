@@ -12,8 +12,8 @@
 
 <div class="overlay"></div>
 
-<nav class="navbar navbar-expand-lg navbar-dark p-4 fixed-top">
-    <div class="container-fluid px-md-5">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top p-3 px-md-5">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">T H R E E <span class="neon-dot">.</span></a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -22,87 +22,137 @@
 
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" href="#" onclick="showSection('public-view')">ANA SAYFA</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">ROL SS</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">HİKAYEMİZ</a></li>
-                <li class="nav-item d-none" id="nav-dashboard"><a class="nav-link text-warning" href="#" onclick="showSection('dashboard-view')">EKİP PANELİ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#hero">VİTRİN</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">BİZ KİMİZ?</a></li>
+                <li class="nav-item"><a class="nav-link" href="#gallery">GALERİ</a></li>
+                <li class="nav-item d-none" id="nav-dashboard"><a class="nav-link text-warning fw-bold" href="#" onclick="showDashboard()">EKİP PANELİ</a></li>
             </ul>
             <div class="d-flex align-items-center" id="auth-buttons">
-                <button class="btn btn-three me-2" data-bs-toggle="modal" data-bs-target="#loginModal">GİRİŞ</button>
-                <button class="btn btn-outline-light rounded-0" data-bs-toggle="modal" data-bs-target="#registerModal">KAYIT</button>
-            </div>
+                </div>
         </div>
     </div>
 </nav>
 
-<div class="container" style="margin-top: 150px;">
+<div id="public-website">
     
-    <div id="public-view" class="view-section text-center">
+    <section id="hero" class="d-flex align-items-center justify-content-center text-center">
         <div class="hero-content">
             <h1 class="brand-title">THREE</h1>
             <p class="brand-subtitle">GÜNDÜZ PARTİ, GECE HİYERARŞİ.</p>
             <div class="mt-5">
-                <button class="btn btn-three btn-lg px-5">BİZE KATIL</button>
+                <a href="#about" class="scroll-arrow"><i class="fas fa-chevron-down"></i></a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="dashboard-view" class="view-section" style="display: none;">
-        <div class="row mb-5">
-            <div class="col-md-8">
-                <h2 class="fw-bold text-white">İÇ DAİRE <span class="text-danger">///</span></h2>
-                <p class="text-muted" id="user-role-text">Rol: Kontrol Ediliyor...</p>
+    <section id="about" class="container section-padding">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <h2 class="section-heading">Sınır Yok.<br><span class="text-neon">Kurallar Yok.</span></h2>
+                <p class="text-muted mt-4 lh-lg" style="font-size: 1.1rem;">
+                    Los Santos'un en lüks kulüplerinde şampanya patlatırken, şehrin yeraltı dünyasının iplerini elimizde tutuyoruz. Biz bir aile değiliz, biz bir <strong>hiyerarşiyiz</strong>. Dışarıdan bakıldığında sadece eğlenen gençler görebilirsin. Ama içeriye girdiğinde, bedelini ödemek zorunda kalacağın bir düzenle karşılaşırsın.
+                </p>
             </div>
-            <div class="col-md-4 text-md-end">
-                <h3 class="text-success mb-0">$2,450,000</h3>
-                <small class="text-muted">EKİP KASASI</small>
-            </div>
-        </div>
-
-        <div class="glass-panel">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h5 class="text-uppercase fw-bold m-0" style="letter-spacing: 2px;">HAFTALIK ÖDEME LİSTESİ</h5>
-                <div id="admin-controls" style="display: none;">
-                    <button class="btn btn-danger btn-sm rounded-0">KASAYI SIFIRLA</button>
+            <div class="col-md-6">
+                <div class="glass-panel text-center p-5">
+                    <i class="fas fa-gem fa-3x mb-3 text-neon"></i>
+                    <h4 class="text-white fw-bold">SADAKAT VE KAN</h4>
+                    <p class="text-muted small">Ekibe girmek kolaydır, hayatta kalmak mesele. Her üye kasaya olan borcunu bilir.</p>
                 </div>
             </div>
-            
-            <div class="table-responsive">
-                <table class="table table-glass">
-                    <thead>
-                        <tr>
-                            <th>ÜYE</th>
-                            <th>RÜTBE</th>
-                            <th>AİDAT</th>
-                            <th>DURUM</th>
-                        </tr>
-                    </thead>
-                    <tbody id="payment-table-body">
-                        </tbody>
-                </table>
+        </div>
+    </section>
+
+    <section id="gallery" class="container section-padding">
+        <div class="text-center mb-5">
+            <h2 class="section-heading">GECENİN <span class="text-neon">SAHİPLERİ</span></h2>
+            <p class="text-muted">Los Santos sokaklarından manzaralar.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1603366615917-1fa6dad5c4fa?q=80&w=800&auto=format&fit=crop" class="img-fluid" alt="SS 1">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1542051812-ba32e18ce6a3?q=80&w=800&auto=format&fit=crop" class="img-fluid" alt="SS 2">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=800&auto=format&fit=crop" class="img-fluid" alt="SS 3">
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
 </div>
 
-<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content glass-panel p-4">
-            <h4 class="text-center text-white mb-4">GİRİŞ YAP</h4>
-            <input type="email" id="login-email" class="form-control mb-3" placeholder="E-posta">
-            <input type="password" id="login-pass" class="form-control mb-4" placeholder="Şifre">
-            <button class="btn btn-three w-100 py-3" onclick="handleLogin()">SİSTEME GİR</button>
+<div id="dashboard-view" class="container section-padding" style="display: none; margin-top: 50px;">
+    <button class="btn btn-outline-light btn-sm mb-4" onclick="showPublicSite()"><i class="fas fa-arrow-left me-2"></i>Siteye Dön</button>
+    
+    <div class="row mb-5">
+        <div class="col-md-8">
+            <h2 class="fw-bold text-white" style="font-family: 'Montserrat'; font-size: 3rem;">İÇ DAİRE <span class="text-neon">///</span></h2>
+            <p class="text-muted" id="user-role-text">Rol: Kontrol Ediliyor...</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <h3 class="text-success mb-0 fw-bold" style="font-size: 2.5rem;">$2,450,000</h3>
+            <small class="text-muted text-uppercase letter-spacing">Ekip Kasası</small>
+        </div>
+    </div>
+
+    <div class="glass-panel">
+        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary pb-3">
+            <h5 class="text-uppercase fw-bold m-0 text-white" style="letter-spacing: 2px;">HAFTALIK ÖDEME LİSTESİ</h5>
+            <div id="admin-controls" style="display: none;">
+                <button class="btn btn-danger btn-sm rounded-0 fw-bold"><i class="fas fa-skull me-2"></i>KASAYI SIFIRLA</button>
+            </div>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-glass">
+                <thead>
+                    <tr>
+                        <th>ÜYE ADI</th>
+                        <th>RÜTBE</th>
+                        <th>AİDAT</th>
+                        <th>DURUM</th>
+                    </tr>
+                </thead>
+                <tbody id="payment-table-body">
+                    </tbody>
+            </table>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="loginModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content glass-panel p-4">
-            <h4 class="text-center text-white mb-4">EKİBE KAYDOL</h4>
-            <input type="text" id="reg-user" class="form-control mb-3" placeholder="Kullanıcı Adı">
-            <input type="email" id="reg-email" class="form-control mb-3" placeholder="E-posta">
-            <input type="password" id="reg-pass" class="form-control mb-4" placeholder="Şifre">
+            <h4 class="text-center text-white mb-4 fw-bold letter-spacing">SİSTEME GİRİŞ</h4>
+            <div class="mb-3">
+                <input type="text" id="login-user" class="form-control" placeholder="Kullanıcı Adı">
+            </div>
+            <div class="mb-4">
+                <input type="password" id="login-pass" class="form-control" placeholder="Şifre">
+            </div>
+            <button class="btn btn-three w-100 py-3" onclick="handleLogin()">GİRİŞ YAP</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="registerModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-panel p-4">
+            <h4 class="text-center text-white mb-4 fw-bold letter-spacing">EKİBE KATIL</h4>
+            <div class="mb-3">
+                <input type="text" id="reg-user" class="form-control" placeholder="Kullanıcı Adı (Örn: omer13ds)">
+            </div>
+            <div class="mb-4">
+                <input type="password" id="reg-pass" class="form-control" placeholder="Şifre (En az 6 hane)">
+            </div>
             <button class="btn btn-three w-100 py-3" onclick="handleRegister()">KAYIT OL</button>
         </div>
     </div>
@@ -116,55 +166,71 @@
     const supabaseKey = 'sb_publishable_2jvOJu9Fl07k_wYNoV_wgw_PK365JZo';
     const db = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // KULLANICI KONTROLÜ
+    // E-posta bypass sistemi (Kullanıcı fark etmeden arkada mail oluşturur)
+    const DUMMY_DOMAIN = "@three.local";
+
     async function checkSession() {
         const { data: { user } } = await db.auth.getUser();
         const authBtnArea = document.getElementById('auth-buttons');
         const dashNav = document.getElementById('nav-dashboard');
 
         if (user) {
-            // Profil bilgisini çek (Rolü görmek için)
             const { data: profile } = await db.from('profiles').select('*').eq('id', user.id).single();
             
-            authBtnArea.innerHTML = `<span class="text-white me-3 small">${profile.username}</span><button class="btn btn-sm btn-outline-danger" onclick="handleLogout()">ÇIKIŞ</button>`;
+            // Çıkış butonu ve kullanıcı adı
+            authBtnArea.innerHTML = `
+                <span class="text-white me-3 fw-bold">${profile.username.toUpperCase()}</span>
+                <button class="btn btn-sm btn-outline-danger border-0 rounded-0" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> ÇIKIŞ</button>
+            `;
             
-            // Eğer rol 'Ekip Üyesi' veya 'Admin' ise paneli göster
+            // Yetki Kontrolü
             if (profile.role === 'Admin' || profile.role === 'Ekip Üyesi') {
                 dashNav.classList.remove('d-none');
-                document.getElementById('user-role-text').innerText = `Yetki: ${profile.role}`;
+                document.getElementById('user-role-text').innerHTML = `Sistem Yetkisi: <strong class="text-white">${profile.role}</strong>`;
                 if (profile.role === 'Admin') document.getElementById('admin-controls').style.display = 'block';
             }
         } else {
-            authBtnArea.innerHTML = `<button class="btn btn-three me-2" data-bs-toggle="modal" data-bs-target="#loginModal">GİRİŞ</button><button class="btn btn-outline-light rounded-0" data-bs-toggle="modal" data-bs-target="#registerModal">KAYIT</button>`;
+            // Giriş yapmamışsa
+            authBtnArea.innerHTML = `
+                <button class="btn btn-three me-2 btn-sm px-4" data-bs-toggle="modal" data-bs-target="#loginModal">GİRİŞ</button>
+                <button class="btn btn-outline-light rounded-0 btn-sm px-4" data-bs-toggle="modal" data-bs-target="#registerModal">KAYIT</button>
+            `;
             dashNav.classList.add('d-none');
-            showSection('public-view');
         }
     }
 
-    // KAYIT FONKSİYONU
+    // KAYIT OL - SADECE KULLANICI ADIYLA
     async function handleRegister() {
-        const email = document.getElementById('reg-email').value;
+        const username = document.getElementById('reg-user').value.trim().toLowerCase();
         const pass = document.getElementById('reg-pass').value;
-        const user = document.getElementById('reg-user').value;
-
-        const { data, error } = await db.auth.signUp({ email, password: pass });
         
-        if (error) alert(error.message);
-        else {
-            // Profil oluştur (Ömer'in kullanıcı adını otomatik admin yapıyoruz)
-            let role = (user === 'omer13ds') ? 'Admin' : 'Ziyaretçi';
-            await db.from('profiles').insert([{ id: data.user.id, username: user, role: role }]);
-            alert("Kayıt başarılı! Giriş yapabilirsin.");
+        if(username.length < 3 || pass.length < 6) {
+            alert("Kullanıcı adı en az 3, şifre en az 6 haneli olmalı kanka!");
+            return;
+        }
+
+        const fakeEmail = username + DUMMY_DOMAIN;
+        const { data, error } = await db.auth.signUp({ email: fakeEmail, password: pass });
+        
+        if (error) {
+            alert("Kayıt Hatası: " + error.message);
+        } else {
+            // Sitenin babasını belirliyoruz
+            let role = (username === 'omer13ds') ? 'Admin' : 'Ziyaretçi';
+            await db.from('profiles').insert([{ id: data.user.id, username: username, role: role }]);
+            alert("Ekibe hoş geldin! Şimdi giriş yapabilirsin.");
             location.reload();
         }
     }
 
-    // GİRİŞ FONKSİYONU
+    // GİRİŞ YAP - SADECE KULLANICI ADIYLA
     async function handleLogin() {
-        const email = document.getElementById('login-email').value;
+        const username = document.getElementById('login-user').value.trim().toLowerCase();
         const pass = document.getElementById('login-pass').value;
-        const { error } = await db.auth.signInWithPassword({ email, password: pass });
-        if (error) alert("Hata: " + error.message);
+        const fakeEmail = username + DUMMY_DOMAIN;
+
+        const { error } = await db.auth.signInWithPassword({ email: fakeEmail, password: pass });
+        if (error) alert("Giriş Başarısız. Kullanıcı adı veya şifre yanlış.");
         else location.reload();
     }
 
@@ -173,23 +239,35 @@
         location.reload();
     }
 
-    function showSection(id) {
-        document.querySelectorAll('.view-section').forEach(s => s.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
-        if(id === 'dashboard-view') fetchPayments();
+    // SAYFA GEÇİŞLERİ
+    function showDashboard() {
+        document.getElementById('public-website').style.display = 'none';
+        document.getElementById('dashboard-view').style.display = 'block';
+        window.scrollTo(0,0);
+        fetchPayments();
     }
 
+    function showPublicSite() {
+        document.getElementById('dashboard-view').style.display = 'none';
+        document.getElementById('public-website').style.display = 'block';
+    }
+
+    // KASA VERİLERİ ÇEKME
     async function fetchPayments() {
         const { data } = await db.from('crew_payments').select('*');
         const tbody = document.getElementById('payment-table-body');
-        tbody.innerHTML = data.map(p => `
-            <tr>
-                <td>${p.member_name}</td>
-                <td>${p.rank}</td>
-                <td>${p.amount}</td>
-                <td class="${p.status === 'Ödendi' ? 'text-success' : 'text-danger'}">${p.status}</td>
-            </tr>
-        `).join('');
+        if(data && data.length > 0) {
+            tbody.innerHTML = data.map(p => `
+                <tr>
+                    <td class="text-white fw-bold">${p.member_name}</td>
+                    <td>${p.rank}</td>
+                    <td class="text-white">${p.amount}</td>
+                    <td class="${p.status === 'Ödendi' ? 'text-success' : 'text-danger'} fw-bold">${p.status}</td>
+                </tr>
+            `).join('');
+        } else {
+            tbody.innerHTML = `<tr><td colspan="4" class="text-center text-muted">Kasa verisi bulunamadı.</td></tr>`;
+        }
     }
 
     window.onload = checkSession;

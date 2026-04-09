@@ -4,113 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THREE | Welcome to the Night</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Senin Github'daki CSS'ini buraya entegre edeceğiz, şimdilik bu efsanevi temayı kullanıyoruz */
-        :root {
-            --three-red: #8b0000;
-            --three-neon: #ff003c;
-            --glass-bg: rgba(10, 10, 10, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.05);
-            --text-glow: 0 0 10px rgba(255, 0, 60, 0.5);
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            color: white;
-            /* BURAYA EN BABA ROL SS'İNİZİN LİNKİ GELECEK */
-            background: url('https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
-            background-size: cover;
-            overflow-x: hidden;
-        }
-
-        /* Arka planı hafif karartıp "Allah gibi" gizemli bir hava katmak için */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%);
-            z-index: -1;
-        }
-
-        /* CAM TASARIMI (Glassmorphism) */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            padding: 30px;
-        }
-
-        /* T H R E E Logosu */
-        .brand-title {
-            font-size: 4rem;
-            font-weight: 900;
-            letter-spacing: 15px;
-            text-transform: uppercase;
-            background: linear-gradient(to right, #fff, #555);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0;
-        }
-
-        .brand-subtitle {
-            color: var(--three-neon);
-            letter-spacing: 5px;
-            font-size: 0.9rem;
-            text-shadow: var(--text-glow);
-            text-transform: uppercase;
-        }
-
-        /* Üye Tablosu Özelleştirmesi */
-        .table-glass {
-            color: white;
-        }
-        .table-glass th {
-            background: rgba(255, 0, 60, 0.1);
-            color: var(--three-neon);
-            border-bottom: 1px solid var(--three-neon);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        .table-glass td {
-            background: transparent;
-            color: #ddd;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            vertical-align: middle;
-        }
-        
-        .status-paid { color: #00ff88; text-shadow: 0 0 5px rgba(0,255,136,0.3); }
-        .status-debt { color: var(--three-neon); text-shadow: var(--text-glow); }
-
-        /* Butonlar */
-        .btn-three {
-            background: transparent;
-            color: white;
-            border: 1px solid var(--three-neon);
-            border-radius: 0;
-            padding: 10px 25px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            transition: all 0.3s ease;
-        }
-        .btn-three:hover {
-            background: var(--three-neon);
-            color: white;
-            box-shadow: var(--text-glow);
-        }
-
-        /* Ekran Geçişleri İçin */
-        #dashboard-view { display: none; }
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -118,7 +16,7 @@
 
 <nav class="navbar navbar-dark p-4">
     <div class="container-fluid px-5">
-        <a class="navbar-brand" href="#" style="letter-spacing: 5px; font-weight: bold;">///</a>
+        <a class="navbar-brand" href="#">///</a>
         <div class="d-flex" id="nav-buttons">
             <button class="btn btn-three" onclick="showLoginModal()">Üye Girişi</button>
         </div>
@@ -141,22 +39,22 @@
         </div>
     </div>
 
-    <div id="dashboard-view">
+    <div id="dashboard-view" style="display: none;">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h3 class="fw-bold mb-0">İÇ DAİRE <span style="color: var(--three-neon);">///</span></h3>
+                <h3 class="fw-bold mb-0 text-white">İÇ DAİRE <span style="color: var(--three-neon);">///</span></h3>
                 <small class="text-muted" id="welcome-text">Hoş geldin, Ekip Üyesi</small>
             </div>
             <div>
-                <h4 class="mb-0 text-end" style="color: #00ff88;">$2,450,000</h4>
+                <h4 class="mb-0 text-end" style="color: var(--status-paid);">$2,450,000</h4>
                 <small class="text-muted">Güncel Kasa</small>
             </div>
         </div>
 
         <div class="glass-panel">
-            <div class="d-flex justify-content-between mb-4">
-                <h5 class="fw-bold text-uppercase" style="letter-spacing: 2px;">Haftalık Ödeme Tablosu</h5>
-                <button class="btn btn-three btn-sm"><i class="fas fa-plus"></i> Kasa Güncelle</button>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold text-white text-uppercase m-0" style="letter-spacing: 2px;">Haftalık Ödeme Tablosu</h5>
+                <button class="btn btn-three btn-sm py-2"><i class="fas fa-plus me-1"></i> Kasa Güncelle</button>
             </div>
             
             <div class="table-responsive">
@@ -209,20 +107,20 @@
 
 <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content glass-panel" style="border: 1px solid var(--three-neon); background: rgba(0,0,0,0.85);">
+    <div class="modal-content glass-panel" style="border: 1px solid var(--three-neon); background: rgba(0,0,0,0.85); padding: 25px;">
       <div class="modal-header border-0 pb-0">
-        <h5 class="modal-title fw-bold w-100 text-center brand-subtitle">SADECE ÜYELER</h5>
-        <button type="button" class="btn-close btn-close-white position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title fw-bold w-100 text-center brand-subtitle text-white">SADECE ÜYELER</h5>
+        <button type="button" class="btn-close btn-close-white position-absolute end-0 me-3 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-4 pt-2 text-center">
         <p class="text-muted small mb-4">Yetkin yoksa bu kapıyı zorlama.</p>
         <div class="mb-3 text-start">
-          <input type="text" id="username" class="form-control bg-dark text-light border-secondary" placeholder="Kullanıcı Adı" style="border-radius: 0;">
+          <input type="text" id="username" class="form-control" placeholder="Kullanıcı Adı">
         </div>
         <div class="mb-4 text-start">
-          <input type="password" id="password" class="form-control bg-dark text-light border-secondary" placeholder="Şifre (Passcode)" style="border-radius: 0;">
+          <input type="password" id="password" class="form-control" placeholder="Şifre (Passcode)">
         </div>
-        <button type="button" class="btn btn-three w-100 py-2" onclick="fakeLogin()">Sisteme Gir</button>
+        <button type="button" class="btn btn-three w-100 py-3" onclick="fakeLogin()">Sisteme Gir</button>
       </div>
     </div>
   </div>
@@ -240,7 +138,6 @@
         modal.show();
     }
 
-    // Şimdilik sadece görsellik için sahte giriş fonksiyonu (Supabase bağlayana kadar)
     function fakeLogin() {
         const user = document.getElementById('username').value;
         if(user === "") {
@@ -248,18 +145,15 @@
             return;
         }
         
-        // Modalı Kapat
         var modalElement = document.getElementById('loginModal');
         var modalInstance = bootstrap.Modal.getInstance(modalElement);
         modalInstance.hide();
 
-        // Vitrini Gizle, Çete Panelini Aç
         publicView.style.display = 'none';
         dashboardView.style.display = 'block';
         
-        // Hoşgeldin yazısını ve navbar butonunu güncelle
         welcomeText.innerHTML = `Hoş geldin, <strong class="text-white">${user.toUpperCase()}</strong>`;
-        navButtons.innerHTML = `<button class="btn btn-outline-danger rounded-0" style="letter-spacing:1px;" onclick="logout()">SİSTEMDEN ÇIK</button>`;
+        navButtons.innerHTML = `<button class="btn btn-outline-danger border-0" style="letter-spacing:1px;" onclick="logout()">ÇIKIŞ YAP</button>`;
     }
 
     function logout() {

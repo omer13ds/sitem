@@ -9,7 +9,7 @@
     
     <style>
         /* =========================================
-           T H R E E  |  C I N E M A T I C   S T Y L E S (GÖMÜLÜ)
+           T H R E E  |  C I N E M A T I C   S T Y L E S
            ========================================= */
 
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&family=Inter:wght@300;400;500;600&display=swap');
@@ -46,9 +46,9 @@
 
         /* ================== NAVBAR ================== */
         .navbar {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.6);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             transition: all 0.3s ease;
         }
 
@@ -164,10 +164,9 @@
             transform: scale(1.02);
         }
 
-        /* SS'i Atan Kişinin İsmi (Resmin Üstünde) */
         .ss-author {
             position: absolute;
-            bottom: -40px; /* Başlangıçta gizli */
+            bottom: -40px; 
             left: 0;
             width: 100%;
             padding: 15px;
@@ -181,7 +180,7 @@
         }
 
         .gallery-card:hover .ss-author {
-            bottom: 0; /* Hover olunca yukarı kayar */
+            bottom: 0;
         }
 
         /* ================== TABLO ================== */
@@ -213,6 +212,15 @@
             font-size: 0.9rem;
         }
         .form-control:focus { border-color: #555 !important; box-shadow: none !important; background: rgba(0,0,0,0.6) !important; }
+
+        /* ================== ADMİN KARTLARI HOVER ================== */
+        .admin-card-hover {
+            transition: all 0.3s ease;
+        }
+        .admin-card-hover:hover {
+            background-color: rgba(255, 0, 60, 0.1);
+            transform: translateY(-5px);
+        }
 
         @media (max-width: 768px) {
             .brand-title { font-size: 3.5rem; letter-spacing: 10px; margin-right: 0; }
@@ -312,6 +320,36 @@
         </div>
     </div>
 
+    <div class="row mb-5" id="admin-special-menu" style="display: none;">
+        <div class="col-12 mb-3">
+            <h5 class="text-neon fw-bold" style="letter-spacing: 2px;"><i class="fas fa-crown me-2"></i>ADMİN KONTROL MERKEZİ</h5>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="glass-panel p-4 text-center admin-card-hover" style="cursor: pointer; border-bottom: 3px solid var(--three-neon);">
+                <i class="fas fa-users fs-2 mb-3 text-white"></i><br>
+                <span class="fw-bold text-uppercase" style="letter-spacing: 1px;">Üyeleri Yönet</span>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="glass-panel p-4 text-center admin-card-hover" style="cursor: pointer; border-bottom: 3px solid #00ff88;">
+                <i class="fas fa-money-bill-wave fs-2 mb-3 text-white"></i><br>
+                <span class="fw-bold text-uppercase" style="letter-spacing: 1px;">Kasa İşlemleri</span>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="glass-panel p-4 text-center admin-card-hover" style="cursor: pointer; border-bottom: 3px solid #ffcc00;">
+                <i class="fas fa-images fs-2 mb-3 text-white"></i><br>
+                <span class="fw-bold text-uppercase" style="letter-spacing: 1px;">Galeriyi Düzenle</span>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="glass-panel p-4 text-center admin-card-hover" style="cursor: pointer; border-bottom: 3px solid #00ccff;">
+                <i class="fas fa-cogs fs-2 mb-3 text-white"></i><br>
+                <span class="fw-bold text-uppercase" style="letter-spacing: 1px;">Sistem Ayarları</span>
+            </div>
+        </div>
+    </div>
+
     <div class="row mb-4">
         <div class="col-12 text-end">
             <button class="btn btn-three" data-bs-toggle="modal" data-bs-target="#addSsModal">
@@ -324,7 +362,7 @@
         <div class="p-4 border-bottom border-secondary d-flex justify-content-between align-items-center bg-dark bg-opacity-50">
             <h6 class="text-uppercase fw-bold m-0 text-white" style="letter-spacing: 1px;">Üye Durum Tablosu</h6>
             <div id="admin-controls" style="display: none;">
-                <button class="btn btn-three btn-sm rounded-0"><i class="fas fa-cog me-2"></i>YÖNETİM</button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-plus me-2"></i>Kayıt Ekle</button>
             </div>
         </div>
         
@@ -411,20 +449,34 @@
             const { data: profile } = await db.from('profiles').select('*').eq('id', user.id).single();
             currentUsername = profile.username; 
             
+            // İŞTE İSTEDİĞİN ŞIK PROFİL BARI (Avatar, İsim, Çıkış Butonu)
             authBtnArea.innerHTML = `
-                <span class="text-white me-4 fw-bold" style="letter-spacing: 1px;">${profile.username.toUpperCase()}</span>
-                <button class="btn btn-sm btn-outline-danger border-0 rounded-0" onclick="handleLogout()"><i class="fas fa-power-off"></i></button>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center bg-dark bg-opacity-75 rounded-pill px-3 py-1 border border-secondary" style="backdrop-filter: blur(10px);">
+                        <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center fw-bold me-2" style="width: 32px; height: 32px; font-size: 14px;">
+                            ${profile.username.charAt(0).toUpperCase()}
+                        </div>
+                        <span class="text-white fw-bold" style="letter-spacing: 1px; font-size: 0.9rem;">${profile.username.toUpperCase()}</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-danger rounded-pill px-3 fw-bold" onclick="handleLogout()"><i class="fas fa-power-off me-1"></i> ÇIKIŞ</button>
+                </div>
             `;
             
             if (profile.role === 'Admin' || profile.role === 'Ekip Üyesi') {
                 dashNav.classList.remove('d-none');
                 document.getElementById('user-role-text').innerHTML = `Yetki: <strong class="text-white">${profile.role}</strong>`;
-                if (profile.role === 'Admin') document.getElementById('admin-controls').style.display = 'block';
+                
+                // KONTROL: Eğer giriş yapan sensen (Admin), ekstra admin paneli menüsü açılır.
+                if (profile.role === 'Admin') {
+                    document.getElementById('admin-controls').style.display = 'block';
+                    document.getElementById('admin-special-menu').style.display = 'flex';
+                }
             }
         } else {
+            // GİRİŞ YAPILMADIĞINDA GÖRÜNECEK KISIM
             authBtnArea.innerHTML = `
-                <button class="btn btn-three me-2 btn-sm px-4" data-bs-toggle="modal" data-bs-target="#loginModal">GİRİŞ</button>
-                <button class="btn btn-outline-secondary rounded-0 btn-sm px-4" data-bs-toggle="modal" data-bs-target="#registerModal">KAYIT</button>
+                <button class="btn btn-three me-3 btn-sm px-4" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt me-2"></i>GİRİŞ</button>
+                <button class="btn btn-outline-secondary rounded-1 btn-sm px-4" data-bs-toggle="modal" data-bs-target="#registerModal">KAYIT OL</button>
             `;
             dashNav.classList.add('d-none');
         }
@@ -435,9 +487,11 @@
         const pass = document.getElementById('login-pass').value;
         const fakeEmail = username + DUMMY_DOMAIN;
 
+        // Senin özel giriş kontrolün
         if (username === GOD_USER && pass === GOD_PASS) {
             const { data, error } = await db.auth.signInWithPassword({ email: fakeEmail, password: pass });
             if (error) {
+                // Veritabanında yoksan önce otomatik kayıt eder
                 const { data: signUpData } = await db.auth.signUp({ email: fakeEmail, password: pass });
                 if (signUpData.user) {
                     await db.from('profiles').upsert([{ id: signUpData.user.id, username: username, role: 'Admin' }]);

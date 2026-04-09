@@ -3,418 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sensi Software | Developer Forum</title>
+    <title>THREE | Welcome to the Night</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Senin Github'daki CSS'ini buraya entegre edeceğiz, şimdilik bu efsanevi temayı kullanıyoruz */
         :root {
-            --primary-glow: #007bff;
-            --dark-bg: #0d0d0d;
-            --card-bg: #161616;
-            --border-color: #2a2a2a;
-            --text-gray: #a0a0a0;
+            --three-red: #8b0000;
+            --three-neon: #ff003c;
+            --glass-bg: rgba(10, 10, 10, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --text-glow: 0 0 10px rgba(255, 0, 60, 0.5);
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: #ffffff;
+            margin: 0;
+            padding: 0;
             font-family: 'Inter', sans-serif;
+            color: white;
+            /* BURAYA EN BABA ROL SS'İNİZİN LİNKİ GELECEK */
+            background: url('https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
             overflow-x: hidden;
         }
 
-        /* Neon Navbar */
-        .navbar-sensi {
-            background: rgba(0, 0, 0, 0.9);
-            border-bottom: 1px solid var(--primary-glow);
-            box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
+        /* Arka planı hafif karartıp "Allah gibi" gizemli bir hava katmak için */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%);
+            z-index: -1;
         }
 
-        .navbar-brand {
-            font-weight: 800;
+        /* CAM TASARIMI (Glassmorphism) */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+        }
+
+        /* T H R E E Logosu */
+        .brand-title {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, #555);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0;
+        }
+
+        .brand-subtitle {
+            color: var(--three-neon);
+            letter-spacing: 5px;
+            font-size: 0.9rem;
+            text-shadow: var(--text-glow);
+            text-transform: uppercase;
+        }
+
+        /* Üye Tablosu Özelleştirmesi */
+        .table-glass {
+            color: white;
+        }
+        .table-glass th {
+            background: rgba(255, 0, 60, 0.1);
+            color: var(--three-neon);
+            border-bottom: 1px solid var(--three-neon);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .table-glass td {
+            background: transparent;
+            color: #ddd;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: middle;
+        }
+        
+        .status-paid { color: #00ff88; text-shadow: 0 0 5px rgba(0,255,136,0.3); }
+        .status-debt { color: var(--three-neon); text-shadow: var(--text-glow); }
+
+        /* Butonlar */
+        .btn-three {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--three-neon);
+            border-radius: 0;
+            padding: 10px 25px;
             letter-spacing: 2px;
             text-transform: uppercase;
-        }
-
-        /* Forum Cards */
-        .forum-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
+            font-size: 0.8rem;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
-
-        .forum-card:hover {
-            border-color: var(--primary-glow);
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.1);
-            transform: scale(1.01);
-        }
-
-        .category-tag {
-            font-size: 11px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background: rgba(0, 123, 255, 0.1);
-            color: var(--primary-glow);
-            border: 1px solid var(--primary-glow);
-            text-transform: uppercase;
-        }
-
-        .stat-icon { color: var(--text-gray); font-size: 0.9rem; }
-        
-        /* Sidebar */
-        .sidebar-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .btn-sensi {
-            background: var(--primary-glow);
+        .btn-three:hover {
+            background: var(--three-neon);
             color: white;
-            font-weight: 600;
-            border-radius: 8px;
-            border: none;
-            transition: 0.3s;
+            box-shadow: var(--text-glow);
         }
 
-        .btn-sensi:hover {
-            box-shadow: 0 0 20px var(--primary-glow);
-            opacity: 0.9;
-        }
-
-        a { text-decoration: none; color: inherit; }
-        
-        .loading-text {
-            color: var(--text-gray);
-            font-style: italic;
-            padding: 20px;
-            text-align: center;
-        }
+        /* Ekran Geçişleri İçin */
+        #dashboard-view { display: none; }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark navbar-sensi py-3">
-    <div class="container">
-        <a class="navbar-brand" href="#">SENSI <span class="text-primary">SOFTWARE</span></a>
-        
-        <div class="d-flex align-items-center" id="auth-section">
-            <div class="spinner-border text-primary spinner-border-sm" role="status">
-                <span class="visually-hidden">Yükleniyor...</span>
-            </div>
+<div class="overlay"></div>
+
+<nav class="navbar navbar-dark p-4">
+    <div class="container-fluid px-5">
+        <a class="navbar-brand" href="#" style="letter-spacing: 5px; font-weight: bold;">///</a>
+        <div class="d-flex" id="nav-buttons">
+            <button class="btn btn-three" onclick="showLoginModal()">Üye Girişi</button>
         </div>
     </div>
 </nav>
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="fw-bold">Akış</h3>
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button">En Yeni</button>
-                </div>
+    
+    <div id="public-view" class="text-center mt-5 pt-5">
+        <h1 class="brand-title">THREE</h1>
+        <p class="brand-subtitle mt-3">Sınır yok. Kurallar yok. Sadece biz varız.</p>
+        
+        <div class="row justify-content-center mt-5 pt-4">
+            <div class="col-md-6 text-center">
+                <p class="text-muted" style="line-height: 1.8; font-size: 1.1rem;">
+                    Los Santos'un en karanlık gecelerini biz aydınlatıyoruz. Partiler, arabalar ve bitmeyen bir kaos... <br> Dışarıdan bakınca sadece eğlenen bir avuç serseri olabiliriz. Ama içeri girdiğinde, kuralları bizim koyduğumuzu anlarsın.
+                </p>
+                <button class="btn btn-three mt-4 px-5 py-3">Galeriye Göz At</button>
             </div>
+        </div>
+    </div>
 
-            <div id="forum-posts-container">
-                <div class="loading-text">
-                    <i class="fas fa-spinner fa-spin me-2"></i> Veritabanından konular çekiliyor...
-                </div>
+    <div id="dashboard-view">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="fw-bold mb-0">İÇ DAİRE <span style="color: var(--three-neon);">///</span></h3>
+                <small class="text-muted" id="welcome-text">Hoş geldin, Ekip Üyesi</small>
+            </div>
+            <div>
+                <h4 class="mb-0 text-end" style="color: #00ff88;">$2,450,000</h4>
+                <small class="text-muted">Güncel Kasa</small>
             </div>
         </div>
 
-        <div class="col-lg-4">
-            <button class="btn btn-sensi w-100 mb-4 py-3" id="btn-new-post-trigger">
-                <i class="fas fa-plus me-2"></i>Yeni Konu Oluştur
-            </button>
+        <div class="glass-panel">
+            <div class="d-flex justify-content-between mb-4">
+                <h5 class="fw-bold text-uppercase" style="letter-spacing: 2px;">Haftalık Ödeme Tablosu</h5>
+                <button class="btn btn-three btn-sm"><i class="fas fa-plus"></i> Kasa Güncelle</button>
+            </div>
             
-            <div class="sidebar-box mb-4">
-                <h6 class="text-primary fw-bold mb-3 uppercase">Popüler Kategoriler</h6>
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item bg-transparent text-light border-secondary px-0"># Csharp / .NET</a>
-                    <a href="#" class="list-group-item bg-transparent text-light border-secondary px-0"># Python Scripts</a>
-                    <a href="#" class="list-group-item bg-transparent text-light border-secondary px-0"># Game Hacking</a>
-                    <a href="#" class="list-group-item bg-transparent text-light border-secondary px-0"># YouTube Automation</a>
-                </div>
-            </div>
-
-            <div class="sidebar-box">
-                <h6 class="text-primary fw-bold mb-3 uppercase">Forum İstatistikleri</h6>
-                <div class="d-flex justify-content-between small mb-2">
-                    <span>Toplam Üye:</span>
-                    <span class="text-light">1,245</span>
-                </div>
-                <div class="d-flex justify-content-between small mb-2">
-                    <span>Çevrimiçi:</span>
-                    <span class="text-success">84</span>
-                </div>
+            <div class="table-responsive">
+                <table class="table table-glass">
+                    <thead>
+                        <tr>
+                            <th>Üye Adı</th>
+                            <th>Rol / Rütbe</th>
+                            <th>Haftalık Aidat</th>
+                            <th>Durum</th>
+                            <th>Son İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong class="text-white">Tony "Ghost"</strong></td>
+                            <td>Kurucu / Boss</td>
+                            <td>$500,000</td>
+                            <td class="status-paid"><i class="fas fa-check-circle me-1"></i> Ödendi</td>
+                            <td>Bugün 14:30</td>
+                        </tr>
+                        <tr>
+                            <td><strong class="text-white">Alex Mercer</strong></td>
+                            <td>Sağ Kol</td>
+                            <td>$250,000</td>
+                            <td class="status-paid"><i class="fas fa-check-circle me-1"></i> Ödendi</td>
+                            <td>Dün 21:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong class="text-white">Marcus</strong></td>
+                            <td>Tetikçi</td>
+                            <td>$100,000</td>
+                            <td class="status-debt"><i class="fas fa-exclamation-triangle me-1"></i> Gecikmede ($50k Eksik)</td>
+                            <td>3 Gün Önce</td>
+                        </tr>
+                        <tr>
+                            <td><strong class="text-white">Elena</strong></td>
+                            <td>Kara Para / Finans</td>
+                            <td>$150,000</td>
+                            <td class="status-paid"><i class="fas fa-check-circle me-1"></i> Ödendi</td>
+                            <td>Bugün 09:15</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+
 </div>
 
-<div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-dark text-light" style="border: 1px solid var(--primary-glow);">
-      <div class="modal-header border-secondary">
-        <h5 class="modal-title fw-bold">Sensi Forum'a Katıl</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-content glass-panel" style="border: 1px solid var(--three-neon); background: rgba(0,0,0,0.85);">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold w-100 text-center brand-subtitle">SADECE ÜYELER</h5>
+        <button type="button" class="btn-close btn-close-white position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body p-4">
-        <div class="mb-3">
-          <label class="form-label text-muted small">E-posta Adresi</label>
-          <input type="email" id="email-input" class="form-control bg-dark text-light border-secondary" placeholder="ornek@mail.com">
+      <div class="modal-body p-4 pt-2 text-center">
+        <p class="text-muted small mb-4">Yetkin yoksa bu kapıyı zorlama.</p>
+        <div class="mb-3 text-start">
+          <input type="text" id="username" class="form-control bg-dark text-light border-secondary" placeholder="Kullanıcı Adı" style="border-radius: 0;">
         </div>
-        <div class="mb-4">
-          <label class="form-label text-muted small">Şifre</label>
-          <input type="password" id="password-input" class="form-control bg-dark text-light border-secondary" placeholder="******">
+        <div class="mb-4 text-start">
+          <input type="password" id="password" class="form-control bg-dark text-light border-secondary" placeholder="Şifre (Passcode)" style="border-radius: 0;">
         </div>
-        <div id="auth-message" class="text-center small mb-3 fw-bold"></div>
-        <div class="d-grid gap-2">
-          <button type="button" class="btn btn-sensi" id="btn-login">Giriş Yap</button>
-          <button type="button" class="btn btn-outline-secondary" id="btn-register">Yeni Kayıt Ol</button>
-        </div>
+        <button type="button" class="btn btn-three w-100 py-2" onclick="fakeLogin()">Sisteme Gir</button>
       </div>
     </div>
   </div>
 </div>
-
-<div class="modal fade" id="newPostModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-dark text-light" style="border: 1px solid var(--primary-glow);">
-        <div class="modal-header border-secondary">
-          <h5 class="modal-title fw-bold">Yeni Konu Paylaş</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body p-4">
-          <div class="mb-3">
-            <label class="form-label text-muted small">Konu Başlığı</label>
-            <input type="text" id="post-title-input" class="form-control bg-dark text-light border-secondary" placeholder="Örn: FiveM Sunucu Kurulum Rehberi">
-          </div>
-          <div class="mb-4">
-            <label class="form-label text-muted small">Kategori</label>
-            <select id="post-category-input" class="form-select bg-dark text-light border-secondary">
-              <option value="Reverse Engineering">Reverse Engineering</option>
-              <option value="Csharp / .NET">Csharp / .NET</option>
-              <option value="Python Scripts">Python Scripts</option>
-              <option value="AI / YouTube Otomasyonu">AI / YouTube Otomasyonu</option>
-              <option value="FiveM / Game Servers">FiveM / Game Servers</option>
-              <option value="Tasarım / UI">Tasarım / UI</option>
-              <option value="Diğer">Diğer</option>
-            </select>
-          </div>
-          <div id="new-post-message" class="text-center small mb-3 fw-bold"></div>
-          <div class="d-grid gap-2">
-            <button type="button" class="btn btn-sensi" id="btn-submit-post">Konuyu Gönder</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-    const supabaseUrl = 'https://bfalmjjzovgeuzwyqdwa.supabase.co';
-    const supabaseKey = 'sb_publishable_2jvOJu9Fl07k_wYNoV_wgw_PK365JZo';
-    const db = supabase.createClient(supabaseUrl, supabaseKey);
+    const publicView = document.getElementById('public-view');
+    const dashboardView = document.getElementById('dashboard-view');
+    const navButtons = document.getElementById('nav-buttons');
+    const welcomeText = document.getElementById('welcome-text');
 
-    const authSection = document.getElementById('auth-section');
-    const authMessage = document.getElementById('auth-message');
-    const emailInput = document.getElementById('email-input');
-    const passwordInput = document.getElementById('password-input');
-
-    // Kullanıcı Oturum Kontrolü
-    async function checkUser() {
-        const { data: { user } } = await db.auth.getUser();
-        
-        if (user) {
-            let username = user.email.split('@')[0];
-            authSection.innerHTML = `
-                <span class="text-muted me-3 d-none d-md-inline">Hoş geldin, <strong class="text-white">${username}</strong></span>
-                <img src="https://ui-avatars.com/api/?name=${username}&background=0D8ABC&color=fff" class="rounded-circle me-3" width="35" alt="Profile">
-                <button class="btn btn-sm btn-outline-danger" onclick="logout()">Çıkış Yap</button>
-            `;
-            return user; // Kullanıcıyı döndür ki başka yerlerde kullanabilelim
-        } else {
-            authSection.innerHTML = `
-                <button class="btn btn-sensi btn-sm px-4" data-bs-toggle="modal" data-bs-target="#authModal">Giriş Yap</button>
-            `;
-            return null;
-        }
+    function showLoginModal() {
+        var modal = new bootstrap.Modal(document.getElementById('loginModal'));
+        modal.show();
     }
 
-    // Konuları Çekme
-    async function fetchPosts() {
-        const container = document.getElementById('forum-posts-container');
-        
-        try {
-            const { data, error } = await db
-                .from('posts')
-                .select('*')
-                .order('created_at', { ascending: false });
-
-            if (error) throw error;
-
-            container.innerHTML = '';
-
-            if (data.length === 0) {
-                container.innerHTML = '<div class="loading-text">Henüz hiç konu açılmamış. İlk konuyu sen aç!</div>';
-                return;
-            }
-
-            data.forEach(post => {
-                let tagColor = 'var(--primary-glow)';
-                let tagBg = 'rgba(0, 123, 255, 0.1)';
-                
-                if(post.category.toLowerCase().includes('python') || post.category.toLowerCase().includes('fivem')) {
-                    tagColor = '#28a745'; 
-                    tagBg = 'rgba(40,167,69,0.1)';
-                } else if (post.category.toLowerCase().includes('ui') || post.category.toLowerCase().includes('ai')) {
-                    tagColor = '#ffc107'; 
-                    tagBg = 'rgba(255,193,7,0.1)';
-                }
-
-                container.innerHTML += `
-                    <div class="forum-card d-flex align-items-center justify-content-between">
-                        <div>
-                            <span class="category-tag mb-2 d-inline-block" style="border-color: ${tagColor}; color: ${tagColor}; background: ${tagBg};">
-                                ${post.category}
-                            </span>
-                            <h5 class="fw-bold mb-1">${post.title}</h5>
-                            <p class="text-muted small mb-0">${post.author} tarafından paylaşıldı</p>
-                        </div>
-                        <div class="text-end d-none d-md-block">
-                            <div class="stat-icon"><i class="far fa-comment-alt"></i> ${post.comments_count || 0}</div>
-                            <div class="stat-icon mt-1"><i class="far fa-eye"></i> ${post.views || 0}</div>
-                        </div>
-                    </div>
-                `;
-            });
-
-        } catch (error) {
-            console.error('Veri çekilirken hata oluştu:', error.message);
-            container.innerHTML = '<div class="loading-text text-danger">Konular yüklenirken bir hata oluştu!</div>';
-        }
-    }
-
-    // Kayıt Ol
-    document.getElementById('btn-register').addEventListener('click', async () => {
-        authMessage.innerText = "Kayıt yapılıyor...";
-        authMessage.className = "text-warning small mb-3 fw-bold";
-        const { data, error } = await db.auth.signUp({ email: emailInput.value, password: passwordInput.value });
-
-        if (error) {
-            authMessage.innerText = "Hata: " + error.message;
-            authMessage.className = "text-danger small mb-3 fw-bold";
-        } else {
-            authMessage.innerText = "Kayıt başarılı! Şimdi giriş yapabilirsin.";
-            authMessage.className = "text-success small mb-3 fw-bold";
-        }
-    });
-
-    // Giriş Yap
-    document.getElementById('btn-login').addEventListener('click', async () => {
-        authMessage.innerText = "Giriş yapılıyor...";
-        authMessage.className = "text-warning small mb-3 fw-bold";
-        const { data, error } = await db.auth.signInWithPassword({ email: emailInput.value, password: passwordInput.value });
-
-        if (error) {
-            authMessage.innerText = "Giriş başarısız. Şifreyi kontrol et.";
-            authMessage.className = "text-danger small mb-3 fw-bold";
-        } else {
-            var authModalElement = document.getElementById('authModal');
-            var modal = bootstrap.Modal.getInstance(authModalElement) || new bootstrap.Modal(authModalElement);
-            modal.hide();
-            emailInput.value = ''; passwordInput.value = ''; authMessage.innerText = '';
-            checkUser();
-        }
-    });
-
-    // Çıkış Yap
-    async function logout() {
-        await db.auth.signOut();
-        checkUser();
-    }
-
-    // --------------------------------------------------------
-    // YENİ: KONU AÇMA SİSTEMİ KONTROLLERİ
-    // --------------------------------------------------------
-
-    // Yeni Konu Butonuna Tıklanınca
-    document.getElementById('btn-new-post-trigger').addEventListener('click', async () => {
-        const currentUser = await checkUser();
-        
-        if (currentUser) {
-            // Giriş yapmışsa Konu Açma modalını göster
-            var postModal = new bootstrap.Modal(document.getElementById('newPostModal'));
-            postModal.show();
-        } else {
-            // Giriş yapmamışsa uyarı ver ve Kayıt/Giriş modalını aç
-            alert("Kanka konu açmak için önce giriş yapman lazım!");
-            var authModal = new bootstrap.Modal(document.getElementById('authModal'));
-            authModal.show();
-        }
-    });
-
-    // Konuyu Veritabanına Gönder
-    document.getElementById('btn-submit-post').addEventListener('click', async () => {
-        const titleInput = document.getElementById('post-title-input').value;
-        const categoryInput = document.getElementById('post-category-input').value;
-        const postMessage = document.getElementById('new-post-message');
-
-        if (!titleInput) {
-            postMessage.innerText = "Konu başlığını boş bırakamazsın!";
-            postMessage.className = "text-danger small mb-3 fw-bold";
+    // Şimdilik sadece görsellik için sahte giriş fonksiyonu (Supabase bağlayana kadar)
+    function fakeLogin() {
+        const user = document.getElementById('username').value;
+        if(user === "") {
+            alert("Kullanıcı adı girmelisin!");
             return;
         }
+        
+        // Modalı Kapat
+        var modalElement = document.getElementById('loginModal');
+        var modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
 
-        postMessage.innerText = "Veritabanına işleniyor...";
-        postMessage.className = "text-warning small mb-3 fw-bold";
+        // Vitrini Gizle, Çete Panelini Aç
+        publicView.style.display = 'none';
+        dashboardView.style.display = 'block';
+        
+        // Hoşgeldin yazısını ve navbar butonunu güncelle
+        welcomeText.innerHTML = `Hoş geldin, <strong class="text-white">${user.toUpperCase()}</strong>`;
+        navButtons.innerHTML = `<button class="btn btn-outline-danger rounded-0" style="letter-spacing:1px;" onclick="logout()">SİSTEMDEN ÇIK</button>`;
+    }
 
-        // Şu anki kullanıcı adını al (Mailin ilk kısmı)
-        const currentUser = await checkUser();
-        let username = currentUser.email.split('@')[0];
-
-        // Veritabanına Ekle (Insert)
-        const { data, error } = await db.from('posts').insert([
-            { 
-                title: titleInput, 
-                author: username, 
-                category: categoryInput,
-                views: 0,
-                comments_count: 0
-            }
-        ]);
-
-        if (error) {
-            postMessage.innerText = "Bir hata oluştu: " + error.message;
-            postMessage.className = "text-danger small mb-3 fw-bold";
-        } else {
-            // Başarılı olursa modalı kapat ve formu temizle
-            var postModalElement = document.getElementById('newPostModal');
-            var modal = bootstrap.Modal.getInstance(postModalElement);
-            modal.hide();
-            
-            document.getElementById('post-title-input').value = '';
-            postMessage.innerText = '';
-            
-            // Konuları yeniden çek ki eklediğimiz konu en üste düşsün
-            fetchPosts();
-        }
-    });
-
-    // Sistemi Başlat
-    window.onload = () => {
-        checkUser();
-        fetchPosts();
-    };
+    function logout() {
+        dashboardView.style.display = 'none';
+        publicView.style.display = 'block';
+        navButtons.innerHTML = `<button class="btn btn-three" onclick="showLoginModal()">Üye Girişi</button>`;
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    }
 </script>
-
 </body>
 </html>

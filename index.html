@@ -75,23 +75,11 @@
             <h2 class="section-heading">GÖRSEL <span class="text-neon">ARŞİV</span></h2>
             <p class="text-muted">Ekip faaliyetleri ve operasyonlar.</p>
         </div>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="gallery-card">
-                    <img src="https://images.unsplash.com/photo-1603366615917-1fa6dad5c4fa?q=80&w=800&auto=format&fit=crop" alt="SS 1">
-                </div>
+        
+        <div id="gallery-status" class="text-center text-muted mb-4"></div>
+        
+        <div class="row g-4" id="gallery-container">
             </div>
-            <div class="col-md-4">
-                <div class="gallery-card">
-                    <img src="https://images.unsplash.com/photo-1542051812-ba32e18ce6a3?q=80&w=800&auto=format&fit=crop" alt="SS 2">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="gallery-card">
-                    <img src="https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=800&auto=format&fit=crop" alt="SS 3">
-                </div>
-            </div>
-        </div>
     </section>
 
 </div>
@@ -109,6 +97,14 @@
                 <small class="text-muted text-uppercase d-block mb-1">Toplam Kasa</small>
                 <h3 class="text-success mb-0 fw-bold">$2,450,000</h3>
             </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12 text-end">
+            <button class="btn btn-three" data-bs-toggle="modal" data-bs-target="#addSsModal">
+                <i class="fas fa-camera me-2"></i>YENİ SS EKLE
+            </button>
         </div>
     </div>
 
@@ -133,6 +129,19 @@
                 <tbody id="payment-table-body">
                     </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addSsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-panel p-4">
+            <h5 class="text-center text-white mb-4 fw-bold letter-spacing">ARŞİVE SS YÜKLE</h5>
+            <p class="text-muted small text-center mb-4">Discord'a yüklediğin resmin bağlantısını (URL) kopyala ve buraya yapıştır.</p>
+            <div class="mb-4">
+                <input type="text" id="ss-url-input" class="form-control" placeholder="Örn: https://cdn.discordapp.com/attachments/...">
+            </div>
+            <button class="btn btn-three w-100 py-3" onclick="submitSS()">GALERİYE GÖNDER</button>
         </div>
     </div>
 </div>
@@ -176,9 +185,10 @@
     const db = supabase.createClient(supabaseUrl, supabaseKey);
     const DUMMY_DOMAIN = "@three.local";
 
-    // OMER İÇİN KAZINMIŞ GİZLİ YÖNETİCİ BİLGİLERİ
     const GOD_USER = "omer13ds";
     const GOD_PASS = "oyaali12";
+    
+    let currentUsername = ""; // SS atarken kimin attığını bilmek için
 
     async function checkSession() {
         const { data: { user } } = await db.auth.getUser();
@@ -187,6 +197,7 @@
 
         if (user) {
             const { data: profile } = await db.from('profiles').select('*').eq('id', user.id).single();
+            currentUsername = profile.username; // Kullanıcı adını hafızaya al
             
             authBtnArea.innerHTML = `
                 <span class="text-white me-4 fw-bold" style="letter-spacing: 1px;">${profile.username.toUpperCase()}</span>
@@ -207,17 +218,13 @@
         }
     }
 
-    // GİRİŞ SİSTEMİ (ÖMER KONTROLÜ İÇERİR)
     async function handleLogin() {
         const username = document.getElementById('login-user').value.trim().toLowerCase();
         const pass = document.getElementById('login-pass').value;
         const fakeEmail = username + DUMMY_DOMAIN;
 
-        // ÖMER GİRİŞ YAPMAYA ÇALIŞIRSA (OTOMATİK KAYIT/GİRİŞ BYPASS)
         if (username === GOD_USER && pass === GOD_PASS) {
             const { data, error } = await db.auth.signInWithPassword({ email: fakeEmail, password: pass });
-            
-            // Eğer Ömer veritabanında henüz yoksa (hata verirse), arka planda hissettirmeden kaydet ve admin yap
             if (error) {
                 const { data: signUpData } = await db.auth.signUp({ email: fakeEmail, password: pass });
                 if (signUpData.user) {
@@ -228,7 +235,6 @@
             return;
         }
 
-        // DİĞER KULLANICILAR İÇİN NORMAL GİRİŞ
         const { error } = await db.auth.signInWithPassword({ email: fakeEmail, password: pass });
         if (error) alert("Hata: Kullanıcı adı veya şifre yanlış.");
         else location.reload();
@@ -290,7 +296,82 @@
         }
     }
 
-    window.onload = checkSession;
+    // ==========================================
+    // YENİ: GALERİ (SS) SİSTEMİ
+    // ==========================================
+
+    // Galeriyi Veritabanından Çek
+    async function fetchGallery() {
+        const container = document.getElementById('gallery-container');
+        const statusText = document.getElementById('gallery-status');
+        
+        statusText.innerText = "Yükleniyor...";
+
+        const { data, error } = await db
+            .from('gallery_posts')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            statusText.innerText = "Görseller yüklenirken hata oluştu.";
+            console.error(error);
+            return;
+        }
+
+        if (data.length === 0) {
+            statusText.innerText = "Henüz arşivde görsel yok.";
+            container.innerHTML = '';
+            return;
+        }
+
+        statusText.innerText = ""; // Yükleniyor yazısını sil
+        container.innerHTML = data.map(post => `
+            <div class="col-md-4">
+                <div class="gallery-card">
+                    <img src="${post.image_url}" alt="Roleplay SS">
+                    <div class="ss-author">
+                        <i class="fas fa-camera me-1"></i> ${post.author.toUpperCase()}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Veritabanına Yeni SS Yükle
+    async function submitSS() {
+        const urlInput = document.getElementById('ss-url-input').value.trim();
+        
+        if (!urlInput) {
+            alert("Kanka resim linkini boş bırakamazsın!");
+            return;
+        }
+
+        const { data, error } = await db.from('gallery_posts').insert([
+            { author: currentUsername, image_url: urlInput }
+        ]);
+
+        if (error) {
+            alert("Yükleme başarısız: " + error.message);
+        } else {
+            // Modalı Kapat
+            var myModalEl = document.getElementById('addSsModal');
+            var modal = bootstrap.Modal.getInstance(myModalEl);
+            modal.hide();
+            
+            document.getElementById('ss-url-input').value = ""; // Kutuyu temizle
+            
+            // Galeriyi güncelle ve siteye dönüp kaydır
+            fetchGallery();
+            showPublicSite();
+            window.location.href = "#gallery"; 
+        }
+    }
+
+    // Sistem Başlarken Her Şeyi Yükle
+    window.onload = () => {
+        checkSession();
+        fetchGallery();
+    };
 </script>
 </body>
 </html>

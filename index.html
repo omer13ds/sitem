@@ -213,7 +213,6 @@
         }
         .form-control:focus { border-color: #555 !important; box-shadow: none !important; background: rgba(0,0,0,0.6) !important; }
 
-        /* ================== ADMİN KARTLARI HOVER ================== */
         .admin-card-hover {
             transition: all 0.3s ease;
         }
@@ -387,7 +386,6 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content glass-panel p-4">
             <h5 class="text-center text-white mb-4 fw-bold letter-spacing">ARŞİVE SS YÜKLE</h5>
-            <p class="text-muted small text-center mb-4">Discord'a yüklediğin resmin bağlantısını (URL) kopyala ve buraya yapıştır.</p>
             <div class="mb-4">
                 <input type="text" id="ss-url-input" class="form-control" placeholder="Örn: https://cdn.discordapp.com/attachments/...">
             </div>
@@ -400,13 +398,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content glass-panel p-4">
             <h5 class="text-center text-white mb-4 fw-bold letter-spacing">SİSTEME GİRİŞ</h5>
+            <div id="login-error" class="alert alert-danger d-none" style="font-size: 0.8rem;"></div>
             <div class="mb-3">
                 <input type="text" id="login-user" class="form-control" placeholder="Kullanıcı Adı">
             </div>
             <div class="mb-4">
                 <input type="password" id="login-pass" class="form-control" placeholder="Şifre">
             </div>
-            <button class="btn btn-three w-100 py-3" onclick="handleLogin()">GİRİŞ YAP</button>
+            <button class="btn btn-three w-100 py-3" onclick="handleLogin()" id="login-btn">GİRİŞ YAP</button>
         </div>
     </div>
 </div>
@@ -415,13 +414,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content glass-panel p-4">
             <h5 class="text-center text-white mb-4 fw-bold letter-spacing">YENİ KAYIT</h5>
+            <div id="reg-error" class="alert alert-danger d-none" style="font-size: 0.8rem;"></div>
             <div class="mb-3">
-                <input type="text" id="reg-user" class="form-control" placeholder="Kullanıcı Adı">
+                <input type="text" id="reg-user" class="form-control" placeholder="Kullanıcı Adı (Min 3 Harf)">
             </div>
             <div class="mb-4">
-                <input type="password" id="reg-pass" class="form-control" placeholder="Şifre">
+                <input type="password" id="reg-pass" class="form-control" placeholder="Şifre (Min 6 Karakter)">
             </div>
-            <button class="btn btn-three w-100 py-3" onclick="handleRegister()">KAYIT OL</button>
+            <button class="btn btn-three w-100 py-3" onclick="handleRegister()" id="reg-btn">KAYIT OL</button>
         </div>
     </div>
 </div>
@@ -433,7 +433,7 @@
     const supabaseUrl = 'https://bfalmjjzovgeuzwyqdwa.supabase.co';
     const supabaseKey = 'sb_publishable_2jvOJu9Fl07k_wYNoV_wgw_PK365JZo';
     const db = supabase.createClient(supabaseUrl, supabaseKey);
-    const DUMMY_DOMAIN = "@three.local";
+    const DUMMY_DOMAIN = "@threeroleplay.local"; // Supabase'in kızmaması için güncellendi
 
     const GOD_USER = "omer13ds";
     const GOD_PASS = "oyaali12";
@@ -446,34 +446,36 @@
         const dashNav = document.getElementById('nav-dashboard');
 
         if (user) {
-            const { data: profile } = await db.from('profiles').select('*').eq('id', user.id).single();
-            currentUsername = profile.username; 
+            // Profil tablosundan veriyi çekmeyi dener, hata verirse sistemi çökertmez
+            let profileData = { username: user.email.split('@')[0], role: 'Üye' };
             
-            // İŞTE İSTEDİĞİN ŞIK PROFİL BARI (Avatar, İsim, Çıkış Butonu)
+            const { data: profile, error } = await db.from('profiles').select('*').eq('id', user.id).single();
+            if(profile) profileData = profile;
+            
+            currentUsername = profileData.username; 
+            
             authBtnArea.innerHTML = `
                 <div class="d-flex align-items-center gap-3">
                     <div class="d-flex align-items-center bg-dark bg-opacity-75 rounded-pill px-3 py-1 border border-secondary" style="backdrop-filter: blur(10px);">
                         <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center fw-bold me-2" style="width: 32px; height: 32px; font-size: 14px;">
-                            ${profile.username.charAt(0).toUpperCase()}
+                            ${profileData.username.charAt(0).toUpperCase()}
                         </div>
-                        <span class="text-white fw-bold" style="letter-spacing: 1px; font-size: 0.9rem;">${profile.username.toUpperCase()}</span>
+                        <span class="text-white fw-bold" style="letter-spacing: 1px; font-size: 0.9rem;">${profileData.username.toUpperCase()}</span>
                     </div>
-                    <button class="btn btn-sm btn-outline-danger rounded-pill px-3 fw-bold" onclick="handleLogout()"><i class="fas fa-power-off me-1"></i> ÇIKIŞ</button>
+                    <button class="btn btn-sm btn-outline-danger rounded-pill px-3 fw-bold" onclick="handleLogout()"><i class="fas fa-power-off me-1"></i></button>
                 </div>
             `;
             
-            if (profile.role === 'Admin' || profile.role === 'Ekip Üyesi') {
+            if (profileData.role === 'Admin' || profileData.role === 'Ekip Üyesi') {
                 dashNav.classList.remove('d-none');
-                document.getElementById('user-role-text').innerHTML = `Yetki: <strong class="text-white">${profile.role}</strong>`;
+                document.getElementById('user-role-text').innerHTML = `Yetki: <strong class="text-white">${profileData.role}</strong>`;
                 
-                // KONTROL: Eğer giriş yapan sensen (Admin), ekstra admin paneli menüsü açılır.
-                if (profile.role === 'Admin') {
+                if (profileData.role === 'Admin' || currentUsername === GOD_USER) {
                     document.getElementById('admin-controls').style.display = 'block';
                     document.getElementById('admin-special-menu').style.display = 'flex';
                 }
             }
         } else {
-            // GİRİŞ YAPILMADIĞINDA GÖRÜNECEK KISIM
             authBtnArea.innerHTML = `
                 <button class="btn btn-three me-3 btn-sm px-4" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt me-2"></i>GİRİŞ</button>
                 <button class="btn btn-outline-secondary rounded-1 btn-sm px-4" data-bs-toggle="modal" data-bs-target="#registerModal">KAYIT OL</button>
@@ -482,19 +484,38 @@
         }
     }
 
+    function showLoginError(msg) {
+        const errDiv = document.getElementById('login-error');
+        errDiv.innerText = msg;
+        errDiv.classList.remove('d-none');
+        document.getElementById('login-btn').innerText = "GİRİŞ YAP";
+    }
+
+    function showRegError(msg) {
+        const errDiv = document.getElementById('reg-error');
+        errDiv.innerText = msg;
+        errDiv.classList.remove('d-none');
+        document.getElementById('reg-btn').innerText = "KAYIT OL";
+    }
+
     async function handleLogin() {
+        document.getElementById('login-btn').innerText = "Bekle...";
+        document.getElementById('login-error').classList.add('d-none');
+
         const username = document.getElementById('login-user').value.trim().toLowerCase();
         const pass = document.getElementById('login-pass').value;
         const fakeEmail = username + DUMMY_DOMAIN;
 
-        // Senin özel giriş kontrolün
         if (username === GOD_USER && pass === GOD_PASS) {
             const { data, error } = await db.auth.signInWithPassword({ email: fakeEmail, password: pass });
             if (error) {
-                // Veritabanında yoksan önce otomatik kayıt eder
-                const { data: signUpData } = await db.auth.signUp({ email: fakeEmail, password: pass });
+                // Admin yoksa hemen kaydet
+                const { data: signUpData, error: signErr } = await db.auth.signUp({ email: fakeEmail, password: pass });
+                if(signErr) return showLoginError("Admin hesabı oluşturulamadı. Supabase ayarlarını kontrol et.");
                 if (signUpData.user) {
                     await db.from('profiles').upsert([{ id: signUpData.user.id, username: username, role: 'Admin' }]);
+                    location.reload();
+                    return;
                 }
             }
             location.reload();
@@ -502,29 +523,50 @@
         }
 
         const { error } = await db.auth.signInWithPassword({ email: fakeEmail, password: pass });
-        if (error) alert("Hata: Kullanıcı adı veya şifre yanlış.");
-        else location.reload();
+        
+        if (error) {
+            if(error.message.includes("Email not confirmed")) {
+                showLoginError("Hata: Supabase panelinden 'Confirm Email' ayarını kapatmalısın!");
+            } else {
+                showLoginError("Hatalı kullanıcı adı veya şifre.");
+            }
+        } else {
+            location.reload();
+        }
     }
 
     async function handleRegister() {
+        document.getElementById('reg-btn').innerText = "Bekle...";
+        document.getElementById('reg-error').classList.add('d-none');
+
         const username = document.getElementById('reg-user').value.trim().toLowerCase();
         const pass = document.getElementById('reg-pass').value;
         
         if(username.length < 3 || pass.length < 6) {
-            alert("Sistem: Kullanıcı adı min 3, şifre min 6 hane olmalıdır.");
-            return;
+            return showRegError("Kullanıcı adı min 3, şifre min 6 karakter olmalı.");
         }
 
         const fakeEmail = username + DUMMY_DOMAIN;
         const { data, error } = await db.auth.signUp({ email: fakeEmail, password: pass });
         
         if (error) {
-            alert("Kayıt Başarısız: " + error.message);
+            showRegError("Kayıt Hatası: " + error.message);
         } else {
-            let role = (username === GOD_USER) ? 'Admin' : 'Ziyaretçi';
-            await db.from('profiles').insert([{ id: data.user.id, username: username, role: role }]);
-            alert("Kayıt işlemi tamamlandı. Giriş yapabilirsiniz.");
-            location.reload();
+            let role = (username === GOD_USER) ? 'Admin' : 'Ekip Üyesi';
+            
+            // Profil tablosuna ekleme dene
+            const { error: profileError } = await db.from('profiles').insert([{ id: data.user.id, username: username, role: role }]);
+            
+            if(profileError) {
+                console.error("Profil Tablosu Hatası (RLS açık olabilir):", profileError);
+                // Sistemi durdurmuyoruz, giriş yapabilsin
+            }
+
+            alert("Kayıt başarılı! Şimdi giriş yapabilirsin.");
+            var myModalEl = document.getElementById('registerModal');
+            var modal = bootstrap.Modal.getInstance(myModalEl);
+            modal.hide();
+            document.getElementById('reg-btn').innerText = "KAYIT OL";
         }
     }
 
@@ -562,24 +604,20 @@
         }
     }
 
-    // Galeriyi Çek
     async function fetchGallery() {
         const container = document.getElementById('gallery-container');
         const statusText = document.getElementById('gallery-status');
         
         statusText.innerText = "Yükleniyor...";
 
-        const { data, error } = await db
-            .from('gallery_posts')
-            .select('*')
-            .order('created_at', { ascending: false });
+        const { data, error } = await db.from('gallery_posts').select('*').order('created_at', { ascending: false });
 
         if (error) {
-            statusText.innerText = "Görseller yüklenirken hata oluştu.";
+            statusText.innerText = "Görseller yüklenirken hata oluştu (RLS ayarlarını kontrol et).";
             return;
         }
 
-        if (data.length === 0) {
+        if (!data || data.length === 0) {
             statusText.innerText = "Henüz arşivde görsel yok.";
             container.innerHTML = '';
             return;
@@ -598,7 +636,6 @@
         `).join('');
     }
 
-    // SS Yükle
     async function submitSS() {
         const urlInput = document.getElementById('ss-url-input').value.trim();
         
@@ -608,11 +645,11 @@
         }
 
         const { data, error } = await db.from('gallery_posts').insert([
-            { author: currentUsername, image_url: urlInput }
+            { author: currentUsername || 'Bilinmiyor', image_url: urlInput }
         ]);
 
         if (error) {
-            alert("Yükleme başarısız: " + error.message);
+            alert("Yükleme başarısız (Supabase RLS ayarlarını kontrol et): " + error.message);
         } else {
             var myModalEl = document.getElementById('addSsModal');
             var modal = bootstrap.Modal.getInstance(myModalEl);

@@ -16,28 +16,24 @@
             --three-red: #d30000;
             --three-dark-red: #8b0000;
             --three-dark: #070707;
-            --glass-bg: rgba(10, 10, 10, 0.75);
-            --glass-border: rgba(211, 0, 0, 0.2);
+            --mod-blue: #00a8ff;
+            --glass-bg: rgba(10, 10, 10, 0.85);
+            --glass-border: rgba(211, 0, 0, 0.3);
             --text-main: #e0e0e0;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
             background-color: var(--three-dark);
-            /* Karanlık ve kırmızı tonlu arkaplan */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(20, 0, 0, 0.85)), url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1920&auto=format&fit=crop');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(20, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             overflow-x: hidden;
-            scroll-behavior: smooth; /* Kaydırma efekti için */
+            scroll-behavior: smooth;
         }
 
         /* ------------------ NAVBAR ------------------ */
@@ -46,9 +42,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 50px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.9);
             border-bottom: 1px solid var(--glass-border);
             position: fixed;
             width: 100%;
@@ -64,17 +58,12 @@
             color: white;
             text-decoration: none;
             text-shadow: 0 0 10px rgba(211, 0, 0, 0.5);
+            cursor: pointer;
         }
 
-        .logo span {
-            color: var(--three-red);
-        }
+        .logo span { color: var(--three-red); }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
+        .nav-links { display: flex; gap: 30px; }
         .nav-links a {
             color: #aaa;
             text-decoration: none;
@@ -82,371 +71,129 @@
             font-weight: 700;
             letter-spacing: 2px;
             transition: 0.3s;
+            cursor: pointer;
         }
-
-        .nav-links a:hover {
-            color: white;
-            text-shadow: 0 0 8px var(--three-red);
-        }
+        .nav-links a:hover { color: white; text-shadow: 0 0 8px var(--three-red); }
 
         /* ------------------ AUTH BUTONLARI ------------------ */
-        .auth-area {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
+        .auth-area { display: flex; gap: 15px; align-items: center; }
+        
         .btn-outline {
-            background: transparent;
-            color: white;
-            border: 1px solid #555;
-            padding: 8px 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.3s;
+            background: transparent; color: white; border: 1px solid #555;
+            padding: 8px 20px; font-family: 'Montserrat', sans-serif; font-weight: 700;
+            font-size: 0.8rem; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s;
         }
-
-        .btn-outline:hover {
-            border-color: white;
-            background: rgba(255,255,255,0.1);
-        }
+        .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
         .btn-solid {
-            background: var(--three-red);
-            color: white;
-            border: 1px solid var(--three-red);
-            padding: 8px 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 0 10px rgba(211, 0, 0, 0.4);
-            text-decoration: none;
-            display: inline-block;
+            background: var(--three-red); color: white; border: 1px solid var(--three-red);
+            padding: 8px 20px; font-family: 'Montserrat', sans-serif; font-weight: 700;
+            font-size: 0.8rem; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s;
         }
+        .btn-solid:hover { background: var(--three-dark-red); box-shadow: 0 0 15px rgba(211, 0, 0, 0.6); }
 
-        .btn-solid:hover {
-            background: var(--three-dark-red);
-            box-shadow: 0 0 20px rgba(211, 0, 0, 0.8);
-            color: white;
+        /* ------------------ AÇILIR PROFİL MENÜSÜ (DROPDOWN) ------------------ */
+        .profile-area { position: relative; display: none; align-items: center; }
+        
+        .profile-badge {
+            display: flex; align-items: center; background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--three-red); border-radius: 30px; padding: 5px 20px 5px 5px;
+            gap: 10px; cursor: pointer; transition: 0.3s;
         }
-
-        /* ------------------ PROFİL BARI (Giriş Yapılınca) ------------------ */
-        .profile-area {
-            display: none;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .user-badge {
-            display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--three-red);
-            border-radius: 30px;
-            padding: 5px 15px 5px 5px;
-            gap: 10px;
-            box-shadow: 0 0 10px rgba(211, 0, 0, 0.2);
-        }
+        .profile-badge:hover { background: rgba(211, 0, 0, 0.1); }
 
         .avatar {
-            width: 35px;
-            height: 35px;
-            background: var(--three-red);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 1.1rem;
+            width: 35px; height: 35px; background: var(--three-red); color: white;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.1rem;
         }
+        .username-text { font-weight: 700; color: white; letter-spacing: 1px; font-size: 0.9rem; }
+        .role-text { font-size: 0.65rem; color: var(--three-red); letter-spacing: 1px; display: block; }
 
-        .username-text {
-            font-weight: 700;
-            color: white;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
+        .dropdown-menu {
+            position: absolute; top: 60px; right: 0; background: #111;
+            border: 1px solid var(--three-red); border-radius: 8px; width: 220px;
+            display: none; flex-direction: column; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 1001;
         }
-
-        .role-text {
-            font-size: 0.7rem;
-            color: var(--three-red);
-            letter-spacing: 1px;
-            display: block;
-        }
-
-        /* ------------------ SECTIONS ------------------ */
-        section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 100px 50px;
-            position: relative;
-        }
-
-        .section-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            letter-spacing: 5px;
-            color: white;
-            margin-bottom: 40px;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        .section-title span {
-            color: var(--three-red);
-        }
-
-        /* VİTRİN (Hero) */
-        #hero {
-            text-align: center;
-        }
-
-        .hero-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 8rem;
-            font-weight: 900;
-            letter-spacing: 20px;
-            color: white;
-            text-shadow: 0 0 30px rgba(211, 0, 0, 0.6);
-            margin-bottom: 10px;
-            margin-right: -20px;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            letter-spacing: 8px;
-            color: #ccc;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
-        .scroll-down {
-            position: absolute;
-            bottom: 50px;
-            color: white;
-            font-size: 2rem;
-            animation: bounce 2s infinite;
-            transition: 0.3s;
-        }
+        .dropdown-menu.active { display: flex; }
         
-        .scroll-down:hover { color: var(--three-red); }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-7px); }
+        .dropdown-item {
+            padding: 15px 20px; color: white; text-decoration: none;
+            font-size: 0.85rem; font-weight: 600; font-family: 'Montserrat', sans-serif;
+            border-bottom: 1px solid #222; transition: 0.3s; cursor: pointer; display: flex; align-items: center; gap: 10px;
         }
+        .dropdown-item:hover { background: rgba(211, 0, 0, 0.15); color: var(--three-red); }
+        .dropdown-item.logout { color: var(--three-red); border-bottom: none; }
+        .dropdown-item.logout:hover { background: var(--three-red); color: white; }
 
-        /* HAKKIMIZDA & DISCORD KARTLARI */
-        .glass-panel {
-            background: rgba(15, 15, 15, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 50px;
-            border-radius: 8px;
-            max-width: 800px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border-top: 4px solid var(--three-red);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-        }
+        /* ------------------ SAYFA YAPISI ------------------ */
+        .page-section { display: none; padding-top: 100px; min-height: 100vh; }
+        .page-section.active { display: block; }
 
-        .glass-panel p {
-            color: #bbb;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
+        /* --- ANA SAYFA --- */
+        #home-page { text-align: center; }
+        .hero-title { font-family: 'Montserrat', sans-serif; font-size: 8rem; font-weight: 900; letter-spacing: 20px; color: white; text-shadow: 0 0 30px rgba(211, 0, 0, 0.6); margin-top: 10vh; }
+        .hero-subtitle { font-size: 1.5rem; letter-spacing: 8px; color: #ccc; font-weight: 500; text-transform: uppercase; margin-bottom: 100px; }
+        
+        .info-panel { background: rgba(15, 15, 15, 0.85); border: 1px solid #333; padding: 40px; border-radius: 8px; max-width: 800px; margin: 0 auto 50px auto; border-top: 4px solid var(--three-red); text-align: left; }
+        .info-panel h2 { font-family: 'Montserrat', sans-serif; font-size: 2rem; color: white; margin-bottom: 20px; }
+        
+        /* --- GALERİ FORUMU --- */
+        .gallery-header { max-width: 1000px; margin: 0 auto 30px auto; display: flex; justify-content: space-between; align-items: center; }
+        .gallery-grid { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; }
+        
+        .post-card { background: #111; border: 1px solid #333; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        .post-header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; background: #0a0a0a; }
+        .post-author { font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;}
+        .role-Admin { color: var(--three-red); text-shadow: 0 0 5px rgba(211,0,0,0.5); }
+        .role-Moderator { color: var(--mod-blue); text-shadow: 0 0 5px rgba(0,168,255,0.5); }
+        .role-Ekip { color: #fff; }
+        
+        .post-img { width: 100%; max-height: 500px; object-fit: cover; display: block; }
+        .post-footer { padding: 15px 20px; background: #0a0a0a; display: flex; justify-content: space-between; align-items: center; }
+        .like-btn { background: transparent; border: none; color: #888; font-size: 1.2rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .like-btn.liked { color: var(--three-red); }
+        .like-btn:hover { color: var(--three-red); }
+        .likers-text { font-size: 0.75rem; color: #666; margin-top: 5px; }
 
-        /* ------------------ DASHBOARD (Gizli) ------------------ */
-        #dashboard {
-            display: none; /* Giriş yapılmadan görünmez */
-            padding-top: 120px;
-            align-items: stretch;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* --- ADMİN PANELİ --- */
+        #admin-page .container { max-width: 1200px; margin: 0 auto; display: flex; gap: 30px; }
+        .admin-sidebar { width: 250px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 8px; padding: 20px 0; height: fit-content; }
+        .admin-menu-item { padding: 15px 25px; color: #aaa; font-weight: 600; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; }
+        .admin-menu-item:hover, .admin-menu-item.active { background: rgba(211,0,0,0.1); color: white; border-left-color: var(--three-red); }
+        
+        .admin-content { flex: 1; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 8px; padding: 30px; }
+        .admin-section { display: none; }
+        .admin-section.active { display: block; }
 
-        .dashboard-header {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 30px;
-            border-radius: 8px;
-            border-left: 5px solid var(--three-red);
-            margin-bottom: 40px;
-            backdrop-filter: blur(10px);
-        }
+        /* Admin Tabloları */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #333; font-size: 0.9rem; }
+        th { color: var(--three-red); font-family: 'Montserrat', sans-serif; }
+        .action-select { background: #000; color: white; border: 1px solid #555; padding: 5px; border-radius: 4px; }
+        
+        /* ------------------ MODALLAR ------------------ */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal-box { background: #111; border: 1px solid var(--three-red); padding: 40px; border-radius: 8px; width: 100%; max-width: 400px; position: relative; }
+        .close-btn { position: absolute; top: 15px; right: 20px; color: #888; font-size: 1.5rem; cursor: pointer; }
+        .modal-title { font-family: 'Montserrat', sans-serif; color: white; font-size: 1.5rem; text-align: center; margin-bottom: 25px; text-transform: uppercase; }
+        .input-group { margin-bottom: 15px; }
+        .input-group input, .input-group select { width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: white; border-radius: 4px; outline: none; }
+        .input-group input:focus { border-color: var(--three-red); }
+        .error-msg { color: var(--three-red); font-size: 0.8rem; margin-bottom: 15px; text-align: center; display: none; }
+        .w-100 { width: 100%; }
 
-        .dashboard-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: white;
-            margin-bottom: 10px;
-        }
-
-        .dashboard-header p {
-            color: #aaa;
-            font-size: 1rem;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            width: 100%;
-        }
-
-        .glass-card {
-            background: rgba(15, 15, 15, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px 20px;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: var(--three-red);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .glass-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .glass-card:hover {
-            background: rgba(30, 0, 0, 0.6);
-            transform: translateY(-5px);
-            border-color: var(--glass-border);
-            box-shadow: 0 10px 30px rgba(211, 0, 0, 0.2);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            color: var(--three-red);
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .card-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: white;
-            letter-spacing: 2px;
-            font-size: 1rem;
-        }
-
-        /* ------------------ MODAL (Kayıt/Giriş) ------------------ */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(8px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .modal-box {
-            background: #111;
-            border: 1px solid var(--three-red);
-            padding: 40px;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 0 30px rgba(211, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            color: #888;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .close-btn:hover { color: var(--three-red); }
-
-        .modal-title {
-            font-family: 'Montserrat', sans-serif;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid #333;
-            color: white;
-            border-radius: 4px;
-            outline: none;
-            font-family: 'Inter', sans-serif;
-            transition: 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: var(--three-red);
-            background: rgba(211, 0, 0, 0.05);
-        }
-
-        .error-msg {
-            color: var(--three-red);
-            font-size: 0.8rem;
-            margin-bottom: 15px;
-            text-align: center;
-            display: none;
-            font-weight: 600;
-        }
-
-        .w-100 { width: 100%; padding: 12px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="#hero" class="logo">THREE<span>.</span></a>
+        <a onclick="showPage('home-page')" class="logo">THREE<span>.</span></a>
         
         <div class="nav-links">
-            <a href="#hero">VİTRİN</a>
-            <a href="#about">HAKKIMIZDA</a>
-            <a href="#discord">DISCORD</a>
-            <a href="#dashboard" id="nav-dash" style="display: none; color: var(--three-red);">EKİP PANELİ</a>
+            <a onclick="showPage('home-page')">VİTRİN & BİLGİ</a>
+            <a onclick="showPage('gallery-page')">GALERİ (FORUM)</a>
         </div>
 
         <div class="auth-area" id="auth-buttons">
@@ -455,87 +202,86 @@
         </div>
 
         <div class="profile-area" id="profile-area">
-            <div class="user-badge">
+            <div class="profile-badge" onclick="toggleDropdown()">
                 <div class="avatar" id="user-avatar">Ö</div>
                 <div>
-                    <span class="username-text" id="user-name">ÖMER</span>
-                    <span class="role-text" id="user-role">ADMIN</span>
+                    <span class="username-text" id="user-name">ÖMER13DS</span>
+                    <span class="role-text" id="user-role">KURUCU ADMIN</span>
                 </div>
+                <i class="fas fa-chevron-down" style="color: #666; font-size: 0.8rem; margin-left: 5px;"></i>
             </div>
-            <button class="btn-outline" style="border-color: var(--three-red); color: var(--three-red);" onclick="cikisYap()">ÇIKIŞ</button>
+            
+            <div class="dropdown-menu" id="dropdown-menu">
+                <a class="dropdown-item" onclick="toggleDropdown()"><i class="fas fa-user"></i> Profil Bilgileri</a>
+                <a class="dropdown-item" id="nav-admin" style="display: none;" onclick="showPage('admin-page'); toggleDropdown();"><i class="fas fa-shield-alt"></i> Admin Paneli</a>
+                <a class="dropdown-item logout" onclick="cikisYap()"><i class="fas fa-sign-out-alt"></i> ÇIKIŞ YAP</a>
+            </div>
         </div>
     </nav>
 
-    <section id="hero">
+    <div id="home-page" class="page-section active">
         <h1 class="hero-title">THREE</h1>
         <p class="hero-subtitle">Los Santos Roleplay Topluluğu</p>
         
-        <a href="#about" class="scroll-down"><i class="fas fa-chevron-down"></i></a>
-    </section>
-
-    <section id="about">
-        <h2 class="section-title">BİZ <span>KİMİZ?</span></h2>
-        <div class="glass-panel">
-            <p>Biz sadece bir ekip değil, Los Santos sokaklarında kendi kurallarını koyan, birbirine bağlı büyük bir aileyiz. Birlikte hareket eder, birlikte kazanırız.</p>
-            <p>Kaliteli rol, saygı ve profesyonellik bizim için her şeyden önce gelir. Eğer sen de bu ailenin bir parçası olup hikayeni bizimle yazmak istiyorsan, doğru yerdesin.</p>
+        <div class="info-panel">
+            <h2>BİZ KİMİZ?</h2>
+            <p>Sadece bir ekip değil, kurallarını kendi koyan bir aileyiz. Kaliteli rol ve saygı her şeyden önce gelir.</p>
         </div>
-    </section>
-
-    <section id="discord">
-        <div class="glass-panel" style="border-top-color: #5865F2;"> <i class="fab fa-discord" style="font-size: 5rem; color: #5865F2; margin-bottom: 20px;"></i>
-            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 2.5rem; font-weight: 900; color: white; margin-bottom: 15px;">AİLEYE KATIL</h2>
-            <p>THREE ekibinin bir parçası olmak, güncel duyuruları takip etmek ve bizimle iletişime geçmek için resmi Discord sunucumuza gel!</p>
-            <a href="https://discord.gg/zYBTXTfPaB" target="_blank" class="btn-solid" style="background: #5865F2; border-color: #5865F2; font-size: 1.1rem; padding: 15px 30px; margin-top: 10px;">
-                <i class="fab fa-discord me-2"></i> DISCORD'A KATIL
-            </a>
+        
+        <div class="info-panel" style="border-top-color: #5865F2; text-align: center;">
+            <i class="fab fa-discord" style="font-size: 4rem; color: #5865F2; margin-bottom: 15px;"></i>
+            <h2>AİLEYE KATIL</h2>
+            <p>Discord sunucumuza gelerek aramıza katılabilirsin.</p>
+            <a href="https://discord.gg/zYBTXTfPaB" target="_blank" class="btn-solid" style="background: #5865F2; border-color: #5865F2;">DISCORD'A KATIL</a>
         </div>
-    </section>
+    </div>
 
-    <section id="dashboard">
-        <div class="dashboard-header w-100">
-            <h2>SİSTEM PANELİ <span style="color: var(--three-red);">///</span></h2>
-            <p>Sisteme başarıyla bağlandınız. Yetki seviyenize göre aşağıdaki modülleri kullanabilirsiniz.</p>
+    <div id="gallery-page" class="page-section">
+        <div class="gallery-header">
+            <h2 style="font-family: 'Montserrat'; color: white; font-size: 2rem;">GÖRSEL <span style="color: var(--three-red);">ARŞİV</span></h2>
+            <button class="btn-solid" id="btn-add-post" style="display: none;" onclick="openModal('postModal')"><i class="fas fa-camera"></i> YENİ GÖNDERİ</button>
         </div>
+        
+        <div class="gallery-grid" id="gallery-feed">
+            </div>
+    </div>
 
-        <div class="grid-container" id="admin-grid" style="display: none; margin-bottom: 20px;">
-            <div class="glass-card" style="border-color: var(--three-red);">
-                <span class="card-icon">👑</span>
-                <span class="card-title">KULLANICI YÖNETİMİ</span>
+    <div id="admin-page" class="page-section">
+        <div class="container">
+            <div class="admin-sidebar">
+                <div class="admin-menu-item active" onclick="switchAdminTab('admin-users', this)"><i class="fas fa-users me-2"></i> Kullanıcı Yönetimi</div>
+                <div class="admin-menu-item" onclick="switchAdminTab('admin-kasa', this)"><i class="fas fa-money-bill-wave me-2"></i> Kasa Durumu</div>
             </div>
-            <div class="glass-card" style="border-color: var(--three-red);">
-                <span class="card-icon">⚙️</span>
-                <span class="card-title">SİSTEM AYARLARI</span>
-            </div>
-        </div>
+            
+            <div class="admin-content">
+                <div id="admin-users" class="admin-section active">
+                    <h2 style="color: white; border-bottom: 1px solid #333; padding-bottom: 10px;">Kullanıcı Yönetimi</h2>
+                    <table id="users-table">
+                        <thead><tr><th>OOC ADI</th><th>IC İSİM</th><th>YETKİ</th><th>İŞLEM</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
 
-        <div class="grid-container">
-            <div class="glass-card">
-                <span class="card-icon">👥</span>
-                <span class="card-title">EKİP LİSTESİ</span>
-            </div>
-            <div class="glass-card">
-                <span class="card-icon">💰</span>
-                <span class="card-title">KASA DURUMU</span>
-            </div>
-            <div class="glass-card">
-                <span class="card-icon">📸</span>
-                <span class="card-title">GÖRSEL ARŞİV</span>
-            </div>
-        </div>
-    </section>
+                <div id="admin-kasa" class="admin-section">
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">
+                        <h2 style="color: white;">Ekip Kasası</h2>
+                        <h2 style="color: #00ff88;">TOPLAM: <span id="kasa-total">$0</span></h2>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <select id="kasa-user" class="action-select" style="padding: 10px; flex: 1;"><option value="">Ekip Üyesi Seç...</option></select>
+                        <input type="number" id="kasa-amount" placeholder="Miktar ($)" class="action-select" style="padding: 10px; width: 120px;">
+                        <select id="kasa-type" class="action-select" style="padding: 10px;"><option value="in">GİRİŞ (+)</option><option value="out">ÇIKIŞ (-)</option></select>
+                        <input type="text" id="kasa-note" placeholder="Açıklama" class="action-select" style="padding: 10px; flex: 1;">
+                        <button class="btn-solid" onclick="addKasa()">EKLE</button>
+                    </div>
 
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal-box">
-            <span class="close-btn" onclick="closeModal('loginModal')">×</span>
-            <h3 class="modal-title">Sisteme Giriş</h3>
-            <div class="error-msg" id="login-error">Kullanıcı adı veya şifre hatalı!</div>
-            <div class="input-group">
-                <input type="text" id="login-user" placeholder="Kullanıcı Adı">
+                    <table id="kasa-table">
+                        <thead><tr><th>TARİH</th><th>ÜYE</th><th>TÜR</th><th>MİKTAR</th><th>AÇIKLAMA</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
-            <div class="input-group">
-                <input type="password" id="login-pass" placeholder="Şifre">
-            </div>
-            <button class="btn-solid w-100" onclick="girisYap()">GİRİŞ YAP</button>
         </div>
     </div>
 
@@ -543,145 +289,396 @@
         <div class="modal-box">
             <span class="close-btn" onclick="closeModal('registerModal')">×</span>
             <h3 class="modal-title">Yeni Kayıt</h3>
-            <div class="error-msg" id="reg-error">Hata mesajı</div>
-            <div class="input-group">
-                <input type="text" id="reg-user" placeholder="Kullanıcı Adı">
+            <div class="error-msg" id="reg-error"></div>
+            <div class="input-group"><input type="text" id="reg-user" placeholder="OOC Kullanıcı Adı"></div>
+            <div class="input-group"><input type="text" id="reg-ic" placeholder="Oyun İçi (IC) İsminiz (Örn: Martin)"></div>
+            <div class="input-group"><input type="password" id="reg-pass" placeholder="Şifre"></div>
+            <button class="btn-outline w-100" onclick="kayitOl()">KAYIT OL</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal('loginModal')">×</span>
+            <h3 class="modal-title">Sisteme Giriş</h3>
+            <div class="error-msg" id="login-error"></div>
+            <div class="input-group"><input type="text" id="login-user" placeholder="OOC Kullanıcı Adı"></div>
+            <div class="input-group"><input type="password" id="login-pass" placeholder="Şifre"></div>
+            <button class="btn-solid w-100" onclick="girisYap()">GİRİŞ YAP</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="postModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal('postModal')">×</span>
+            <h3 class="modal-title">Arşive Ekle</h3>
+            <div class="input-group"><input type="text" id="post-url" placeholder="Resim URL (Discord vb.)"></div>
+            <button class="btn-solid w-100" onclick="gonderiEkle()">PAYLAŞ</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-box" style="text-align: center;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--three-red); margin-bottom: 15px;"></i>
+            <h3 class="modal-title" style="margin-bottom: 10px;">DİKKAT</h3>
+            <p id="confirm-text" style="color: #aaa; margin-bottom: 25px;">Bu işlemi yapmak istediğine emin misin?</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn-outline" onclick="closeModal('confirmModal')">İPTAL</button>
+                <button class="btn-solid" id="confirm-btn">EVET, SİL</button>
             </div>
-            <div class="input-group">
-                <input type="password" id="reg-pass" placeholder="Şifre">
-            </div>
-            <button class="btn-outline w-100" onclick="kayitOl()">KAYDI TAMAMLA</button>
         </div>
     </div>
 
     <script>
-        // Senin Özel Admin Bilgilerin
         const ADMIN_USER = "omer13ds";
         const ADMIN_PASS = "oyaali12";
+        
+        let confirmActionCallback = null;
 
-        // Sayfa yüklendiğinde oturumu kontrol et
         window.onload = function() {
+            initDB();
             oturumKontrol();
+            renderGallery();
         };
 
-        // Modalları Aç/Kapat
-        function openModal(id) {
-            document.getElementById(id).style.display = 'flex';
+        // Veritabanı Başlatıcı (Kurucu Admini otomatik ekler)
+        function initDB() {
+            let users = JSON.parse(localStorage.getItem('threeUsersDB')) || {};
+            if(!users[ADMIN_USER]) {
+                users[ADMIN_USER] = { password: ADMIN_PASS, icName: "Kurucu", role: "Admin" };
+                localStorage.setItem('threeUsersDB', JSON.stringify(users));
+            }
+            if(!localStorage.getItem('threeGalleryDB')) localStorage.setItem('threeGalleryDB', JSON.stringify([]));
+            if(!localStorage.getItem('threeKasaDB')) localStorage.setItem('threeKasaDB', JSON.stringify([]));
         }
 
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-            document.getElementById('login-error').style.display = 'none';
-            document.getElementById('reg-error').style.display = 'none';
+        // --- SAYFA YÖNETİMİ ---
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
+            
+            if(pageId === 'admin-page') {
+                renderAdminUsers();
+                renderAdminKasa();
+            } else if (pageId === 'gallery-page') {
+                renderGallery();
+            }
         }
 
-        // --- KAYIT OLMA SİSTEMİ ---
+        function switchAdminTab(tabId, el) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.admin-menu-item').forEach(m => m.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active');
+        }
+
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdown-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Modal Yönetimi
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { 
+            document.getElementById(id).style.display = 'none'; 
+            if(document.getElementById('login-error')) document.getElementById('login-error').style.display = 'none';
+            if(document.getElementById('reg-error')) document.getElementById('reg-error').style.display = 'none';
+        }
+
+        function askConfirm(text, callback) {
+            document.getElementById('confirm-text').innerText = text;
+            confirmActionCallback = callback;
+            openModal('confirmModal');
+            
+            document.getElementById('confirm-btn').onclick = function() {
+                if(confirmActionCallback) confirmActionCallback();
+                closeModal('confirmModal');
+            };
+        }
+
+        // --- KAYIT & GİRİŞ ---
         function kayitOl() {
             var user = document.getElementById('reg-user').value.trim();
+            var ic = document.getElementById('reg-ic').value.trim();
             var pass = document.getElementById('reg-pass').value;
-            var errorBox = document.getElementById('reg-error');
+            var err = document.getElementById('reg-error');
 
-            if(user.length < 3 || pass.length < 3) {
-                errorBox.innerText = "Kullanıcı adı ve şifre en az 3 hane olmalı!";
-                errorBox.style.display = "block";
-                return;
+            if(user.length < 3 || pass.length < 3 || ic.length < 2) {
+                err.innerText = "Tüm alanları eksiksiz doldurun!"; err.style.display = "block"; return;
             }
 
-            // Mevcut kullanıcıları tarayıcıdan çek
-            var usersDB = JSON.parse(localStorage.getItem('threeUsersDB')) || {};
-
-            if(usersDB[user] || user === ADMIN_USER) {
-                errorBox.innerText = "Bu kullanıcı adı zaten alınmış kanka!";
-                errorBox.style.display = "block";
-                return;
+            var users = JSON.parse(localStorage.getItem('threeUsersDB'));
+            if(users[user]) {
+                err.innerText = "Bu kullanıcı adı alınmış!"; err.style.display = "block"; return;
             }
 
-            // Kaydet
-            usersDB[user] = { password: pass, role: 'Üye' };
-            localStorage.setItem('threeUsersDB', JSON.stringify(usersDB));
+            users[user] = { password: pass, icName: ic, role: 'Üye' };
+            localStorage.setItem('threeUsersDB', JSON.stringify(users));
 
-            alert("Kayıt başarılı! Şimdi giriş yapabilirsin.");
-            closeModal('registerModal');
-            openModal('loginModal');
+            alert("Kayıt başarılı! Giriş yapabilirsiniz.");
+            closeModal('registerModal'); openModal('loginModal');
         }
 
-        // --- GİRİŞ YAPMA SİSTEMİ ---
         function girisYap() {
             var user = document.getElementById('login-user').value.trim();
             var pass = document.getElementById('login-pass').value;
-            var errorBox = document.getElementById('login-error');
+            var err = document.getElementById('login-error');
 
-            // 1. Önce senin Admin hesabını kontrol et
-            if(user === ADMIN_USER && pass === ADMIN_PASS) {
-                basariliGiris(user, 'Kurucu Admin');
-                return;
-            }
-
-            // 2. Diğer üyeleri kontrol et
-            var usersDB = JSON.parse(localStorage.getItem('threeUsersDB')) || {};
+            var users = JSON.parse(localStorage.getItem('threeUsersDB'));
             
-            if(usersDB[user] && usersDB[user].password === pass) {
-                basariliGiris(user, usersDB[user].role);
+            if(users[user] && users[user].password === pass) {
+                let session = { username: user, icName: users[user].icName, role: users[user].role };
+                localStorage.setItem('threeSession', JSON.stringify(session));
+                closeModal('loginModal');
+                oturumKontrol();
             } else {
-                errorBox.innerText = "Hatalı kullanıcı adı veya şifre!";
-                errorBox.style.display = "block";
+                err.innerText = "Hatalı bilgi girdin kanka!"; err.style.display = "block";
             }
         }
 
-        // Giriş başarılıysa çalışacak kod
-        function basariliGiris(username, role) {
-            var sessionData = { username: username, role: role };
-            localStorage.setItem('threeActiveSession', JSON.stringify(sessionData));
-            
-            closeModal('loginModal');
-            oturumKontrol();
-            
-            // Paneli açtığı için direkt oraya kaydır
-            window.location.href = "#dashboard";
-        }
-
-        // --- ARAYÜZ (GİRİŞ YAPILDI / YAPILMADI) KONTROLÜ ---
         function oturumKontrol() {
-            var activeSession = JSON.parse(localStorage.getItem('threeActiveSession'));
-
-            if(activeSession) {
-                // GİRİŞ YAPILDIYSA
+            var session = JSON.parse(localStorage.getItem('threeSession'));
+            
+            if(session) {
                 document.getElementById('auth-buttons').style.display = 'none';
                 document.getElementById('profile-area').style.display = 'flex';
-                document.getElementById('nav-dash').style.display = 'inline-block';
-                document.getElementById('dashboard').style.display = 'flex';
+                
+                document.getElementById('user-name').innerText = session.username.toUpperCase();
+                document.getElementById('user-avatar').innerText = session.username.charAt(0).toUpperCase();
+                document.getElementById('user-role').innerText = session.role.toUpperCase();
 
-                document.getElementById('user-name').innerText = activeSession.username.toUpperCase();
-                document.getElementById('user-avatar').innerText = activeSession.username.charAt(0).toUpperCase();
-                document.getElementById('user-role').innerText = activeSession.role.toUpperCase();
-
-                // Eğer sensen, admin panellerini de göster
-                if(activeSession.username === ADMIN_USER) {
-                    document.getElementById('admin-grid').style.display = 'grid';
+                // Admin veya Mod ise panel gözükür
+                if(session.role === 'Admin' || session.role === 'Moderator') {
+                    document.getElementById('nav-admin').style.display = 'flex';
                 } else {
-                    document.getElementById('admin-grid').style.display = 'none';
+                    document.getElementById('nav-admin').style.display = 'none';
                 }
 
+                // Ekip ve üstü resim atabilir
+                if(['Admin', 'Moderator', 'Ekip'].includes(session.role)) {
+                    document.getElementById('btn-add-post').style.display = 'inline-block';
+                } else {
+                    document.getElementById('btn-add-post').style.display = 'none';
+                }
             } else {
-                // GİRİŞ YAPILMADIYSA
                 document.getElementById('auth-buttons').style.display = 'flex';
                 document.getElementById('profile-area').style.display = 'none';
-                document.getElementById('nav-dash').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'none';
-                
-                document.getElementById('login-user').value = '';
-                document.getElementById('login-pass').value = '';
-                document.getElementById('reg-user').value = '';
-                document.getElementById('reg-pass').value = '';
+                document.getElementById('btn-add-post').style.display = 'none';
+                showPage('home-page');
             }
         }
 
-        // Çıkış Yap Butonu
         function cikisYap() {
-            localStorage.removeItem('threeActiveSession');
+            localStorage.removeItem('threeSession');
+            toggleDropdown();
             oturumKontrol();
-            window.location.href = "#hero"; // Ana sayfaya at
         }
+
+        // --- GALERİ MANTIĞI ---
+        function gonderiEkle() {
+            var url = document.getElementById('post-url').value.trim();
+            if(!url) return alert("Link boş olamaz!");
+            
+            var session = JSON.parse(localStorage.getItem('threeSession'));
+            var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
+            
+            posts.unshift({
+                id: Date.now(),
+                authorUser: session.username,
+                authorIc: session.icName,
+                authorRole: session.role,
+                imgUrl: url,
+                likes: []
+            });
+            
+            localStorage.setItem('threeGalleryDB', JSON.stringify(posts));
+            closeModal('postModal');
+            document.getElementById('post-url').value = '';
+            renderGallery();
+        }
+
+        function renderGallery() {
+            var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
+            var session = JSON.parse(localStorage.getItem('threeSession'));
+            var feed = document.getElementById('gallery-feed');
+            
+            if(posts.length === 0) {
+                feed.innerHTML = "<p style='color:#666; text-align:center;'>Henüz gönderi yok.</p>"; return;
+            }
+
+            feed.innerHTML = '';
+            posts.forEach(post => {
+                let isLiked = session ? post.likes.includes(session.username) : false;
+                let heartClass = isLiked ? 'fas fa-heart liked' : 'far fa-heart';
+                
+                // Silme butonu sadece Mod ve Adminlerde gözükür
+                let deleteHtml = '';
+                if(session && (session.role === 'Admin' || session.role === 'Moderator')) {
+                    deleteHtml = `<i class="fas fa-trash" style="color:var(--three-red); cursor:pointer;" onclick="deletePost(${post.id})"></i>`;
+                }
+
+                // Renkli İsim Formatı (Örn: Martin - omer13ds)
+                let nameClass = `role-${post.authorRole}`;
+                let authorHtml = `<span class="${nameClass}">${post.authorIc} - ${post.authorUser}</span>`;
+
+                let likersText = post.likes.length > 0 ? post.likes.join(', ') + ' beğendi' : '';
+
+                feed.innerHTML += `
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-author"><i class="fas fa-camera"></i> ${authorHtml}</div>
+                            ${deleteHtml}
+                        </div>
+                        <img src="${post.imgUrl}" class="post-img" onerror="this.src='https://via.placeholder.com/800x400?text=Resim+Bulunamadi'">
+                        <div class="post-footer" style="flex-direction:column; align-items:flex-start;">
+                            <button class="like-btn" onclick="toggleLike(${post.id})"><i class="${heartClass}"></i> ${post.likes.length}</button>
+                            <div class="likers-text">${likersText}</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleLike(postId) {
+            var session = JSON.parse(localStorage.getItem('threeSession'));
+            if(!session) return alert("Beğenmek için giriş yapmalısın!");
+
+            var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
+            var post = posts.find(p => p.id === postId);
+            
+            if(post.likes.includes(session.username)) {
+                post.likes = post.likes.filter(u => u !== session.username);
+            } else {
+                post.likes.push(session.username);
+            }
+            
+            localStorage.setItem('threeGalleryDB', JSON.stringify(posts));
+            renderGallery();
+        }
+
+        function deletePost(postId) {
+            askConfirm("Bu fotoğrafı kalıcı olarak silmek istiyor musun?", function() {
+                var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
+                posts = posts.filter(p => p.id !== postId);
+                localStorage.setItem('threeGalleryDB', JSON.stringify(posts));
+                renderGallery();
+            });
+        }
+
+        // --- ADMİN: KULLANICI YÖNETİMİ ---
+        function renderAdminUsers() {
+            var users = JSON.parse(localStorage.getItem('threeUsersDB'));
+            var session = JSON.parse(localStorage.getItem('threeSession'));
+            var tbody = document.querySelector('#users-table tbody');
+            tbody.innerHTML = '';
+
+            for(let username in users) {
+                let u = users[username];
+                
+                // Kendi yetkini düşürmemeni sağlamak için
+                let selectHtml = `
+                    <select class="action-select" onchange="changeRole('${username}', this.value)" ${username === ADMIN_USER ? 'disabled' : ''}>
+                        <option value="Üye" ${u.role==='Üye'?'selected':''}>Üye</option>
+                        <option value="Ekip" ${u.role==='Ekip'?'selected':''}>Ekip</option>
+                        <option value="Moderator" ${u.role==='Moderator'?'selected':''}>Moderator</option>
+                        <option value="Admin" ${u.role==='Admin'?'selected':''}>Admin</option>
+                    </select>
+                `;
+
+                let deleteBtn = username !== ADMIN_USER ? `<button class="btn-solid" style="padding:5px 10px; font-size:0.7rem;" onclick="deleteUser('${username}')"><i class="fas fa-ban"></i> SİL</button>` : '';
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${username}</td>
+                        <td>${u.icName}</td>
+                        <td>${selectHtml}</td>
+                        <td>${deleteBtn}</td>
+                    </tr>
+                `;
+            }
+        }
+
+        function changeRole(username, newRole) {
+            var users = JSON.parse(localStorage.getItem('threeUsersDB'));
+            users[username].role = newRole;
+            localStorage.setItem('threeUsersDB', JSON.stringify(users));
+            alert(`${username} kullanıcısının rolü ${newRole} yapıldı.`);
+            
+            // Eğer galerideki isim rengi değişsin istiyorsan, eski postları da güncelleyebiliriz ama şimdilik kalsın.
+            renderAdminKasa(); // Ekip listesi güncellenmiş olabilir
+        }
+
+        function deleteUser(username) {
+            askConfirm(`${username} adlı kullanıcıyı sistemden silmek üzeresin. Emin misin?`, function() {
+                var users = JSON.parse(localStorage.getItem('threeUsersDB'));
+                delete users[username];
+                localStorage.setItem('threeUsersDB', JSON.stringify(users));
+                renderAdminUsers();
+                renderAdminKasa();
+            });
+        }
+
+        // --- ADMİN: KASA YÖNETİMİ ---
+        function renderAdminKasa() {
+            var users = JSON.parse(localStorage.getItem('threeUsersDB'));
+            var transactions = JSON.parse(localStorage.getItem('threeKasaDB'));
+            var selectBox = document.getElementById('kasa-user');
+            var tbody = document.querySelector('#kasa-table tbody');
+            
+            // Ekip listesi doldur (Sadece Ekip, Mod, Admin olanlar kasaya işlenebilir)
+            selectBox.innerHTML = '<option value="">Ekip Üyesi Seç...</option>';
+            for(let username in users) {
+                if(users[username].role !== 'Üye') {
+                    selectBox.innerHTML += `<option value="${username}">${users[username].icName} (${username})</option>`;
+                }
+            }
+
+            // Tabloyu ve Toplamı Doldur
+            tbody.innerHTML = '';
+            let total = 0;
+            
+            transactions.forEach(t => {
+                total += t.type === 'in' ? Number(t.amount) : -Number(t.amount);
+                let typeHtml = t.type === 'in' ? '<span style="color:#00ff88;">GİRİŞ (+)</span>' : '<span style="color:var(--three-red);">ÇIKIŞ (-)</span>';
+                
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="color:#888;">${t.date}</td>
+                        <td>${t.user}</td>
+                        <td>${typeHtml}</td>
+                        <td>$${t.amount}</td>
+                        <td style="color:#ccc;">${t.note}</td>
+                    </tr>
+                `;
+            });
+            
+            document.getElementById('kasa-total').innerText = '$' + total.toLocaleString();
+        }
+
+        function addKasa() {
+            var user = document.getElementById('kasa-user').value;
+            var amount = document.getElementById('kasa-amount').value;
+            var type = document.getElementById('kasa-type').value;
+            var note = document.getElementById('kasa-note').value;
+
+            if(!user || !amount || !note) return alert("Lütfen tüm alanları doldur!");
+
+            var transactions = JSON.parse(localStorage.getItem('threeKasaDB'));
+            let d = new Date();
+            let dateStr = d.toLocaleDateString('tr-TR') + " " + d.getHours() + ":" + (d.getMinutes()<10?'0':'') + d.getMinutes();
+
+            transactions.unshift({
+                user: user, amount: amount, type: type, note: note, date: dateStr
+            });
+
+            localStorage.setItem('threeKasaDB', JSON.stringify(transactions));
+            
+            document.getElementById('kasa-amount').value = '';
+            document.getElementById('kasa-note').value = '';
+            renderAdminKasa();
+        }
+
     </script>
 </body>
 </html>

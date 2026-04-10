@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* =========================================
-           T H R E E  |  R E D  C I N E M A T I C
-           ========================================= */
         :root {
             --three-red: #d30000;
             --three-dark-red: #8b0000;
@@ -75,10 +72,10 @@
         .post-header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; background: #0a0a0a; }
         .post-author { font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;}
         
-        .role-Admin { color: var(--three-red); text-shadow: 0 0 5px rgba(211,0,0,0.5); }
-        .role-Moderator { color: var(--mod-blue); text-shadow: 0 0 5px rgba(0,168,255,0.5); }
-        .role-Ekip { color: #fff; }
-        .role-Üye { color: #aaa; }
+        .role-Admin, .role-admin { color: var(--three-red); text-shadow: 0 0 5px rgba(211,0,0,0.5); }
+        .role-Moderator, .role-moderator { color: var(--mod-blue); text-shadow: 0 0 5px rgba(0,168,255,0.5); }
+        .role-Ekip, .role-ekip { color: #fff; }
+        .role-Üye, .role-üye { color: #aaa; }
         
         .post-img { width: 100%; max-height: 500px; object-fit: cover; display: block; border-bottom: 1px solid #222; }
         .post-text-body { padding: 15px 20px; background: #0a0a0a; color: #ddd; font-size: 0.95rem; line-height: 1.6; border-bottom: 1px solid #222;}
@@ -324,15 +321,12 @@
                     currentUser = data;
                     oturumArayuzu(data);
                 } else {
-                    // Profil tablosunda yoksa sistemi çökertmek yerine tamir et
                     let fallbackUsername = user.email.split('@')[0];
                     let role = (fallbackUsername === ADMIN_USER) ? 'Admin' : 'Üye';
                     let fallbackData = { id: user.id, username: fallbackUsername, ic_name: "İsimsiz Üye", role: role };
                     
                     currentUser = fallbackData;
                     oturumArayuzu(fallbackData);
-                    
-                    // Arka planda veritabanına eklemeyi dene
                     await db.from('profiles').insert([fallbackData]);
                 }
             } catch(e) {
@@ -350,13 +344,15 @@
                 document.getElementById('user-avatar').innerText = (profile.username || "?").charAt(0).toUpperCase();
                 document.getElementById('user-role').innerText = (profile.role || "ÜYE").toUpperCase();
 
-                if(profile.role === 'Admin' || profile.role === 'Moderator') {
+                let safeRole = (profile.role || "").toLowerCase();
+                
+                if(safeRole === 'admin' || safeRole === 'moderator') {
                     document.getElementById('nav-admin').style.display = 'flex';
                 } else {
                     document.getElementById('nav-admin').style.display = 'none';
                 }
 
-                if(['Admin', 'Moderator', 'Ekip'].includes(profile.role)) {
+                if(safeRole === 'admin' || safeRole === 'moderator' || safeRole === 'ekip') {
                     document.getElementById('btn-add-post').style.display = 'inline-block';
                 } else {
                     document.getElementById('btn-add-post').style.display = 'none';
@@ -401,7 +397,6 @@
 
             showLoading(true, "GİRİŞ YAPILIYOR...");
 
-            // ÖZEL ADMIN GİRİŞ KONTROLÜ (Veritabanı silinmiş olsa bile seni sokar)
             if(user === ADMIN_USER && pass === ADMIN_PASS) {
                 const { error } = await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
                 if(error) {
@@ -448,13 +443,15 @@
                 let isLiked = currentUser ? likes.includes(currentUser.username) : false;
                 let heartClass = isLiked ? 'fas fa-heart liked' : 'far fa-heart';
                 
-                // Silme Butonu (Yetkili VEYA Kendi Gönderisi İse)
-                let deleteHtml = '';
-                if(currentUser && (currentUser.role === 'Admin' || currentUser.role === 'Moderator' || currentUser.username === post.author_user)) {
-                    deleteHtml = `<i class="fas fa-trash" style="color:var(--three-red); cursor:pointer;" onclick="deletePost(${post.id})"></i>`;
+                // Silme Butonu Fix: Artık doğrudan tıklanabilir bir buton, z-index eklendi.
+                let deleteBtn = '';
+                if(currentUser) {
+                    let safeCurrentUserRole = (currentUser.role || "").toLowerCase();
+                    if(safeCurrentUserRole === 'admin' || safeCurrentUserRole === 'moderator' || currentUser.username === post.author_user) {
+                        deleteBtn = `<button onclick="deletePost(${post.id})" style="background:transparent; border:none; color:var(--three-red); font-size:1.2rem; cursor:pointer; padding:5px; z-index:10;"><i class="fas fa-trash"></i></button>`;
+                    }
                 }
 
-                // Hataya Karşı Korumalı İsimler ("undefined" yazmasını önler)
                 let safeRole = post.author_role || "Üye";
                 let safeIcName = post.author_ic || "Bilinmiyor";
                 let safeUsername = post.author_user || "bilinmiyor";
@@ -482,7 +479,7 @@
 
                 feed.innerHTML += `
                     <div class="post-card">
-                        <div class="post-header"><div class="post-author"><i class="fas fa-user-circle"></i> ${authorHtml}</div>${deleteHtml}</div>
+                        <div class="post-header"><div class="post-author"><i class="fas fa-user-circle"></i> ${authorHtml}</div>${deleteBtn}</div>
                         ${textHtml}
                         ${imgHtml}
                         <div class="post-footer">
@@ -612,7 +609,7 @@
             const { data: profiles } = await db.from('profiles').select('username, ic_name, role');
             selectBox.innerHTML = '<option value="">Ekip Üyesi Seç...</option>';
             profiles.forEach(u => {
-                if(u.role !== 'Üye') selectBox.innerHTML += `<option value="${u.username}">${u.ic_name} (${u.username})</option>`;
+                if((u.role || "").toLowerCase() !== 'üye') selectBox.innerHTML += `<option value="${u.username}">${u.ic_name} (${u.username})</option>`;
             });
 
             const { data: transactions } = await db.from('kasa_transactions').select('*').order('created_at', { ascending: false });

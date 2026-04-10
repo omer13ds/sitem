@@ -51,6 +51,7 @@
         .avatar { width: 40px; height: 40px; background: var(--three-red); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.2rem; }
         .username-text { font-weight: 700; color: white; letter-spacing: 1px; font-size: 0.9rem; }
         .role-text { font-size: 0.7rem; color: var(--three-red); letter-spacing: 1px; display: block; font-weight: bold;}
+        
         .dropdown-menu { position: absolute; top: 65px; right: 0; background: #0a0a0a; border: 1px solid var(--three-red); border-radius: 8px; width: 220px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.9); z-index: 1001; }
         .dropdown-menu.active { display: flex; }
         .dropdown-item { padding: 15px 20px; color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 600; font-family: 'Montserrat', sans-serif; border-bottom: 1px solid #1a1a1a; transition: 0.3s; cursor: pointer; display: flex; align-items: center; gap: 12px; }
@@ -114,7 +115,7 @@
         .comment-input-area input { flex: 1; padding: 12px 20px; background: rgba(255, 255, 255, 0.03); border: 1px solid #333; color: white; border-radius: 30px; outline: none; font-family: 'Inter', sans-serif; transition: 0.3s;}
         .comment-input-area input:focus { border-color: #777; background: rgba(255, 255, 255, 0.05); }
 
-        /* ---------------- ADMİN PANELİ ---------------- */
+        /* ---------------- EKİP/ADMİN PANELİ ---------------- */
         #admin-page .container { max-width: 1300px; margin: 0 auto; display: flex; gap: 30px; padding: 0 20px 50px 20px; flex-wrap: wrap;}
         .admin-sidebar { width: 280px; background: var(--glass-bg); border: 1px solid #222; border-radius: 12px; padding: 20px 0; height: fit-content; flex-shrink: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.8);}
         .admin-menu-item { padding: 18px 25px; color: #aaa; font-weight: 600; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; font-size: 0.95rem; }
@@ -166,7 +167,7 @@
             <a onclick="showPage('home-page')">VİTRİN</a>
             <a onclick="showPage('home-page'); setTimeout(()=> { window.location.href='#about-section'; }, 100);">HAKKIMIZDA</a>
             <a onclick="showPage('home-page'); setTimeout(()=> { window.location.href='#discord-section'; }, 100);">DİSCORD</a>
-            <a id="nav-admin-link" style="display: none; color: var(--three-red);" onclick="showPage('admin-page')">EKİP PANELİ</a>
+            <a onclick="showPage('gallery-page')">GALERİ (FORUM)</a>
         </div>
 
         <div class="auth-area" id="auth-buttons">
@@ -185,7 +186,7 @@
             </div>
             
             <div class="dropdown-menu" id="dropdown-menu">
-                <a class="dropdown-item" onclick="showPage('admin-page'); toggleDropdown();" id="dropdown-admin" style="display: none;"><i class="fas fa-shield-alt"></i> Admin Paneli</a>
+                <a class="dropdown-item" id="dropdown-admin" style="display: none;" onclick="showPage('admin-page'); toggleDropdown();"><i class="fas fa-shield-alt"></i> Ekip Paneli</a>
                 <a class="dropdown-item logout" onclick="cikisYap()"><i class="fas fa-sign-out-alt"></i> ÇIKIŞ YAP</a>
             </div>
         </div>
@@ -226,14 +227,14 @@
     <div id="admin-page" class="page-section">
         <div class="container">
             <div class="admin-sidebar">
-                <div class="admin-menu-item active" onclick="switchAdminTab('admin-users', this)"><i class="fas fa-users me-2"></i> Kullanıcı Yönetimi</div>
-                <div class="admin-menu-item" onclick="switchAdminTab('admin-kasa', this)"><i class="fas fa-money-bill-wave me-2"></i> Kasa Durumu</div>
+                <div class="admin-menu-item active" id="tab-kullanici" onclick="switchAdminTab('admin-users', this)"><i class="fas fa-users me-2"></i> Kullanıcı Yönetimi</div>
+                <div class="admin-menu-item" id="tab-kasa" onclick="switchAdminTab('admin-kasa', this)"><i class="fas fa-money-bill-wave me-2"></i> Kasa Durumu</div>
             </div>
             
             <div class="admin-content">
                 <div id="admin-users" class="admin-section active">
                     <h2 style="color: white; border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 5px;">Kullanıcı Yönetimi</h2>
-                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">NOT: Foruma fotoğraf atabilmek için kişinin en az "Ekip" yetkisine sahip olması gerekir. IC İsim kutusuna tıklayıp enter'a basarak isimleri düzenleyebilirsin.</p>
+                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">NOT: Sadece Adminler kullanıcıların yetkisini değiştirebilir. Foruma fotoğraf atabilmek için en az "Ekip" permi gerekir. IC İsim kutusuna tıklayıp enter'a basarak isimleri düzenleyebilirsiniz.</p>
                     <table id="users-table">
                         <thead><tr><th>OOC ADI</th><th>IC İSİM (Tıkla Düzenle)</th><th>YETKİ VER</th><th>İŞLEM</th></tr></thead>
                         <tbody></tbody>
@@ -246,7 +247,7 @@
                         <h2 style="color: #00ff88; font-family: 'Montserrat', sans-serif;">TOPLAM: <span id="kasa-total">$0</span></h2>
                     </div>
                     
-                    <div style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;" id="kasa-controls">
                         <select id="kasa-user" class="action-select" style="flex: 1;"><option value="">Ekip Üyesi Seç...</option></select>
                         <input type="number" id="kasa-amount" placeholder="Miktar ($)" class="action-select" style="width: 150px;">
                         <select id="kasa-type" class="action-select"><option value="in">GİRİŞ (+)</option><option value="out">ÇIKIŞ (-)</option></select>
@@ -364,7 +365,6 @@
 
         function toggleDropdown() { document.getElementById('dropdown-menu').classList.toggle('active'); }
 
-        // --- ZIRHLI OTURUM KONTROLÜ ---
         window.onload = async function() {
             showLoading(true, "OTURUM KONTROLÜ...");
             try {
@@ -395,7 +395,6 @@
                     
                     currentUser = fallbackData;
                     oturumArayuzu(fallbackData);
-                    // Kayıp profili arka planda onar
                     await db.from('profiles').insert([fallbackData]);
                 }
             } catch(e) {
@@ -415,26 +414,30 @@
 
                 let safeRole = (profile.role || "").toLowerCase();
                 
-                // Admin ve Mod menülerini göster
-                if(safeRole === 'admin' || safeRole === 'moderator') {
-                    document.getElementById('nav-admin-link').style.display = 'block';
-                    document.getElementById('dropdown-admin').style.display = 'flex';
-                } else {
-                    document.getElementById('nav-admin-link').style.display = 'none';
-                    document.getElementById('dropdown-admin').style.display = 'none';
-                }
-
-                // Gönderi atma yetkisi
+                // Ekip Paneli Menüsü Yetkisi (Sadece Ekip, Mod, Admin görür)
                 if(safeRole === 'admin' || safeRole === 'moderator' || safeRole === 'ekip') {
+                    document.getElementById('dropdown-admin').style.display = 'flex';
                     document.getElementById('btn-add-post').style.display = 'inline-block';
                 } else {
+                    document.getElementById('dropdown-admin').style.display = 'none';
                     document.getElementById('btn-add-post').style.display = 'none';
                 }
+
+                // Sadece Admin "Kullanıcı Yönetimi" Sekmesini Görür
+                if(safeRole === 'admin') {
+                    document.getElementById('tab-kullanici').style.display = 'block';
+                    document.getElementById('kasa-controls').style.display = 'flex';
+                } else {
+                    document.getElementById('tab-kullanici').style.display = 'none';
+                    // Sadece Kasa giriş çıkışı Adminler yapabilir, mod ve ekip sadece kasayı görür
+                    document.getElementById('kasa-controls').style.display = 'none';
+                    switchAdminTab('admin-kasa', document.getElementById('tab-kasa'));
+                }
+
             } else {
                 document.getElementById('auth-buttons').style.display = 'flex';
                 document.getElementById('profile-area').style.display = 'none';
                 document.getElementById('btn-add-post').style.display = 'none';
-                document.getElementById('nav-admin-link').style.display = 'none';
                 currentUser = null;
             }
         }
@@ -624,7 +627,7 @@
             let comments = post.comments || [];
             comments.push({ user: currentUser.username, icName: currentUser.ic_name, role: currentUser.role, text: text });
 
-            input.value = ""; // yazıyı sil
+            input.value = ""; 
             await db.from('gallery_posts').update({ comments: comments }).eq('id', postId);
             fetchGallery();
         }
@@ -638,7 +641,7 @@
             }
         }
 
-        // --- ZIRHLI ADMİN PANELİ ---
+        // --- ZIRHLI KULLANICI YÖNETİMİ ---
         async function fetchAdminUsers() {
             const tbody = document.querySelector('#users-table tbody');
             tbody.innerHTML = "<tr><td colspan='4' style='text-align:center; color:white;'>Veriler Yükleniyor...</td></tr>";
@@ -647,19 +650,19 @@
                 const { data: profiles, error } = await db.from('profiles').select('*');
                 
                 if(error) {
-                    tbody.innerHTML = `<tr><td colspan='4' style='color:#ff4c4c; text-align:center;'>Tablo çekilemedi: ${error.message}</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan='4' style='color:#ff4c4c; text-align:center;'>Sistem Hatası Veya Güvenlik Duvarı (RLS) Açık!<br><span style='color:white;font-size:0.8rem;'>Supabase SQL Editor'e gidip RLS kapatma kodunu çalıştırmanız lazım.</span></td></tr>`;
                     return;
                 }
 
                 if(!profiles || profiles.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan='4' style='text-align:center; color:#888;'>Sistemde henüz kayıtlı kullanıcı yok.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan='4' style='text-align:center; color:#888;'>Sistemde henüz kayıtlı kullanıcı yok veya RLS izin vermiyor. Lütfen SQL kodunu çalıştırın.</td></tr>`;
                     return;
                 }
 
-                // GÜVENLİ SIRALAMA (BOŞ İSİM ÇÖKMESİNİ EZECEK YER)
+                // EFSANE KORUMA: Boş olan isimleri bulup çökmesini engeller
                 profiles.sort((a,b) => {
-                    let nameA = a.username || "";
-                    let nameB = b.username || "";
+                    let nameA = a.username || "isimsiz";
+                    let nameB = b.username || "isimsiz";
                     return nameA.localeCompare(nameB);
                 });
                 
@@ -680,11 +683,10 @@
                         deleteBtn = `<button class="btn-solid" style="padding:10px 15px; font-size:0.8rem; background:var(--three-red); border:none;" onclick="deleteUser('${u.id}', '${u.username}')"><i class="fas fa-trash"></i> SİL</button>`;
                     }
 
-                    // IC İsim Düzenleme Inputu
                     let icInputHtml = `<input type="text" class="ic-input" value="${u.ic_name || ''}" placeholder="İsim Girin..." onchange="updateIcName('${u.id}', this.value)">`;
 
                     tbody.innerHTML += `<tr>
-                        <td style="font-weight: 600;">${u.username || 'Bilinmiyor'}</td>
+                        <td style="font-weight: 600;">${u.username || 'Hatalı İsim'}</td>
                         <td>${icInputHtml}</td>
                         <td>${selectHtml}</td>
                         <td>${deleteBtn}</td>
@@ -692,7 +694,7 @@
                 });
             } catch (err) {
                 console.error(err);
-                tbody.innerHTML = `<tr><td colspan='4' style='color:#ff4c4c; text-align:center;'>Kritik Hata! Tablo oluşturulamadı.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan='4' style='color:#ff4c4c; text-align:center;'>Sistem çökmesini engelledi. Veritabanı tablolarında sorun var.</td></tr>`;
             }
         }
 
@@ -700,10 +702,7 @@
             showLoading(true, "IC İSİM KAYDEDİLİYOR...");
             await db.from('profiles').update({ ic_name: newIcName }).eq('id', userId);
             showLoading(false);
-            
-            if(currentUser && currentUser.id === userId) {
-                currentUser.ic_name = newIcName;
-            }
+            if(currentUser && currentUser.id === userId) { currentUser.ic_name = newIcName; }
         }
 
         async function changeRole(userId, username, newRole) {
@@ -711,7 +710,6 @@
             await db.from('profiles').update({ role: newRole }).eq('id', userId);
             showLoading(false);
             alert(`SİSTEM: ${username} kullanıcısına [${newRole}] yetkisi verildi!`);
-            fetchAdminKasa(); 
         }
 
         async function deleteUser(userId, username) {
@@ -723,7 +721,7 @@
             }
         }
 
-        // --- KASA YÖNETİMİ ---
+        // KASA YÖNETİMİ
         async function fetchAdminKasa() {
             const selectBox = document.getElementById('kasa-user');
             const tbody = document.querySelector('#kasa-table tbody');

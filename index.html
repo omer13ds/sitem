@@ -11,7 +11,6 @@
         /* =========================================
            T H R E E  |  R E D  C I N E M A T I C
            ========================================= */
-
         :root {
             --three-red: #d30000;
             --three-dark-red: #8b0000;
@@ -23,50 +22,35 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text-main);
-            background-color: var(--three-dark);
+            font-family: 'Inter', sans-serif; color: var(--text-main); background-color: var(--three-dark);
             background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(20, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            background-size: cover; background-position: center; background-attachment: fixed;
+            overflow-x: hidden; scroll-behavior: smooth;
         }
 
-        /* ------------------ NAVBAR ------------------ */
-        .navbar {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 50px; background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid var(--glass-border);
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-        }
-
+        /* NAVBAR */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid var(--glass-border); position: fixed; width: 100%; top: 0; z-index: 1000; }
         .logo { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; font-weight: 900; letter-spacing: 4px; color: white; text-decoration: none; cursor: pointer; }
         .logo span { color: var(--three-red); }
-
         .nav-links { display: flex; gap: 30px; }
         .nav-links a { color: #aaa; text-decoration: none; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; transition: 0.3s; cursor: pointer; }
         .nav-links a:hover { color: white; text-shadow: 0 0 8px var(--three-red); }
 
-        /* ------------------ AUTH BUTONLARI ------------------ */
+        /* AUTH BUTONLARI */
         .auth-area { display: flex; gap: 15px; align-items: center; }
-        
         .btn-outline { background: transparent; color: white; border: 1px solid #555; padding: 8px 20px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
         .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
-
         .btn-solid { background: var(--three-red); color: white; border: 1px solid var(--three-red); padding: 8px 20px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
         .btn-solid:hover { background: var(--three-dark-red); box-shadow: 0 0 15px rgba(211, 0, 0, 0.6); }
 
-        /* ------------------ AÇILIR PROFİL MENÜSÜ ------------------ */
+        /* AÇILIR PROFİL MENÜSÜ */
         .profile-area { position: relative; display: none; align-items: center; }
         .profile-badge { display: flex; align-items: center; background: rgba(0, 0, 0, 0.8); border: 1px solid var(--three-red); border-radius: 30px; padding: 5px 20px 5px 5px; gap: 10px; cursor: pointer; transition: 0.3s; }
         .profile-badge:hover { background: rgba(211, 0, 0, 0.1); }
         .avatar { width: 35px; height: 35px; background: var(--three-red); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.1rem; }
         .username-text { font-weight: 700; color: white; letter-spacing: 1px; font-size: 0.9rem; }
         .role-text { font-size: 0.65rem; color: var(--three-red); letter-spacing: 1px; display: block; }
-
         .dropdown-menu { position: absolute; top: 60px; right: 0; background: #111; border: 1px solid var(--three-red); border-radius: 8px; width: 220px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 1001; }
         .dropdown-menu.active { display: flex; }
         .dropdown-item { padding: 15px 20px; color: white; text-decoration: none; font-size: 0.85rem; font-weight: 600; font-family: 'Montserrat', sans-serif; border-bottom: 1px solid #222; transition: 0.3s; cursor: pointer; display: flex; align-items: center; gap: 10px; }
@@ -74,25 +58,23 @@
         .dropdown-item.logout { color: var(--three-red); border-bottom: none; }
         .dropdown-item.logout:hover { background: var(--three-red); color: white; }
 
-        /* ------------------ SAYFALAR ------------------ */
+        /* SAYFALAR */
         .page-section { display: none; padding-top: 100px; min-height: 100vh; }
         .page-section.active { display: block; }
 
-        /* --- ANA SAYFA --- */
+        /* ANA SAYFA */
         #home-page { text-align: center; }
         .hero-title { font-family: 'Montserrat', sans-serif; font-size: 8rem; font-weight: 900; letter-spacing: 20px; color: white; text-shadow: 0 0 30px rgba(211, 0, 0, 0.6); margin-top: 10vh; }
         .hero-subtitle { font-size: 1.5rem; letter-spacing: 8px; color: #ccc; font-weight: 500; text-transform: uppercase; margin-bottom: 100px; }
         .info-panel { background: rgba(15, 15, 15, 0.85); border: 1px solid #333; padding: 40px; border-radius: 8px; max-width: 800px; margin: 0 auto 50px auto; border-top: 4px solid var(--three-red); text-align: left; }
         
-        /* --- GALERİ & FORUM --- */
+        /* GALERİ & FORUM */
         .gallery-header { max-width: 1000px; margin: 0 auto 30px auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
         .gallery-grid { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; padding: 0 20px 50px 20px; }
-        
         .post-card { background: #111; border: 1px solid #333; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
         .post-header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; background: #0a0a0a; }
         .post-author { font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;}
         
-        /* Renkler */
         .role-Admin { color: var(--three-red); text-shadow: 0 0 5px rgba(211,0,0,0.5); }
         .role-Moderator { color: var(--mod-blue); text-shadow: 0 0 5px rgba(0,168,255,0.5); }
         .role-Ekip { color: #fff; }
@@ -100,7 +82,6 @@
         
         .post-img { width: 100%; max-height: 500px; object-fit: cover; display: block; border-bottom: 1px solid #222; }
         .post-text-body { padding: 15px 20px; background: #0a0a0a; color: #ddd; font-size: 0.95rem; line-height: 1.6; border-bottom: 1px solid #222;}
-        
         .post-footer { padding: 15px 20px; background: #0a0a0a; display: flex; flex-direction: column; gap: 15px; }
         .like-section { display: flex; align-items: center; gap: 15px; }
         .like-btn { background: transparent; border: none; color: #888; font-size: 1.2rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
@@ -116,22 +97,20 @@
         .comment-input-area input { flex: 1; padding: 10px 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: white; border-radius: 4px; outline: none; font-family: 'Inter', sans-serif;}
         .comment-input-area input:focus { border-color: #555; }
 
-        /* --- ADMİN PANELİ --- */
+        /* ADMİN PANELİ */
         #admin-page .container { max-width: 1200px; margin: 0 auto; display: flex; gap: 30px; padding: 0 20px; flex-wrap: wrap;}
         .admin-sidebar { width: 250px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 8px; padding: 20px 0; height: fit-content; flex-shrink: 0;}
         .admin-menu-item { padding: 15px 25px; color: #aaa; font-weight: 600; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; }
         .admin-menu-item:hover, .admin-menu-item.active { background: rgba(211,0,0,0.1); color: white; border-left-color: var(--three-red); }
-        
         .admin-content { flex: 1; min-width: 300px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 8px; padding: 30px; overflow-x: auto;}
         .admin-section { display: none; }
         .admin-section.active { display: block; }
-        
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid #333; font-size: 0.9rem; }
         th { color: var(--three-red); font-family: 'Montserrat', sans-serif; }
         .action-select { background: #000; color: white; border: 1px solid #555; padding: 8px; border-radius: 4px; font-family: 'Inter', sans-serif;}
 
-        /* ------------------ MODALLAR ------------------ */
+        /* MODALLAR */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; }
         .modal-box { background: #111; border: 1px solid var(--three-red); padding: 40px; border-radius: 8px; width: 100%; max-width: 450px; position: relative; }
         .close-btn { position: absolute; top: 15px; right: 20px; color: #888; font-size: 1.5rem; cursor: pointer; }
@@ -142,9 +121,13 @@
         .error-msg { color: var(--three-red); font-size: 0.8rem; margin-bottom: 15px; text-align: center; display: none; }
         .w-100 { width: 100%; }
 
+        /* Loading */
+        #loading-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 9999; display: none; justify-content: center; align-items: center; color: var(--three-red); font-size: 2rem; }
     </style>
 </head>
 <body>
+
+    <div id="loading-overlay"><i class="fas fa-circle-notch fa-spin"></i></div>
 
     <nav class="navbar">
         <a onclick="showPage('home-page')" class="logo">THREE<span>.</span></a>
@@ -161,10 +144,10 @@
 
         <div class="profile-area" id="profile-area">
             <div class="profile-badge" onclick="toggleDropdown()">
-                <div class="avatar" id="user-avatar">Ö</div>
+                <div class="avatar" id="user-avatar">?</div>
                 <div>
-                    <span class="username-text" id="user-name">ÖMER13DS</span>
-                    <span class="role-text" id="user-role">ADMIN</span>
+                    <span class="username-text" id="user-name">Yükleniyor</span>
+                    <span class="role-text" id="user-role">...</span>
                 </div>
                 <i class="fas fa-chevron-down" style="color: #666; font-size: 0.8rem; margin-left: 5px;"></i>
             </div>
@@ -198,9 +181,7 @@
             <h2 style="font-family: 'Montserrat'; color: white; font-size: 2rem;">GÖRSEL <span style="color: var(--three-red);">FORUM</span></h2>
             <button class="btn-solid" id="btn-add-post" style="display: none;" onclick="openModal('postModal')"><i class="fas fa-pen"></i> YENİ GÖNDERİ</button>
         </div>
-        
-        <div class="gallery-grid" id="gallery-feed">
-            </div>
+        <div class="gallery-grid" id="gallery-feed"></div>
     </div>
 
     <div id="admin-page" class="page-section">
@@ -213,7 +194,7 @@
             <div class="admin-content">
                 <div id="admin-users" class="admin-section active">
                     <h2 style="color: white; border-bottom: 1px solid #333; padding-bottom: 10px;">Kullanıcı Yönetimi</h2>
-                    <p style="color: #888; font-size: 0.85rem; margin-top: 10px;">NOT: Sadece Ekip, Moderator ve Admin rolündekiler Galeri'ye resim/yazı gönderebilir.</p>
+                    <p style="color: #888; font-size: 0.85rem; margin-top: 10px;">Sadece Ekip, Moderator ve Admin rolündekiler foruma içerik atabilir.</p>
                     <table id="users-table">
                         <thead><tr><th>OOC ADI</th><th>IC İSİM</th><th>YETKİ VER</th><th>İŞLEM</th></tr></thead>
                         <tbody></tbody>
@@ -248,7 +229,7 @@
             <span class="close-btn" onclick="closeModal('registerModal')">×</span>
             <h3 class="modal-title">Yeni Kayıt</h3>
             <div class="error-msg" id="reg-error"></div>
-            <div class="input-group"><input type="text" id="reg-user" placeholder="OOC Kullanıcı Adı"></div>
+            <div class="input-group"><input type="text" id="reg-user" placeholder="OOC Kullanıcı Adı (Giriş için)"></div>
             <div class="input-group"><input type="text" id="reg-ic" placeholder="Oyun İçi (IC) İsminiz (Örn: Martin)"></div>
             <div class="input-group"><input type="password" id="reg-pass" placeholder="Şifre"></div>
             <button class="btn-outline w-100" onclick="kayitOl()">KAYIT OL</button>
@@ -270,110 +251,94 @@
         <div class="modal-box" style="max-width: 500px;">
             <span class="close-btn" onclick="closeModal('postModal')">×</span>
             <h3 class="modal-title">FORUMA GÖNDER</h3>
-            <div class="input-group">
-                <input type="text" id="post-url" placeholder="Resim URL (İsteğe Bağlı, Discord vb.)">
-            </div>
-            <div class="input-group">
-                <textarea id="post-text" placeholder="Gönderi metni veya rol hikayesi yazın..." rows="4" style="resize: vertical;"></textarea>
-            </div>
+            <div class="input-group"><input type="text" id="post-url" placeholder="Resim URL (İsteğe Bağlı, Discord vb.)"></div>
+            <div class="input-group"><textarea id="post-text" placeholder="Gönderi metni veya rol hikayesi yazın..." rows="4" style="resize: vertical;"></textarea></div>
             <button class="btn-solid w-100" onclick="gonderiEkle()">PAYLAŞ</button>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+        // Senin Supabase Bağlantın
+        const supabaseUrl = 'https://bfalmjjzovgeuzwyqdwa.supabase.co';
+        const supabaseKey = 'sb_publishable_2jvOJu9Fl07k_wYNoV_wgw_PK365JZo';
+        const db = supabase.createClient(supabaseUrl, supabaseKey);
+        const DUMMY_DOMAIN = "@threeroleplay.local";
+
         const ADMIN_USER = "omer13ds";
         const ADMIN_PASS = "oyaali12";
+        
+        let currentUser = null; // Veritabanından gelen aktif profil verisi
 
-        window.onload = function() {
-            initDB();
-            oturumKontrol();
-        };
+        // Yükleme Animasyonu
+        function showLoading(state) { document.getElementById('loading-overlay').style.display = state ? 'flex' : 'none'; }
 
-        function initDB() {
-            let users = JSON.parse(localStorage.getItem('threeUsersDB')) || {};
-            if(!users[ADMIN_USER]) {
-                users[ADMIN_USER] = { password: ADMIN_PASS, icName: "Kurucu", role: "Admin" };
-                localStorage.setItem('threeUsersDB', JSON.stringify(users));
-            }
-            if(!localStorage.getItem('threeGalleryDB')) localStorage.setItem('threeGalleryDB', JSON.stringify([]));
-            if(!localStorage.getItem('threeKasaDB')) localStorage.setItem('threeKasaDB', JSON.stringify([]));
+        // Modal Yönetimi
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { 
+            document.getElementById(id).style.display = 'none'; 
+            if(document.getElementById('login-error')) document.getElementById('login-error').style.display = 'none';
+            if(document.getElementById('reg-error')) document.getElementById('reg-error').style.display = 'none';
         }
 
+        // Sayfa Yönetimi
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
             
-            if(pageId === 'admin-page') { renderAdminUsers(); renderAdminKasa(); } 
-            else if (pageId === 'gallery-page') { renderGallery(); }
+            if(pageId === 'admin-page') { fetchAdminUsers(); fetchAdminKasa(); } 
+            else if (pageId === 'gallery-page') { fetchGallery(); }
         }
 
         function switchAdminTab(tabId, el) {
             document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.admin-menu-item').forEach(m => m.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            el.classList.add('active');
+            document.getElementById(tabId).classList.add('active'); el.classList.add('active');
         }
 
-        function toggleDropdown() {
-            document.getElementById('dropdown-menu').classList.toggle('active');
-        }
+        function toggleDropdown() { document.getElementById('dropdown-menu').classList.toggle('active'); }
 
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        // --- AUTH ---
-        function kayitOl() {
-            var user = document.getElementById('reg-user').value.trim();
-            var ic = document.getElementById('reg-ic').value.trim();
-            var pass = document.getElementById('reg-pass').value;
-            
-            if(user.length < 3 || pass.length < 3 || ic.length < 2) return alert("Alanları eksiksiz doldur!");
-
-            var users = JSON.parse(localStorage.getItem('threeUsersDB'));
-            if(users[user]) return alert("Bu kullanıcı adı alınmış!");
-
-            users[user] = { password: pass, icName: ic, role: 'Üye' };
-            localStorage.setItem('threeUsersDB', JSON.stringify(users));
-
-            alert("Kayıt başarılı!");
-            closeModal('registerModal'); openModal('loginModal');
-        }
-
-        function girisYap() {
-            var user = document.getElementById('login-user').value.trim();
-            var pass = document.getElementById('login-pass').value;
-            var users = JSON.parse(localStorage.getItem('threeUsersDB'));
-            
-            if(users[user] && users[user].password === pass) {
-                let session = { username: user, icName: users[user].icName, role: users[user].role };
-                localStorage.setItem('threeSession', JSON.stringify(session));
-                closeModal('loginModal');
-                oturumKontrol();
+        // --- AUTH & PROFİL ---
+        window.onload = async function() {
+            showLoading(true);
+            const { data: { user } } = await db.auth.getUser();
+            if(user) {
+                await loadUserProfile(user.id);
             } else {
-                alert("Hatalı bilgi!");
+                oturumArayuzu(null);
+            }
+            showLoading(false);
+        };
+
+        async function loadUserProfile(userId) {
+            const { data, error } = await db.from('profiles').select('*').eq('id', userId).single();
+            if(data) {
+                currentUser = data;
+                oturumArayuzu(data);
+            } else {
+                // Eğer Supabase'de kullanıcı var ama profil yoksa (silinmişse vs)
+                await db.auth.signOut();
+                oturumArayuzu(null);
             }
         }
 
-        function oturumKontrol() {
-            var session = JSON.parse(localStorage.getItem('threeSession'));
-            
-            if(session) {
+        function oturumArayuzu(profile) {
+            if(profile) {
                 document.getElementById('auth-buttons').style.display = 'none';
                 document.getElementById('profile-area').style.display = 'flex';
                 
-                document.getElementById('user-name').innerText = session.username.toUpperCase();
-                document.getElementById('user-avatar').innerText = session.username.charAt(0).toUpperCase();
-                document.getElementById('user-role').innerText = session.role.toUpperCase();
+                document.getElementById('user-name').innerText = profile.username.toUpperCase();
+                document.getElementById('user-avatar').innerText = profile.username.charAt(0).toUpperCase();
+                document.getElementById('user-role').innerText = profile.role.toUpperCase();
 
-                if(session.role === 'Admin' || session.role === 'Moderator') {
+                if(profile.role === 'Admin' || profile.role === 'Moderator') {
                     document.getElementById('nav-admin').style.display = 'flex';
                 } else {
                     document.getElementById('nav-admin').style.display = 'none';
                 }
 
-                // Sadece yetkililer paylaşım yapabilir
-                if(['Admin', 'Moderator', 'Ekip'].includes(session.role)) {
+                if(['Admin', 'Moderator', 'Ekip'].includes(profile.role)) {
                     document.getElementById('btn-add-post').style.display = 'inline-block';
                 } else {
                     document.getElementById('btn-add-post').style.display = 'none';
@@ -382,83 +347,116 @@
                 document.getElementById('auth-buttons').style.display = 'flex';
                 document.getElementById('profile-area').style.display = 'none';
                 document.getElementById('btn-add-post').style.display = 'none';
-                showPage('home-page');
+                currentUser = null;
             }
         }
 
-        function cikisYap() {
-            localStorage.removeItem('threeSession');
-            document.getElementById('dropdown-menu').classList.remove('active');
-            oturumKontrol();
-        }
-
-        // --- GALERİ & FORUM ---
-        function gonderiEkle() {
-            var url = document.getElementById('post-url').value.trim();
-            var text = document.getElementById('post-text').value.trim();
+        async function kayitOl() {
+            var user = document.getElementById('reg-user').value.trim().toLowerCase();
+            var ic = document.getElementById('reg-ic').value.trim();
+            var pass = document.getElementById('reg-pass').value;
+            var errBox = document.getElementById('reg-error');
             
-            if(!url && !text) return alert("En azından bir resim veya yazı eklemelisin!");
-            
-            var session = JSON.parse(localStorage.getItem('threeSession'));
-            var posts = JSON.parse(localStorage.getItem('threeGalleryDB')) || [];
-            
-            posts.unshift({
-                id: Date.now(),
-                authorUser: session.username,
-                authorIc: session.icName,
-                authorRole: session.role,
-                imgUrl: url,
-                text: text, // Metin eklendi
-                likes: [],
-                comments: [] // Yorumlar eklendi
-            });
-            
-            localStorage.setItem('threeGalleryDB', JSON.stringify(posts));
-            closeModal('postModal');
-            document.getElementById('post-url').value = '';
-            document.getElementById('post-text').value = '';
-            renderGallery();
-        }
-
-        function renderGallery() {
-            var posts = JSON.parse(localStorage.getItem('threeGalleryDB')) || [];
-            var session = JSON.parse(localStorage.getItem('threeSession'));
-            var feed = document.getElementById('gallery-feed');
-            
-            if(posts.length === 0) {
-                feed.innerHTML = "<p style='color:#666; text-align:center;'>Henüz gönderi yok.</p>"; return;
+            if(user.length < 3 || pass.length < 6 || ic.length < 2) {
+                errBox.innerText = "Kullanıcı/IC min 3, Şifre min 6 hane!"; errBox.style.display = "block"; return;
             }
+
+            showLoading(true);
+            const { data, error } = await db.auth.signUp({ email: user + DUMMY_DOMAIN, password: pass });
+            
+            if(error) {
+                errBox.innerText = error.message.includes("already registered") ? "Bu OOC isim zaten alınmış!" : error.message;
+                errBox.style.display = "block";
+            } else if(data.user) {
+                let role = (user === ADMIN_USER) ? 'Admin' : 'Üye';
+                await db.from('profiles').insert([{ id: data.user.id, username: user, ic_name: ic, role: role }]);
+                alert("Kayıt başarılı! Şimdi giriş yapabilirsin.");
+                closeModal('registerModal'); openModal('loginModal');
+            }
+            showLoading(false);
+        }
+
+        async function girisYap() {
+            var user = document.getElementById('login-user').value.trim().toLowerCase();
+            var pass = document.getElementById('login-pass').value;
+            var errBox = document.getElementById('login-error');
+
+            showLoading(true);
+
+            // ÖZEL ADMIN KONTROLÜ (Senin için kurtarıcı)
+            if(user === ADMIN_USER && pass === ADMIN_PASS) {
+                const { data, error } = await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
+                if(error) {
+                    // Hesap yoksa otomatik açar
+                    const { data: signUpData } = await db.auth.signUp({ email: user + DUMMY_DOMAIN, password: pass });
+                    if(signUpData.user) await db.from('profiles').insert([{ id: signUpData.user.id, username: user, ic_name: "Kurucu", role: "Admin" }]);
+                    await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
+                }
+                window.location.reload(); return;
+            }
+
+            const { data, error } = await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
+            
+            if(error) {
+                errBox.innerText = "Hatalı OOC isim veya şifre!"; errBox.style.display = "block";
+                showLoading(false);
+            } else {
+                // Silinmiş profile girmeye çalışıyorsa engelle
+                const { data: checkProfile } = await db.from('profiles').select('id').eq('id', data.user.id).single();
+                if(!checkProfile) {
+                    await db.auth.signOut();
+                    errBox.innerText = "Bu hesap sunucudan uzaklaştırılmış/silinmiş!"; errBox.style.display = "block";
+                    showLoading(false);
+                } else {
+                    window.location.reload();
+                }
+            }
+        }
+
+        async function cikisYap() {
+            showLoading(true);
+            await db.auth.signOut();
+            window.location.reload();
+        }
+
+        // --- GALERİ FORUM ---
+        async function fetchGallery() {
+            const feed = document.getElementById('gallery-feed');
+            feed.innerHTML = "<p style='color:#888; text-align:center;'>Veriler yükleniyor...</p>";
+            
+            const { data, error } = await db.from('gallery_posts').select('*').order('created_at', { ascending: false });
+            
+            if(error) { feed.innerHTML = "<p style='color:red;'>Bağlantı hatası!</p>"; return; }
+            if(!data || data.length === 0) { feed.innerHTML = "<p style='color:#666; text-align:center;'>Henüz gönderi yok.</p>"; return; }
 
             feed.innerHTML = '';
-            posts.forEach(post => {
-                // Eski verilere karşı koruma
-                if(!post.comments) post.comments = [];
+            data.forEach(post => {
+                let likes = post.likes || [];
+                let comments = post.comments || [];
                 
-                let isLiked = session ? post.likes.includes(session.username) : false;
+                let isLiked = currentUser ? likes.includes(currentUser.username) : false;
                 let heartClass = isLiked ? 'fas fa-heart liked' : 'far fa-heart';
                 
                 let deleteHtml = '';
-                if(session && (session.role === 'Admin' || session.role === 'Moderator')) {
+                if(currentUser && (currentUser.role === 'Admin' || currentUser.role === 'Moderator')) {
                     deleteHtml = `<i class="fas fa-trash" style="color:var(--three-red); cursor:pointer;" onclick="deletePost(${post.id})"></i>`;
                 }
 
-                let nameClass = `role-${post.authorRole}`;
-                let authorHtml = `<span class="${nameClass}">${post.authorIc} - ${post.authorUser}</span>`;
-                let likersText = post.likes.length > 0 ? post.likes.length + ' beğeni' : 'İlk beğenen sen ol';
+                let nameClass = `role-${post.author_role}`;
+                let authorHtml = `<span class="${nameClass}">${post.author_ic} - ${post.author_user}</span>`;
+                let likersText = likes.length > 0 ? likes.length + ' beğeni' : 'İlk beğenen sen ol';
 
-                let imgHtml = post.imgUrl ? `<img src="${post.imgUrl}" class="post-img" onerror="this.style.display='none'">` : '';
-                let textHtml = post.text ? `<div class="post-text-body">${post.text.replace(/\n/g, '<br>')}</div>` : '';
+                let imgHtml = post.img_url ? `<img src="${post.img_url}" class="post-img" onerror="this.style.display='none'">` : '';
+                let textHtml = post.text_content ? `<div class="post-text-body">${post.text_content.replace(/\n/g, '<br>')}</div>` : '';
 
-                // Yorumları Listeleme
                 let commentsHtml = '<div class="comments-list">';
-                post.comments.forEach(c => {
+                comments.forEach(c => {
                     let cRoleClass = `role-${c.role}`;
                     commentsHtml += `<div class="comment-item"><span class="${cRoleClass}" style="font-weight:700;">${c.icName}:</span> <span style="color:#ccc;">${c.text}</span></div>`;
                 });
                 commentsHtml += '</div>';
 
-                // Yorum Yapma Kutusu (Giriş yaptıysa)
-                let commentInputHtml = session ? `
+                let commentInputHtml = currentUser ? `
                     <div class="comment-input-area">
                         <input type="text" id="comment-input-${post.id}" placeholder="Bir yorum yaz...">
                         <button class="btn-solid" onclick="yorumYap(${post.id})">GÖNDER</button>
@@ -467,10 +465,7 @@
 
                 feed.innerHTML += `
                     <div class="post-card">
-                        <div class="post-header">
-                            <div class="post-author"><i class="fas fa-user-circle"></i> ${authorHtml}</div>
-                            ${deleteHtml}
-                        </div>
+                        <div class="post-header"><div class="post-author"><i class="fas fa-user-circle"></i> ${authorHtml}</div>${deleteHtml}</div>
                         ${textHtml}
                         ${imgHtml}
                         <div class="post-footer">
@@ -478,9 +473,7 @@
                                 <button class="like-btn" onclick="toggleLike(${post.id})"><i class="${heartClass}"></i></button>
                                 <span class="likers-text">${likersText}</span>
                             </div>
-                            
                             <div style="width: 100%; border-top: 1px solid #222; margin: 10px 0;"></div>
-                            
                             ${commentsHtml}
                             ${commentInputHtml}
                         </div>
@@ -489,60 +482,81 @@
             });
         }
 
-        function toggleLike(postId) {
-            var session = JSON.parse(localStorage.getItem('threeSession'));
-            if(!session) return alert("Beğenmek için giriş yapmalısın!");
-            var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
-            var post = posts.find(p => p.id === postId);
+        async function gonderiEkle() {
+            var url = document.getElementById('post-url').value.trim();
+            var text = document.getElementById('post-text').value.trim();
             
-            if(post.likes.includes(session.username)) { post.likes = post.likes.filter(u => u !== session.username); } 
-            else { post.likes.push(session.username); }
+            if(!url && !text) return alert("En azından bir resim veya yazı eklemelisin!");
             
-            localStorage.setItem('threeGalleryDB', JSON.stringify(posts)); renderGallery();
+            showLoading(true);
+            const { error } = await db.from('gallery_posts').insert([{
+                author_user: currentUser.username,
+                author_ic: currentUser.ic_name,
+                author_role: currentUser.role,
+                img_url: url,
+                text_content: text,
+                likes: [],
+                comments: []
+            }]);
+
+            showLoading(false);
+            if(error) return alert("Hata: " + error.message);
+            
+            closeModal('postModal');
+            document.getElementById('post-url').value = ''; document.getElementById('post-text').value = '';
+            fetchGallery();
         }
 
-        function yorumYap(postId) {
-            var session = JSON.parse(localStorage.getItem('threeSession'));
+        async function toggleLike(postId) {
+            if(!currentUser) return alert("Beğenmek için giriş yapmalısın!");
+            
+            // Mevcut postu çek
+            const { data: post } = await db.from('gallery_posts').select('likes').eq('id', postId).single();
+            if(!post) return;
+
+            let likes = post.likes || [];
+            if(likes.includes(currentUser.username)) { likes = likes.filter(u => u !== currentUser.username); } 
+            else { likes.push(currentUser.username); }
+            
+            await db.from('gallery_posts').update({ likes: likes }).eq('id', postId);
+            fetchGallery();
+        }
+
+        async function yorumYap(postId) {
             var input = document.getElementById(`comment-input-${postId}`);
             var text = input.value.trim();
-            
-            if(!text) return;
+            if(!text || !currentUser) return;
 
-            var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
-            var post = posts.find(p => p.id === postId);
-            
-            post.comments.push({
-                user: session.username,
-                icName: session.icName,
-                role: session.role,
-                text: text
-            });
+            const { data: post } = await db.from('gallery_posts').select('comments').eq('id', postId).single();
+            if(!post) return;
 
-            localStorage.setItem('threeGalleryDB', JSON.stringify(posts));
-            renderGallery();
+            let comments = post.comments || [];
+            comments.push({ user: currentUser.username, icName: currentUser.ic_name, role: currentUser.role, text: text });
+
+            await db.from('gallery_posts').update({ comments: comments }).eq('id', postId);
+            fetchGallery();
         }
 
-        function deletePost(postId) {
+        async function deletePost(postId) {
             if(confirm("Bu gönderiyi silmek istediğine emin misin?")) {
-                var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
-                posts = posts.filter(p => p.id !== postId);
-                localStorage.setItem('threeGalleryDB', JSON.stringify(posts));
-                renderGallery();
+                showLoading(true);
+                await db.from('gallery_posts').delete().eq('id', postId);
+                showLoading(false);
+                fetchGallery();
             }
         }
 
         // --- ADMİN PANELİ ---
-        function renderAdminUsers() {
-            var users = JSON.parse(localStorage.getItem('threeUsersDB'));
-            var tbody = document.querySelector('#users-table tbody');
-            tbody.innerHTML = '';
+        async function fetchAdminUsers() {
+            const tbody = document.querySelector('#users-table tbody');
+            tbody.innerHTML = "<tr><td colspan='4'>Yükleniyor...</td></tr>";
 
-            for(let username in users) {
-                let u = users[username];
-                
-                // Seçenek kutusu (Değiştirilince anında kaydeder)
+            const { data: profiles } = await db.from('profiles').select('*').order('created_at', { ascending: false });
+            
+            tbody.innerHTML = '';
+            profiles.forEach(u => {
                 let selectHtml = `
-                    <select class="action-select" onchange="changeRole('${username}', this.value)" ${username === ADMIN_USER ? 'disabled' : ''}>
+                    <select class="action-select" onchange="changeRole('${u.id}', '${u.username}', this.value)" ${u.username === ADMIN_USER ? 'disabled' : ''}>
                         <option value="Üye" ${u.role==='Üye'?'selected':''}>Üye</option>
                         <option value="Ekip" ${u.role==='Ekip'?'selected':''}>Ekip</option>
                         <option value="Moderator" ${u.role==='Moderator'?'selected':''}>Moderator</option>
@@ -550,52 +564,43 @@
                     </select>
                 `;
 
-                let deleteBtn = username !== ADMIN_USER ? `<button class="btn-solid" style="padding:6px 12px; font-size:0.7rem; background:var(--three-red); border:none;" onclick="deleteUser('${username}')"><i class="fas fa-trash"></i> SİL</button>` : '';
+                let deleteBtn = u.username !== ADMIN_USER ? `<button class="btn-solid" style="padding:6px 12px; font-size:0.7rem; background:var(--three-red); border:none;" onclick="deleteUser('${u.id}', '${u.username}')"><i class="fas fa-trash"></i> SİL</button>` : '';
 
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${username}</td>
-                        <td style="color:#ccc;">${u.icName}</td>
-                        <td>${selectHtml}</td>
-                        <td>${deleteBtn}</td>
-                    </tr>
-                `;
-            }
+                tbody.innerHTML += `<tr><td>${u.username}</td><td style="color:#ccc;">${u.ic_name}</td><td>${selectHtml}</td><td>${deleteBtn}</td></tr>`;
+            });
         }
 
-        // Yetki anında güncellenir
-        function changeRole(username, newRole) {
-            var users = JSON.parse(localStorage.getItem('threeUsersDB'));
-            users[username].role = newRole;
-            localStorage.setItem('threeUsersDB', JSON.stringify(users));
-            
-            alert(`SİSTEM: ${username} kullanıcısına başarıyla [${newRole}] yetkisi verildi!`);
-            renderAdminKasa(); // Kasada sadece ekipler göründüğü için listeyi yenile
+        async function changeRole(userId, username, newRole) {
+            showLoading(true);
+            await db.from('profiles').update({ role: newRole }).eq('id', userId);
+            showLoading(false);
+            alert(`SİSTEM: ${username} kullanıcısına [${newRole}] yetkisi verildi!`);
+            fetchAdminKasa(); 
         }
 
-        function deleteUser(username) {
+        async function deleteUser(userId, username) {
             if(confirm(`DİKKAT: ${username} adlı kullanıcıyı tamamen silmek üzeresin. Onaylıyor musun?`)) {
-                var users = JSON.parse(localStorage.getItem('threeUsersDB'));
-                delete users[username];
-                localStorage.setItem('threeUsersDB', JSON.stringify(users));
-                renderAdminUsers(); renderAdminKasa();
+                showLoading(true);
+                // Profil tablosundan silmek, kişinin bir daha giriş yapamamasına sebep olur (Girişte profil kontrolü ekledik)
+                await db.from('profiles').delete().eq('id', userId);
+                showLoading(false);
+                fetchAdminUsers(); fetchAdminKasa();
             }
         }
 
-        // Kasa
-        function renderAdminKasa() {
-            var users = JSON.parse(localStorage.getItem('threeUsersDB'));
-            var transactions = JSON.parse(localStorage.getItem('threeKasaDB'));
-            var selectBox = document.getElementById('kasa-user');
-            var tbody = document.querySelector('#kasa-table tbody');
+        // KASA
+        async function fetchAdminKasa() {
+            const selectBox = document.getElementById('kasa-user');
+            const tbody = document.querySelector('#kasa-table tbody');
             
+            const { data: profiles } = await db.from('profiles').select('username, ic_name, role');
             selectBox.innerHTML = '<option value="">Ekip Üyesi Seç...</option>';
-            for(let username in users) {
-                if(users[username].role !== 'Üye') {
-                    selectBox.innerHTML += `<option value="${username}">${users[username].icName} (${username})</option>`;
-                }
-            }
+            profiles.forEach(u => {
+                if(u.role !== 'Üye') selectBox.innerHTML += `<option value="${u.username}">${u.ic_name} (${u.username})</option>`;
+            });
 
+            const { data: transactions } = await db.from('kasa_transactions').select('*').order('created_at', { ascending: false });
+            
             tbody.innerHTML = '';
             let total = 0;
             
@@ -603,20 +608,15 @@
                 total += t.type === 'in' ? Number(t.amount) : -Number(t.amount);
                 let typeHtml = t.type === 'in' ? '<span style="color:#00ff88;">GİRİŞ (+)</span>' : '<span style="color:var(--three-red);">ÇIKIŞ (-)</span>';
                 
-                tbody.innerHTML += `
-                    <tr>
-                        <td style="color:#888;">${t.date}</td>
-                        <td>${t.user}</td>
-                        <td>${typeHtml}</td>
-                        <td>$${t.amount}</td>
-                        <td style="color:#ccc;">${t.note}</td>
-                    </tr>
-                `;
+                let d = new Date(t.created_at);
+                let dateStr = d.toLocaleDateString('tr-TR') + " " + d.getHours() + ":" + (d.getMinutes()<10?'0':'') + d.getMinutes();
+
+                tbody.innerHTML += `<tr><td style="color:#888;">${dateStr}</td><td>${t.username}</td><td>${typeHtml}</td><td>$${t.amount}</td><td style="color:#ccc;">${t.note}</td></tr>`;
             });
             document.getElementById('kasa-total').innerText = '$' + total.toLocaleString();
         }
 
-        function addKasa() {
+        async function addKasa() {
             var user = document.getElementById('kasa-user').value;
             var amount = document.getElementById('kasa-amount').value;
             var type = document.getElementById('kasa-type').value;
@@ -624,14 +624,12 @@
 
             if(!user || !amount || !note) return alert("Kasa için tüm alanları doldur!");
 
-            var transactions = JSON.parse(localStorage.getItem('threeKasaDB'));
-            let d = new Date(); let dateStr = d.toLocaleDateString('tr-TR') + " " + d.getHours() + ":" + (d.getMinutes()<10?'0':'') + d.getMinutes();
+            showLoading(true);
+            await db.from('kasa_transactions').insert([{ username: user, amount: amount, type: type, note: note }]);
+            showLoading(false);
 
-            transactions.unshift({ user: user, amount: amount, type: type, note: note, date: dateStr });
-            localStorage.setItem('threeKasaDB', JSON.stringify(transactions));
-            
             document.getElementById('kasa-amount').value = ''; document.getElementById('kasa-note').value = '';
-            renderAdminKasa();
+            fetchAdminKasa();
         }
     </script>
 </body>

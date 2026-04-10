@@ -118,16 +118,20 @@
         .input-group { margin-bottom: 15px; }
         .input-group input, .input-group textarea { width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: white; border-radius: 4px; outline: none; font-family: 'Inter', sans-serif;}
         .input-group input:focus, .input-group textarea:focus { border-color: var(--three-red); }
-        .error-msg { color: var(--three-red); font-size: 0.8rem; margin-bottom: 15px; text-align: center; display: none; }
+        .error-msg { color: var(--three-red); font-size: 0.8rem; margin-bottom: 15px; text-align: center; display: none; font-weight: bold; }
         .w-100 { width: 100%; }
 
         /* Loading */
-        #loading-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 9999; display: none; justify-content: center; align-items: center; color: var(--three-red); font-size: 2rem; }
+        #loading-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 9999; display: none; flex-direction: column; justify-content: center; align-items: center; color: var(--three-red); font-size: 2rem; }
+        #loading-text { font-size: 1rem; color: white; margin-top: 15px; font-family: 'Montserrat', sans-serif; letter-spacing: 2px;}
     </style>
 </head>
 <body>
 
-    <div id="loading-overlay"><i class="fas fa-circle-notch fa-spin"></i></div>
+    <div id="loading-overlay">
+        <i class="fas fa-circle-notch fa-spin"></i>
+        <div id="loading-text">YÜKLENİYOR...</div>
+    </div>
 
     <nav class="navbar">
         <a onclick="showPage('home-page')" class="logo">THREE<span>.</span></a>
@@ -153,7 +157,6 @@
             </div>
             
             <div class="dropdown-menu" id="dropdown-menu">
-                <a class="dropdown-item" onclick="toggleDropdown()"><i class="fas fa-user"></i> Profil Bilgileri</a>
                 <a class="dropdown-item" id="nav-admin" style="display: none;" onclick="showPage('admin-page'); toggleDropdown();"><i class="fas fa-shield-alt"></i> Admin Paneli</a>
                 <a class="dropdown-item logout" onclick="cikisYap()"><i class="fas fa-sign-out-alt"></i> ÇIKIŞ YAP</a>
             </div>
@@ -194,7 +197,6 @@
             <div class="admin-content">
                 <div id="admin-users" class="admin-section active">
                     <h2 style="color: white; border-bottom: 1px solid #333; padding-bottom: 10px;">Kullanıcı Yönetimi</h2>
-                    <p style="color: #888; font-size: 0.85rem; margin-top: 10px;">Sadece Ekip, Moderator ve Admin rolündekiler foruma içerik atabilir.</p>
                     <table id="users-table">
                         <thead><tr><th>OOC ADI</th><th>IC İSİM</th><th>YETKİ VER</th><th>İŞLEM</th></tr></thead>
                         <tbody></tbody>
@@ -259,7 +261,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // Senin Supabase Bağlantın
         const supabaseUrl = 'https://bfalmjjzovgeuzwyqdwa.supabase.co';
         const supabaseKey = 'sb_publishable_2jvOJu9Fl07k_wYNoV_wgw_PK365JZo';
         const db = supabase.createClient(supabaseUrl, supabaseKey);
@@ -268,12 +269,13 @@
         const ADMIN_USER = "omer13ds";
         const ADMIN_PASS = "oyaali12";
         
-        let currentUser = null; // Veritabanından gelen aktif profil verisi
+        let currentUser = null;
 
-        // Yükleme Animasyonu
-        function showLoading(state) { document.getElementById('loading-overlay').style.display = state ? 'flex' : 'none'; }
+        function showLoading(state, text="YÜKLENİYOR...") { 
+            document.getElementById('loading-overlay').style.display = state ? 'flex' : 'none'; 
+            document.getElementById('loading-text').innerText = text;
+        }
 
-        // Modal Yönetimi
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { 
             document.getElementById(id).style.display = 'none'; 
@@ -281,12 +283,10 @@
             if(document.getElementById('reg-error')) document.getElementById('reg-error').style.display = 'none';
         }
 
-        // Sayfa Yönetimi
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
-            
             if(pageId === 'admin-page') { fetchAdminUsers(); fetchAdminKasa(); } 
             else if (pageId === 'gallery-page') { fetchGallery(); }
         }
@@ -299,26 +299,44 @@
 
         function toggleDropdown() { document.getElementById('dropdown-menu').classList.toggle('active'); }
 
-        // --- AUTH & PROFİL ---
+        // --- ZIRHLI OTURUM KONTROLÜ ---
         window.onload = async function() {
-            showLoading(true);
-            const { data: { user } } = await db.auth.getUser();
-            if(user) {
-                await loadUserProfile(user.id);
-            } else {
+            showLoading(true, "OTURUM KONTROLÜ...");
+            try {
+                const { data: { user } } = await db.auth.getUser();
+                if(user) {
+                    await loadUserProfile(user);
+                } else {
+                    oturumArayuzu(null);
+                }
+            } catch (error) {
+                console.error("Auth Error:", error);
                 oturumArayuzu(null);
             }
             showLoading(false);
         };
 
-        async function loadUserProfile(userId) {
-            const { data, error } = await db.from('profiles').select('*').eq('id', userId).single();
-            if(data) {
-                currentUser = data;
-                oturumArayuzu(data);
-            } else {
-                // Eğer Supabase'de kullanıcı var ama profil yoksa (silinmişse vs)
-                await db.auth.signOut();
+        async function loadUserProfile(user) {
+            try {
+                const { data, error } = await db.from('profiles').select('*').eq('id', user.id).single();
+                
+                if(data) {
+                    currentUser = data;
+                    oturumArayuzu(data);
+                } else {
+                    // Profil tablosunda yoksa sistemi çökertmek yerine tamir et
+                    let fallbackUsername = user.email.split('@')[0];
+                    let role = (fallbackUsername === ADMIN_USER) ? 'Admin' : 'Üye';
+                    let fallbackData = { id: user.id, username: fallbackUsername, ic_name: "İsimsiz Üye", role: role };
+                    
+                    currentUser = fallbackData;
+                    oturumArayuzu(fallbackData);
+                    
+                    // Arka planda veritabanına eklemeyi dene
+                    await db.from('profiles').insert([fallbackData]);
+                }
+            } catch(e) {
+                console.log("Profil yüklenemedi, sistem korumaya alındı.", e);
                 oturumArayuzu(null);
             }
         }
@@ -328,9 +346,9 @@
                 document.getElementById('auth-buttons').style.display = 'none';
                 document.getElementById('profile-area').style.display = 'flex';
                 
-                document.getElementById('user-name').innerText = profile.username.toUpperCase();
-                document.getElementById('user-avatar').innerText = profile.username.charAt(0).toUpperCase();
-                document.getElementById('user-role').innerText = profile.role.toUpperCase();
+                document.getElementById('user-name').innerText = (profile.username || "BILINMEYEN").toUpperCase();
+                document.getElementById('user-avatar').innerText = (profile.username || "?").charAt(0).toUpperCase();
+                document.getElementById('user-role').innerText = (profile.role || "ÜYE").toUpperCase();
 
                 if(profile.role === 'Admin' || profile.role === 'Moderator') {
                     document.getElementById('nav-admin').style.display = 'flex';
@@ -361,11 +379,11 @@
                 errBox.innerText = "Kullanıcı/IC min 3, Şifre min 6 hane!"; errBox.style.display = "block"; return;
             }
 
-            showLoading(true);
+            showLoading(true, "KAYIT YAPILIYOR...");
             const { data, error } = await db.auth.signUp({ email: user + DUMMY_DOMAIN, password: pass });
             
             if(error) {
-                errBox.innerText = error.message.includes("already registered") ? "Bu OOC isim zaten alınmış!" : error.message;
+                errBox.innerText = error.message.includes("already registered") ? "Bu kullanıcı adı zaten alınmış!" : error.message;
                 errBox.style.display = "block";
             } else if(data.user) {
                 let role = (user === ADMIN_USER) ? 'Admin' : 'Üye';
@@ -381,15 +399,16 @@
             var pass = document.getElementById('login-pass').value;
             var errBox = document.getElementById('login-error');
 
-            showLoading(true);
+            showLoading(true, "GİRİŞ YAPILIYOR...");
 
-            // ÖZEL ADMIN KONTROLÜ (Senin için kurtarıcı)
+            // ÖZEL ADMIN GİRİŞ KONTROLÜ (Veritabanı silinmiş olsa bile seni sokar)
             if(user === ADMIN_USER && pass === ADMIN_PASS) {
-                const { data, error } = await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
+                const { error } = await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
                 if(error) {
-                    // Hesap yoksa otomatik açar
                     const { data: signUpData } = await db.auth.signUp({ email: user + DUMMY_DOMAIN, password: pass });
-                    if(signUpData.user) await db.from('profiles').insert([{ id: signUpData.user.id, username: user, ic_name: "Kurucu", role: "Admin" }]);
+                    if(signUpData.user) {
+                        await db.from('profiles').insert([{ id: signUpData.user.id, username: user, ic_name: "Kurucu Admin", role: "Admin" }]);
+                    }
                     await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
                 }
                 window.location.reload(); return;
@@ -398,28 +417,20 @@
             const { data, error } = await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
             
             if(error) {
-                errBox.innerText = "Hatalı OOC isim veya şifre!"; errBox.style.display = "block";
+                errBox.innerText = "Hatalı kullanıcı adı veya şifre!"; errBox.style.display = "block";
                 showLoading(false);
             } else {
-                // Silinmiş profile girmeye çalışıyorsa engelle
-                const { data: checkProfile } = await db.from('profiles').select('id').eq('id', data.user.id).single();
-                if(!checkProfile) {
-                    await db.auth.signOut();
-                    errBox.innerText = "Bu hesap sunucudan uzaklaştırılmış/silinmiş!"; errBox.style.display = "block";
-                    showLoading(false);
-                } else {
-                    window.location.reload();
-                }
+                window.location.reload();
             }
         }
 
         async function cikisYap() {
-            showLoading(true);
+            showLoading(true, "ÇIKIŞ YAPILIYOR...");
             await db.auth.signOut();
             window.location.reload();
         }
 
-        // --- GALERİ FORUM ---
+        // --- ZIRHLI GALERİ SİSTEMİ ---
         async function fetchGallery() {
             const feed = document.getElementById('gallery-feed');
             feed.innerHTML = "<p style='color:#888; text-align:center;'>Veriler yükleniyor...</p>";
@@ -437,13 +448,19 @@
                 let isLiked = currentUser ? likes.includes(currentUser.username) : false;
                 let heartClass = isLiked ? 'fas fa-heart liked' : 'far fa-heart';
                 
+                // Silme Butonu (Yetkili VEYA Kendi Gönderisi İse)
                 let deleteHtml = '';
-                if(currentUser && (currentUser.role === 'Admin' || currentUser.role === 'Moderator')) {
+                if(currentUser && (currentUser.role === 'Admin' || currentUser.role === 'Moderator' || currentUser.username === post.author_user)) {
                     deleteHtml = `<i class="fas fa-trash" style="color:var(--three-red); cursor:pointer;" onclick="deletePost(${post.id})"></i>`;
                 }
 
-                let nameClass = `role-${post.author_role}`;
-                let authorHtml = `<span class="${nameClass}">${post.author_ic} - ${post.author_user}</span>`;
+                // Hataya Karşı Korumalı İsimler ("undefined" yazmasını önler)
+                let safeRole = post.author_role || "Üye";
+                let safeIcName = post.author_ic || "Bilinmiyor";
+                let safeUsername = post.author_user || "bilinmiyor";
+
+                let nameClass = `role-${safeRole}`;
+                let authorHtml = `<span class="${nameClass}">${safeIcName} - ${safeUsername}</span>`;
                 let likersText = likes.length > 0 ? likes.length + ' beğeni' : 'İlk beğenen sen ol';
 
                 let imgHtml = post.img_url ? `<img src="${post.img_url}" class="post-img" onerror="this.style.display='none'">` : '';
@@ -451,8 +468,8 @@
 
                 let commentsHtml = '<div class="comments-list">';
                 comments.forEach(c => {
-                    let cRoleClass = `role-${c.role}`;
-                    commentsHtml += `<div class="comment-item"><span class="${cRoleClass}" style="font-weight:700;">${c.icName}:</span> <span style="color:#ccc;">${c.text}</span></div>`;
+                    let cRoleClass = `role-${c.role || 'Üye'}`;
+                    commentsHtml += `<div class="comment-item"><span class="${cRoleClass}" style="font-weight:700;">${c.icName || 'Bilinmiyor'}:</span> <span style="color:#ccc;">${c.text}</span></div>`;
                 });
                 commentsHtml += '</div>';
 
@@ -488,7 +505,7 @@
             
             if(!url && !text) return alert("En azından bir resim veya yazı eklemelisin!");
             
-            showLoading(true);
+            showLoading(true, "PAYLAŞILIYOR...");
             const { error } = await db.from('gallery_posts').insert([{
                 author_user: currentUser.username,
                 author_ic: currentUser.ic_name,
@@ -510,7 +527,6 @@
         async function toggleLike(postId) {
             if(!currentUser) return alert("Beğenmek için giriş yapmalısın!");
             
-            // Mevcut postu çek
             const { data: post } = await db.from('gallery_posts').select('likes').eq('id', postId).single();
             if(!post) return;
 
@@ -538,8 +554,8 @@
         }
 
         async function deletePost(postId) {
-            if(confirm("Bu gönderiyi silmek istediğine emin misin?")) {
-                showLoading(true);
+            if(confirm("Silmek istediğine emin misin? (Hatalı/Boş gönderileri de buradan silebilirsin)")) {
+                showLoading(true, "SİLİNİYOR...");
                 await db.from('gallery_posts').delete().eq('id', postId);
                 showLoading(false);
                 fetchGallery();
@@ -555,23 +571,24 @@
             
             tbody.innerHTML = '';
             profiles.forEach(u => {
+                let safeRole = u.role || 'Üye';
                 let selectHtml = `
                     <select class="action-select" onchange="changeRole('${u.id}', '${u.username}', this.value)" ${u.username === ADMIN_USER ? 'disabled' : ''}>
-                        <option value="Üye" ${u.role==='Üye'?'selected':''}>Üye</option>
-                        <option value="Ekip" ${u.role==='Ekip'?'selected':''}>Ekip</option>
-                        <option value="Moderator" ${u.role==='Moderator'?'selected':''}>Moderator</option>
-                        <option value="Admin" ${u.role==='Admin'?'selected':''}>Admin</option>
+                        <option value="Üye" ${safeRole==='Üye'?'selected':''}>Üye</option>
+                        <option value="Ekip" ${safeRole==='Ekip'?'selected':''}>Ekip</option>
+                        <option value="Moderator" ${safeRole==='Moderator'?'selected':''}>Moderator</option>
+                        <option value="Admin" ${safeRole==='Admin'?'selected':''}>Admin</option>
                     </select>
                 `;
 
                 let deleteBtn = u.username !== ADMIN_USER ? `<button class="btn-solid" style="padding:6px 12px; font-size:0.7rem; background:var(--three-red); border:none;" onclick="deleteUser('${u.id}', '${u.username}')"><i class="fas fa-trash"></i> SİL</button>` : '';
 
-                tbody.innerHTML += `<tr><td>${u.username}</td><td style="color:#ccc;">${u.ic_name}</td><td>${selectHtml}</td><td>${deleteBtn}</td></tr>`;
+                tbody.innerHTML += `<tr><td>${u.username}</td><td style="color:#ccc;">${u.ic_name || 'Bilinmiyor'}</td><td>${selectHtml}</td><td>${deleteBtn}</td></tr>`;
             });
         }
 
         async function changeRole(userId, username, newRole) {
-            showLoading(true);
+            showLoading(true, "YETKİ GÜNCELLENİYOR...");
             await db.from('profiles').update({ role: newRole }).eq('id', userId);
             showLoading(false);
             alert(`SİSTEM: ${username} kullanıcısına [${newRole}] yetkisi verildi!`);
@@ -580,8 +597,7 @@
 
         async function deleteUser(userId, username) {
             if(confirm(`DİKKAT: ${username} adlı kullanıcıyı tamamen silmek üzeresin. Onaylıyor musun?`)) {
-                showLoading(true);
-                // Profil tablosundan silmek, kişinin bir daha giriş yapamamasına sebep olur (Girişte profil kontrolü ekledik)
+                showLoading(true, "KULLANICI SİLİNİYOR...");
                 await db.from('profiles').delete().eq('id', userId);
                 showLoading(false);
                 fetchAdminUsers(); fetchAdminKasa();
@@ -624,7 +640,7 @@
 
             if(!user || !amount || !note) return alert("Kasa için tüm alanları doldur!");
 
-            showLoading(true);
+            showLoading(true, "KASAYA İŞLENİYOR...");
             await db.from('kasa_transactions').insert([{ username: user, amount: amount, type: type, note: note }]);
             showLoading(false);
 

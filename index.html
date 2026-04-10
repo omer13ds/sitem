@@ -38,96 +38,43 @@
 
         /* ------------------ NAVBAR ------------------ */
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            background: rgba(0, 0, 0, 0.9);
-            border-bottom: 1px solid var(--glass-border);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid var(--glass-border);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
         }
 
-        .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: 4px;
-            color: white;
-            text-decoration: none;
-            text-shadow: 0 0 10px rgba(211, 0, 0, 0.5);
-            cursor: pointer;
-        }
-
+        .logo { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; font-weight: 900; letter-spacing: 4px; color: white; text-decoration: none; cursor: pointer; }
         .logo span { color: var(--three-red); }
 
         .nav-links { display: flex; gap: 30px; }
-        .nav-links a {
-            color: #aaa;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            cursor: pointer;
-        }
+        .nav-links a { color: #aaa; text-decoration: none; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; transition: 0.3s; cursor: pointer; }
         .nav-links a:hover { color: white; text-shadow: 0 0 8px var(--three-red); }
 
         /* ------------------ AUTH BUTONLARI ------------------ */
         .auth-area { display: flex; gap: 15px; align-items: center; }
         
-        .btn-outline {
-            background: transparent; color: white; border: 1px solid #555;
-            padding: 8px 20px; font-family: 'Montserrat', sans-serif; font-weight: 700;
-            font-size: 0.8rem; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s;
-        }
+        .btn-outline { background: transparent; color: white; border: 1px solid #555; padding: 8px 20px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
         .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
-        .btn-solid {
-            background: var(--three-red); color: white; border: 1px solid var(--three-red);
-            padding: 8px 20px; font-family: 'Montserrat', sans-serif; font-weight: 700;
-            font-size: 0.8rem; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s;
-        }
+        .btn-solid { background: var(--three-red); color: white; border: 1px solid var(--three-red); padding: 8px 20px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
         .btn-solid:hover { background: var(--three-dark-red); box-shadow: 0 0 15px rgba(211, 0, 0, 0.6); }
 
-        /* ------------------ AÇILIR PROFİL MENÜSÜ (DROPDOWN) ------------------ */
+        /* ------------------ AÇILIR PROFİL MENÜSÜ ------------------ */
         .profile-area { position: relative; display: none; align-items: center; }
-        
-        .profile-badge {
-            display: flex; align-items: center; background: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--three-red); border-radius: 30px; padding: 5px 20px 5px 5px;
-            gap: 10px; cursor: pointer; transition: 0.3s;
-        }
+        .profile-badge { display: flex; align-items: center; background: rgba(0, 0, 0, 0.8); border: 1px solid var(--three-red); border-radius: 30px; padding: 5px 20px 5px 5px; gap: 10px; cursor: pointer; transition: 0.3s; }
         .profile-badge:hover { background: rgba(211, 0, 0, 0.1); }
-
-        .avatar {
-            width: 35px; height: 35px; background: var(--three-red); color: white;
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.1rem;
-        }
+        .avatar { width: 35px; height: 35px; background: var(--three-red); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.1rem; }
         .username-text { font-weight: 700; color: white; letter-spacing: 1px; font-size: 0.9rem; }
         .role-text { font-size: 0.65rem; color: var(--three-red); letter-spacing: 1px; display: block; }
 
-        .dropdown-menu {
-            position: absolute; top: 60px; right: 0; background: #111;
-            border: 1px solid var(--three-red); border-radius: 8px; width: 220px;
-            display: none; flex-direction: column; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 1001;
-        }
+        .dropdown-menu { position: absolute; top: 60px; right: 0; background: #111; border: 1px solid var(--three-red); border-radius: 8px; width: 220px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 1001; }
         .dropdown-menu.active { display: flex; }
-        
-        .dropdown-item {
-            padding: 15px 20px; color: white; text-decoration: none;
-            font-size: 0.85rem; font-weight: 600; font-family: 'Montserrat', sans-serif;
-            border-bottom: 1px solid #222; transition: 0.3s; cursor: pointer; display: flex; align-items: center; gap: 10px;
-        }
+        .dropdown-item { padding: 15px 20px; color: white; text-decoration: none; font-size: 0.85rem; font-weight: 600; font-family: 'Montserrat', sans-serif; border-bottom: 1px solid #222; transition: 0.3s; cursor: pointer; display: flex; align-items: center; gap: 10px; }
         .dropdown-item:hover { background: rgba(211, 0, 0, 0.15); color: var(--three-red); }
         .dropdown-item.logout { color: var(--three-red); border-bottom: none; }
         .dropdown-item.logout:hover { background: var(--three-red); color: white; }
 
-        /* ------------------ SAYFA YAPISI ------------------ */
+        /* ------------------ SAYFALAR ------------------ */
         .page-section { display: none; padding-top: 100px; min-height: 100vh; }
         .page-section.active { display: block; }
 
@@ -135,52 +82,63 @@
         #home-page { text-align: center; }
         .hero-title { font-family: 'Montserrat', sans-serif; font-size: 8rem; font-weight: 900; letter-spacing: 20px; color: white; text-shadow: 0 0 30px rgba(211, 0, 0, 0.6); margin-top: 10vh; }
         .hero-subtitle { font-size: 1.5rem; letter-spacing: 8px; color: #ccc; font-weight: 500; text-transform: uppercase; margin-bottom: 100px; }
-        
         .info-panel { background: rgba(15, 15, 15, 0.85); border: 1px solid #333; padding: 40px; border-radius: 8px; max-width: 800px; margin: 0 auto 50px auto; border-top: 4px solid var(--three-red); text-align: left; }
-        .info-panel h2 { font-family: 'Montserrat', sans-serif; font-size: 2rem; color: white; margin-bottom: 20px; }
         
-        /* --- GALERİ FORUMU --- */
-        .gallery-header { max-width: 1000px; margin: 0 auto 30px auto; display: flex; justify-content: space-between; align-items: center; }
-        .gallery-grid { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; }
+        /* --- GALERİ & FORUM --- */
+        .gallery-header { max-width: 1000px; margin: 0 auto 30px auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .gallery-grid { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; padding: 0 20px 50px 20px; }
         
         .post-card { background: #111; border: 1px solid #333; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
         .post-header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; background: #0a0a0a; }
         .post-author { font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;}
+        
+        /* Renkler */
         .role-Admin { color: var(--three-red); text-shadow: 0 0 5px rgba(211,0,0,0.5); }
         .role-Moderator { color: var(--mod-blue); text-shadow: 0 0 5px rgba(0,168,255,0.5); }
         .role-Ekip { color: #fff; }
+        .role-Üye { color: #aaa; }
         
-        .post-img { width: 100%; max-height: 500px; object-fit: cover; display: block; }
-        .post-footer { padding: 15px 20px; background: #0a0a0a; display: flex; justify-content: space-between; align-items: center; }
+        .post-img { width: 100%; max-height: 500px; object-fit: cover; display: block; border-bottom: 1px solid #222; }
+        .post-text-body { padding: 15px 20px; background: #0a0a0a; color: #ddd; font-size: 0.95rem; line-height: 1.6; border-bottom: 1px solid #222;}
+        
+        .post-footer { padding: 15px 20px; background: #0a0a0a; display: flex; flex-direction: column; gap: 15px; }
+        .like-section { display: flex; align-items: center; gap: 15px; }
         .like-btn { background: transparent; border: none; color: #888; font-size: 1.2rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .like-btn.liked { color: var(--three-red); }
-        .like-btn:hover { color: var(--three-red); }
-        .likers-text { font-size: 0.75rem; color: #666; margin-top: 5px; }
+        .like-btn.liked, .like-btn:hover { color: var(--three-red); }
+        .likers-text { font-size: 0.8rem; color: #666; }
+
+        /* Yorum Alanı */
+        .comments-list { max-height: 200px; overflow-y: auto; padding-right: 10px; margin-bottom: 10px; }
+        .comments-list::-webkit-scrollbar { width: 5px; }
+        .comments-list::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
+        .comment-item { margin-bottom: 10px; font-size: 0.85rem; line-height: 1.4; background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px;}
+        .comment-input-area { display: flex; gap: 10px; }
+        .comment-input-area input { flex: 1; padding: 10px 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: white; border-radius: 4px; outline: none; font-family: 'Inter', sans-serif;}
+        .comment-input-area input:focus { border-color: #555; }
 
         /* --- ADMİN PANELİ --- */
-        #admin-page .container { max-width: 1200px; margin: 0 auto; display: flex; gap: 30px; }
-        .admin-sidebar { width: 250px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 8px; padding: 20px 0; height: fit-content; }
+        #admin-page .container { max-width: 1200px; margin: 0 auto; display: flex; gap: 30px; padding: 0 20px; flex-wrap: wrap;}
+        .admin-sidebar { width: 250px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 8px; padding: 20px 0; height: fit-content; flex-shrink: 0;}
         .admin-menu-item { padding: 15px 25px; color: #aaa; font-weight: 600; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; }
         .admin-menu-item:hover, .admin-menu-item.active { background: rgba(211,0,0,0.1); color: white; border-left-color: var(--three-red); }
         
-        .admin-content { flex: 1; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 8px; padding: 30px; }
+        .admin-content { flex: 1; min-width: 300px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 8px; padding: 30px; overflow-x: auto;}
         .admin-section { display: none; }
         .admin-section.active { display: block; }
-
-        /* Admin Tabloları */
+        
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid #333; font-size: 0.9rem; }
         th { color: var(--three-red); font-family: 'Montserrat', sans-serif; }
-        .action-select { background: #000; color: white; border: 1px solid #555; padding: 5px; border-radius: 4px; }
-        
+        .action-select { background: #000; color: white; border: 1px solid #555; padding: 8px; border-radius: 4px; font-family: 'Inter', sans-serif;}
+
         /* ------------------ MODALLAR ------------------ */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; }
-        .modal-box { background: #111; border: 1px solid var(--three-red); padding: 40px; border-radius: 8px; width: 100%; max-width: 400px; position: relative; }
+        .modal-box { background: #111; border: 1px solid var(--three-red); padding: 40px; border-radius: 8px; width: 100%; max-width: 450px; position: relative; }
         .close-btn { position: absolute; top: 15px; right: 20px; color: #888; font-size: 1.5rem; cursor: pointer; }
         .modal-title { font-family: 'Montserrat', sans-serif; color: white; font-size: 1.5rem; text-align: center; margin-bottom: 25px; text-transform: uppercase; }
         .input-group { margin-bottom: 15px; }
-        .input-group input, .input-group select { width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: white; border-radius: 4px; outline: none; }
-        .input-group input:focus { border-color: var(--three-red); }
+        .input-group input, .input-group textarea { width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: white; border-radius: 4px; outline: none; font-family: 'Inter', sans-serif;}
+        .input-group input:focus, .input-group textarea:focus { border-color: var(--three-red); }
         .error-msg { color: var(--three-red); font-size: 0.8rem; margin-bottom: 15px; text-align: center; display: none; }
         .w-100 { width: 100%; }
 
@@ -206,7 +164,7 @@
                 <div class="avatar" id="user-avatar">Ö</div>
                 <div>
                     <span class="username-text" id="user-name">ÖMER13DS</span>
-                    <span class="role-text" id="user-role">KURUCU ADMIN</span>
+                    <span class="role-text" id="user-role">ADMIN</span>
                 </div>
                 <i class="fas fa-chevron-down" style="color: #666; font-size: 0.8rem; margin-left: 5px;"></i>
             </div>
@@ -225,21 +183,20 @@
         
         <div class="info-panel">
             <h2>BİZ KİMİZ?</h2>
-            <p>Sadece bir ekip değil, kurallarını kendi koyan bir aileyiz. Kaliteli rol ve saygı her şeyden önce gelir.</p>
+            <p>Sadece bir ekip değil, kurallarını kendi koyan bir aileyiz. Birlikte hareket eder, birlikte kazanırız.</p>
         </div>
         
         <div class="info-panel" style="border-top-color: #5865F2; text-align: center;">
             <i class="fab fa-discord" style="font-size: 4rem; color: #5865F2; margin-bottom: 15px;"></i>
             <h2>AİLEYE KATIL</h2>
-            <p>Discord sunucumuza gelerek aramıza katılabilirsin.</p>
-            <a href="https://discord.gg/zYBTXTfPaB" target="_blank" class="btn-solid" style="background: #5865F2; border-color: #5865F2;">DISCORD'A KATIL</a>
+            <a href="https://discord.gg/zYBTXTfPaB" target="_blank" class="btn-solid" style="background: #5865F2; border-color: #5865F2; margin-top: 10px;">DISCORD'A KATIL</a>
         </div>
     </div>
 
     <div id="gallery-page" class="page-section">
         <div class="gallery-header">
-            <h2 style="font-family: 'Montserrat'; color: white; font-size: 2rem;">GÖRSEL <span style="color: var(--three-red);">ARŞİV</span></h2>
-            <button class="btn-solid" id="btn-add-post" style="display: none;" onclick="openModal('postModal')"><i class="fas fa-camera"></i> YENİ GÖNDERİ</button>
+            <h2 style="font-family: 'Montserrat'; color: white; font-size: 2rem;">GÖRSEL <span style="color: var(--three-red);">FORUM</span></h2>
+            <button class="btn-solid" id="btn-add-post" style="display: none;" onclick="openModal('postModal')"><i class="fas fa-pen"></i> YENİ GÖNDERİ</button>
         </div>
         
         <div class="gallery-grid" id="gallery-feed">
@@ -256,8 +213,9 @@
             <div class="admin-content">
                 <div id="admin-users" class="admin-section active">
                     <h2 style="color: white; border-bottom: 1px solid #333; padding-bottom: 10px;">Kullanıcı Yönetimi</h2>
+                    <p style="color: #888; font-size: 0.85rem; margin-top: 10px;">NOT: Sadece Ekip, Moderator ve Admin rolündekiler Galeri'ye resim/yazı gönderebilir.</p>
                     <table id="users-table">
-                        <thead><tr><th>OOC ADI</th><th>IC İSİM</th><th>YETKİ</th><th>İŞLEM</th></tr></thead>
+                        <thead><tr><th>OOC ADI</th><th>IC İSİM</th><th>YETKİ VER</th><th>İŞLEM</th></tr></thead>
                         <tbody></tbody>
                     </table>
                 </div>
@@ -268,12 +226,12 @@
                         <h2 style="color: #00ff88;">TOPLAM: <span id="kasa-total">$0</span></h2>
                     </div>
                     
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <select id="kasa-user" class="action-select" style="padding: 10px; flex: 1;"><option value="">Ekip Üyesi Seç...</option></select>
-                        <input type="number" id="kasa-amount" placeholder="Miktar ($)" class="action-select" style="padding: 10px; width: 120px;">
-                        <select id="kasa-type" class="action-select" style="padding: 10px;"><option value="in">GİRİŞ (+)</option><option value="out">ÇIKIŞ (-)</option></select>
-                        <input type="text" id="kasa-note" placeholder="Açıklama" class="action-select" style="padding: 10px; flex: 1;">
-                        <button class="btn-solid" onclick="addKasa()">EKLE</button>
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <select id="kasa-user" class="action-select" style="flex: 1;"><option value="">Ekip Üyesi Seç...</option></select>
+                        <input type="number" id="kasa-amount" placeholder="Miktar ($)" class="action-select" style="width: 120px;">
+                        <select id="kasa-type" class="action-select"><option value="in">GİRİŞ (+)</option><option value="out">ÇIKIŞ (-)</option></select>
+                        <input type="text" id="kasa-note" placeholder="Açıklama" class="action-select" style="flex: 2;">
+                        <button class="btn-solid" onclick="addKasa()">İŞLE</button>
                     </div>
 
                     <table id="kasa-table">
@@ -300,7 +258,7 @@
     <div class="modal-overlay" id="loginModal">
         <div class="modal-box">
             <span class="close-btn" onclick="closeModal('loginModal')">×</span>
-            <h3 class="modal-title">Sisteme Giriş</h3>
+            <h3 class="modal-title">GİRİŞ</h3>
             <div class="error-msg" id="login-error"></div>
             <div class="input-group"><input type="text" id="login-user" placeholder="OOC Kullanıcı Adı"></div>
             <div class="input-group"><input type="password" id="login-pass" placeholder="Şifre"></div>
@@ -309,39 +267,28 @@
     </div>
 
     <div class="modal-overlay" id="postModal">
-        <div class="modal-box">
+        <div class="modal-box" style="max-width: 500px;">
             <span class="close-btn" onclick="closeModal('postModal')">×</span>
-            <h3 class="modal-title">Arşive Ekle</h3>
-            <div class="input-group"><input type="text" id="post-url" placeholder="Resim URL (Discord vb.)"></div>
-            <button class="btn-solid w-100" onclick="gonderiEkle()">PAYLAŞ</button>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="confirmModal">
-        <div class="modal-box" style="text-align: center;">
-            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--three-red); margin-bottom: 15px;"></i>
-            <h3 class="modal-title" style="margin-bottom: 10px;">DİKKAT</h3>
-            <p id="confirm-text" style="color: #aaa; margin-bottom: 25px;">Bu işlemi yapmak istediğine emin misin?</p>
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <button class="btn-outline" onclick="closeModal('confirmModal')">İPTAL</button>
-                <button class="btn-solid" id="confirm-btn">EVET, SİL</button>
+            <h3 class="modal-title">FORUMA GÖNDER</h3>
+            <div class="input-group">
+                <input type="text" id="post-url" placeholder="Resim URL (İsteğe Bağlı, Discord vb.)">
             </div>
+            <div class="input-group">
+                <textarea id="post-text" placeholder="Gönderi metni veya rol hikayesi yazın..." rows="4" style="resize: vertical;"></textarea>
+            </div>
+            <button class="btn-solid w-100" onclick="gonderiEkle()">PAYLAŞ</button>
         </div>
     </div>
 
     <script>
         const ADMIN_USER = "omer13ds";
         const ADMIN_PASS = "oyaali12";
-        
-        let confirmActionCallback = null;
 
         window.onload = function() {
             initDB();
             oturumKontrol();
-            renderGallery();
         };
 
-        // Veritabanı Başlatıcı (Kurucu Admini otomatik ekler)
         function initDB() {
             let users = JSON.parse(localStorage.getItem('threeUsersDB')) || {};
             if(!users[ADMIN_USER]) {
@@ -352,18 +299,13 @@
             if(!localStorage.getItem('threeKasaDB')) localStorage.setItem('threeKasaDB', JSON.stringify([]));
         }
 
-        // --- SAYFA YÖNETİMİ ---
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
             
-            if(pageId === 'admin-page') {
-                renderAdminUsers();
-                renderAdminKasa();
-            } else if (pageId === 'gallery-page') {
-                renderGallery();
-            }
+            if(pageId === 'admin-page') { renderAdminUsers(); renderAdminKasa(); } 
+            else if (pageId === 'gallery-page') { renderGallery(); }
         }
 
         function switchAdminTab(tabId, el) {
@@ -374,57 +316,33 @@
         }
 
         function toggleDropdown() {
-            const menu = document.getElementById('dropdown-menu');
-            menu.classList.toggle('active');
+            document.getElementById('dropdown-menu').classList.toggle('active');
         }
 
-        // Modal Yönetimi
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { 
-            document.getElementById(id).style.display = 'none'; 
-            if(document.getElementById('login-error')) document.getElementById('login-error').style.display = 'none';
-            if(document.getElementById('reg-error')) document.getElementById('reg-error').style.display = 'none';
-        }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        function askConfirm(text, callback) {
-            document.getElementById('confirm-text').innerText = text;
-            confirmActionCallback = callback;
-            openModal('confirmModal');
-            
-            document.getElementById('confirm-btn').onclick = function() {
-                if(confirmActionCallback) confirmActionCallback();
-                closeModal('confirmModal');
-            };
-        }
-
-        // --- KAYIT & GİRİŞ ---
+        // --- AUTH ---
         function kayitOl() {
             var user = document.getElementById('reg-user').value.trim();
             var ic = document.getElementById('reg-ic').value.trim();
             var pass = document.getElementById('reg-pass').value;
-            var err = document.getElementById('reg-error');
-
-            if(user.length < 3 || pass.length < 3 || ic.length < 2) {
-                err.innerText = "Tüm alanları eksiksiz doldurun!"; err.style.display = "block"; return;
-            }
+            
+            if(user.length < 3 || pass.length < 3 || ic.length < 2) return alert("Alanları eksiksiz doldur!");
 
             var users = JSON.parse(localStorage.getItem('threeUsersDB'));
-            if(users[user]) {
-                err.innerText = "Bu kullanıcı adı alınmış!"; err.style.display = "block"; return;
-            }
+            if(users[user]) return alert("Bu kullanıcı adı alınmış!");
 
             users[user] = { password: pass, icName: ic, role: 'Üye' };
             localStorage.setItem('threeUsersDB', JSON.stringify(users));
 
-            alert("Kayıt başarılı! Giriş yapabilirsiniz.");
+            alert("Kayıt başarılı!");
             closeModal('registerModal'); openModal('loginModal');
         }
 
         function girisYap() {
             var user = document.getElementById('login-user').value.trim();
             var pass = document.getElementById('login-pass').value;
-            var err = document.getElementById('login-error');
-
             var users = JSON.parse(localStorage.getItem('threeUsersDB'));
             
             if(users[user] && users[user].password === pass) {
@@ -433,7 +351,7 @@
                 closeModal('loginModal');
                 oturumKontrol();
             } else {
-                err.innerText = "Hatalı bilgi girdin kanka!"; err.style.display = "block";
+                alert("Hatalı bilgi!");
             }
         }
 
@@ -448,14 +366,13 @@
                 document.getElementById('user-avatar').innerText = session.username.charAt(0).toUpperCase();
                 document.getElementById('user-role').innerText = session.role.toUpperCase();
 
-                // Admin veya Mod ise panel gözükür
                 if(session.role === 'Admin' || session.role === 'Moderator') {
                     document.getElementById('nav-admin').style.display = 'flex';
                 } else {
                     document.getElementById('nav-admin').style.display = 'none';
                 }
 
-                // Ekip ve üstü resim atabilir
+                // Sadece yetkililer paylaşım yapabilir
                 if(['Admin', 'Moderator', 'Ekip'].includes(session.role)) {
                     document.getElementById('btn-add-post').style.display = 'inline-block';
                 } else {
@@ -471,17 +388,19 @@
 
         function cikisYap() {
             localStorage.removeItem('threeSession');
-            toggleDropdown();
+            document.getElementById('dropdown-menu').classList.remove('active');
             oturumKontrol();
         }
 
-        // --- GALERİ MANTIĞI ---
+        // --- GALERİ & FORUM ---
         function gonderiEkle() {
             var url = document.getElementById('post-url').value.trim();
-            if(!url) return alert("Link boş olamaz!");
+            var text = document.getElementById('post-text').value.trim();
+            
+            if(!url && !text) return alert("En azından bir resim veya yazı eklemelisin!");
             
             var session = JSON.parse(localStorage.getItem('threeSession'));
-            var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
+            var posts = JSON.parse(localStorage.getItem('threeGalleryDB')) || [];
             
             posts.unshift({
                 id: Date.now(),
@@ -489,17 +408,20 @@
                 authorIc: session.icName,
                 authorRole: session.role,
                 imgUrl: url,
-                likes: []
+                text: text, // Metin eklendi
+                likes: [],
+                comments: [] // Yorumlar eklendi
             });
             
             localStorage.setItem('threeGalleryDB', JSON.stringify(posts));
             closeModal('postModal');
             document.getElementById('post-url').value = '';
+            document.getElementById('post-text').value = '';
             renderGallery();
         }
 
         function renderGallery() {
-            var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
+            var posts = JSON.parse(localStorage.getItem('threeGalleryDB')) || [];
             var session = JSON.parse(localStorage.getItem('threeSession'));
             var feed = document.getElementById('gallery-feed');
             
@@ -509,31 +431,58 @@
 
             feed.innerHTML = '';
             posts.forEach(post => {
+                // Eski verilere karşı koruma
+                if(!post.comments) post.comments = [];
+                
                 let isLiked = session ? post.likes.includes(session.username) : false;
                 let heartClass = isLiked ? 'fas fa-heart liked' : 'far fa-heart';
                 
-                // Silme butonu sadece Mod ve Adminlerde gözükür
                 let deleteHtml = '';
                 if(session && (session.role === 'Admin' || session.role === 'Moderator')) {
                     deleteHtml = `<i class="fas fa-trash" style="color:var(--three-red); cursor:pointer;" onclick="deletePost(${post.id})"></i>`;
                 }
 
-                // Renkli İsim Formatı (Örn: Martin - omer13ds)
                 let nameClass = `role-${post.authorRole}`;
                 let authorHtml = `<span class="${nameClass}">${post.authorIc} - ${post.authorUser}</span>`;
+                let likersText = post.likes.length > 0 ? post.likes.length + ' beğeni' : 'İlk beğenen sen ol';
 
-                let likersText = post.likes.length > 0 ? post.likes.join(', ') + ' beğendi' : '';
+                let imgHtml = post.imgUrl ? `<img src="${post.imgUrl}" class="post-img" onerror="this.style.display='none'">` : '';
+                let textHtml = post.text ? `<div class="post-text-body">${post.text.replace(/\n/g, '<br>')}</div>` : '';
+
+                // Yorumları Listeleme
+                let commentsHtml = '<div class="comments-list">';
+                post.comments.forEach(c => {
+                    let cRoleClass = `role-${c.role}`;
+                    commentsHtml += `<div class="comment-item"><span class="${cRoleClass}" style="font-weight:700;">${c.icName}:</span> <span style="color:#ccc;">${c.text}</span></div>`;
+                });
+                commentsHtml += '</div>';
+
+                // Yorum Yapma Kutusu (Giriş yaptıysa)
+                let commentInputHtml = session ? `
+                    <div class="comment-input-area">
+                        <input type="text" id="comment-input-${post.id}" placeholder="Bir yorum yaz...">
+                        <button class="btn-solid" onclick="yorumYap(${post.id})">GÖNDER</button>
+                    </div>
+                ` : `<div style="font-size:0.8rem; color:#666;">Yorum yapmak için giriş yapmalısın.</div>`;
 
                 feed.innerHTML += `
                     <div class="post-card">
                         <div class="post-header">
-                            <div class="post-author"><i class="fas fa-camera"></i> ${authorHtml}</div>
+                            <div class="post-author"><i class="fas fa-user-circle"></i> ${authorHtml}</div>
                             ${deleteHtml}
                         </div>
-                        <img src="${post.imgUrl}" class="post-img" onerror="this.src='https://via.placeholder.com/800x400?text=Resim+Bulunamadi'">
-                        <div class="post-footer" style="flex-direction:column; align-items:flex-start;">
-                            <button class="like-btn" onclick="toggleLike(${post.id})"><i class="${heartClass}"></i> ${post.likes.length}</button>
-                            <div class="likers-text">${likersText}</div>
+                        ${textHtml}
+                        ${imgHtml}
+                        <div class="post-footer">
+                            <div class="like-section">
+                                <button class="like-btn" onclick="toggleLike(${post.id})"><i class="${heartClass}"></i></button>
+                                <span class="likers-text">${likersText}</span>
+                            </div>
+                            
+                            <div style="width: 100%; border-top: 1px solid #222; margin: 10px 0;"></div>
+                            
+                            ${commentsHtml}
+                            ${commentInputHtml}
                         </div>
                     </div>
                 `;
@@ -543,40 +492,55 @@
         function toggleLike(postId) {
             var session = JSON.parse(localStorage.getItem('threeSession'));
             if(!session) return alert("Beğenmek için giriş yapmalısın!");
+            var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
+            var post = posts.find(p => p.id === postId);
+            
+            if(post.likes.includes(session.username)) { post.likes = post.likes.filter(u => u !== session.username); } 
+            else { post.likes.push(session.username); }
+            
+            localStorage.setItem('threeGalleryDB', JSON.stringify(posts)); renderGallery();
+        }
+
+        function yorumYap(postId) {
+            var session = JSON.parse(localStorage.getItem('threeSession'));
+            var input = document.getElementById(`comment-input-${postId}`);
+            var text = input.value.trim();
+            
+            if(!text) return;
 
             var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
             var post = posts.find(p => p.id === postId);
             
-            if(post.likes.includes(session.username)) {
-                post.likes = post.likes.filter(u => u !== session.username);
-            } else {
-                post.likes.push(session.username);
-            }
-            
+            post.comments.push({
+                user: session.username,
+                icName: session.icName,
+                role: session.role,
+                text: text
+            });
+
             localStorage.setItem('threeGalleryDB', JSON.stringify(posts));
             renderGallery();
         }
 
         function deletePost(postId) {
-            askConfirm("Bu fotoğrafı kalıcı olarak silmek istiyor musun?", function() {
+            if(confirm("Bu gönderiyi silmek istediğine emin misin?")) {
                 var posts = JSON.parse(localStorage.getItem('threeGalleryDB'));
                 posts = posts.filter(p => p.id !== postId);
                 localStorage.setItem('threeGalleryDB', JSON.stringify(posts));
                 renderGallery();
-            });
+            }
         }
 
-        // --- ADMİN: KULLANICI YÖNETİMİ ---
+        // --- ADMİN PANELİ ---
         function renderAdminUsers() {
             var users = JSON.parse(localStorage.getItem('threeUsersDB'));
-            var session = JSON.parse(localStorage.getItem('threeSession'));
             var tbody = document.querySelector('#users-table tbody');
             tbody.innerHTML = '';
 
             for(let username in users) {
                 let u = users[username];
                 
-                // Kendi yetkini düşürmemeni sağlamak için
+                // Seçenek kutusu (Değiştirilince anında kaydeder)
                 let selectHtml = `
                     <select class="action-select" onchange="changeRole('${username}', this.value)" ${username === ADMIN_USER ? 'disabled' : ''}>
                         <option value="Üye" ${u.role==='Üye'?'selected':''}>Üye</option>
@@ -586,12 +550,12 @@
                     </select>
                 `;
 
-                let deleteBtn = username !== ADMIN_USER ? `<button class="btn-solid" style="padding:5px 10px; font-size:0.7rem;" onclick="deleteUser('${username}')"><i class="fas fa-ban"></i> SİL</button>` : '';
+                let deleteBtn = username !== ADMIN_USER ? `<button class="btn-solid" style="padding:6px 12px; font-size:0.7rem; background:var(--three-red); border:none;" onclick="deleteUser('${username}')"><i class="fas fa-trash"></i> SİL</button>` : '';
 
                 tbody.innerHTML += `
                     <tr>
                         <td>${username}</td>
-                        <td>${u.icName}</td>
+                        <td style="color:#ccc;">${u.icName}</td>
                         <td>${selectHtml}</td>
                         <td>${deleteBtn}</td>
                     </tr>
@@ -599,34 +563,32 @@
             }
         }
 
+        // Yetki anında güncellenir
         function changeRole(username, newRole) {
             var users = JSON.parse(localStorage.getItem('threeUsersDB'));
             users[username].role = newRole;
             localStorage.setItem('threeUsersDB', JSON.stringify(users));
-            alert(`${username} kullanıcısının rolü ${newRole} yapıldı.`);
             
-            // Eğer galerideki isim rengi değişsin istiyorsan, eski postları da güncelleyebiliriz ama şimdilik kalsın.
-            renderAdminKasa(); // Ekip listesi güncellenmiş olabilir
+            alert(`SİSTEM: ${username} kullanıcısına başarıyla [${newRole}] yetkisi verildi!`);
+            renderAdminKasa(); // Kasada sadece ekipler göründüğü için listeyi yenile
         }
 
         function deleteUser(username) {
-            askConfirm(`${username} adlı kullanıcıyı sistemden silmek üzeresin. Emin misin?`, function() {
+            if(confirm(`DİKKAT: ${username} adlı kullanıcıyı tamamen silmek üzeresin. Onaylıyor musun?`)) {
                 var users = JSON.parse(localStorage.getItem('threeUsersDB'));
                 delete users[username];
                 localStorage.setItem('threeUsersDB', JSON.stringify(users));
-                renderAdminUsers();
-                renderAdminKasa();
-            });
+                renderAdminUsers(); renderAdminKasa();
+            }
         }
 
-        // --- ADMİN: KASA YÖNETİMİ ---
+        // Kasa
         function renderAdminKasa() {
             var users = JSON.parse(localStorage.getItem('threeUsersDB'));
             var transactions = JSON.parse(localStorage.getItem('threeKasaDB'));
             var selectBox = document.getElementById('kasa-user');
             var tbody = document.querySelector('#kasa-table tbody');
             
-            // Ekip listesi doldur (Sadece Ekip, Mod, Admin olanlar kasaya işlenebilir)
             selectBox.innerHTML = '<option value="">Ekip Üyesi Seç...</option>';
             for(let username in users) {
                 if(users[username].role !== 'Üye') {
@@ -634,7 +596,6 @@
                 }
             }
 
-            // Tabloyu ve Toplamı Doldur
             tbody.innerHTML = '';
             let total = 0;
             
@@ -652,7 +613,6 @@
                     </tr>
                 `;
             });
-            
             document.getElementById('kasa-total').innerText = '$' + total.toLocaleString();
         }
 
@@ -662,23 +622,17 @@
             var type = document.getElementById('kasa-type').value;
             var note = document.getElementById('kasa-note').value;
 
-            if(!user || !amount || !note) return alert("Lütfen tüm alanları doldur!");
+            if(!user || !amount || !note) return alert("Kasa için tüm alanları doldur!");
 
             var transactions = JSON.parse(localStorage.getItem('threeKasaDB'));
-            let d = new Date();
-            let dateStr = d.toLocaleDateString('tr-TR') + " " + d.getHours() + ":" + (d.getMinutes()<10?'0':'') + d.getMinutes();
+            let d = new Date(); let dateStr = d.toLocaleDateString('tr-TR') + " " + d.getHours() + ":" + (d.getMinutes()<10?'0':'') + d.getMinutes();
 
-            transactions.unshift({
-                user: user, amount: amount, type: type, note: note, date: dateStr
-            });
-
+            transactions.unshift({ user: user, amount: amount, type: type, note: note, date: dateStr });
             localStorage.setItem('threeKasaDB', JSON.stringify(transactions));
             
-            document.getElementById('kasa-amount').value = '';
-            document.getElementById('kasa-note').value = '';
+            document.getElementById('kasa-amount').value = ''; document.getElementById('kasa-note').value = '';
             renderAdminKasa();
         }
-
     </script>
 </body>
 </html>

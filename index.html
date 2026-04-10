@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yönetim Portalı | Premium</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <title>THREE | Syndicate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Genel Değişkenler ve Ayarlar */
+        /* =========================================
+           T H R E E  |  R E D  C I N E M A T I C
+           ========================================= */
+
         :root {
-            --neon-red: #ff003c;
-            --glass-bg: rgba(15, 15, 15, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --three-red: #d30000; /* Kan/Neon Kırmızı */
+            --three-dark-red: #8b0000;
+            --three-dark: #070707;
+            --glass-bg: rgba(10, 10, 10, 0.75);
+            --glass-border: rgba(211, 0, 0, 0.2);
             --text-main: #e0e0e0;
         }
 
@@ -24,14 +29,15 @@
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
-            background-color: #0a0a0a;
-            /* Arkaplan Fotoğrafı ve Üzerine Karanlık Filtre */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1920&auto=format&fit=crop');
+            background-color: var(--three-dark);
+            /* Karanlık ve kırmızı tonlu arkaplan */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(20, 0, 0, 0.85)), url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             min-height: 100vh;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         /* ------------------ NAVBAR ------------------ */
@@ -40,26 +46,28 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 50px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--glass-border);
-            position: sticky;
+            position: fixed;
+            width: 100%;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .logo {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             color: white;
             text-decoration: none;
+            text-shadow: 0 0 10px rgba(211, 0, 0, 0.5);
         }
 
         .logo span {
-            color: var(--neon-red);
+            color: var(--three-red);
         }
 
         .nav-links {
@@ -70,104 +78,29 @@
         .nav-links a {
             color: #aaa;
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: 0.3s;
         }
 
         .nav-links a:hover {
-            color: white;
+            color: var(--three-red);
+            text-shadow: 0 0 8px var(--three-red);
         }
 
-        /* ------------------ GİRİŞ BÖLÜMÜ ------------------ */
+        /* ------------------ AUTH BUTONLARI ------------------ */
         .auth-area {
             display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .input-glass {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 4px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .input-glass:focus {
-            border-color: var(--neon-red);
-            box-shadow: 0 0 8px rgba(255, 0, 60, 0.3);
-        }
-
-        .btn-neon {
-            background: white;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-neon:hover {
-            background: var(--neon-red);
-            color: white;
-            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
-        }
-
-        /* ------------------ PROFİL BARI (Gizli) ------------------ */
-        .profile-bar {
-            display: none; /* Başlangıçta gizli */
-            align-items: center;
             gap: 15px;
-        }
-
-        .user-badge {
-            display: flex;
             align-items: center;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 5px 15px 5px 5px;
-            gap: 10px;
-            backdrop-filter: blur(10px);
         }
 
-        .avatar {
-            width: 35px;
-            height: 35px;
-            background: var(--neon-red);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .username-text {
-            font-weight: 600;
-            color: white;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-        }
-
-        .btn-logout {
+        .btn-outline {
             background: transparent;
-            color: var(--neon-red);
-            border: 1px solid var(--neon-red);
-            padding: 8px 15px;
+            color: white;
+            border: 1px solid #555;
+            padding: 8px 20px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 0.8rem;
@@ -177,102 +110,181 @@
             transition: 0.3s;
         }
 
-        .btn-logout:hover {
-            background: var(--neon-red);
-            color: white;
+        .btn-outline:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
         }
 
-        /* ------------------ ANA VİTRİN ------------------ */
-        .hero-section {
-            height: 60vh;
+        .btn-solid {
+            background: var(--three-red);
+            color: white;
+            border: 1px solid var(--three-red);
+            padding: 8px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(211, 0, 0, 0.4);
+        }
+
+        .btn-solid:hover {
+            background: var(--three-dark-red);
+            box-shadow: 0 0 20px rgba(211, 0, 0, 0.8);
+        }
+
+        /* ------------------ PROFİL BARI (Giriş Yapılınca) ------------------ */
+        .profile-area {
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-badge {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--three-red);
+            border-radius: 30px;
+            padding: 5px 15px 5px 5px;
+            gap: 10px;
+            box-shadow: 0 0 10px rgba(211, 0, 0, 0.2);
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            background: var(--three-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.1rem;
+        }
+
+        .username-text {
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .role-text {
+            font-size: 0.7rem;
+            color: var(--three-red);
+            letter-spacing: 1px;
+            display: block;
+        }
+
+        /* ------------------ SECTIONS ------------------ */
+        section {
+            padding: 100px 50px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+
+        #hero {
             align-items: center;
             text-align: center;
-            padding: 20px;
         }
 
         .hero-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 5rem;
+            font-size: 8rem;
             font-weight: 900;
-            letter-spacing: 15px;
+            letter-spacing: 20px;
             color: white;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            text-shadow: 0 0 30px rgba(211, 0, 0, 0.6);
             margin-bottom: 10px;
+            margin-right: -20px;
         }
 
         .hero-subtitle {
-            font-size: 1.1rem;
-            letter-spacing: 5px;
+            font-size: 1.2rem;
+            letter-spacing: 8px;
             color: #aaa;
+            font-weight: 500;
         }
 
-        /* ------------------ ADMİN PANELİ (Gizli) ------------------ */
-        .admin-dashboard {
-            display: none; /* Başlangıçta gizli */
-            max-width: 1200px;
-            margin: -50px auto 50px auto;
-            position: relative;
-            z-index: 10;
-            padding: 0 20px;
+        /* ------------------ DASHBOARD (Gizli) ------------------ */
+        #dashboard {
+            display: none; /* Giriş yapılmadan görünmez */
+            padding-top: 120px;
         }
 
         .dashboard-header {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            padding: 25px 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            border-left: 4px solid var(--neon-red);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 5px solid var(--three-red);
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
         }
 
         .dashboard-header h2 {
             font-family: 'Montserrat', sans-serif;
-            color: white;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 900;
             letter-spacing: 2px;
-            margin-bottom: 5px;
+            color: white;
+            margin-bottom: 10px;
         }
 
         .dashboard-header p {
-            color: #888;
-            font-size: 0.9rem;
+            color: #aaa;
+            font-size: 1rem;
         }
 
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            gap: 20px;
         }
 
         .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             padding: 40px 20px;
-            border-radius: 10px;
+            border-radius: 8px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--three-red);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .glass-card:hover::before {
+            transform: scaleX(1);
         }
 
         .glass-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(25, 25, 25, 0.8);
-            box-shadow: 0 15px 40px rgba(255, 0, 60, 0.15);
+            background: rgba(30, 0, 0, 0.6);
+            transform: translateY(-5px);
+            border-color: var(--glass-border);
+            box-shadow: 0 10px 30px rgba(211, 0, 0, 0.2);
         }
 
         .card-icon {
             font-size: 2.5rem;
-            color: white;
+            color: var(--three-red);
             margin-bottom: 15px;
             display: block;
         }
@@ -281,102 +293,311 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             color: white;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             font-size: 1rem;
         }
 
+        /* ------------------ CUSTOM MODAL (Kayıt/Giriş) ------------------ */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-box {
+            background: #111;
+            border: 1px solid var(--three-red);
+            padding: 40px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 30px rgba(211, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            color: #888;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover { color: var(--three-red); }
+
+        .modal-title {
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            color: white;
+            border-radius: 4px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--three-red);
+            background: rgba(211, 0, 0, 0.05);
+        }
+
+        .error-msg {
+            color: var(--three-red);
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+            font-weight: 600;
+        }
+
+        .w-100 { width: 100%; padding: 12px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="#" class="logo">SİSTEM<span>.</span></a>
+        <a href="#hero" class="logo">THREE<span>.</span></a>
         
         <div class="nav-links">
-            <a href="#">ANA SAYFA</a>
-            <a href="#">BİZ KİMİZ?</a>
-            <a href="#">GALERİ</a>
+            <a href="#hero">VİTRİN</a>
+            <a href="#dashboard" id="nav-dash" style="display: none; color: var(--three-red);">EKİP PANELİ</a>
         </div>
 
-        <div class="auth-area" id="login-form">
-            <input type="text" id="username" class="input-glass" placeholder="Kullanıcı Adı">
-            <input type="password" id="password" class="input-glass" placeholder="Şifre">
-            <button class="btn-neon" onclick="girisYap()">GİRİŞ</button>
+        <div class="auth-area" id="auth-buttons">
+            <button class="btn-outline" onclick="openModal('registerModal')">KAYIT OL</button>
+            <button class="btn-solid" onclick="openModal('loginModal')">GİRİŞ YAP</button>
         </div>
 
-        <div class="profile-bar" id="profile-area">
+        <div class="profile-area" id="profile-area">
             <div class="user-badge">
-                <div class="avatar">Ö</div>
-                <span class="username-text">ÖMER</span>
+                <div class="avatar" id="user-avatar">Ö</div>
+                <div>
+                    <span class="username-text" id="user-name">ÖMER</span>
+                    <span class="role-text" id="user-role">ADMIN</span>
+                </div>
             </div>
-            <button class="btn-logout" onclick="cikisYap()">ÇIKIŞ</button>
+            <button class="btn-outline" style="border-color: var(--three-red); color: var(--three-red);" onclick="cikisYap()">ÇIKIŞ</button>
         </div>
     </nav>
 
-    <header class="hero-section">
-        <h1 class="hero-title">KONTROL</h1>
-        <p class="hero-subtitle">GİZLİLİK. GÜVEN. DİSİPLİN.</p>
-    </header>
+    <section id="hero">
+        <h1 class="hero-title">THREE</h1>
+        <p class="hero-subtitle">DİSİPLİN. GÜÇ. GİZLİLİK.</p>
+    </section>
 
-    <section class="admin-dashboard" id="admin-panel">
+    <section id="dashboard">
         <div class="dashboard-header">
-            <h2>ADMİN PANELİ</h2>
-            <p>Sisteme yetkili olarak bağlandınız. Aşağıdan işlemleri yürütebilirsiniz.</p>
+            <h2>SİSTEM PANELİ <span style="color: var(--three-red);">///</span></h2>
+            <p>Sisteme başarıyla bağlandınız. Yetki seviyenize göre aşağıdaki modülleri kullanabilirsiniz.</p>
+        </div>
+
+        <div class="grid-container" id="admin-grid" style="display: none; margin-bottom: 20px;">
+            <div class="glass-card" style="border-color: var(--three-red);">
+                <span class="card-icon">👑</span>
+                <span class="card-title">KULLANICI YÖNETİMİ</span>
+            </div>
+            <div class="glass-card" style="border-color: var(--three-red);">
+                <span class="card-icon">⚙️</span>
+                <span class="card-title">SİSTEM AYARLARI</span>
+            </div>
         </div>
 
         <div class="grid-container">
             <div class="glass-card">
                 <span class="card-icon">👥</span>
-                <span class="card-title">EKİBİ YÖNET</span>
+                <span class="card-title">EKİP LİSTESİ</span>
             </div>
-            <div class="glass-card" style="border-bottom: 3px solid #00ff88;">
+            <div class="glass-card">
                 <span class="card-icon">💰</span>
-                <span class="card-title">KASA İŞLEMLERİ</span>
+                <span class="card-title">KASA DURUMU</span>
             </div>
-            <div class="glass-card" style="border-bottom: 3px solid #ffcc00;">
+            <div class="glass-card">
                 <span class="card-icon">📸</span>
-                <span class="card-title">ARŞİV & GALERİ</span>
-            </div>
-            <div class="glass-card" style="border-bottom: 3px solid var(--neon-red);">
-                <span class="card-icon">⚙️</span>
-                <span class="card-title">SİSTEM AYARLARI</span>
+                <span class="card-title">GÖRSEL ARŞİV</span>
             </div>
         </div>
     </section>
 
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal('loginModal')">×</span>
+            <h3 class="modal-title">Sisteme Giriş</h3>
+            <div class="error-msg" id="login-error">Kullanıcı adı veya şifre hatalı!</div>
+            <div class="input-group">
+                <input type="text" id="login-user" placeholder="Kullanıcı Adı">
+            </div>
+            <div class="input-group">
+                <input type="password" id="login-pass" placeholder="Şifre">
+            </div>
+            <button class="btn-solid w-100" onclick="girisYap()">GİRİŞ YAP</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal('registerModal')">×</span>
+            <h3 class="modal-title">Yeni Kayıt</h3>
+            <div class="error-msg" id="reg-error">Hata mesajı</div>
+            <div class="input-group">
+                <input type="text" id="reg-user" placeholder="Kullanıcı Adı">
+            </div>
+            <div class="input-group">
+                <input type="password" id="reg-pass" placeholder="Şifre">
+            </div>
+            <button class="btn-outline w-100" onclick="kayitOl()">KAYDI TAMAMLA</button>
+        </div>
+    </div>
+
     <script>
-        // Şifre alanındayken Enter'a basınca direkt giriş yapması için
-        document.getElementById("password").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                girisYap();
+        // Senin Efsanevi Admin Bilgilerin
+        const ADMIN_USER = "omer13ds";
+        const ADMIN_PASS = "oyaali12";
+
+        // Sayfa yüklendiğinde oturum var mı kontrol et
+        window.onload = function() {
+            oturumKontrol();
+        };
+
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+            document.getElementById('login-error').style.display = 'none';
+            document.getElementById('reg-error').style.display = 'none';
+        }
+
+        // --- KAYIT SİSTEMİ ---
+        function kayitOl() {
+            var user = document.getElementById('reg-user').value.trim();
+            var pass = document.getElementById('reg-pass').value;
+            var errorBox = document.getElementById('reg-error');
+
+            if(user.length < 3 || pass.length < 3) {
+                errorBox.innerText = "Kullanıcı adı ve şifre en az 3 hane olmalı!";
+                errorBox.style.display = "block";
+                return;
             }
-        });
 
+            // Tarayıcıdan eski kayıtlı kullanıcıları çek
+            var usersDB = JSON.parse(localStorage.getItem('threeUsers')) || {};
+
+            if(usersDB[user] || user === ADMIN_USER) {
+                errorBox.innerText = "Bu kullanıcı adı zaten alınmış kanka!";
+                errorBox.style.display = "block";
+                return;
+            }
+
+            // Yeni kullanıcıyı kaydet
+            usersDB[user] = { password: pass, role: 'Üye' };
+            localStorage.setItem('threeUsers', JSON.stringify(usersDB));
+
+            alert("Kayıt başarılı! Şimdi giriş yapabilirsin.");
+            closeModal('registerModal');
+            openModal('loginModal');
+        }
+
+        // --- GİRİŞ SİSTEMİ ---
         function girisYap() {
-            var kadi = document.getElementById('username').value;
-            var sifre = document.getElementById('password').value;
+            var user = document.getElementById('login-user').value.trim();
+            var pass = document.getElementById('login-pass').value;
+            var errorBox = document.getElementById('login-error');
 
-            // Senin özel bilgilerin
-            if (kadi === "omer13ds" && sifre === "oyaali12") {
-                // Giriş kısmını gizle, profili ve paneli göster
-                document.getElementById('login-form').style.display = "none";
-                document.getElementById('profile-area').style.display = "flex";
-                document.getElementById('admin-panel').style.display = "block";
+            // 1. Önce Admin'i (Seni) kontrol et
+            if(user === ADMIN_USER && pass === ADMIN_PASS) {
+                basariliGiris(user, 'Kurucu Admin');
+                return;
+            }
+
+            // 2. Tarayıcıya kayıt olmuş diğer üyeleri kontrol et
+            var usersDB = JSON.parse(localStorage.getItem('threeUsers')) || {};
+            
+            if(usersDB[user] && usersDB[user].password === pass) {
+                basariliGiris(user, usersDB[user].role);
             } else {
-                // Şifre yanlışsa uyarı ver
-                alert("Hatalı kullanıcı adı veya şifre girdin kanka, tekrar dene!");
+                errorBox.innerText = "Hatalı kullanıcı adı veya şifre!";
+                errorBox.style.display = "block";
+            }
+        }
+
+        function basariliGiris(username, role) {
+            // Aktif oturumu tarayıcıya kaydet
+            var sessionData = { username: username, role: role };
+            localStorage.setItem('threeSession', JSON.stringify(sessionData));
+            
+            closeModal('loginModal');
+            oturumKontrol();
+        }
+
+        // --- OTURUM & GÖRÜNÜM KONTROLÜ ---
+        function oturumKontrol() {
+            var activeSession = JSON.parse(localStorage.getItem('threeSession'));
+
+            if(activeSession) {
+                // Giriş Başarılı - Arayüzü Güncelle
+                document.getElementById('auth-buttons').style.display = 'none';
+                document.getElementById('profile-area').style.display = 'flex';
+                document.getElementById('nav-dash').style.display = 'block';
+                document.getElementById('dashboard').style.display = 'block';
+
+                // Profil bilgilerini yazdır
+                document.getElementById('user-name').innerText = activeSession.username.toUpperCase();
+                document.getElementById('user-avatar').innerText = activeSession.username.charAt(0).toUpperCase();
+                document.getElementById('user-role').innerText = activeSession.role.toUpperCase();
+
+                // Eğer giriş yapan sensen (Admin), ekstra menüyü göster
+                if(activeSession.username === ADMIN_USER) {
+                    document.getElementById('admin-grid').style.display = 'grid';
+                } else {
+                    document.getElementById('admin-grid').style.display = 'none';
+                }
+
+                // Scroll'u Dashboard'a kaydır (İsteğe bağlı)
+                window.location.href = "#dashboard";
+
+            } else {
+                // Çıkış Yapılmış - Arayüzü Sıfırla
+                document.getElementById('auth-buttons').style.display = 'flex';
+                document.getElementById('profile-area').style.display = 'none';
+                document.getElementById('nav-dash').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'none';
+                
+                // Form içlerini temizle
+                document.getElementById('login-user').value = '';
+                document.getElementById('login-pass').value = '';
+                document.getElementById('reg-user').value = '';
+                document.getElementById('reg-pass').value = '';
             }
         }
 
         function cikisYap() {
-            // Çıkış yapınca her şeyi eski haline çevir
-            document.getElementById('username').value = "";
-            document.getElementById('password').value = "";
-            
-            document.getElementById('login-form').style.display = "flex";
-            document.getElementById('profile-area').style.display = "none";
-            document.getElementById('admin-panel').style.display = "none";
+            // Oturumu sil ve sayfayı güncelle
+            localStorage.removeItem('threeSession');
+            oturumKontrol();
+            window.location.href = "#hero";
         }
     </script>
 </body>

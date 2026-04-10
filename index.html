@@ -186,7 +186,9 @@
             </div>
             
             <div class="dropdown-menu" id="dropdown-menu">
-                <a class="dropdown-item" id="dropdown-admin" style="display: none;" onclick="showPage('admin-page'); toggleDropdown();"><i class="fas fa-shield-alt"></i> Ekip Paneli</a>
+                <a class="dropdown-item" id="dropdown-admin" style="display: none;" onclick="showPage('admin-page'); toggleDropdown();">
+                    <i class="fas fa-shield-alt"></i> <span id="dropdown-admin-text">Yönetim Paneli</span>
+                </a>
                 <a class="dropdown-item logout" onclick="cikisYap()"><i class="fas fa-sign-out-alt"></i> ÇIKIŞ YAP</a>
             </div>
         </div>
@@ -395,7 +397,6 @@
                     
                     currentUser = fallbackData;
                     oturumArayuzu(fallbackData);
-                    await db.from('profiles').insert([fallbackData]);
                 }
             } catch(e) {
                 console.error("Profil yüklenemedi.", e);
@@ -414,26 +415,33 @@
 
                 let safeRole = (profile.role || "").toLowerCase();
                 
-                // Ekip Paneli Menüsü Yetkisi (Sadece Ekip, Mod, Admin görür)
-                if(safeRole === 'admin' || safeRole === 'moderator' || safeRole === 'ekip') {
+                // PANEL KONTROLÜ (DROPDOWN İÇİN)
+                if (safeRole === 'admin' || safeRole === 'moderator') {
+                    document.getElementById('dropdown-admin-text').innerText = 'Admin Paneli';
                     document.getElementById('dropdown-admin').style.display = 'flex';
-                    document.getElementById('btn-add-post').style.display = 'inline-block';
+                } else if (safeRole === 'ekip') {
+                    document.getElementById('dropdown-admin-text').innerText = 'Ekip Paneli';
+                    document.getElementById('dropdown-admin').style.display = 'flex';
                 } else {
                     document.getElementById('dropdown-admin').style.display = 'none';
-                    document.getElementById('btn-add-post').style.display = 'none';
                 }
 
-                // Sadece Admin "Kullanıcı Yönetimi" Sekmesini Görür
-                if(safeRole === 'admin') {
+                // Admin/Mod ise Kullanıcı Yönetimini Görsün, Ekipse Sadece Kasayı Görsün
+                if(safeRole === 'admin' || safeRole === 'moderator') {
                     document.getElementById('tab-kullanici').style.display = 'block';
                     document.getElementById('kasa-controls').style.display = 'flex';
-                } else {
+                } else if (safeRole === 'ekip') {
                     document.getElementById('tab-kullanici').style.display = 'none';
-                    // Sadece Kasa giriş çıkışı Adminler yapabilir, mod ve ekip sadece kasayı görür
-                    document.getElementById('kasa-controls').style.display = 'none';
+                    document.getElementById('kasa-controls').style.display = 'none'; // Sadece görebilir
                     switchAdminTab('admin-kasa', document.getElementById('tab-kasa'));
                 }
 
+                // Gönderi atma yetkisi
+                if(safeRole === 'admin' || safeRole === 'moderator' || safeRole === 'ekip') {
+                    document.getElementById('btn-add-post').style.display = 'inline-block';
+                } else {
+                    document.getElementById('btn-add-post').style.display = 'none';
+                }
             } else {
                 document.getElementById('auth-buttons').style.display = 'flex';
                 document.getElementById('profile-area').style.display = 'none';
@@ -460,7 +468,8 @@
                 errBox.style.display = "block";
             } else if(data.user) {
                 let role = (user === ADMIN_USER) ? 'Admin' : 'Üye';
-                await db.from('profiles').insert([{ id: data.user.id, username: user, ic_name: ic, role: role }]);
+                // Kayıt olan kişiyi garanti listeye ekle
+                await db.from('profiles').upsert([{ id: data.user.id, username: user, ic_name: ic, role: role }]);
                 alert("Kayıt başarılı! Şimdi giriş yapabilirsin.");
                 closeModal('registerModal'); openModal('loginModal');
             }
@@ -475,13 +484,16 @@
             showLoading(true, "GİRİŞ YAPILIYOR...");
 
             if(user === ADMIN_USER && pass === ADMIN_PASS) {
-                const { error } = await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
+                const { data: authData, error } = await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
                 if(error) {
                     const { data: signUpData } = await db.auth.signUp({ email: user + DUMMY_DOMAIN, password: pass });
                     if(signUpData.user) {
-                        await db.from('profiles').insert([{ id: signUpData.user.id, username: user, ic_name: "Kurucu Admin", role: "Admin" }]);
+                        await db.from('profiles').upsert([{ id: signUpData.user.id, username: user, ic_name: "Kurucu Admin", role: "Admin" }]);
                     }
                     await db.auth.signInWithPassword({ email: user + DUMMY_DOMAIN, password: pass });
+                } else if(authData && authData.user) {
+                    // Adminin tabloda her zaman olduğundan emin ol
+                    await db.from('profiles').upsert([{ id: authData.user.id, username: user, ic_name: "Kurucu Admin", role: "Admin" }]);
                 }
                 window.location.reload(); return;
             }
@@ -650,16 +662,16 @@
                 const { data: profiles, error } = await db.from('profiles').select('*');
                 
                 if(error) {
-                    tbody.innerHTML = `<tr><td colspan='4' style='color:#ff4c4c; text-align:center;'>Sistem Hatası Veya Güvenlik Duvarı (RLS) Açık!<br><span style='color:white;font-size:0.8rem;'>Supabase SQL Editor'e gidip RLS kapatma kodunu çalıştırmanız lazım.</span></td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan='4' style='color:#ff4c4c; text-align:center;'>Sistem Hatası: Lütfen Adım 1'deki SQL Kodunu Supabase'de çalıştırın.</td></tr>`;
                     return;
                 }
 
                 if(!profiles || profiles.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan='4' style='text-align:center; color:#888;'>Sistemde henüz kayıtlı kullanıcı yok veya RLS izin vermiyor. Lütfen SQL kodunu çalıştırın.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan='4' style='text-align:center; color:#888;'>Sistemde henüz kayıtlı kullanıcı yok.</td></tr>`;
                     return;
                 }
 
-                // EFSANE KORUMA: Boş olan isimleri bulup çökmesini engeller
+                // EFSANE KORUMA: Boş isimlerin sistemi çökertmesini önler
                 profiles.sort((a,b) => {
                     let nameA = a.username || "isimsiz";
                     let nameB = b.username || "isimsiz";
@@ -694,7 +706,7 @@
                 });
             } catch (err) {
                 console.error(err);
-                tbody.innerHTML = `<tr><td colspan='4' style='color:#ff4c4c; text-align:center;'>Sistem çökmesini engelledi. Veritabanı tablolarında sorun var.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan='4' style='color:#ff4c4c; text-align:center;'>Veritabanı tablolarında sorun var, SQL kodunu çalıştırın.</td></tr>`;
             }
         }
 

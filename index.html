@@ -12,14 +12,16 @@
 
     <style>
         /* =========================================
-           S E N S I   S O F T W A R E  -  P R O
+           S E N S I   S O F T W A R E  -  U L T R A
            ========================================= */
         :root {
-            --bg-main: #09090b; /* Saf ve asil koyu gri/siyah */
-            --accent-color: #00d2ff; /* Temiz teknoloji mavisi */
-            --text-main: #f4f4f5;
-            --text-muted: #71717a;
-            --border-color: rgba(255, 255, 255, 0.05);
+            --bg-main: #050505; 
+            --accent-color: #00d2ff; 
+            --accent-dark: #0088aa;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --card-bg: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
         }
 
         * {
@@ -34,9 +36,14 @@
             background-color: var(--bg-main);
             color: var(--text-main);
             overflow-x: hidden;
-            /* Sadece üst kısımda çok hafif, gözü yormayan asil bir parıltı */
-            background-image: radial-gradient(circle at 50% -20%, rgba(0, 210, 255, 0.07), transparent 50%);
+            /* Premium Izgara (Grid) ve Tepe Işığı Efekti */
+            background-image: 
+                radial-gradient(ellipse at 50% -20%, rgba(0, 210, 255, 0.15), transparent 60%),
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
             background-attachment: fixed;
+            background-position: center top;
         }
 
         /* --- NAVBAR --- */
@@ -45,9 +52,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: rgba(9, 9, 11, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
             position: fixed;
             width: 100%;
@@ -55,9 +62,8 @@
             z-index: 1000;
         }
 
-        /* Yeni Premium Logo Tasarımı */
         .logo {
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: #fff;
             text-decoration: none;
@@ -72,15 +78,14 @@
         .logo i {
             color: var(--accent-color);
             font-size: 1.2rem;
+            filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.5));
         }
 
         .logo-light {
             font-weight: 300;
             color: var(--text-muted);
-            margin-left: 2px;
         }
 
-        /* Nav linkleri tam ortaya hizalama */
         .nav-links {
             display: flex;
             gap: 35px;
@@ -92,55 +97,88 @@
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover {
             color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
 
-        /* Sağ taraftaki boşluğu dengelemek için görünmez bir kutu */
+        /* Hover olunca linklerin altına gelen ufak çizgi animasyonu */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
         .nav-right-placeholder {
             width: 150px;
         }
 
         /* --- HERO SECTION --- */
         .hero {
-            min-height: 85vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 140px 20px 60px 20px;
-            max-width: 800px;
+            padding: 160px 20px 80px 20px;
+            max-width: 850px;
             margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: 4.2rem;
+            font-size: 4.5rem;
             font-weight: 800;
             line-height: 1.15;
             color: #ffffff;
             margin-bottom: 25px;
+            animation: fadeUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Başlıktaki renk geçişi eklentisi */
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             color: var(--text-muted);
-            line-height: 1.6;
-            max-width: 580px;
-            margin-bottom: 40px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 45px;
             font-weight: 400;
+            animation: fadeUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
         /* --- ANIMASYONLU İNDİRME BUTONU --- */
         .download-wrapper {
             position: relative;
             display: inline-block;
+            animation: fadeUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
         .download-btn {
@@ -149,34 +187,37 @@
             gap: 12px;
             background: #ffffff;
             color: #000000;
-            padding: 16px 36px;
-            border-radius: 12px;
+            padding: 18px 40px;
+            border-radius: 14px;
             text-decoration: none;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 600;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             border: 1px solid #ffffff;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.15);
             cursor: pointer;
+            z-index: 2;
+            position: relative;
         }
 
         .download-wrapper::after {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            z-index: -1;
+            border-radius: 14px;
+            border: 2px solid rgba(0, 210, 255, 0.4);
+            z-index: 1;
             animation: buttonPulse 2.5s infinite;
-            opacity: 0;
             pointer-events: none;
         }
 
         .download-btn:hover {
-            transform: translateY(-3px);
-            background: transparent;
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.05);
             color: #ffffff;
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         .download-btn i {
@@ -184,56 +225,76 @@
         }
 
         .download-btn:hover i {
-            transform: translateY(2px);
+            transform: translateY(3px);
         }
 
         .version-info {
-            margin-top: 15px;
-            font-size: 0.8rem;
+            margin-top: 20px;
+            font-size: 0.85rem;
             color: var(--text-muted);
             font-weight: 500;
+            animation: fadeUp 0.8s ease-out 0.6s forwards;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* --- SADECE 3 SÜTUN ÖZELLİK (MİNİMALİST) --- */
+        .version-info i { color: #10b981; } /* Güvenli ikon yeşili */
+
+        /* --- PREMİUM ÖZELLİK KARTLARI --- */
         .features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 60px 20px 100px 20px;
-            border-top: 1px solid var(--border-color);
+            padding: 40px 20px 120px 20px;
         }
 
-        .feature-item {
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 35px 30px;
+            border-radius: 24px;
             text-align: left;
-            padding: 20px;
-            border-radius: 16px;
-            transition: background 0.3s ease;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            animation: fadeUp 0.8s ease-out 0.8s forwards;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        /* Özelliklerin üstüne gelince çok hafif bir aydınlanma efekti (Profesyonel dokunuş) */
-        .feature-item:hover {
-            background: rgba(255, 255, 255, 0.02);
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 210, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 210, 255, 0.05);
         }
 
-        .feature-item h3 {
-            font-size: 1.1rem;
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
             font-weight: 600;
             color: #fff;
             margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .feature-item h3 i {
-            color: var(--accent-color);
+        .feature-card p {
             font-size: 0.95rem;
-        }
-
-        .feature-item p {
-            font-size: 0.9rem;
             color: var(--text-muted);
             line-height: 1.6;
         }
@@ -245,19 +306,27 @@
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
             font-size: 0.85rem;
+            background: rgba(0,0,0,0.2);
         }
 
-        /* Buton Dalgalanma Animasyonu */
+        /* Animasyonlar */
         @keyframes buttonPulse {
-            0% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.08); opacity: 0; }
+            0% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.15); opacity: 0; }
             100% { transform: scale(1); opacity: 0; }
         }
 
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Responsive Tasarım */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
+        @media (max-width: 900px) {
             .features { grid-template-columns: 1fr; gap: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
             .nav-links { 
                 position: static; 
                 transform: none; 
@@ -271,52 +340,54 @@
 <body>
 
     <nav class="navbar">
-        <!-- Güncellenmiş Profesyonel Logo -->
         <a href="#" class="logo">
             <i class="fas fa-layer-group"></i> Sensi<span class="logo-light">Software</span>
         </a>
         
-        <!-- Tam Ortalanmış Navigasyon -->
         <div class="nav-links">
             <a href="#features">Özellikler</a>
-            <!-- Hizmetler Tıklandığında Bakımda Uyarısı Verir -->
             <a href="#" onclick="alert('Hizmetlerimiz şu an geliştirilme ve bakım aşamasındadır. Çok yakında eklenecek!'); return false;">Hizmetler</a>
             <a href="https://discord.gg/senin-linkin" target="_blank">Discord</a>
         </div>
 
-        <!-- Simetriyi Korumak İçin Görünmez Kutu -->
         <div class="nav-right-placeholder"></div>
     </nav>
 
     <section class="hero">
-        <h1>Basit. Hızlı. <br>Eksiksiz Başlatıcı.</h1>
+        <h1>Basit. Hızlı. <br><span class="text-gradient">Eksiksiz Başlatıcı.</span></h1>
         <p>SensiSoftware masaüstü uygulaması ile tüm modifikasyon ve oyun süreçlerinizi tek noktadan, en kararlı altyapıyla yönetin.</p>
         
         <div class="download-wrapper">
+            <!-- Dosyanı yüklediğinde SensiSoftware.exe ismini buraya bağlarsın -->
             <a href="SensiSoftware.exe" class="download-btn" download>
                 <i class="fas fa-arrow-down"></i> Windows İçin İndir
             </a>
         </div>
-        <div class="version-info">Versiyon 1.0.0 • Güvenli HTTPS Bağlantısı</div>
+        <div class="version-info">
+            <i class="fas fa-lock"></i> Versiyon 1.0.0 • SSL Korumalı İndirme
+        </div>
     </section>
 
     <section class="features" id="features">
-        <div class="feature-item">
-            <h3><i class="fas fa-bolt"></i> Sıfır Gecikme</h3>
-            <p>Hafif ve optimize edilmiş kod mimarisi sayesinde sistem kaynaklarını tüketmeden anında çalışır.</p>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+            <h3>Sıfır Gecikme</h3>
+            <p>Hafif ve optimize edilmiş kod mimarisi sayesinde sistem kaynaklarını tüketmeden anında çalışır ve oyun keyfinizi bölmez.</p>
         </div>
-        <div class="feature-item">
-            <h3><i class="fas fa-shield-alt"></i> Güvenli Çekirdek</h3>
-            <p>Uçtan uca doğrulanmış dosya transferi ile indirilen tüm verileriniz orijinalliğini korur.</p>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>Güvenli Çekirdek</h3>
+            <p>Uçtan uca doğrulanmış dosya transferi ile indirilen tüm verileriniz orijinalliğini korur, dış müdahalelere kapalıdır.</p>
         </div>
-        <div class="feature-item">
-            <h3><i class="fas fa-sync-alt"></i> Akıllı Güncelleme</h3>
-            <p>Yeni bir yama veya güncelleme geldiğinde launcher bunu otomatik algılar ve sizi yormadan günceller.</p>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+            <h3>Akıllı Güncelleme</h3>
+            <p>Yeni bir yama veya güncelleme geldiğinde launcher bunu otomatik algılar ve arka planda sizi yormadan anında günceller.</p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 SensiSoftware. Tüm hakları saklıdır. SSL Korumalı Resmi İndirme Sayfası.</p>
+        <p>&copy; 2026 SensiSoftware. Tüm hakları saklıdır. Resmi İndirme Sayfası.</p>
     </footer>
 
 </body>

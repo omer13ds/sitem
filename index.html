@@ -12,7 +12,7 @@
 
     <style>
         /* =========================================
-           S E N S I   S O F T W A R E  -  S L E E K
+           S E N S I   S O F T W A R E  -  P R O
            ========================================= */
         :root {
             --bg-main: #09090b; /* Saf ve asil koyu gri/siyah */
@@ -44,10 +44,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 10%;
-            background: rgba(9, 9, 11, 0.5);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            padding: 20px 8%;
+            background: rgba(9, 9, 11, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
             position: fixed;
             width: 100%;
@@ -55,18 +55,38 @@
             z-index: 1000;
         }
 
+        /* Yeni Premium Logo Tasarımı */
         .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
+            font-size: 1.35rem;
+            font-weight: 800;
             color: #fff;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 2;
         }
 
-        .logo span {
+        .logo i {
             color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .logo-light {
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-left: 2px;
+        }
+
+        /* Nav linkleri tam ortaya hizalama */
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .nav-links a {
@@ -74,12 +94,17 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            margin-left: 30px;
             transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
             color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        /* Sağ taraftaki boşluğu dengelemek için görünmez bir kutu */
+        .nav-right-placeholder {
+            width: 150px;
         }
 
         /* --- HERO SECTION --- */
@@ -96,11 +121,11 @@
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 4.2rem;
             font-weight: 800;
             line-height: 1.15;
             color: #ffffff;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .hero p {
@@ -135,7 +160,6 @@
             cursor: pointer;
         }
 
-        /* Arka planda sürekli hafifçe dönen dalga efekti (Pulse) */
         .download-wrapper::after {
             content: '';
             position: absolute;
@@ -160,7 +184,7 @@
         }
 
         .download-btn:hover i {
-            transform: translateY(2px); /* Hover olunca ok işareti hafifçe aşağı oynar */
+            transform: translateY(2px);
         }
 
         .version-info {
@@ -174,7 +198,7 @@
         .features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            gap: 30px;
             max-width: 1000px;
             margin: 0 auto;
             padding: 60px 20px 100px 20px;
@@ -183,13 +207,21 @@
 
         .feature-item {
             text-align: left;
+            padding: 20px;
+            border-radius: 16px;
+            transition: background 0.3s ease;
+        }
+
+        /* Özelliklerin üstüne gelince çok hafif bir aydınlanma efekti (Profesyonel dokunuş) */
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .feature-item h3 {
             font-size: 1.1rem;
             font-weight: 600;
             color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -203,7 +235,7 @@
         .feature-item p {
             font-size: 0.9rem;
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         /* --- FOOTER --- */
@@ -212,7 +244,7 @@
             padding: 40px 20px;
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         /* Buton Dalgalanma Animasyonu */
@@ -225,19 +257,35 @@
         /* Responsive Tasarım */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.8rem; }
-            .features { grid-template-columns: 1fr; gap: 30px; }
-            .nav-links { display: none; }
+            .features { grid-template-columns: 1fr; gap: 20px; }
+            .nav-links { 
+                position: static; 
+                transform: none; 
+                gap: 15px; 
+            }
+            .navbar { flex-direction: column; gap: 20px; padding: 20px; }
+            .nav-right-placeholder { display: none; }
         }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="#" class="logo">Sensi<span>Software</span></a>
+        <!-- Güncellenmiş Profesyonel Logo -->
+        <a href="#" class="logo">
+            <i class="fas fa-layer-group"></i> Sensi<span class="logo-light">Software</span>
+        </a>
+        
+        <!-- Tam Ortalanmış Navigasyon -->
         <div class="nav-links">
             <a href="#features">Özellikler</a>
+            <!-- Hizmetler Tıklandığında Bakımda Uyarısı Verir -->
+            <a href="#" onclick="alert('Hizmetlerimiz şu an geliştirilme ve bakım aşamasındadır. Çok yakında eklenecek!'); return false;">Hizmetler</a>
             <a href="https://discord.gg/senin-linkin" target="_blank">Discord</a>
         </div>
+
+        <!-- Simetriyi Korumak İçin Görünmez Kutu -->
+        <div class="nav-right-placeholder"></div>
     </nav>
 
     <section class="hero">
@@ -245,7 +293,6 @@
         <p>SensiSoftware masaüstü uygulaması ile tüm modifikasyon ve oyun süreçlerinizi tek noktadan, en kararlı altyapıyla yönetin.</p>
         
         <div class="download-wrapper">
-            <!-- Dosyanı yüklediğinde SensiSoftware.exe ismini buraya bağlarsın kanka -->
             <a href="SensiSoftware.exe" class="download-btn" download>
                 <i class="fas fa-arrow-down"></i> Windows İçin İndir
             </a>

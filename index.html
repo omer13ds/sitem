@@ -3,354 +3,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SensiSoftware | Elite Provider</title>
+    <title>SensiSoftware | Elite Gaming Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-main: #050505;
-            --bg-card: rgba(15, 15, 20, 0.7);
-            --primary: #6366f1; /* Mitamers tarzı premium mor/mavi */
-            --primary-glow: rgba(99, 102, 241, 0.5);
-            --text-main: #ffffff;
-            --text-muted: #8b8b9e;
+            --bg-main: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.6);
+            --primary: #4f46e5;
+            --primary-glow: rgba(79, 70, 229, 0.4);
+            --accent: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
             --success: #10b981;
             --danger: #ef4444;
-            --discord: #5865F2;
-            --youtube: #FF0000;
+            --border: rgba(255,255,255,0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
+        body { background-color: var(--bg-main); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
 
-        /* Efsane Arka Plan - Karanlık ve Derin */
-        .background {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;
-            background: url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-            filter: brightness(0.2) contrast(1.2);
-        }
-        .bg-overlay {
+        /* Arka Plan Efekti */
+        .ambient-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 50%),
-                        radial-gradient(circle at bottom left, rgba(5, 5, 5, 1), rgba(5, 5, 5, 0.8));
+            background: radial-gradient(circle at 15% 50%, rgba(79, 70, 229, 0.12), transparent 40%),
+                        radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.12), transparent 40%);
         }
 
-        /* Üst Menü */
+        /* --- NAVBAR --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 5%; background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05);
-            position: sticky; top: 0; z-index: 100;
+            padding: 20px 5%; background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000;
         }
-        .logo { font-size: 1.8rem; font-weight: 800; display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; }
-        .logo i { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
+        .logo { font-size: 1.6rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--accent); }
         
-        .nav-links { display: flex; gap: 30px; }
-        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .nav-link:hover, .nav-link.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .nav-links { display: flex; gap: 30px; background: rgba(255,255,255,0.03); padding: 10px 30px; border-radius: 50px; border: 1px solid var(--border); }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: #fff; }
 
-        .social-btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; color: white; display: flex; align-items: center; gap: 8px; transition: 0.3s; border: none; cursor: pointer; }
-        .btn-discord { background: var(--discord); }
-        .btn-discord:hover { box-shadow: 0 0 20px rgba(88, 101, 242, 0.5); transform: translateY(-2px); }
-        .btn-admin { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
-        .btn-admin:hover { background: var(--primary); color: #fff; box-shadow: 0 0 20px var(--primary-glow); }
+        .header-actions { display: flex; gap: 15px; align-items: center; }
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; border: none; display: flex; align-items: center; gap: 8px; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: #fff; }
+        .btn-outline:hover { border-color: var(--primary); }
 
-        /* Sayfa İçerik Alanı */
-        .container { max-width: 1400px; margin: 0 auto; padding: 50px 20px; display: none; animation: fadeIn 0.4s ease; }
-        .container.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- SAYFA YAPISI --- */
+        .page { display: none; animation: fadeUp 0.4s ease forwards; opacity: 0; transform: translateY(20px); padding: 40px 5%; max-width: 1400px; margin: 0 auto; }
+        .page.active { display: block; }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- MAĞAZA (ÜRÜNLER) SAYFASI --- */
-        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
-        .section-desc { color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem; }
+        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; }
+        .section-desc { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 40px; max-width: 600px; }
 
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+        /* --- ANA SAYFA (HOME) --- */
+        .hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 60px 0; }
+        .hero h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        .hero h1 span { background: linear-gradient(to right, var(--primary), var(--accent)); -webkit-background-clip: text; color: transparent; }
         
-        .product-card {
-            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px; overflow: hidden; backdrop-filter: blur(10px);
-            transition: 0.3s; position: relative;
-        }
-        .product-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px var(--primary-glow); }
+        .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px; width: 100%; }
+        .review-card { background: var(--bg-card); border: 1px solid var(--border); padding: 25px; border-radius: 16px; text-align: left; }
+        .stars { color: #fbbf24; margin-bottom: 10px; }
+
+        /* --- MAĞAZA (STORE) KATEGORİLERİ --- */
+        .category-title { font-size: 1.5rem; font-weight: 600; margin: 40px 0 20px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
         
-        .product-img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        
+        .product-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: 0.3s; }
+        .product-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .product-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid var(--border); }
         .product-body { padding: 25px; }
-        .product-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .product-title { font-size: 1.5rem; font-weight: 800; }
-        
-        .status-badge { padding: 5px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 800; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 1px; }
-        .status-ud { background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
-        .status-update { background: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tags { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tag { font-family: 'JetBrains Mono'; font-size: 0.75rem; background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px; color: var(--accent); }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
 
-        .feature-list { margin: 20px 0; list-style: none; }
-        .feature-list li { margin-bottom: 8px; color: #ccc; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
-        .feature-list li i { color: var(--primary); font-size: 0.8rem; }
-        
-        .tech-tags { display: flex; gap: 10px; margin-bottom: 20px; }
-        .tech-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px; color: var(--text-muted); }
+        /* --- DURUM (STATUS) --- */
+        .status-table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+        .status-table th, .status-table td { padding: 15px 25px; text-align: left; border-bottom: 1px solid var(--border); }
+        .status-table th { background: rgba(0,0,0,0.3); color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; }
+        .badge { padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+        .badge.ud { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
 
-        .product-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
-        .price { font-size: 1.8rem; font-weight: 800; }
-        .buy-btn { background: var(--primary); color: #fff; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: 0.3s; }
-        .buy-btn:hover { box-shadow: 0 0 20px var(--primary-glow); }
-
-        /* --- ADMIN PANELİ --- */
-        .admin-dashboard { display: grid; grid-template-columns: 250px 1fr; gap: 30px; }
-        .admin-sidebar { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; height: fit-content; }
-        .admin-user { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .admin-user img { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 10px; }
+        /* --- LOGIN & ADMIN MODAL --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: var(--bg-card); border: 1px solid var(--border); padding: 40px; border-radius: 20px; width: 400px; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        .close-btn { position: absolute; right: 20px; top: 20px; background: transparent; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; }
         
-        .admin-menu-item { display: block; padding: 12px 15px; color: var(--text-muted); text-decoration: none; border-radius: 8px; margin-bottom: 5px; transition: 0.3s; }
-        .admin-menu-item:hover, .admin-menu-item.active { background: rgba(99, 102, 241, 0.1); color: var(--primary); }
-        
-        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: var(--bg-card); padding: 25px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); }
-        .stat-title { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; }
-        .stat-value { font-size: 2rem; font-weight: 800; }
-        .stat-value.youtube { color: var(--youtube); }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--text-muted); }
+        .input-group input, .input-group select { width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: #fff; border-radius: 8px; font-family: inherit; }
+        .input-group input:focus { outline: none; border-color: var(--primary); }
+        #loginError { color: var(--danger); font-size: 0.85rem; display: none; margin-bottom: 15px; }
 
-        .admin-table-card { background: var(--bg-card); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); padding: 25px; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        th { color: var(--text-muted); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
-        td input, td select { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 8px; border-radius: 6px; font-family: inherit; }
-        td input:focus { outline: none; border-color: var(--primary); }
+        /* --- KEY GENERATOR (Admin İçinde) --- */
+        .admin-layout { display: grid; grid-template-columns: 250px 1fr; gap: 30px; margin-top: 20px; }
+        .admin-sidebar button { width: 100%; text-align: left; background: transparent; border: none; color: var(--text-muted); padding: 12px 15px; border-radius: 8px; cursor: pointer; font-size: 1rem; margin-bottom: 5px; transition: 0.3s; }
+        .admin-sidebar button.active, .admin-sidebar button:hover { background: rgba(79, 70, 229, 0.1); color: var(--primary); }
+        .key-box { background: rgba(0,0,0,0.5); border: 1px dashed var(--primary); padding: 15px; border-radius: 8px; font-family: 'JetBrains Mono'; margin-top: 20px; max-height: 200px; overflow-y: auto; white-space: pre-wrap; font-size: 0.9rem; }
 
     </style>
 </head>
 <body>
 
-    <!-- Arka Plan Görselleri -->
-    <div class="background"></div>
-    <div class="bg-overlay"></div>
+    <div class="ambient-bg"></div>
 
-    <!-- Üst Menü -->
+    <!-- NAVBAR -->
     <header>
-        <a href="#" class="logo" onclick="switchTab('store')">
+        <a href="#" class="logo" onclick="nav('home')">
             <i class="fas fa-layer-group"></i> SensiSoftware
         </a>
-        
         <div class="nav-links">
-            <a class="nav-link active" id="nav-store" onclick="switchTab('store')">Mağaza</a>
-            <a class="nav-link" id="nav-status">Durum</a>
-            <a class="nav-link" id="nav-faq">SSS</a>
+            <a class="nav-link active" id="nav-home" onclick="nav('home')">Ana Sayfa</a>
+            <a class="nav-link" id="nav-store" onclick="nav('store')">Mağaza</a>
+            <a class="nav-link" id="nav-status" onclick="nav('status')">Durum</a>
         </div>
-
-        <div style="display: flex; gap: 15px;">
-            <a href="https://discord.gg/sensisoftware" target="_blank" class="social-btn btn-discord">
-                <i class="fab fa-discord"></i> Topluluğa Katıl
-            </a>
-            <button class="social-btn btn-admin" onclick="switchTab('admin')">
-                <i class="fas fa-shield-halved"></i> Panel
+        <div class="header-actions">
+            <!-- Normal Müşteriler İçin Sadece Giriş Butonu Görünür -->
+            <button class="btn btn-primary" id="loginBtnTrigger" onclick="openModal('loginModal')">
+                <i class="fas fa-user"></i> Müşteri Girişi
             </button>
+            <!-- Sadece Admin Giriş Yapınca Bu Çıkar -->
+            <button class="btn btn-outline" id="adminPanelBtn" style="display: none; border-color: var(--accent); color: var(--accent);" onclick="nav('admin')">
+                <i class="fas fa-shield-halved"></i> Admin Panel
+            </button>
+            <button class="btn btn-outline" id="logoutBtn" style="display: none;" onclick="logout()">Çıkış</button>
         </div>
     </header>
 
-    <!-- MAĞAZA İÇERİĞİ -->
-    <main class="container active" id="view-store">
-        <h1 class="section-title">Premium <span style="color: var(--primary);">Erişim</span></h1>
-        <p class="section-desc">Piyasadaki en güvenli, optimize edilmiş özel yazılımlar. Güncel ve tespit edilemez.</p>
+    <!-- 1. ANA SAYFA -->
+    <div class="page active" id="page-home">
+        <div class="hero">
+            <h1>Sınırları Kaldır.<br><span>Oyunun Hakimi Ol.</span></h1>
+            <p class="section-desc">SensiSoftware, rakiplerine karşı mutlak üstünlük kurman için geliştirilmiş, yüksek güvenlikli ve tespit edilemez premium araçlar sunar.</p>
+            <button class="btn btn-primary" style="padding: 15px 30px; font-size: 1.1rem;" onclick="nav('store')">Hemen Ürünleri İncele</button>
+            
+            <div class="reviews">
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="font-size: 0.9rem; color: #ccc;">"Aylardır kullanıyorum, main hesabımda bile ban yemedim. Launcher sistemi çok pratik."</p>
+                    <div style="margin-top: 15px; font-weight: 600; font-size: 0.85rem; color: var(--accent);">@DestryXX (Discord)</div>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="font-size: 0.9rem; color: #ccc;">"Özellikle FPS düşüşü olmaması muazzam. External menü tasarımı harika akıyor."</p>
+                    <div style="margin-top: 15px; font-weight: 600; font-size: 0.85rem; color: var(--accent);">@KaanTR (Discord)</div>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="font-size: 0.9rem; color: #ccc;">"Ticket açtım, adminler 2 dakikada halletti. Sektördeki en iyi destek ekibi net."</p>
+                    <div style="margin-top: 15px; font-weight: 600; font-size: 0.85rem; color: var(--accent);">@NightOwl (Discord)</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- 2. MAĞAZA (KATEGORİLİ) -->
+    <div class="page" id="page-store">
+        <h1 class="section-title">Premium Mağaza</h1>
+        <p class="section-desc">Kategorilerine ayrılmış tüm araçlarımıza buradan ulaşabilirsiniz.</p>
+
+        <!-- Kategori 1: FPS Oyunları -->
+        <h2 class="category-title"><i class="fas fa-crosshairs"></i> FPS Oyunları</h2>
         <div class="product-grid">
-            
-            <!-- Ürün 1: CS2 External -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1605901309584-818e25960b8f?auto=format&fit=crop&w=800&q=80" class="product-img" alt="CS2">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" class="product-img">
                 <div class="product-body">
-                    <div class="product-header">
-                        <h2 class="product-title">CS2: OMEGA Base</h2>
-                        <span class="status-badge status-ud"><i class="fas fa-check-circle"></i> Undetected</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">C++ x64</span>
-                        <span class="tech-tag">External Console</span>
-                    </div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-crosshairs"></i> Dinamik Offset Güncelleme (Offset Data)</li>
-                        <li><i class="fas fa-eye"></i> Pürüzsüz Bone ESP & Radar</li>
-                        <li><i class="fas fa-shield-alt"></i> SensiLauncher Entegreli</li>
-                        <li><i class="fas fa-bolt"></i> Sıfır FPS Düşüşü</li>
-                    </ul>
-                    <div class="product-footer">
-                        <span class="price">$35.00 <span style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/ay</span></span>
-                        <button class="buy-btn"><i class="fas fa-shopping-cart"></i> Satın Al</button>
+                    <div class="tags"><span class="tag">C++ x64</span><span class="tag">External</span></div>
+                    <h3 style="margin-bottom: 10px;">CS2: Omega Base</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">External Console arayüzü ile donanım okuması. Güvenli offset yönetimi ve Radar ESP.</p>
+                    <div class="price-row">
+                        <span style="font-size: 1.5rem; font-weight: 800;">$35<span style="font-size: 0.9rem; color: #888;">/ay</span></span>
+                        <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Satın Al</button>
                     </div>
                 </div>
             </div>
-
-            <!-- Ürün 2: Valorant -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" class="product-img" alt="Valorant">
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" class="product-img">
                 <div class="product-body">
-                    <div class="product-header">
-                        <h2 class="product-title">VALORANT: VANGUARD+</h2>
-                        <span class="status-badge status-ud"><i class="fas fa-check-circle"></i> Undetected</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Internal Module</span>
-                        <span class="tech-tag">Kernel-Level</span>
-                    </div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-crosshairs"></i> V-Sync Aimbot Asistanı</li>
-                        <li><i class="fas fa-eye"></i> Streamproof (Yayında Gizli)</li>
-                        <li><i class="fas fa-shield-alt"></i> Donanım (HWID) Ban Koruması</li>
-                        <li><i class="fas fa-bolt"></i> Tamamen Özelleştirilebilir Menü</li>
-                    </ul>
-                    <div class="product-footer">
-                        <span class="price">$50.00 <span style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/ay</span></span>
-                        <button class="buy-btn"><i class="fas fa-shopping-cart"></i> Satın Al</button>
+                    <div class="tags"><span class="tag">Internal</span><span class="tag">Kernel</span></div>
+                    <h3 style="margin-bottom: 10px;">Valorant: Vanguard+</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Streamproof yapı, HWID Spoof entegreli tam paket profesyonel destek yazılımı.</p>
+                    <div class="price-row">
+                        <span style="font-size: 1.5rem; font-weight: 800;">$50<span style="font-size: 0.9rem; color: #888;">/ay</span></span>
+                        <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Satın Al</button>
                     </div>
                 </div>
             </div>
-
-            <!-- Ürün 3: Multi-Tool -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800&q=80" class="product-img" alt="Launcher">
-                <div class="product-body">
-                    <div class="product-header">
-                        <h2 class="product-title">SENSI: AIO Launcher</h2>
-                        <span class="status-badge status-update"><i class="fas fa-wrench"></i> Updating</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python Core</span>
-                        <span class="tech-tag">Multi-Platform</span>
-                    </div>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-crosshairs"></i> Tek Tıkla Tüm Yazılımları Başlatma</li>
-                        <li><i class="fas fa-eye"></i> Otomatik Güncelleme Sistemi</li>
-                        <li><i class="fas fa-shield-alt"></i> Özel Fiyatlandırma Arayüzü</li>
-                        <li><i class="fas fa-bolt"></i> Cloud Config Senkronizasyonu</li>
-                    </ul>
-                    <div class="product-footer">
-                        <span class="price">$15.00 <span style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/ömür boyu</span></span>
-                        <button class="buy-btn" disabled style="background: rgba(255,255,255,0.1); cursor: not-allowed; color: #888;">Bakımda</button>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </main>
 
-    <!-- ADMIN PANELİ İÇERİĞİ -->
-    <main class="container" id="view-admin">
-        <div class="admin-dashboard">
-            
-            <!-- Sol Menü -->
+        <!-- Kategori 2: Yazılım & Araçlar -->
+        <h2 class="category-title" style="margin-top: 60px;"><i class="fas fa-code"></i> Yazılım & Araçlar</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" class="product-img">
+                <div class="product-body">
+                    <div class="tags"><span class="tag">Python Base</span><span class="tag">AIO Tool</span></div>
+                    <h3 style="margin-bottom: 10px;">SensiSoftware Launcher</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Tüm ürünleri tek noktadan kontrol edebileceğiniz, özel mağaza arayüzlü Python tabanlı Multi-Launcher.</p>
+                    <div class="price-row">
+                        <span style="font-size: 1.5rem; font-weight: 800;">$15<span style="font-size: 0.9rem; color: #888;">/sınırsız</span></span>
+                        <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Satın Al</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. DURUM (STATUS) -->
+    <div class="page" id="page-status">
+        <h1 class="section-title">Sistem Durumu</h1>
+        <p class="section-desc">Tüm yazılımlarımızın canlı anti-cheat (VAC, Vanguard vs.) tespit durumları.</p>
+        
+        <table class="status-table">
+            <thead><tr><th>Ürün Adı</th><th>Platform</th><th>Son Güncelleme</th><th>Durum</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight: 600;">CS2: Omega Base</td>
+                    <td>Steam</td>
+                    <td>Bugün, 14:30</td>
+                    <td><span class="badge ud"><i class="fas fa-check-circle"></i> Undetected</span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 600;">Valorant: Vanguard+</td>
+                    <td>Riot Games</td>
+                    <td>Dün, 09:15</td>
+                    <td><span class="badge ud"><i class="fas fa-check-circle"></i> Undetected</span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 600;">SensiSoftware Launcher</td>
+                    <td>Windows X64</td>
+                    <td>13 Temmuz 2026</td>
+                    <td><span class="badge ud"><i class="fas fa-check-circle"></i> Undetected</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 4. GİZLİ ADMİN PANELİ (Sadece Login sonrası) -->
+    <div class="page" id="page-admin">
+        <h1 class="section-title" style="color: var(--accent);">Admin Kontrol Merkezi</h1>
+        
+        <div class="admin-layout">
             <div class="admin-sidebar">
-                <div class="admin-user">
-                    <img src="https://ui-avatars.com/api/?name=Omer&background=6366f1&color=fff&bold=true" alt="Admin Profil">
-                    <h3 style="font-weight: 600;">Hoş geldin, Ömer</h3>
-                    <span style="color: var(--primary); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">[Root Access]</span>
-                </div>
-                <nav>
-                    <a href="#" class="admin-menu-item active"><i class="fas fa-chart-pie" style="width: 25px;"></i> İstatistikler</a>
-                    <a href="#" class="admin-menu-item"><i class="fas fa-box" style="width: 25px;"></i> Ürün Yönetimi</a>
-                    <a href="#" class="admin-menu-item"><i class="fas fa-users" style="width: 25px;"></i> Müşteriler</a>
-                    <a href="#" class="admin-menu-item"><i class="fas fa-cog" style="width: 25px;"></i> Sistem Ayarları</a>
-                </nav>
+                <button class="active"><i class="fas fa-key"></i> Key Üretici (Gen)</button>
+                <button><i class="fas fa-box"></i> Ürün Ayarları</button>
+                <button><i class="fas fa-chart-line"></i> Satış İstatistikleri</button>
             </div>
-
-            <!-- Sağ İçerik -->
-            <div class="admin-content">
-                <h2 style="margin-bottom: 25px; font-weight: 800;">Sistem Özeti</h2>
+            
+            <div class="admin-content" style="background: var(--bg-card); padding: 30px; border-radius: 16px; border: 1px solid var(--border);">
+                <h2 style="margin-bottom: 20px;">Lisans Key Üret</h2>
                 
-                <div class="stat-grid">
-                    <div class="stat-card">
-                        <div class="stat-title">Aktif Aboneler</div>
-                        <div class="stat-value">1,284</div>
-                        <div style="color: var(--success); font-size: 0.85rem; margin-top: 5px;"><i class="fas fa-arrow-up"></i> +12% bu hafta</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div class="input-group">
+                        <label>Hangi Oyun/Ürün İçin?</label>
+                        <select id="genProduct">
+                            <option value="CS2">CS2: Omega</option>
+                            <option value="VAL">Valorant: Vanguard+</option>
+                            <option value="LNC">Sensi Launcher</option>
+                        </select>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Aylık Gelir</div>
-                        <div class="stat-value" style="color: var(--primary);">$14,520</div>
-                        <div style="color: var(--success); font-size: 0.85rem; margin-top: 5px;"><i class="fas fa-arrow-up"></i> +5% bu hafta</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title"><i class="fab fa-youtube"></i> YouTube Shorts İzl.</div>
-                        <div class="stat-value youtube">45.2K</div>
-                        <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">Son videodan gelen trafik</div>
+                    <div class="input-group">
+                        <label>Süre</label>
+                        <select id="genTime">
+                            <option value="1D">Günlük (1 Day)</option>
+                            <option value="7D">Haftalık (7 Days)</option>
+                            <option value="30D">Aylık (30 Days)</option>
+                            <option value="LT">Sınırsız (Lifetime)</option>
+                        </select>
                     </div>
                 </div>
+                
+                <div class="input-group">
+                    <label>Üretilecek Key Adedi</label>
+                    <input type="number" id="genAmount" value="5" min="1" max="50">
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="generateKeys()">
+                    <i class="fas fa-cogs"></i> Keyleri Oluştur
+                </button>
 
-                <div class="admin-table-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h3 style="font-weight: 600;">Hızlı Ürün Kontrolü</h3>
-                        <button class="buy-btn" style="padding: 8px 15px; font-size: 0.9rem;" onclick="alert('Veritabanına kaydedildi!')"><i class="fas fa-save"></i> Kaydet</button>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Yazılım Adı</th>
-                                <th>Altyapı</th>
-                                <th>Fiyat ($)</th>
-                                <th>Durum</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>CS2: OMEGA Base</strong></td>
-                                <td style="font-family: 'JetBrains Mono'; font-size: 0.85rem; color: #aaa;">C++ x64</td>
-                                <td><input type="number" value="35.00" style="width: 80px;"></td>
-                                <td>
-                                    <select>
-                                        <option value="ud" selected>Undetected</option>
-                                        <option value="update">Updating</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>VALORANT: VANGUARD+</strong></td>
-                                <td style="font-family: 'JetBrains Mono'; font-size: 0.85rem; color: #aaa;">Internal</td>
-                                <td><input type="number" value="50.00" style="width: 80px;"></td>
-                                <td>
-                                    <select>
-                                        <option value="ud" selected>Undetected</option>
-                                        <option value="update">Updating</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>SENSI: AIO Launcher</strong></td>
-                                <td style="font-family: 'JetBrains Mono'; font-size: 0.85rem; color: #aaa;">Python</td>
-                                <td><input type="number" value="15.00" style="width: 80px;"></td>
-                                <td>
-                                    <select>
-                                        <option value="ud">Undetected</option>
-                                        <option value="update" selected>Updating</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <div class="key-box" id="keyOutput">Keyler burada listelenecek...</div>
+                <button class="btn btn-outline" style="margin-top: 10px; font-size: 0.85rem;" onclick="copyKeys()"><i class="fas fa-copy"></i> Tümünü Kopyala</button>
             </div>
-
         </div>
-    </main>
+    </div>
+
+    <!-- GİRİŞ MODALI -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal('loginModal')"><i class="fas fa-times"></i></button>
+            <h2 style="margin-bottom: 25px;">Sisteme Giriş</h2>
+            
+            <div class="input-group">
+                <label>Kullanıcı Adı</label>
+                <input type="text" id="username" placeholder="omer13ds">
+            </div>
+            <div class="input-group">
+                <label>Şifre</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+            
+            <p id="loginError">Yetkisiz erişim denemesi! Bilgiler yanlış.</p>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="checkLogin()">Giriş Yap</button>
+        </div>
+    </div>
 
     <script>
-        // Sayfa/Sekme Değiştirme Mantığı
-        function switchTab(tabId) {
-            // Buton aktiflikleri
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            if(document.getElementById('nav-' + tabId)) {
-                document.getElementById('nav-' + tabId).classList.add('active');
-            }
-
-            // İçerik göster/gizle
-            document.querySelectorAll('.container').forEach(container => container.classList.remove('active'));
-            document.getElementById('view-' + tabId).classList.add('active');
+        // Sayfa Gezinme
+        function nav(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             
-            // Eğer panele geçildiyse sayfayı en üste kaydır
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('page-' + pageId).classList.add('active');
+            if(document.getElementById('nav-' + pageId)) {
+                document.getElementById('nav-' + pageId).classList.add('active');
+            }
+        }
+
+        // Modal Yönetimi
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { 
+            document.getElementById(id).classList.remove('active'); 
+            document.getElementById('loginError').style.display = 'none';
+        }
+
+        // Sıkı Login Sistemi
+        function checkLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            if(user === 'omer13ds' && pass === 'oyaali12') {
+                closeModal('loginModal');
+                document.getElementById('loginBtnTrigger').style.display = 'none';
+                document.getElementById('adminPanelBtn').style.display = 'flex';
+                document.getElementById('logoutBtn').style.display = 'flex';
+                nav('admin'); // Direkt admin panele at
+                
+                // Formu temizle
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        function logout() {
+            document.getElementById('loginBtnTrigger').style.display = 'flex';
+            document.getElementById('adminPanelBtn').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'none';
+            nav('home');
+        }
+
+        // Key Generator Mantığı
+        function generateKeys() {
+            const amount = document.getElementById('genAmount').value;
+            const product = document.getElementById('genProduct').value;
+            const time = document.getElementById('genTime').value;
+            const output = document.getElementById('keyOutput');
+            
+            let keys = "";
+            for(let i = 0; i < amount; i++) {
+                // Rastgele 12 haneli alfanumerik string üret
+                const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase() + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+                keys += `SENSI-${product}-${time}-${randomPart}\n`;
+            }
+            output.innerText = keys;
+        }
+
+        function copyKeys() {
+            const keys = document.getElementById('keyOutput').innerText;
+            if(keys.includes('Keyler burada')) return;
+            navigator.clipboard.writeText(keys);
+            alert("Keyler başarıyla kopyalandı kanka!");
         }
     </script>
 </body>

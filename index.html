@@ -10,10 +10,12 @@
         :root {
             --bg-dark: #030305;
             --bg-panel: rgba(10, 10, 15, 0.65);
-            --primary: #8a2be2; /* Temaya uygun mor bir primary renk */
+            --primary: #8a2be2; 
             --primary-glow: rgba(138, 43, 226, 0.4);
-            --accent: #b366ff; /* Logondaki açık mor tonlarına uyumlu */
+            --accent: #b366ff; 
             --accent-glow: rgba(179, 102, 255, 0.3);
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.2);
             --text-main: #f8fafc;
             --text-muted: #8b8b9e;
             --border: rgba(255, 255, 255, 0.08);
@@ -23,14 +25,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; min-height: 100vh; scroll-behavior: smooth; }
 
-        /* --- PREMIUM ARKA PLAN VE IŞIK EFEKTLERİ --- */
+        /* --- PREMIUM ARKA PLAN --- */
         .ambient-bg { position: fixed; inset: 0; z-index: -2; background: radial-gradient(circle at 50% 0%, #0a0a14 0%, #030305 70%); }
         .glow-sphere-1 { position: fixed; top: -15%; left: -10%; width: 50vw; height: 50vh; background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 60%); filter: blur(90px); z-index: -1; animation: float 15s infinite alternate ease-in-out; }
         .glow-sphere-2 { position: fixed; bottom: -15%; right: -10%; width: 40vw; height: 40vh; background: radial-gradient(circle, rgba(179, 102, 255, 0.1) 0%, transparent 60%); filter: blur(90px); z-index: -1; animation: float 12s infinite alternate-reverse ease-in-out; }
 
         @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 40px); } }
 
-        /* --- HEADER / NAVBAR --- */
+        /* --- NAVBAR --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 6%; background: rgba(3, 3, 5, 0.85);
@@ -54,12 +56,12 @@
         .btn-outline { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: #fff; backdrop-filter: blur(10px); }
         .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(179, 102, 255, 0.05); }
 
-        /* --- SPA SAYFA GEÇİŞLERİ --- */
+        /* --- SAYFA GEÇİŞLERİ --- */
         .page { display: none; animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; max-width: 1400px; margin: 0 auto; padding: 50px 6%; }
         .page.active { display: block; }
         @keyframes fadeInScale { from { opacity: 0; transform: scale(0.98) translateY(15px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        /* --- ANA SAYFA (HOME) --- */
+        /* --- ANA SAYFA --- */
         .home-hero { text-align: center; padding: 120px 0 80px 0; display: flex; flex-direction: column; align-items: center; }
         .home-badge { background: rgba(179, 102, 255, 0.05); border: 1px solid rgba(179, 102, 255, 0.2); color: var(--accent); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 30px; letter-spacing: 1.5px; text-transform: uppercase; }
         .home-title { font-family: 'Space Grotesk', sans-serif; font-size: 5.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; letter-spacing: -2px; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
@@ -73,7 +75,7 @@
         .feat-card h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 12px; color: #fff; }
         .feat-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
 
-        /* --- MAĞAZA (STORE) --- */
+        /* --- MAĞAZA KISMI --- */
         .store-header { text-align: center; margin-bottom: 50px; }
         .store-title { font-size: 3rem; font-weight: 800; margin-bottom: 10px; font-family: 'Space Grotesk', sans-serif;}
         .store-desc { color: var(--text-muted); font-size: 1.05rem; }
@@ -82,22 +84,55 @@
         .filter-pill { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: var(--text-muted); padding: 10px 24px; border-radius: 30px; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px); }
         .filter-pill:hover, .filter-pill.active { background: #fff; color: #000; border-color: #fff; }
 
-        /* Üst Seviye Ürün Kartları */
+        /* --- PROFESYONEL ÜRÜN KARTLARI --- */
         .showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-        .showcase-card { position: relative; height: 450px; border-radius: 20px; overflow: hidden; cursor: pointer; background: #0a0a0f; border: 1px solid var(--border); transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .showcase-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6) saturate(1.1); transition: 0.7s; background-color: #111; }
-        .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,3,5,0.95) 0%, rgba(3,3,5,0.4) 50%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; z-index: 2; }
-        .card-bg-text { position: absolute; bottom: 45px; left: 25px; font-size: 2.8rem; font-weight: 900; color: rgba(255, 255, 255, 0.03); text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; z-index: 1; transition: 0.4s; pointer-events: none; letter-spacing: 1px; }
-        .card-gozat { font-size: 0.75rem; color: var(--accent); font-weight: 700; letter-spacing: 2.5px; margin-bottom: 8px; text-transform: uppercase; }
-        .card-title { font-size: 1.5rem; font-weight: 700; color: #fff; }
-        .card-arrow { position: absolute; bottom: 30px; right: 30px; color: var(--text-muted); font-size: 1.2rem; transition: 0.4s; z-index: 3; background: rgba(255,255,255,0.05); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; backdrop-filter: blur(5px); }
+        .showcase-card { 
+            position: relative; height: 450px; border-radius: 20px; overflow: hidden; 
+            cursor: pointer; background: #0a0a0f; border: 1px solid var(--border); 
+            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        
+        .showcase-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7) saturate(1.1); transition: 0.7s; background-color: #111; }
+        
+        /* Canlı Durum Rozeti (UNDETECTED) */
+        .card-status {
+            position: absolute; top: 20px; right: 20px;
+            background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--success); padding: 6px 14px; border-radius: 30px;
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; z-index: 3;
+            display: flex; align-items: center; gap: 8px; backdrop-filter: blur(8px);
+        }
+        .card-status i { font-size: 0.5rem; animation: blinkStatus 2s infinite; }
+        @keyframes blinkStatus { 0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--success); } 50% { opacity: 0.4; box-shadow: none; } }
 
-        .showcase-card:hover { transform: translateY(-10px); border-color: var(--border-hover); box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(179, 102, 255, 0.1); }
+        /* Alt Kısım Cam Efekti */
+        .card-overlay { 
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(5,5,8,0.98) 10%, rgba(5,5,8,0.6) 60%, transparent); 
+            display: flex; flex-direction: column; justify-content: flex-end; 
+            padding: 30px 25px; z-index: 2; height: 60%;
+        }
+        
+        .card-bg-text { position: absolute; bottom: 50px; left: 20px; font-size: 3rem; font-weight: 900; color: rgba(255, 255, 255, 0.02); text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; z-index: 1; transition: 0.4s; pointer-events: none; letter-spacing: -1px; }
+        
+        .card-gozat { font-size: 0.7rem; color: var(--accent); font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; text-transform: uppercase; }
+        .card-title { font-size: 1.5rem; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+        
+        .card-arrow { 
+            position: absolute; bottom: 25px; right: 25px; color: var(--text-muted); 
+            font-size: 1.1rem; transition: 0.4s; z-index: 3; 
+            background: rgba(255,255,255,0.05); width: 45px; height: 45px; 
+            display: flex; align-items: center; justify-content: center; 
+            border-radius: 50%; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Hover Efektleri */
+        .showcase-card:hover { transform: translateY(-10px); border-color: var(--border-hover); box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(179, 102, 255, 0.15); }
         .showcase-card:hover img { transform: scale(1.05); filter: brightness(0.4) saturate(1.3); }
-        .showcase-card:hover .card-bg-text { color: rgba(179, 102, 255, 0.08); transform: translateY(-8px); }
-        .showcase-card:hover .card-arrow { background: #fff; color: #000; transform: rotate(-45deg); }
+        .showcase-card:hover .card-bg-text { color: rgba(179, 102, 255, 0.06); transform: translateY(-8px) scale(1.02); }
+        .showcase-card:hover .card-arrow { background: #fff; color: #000; transform: rotate(-45deg); border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
 
-        /* --- ÜRÜN DETAY MODALI (POPUP KART) --- */
+        /* --- ÜRÜN MODALI --- */
         .prod-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: none; justify-content: center; align-items: center; z-index: 3000; animation: fadeIn 0.3s ease; }
         .prod-modal-overlay.active { display: flex; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -123,7 +158,7 @@
         .prod-feats { list-style: none; margin-bottom: 40px; background: rgba(255,255,255,0.02); padding: 25px; border-radius: 16px; border: 1px solid var(--border); }
         .prod-feats li { display: flex; align-items: center; gap: 12px; color: #e2e8f0; font-size: 0.95rem; margin-bottom: 15px; }
         .prod-feats li:last-child { margin-bottom: 0; }
-        .prod-feats li i { color: #10b981; font-size: 1.1rem; }
+        .prod-feats li i { color: var(--success); font-size: 1.1rem; }
 
         .prod-pricing { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: auto; }
         .p-tier { background: rgba(0,0,0,0.4); border: 1px solid var(--border); padding: 20px 25px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; cursor: pointer; }
@@ -133,27 +168,21 @@
         .p-tier-price { font-size: 1.8rem; font-weight: 800; color: #fff; }
         .p-tier-price span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
 
-        /* --- GİRİŞ YAP PANELİ --- */
+        /* --- GİRİŞ YAP & CANLI DESTEK & ADMIN (KORUNDU) --- */
         .auth-modal { background: rgba(10, 10, 15, 0.95); border: 1px solid var(--border-hover); padding: 50px 40px; border-radius: 24px; width: 420px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.9); }
         .auth-header { text-align: center; margin-bottom: 35px; }
         .auth-icon { width: 65px; height: 65px; background: rgba(138, 43, 226, 0.1); color: var(--primary); border-radius: 18px; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; margin: 0 auto 20px auto; border: 1px solid rgba(138, 43, 226, 0.3); }
         .auth-header h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
-        
         .input-group { margin-bottom: 20px; position: relative; }
         .input-group i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
         .input-group input { width: 100%; padding: 16px 16px 16px 50px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); color: #fff; border-radius: 12px; font-size: 0.95rem; transition: 0.3s; outline: none; }
         .input-group input:focus { border-color: var(--primary); background: rgba(0,0,0,0.8); box-shadow: 0 0 20px rgba(138, 43, 226, 0.2); }
-        
         .remember-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
         .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; user-select: none; }
         .checkbox-label input { accent-color: var(--primary); width: 18px; height: 18px; cursor: pointer; }
-        
         #loginError { color: #ff4757; font-size: 0.85rem; display: none; margin-bottom: 20px; text-align: center; background: rgba(255, 71, 87, 0.1); padding: 12px; border-radius: 10px; border: 1px solid rgba(255, 71, 87, 0.2); }
-
-        /* --- CANLI DESTEK --- */
         .chat-widget { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--primary), #6a0dad); width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 1.6rem; cursor: pointer; box-shadow: 0 10px 30px rgba(138, 43, 226, 0.5); z-index: 4000; transition: 0.3s; border: 2px solid rgba(255,255,255,0.1); }
         .chat-widget:hover { transform: scale(1.1) translateY(-5px); }
-        
         .chat-window { position: fixed; bottom: 110px; right: 30px; width: 340px; background: rgba(13, 13, 20, 0.95); border: 1px solid var(--border-hover); border-radius: 20px; backdrop-filter: blur(25px); z-index: 4000; transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
         .chat-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
         .chat-header { background: rgba(0,0,0,0.4); padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 1rem; }
@@ -162,8 +191,6 @@
         .chat-body { padding: 25px 20px; display: flex; flex-direction: column; gap: 15px; }
         .chat-msg { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 16px; border-bottom-left-radius: 4px; font-size: 0.9rem; color: #e2e8f0; line-height: 1.6; border: 1px solid rgba(255,255,255,0.05); }
         .chat-msg .time { display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; text-align: right; }
-
-        /* --- ADMIN PANELİ --- */
         .admin-layout { display: grid; grid-template-columns: 250px 1fr; gap: 30px; }
         .admin-sidebar button { width: 100%; text-align: left; background: transparent; border: none; color: var(--text-muted); padding: 15px 20px; border-radius: 12px; cursor: pointer; font-size: 1rem; margin-bottom: 8px; transition: 0.3s; font-weight: 600; display: flex; align-items: center; gap: 10px; }
         .admin-sidebar button.active, .admin-sidebar button:hover { background: rgba(179, 102, 255, 0.1); color: var(--accent); border: 1px solid rgba(179, 102, 255, 0.2); }
@@ -176,11 +203,8 @@
     <div class="glow-sphere-1"></div>
     <div class="glow-sphere-2"></div>
 
-    <!-- NAVBAR -->
     <header>
-        <a href="#" class="logo" onclick="nav('home')">
-            SENSI<span>SOFTWARE</span>
-        </a>
+        <a href="#" class="logo" onclick="nav('home')">SENSI<span>SOFTWARE</span></a>
         <div class="nav-links">
             <a class="nav-link active" id="nav-home" onclick="nav('home')">Ana Sayfa</a>
             <a class="nav-link" id="nav-store" onclick="nav('store')">Mağaza</a>
@@ -192,7 +216,6 @@
         </div>
     </header>
 
-    <!-- 1. ANA SAYFA -->
     <div class="page active" id="page-home">
         <div class="home-hero">
             <div class="home-badge"><i class="fas fa-bolt"></i> Elite Detection Bypass</div>
@@ -200,7 +223,6 @@
             <p class="home-desc">SensiSoftware; profesyonel oyuncular için geliştirilmiş, donanım okuması yapmayan ve tamamen tespit edilemez premium yazılım çözümleri sunar.</p>
             <button class="btn btn-primary" style="padding: 16px 40px; font-size: 1.1rem; border-radius: 12px;" onclick="nav('store')">Mağazayı Keşfet</button>
         </div>
-
         <div class="features-grid">
             <div class="feat-card">
                 <div class="feat-icon"><i class="fas fa-shield-halved"></i></div>
@@ -220,13 +242,11 @@
         </div>
     </div>
 
-    <!-- 2. MAĞAZA -->
     <div class="page" id="page-store">
         <div class="store-header">
             <h1 class="store-title">Ürünlerimiz</h1>
             <p class="store-desc">En üst düzey donanım koruması ve tespit edilemez yazılım mimarisi.</p>
         </div>
-
         <div class="filter-bar">
             <button class="filter-pill active">Tüm Ürünler</button>
             <button class="filter-pill">Valorant</button>
@@ -235,8 +255,9 @@
         </div>
 
         <div class="showcase-grid">
-            <!-- VALORANT KARTI (PNG GÜNCELLENDİ VE YAZILAR TEMİZLENDİ) -->
+            <!-- VALORANT VIP (PNG) -->
             <div class="showcase-card" onclick="openProductModal('val')">
+                <div class="card-status"><i class="fas fa-circle"></i> UNDETECTED</div>
                 <img src="valorant.png" alt="Valorant VIP">
                 <div class="card-bg-text">VALORANT</div>
                 <div class="card-overlay">
@@ -246,18 +267,21 @@
                 <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
 
-            <!-- DİĞER KARTLAR -->
+            <!-- CS2 VIP (PNG GÜNCELLENDİ) -->
             <div class="showcase-card" onclick="openProductModal('cs2')">
-                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/ss_164b383416e7dd786f6630f5bb8da4bf5a59dcc8.1920x1080.jpg" alt="CS2">
+                <div class="card-status"><i class="fas fa-circle"></i> UNDETECTED</div>
+                <img src="cs2.png" alt="CS2 VIP">
                 <div class="card-bg-text">C-STRIKE</div>
                 <div class="card-overlay">
                     <div class="card-gozat">İNCELE</div>
-                    <div class="card-title">Counter-Strike 2</div>
+                    <div class="card-title">Counter-Strike 2 VIP</div>
                 </div>
                 <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
 
+            <!-- SPOOFER -->
             <div class="showcase-card" onclick="openProductModal('spoof')">
+                <div class="card-status"><i class="fas fa-circle"></i> WORKING</div>
                 <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000" alt="Spoofer">
                 <div class="card-bg-text">SPOOFER</div>
                 <div class="card-overlay">
@@ -267,7 +291,9 @@
                 <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
 
+            <!-- LAUNCHER -->
             <div class="showcase-card" onclick="openProductModal('launcher')">
+                <div class="card-status" style="color: var(--accent); border-color: var(--accent); background: rgba(179,102,255,0.1);"><i class="fas fa-cloud" style="animation: none;"></i> ONLINE</div>
                 <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=1000" alt="Launcher">
                 <div class="card-bg-text">LAUNCHER</div>
                 <div class="card-overlay">
@@ -279,23 +305,19 @@
         </div>
     </div>
 
-    <!-- PROFESYONEL ÜRÜN KARTI (MODAL) -->
+    <!-- MODAL -->
     <div class="prod-modal-overlay" id="productModal">
         <div class="prod-modal-card">
             <button class="close-prod" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
-            
             <div class="prod-img-side">
                 <img id="pm-img" src="" alt="Cover">
                 <div class="prod-img-overlay"></div>
             </div>
-            
             <div class="prod-info-side">
                 <h2 id="pm-title">Ürün Başlığı</h2>
                 <div class="sub" id="pm-sub">Premium Çözüm</div>
                 <p id="pm-desc">Açıklama metni.</p>
-                
                 <ul class="prod-feats" id="pm-feats"></ul>
-
                 <div class="prod-pricing">
                     <div class="p-tier">
                         <div class="p-tier-left">
@@ -316,17 +338,15 @@
         </div>
     </div>
 
-    <!-- GİRİŞ YAP PANELİ -->
+    <!-- GİRİŞ -->
     <div class="prod-modal-overlay" id="authModal" style="z-index: 4000;">
         <div class="auth-modal">
             <button class="close-prod" style="top: 25px; right: 25px;" onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
-            
             <div class="auth-header">
                 <div class="auth-icon"><i class="fas fa-fingerprint"></i></div>
                 <h2 style="font-family: 'Space Grotesk', sans-serif;">Giriş Yap</h2>
                 <p style="color: var(--text-muted); font-size: 0.95rem;">Sisteme erişmek için bilgilerinizi doğrulayın.</p>
             </div>
-
             <div class="input-group">
                 <i class="fas fa-user"></i>
                 <input type="text" id="username" placeholder="Kullanıcı Adı">
@@ -335,27 +355,16 @@
                 <i class="fas fa-lock"></i>
                 <input type="password" id="password" placeholder="Şifre">
             </div>
-            
             <div class="remember-row">
-                <label class="checkbox-label">
-                    <input type="checkbox" id="rememberMe">
-                    Beni Hatırla
-                </label>
+                <label class="checkbox-label"><input type="checkbox" id="rememberMe"> Beni Hatırla</label>
             </div>
-
             <p id="loginError"><i class="fas fa-exclamation-triangle"></i> Girdiğiniz bilgiler eşleşmedi.</p>
-            
-            <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 16px; font-size: 1.05rem; border-radius: 12px;" onclick="checkLogin()">
-                Giriş Yap
-            </button>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 16px; font-size: 1.05rem; border-radius: 12px;" onclick="checkLogin()">Giriş Yap</button>
         </div>
     </div>
 
-    <!-- CANLI DESTEK WIDGET -->
-    <div class="chat-widget" onclick="toggleChat()">
-        <i class="fas fa-comment-dots"></i>
-    </div>
-    
+    <!-- CANLI DESTEK -->
+    <div class="chat-widget" onclick="toggleChat()"><i class="fas fa-comment-dots"></i></div>
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <span><i class="fas fa-headset" style="color: var(--accent); margin-right: 8px;"></i> Sensi Destek</span>
@@ -363,14 +372,12 @@
         </div>
         <div class="chat-body">
             <div class="chat-msg">
-                <strong>Merhaba Kanka! 👋</strong><br><br>
-                Canlı destek sistemimiz çok yakında animasyonlu ve tam kapasiteli olarak hizmetinizde olacaktır. Anlayışınız için teşekkür ederiz. 🚀
-                <span class="time">Şimdi</span>
+                <strong>Merhaba! 👋</strong><br><br>Canlı destek sistemimiz çok yakında animasyonlu ve tam kapasiteli olarak hizmetinizde olacaktır. Anlayışınız için teşekkür ederiz. 🚀<span class="time">Şimdi</span>
             </div>
         </div>
     </div>
 
-    <!-- GİZLİ ADMİN PANELİ -->
+    <!-- ADMIN PANEL -->
     <div class="page" id="page-admin">
         <h1 style="color: var(--accent); font-weight: 700; margin-bottom: 30px; font-size: 2.5rem; font-family: 'Space Grotesk', sans-serif;">Yönetim Paneli</h1>
         <div class="admin-layout">
@@ -386,7 +393,7 @@
                         <label style="display:block; margin-bottom: 10px; font-size: 0.95rem; color: #888;">Hedef Ürün</label>
                         <select id="genProduct" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: #fff; border-radius: 12px; outline:none;">
                             <option value="VAL">Valorant VIP</option>
-                            <option value="CS2">Counter-Strike 2</option>
+                            <option value="CS2">Counter-Strike 2 VIP</option>
                             <option value="SPOOF">HWID Spoofer</option>
                         </select>
                     </div>
@@ -410,10 +417,10 @@
     </div>
 
     <script>
-        // Ürün Veritabanı (Valorant Görseli, Başlığı ve Sub-text'i tertemiz güncellendi)
+        // CS2 VERİTABANI CS2.PNG VE VIP OLARAK GÜNCELLENDİ
         const productDB = {
             'val': { title: 'Valorant VIP', sub: 'Premium Software', desc: 'Riot Vanguard sistemini ring0 seviyesinde bypass eden, streamproof mimariye sahip özel yapım aimbot ve ESP paketi.', feats: ['<li><i class="fas fa-check"></i> Kusursuz V-Sync Aimbot</li>', '<li><i class="fas fa-check"></i> OBS/Discord Yayında Gizlilik</li>', '<li><i class="fas fa-check"></i> Dahili HWID Koruyucu</li>'], img: 'valorant.png', prices: ['$10', '$50'] },
-            'cs2': { title: 'Counter-Strike 2', sub: 'External Base', desc: 'Oyun dosyalarına müdahale etmeden çalışan harici konsol mimarisi. VAC Live sistemine takılmaz.', feats: ['<li><i class="fas fa-check"></i> Dinamik Offset Güncellemesi</li>', '<li><i class="fas fa-check"></i> Radar ve Bone ESP</li>', '<li><i class="fas fa-check"></i> Sıfır FPS Düşüşü</li>'], img: 'https://cdn.cloudflare.steamstatic.com/steam/apps/730/ss_164b383416e7dd786f6630f5bb8da4bf5a59dcc8.1920x1080.jpg', prices: ['$5', '$35'] },
+            'cs2': { title: 'Counter-Strike 2 VIP', sub: 'External Base', desc: 'Oyun dosyalarına müdahale etmeden çalışan harici konsol mimarisi. VAC Live sistemine takılmaz.', feats: ['<li><i class="fas fa-check"></i> Dinamik Offset Güncellemesi</li>', '<li><i class="fas fa-check"></i> Radar ve Bone ESP</li>', '<li><i class="fas fa-check"></i> Sıfır FPS Düşüşü</li>'], img: 'cs2.png', prices: ['$5', '$35'] },
             'spoof': { title: 'HWID Spoofer Elite', sub: 'Kernel Driver', desc: 'Ban yemiş donanım seri numaralarını kalıcı veya geçici olarak değiştirir. Anakart, disk ve MAC temizler.', feats: ['<li><i class="fas fa-check"></i> Tüm Anti-Cheatlere Uyumlu</li>', '<li><i class="fas fa-check"></i> Kalıcı (Permanent) Mod</li>', '<li><i class="fas fa-check"></i> Güvenli Disk Temizliği</li>'], img: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000', prices: ['$8', '$25'] },
             'launcher': { title: 'Sensi: AIO Launcher', sub: 'Python Core', desc: 'Tüm SensiSoftware araçlarını tek bir arayüzden yönetmenizi sağlayan güvenli masaüstü platformu.', feats: ['<li><i class="fas fa-check"></i> Otomatik Yazılım Güncelleme</li>', '<li><i class="fas fa-check"></i> Cloud Config Sistemi</li>', '<li><i class="fas fa-check"></i> Güvenli Login Entegrasyonu</li>'], img: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=1000', prices: ['$3', '$15'] }
         };
@@ -438,13 +445,9 @@
             document.getElementById('productModal').classList.add('active');
         }
         function closeProductModal() { document.getElementById('productModal').classList.remove('active'); }
-
         function toggleChat() { document.getElementById('chatWindow').classList.toggle('open'); }
 
-        window.onload = () => {
-            if (localStorage.getItem('sensiAdmin') === 'true') { loginSuccess(); }
-        };
-
+        window.onload = () => { if (localStorage.getItem('sensiAdmin') === 'true') { loginSuccess(); } };
         function openAuthModal() { document.getElementById('authModal').classList.add('active'); }
         function closeAuthModal() { document.getElementById('authModal').classList.remove('active'); document.getElementById('loginError').style.display = 'none'; }
 
@@ -452,13 +455,10 @@
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
             const remember = document.getElementById('rememberMe').checked;
-
             if(u === 'omer13ds' && p === 'oyaali12') {
                 if(remember) { localStorage.setItem('sensiAdmin', 'true'); } 
                 loginSuccess();
-            } else {
-                document.getElementById('loginError').style.display = 'block';
-            }
+            } else { document.getElementById('loginError').style.display = 'block'; }
         }
 
         function loginSuccess() {
@@ -483,9 +483,7 @@
             const prod = document.getElementById('genProduct').value;
             const time = document.getElementById('genTime').value;
             let res = "";
-            for(let i=0; i<amount; i++) {
-                res += `SENSI-${prod}-${time}-${Math.random().toString(36).substring(2,8).toUpperCase()}\n`;
-            }
+            for(let i=0; i<amount; i++) { res += `SENSI-${prod}-${time}-${Math.random().toString(36).substring(2,8).toUpperCase()}\n`; }
             document.getElementById('keyOutput').innerText = res;
         }
     </script>

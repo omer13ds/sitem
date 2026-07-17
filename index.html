@@ -30,49 +30,34 @@
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
 
-        /* --- LOADING EKRANI --- */
-        .loader-screen {
-            position: fixed; inset: 0; z-index: 99999;
-            background: var(--bg-dark);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+        /* --- PREMIUM ARKA PLAN VE LOGO PNG --- */
+        .ambient-bg { position: fixed; inset: 0; z-index: -2; background: radial-gradient(ellipse at 50% 0%, rgba(10, 10, 20, 0.8) 0%, #030305 80%); }
+        
+        /* Kendi Logon İçin Arka Plan */
+        .main-bg-image {
+            position: fixed;
+            inset: -5%; /* Kenarlardaki blur boşluğunu kapatmak için biraz büyütüyoruz */
+            z-index: -3;
+            background: url('logo.png') center center / cover no-repeat;
+            filter: blur(10px) brightness(0.3); /* Bulanıklık ve karartma ayarı */
+            pointer-events: none;
         }
-        .loader-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .loader-logo {
-            font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 700;
-            letter-spacing: 2px; color: #fff; margin-bottom: 40px;
-        }
-        .loader-logo span { color: var(--accent); }
-        .loader-bar-track {
-            width: 220px; height: 3px; background: rgba(255,255,255,0.06);
-            border-radius: 10px; overflow: hidden; position: relative;
-        }
-        .loader-bar-fill {
-            width: 0%; height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 10px;
-            animation: loaderFill 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-            box-shadow: 0 0 20px var(--primary-glow);
-        }
-        @keyframes loaderFill { 0% { width: 0%; } 100% { width: 100%; } }
 
-        /* --- PREMIUM ARKA PLAN --- */
-        .ambient-bg { position: fixed; inset: 0; z-index: -2; background: radial-gradient(ellipse at 50% 0%, #0a0a14 0%, #030305 70%); }
         .glow-sphere-1 {
             position: fixed; top: -15%; left: -10%; width: 50vw; height: 50vh;
-            background: radial-gradient(circle, rgba(138, 43, 226, 0.12) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 60%);
             filter: blur(100px); z-index: -1; will-change: transform;
             transition: transform 0.3s ease-out;
         }
         .glow-sphere-2 {
             position: fixed; bottom: -15%; right: -10%; width: 40vw; height: 40vh;
-            background: radial-gradient(circle, rgba(179, 102, 255, 0.08) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(179, 102, 255, 0.1) 0%, transparent 60%);
             filter: blur(100px); z-index: -1; will-change: transform;
             transition: transform 0.3s ease-out;
         }
         .glow-sphere-3 {
             position: fixed; top: 40%; left: 50%; width: 30vw; height: 30vh;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 60%);
             filter: blur(120px); z-index: -1; will-change: transform;
             transition: transform 0.3s ease-out;
         }
@@ -641,15 +626,8 @@
 </head>
 <body>
 
-    <!-- LOADING EKRANI -->
-    <div class="loader-screen" id="loaderScreen">
-        <div class="loader-logo">SENSI<span>SOFTWARE</span></div>
-        <div class="loader-bar-track">
-            <div class="loader-bar-fill"></div>
-        </div>
-    </div>
-
     <!-- ARKA PLAN -->
+    <div class="main-bg-image"></div> <!-- GÖNDERDİĞİN LOGO BURADA -->
     <div class="ambient-bg"></div>
     <div class="glow-sphere-1" id="sphere1"></div>
     <div class="glow-sphere-2" id="sphere2"></div>
@@ -955,13 +933,6 @@
             'launcher': { title: 'Sensi: AIO Launcher', sub: 'Python Core', desc: 'Tüm SensiSoftware araçlarını tek bir arayüzden yönetmenizi sağlayan güvenli masaüstü platformu.', feats: ['<li><i class="fas fa-check"></i> Otomatik Yazılım Güncelleme</li>', '<li><i class="fas fa-check"></i> Cloud Config Sistemi</li>', '<li><i class="fas fa-check"></i> Güvenli Login Entegrasyonu</li>'], img: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=1000', prices: ['$3', '$15'] }
         };
 
-        // ===== LOADING EKRANI =====
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loaderScreen').classList.add('hidden');
-            }, 2200);
-        });
-
         // ===== YILDIZ PARTİKÜLLERİ =====
         const canvas = document.getElementById('starsCanvas');
         const ctx = canvas.getContext('2d');
@@ -1066,7 +1037,7 @@
             requestAnimationFrame(update);
         }
 
-        // ===== NAVIGASYON =====
+        // ===== NAVIGASYON VE KART GÖRÜNÜM FIX =====
         function nav(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -1079,8 +1050,14 @@
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Sayfa değiştiğinde reveal'ları tekrar gözlemle
-            setTimeout(observeReveals, 100);
+            // KARTLARIN MAĞAZAYA TIKLAYINCA GÖZÜKMEME SORUNUNU BURADAN ÇÖZDÜM 
+            setTimeout(() => {
+                if (page) {
+                    page.querySelectorAll('.reveal').forEach(el => {
+                        el.classList.add('visible');
+                    });
+                }
+            }, 50);
         }
 
         // ===== ÜRÜN MODALI =====
@@ -1108,9 +1085,7 @@
         // ===== GİRİŞ SİSTEMİ =====
         window.onload = () => {
             if (localStorage.getItem('sensiAdmin') === 'true') { loginSuccess(); }
-            setTimeout(() => {
-                document.getElementById('loaderScreen').classList.add('hidden');
-            }, 2200);
+            // Yükleme ekranı komutları silindiği için site artık saniyesinde açılacak
         };
 
         function openAuthModal() {

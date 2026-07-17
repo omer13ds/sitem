@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SensiSoftware | Elite Solutions</title>
-    <meta name="description" content="SensiSoftware - Profesyonel oyuncular için geliştirilmiş premium yazılım çözümleri.">
+    <title>SensiSoftware | Elite Launcher Platform</title>
+    <meta name="description" content="SensiSoftware - Python tabanlı, harici ve güvenilir launcher platformu.">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -44,25 +44,24 @@
             min-height: 100vh; 
         }
 
-        /* --- LOGO.PNG ARKA PLAN VE ŞEFFAFLIK AYARLARI --- */
+        /* --- LOGO.PNG ARKA PLAN VE ŞEFFAFLIK AYARLARI (DÜZELTİLDİ) --- */
         
-        /* 1. Katman: Ana Logo (Seni fotoğrafı buraya oturuyor) */
+        /* 1. Katman: Ana Logo - Blur azaltıldı ve parlaklık artırıldı */
         .main-bg-image {
             position: fixed; 
-            inset: -5%; /* Kenarlardaki blur boşluğunu kapatmak için */
+            inset: -5%; 
             z-index: -3;
             background: url('logo.png') center center / cover no-repeat;
-            filter: blur(6px) brightness(0.6); /* Bulanıklık 6px'e düşürüldü, parlaklık artırıldı */
+            filter: blur(2px) brightness(0.8); 
             pointer-events: none;
         }
 
-        /* 2. Katman: Logonun üzerine binen YARI SAYDAM karanlık geçiş (Eskiden burası simsiyah yapıyordu) */
+        /* 2. Katman: Neredeyse tamamen şeffaf karanlık geçiş (Eski koda dönüldü) */
         .ambient-bg { 
             position: fixed; 
             inset: 0; 
             z-index: -2; 
-            /* Alfa (A) değerleri 0.3 ve 0.7 yapılarak arka planın görünmesi sağlandı */
-            background: radial-gradient(ellipse at 50% 0%, rgba(10, 10, 20, 0.3) 0%, rgba(3, 3, 5, 0.7) 80%); 
+            background: rgba(3, 3, 5, 0.15); 
         }
 
         .glow-sphere-1 {
@@ -118,9 +117,9 @@
             justify-content: space-between; 
             align-items: center;
             padding: 18px 6%; 
-            background: rgba(3, 3, 5, 0.7);
-            backdrop-filter: blur(30px); 
-            -webkit-backdrop-filter: blur(30px);
+            background: rgba(3, 3, 5, 0.4);
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--glass-border);
             position: sticky; 
             top: 0; 
@@ -129,7 +128,7 @@
         }
 
         header.scrolled {
-            background: rgba(3, 3, 5, 0.92);
+            background: rgba(3, 3, 5, 0.85);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
 
@@ -256,7 +255,7 @@
         }
 
         .btn-outline {
-            background: var(--glass-bg); 
+            background: rgba(255, 255, 255, 0.05); 
             border: 1px solid var(--glass-border);
             color: #fff; 
             backdrop-filter: blur(10px);
@@ -391,7 +390,7 @@
         .stat-item {
             text-align: center; 
             padding: 35px 20px;
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             backdrop-filter: blur(10px);
@@ -467,7 +466,7 @@
         }
 
         .feat-card {
-            background: var(--glass-bg); 
+            background: rgba(255, 255, 255, 0.03); 
             border: 1px solid var(--glass-border);
             padding: 40px 35px; 
             border-radius: 24px;
@@ -492,7 +491,7 @@
         .feat-card:hover {
             transform: translateY(-8px);
             border-color: rgba(138, 43, 226, 0.3);
-            background: rgba(138, 43, 226, 0.04);
+            background: rgba(138, 43, 226, 0.06);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(138, 43, 226, 0.08);
         }
 
@@ -598,9 +597,10 @@
             border-radius: 22px; 
             overflow: hidden;
             cursor: pointer; 
-            background: #0a0a0f; 
+            background: rgba(10, 10, 15, 0.7); 
             border: 1px solid var(--glass-border);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
         }
 
         .showcase-card img {
@@ -609,7 +609,7 @@
             object-fit: cover;
             filter: brightness(0.65) saturate(1.1);
             transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            background-color: #111;
+            background-color: transparent;
         }
 
         .card-status {
@@ -646,7 +646,7 @@
             bottom: 0; 
             left: 0; 
             right: 0;
-            background: linear-gradient(to top, rgba(5, 5, 8, 0.98) 5%, rgba(5, 5, 8, 0.7) 50%, transparent);
+            background: linear-gradient(to top, rgba(5, 5, 8, 0.98) 5%, rgba(5, 5, 8, 0.5) 60%, transparent);
             display: flex; 
             flex-direction: column; 
             justify-content: flex-end;
@@ -661,7 +661,7 @@
             left: 20px;
             font-size: 3rem; 
             font-weight: 900; 
-            color: rgba(255, 255, 255, 0.02);
+            color: rgba(255, 255, 255, 0.03);
             text-transform: uppercase; 
             font-family: 'Space Grotesk', sans-serif;
             z-index: 1; 
@@ -717,7 +717,7 @@
         }
 
         .showcase-card:hover .card-bg-text { 
-            color: rgba(179, 102, 255, 0.05); 
+            color: rgba(179, 102, 255, 0.08); 
             transform: translateY(-8px) scale(1.02); 
         }
 
@@ -733,7 +733,7 @@
         .prod-modal-overlay {
             position: fixed; 
             inset: 0; 
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(20px); 
             display: none; 
             justify-content: center;
@@ -752,7 +752,7 @@
         }
 
         .prod-modal-card {
-            background: #0d0d14; 
+            background: rgba(13, 13, 20, 0.9); 
             border: 1px solid var(--border-hover); 
             border-radius: 24px;
             width: 1050px; 
@@ -764,6 +764,7 @@
             position: relative;
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
             animation: modalSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            backdrop-filter: blur(15px);
         }
 
         @keyframes modalSlideUp {
@@ -806,13 +807,13 @@
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            filter: brightness(0.9) saturate(1.1); 
+            filter: brightness(0.8) saturate(1.1); 
         }
 
         .prod-img-overlay { 
             position: absolute; 
             inset: 0; 
-            background: linear-gradient(to right, transparent, #0d0d14); 
+            background: linear-gradient(to right, transparent, rgba(13, 13, 20, 0.9)); 
         }
 
         .prod-info-side { 
@@ -1348,7 +1349,7 @@
             .footer-grid { grid-template-columns: 1fr 1fr; }
             .prod-modal-card { grid-template-columns: 1fr; }
             .prod-img-side { height: 250px; }
-            .prod-img-overlay { background: linear-gradient(to bottom, transparent, #0d0d14); }
+            .prod-img-overlay { background: linear-gradient(to bottom, transparent, rgba(13, 13, 20, 0.9)); }
         }
 
         @media (max-width: 768px) {
@@ -1365,7 +1366,7 @@
 </head>
 <body>
 
-    <!-- ARKA PLAN GÖRSELi (DÜZELTİLDİ) -->
+    <!-- ARKA PLAN GÖRSELi -->
     <div class="main-bg-image"></div>
     <div class="ambient-bg"></div>
     
@@ -1401,14 +1402,14 @@
     <div class="page active" id="page-home">
         <div class="home-hero">
             <div class="home-badge reveal">
-                <i class="fas fa-bolt"></i> Elite Detection Bypass
+                <i class="fas fa-bolt"></i> Python Core Platform
             </div>
             <h1 class="home-title reveal reveal-delay-1">
-                <span class="line1">Oyunun Kurallarını</span>
-                <span class="line2">Yeniden Yazın.</span>
+                <span class="line1">Sensi Launcher</span>
+                <span class="line2">Platformu.</span>
             </h1>
             <p class="home-desc reveal reveal-delay-2">
-                SensiSoftware; profesyonel oyuncular için geliştirilmiş, donanım okuması yapmayan ve tamamen tespit edilemez premium yazılım çözümleri sunar.
+                SensiSoftware; Python ile geliştirilen, DLL gerektirmeyen tamamen harici (external) bir launcher platformudur.
             </p>
             <div class="hero-btns reveal reveal-delay-3">
                 <button class="btn btn-primary" style="padding: 16px 40px; font-size: 1.05rem;" onclick="nav('store')">
@@ -1431,8 +1432,8 @@
                 <div class="stat-label">Uptime Süresi</div>
             </div>
             <div class="stat-item reveal reveal-delay-2">
-                <div class="stat-number" data-target="0" data-suffix="" data-prefix="">0</div>
-                <div class="stat-label">Ban Vakası</div>
+                <div class="stat-number" data-target="100" data-suffix="%" data-prefix="">0</div>
+                <div class="stat-label">External Güvenlik</div>
             </div>
             <div class="stat-item reveal reveal-delay-3">
                 <div class="stat-number" data-target="24" data-suffix="/7">0</div>
@@ -1443,18 +1444,18 @@
         <!-- ÖZELLİKLER -->
         <div class="features-section-title reveal">
             <h2>Neden SensiSoftware?</h2>
-            <p>Sektörün en ileri teknolojileriyle korunan altyapımız.</p>
+            <p>Gelişmiş mimari ve DLL gerektirmeyen güvenli altyapı.</p>
         </div>
         <div class="features-grid">
             <div class="feat-card reveal">
                 <div class="feat-icon"><i class="fas fa-shield-halved"></i></div>
-                <h3>Sıfır Ban Riski (Ring0)</h3>
-                <p>Yazılımlarımız Kernel seviyesinde çalışır. Oyunların gelişmiş koruma sistemleri tarafından kesinlikle tespit edilemez.</p>
+                <h3>Harici (External) Mimari</h3>
+                <p>Sistem tamamen dll'siz, external olarak çalışır. Oyun dosyalarına müdahale etmediği için güvenli bir launcher deneyimi sunar.</p>
             </div>
             <div class="feat-card reveal reveal-delay-1">
                 <div class="feat-icon"><i class="fas fa-bolt"></i></div>
-                <h3>Anında Otomatik Teslimat</h3>
-                <p>Ödemeniz onaylandığı saniye, lisans anahtarınız ve indirme bağlantınız sistem tarafından otomatik tanımlanır.</p>
+                <h3>Merkezi Yönetim</h3>
+                <p>Tüm eklentilerinizi ve lisanslarınızı oyun içi bir menü kullanmadan, doğrudan masaüstü arayüzünden kontrol edebilirsiniz.</p>
             </div>
             <div class="feat-card reveal reveal-delay-2">
                 <div class="feat-icon"><i class="fas fa-headset"></i></div>
@@ -1468,13 +1469,13 @@
     <div class="page" id="page-store">
         <div class="store-header reveal">
             <h1 class="store-title">Ürünlerimiz</h1>
-            <p class="store-desc">En üst düzey donanım koruması ve tespit edilemez yazılım mimarisi.</p>
+            <p class="store-desc">Gelişmiş Python altyapısı ve tespit edilemez harici mimari.</p>
         </div>
         <div class="filter-bar reveal">
             <button class="filter-pill active">Tüm Ürünler</button>
             <button class="filter-pill">Valorant</button>
             <button class="filter-pill">CS2</button>
-            <button class="filter-pill">Yazılımlar</button>
+            <button class="filter-pill">Araçlar</button>
         </div>
 
         <!-- YENİ DİNAMİK ÜRÜN KAFESİ -->
@@ -1509,8 +1510,8 @@
                     <div>
                         <label style="display:block; margin-bottom: 10px; font-size: 0.95rem; color: #888;">Hedef Ürün</label>
                         <select id="genProduct" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: #fff; border-radius: 12px; outline:none; font-family: 'Poppins', sans-serif;">
-                            <option value="VAL">Valorant VIP</option>
-                            <option value="CS2">Counter-Strike 2 VIP</option>
+                            <option value="VAL">Valorant External</option>
+                            <option value="CS2">Counter-Strike 2 External</option>
                             <option value="SPOOF">HWID Spoofer</option>
                         </select>
                     </div>
@@ -1543,7 +1544,7 @@
                 </div>
                 
                 <div class="admin-input-group">
-                    <label>Kategori/Alt Başlık (Örn: Aimbot & ESP)</label>
+                    <label>Kategori/Alt Başlık (Örn: External Module)</label>
                     <input type="text" id="newProdSub" class="admin-input" placeholder="Kategori girin">
                 </div>
                 
@@ -1677,7 +1678,7 @@
                     <div class="logo-dot"></div>
                     SENSI<span>SOFTWARE</span>
                 </a>
-                <p>Profesyonel oyuncular için geliştirilmiş, tespit edilemez premium yazılım çözümleri.</p>
+                <p>Güvenilir, harici mimariye dayalı Python tabanlı launcher platformu.</p>
                 <div class="footer-socials">
                     <a href="#"><i class="fab fa-discord"></i></a>
                     <a href="#"><i class="fab fa-telegram"></i></a>
@@ -1687,8 +1688,8 @@
             </div>
             <div class="footer-col">
                 <h4>Ürünler</h4>
-                <a href="#" onclick="nav('store')">Valorant VIP</a>
-                <a href="#" onclick="nav('store')">CS2 VIP</a>
+                <a href="#" onclick="nav('store')">Valorant External</a>
+                <a href="#" onclick="nav('store')">CS2 External</a>
                 <a href="#" onclick="nav('store')">HWID Spoofer</a>
                 <a href="#" onclick="nav('store')">AIO Launcher</a>
             </div>
@@ -1716,25 +1717,25 @@
         // ===== ÜRÜN VERİTABANI VE DİNAMİK YAPI =====
         const defaultProducts = {
             'val': { 
-                title: 'Valorant VIP', 
-                sub: 'Premium Software', 
-                desc: 'Riot Vanguard sistemini ring0 seviyesinde bypass eden, streamproof mimariye sahip özel yapım aimbot ve ESP paketi.', 
+                title: 'Valorant External', 
+                sub: 'Python Core Module', 
+                desc: 'Sensi Launcher üzerinden çalışan, oyun içi menü gerektirmeyen DLL\'siz güvenli harici yapı.', 
                 img: 'valorant.png', 
                 status: 'UNDETECTED', 
                 prices: ['$10', '$50'] 
             },
             'cs2': { 
-                title: 'Counter-Strike 2 VIP', 
+                title: 'Counter-Strike 2 External', 
                 sub: 'External Base', 
-                desc: 'Oyun dosyalarına müdahale etmeden çalışan harici konsol mimarisi. VAC Live sistemine takılmaz.', 
+                desc: 'Oyun dosyalarına müdahale etmeden çalışan tamamen harici Python mimarisi.', 
                 img: 'cs2.png', 
                 status: 'UNDETECTED', 
                 prices: ['$5', '$35'] 
             },
             'spoof': { 
                 title: 'HWID Spoofer Elite', 
-                sub: 'Kernel Driver', 
-                desc: 'Ban yemiş donanım seri numaralarını kalıcı veya geçici olarak değiştirir. Anakart, disk ve MAC temizler.', 
+                sub: 'System Module', 
+                desc: 'Donanım seri numaralarını kalıcı veya geçici olarak güvenli bir şekilde değiştirir.', 
                 img: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000', 
                 status: 'WORKING', 
                 prices: ['$8', '$25'] 
@@ -1742,7 +1743,7 @@
             'launcher': { 
                 title: 'Sensi: AIO Launcher', 
                 sub: 'Python Core', 
-                desc: 'Tüm SensiSoftware araçlarını tek bir arayüzden yönetmenizi sağlayan güvenli masaüstü platformu.', 
+                desc: 'Tüm SensiSoftware eklentilerini tek bir arayüzden yönetmenizi sağlayan merkezi masaüstü platformu.', 
                 img: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=1000', 
                 status: 'ONLINE', 
                 prices: ['$3', '$15'] 
@@ -1954,7 +1955,7 @@
             document.getElementById('pm-title').innerText = p.title;
             document.getElementById('pm-sub').innerText = p.sub;
             document.getElementById('pm-desc').innerText = p.desc;
-            document.getElementById('pm-feats').innerHTML = '<li><i class="fas fa-check"></i> Anında Teslimat</li><li><i class="fas fa-check"></i> Otomatik Güncelleme</li>';
+            document.getElementById('pm-feats').innerHTML = '<li><i class="fas fa-check"></i> Anında Teslimat</li><li><i class="fas fa-check"></i> Harici Çalışma</li>';
             document.getElementById('pm-p1').innerHTML = p.prices[0] + " <span>/24s</span>";
             document.getElementById('pm-p30').innerHTML = p.prices[1] + " <span>/ay</span>";
             document.getElementById('productModal').classList.add('active');
@@ -1976,7 +1977,6 @@
             if (localStorage.getItem('sensiAdmin') === 'true') { 
                 loginSuccess(); 
             }
-            // Loading ekranı silindi, anında açılıyor.
             nav('home');
         };
 

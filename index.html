@@ -4,207 +4,664 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SensiSoftware | Elite Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="SensiSoftware - Profesyonel oyuncular için geliştirilmiş premium yazılım çözümleri.">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-dark: #030305;
             --bg-panel: rgba(10, 10, 15, 0.65);
-            --primary: #8a2be2; 
+            --primary: #8a2be2;
             --primary-glow: rgba(138, 43, 226, 0.4);
-            --accent: #b366ff; 
+            --accent: #b366ff;
             --accent-glow: rgba(179, 102, 255, 0.3);
+            --accent-secondary: #7c3aed;
             --success: #10b981;
             --success-glow: rgba(16, 185, 129, 0.2);
             --text-main: #f8fafc;
             --text-muted: #8b8b9e;
             --border: rgba(255, 255, 255, 0.08);
             --border-hover: rgba(179, 102, 255, 0.3);
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.06);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; min-height: 100vh; scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
+
+        /* --- LOADING EKRANI --- */
+        .loader-screen {
+            position: fixed; inset: 0; z-index: 99999;
+            background: var(--bg-dark);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .loader-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-logo {
+            font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 700;
+            letter-spacing: 2px; color: #fff; margin-bottom: 40px;
+        }
+        .loader-logo span { color: var(--accent); }
+        .loader-bar-track {
+            width: 220px; height: 3px; background: rgba(255,255,255,0.06);
+            border-radius: 10px; overflow: hidden; position: relative;
+        }
+        .loader-bar-fill {
+            width: 0%; height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            animation: loaderFill 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+        @keyframes loaderFill { 0% { width: 0%; } 100% { width: 100%; } }
 
         /* --- PREMIUM ARKA PLAN --- */
-        .ambient-bg { position: fixed; inset: 0; z-index: -2; background: radial-gradient(circle at 50% 0%, #0a0a14 0%, #030305 70%); }
-        .glow-sphere-1 { position: fixed; top: -15%; left: -10%; width: 50vw; height: 50vh; background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 60%); filter: blur(90px); z-index: -1; animation: float 15s infinite alternate ease-in-out; }
-        .glow-sphere-2 { position: fixed; bottom: -15%; right: -10%; width: 40vw; height: 40vh; background: radial-gradient(circle, rgba(179, 102, 255, 0.1) 0%, transparent 60%); filter: blur(90px); z-index: -1; animation: float 12s infinite alternate-reverse ease-in-out; }
+        .ambient-bg { position: fixed; inset: 0; z-index: -2; background: radial-gradient(ellipse at 50% 0%, #0a0a14 0%, #030305 70%); }
+        .glow-sphere-1 {
+            position: fixed; top: -15%; left: -10%; width: 50vw; height: 50vh;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.12) 0%, transparent 60%);
+            filter: blur(100px); z-index: -1; will-change: transform;
+            transition: transform 0.3s ease-out;
+        }
+        .glow-sphere-2 {
+            position: fixed; bottom: -15%; right: -10%; width: 40vw; height: 40vh;
+            background: radial-gradient(circle, rgba(179, 102, 255, 0.08) 0%, transparent 60%);
+            filter: blur(100px); z-index: -1; will-change: transform;
+            transition: transform 0.3s ease-out;
+        }
+        .glow-sphere-3 {
+            position: fixed; top: 40%; left: 50%; width: 30vw; height: 30vh;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 60%);
+            filter: blur(120px); z-index: -1; will-change: transform;
+            transition: transform 0.3s ease-out;
+        }
 
-        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 40px); } }
+        /* --- YILDIZ PARTİKÜLLERİ --- */
+        .stars-canvas {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none;
+        }
 
         /* --- NAVBAR --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 6%; background: rgba(3, 3, 5, 0.85);
-            backdrop-filter: blur(24px); border-bottom: 1px solid var(--border);
+            padding: 18px 6%; background: rgba(3, 3, 5, 0.7);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--glass-border);
             position: sticky; top: 0; z-index: 1000;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
         }
-        .logo { 
-            font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; 
-            letter-spacing: 1.5px; text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px;
+        header.scrolled {
+            background: rgba(3, 3, 5, 0.92);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
+        .logo {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700;
+            letter-spacing: 1.5px; text-decoration: none; color: #fff;
+            display: flex; align-items: center; gap: 10px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover { transform: scale(1.03); }
         .logo span { color: var(--accent); }
+        .logo-dot {
+            width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+            animation: logoPulse 2s infinite;
+            box-shadow: 0 0 10px var(--accent);
+        }
+        @keyframes logoPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
 
         .nav-links { display: flex; gap: 40px; }
-        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: 0.3s; position: relative; }
-        .nav-link:hover, .nav-link.active { color: #fff; }
-        .nav-link.active::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 2px; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+        .nav-link {
+            color: var(--text-muted); text-decoration: none; font-weight: 500;
+            font-size: 0.95rem; cursor: pointer; transition: color 0.3s, transform 0.3s;
+            position: relative; padding: 4px 0;
+        }
+        .nav-link:hover { color: #fff; transform: translateY(-1px); }
+        .nav-link.active { color: #fff; }
+        .nav-link.active::after {
+            content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 2px; background: var(--accent);
+            box-shadow: 0 0 10px var(--accent); border-radius: 2px;
+        }
 
-        .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; border: none; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
-        .btn-primary { background: linear-gradient(135deg, var(--primary), #6a0dad); color: #fff; box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2); }
-        .btn-primary:hover { box-shadow: 0 8px 25px var(--primary-glow); transform: translateY(-2px); }
-        .btn-outline { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: #fff; backdrop-filter: blur(10px); }
-        .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(179, 102, 255, 0.05); }
+        .header-actions { display: flex; gap: 12px; align-items: center; }
+
+        .btn {
+            padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none; display: flex; align-items: center; gap: 8px; font-size: 0.9rem;
+            position: relative; overflow: hidden;
+        }
+        .btn::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .btn:hover::before { opacity: 1; }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #6a0dad);
+            color: #fff; box-shadow: 0 4px 15px rgba(138, 43, 226, 0.25);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 8px 30px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+        .btn-primary:active { transform: translateY(0); }
+        .btn-outline {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            color: #fff; backdrop-filter: blur(10px);
+        }
+        .btn-outline:hover {
+            border-color: var(--accent); color: var(--accent);
+            background: rgba(179, 102, 255, 0.05);
+            box-shadow: 0 0 20px rgba(179, 102, 255, 0.1);
+        }
 
         /* --- SAYFA GEÇİŞLERİ --- */
-        .page { display: none; animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; max-width: 1400px; margin: 0 auto; padding: 50px 6%; }
-        .page.active { display: block; }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.98) translateY(15px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .page {
+            display: none; max-width: 1400px; margin: 0 auto; padding: 50px 6%;
+        }
+        .page.active {
+            display: block;
+            animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes pageEnter {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        /* --- ANA SAYFA --- */
-        .home-hero { text-align: center; padding: 120px 0 80px 0; display: flex; flex-direction: column; align-items: center; }
-        .home-badge { background: rgba(179, 102, 255, 0.05); border: 1px solid rgba(179, 102, 255, 0.2); color: var(--accent); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 30px; letter-spacing: 1.5px; text-transform: uppercase; }
-        .home-title { font-family: 'Space Grotesk', sans-serif; font-size: 5.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; letter-spacing: -2px; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .home-title span { background: linear-gradient(to right, #fff, var(--text-muted)); -webkit-background-clip: text; color: transparent; }
-        .home-desc { color: var(--text-muted); font-size: 1.15rem; max-width: 650px; margin-bottom: 45px; line-height: 1.7; }
+        /* --- SCROLL ANİMASYONLARI --- */
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
 
-        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; text-align: left; }
-        .feat-card { background: rgba(255,255,255,0.01); border: 1px solid var(--border); padding: 40px; border-radius: 24px; transition: 0.4s; backdrop-filter: blur(10px); }
-        .feat-card:hover { transform: translateY(-5px); border-color: var(--primary); background: rgba(138, 43, 226, 0.03); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .feat-icon { width: 55px; height: 55px; background: rgba(138, 43, 226, 0.1); color: var(--accent); display: flex; justify-content: center; align-items: center; font-size: 1.6rem; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(138, 43, 226, 0.2); }
-        .feat-card h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 12px; color: #fff; }
-        .feat-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+        /* --- ANA SAYFA HERO --- */
+        .home-hero {
+            text-align: center; padding: 100px 0 60px 0;
+            display: flex; flex-direction: column; align-items: center;
+            position: relative;
+        }
+        .home-badge {
+            background: rgba(179, 102, 255, 0.06); border: 1px solid rgba(179, 102, 255, 0.15);
+            color: var(--accent); padding: 10px 24px; border-radius: 50px;
+            font-size: 0.8rem; font-weight: 600; margin-bottom: 30px;
+            letter-spacing: 2px; text-transform: uppercase;
+            display: flex; align-items: center; gap: 10px;
+            backdrop-filter: blur(10px);
+            animation: badgeFloat 3s ease-in-out infinite;
+        }
+        @keyframes badgeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-        /* --- MAĞAZA KISMI --- */
+        .home-title {
+            font-family: 'Space Grotesk', sans-serif; font-size: 5rem; font-weight: 800;
+            line-height: 1.08; margin-bottom: 25px; letter-spacing: -2px;
+        }
+        .home-title .line1 { display: block; color: #fff; }
+        .home-title .line2 {
+            display: block;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, var(--primary) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+        @keyframes gradientShift { 0%, 100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+
+        .home-desc {
+            color: var(--text-muted); font-size: 1.1rem; max-width: 620px;
+            margin-bottom: 45px; line-height: 1.8;
+        }
+
+        .hero-btns { display: flex; gap: 16px; align-items: center; }
+
+        /* --- İSTATİSTİK BANDI --- */
+        .stats-band {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+            margin: 80px 0 60px 0; padding: 0;
+        }
+        .stat-item {
+            text-align: center; padding: 35px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden;
+        }
+        .stat-item::before {
+            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 60%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .stat-item:hover { transform: translateY(-5px); border-color: var(--border-hover); }
+        .stat-item:hover::before { opacity: 1; }
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif; font-size: 2.8rem;
+            font-weight: 800; color: #fff; margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .stat-label { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* --- ÖZELLİK KARTLARI --- */
+        .features-section-title {
+            text-align: center; margin-bottom: 50px;
+        }
+        .features-section-title h2 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem;
+            font-weight: 700; margin-bottom: 12px;
+        }
+        .features-section-title p { color: var(--text-muted); font-size: 1rem; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .feat-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            padding: 40px 35px; border-radius: 24px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px); position: relative; overflow: hidden;
+        }
+        .feat-card::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(179, 102, 255, 0.4), transparent);
+            opacity: 0; transition: opacity 0.5s;
+        }
+        .feat-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(138, 43, 226, 0.3);
+            background: rgba(138, 43, 226, 0.04);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(138, 43, 226, 0.08);
+        }
+        .feat-card:hover::after { opacity: 1; }
+        .feat-icon {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.15), rgba(179, 102, 255, 0.05));
+            color: var(--accent); display: flex; justify-content: center; align-items: center;
+            font-size: 1.5rem; border-radius: 16px; margin-bottom: 24px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+        .feat-card:hover .feat-icon {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.3);
+        }
+        .feat-card h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 12px; color: #fff; }
+        .feat-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; }
+
+        /* --- MAĞAZA --- */
         .store-header { text-align: center; margin-bottom: 50px; }
-        .store-title { font-size: 3rem; font-weight: 800; margin-bottom: 10px; font-family: 'Space Grotesk', sans-serif;}
+        .store-title {
+            font-size: 2.8rem; font-weight: 800; margin-bottom: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
         .store-desc { color: var(--text-muted); font-size: 1.05rem; }
 
-        .filter-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; }
-        .filter-pill { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: var(--text-muted); padding: 10px 24px; border-radius: 30px; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px); }
-        .filter-pill:hover, .filter-pill.active { background: #fff; color: #000; border-color: #fff; }
-
-        /* --- PROFESYONEL ÜRÜN KARTLARI --- */
-        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-        .showcase-card { 
-            position: relative; height: 450px; border-radius: 20px; overflow: hidden; 
-            cursor: pointer; background: #0a0a0f; border: 1px solid var(--border); 
-            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+        .filter-bar { display: flex; justify-content: center; gap: 12px; margin-bottom: 50px; flex-wrap: wrap; }
+        .filter-pill {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            color: var(--text-muted); padding: 10px 24px; border-radius: 30px;
+            font-size: 0.88rem; font-weight: 500; cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(5px);
         }
-        
-        .showcase-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7) saturate(1.1); transition: 0.7s; background-color: #111; }
-        
-        /* Canlı Durum Rozeti (UNDETECTED) */
+        .filter-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(179, 102, 255, 0.05); }
+        .filter-pill.active {
+            background: #fff; color: #000; border-color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- ÜRÜN KARTLARI --- */
+        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; }
+        .showcase-card {
+            position: relative; height: 450px; border-radius: 22px; overflow: hidden;
+            cursor: pointer; background: #0a0a0f; border: 1px solid var(--glass-border);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .showcase-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: brightness(0.65) saturate(1.1);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            background-color: #111;
+        }
         .card-status {
             position: absolute; top: 20px; right: 20px;
-            background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25);
             color: var(--success); padding: 6px 14px; border-radius: 30px;
             font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; z-index: 3;
-            display: flex; align-items: center; gap: 8px; backdrop-filter: blur(8px);
+            display: flex; align-items: center; gap: 8px;
+            backdrop-filter: blur(12px);
         }
         .card-status i { font-size: 0.5rem; animation: blinkStatus 2s infinite; }
-        @keyframes blinkStatus { 0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--success); } 50% { opacity: 0.4; box-shadow: none; } }
+        @keyframes blinkStatus { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* Alt Kısım Cam Efekti */
-        .card-overlay { 
+        .card-overlay {
             position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(5,5,8,0.98) 10%, rgba(5,5,8,0.6) 60%, transparent); 
-            display: flex; flex-direction: column; justify-content: flex-end; 
-            padding: 30px 25px; z-index: 2; height: 60%;
+            background: linear-gradient(to top, rgba(5, 5, 8, 0.98) 5%, rgba(5, 5, 8, 0.7) 50%, transparent);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 30px 25px; z-index: 2; height: 55%;
         }
-        
-        .card-bg-text { position: absolute; bottom: 50px; left: 20px; font-size: 3rem; font-weight: 900; color: rgba(255, 255, 255, 0.02); text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; z-index: 1; transition: 0.4s; pointer-events: none; letter-spacing: -1px; }
-        
-        .card-gozat { font-size: 0.7rem; color: var(--accent); font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; text-transform: uppercase; }
-        .card-title { font-size: 1.5rem; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
-        
-        .card-arrow { 
-            position: absolute; bottom: 25px; right: 25px; color: var(--text-muted); 
-            font-size: 1.1rem; transition: 0.4s; z-index: 3; 
-            background: rgba(255,255,255,0.05); width: 45px; height: 45px; 
-            display: flex; align-items: center; justify-content: center; 
-            border-radius: 50%; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05);
+        .card-bg-text {
+            position: absolute; bottom: 50px; left: 20px;
+            font-size: 3rem; font-weight: 900; color: rgba(255, 255, 255, 0.02);
+            text-transform: uppercase; font-family: 'Space Grotesk', sans-serif;
+            z-index: 1; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none; letter-spacing: -1px;
+        }
+        .card-gozat {
+            font-size: 0.7rem; color: var(--accent); font-weight: 700;
+            letter-spacing: 2px; margin-bottom: 6px; text-transform: uppercase;
+        }
+        .card-title { font-size: 1.4rem; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+        .card-arrow {
+            position: absolute; bottom: 25px; right: 25px; color: var(--text-muted);
+            font-size: 1rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 3; background: rgba(255, 255, 255, 0.05);
+            width: 44px; height: 44px; display: flex; align-items: center;
+            justify-content: center; border-radius: 50%;
+            backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        /* Hover Efektleri */
-        .showcase-card:hover { transform: translateY(-10px); border-color: var(--border-hover); box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(179, 102, 255, 0.15); }
-        .showcase-card:hover img { transform: scale(1.05); filter: brightness(0.4) saturate(1.3); }
-        .showcase-card:hover .card-bg-text { color: rgba(179, 102, 255, 0.06); transform: translateY(-8px) scale(1.02); }
-        .showcase-card:hover .card-arrow { background: #fff; color: #000; transform: rotate(-45deg); border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+        .showcase-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--border-hover);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(179, 102, 255, 0.12);
+        }
+        .showcase-card:hover img { transform: scale(1.08); filter: brightness(0.35) saturate(1.3); }
+        .showcase-card:hover .card-bg-text { color: rgba(179, 102, 255, 0.05); transform: translateY(-8px) scale(1.02); }
+        .showcase-card:hover .card-arrow {
+            background: #fff; color: #000; transform: rotate(-45deg);
+            border-color: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
 
         /* --- ÜRÜN MODALI --- */
-        .prod-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: none; justify-content: center; align-items: center; z-index: 3000; animation: fadeIn 0.3s ease; }
-        .prod-modal-overlay.active { display: flex; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .prod-modal-card { 
-            background: #0d0d14; border: 1px solid var(--border-hover); border-radius: 24px; 
-            width: 1050px; max-width: 95%; max-height: 90vh; overflow: hidden; 
-            display: grid; grid-template-columns: 1fr 1.2fr; position: relative;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.9);
+        .prod-modal-overlay {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px); display: none; justify-content: center;
+            align-items: center; z-index: 3000;
         }
-        .close-prod { position: absolute; right: 25px; top: 25px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; transition: 0.3s; backdrop-filter: blur(10px); }
+        .prod-modal-overlay.active {
+            display: flex;
+            animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .prod-modal-card {
+            background: #0d0d14; border: 1px solid var(--border-hover); border-radius: 24px;
+            width: 1050px; max-width: 95%; max-height: 90vh; overflow: hidden;
+            display: grid; grid-template-columns: 1fr 1.2fr; position: relative;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
+            animation: modalSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .close-prod {
+            position: absolute; right: 25px; top: 25px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border);
+            color: #fff; width: 40px; height: 40px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 10; transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
         .close-prod:hover { background: #ef4444; border-color: #ef4444; transform: rotate(90deg); }
 
         .prod-img-side { width: 100%; height: 100%; position: relative; }
         .prod-img-side img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9) saturate(1.1); }
         .prod-img-overlay { position: absolute; inset: 0; background: linear-gradient(to right, transparent, #0d0d14); }
-        
+
         .prod-info-side { padding: 50px 40px; overflow-y: auto; display: flex; flex-direction: column; }
-        .prod-info-side h2 { font-size: 2.5rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif; margin-bottom: 5px; line-height: 1.1; }
-        .prod-info-side .sub { color: var(--accent); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px; display: inline-block; padding: 5px 12px; background: rgba(179, 102, 255, 0.1); border-radius: 8px; }
-        .prod-info-side p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 30px; }
-        
-        .prod-feats { list-style: none; margin-bottom: 40px; background: rgba(255,255,255,0.02); padding: 25px; border-radius: 16px; border: 1px solid var(--border); }
-        .prod-feats li { display: flex; align-items: center; gap: 12px; color: #e2e8f0; font-size: 0.95rem; margin-bottom: 15px; }
+        .prod-info-side h2 {
+            font-size: 2.3rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 8px; line-height: 1.1;
+        }
+        .prod-info-side .sub {
+            color: var(--accent); font-weight: 600; font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px;
+            display: inline-block; padding: 5px 14px;
+            background: rgba(179, 102, 255, 0.1); border-radius: 8px;
+        }
+        .prod-info-side p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 30px; }
+
+        .prod-feats {
+            list-style: none; margin-bottom: 35px;
+            background: var(--glass-bg); padding: 24px;
+            border-radius: 16px; border: 1px solid var(--glass-border);
+        }
+        .prod-feats li {
+            display: flex; align-items: center; gap: 12px;
+            color: #e2e8f0; font-size: 0.93rem; margin-bottom: 14px;
+        }
         .prod-feats li:last-child { margin-bottom: 0; }
-        .prod-feats li i { color: var(--success); font-size: 1.1rem; }
+        .prod-feats li i { color: var(--success); font-size: 1rem; }
 
-        .prod-pricing { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: auto; }
-        .p-tier { background: rgba(0,0,0,0.4); border: 1px solid var(--border); padding: 20px 25px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; cursor: pointer; }
-        .p-tier:hover { border-color: var(--primary); background: rgba(138, 43, 226, 0.05); transform: translateX(5px); }
+        .prod-pricing { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: auto; }
+        .p-tier {
+            background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border);
+            padding: 20px 25px; border-radius: 16px;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer;
+        }
+        .p-tier:hover {
+            border-color: var(--primary); background: rgba(138, 43, 226, 0.06);
+            transform: translateX(5px);
+        }
         .p-tier-left { display: flex; flex-direction: column; }
-        .p-tier-name { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .p-tier-price { font-size: 1.8rem; font-weight: 800; color: #fff; }
-        .p-tier-price span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+        .p-tier-name { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .p-tier-price { font-size: 1.7rem; font-weight: 800; color: #fff; }
+        .p-tier-price span { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; }
 
-        /* --- GİRİŞ YAP & CANLI DESTEK & ADMIN (KORUNDU) --- */
-        .auth-modal { background: rgba(10, 10, 15, 0.95); border: 1px solid var(--border-hover); padding: 50px 40px; border-radius: 24px; width: 420px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.9); }
+        /* --- GİRİŞ YAP MODAL --- */
+        .auth-modal {
+            background: rgba(10, 10, 15, 0.95); border: 1px solid var(--border-hover);
+            padding: 50px 40px; border-radius: 24px; width: 420px; position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+            animation: modalSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            backdrop-filter: blur(20px);
+        }
         .auth-header { text-align: center; margin-bottom: 35px; }
-        .auth-icon { width: 65px; height: 65px; background: rgba(138, 43, 226, 0.1); color: var(--primary); border-radius: 18px; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; margin: 0 auto 20px auto; border: 1px solid rgba(138, 43, 226, 0.3); }
+        .auth-icon {
+            width: 65px; height: 65px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.15), rgba(179, 102, 255, 0.05));
+            color: var(--primary); border-radius: 18px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.8rem; margin: 0 auto 20px auto;
+            border: 1px solid rgba(138, 43, 226, 0.25);
+        }
         .auth-header h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
         .input-group { margin-bottom: 20px; position: relative; }
-        .input-group i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
-        .input-group input { width: 100%; padding: 16px 16px 16px 50px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); color: #fff; border-radius: 12px; font-size: 0.95rem; transition: 0.3s; outline: none; }
-        .input-group input:focus { border-color: var(--primary); background: rgba(0,0,0,0.8); box-shadow: 0 0 20px rgba(138, 43, 226, 0.2); }
+        .input-group i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); transition: color 0.3s; }
+        .input-group input {
+            width: 100%; padding: 16px 16px 16px 50px;
+            background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border);
+            color: #fff; border-radius: 12px; font-size: 0.95rem;
+            transition: all 0.3s; outline: none;
+        }
+        .input-group input:focus {
+            border-color: var(--primary); background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.15);
+        }
+        .input-group:focus-within i { color: var(--accent); }
+
         .remember-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
         .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; user-select: none; }
         .checkbox-label input { accent-color: var(--primary); width: 18px; height: 18px; cursor: pointer; }
-        #loginError { color: #ff4757; font-size: 0.85rem; display: none; margin-bottom: 20px; text-align: center; background: rgba(255, 71, 87, 0.1); padding: 12px; border-radius: 10px; border: 1px solid rgba(255, 71, 87, 0.2); }
-        .chat-widget { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--primary), #6a0dad); width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 1.6rem; cursor: pointer; box-shadow: 0 10px 30px rgba(138, 43, 226, 0.5); z-index: 4000; transition: 0.3s; border: 2px solid rgba(255,255,255,0.1); }
-        .chat-widget:hover { transform: scale(1.1) translateY(-5px); }
-        .chat-window { position: fixed; bottom: 110px; right: 30px; width: 340px; background: rgba(13, 13, 20, 0.95); border: 1px solid var(--border-hover); border-radius: 20px; backdrop-filter: blur(25px); z-index: 4000; transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
+        #loginError {
+            color: #ff4757; font-size: 0.85rem; display: none; margin-bottom: 20px;
+            text-align: center; background: rgba(255, 71, 87, 0.08);
+            padding: 12px; border-radius: 10px; border: 1px solid rgba(255, 71, 87, 0.15);
+        }
+
+        /* --- CANLI DESTEK --- */
+        .chat-widget {
+            position: fixed; bottom: 30px; right: 30px;
+            background: linear-gradient(135deg, var(--primary), #6a0dad);
+            width: 62px; height: 62px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: #fff; font-size: 1.5rem; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
+            z-index: 4000; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .chat-widget:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 40px rgba(138, 43, 226, 0.5); }
+        .chat-widget::before {
+            content: ''; position: absolute; inset: -4px;
+            border-radius: 50%; border: 2px solid var(--accent);
+            animation: chatRing 2s ease-in-out infinite;
+            opacity: 0;
+        }
+        @keyframes chatRing { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.4); opacity: 0; } }
+
+        .chat-window {
+            position: fixed; bottom: 110px; right: 30px; width: 340px;
+            background: rgba(13, 13, 20, 0.95); border: 1px solid var(--border-hover);
+            border-radius: 20px; backdrop-filter: blur(25px); z-index: 4000;
+            transform: translateY(20px) scale(0.95); opacity: 0;
+            pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+        }
         .chat-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
-        .chat-header { background: rgba(0,0,0,0.4); padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 1rem; }
-        .chat-header i { cursor: pointer; color: var(--text-muted); transition: 0.3s; font-size: 1.2rem; }
+        .chat-header {
+            background: rgba(0, 0, 0, 0.4); padding: 18px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--glass-border); font-weight: 600; font-size: 0.95rem;
+        }
+        .chat-header i { cursor: pointer; color: var(--text-muted); transition: 0.3s; font-size: 1.1rem; }
         .chat-header i:hover { color: #fff; }
         .chat-body { padding: 25px 20px; display: flex; flex-direction: column; gap: 15px; }
-        .chat-msg { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 16px; border-bottom-left-radius: 4px; font-size: 0.9rem; color: #e2e8f0; line-height: 1.6; border: 1px solid rgba(255,255,255,0.05); }
+        .chat-msg {
+            background: var(--glass-bg); padding: 16px; border-radius: 16px;
+            border-bottom-left-radius: 4px; font-size: 0.88rem; color: #e2e8f0;
+            line-height: 1.7; border: 1px solid rgba(255, 255, 255, 0.04);
+        }
         .chat-msg .time { display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; text-align: right; }
+
+        /* --- ADMIN PANEL --- */
         .admin-layout { display: grid; grid-template-columns: 250px 1fr; gap: 30px; }
-        .admin-sidebar button { width: 100%; text-align: left; background: transparent; border: none; color: var(--text-muted); padding: 15px 20px; border-radius: 12px; cursor: pointer; font-size: 1rem; margin-bottom: 8px; transition: 0.3s; font-weight: 600; display: flex; align-items: center; gap: 10px; }
-        .admin-sidebar button.active, .admin-sidebar button:hover { background: rgba(179, 102, 255, 0.1); color: var(--accent); border: 1px solid rgba(179, 102, 255, 0.2); }
-        .key-box { background: rgba(0,0,0,0.6); border: 1px dashed var(--accent); padding: 20px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; margin-top: 25px; max-height: 200px; overflow-y: auto; white-space: pre-wrap; font-size: 0.95rem; color: #fff; }
+        .admin-sidebar button {
+            width: 100%; text-align: left; background: transparent; border: none;
+            color: var(--text-muted); padding: 15px 20px; border-radius: 12px;
+            cursor: pointer; font-size: 0.95rem; margin-bottom: 8px;
+            transition: all 0.3s; font-weight: 600;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .admin-sidebar button.active, .admin-sidebar button:hover {
+            background: rgba(179, 102, 255, 0.08); color: var(--accent);
+            border: 1px solid rgba(179, 102, 255, 0.15);
+        }
+        .key-box {
+            background: rgba(0, 0, 0, 0.5); border: 1px dashed rgba(179, 102, 255, 0.3);
+            padding: 20px; border-radius: 14px;
+            font-family: 'JetBrains Mono', monospace; margin-top: 25px;
+            max-height: 200px; overflow-y: auto; white-space: pre-wrap;
+            font-size: 0.9rem; color: var(--accent);
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            border-top: 1px solid var(--glass-border);
+            background: rgba(3, 3, 5, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 60px 6% 30px 6%;
+            margin-top: 80px;
+        }
+        .footer-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px; margin-bottom: 50px;
+        }
+        .footer-brand .logo { margin-bottom: 16px; font-size: 1.3rem; }
+        .footer-brand p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; max-width: 300px; }
+        .footer-col h4 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem;
+            font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+            color: #fff; margin-bottom: 20px;
+        }
+        .footer-col a {
+            display: block; color: var(--text-muted); text-decoration: none;
+            font-size: 0.88rem; margin-bottom: 12px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .footer-col a:hover { color: var(--accent); transform: translateX(4px); }
+        .footer-socials { display: flex; gap: 12px; margin-top: 20px; }
+        .footer-socials a {
+            width: 40px; height: 40px; border-radius: 12px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); font-size: 1rem;
+            transition: all 0.3s; margin-bottom: 0;
+        }
+        .footer-socials a:hover {
+            color: var(--accent); border-color: var(--accent);
+            background: rgba(179, 102, 255, 0.08);
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 25px; border-top: 1px solid var(--glass-border);
+        }
+        .footer-bottom p { color: var(--text-muted); font-size: 0.82rem; }
+
+        /* --- CUSTOM SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(179, 102, 255, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(179, 102, 255, 0.4); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .home-title { font-size: 3.5rem; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-band { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .prod-modal-card { grid-template-columns: 1fr; }
+            .prod-img-side { height: 250px; }
+            .prod-img-overlay { background: linear-gradient(to bottom, transparent, #0d0d14); }
+        }
+        @media (max-width: 768px) {
+            .home-title { font-size: 2.8rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .stats-band { grid-template-columns: 1fr 1fr; gap: 16px; }
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            .admin-layout { grid-template-columns: 1fr; }
+            .showcase-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="ambient-bg"></div>
-    <div class="glow-sphere-1"></div>
-    <div class="glow-sphere-2"></div>
+    <!-- LOADING EKRANI -->
+    <div class="loader-screen" id="loaderScreen">
+        <div class="loader-logo">SENSI<span>SOFTWARE</span></div>
+        <div class="loader-bar-track">
+            <div class="loader-bar-fill"></div>
+        </div>
+    </div>
 
-    <header>
-        <a href="#" class="logo" onclick="nav('home')">SENSI<span>SOFTWARE</span></a>
+    <!-- ARKA PLAN -->
+    <div class="ambient-bg"></div>
+    <div class="glow-sphere-1" id="sphere1"></div>
+    <div class="glow-sphere-2" id="sphere2"></div>
+    <div class="glow-sphere-3" id="sphere3"></div>
+    <canvas class="stars-canvas" id="starsCanvas"></canvas>
+
+    <!-- NAVBAR -->
+    <header id="mainHeader">
+        <a href="#" class="logo" onclick="nav('home')">
+            <div class="logo-dot"></div>
+            SENSI<span>SOFTWARE</span>
+        </a>
         <div class="nav-links">
             <a class="nav-link active" id="nav-home" onclick="nav('home')">Ana Sayfa</a>
             <a class="nav-link" id="nav-store" onclick="nav('store')">Mağaza</a>
@@ -212,42 +669,76 @@
         <div class="header-actions">
             <button class="btn btn-outline" id="loginBtnTrigger" onclick="openAuthModal()"><i class="fas fa-sign-in-alt"></i> Giriş Yap</button>
             <button class="btn btn-primary" id="adminPanelBtn" style="display: none;" onclick="nav('admin')"><i class="fas fa-shield-halved"></i> Yönetim Paneli</button>
-            <button class="btn btn-outline" id="logoutBtn" style="display: none;" onclick="logout()">Çıkış</button>
+            <button class="btn btn-outline" id="logoutBtn" style="display: none;" onclick="logout()"><i class="fas fa-right-from-bracket"></i> Çıkış</button>
         </div>
     </header>
 
+    <!-- ANA SAYFA -->
     <div class="page active" id="page-home">
         <div class="home-hero">
-            <div class="home-badge"><i class="fas fa-bolt"></i> Elite Detection Bypass</div>
-            <h1 class="home-title">Oyunun Kurallarını<br><span>Yeniden Yazın.</span></h1>
-            <p class="home-desc">SensiSoftware; profesyonel oyuncular için geliştirilmiş, donanım okuması yapmayan ve tamamen tespit edilemez premium yazılım çözümleri sunar.</p>
-            <button class="btn btn-primary" style="padding: 16px 40px; font-size: 1.1rem; border-radius: 12px;" onclick="nav('store')">Mağazayı Keşfet</button>
+            <div class="home-badge reveal"><i class="fas fa-bolt"></i> Elite Detection Bypass</div>
+            <h1 class="home-title reveal reveal-delay-1">
+                <span class="line1">Oyunun Kurallarını</span>
+                <span class="line2">Yeniden Yazın.</span>
+            </h1>
+            <p class="home-desc reveal reveal-delay-2">SensiSoftware; profesyonel oyuncular için geliştirilmiş, donanım okuması yapmayan ve tamamen tespit edilemez premium yazılım çözümleri sunar.</p>
+            <div class="hero-btns reveal reveal-delay-3">
+                <button class="btn btn-primary" style="padding: 16px 40px; font-size: 1.05rem;" onclick="nav('store')"><i class="fas fa-rocket"></i> Mağazayı Keşfet</button>
+                <button class="btn btn-outline" style="padding: 16px 32px; font-size: 1.05rem;" onclick="toggleChat()"><i class="fas fa-headset"></i> Destek</button>
+            </div>
+        </div>
+
+        <!-- İSTATİSTİK BANDI -->
+        <div class="stats-band">
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="15000">0</div>
+                <div class="stat-label">Aktif Kullanıcı</div>
+            </div>
+            <div class="stat-item reveal reveal-delay-1">
+                <div class="stat-number" data-target="99.9" data-suffix="%" data-decimal="1">0</div>
+                <div class="stat-label">Uptime Süresi</div>
+            </div>
+            <div class="stat-item reveal reveal-delay-2">
+                <div class="stat-number" data-target="0" data-suffix="" data-prefix="">0</div>
+                <div class="stat-label">Ban Vakası</div>
+            </div>
+            <div class="stat-item reveal reveal-delay-3">
+                <div class="stat-number" data-target="24" data-suffix="/7">0</div>
+                <div class="stat-label">Canlı Destek</div>
+            </div>
+        </div>
+
+        <!-- ÖZELLİKLER -->
+        <div class="features-section-title reveal">
+            <h2>Neden SensiSoftware?</h2>
+            <p>Sektörün en ileri teknolojileriyle korunan altyapımız.</p>
         </div>
         <div class="features-grid">
-            <div class="feat-card">
+            <div class="feat-card reveal">
                 <div class="feat-icon"><i class="fas fa-shield-halved"></i></div>
                 <h3>Sıfır Ban Riski (Ring0)</h3>
                 <p>Yazılımlarımız Kernel seviyesinde çalışır. Oyunların gelişmiş koruma sistemleri tarafından kesinlikle tespit edilemez.</p>
             </div>
-            <div class="feat-card">
+            <div class="feat-card reveal reveal-delay-1">
                 <div class="feat-icon"><i class="fas fa-bolt"></i></div>
                 <h3>Anında Otomatik Teslimat</h3>
                 <p>Ödemeniz onaylandığı saniye, lisans anahtarınız ve indirme bağlantınız sistem tarafından otomatik tanımlanır.</p>
             </div>
-            <div class="feat-card">
+            <div class="feat-card reveal reveal-delay-2">
                 <div class="feat-icon"><i class="fas fa-headset"></i></div>
                 <h3>7/24 Teknik Destek</h3>
-                <p>Karşılaştığınız en ufak sorunda bile, uzman ekibimiz canlı destek üzerinden anında müdahale eder ve çözüm sağlar.</p>
+                <p>Karşılaştığınız en ufak sorunda bile, uzman ekibimiz canlı destek üzerinden anında müdahale eder.</p>
             </div>
         </div>
     </div>
 
+    <!-- MAĞAZA -->
     <div class="page" id="page-store">
-        <div class="store-header">
+        <div class="store-header reveal">
             <h1 class="store-title">Ürünlerimiz</h1>
             <p class="store-desc">En üst düzey donanım koruması ve tespit edilemez yazılım mimarisi.</p>
         </div>
-        <div class="filter-bar">
+        <div class="filter-bar reveal">
             <button class="filter-pill active">Tüm Ürünler</button>
             <button class="filter-pill">Valorant</button>
             <button class="filter-pill">CS2</button>
@@ -255,8 +746,7 @@
         </div>
 
         <div class="showcase-grid">
-            <!-- VALORANT VIP (PNG) -->
-            <div class="showcase-card" onclick="openProductModal('val')">
+            <div class="showcase-card reveal" onclick="openProductModal('val')">
                 <div class="card-status"><i class="fas fa-circle"></i> UNDETECTED</div>
                 <img src="valorant.png" alt="Valorant VIP">
                 <div class="card-bg-text">VALORANT</div>
@@ -267,8 +757,7 @@
                 <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
 
-            <!-- CS2 VIP (PNG GÜNCELLENDİ) -->
-            <div class="showcase-card" onclick="openProductModal('cs2')">
+            <div class="showcase-card reveal reveal-delay-1" onclick="openProductModal('cs2')">
                 <div class="card-status"><i class="fas fa-circle"></i> UNDETECTED</div>
                 <img src="cs2.png" alt="CS2 VIP">
                 <div class="card-bg-text">C-STRIKE</div>
@@ -279,8 +768,7 @@
                 <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
 
-            <!-- SPOOFER -->
-            <div class="showcase-card" onclick="openProductModal('spoof')">
+            <div class="showcase-card reveal reveal-delay-2" onclick="openProductModal('spoof')">
                 <div class="card-status"><i class="fas fa-circle"></i> WORKING</div>
                 <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000" alt="Spoofer">
                 <div class="card-bg-text">SPOOFER</div>
@@ -291,8 +779,7 @@
                 <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
 
-            <!-- LAUNCHER -->
-            <div class="showcase-card" onclick="openProductModal('launcher')">
+            <div class="showcase-card reveal reveal-delay-3" onclick="openProductModal('launcher')">
                 <div class="card-status" style="color: var(--accent); border-color: var(--accent); background: rgba(179,102,255,0.1);"><i class="fas fa-cloud" style="animation: none;"></i> ONLINE</div>
                 <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=1000" alt="Launcher">
                 <div class="card-bg-text">LAUNCHER</div>
@@ -305,7 +792,7 @@
         </div>
     </div>
 
-    <!-- MODAL -->
+    <!-- ÜRÜN MODALI -->
     <div class="prod-modal-overlay" id="productModal">
         <div class="prod-modal-card">
             <button class="close-prod" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
@@ -338,7 +825,7 @@
         </div>
     </div>
 
-    <!-- GİRİŞ -->
+    <!-- GİRİŞ MODALI -->
     <div class="prod-modal-overlay" id="authModal" style="z-index: 4000;">
         <div class="auth-modal">
             <button class="close-prod" style="top: 25px; right: 25px;" onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
@@ -386,12 +873,12 @@
                 <button><i class="fas fa-users"></i> Müşteriler</button>
                 <button><i class="fas fa-cog"></i> Ayarlar</button>
             </div>
-            <div class="admin-content" style="background: var(--bg-panel); padding: 40px; border-radius: 24px; border: 1px solid var(--border); backdrop-filter: blur(10px);">
+            <div class="admin-content" style="background: var(--bg-panel); padding: 40px; border-radius: 24px; border: 1px solid var(--glass-border); backdrop-filter: blur(10px);">
                 <h2 style="margin-bottom: 25px; font-size: 1.6rem;">Lisans Key Havuzu</h2>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px;">
                     <div>
                         <label style="display:block; margin-bottom: 10px; font-size: 0.95rem; color: #888;">Hedef Ürün</label>
-                        <select id="genProduct" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: #fff; border-radius: 12px; outline:none;">
+                        <select id="genProduct" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: #fff; border-radius: 12px; outline:none; font-family: 'Poppins', sans-serif;">
                             <option value="VAL">Valorant VIP</option>
                             <option value="CS2">Counter-Strike 2 VIP</option>
                             <option value="SPOOF">HWID Spoofer</option>
@@ -399,7 +886,7 @@
                     </div>
                     <div>
                         <label style="display:block; margin-bottom: 10px; font-size: 0.95rem; color: #888;">Lisans Süresi</label>
-                        <select id="genTime" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: #fff; border-radius: 12px; outline:none;">
+                        <select id="genTime" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: #fff; border-radius: 12px; outline:none; font-family: 'Poppins', sans-serif;">
                             <option value="1D">1 Günlük</option>
                             <option value="30D">30 Günlük</option>
                             <option value="LT">Sınırsız (Lifetime)</option>
@@ -408,7 +895,7 @@
                 </div>
                 <div style="margin-bottom: 25px;">
                     <label style="display:block; margin-bottom: 10px; font-size: 0.95rem; color: #888;">Üretilecek Adet</label>
-                    <input type="number" id="genAmount" value="5" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: #fff; border-radius: 12px; outline:none;">
+                    <input type="number" id="genAmount" value="5" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: #fff; border-radius: 12px; outline:none; font-family: 'Poppins', sans-serif;">
                 </div>
                 <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 15px;" onclick="generateKeys()"><i class="fas fa-cogs"></i> Lisansları Bas</button>
                 <div class="key-box" id="keyOutput">...</div>
@@ -416,8 +903,51 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
+    <footer class="site-footer" id="siteFooter">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo" onclick="nav('home')">
+                    <div class="logo-dot"></div>
+                    SENSI<span>SOFTWARE</span>
+                </a>
+                <p>Profesyonel oyuncular için geliştirilmiş, tespit edilemez premium yazılım çözümleri.</p>
+                <div class="footer-socials">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Ürünler</h4>
+                <a href="#" onclick="nav('store')">Valorant VIP</a>
+                <a href="#" onclick="nav('store')">CS2 VIP</a>
+                <a href="#" onclick="nav('store')">HWID Spoofer</a>
+                <a href="#" onclick="nav('store')">AIO Launcher</a>
+            </div>
+            <div class="footer-col">
+                <h4>Destek</h4>
+                <a href="#">SSS</a>
+                <a href="#">Kurulum Rehberi</a>
+                <a href="#">Durum Sayfası</a>
+                <a href="#" onclick="toggleChat()">Canlı Destek</a>
+            </div>
+            <div class="footer-col">
+                <h4>Yasal</h4>
+                <a href="#">Kullanım Koşulları</a>
+                <a href="#">Gizlilik Politikası</a>
+                <a href="#">İade Politikası</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SensiSoftware. Tüm hakları saklıdır.</p>
+            <p style="color: rgba(139, 139, 158, 0.6); font-size: 0.78rem;">Made with <i class="fas fa-heart" style="color: var(--primary); font-size: 0.7rem;"></i> by Sensi Team</p>
+        </div>
+    </footer>
+
     <script>
-        // CS2 VERİTABANI CS2.PNG VE VIP OLARAK GÜNCELLENDİ
+        // ===== ÜRÜN VERİTABANI =====
         const productDB = {
             'val': { title: 'Valorant VIP', sub: 'Premium Software', desc: 'Riot Vanguard sistemini ring0 seviyesinde bypass eden, streamproof mimariye sahip özel yapım aimbot ve ESP paketi.', feats: ['<li><i class="fas fa-check"></i> Kusursuz V-Sync Aimbot</li>', '<li><i class="fas fa-check"></i> OBS/Discord Yayında Gizlilik</li>', '<li><i class="fas fa-check"></i> Dahili HWID Koruyucu</li>'], img: 'valorant.png', prices: ['$10', '$50'] },
             'cs2': { title: 'Counter-Strike 2 VIP', sub: 'External Base', desc: 'Oyun dosyalarına müdahale etmeden çalışan harici konsol mimarisi. VAC Live sistemine takılmaz.', feats: ['<li><i class="fas fa-check"></i> Dinamik Offset Güncellemesi</li>', '<li><i class="fas fa-check"></i> Radar ve Bone ESP</li>', '<li><i class="fas fa-check"></i> Sıfır FPS Düşüşü</li>'], img: 'cs2.png', prices: ['$5', '$35'] },
@@ -425,14 +955,135 @@
             'launcher': { title: 'Sensi: AIO Launcher', sub: 'Python Core', desc: 'Tüm SensiSoftware araçlarını tek bir arayüzden yönetmenizi sağlayan güvenli masaüstü platformu.', feats: ['<li><i class="fas fa-check"></i> Otomatik Yazılım Güncelleme</li>', '<li><i class="fas fa-check"></i> Cloud Config Sistemi</li>', '<li><i class="fas fa-check"></i> Güvenli Login Entegrasyonu</li>'], img: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=1000', prices: ['$3', '$15'] }
         };
 
+        // ===== LOADING EKRANI =====
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loaderScreen').classList.add('hidden');
+            }, 2200);
+        });
+
+        // ===== YILDIZ PARTİKÜLLERİ =====
+        const canvas = document.getElementById('starsCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function initStars() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stars = [];
+            const count = Math.floor((canvas.width * canvas.height) / 8000);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.2 + 0.3,
+                    opacity: Math.random() * 0.5 + 0.1,
+                    speed: Math.random() * 0.3 + 0.05,
+                    phase: Math.random() * Math.PI * 2
+                });
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const time = Date.now() * 0.001;
+            stars.forEach(s => {
+                const twinkle = Math.sin(time * s.speed + s.phase) * 0.3 + 0.7;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(179, 166, 255, ${s.opacity * twinkle})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(drawStars);
+        }
+
+        initStars();
+        drawStars();
+        window.addEventListener('resize', initStars);
+
+        // ===== FARE TAKİPLİ PARALLAX =====
+        document.addEventListener('mousemove', (e) => {
+            const mx = (e.clientX / window.innerWidth - 0.5) * 2;
+            const my = (e.clientY / window.innerHeight - 0.5) * 2;
+
+            document.getElementById('sphere1').style.transform = `translate(${mx * 30}px, ${my * 20}px)`;
+            document.getElementById('sphere2').style.transform = `translate(${mx * -20}px, ${my * -25}px)`;
+            document.getElementById('sphere3').style.transform = `translate(${mx * 15}px, ${my * -15}px)`;
+        });
+
+        // ===== SCROLL: NAVBAR & REVEAL ANİMASYONLARI =====
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 30);
+        });
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Sayaç animasyonu
+                    if (entry.target.classList.contains('stat-item')) {
+                        animateCounter(entry.target.querySelector('.stat-number'));
+                    }
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        function observeReveals() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.classList.remove('visible');
+                revealObserver.observe(el);
+            });
+        }
+        observeReveals();
+
+        // ===== SAYI SAYACI ANİMASYONU =====
+        function animateCounter(el) {
+            if (!el || el.dataset.animated) return;
+            el.dataset.animated = 'true';
+
+            const target = parseFloat(el.dataset.target);
+            const suffix = el.dataset.suffix || '';
+            const prefix = el.dataset.prefix || '';
+            const decimal = parseInt(el.dataset.decimal) || 0;
+            const duration = 2000;
+            const start = performance.now();
+
+            function update(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+                const current = target * eased;
+
+                if (decimal > 0) {
+                    el.textContent = prefix + current.toFixed(decimal) + suffix;
+                } else {
+                    el.textContent = prefix + Math.floor(current).toLocaleString('tr-TR') + suffix;
+                }
+
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+
+        // ===== NAVIGASYON =====
         function nav(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            document.getElementById('page-' + pageId).classList.add('active');
-            if(document.getElementById('nav-' + pageId)) document.getElementById('nav-' + pageId).classList.add('active');
-            window.scrollTo(0,0);
+
+            const page = document.getElementById('page-' + pageId);
+            if (page) page.classList.add('active');
+
+            const link = document.getElementById('nav-' + pageId);
+            if (link) link.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Sayfa değiştiğinde reveal'ları tekrar gözlemle
+            setTimeout(observeReveals, 100);
         }
 
+        // ===== ÜRÜN MODALI =====
         function openProductModal(id) {
             const p = productDB[id];
             document.getElementById('pm-img').src = p.img;
@@ -443,22 +1094,50 @@
             document.getElementById('pm-p1').innerHTML = p.prices[0] + " <span>/24s</span>";
             document.getElementById('pm-p30').innerHTML = p.prices[1] + " <span>/ay</span>";
             document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-        function closeProductModal() { document.getElementById('productModal').classList.remove('active'); }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ===== CANLI DESTEK =====
         function toggleChat() { document.getElementById('chatWindow').classList.toggle('open'); }
 
-        window.onload = () => { if (localStorage.getItem('sensiAdmin') === 'true') { loginSuccess(); } };
-        function openAuthModal() { document.getElementById('authModal').classList.add('active'); }
-        function closeAuthModal() { document.getElementById('authModal').classList.remove('active'); document.getElementById('loginError').style.display = 'none'; }
+        // ===== GİRİŞ SİSTEMİ =====
+        window.onload = () => {
+            if (localStorage.getItem('sensiAdmin') === 'true') { loginSuccess(); }
+            setTimeout(() => {
+                document.getElementById('loaderScreen').classList.add('hidden');
+            }, 2200);
+        };
+
+        function openAuthModal() {
+            document.getElementById('authModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+            document.getElementById('loginError').style.display = 'none';
+            document.body.style.overflow = '';
+        }
 
         function checkLogin() {
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
             const remember = document.getElementById('rememberMe').checked;
-            if(u === 'omer13ds' && p === 'oyaali12') {
-                if(remember) { localStorage.setItem('sensiAdmin', 'true'); } 
+            if (u === 'omer13ds' && p === 'oyaali12') {
+                if (remember) { localStorage.setItem('sensiAdmin', 'true'); }
                 loginSuccess();
-            } else { document.getElementById('loginError').style.display = 'block'; }
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+                // Shake animasyonu
+                const modal = document.querySelector('.auth-modal');
+                modal.style.animation = 'none';
+                setTimeout(() => { modal.style.animation = 'shake 0.4s ease'; }, 10);
+            }
         }
 
         function loginSuccess() {
@@ -466,12 +1145,13 @@
             document.getElementById('loginBtnTrigger').style.display = 'none';
             document.getElementById('adminPanelBtn').style.display = 'flex';
             document.getElementById('logoutBtn').style.display = 'flex';
-            document.getElementById('username').value = ''; document.getElementById('password').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
             nav('admin');
         }
 
         function logout() {
-            localStorage.removeItem('sensiAdmin'); 
+            localStorage.removeItem('sensiAdmin');
             document.getElementById('loginBtnTrigger').style.display = 'flex';
             document.getElementById('adminPanelBtn').style.display = 'none';
             document.getElementById('logoutBtn').style.display = 'none';
@@ -483,9 +1163,44 @@
             const prod = document.getElementById('genProduct').value;
             const time = document.getElementById('genTime').value;
             let res = "";
-            for(let i=0; i<amount; i++) { res += `SENSI-${prod}-${time}-${Math.random().toString(36).substring(2,8).toUpperCase()}\n`; }
+            for (let i = 0; i < amount; i++) {
+                res += `SENSI-${prod}-${time}-${Math.random().toString(36).substring(2, 8).toUpperCase()}\n`;
+            }
             document.getElementById('keyOutput').innerText = res;
         }
+
+        // ===== FİLTRE PILLERI =====
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+            });
+        });
+
+        // ===== MODAL DIŞINA TIKLA KAPAT =====
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('productModal')) closeProductModal();
+        });
+        document.getElementById('authModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('authModal')) closeAuthModal();
+        });
+
+        // ===== ESC TUŞU İLE KAPAT =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeProductModal();
+                closeAuthModal();
+            }
+        });
     </script>
+
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            50% { transform: translateX(8px); }
+            75% { transform: translateX(-4px); }
+        }
+    </style>
 </body>
 </html>

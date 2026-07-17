@@ -10,14 +10,14 @@
         :root {
             --bg-dark: #030305;
             --bg-panel: rgba(10, 10, 15, 0.65);
-            --primary: #4f46e5;
-            --primary-glow: rgba(79, 70, 229, 0.4);
-            --accent: #00d2ff;
-            --accent-glow: rgba(0, 210, 255, 0.3);
+            --primary: #8a2be2; /* Temaya uygun mor bir primary renk */
+            --primary-glow: rgba(138, 43, 226, 0.4);
+            --accent: #b366ff; /* Logondaki açık mor tonlarına uyumlu */
+            --accent-glow: rgba(179, 102, 255, 0.3);
             --text-main: #f8fafc;
             --text-muted: #8b8b9e;
             --border: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(255, 255, 255, 0.2);
+            --border-hover: rgba(179, 102, 255, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -25,8 +25,8 @@
 
         /* --- PREMIUM ARKA PLAN VE IŞIK EFEKTLERİ --- */
         .ambient-bg { position: fixed; inset: 0; z-index: -2; background: radial-gradient(circle at 50% 0%, #0a0a14 0%, #030305 70%); }
-        .glow-sphere-1 { position: fixed; top: -15%; left: -10%; width: 50vw; height: 50vh; background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 60%); filter: blur(90px); z-index: -1; animation: float 15s infinite alternate ease-in-out; }
-        .glow-sphere-2 { position: fixed; bottom: -15%; right: -10%; width: 40vw; height: 40vh; background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, transparent 60%); filter: blur(90px); z-index: -1; animation: float 12s infinite alternate-reverse ease-in-out; }
+        .glow-sphere-1 { position: fixed; top: -15%; left: -10%; width: 50vw; height: 50vh; background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 60%); filter: blur(90px); z-index: -1; animation: float 15s infinite alternate ease-in-out; }
+        .glow-sphere-2 { position: fixed; bottom: -15%; right: -10%; width: 40vw; height: 40vh; background: radial-gradient(circle, rgba(179, 102, 255, 0.1) 0%, transparent 60%); filter: blur(90px); z-index: -1; animation: float 12s infinite alternate-reverse ease-in-out; }
 
         @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 40px); } }
 
@@ -49,10 +49,10 @@
         .nav-link.active::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 2px; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
 
         .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; border: none; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
-        .btn-primary { background: linear-gradient(135deg, var(--primary), #3b82f6); color: #fff; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2); }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), #6a0dad); color: #fff; box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2); }
         .btn-primary:hover { box-shadow: 0 8px 25px var(--primary-glow); transform: translateY(-2px); }
         .btn-outline { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: #fff; backdrop-filter: blur(10px); }
-        .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(0, 210, 255, 0.05); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(179, 102, 255, 0.05); }
 
         /* --- SPA SAYFA GEÇİŞLERİ --- */
         .page { display: none; animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; max-width: 1400px; margin: 0 auto; padding: 50px 6%; }
@@ -61,15 +61,15 @@
 
         /* --- ANA SAYFA (HOME) --- */
         .home-hero { text-align: center; padding: 120px 0 80px 0; display: flex; flex-direction: column; align-items: center; }
-        .home-badge { background: rgba(0, 210, 255, 0.05); border: 1px solid rgba(0, 210, 255, 0.2); color: var(--accent); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 30px; letter-spacing: 1.5px; text-transform: uppercase; }
+        .home-badge { background: rgba(179, 102, 255, 0.05); border: 1px solid rgba(179, 102, 255, 0.2); color: var(--accent); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 30px; letter-spacing: 1.5px; text-transform: uppercase; }
         .home-title { font-family: 'Space Grotesk', sans-serif; font-size: 5.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; letter-spacing: -2px; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .home-title span { background: linear-gradient(to right, #fff, var(--text-muted)); -webkit-background-clip: text; color: transparent; }
         .home-desc { color: var(--text-muted); font-size: 1.15rem; max-width: 650px; margin-bottom: 45px; line-height: 1.7; }
 
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; text-align: left; }
         .feat-card { background: rgba(255,255,255,0.01); border: 1px solid var(--border); padding: 40px; border-radius: 24px; transition: 0.4s; backdrop-filter: blur(10px); }
-        .feat-card:hover { transform: translateY(-5px); border-color: var(--primary); background: rgba(79, 70, 229, 0.03); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .feat-icon { width: 55px; height: 55px; background: rgba(79, 70, 229, 0.1); color: var(--primary); display: flex; justify-content: center; align-items: center; font-size: 1.6rem; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(79, 70, 229, 0.2); }
+        .feat-card:hover { transform: translateY(-5px); border-color: var(--primary); background: rgba(138, 43, 226, 0.03); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .feat-icon { width: 55px; height: 55px; background: rgba(138, 43, 226, 0.1); color: var(--accent); display: flex; justify-content: center; align-items: center; font-size: 1.6rem; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(138, 43, 226, 0.2); }
         .feat-card h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 12px; color: #fff; }
         .feat-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
 
@@ -85,21 +85,22 @@
         /* Üst Seviye Ürün Kartları */
         .showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
         .showcase-card { position: relative; height: 450px; border-radius: 20px; overflow: hidden; cursor: pointer; background: #0a0a0f; border: 1px solid var(--border); transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .showcase-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5) saturate(1.2); transition: 0.7s; background-color: #111; }
+        .showcase-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6) saturate(1.1); transition: 0.7s; background-color: #111; }
         .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,3,5,0.95) 0%, rgba(3,3,5,0.4) 50%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; z-index: 2; }
         .card-bg-text { position: absolute; bottom: 45px; left: 25px; font-size: 2.8rem; font-weight: 900; color: rgba(255, 255, 255, 0.03); text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; z-index: 1; transition: 0.4s; pointer-events: none; letter-spacing: 1px; }
         .card-gozat { font-size: 0.75rem; color: var(--accent); font-weight: 700; letter-spacing: 2.5px; margin-bottom: 8px; text-transform: uppercase; }
         .card-title { font-size: 1.5rem; font-weight: 700; color: #fff; }
         .card-arrow { position: absolute; bottom: 30px; right: 30px; color: var(--text-muted); font-size: 1.2rem; transition: 0.4s; z-index: 3; background: rgba(255,255,255,0.05); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; backdrop-filter: blur(5px); }
 
-        .showcase-card:hover { transform: translateY(-10px); border-color: var(--border-hover); box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,210,255,0.05); }
-        .showcase-card:hover img { transform: scale(1.08); filter: brightness(0.3) saturate(1.4); }
-        .showcase-card:hover .card-bg-text { color: rgba(0, 210, 255, 0.08); transform: translateY(-8px); }
+        .showcase-card:hover { transform: translateY(-10px); border-color: var(--border-hover); box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(179, 102, 255, 0.1); }
+        .showcase-card:hover img { transform: scale(1.05); filter: brightness(0.4) saturate(1.3); }
+        .showcase-card:hover .card-bg-text { color: rgba(179, 102, 255, 0.08); transform: translateY(-8px); }
         .showcase-card:hover .card-arrow { background: #fff; color: #000; transform: rotate(-45deg); }
 
         /* --- ÜRÜN DETAY MODALI (POPUP KART) --- */
         .prod-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: none; justify-content: center; align-items: center; z-index: 3000; animation: fadeIn 0.3s ease; }
         .prod-modal-overlay.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         .prod-modal-card { 
             background: #0d0d14; border: 1px solid var(--border-hover); border-radius: 24px; 
@@ -111,12 +112,12 @@
         .close-prod:hover { background: #ef4444; border-color: #ef4444; transform: rotate(90deg); }
 
         .prod-img-side { width: 100%; height: 100%; position: relative; }
-        .prod-img-side img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8) saturate(1.2); }
+        .prod-img-side img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9) saturate(1.1); }
         .prod-img-overlay { position: absolute; inset: 0; background: linear-gradient(to right, transparent, #0d0d14); }
         
         .prod-info-side { padding: 50px 40px; overflow-y: auto; display: flex; flex-direction: column; }
         .prod-info-side h2 { font-size: 2.5rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif; margin-bottom: 5px; line-height: 1.1; }
-        .prod-info-side .sub { color: var(--accent); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px; display: inline-block; padding: 5px 12px; background: rgba(0,210,255,0.1); border-radius: 8px; }
+        .prod-info-side .sub { color: var(--accent); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px; display: inline-block; padding: 5px 12px; background: rgba(179, 102, 255, 0.1); border-radius: 8px; }
         .prod-info-side p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 30px; }
         
         .prod-feats { list-style: none; margin-bottom: 40px; background: rgba(255,255,255,0.02); padding: 25px; border-radius: 16px; border: 1px solid var(--border); }
@@ -126,7 +127,7 @@
 
         .prod-pricing { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: auto; }
         .p-tier { background: rgba(0,0,0,0.4); border: 1px solid var(--border); padding: 20px 25px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; cursor: pointer; }
-        .p-tier:hover { border-color: var(--primary); background: rgba(79, 70, 229, 0.05); transform: translateX(5px); }
+        .p-tier:hover { border-color: var(--primary); background: rgba(138, 43, 226, 0.05); transform: translateX(5px); }
         .p-tier-left { display: flex; flex-direction: column; }
         .p-tier-name { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         .p-tier-price { font-size: 1.8rem; font-weight: 800; color: #fff; }
@@ -135,13 +136,13 @@
         /* --- GİRİŞ YAP PANELİ --- */
         .auth-modal { background: rgba(10, 10, 15, 0.95); border: 1px solid var(--border-hover); padding: 50px 40px; border-radius: 24px; width: 420px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.9); }
         .auth-header { text-align: center; margin-bottom: 35px; }
-        .auth-icon { width: 65px; height: 65px; background: rgba(79, 70, 229, 0.1); color: var(--primary); border-radius: 18px; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; margin: 0 auto 20px auto; border: 1px solid rgba(79, 70, 229, 0.3); }
+        .auth-icon { width: 65px; height: 65px; background: rgba(138, 43, 226, 0.1); color: var(--primary); border-radius: 18px; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; margin: 0 auto 20px auto; border: 1px solid rgba(138, 43, 226, 0.3); }
         .auth-header h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
         
         .input-group { margin-bottom: 20px; position: relative; }
         .input-group i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
         .input-group input { width: 100%; padding: 16px 16px 16px 50px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); color: #fff; border-radius: 12px; font-size: 0.95rem; transition: 0.3s; outline: none; }
-        .input-group input:focus { border-color: var(--primary); background: rgba(0,0,0,0.8); box-shadow: 0 0 20px rgba(79, 70, 229, 0.2); }
+        .input-group input:focus { border-color: var(--primary); background: rgba(0,0,0,0.8); box-shadow: 0 0 20px rgba(138, 43, 226, 0.2); }
         
         .remember-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
         .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; user-select: none; }
@@ -150,7 +151,7 @@
         #loginError { color: #ff4757; font-size: 0.85rem; display: none; margin-bottom: 20px; text-align: center; background: rgba(255, 71, 87, 0.1); padding: 12px; border-radius: 10px; border: 1px solid rgba(255, 71, 87, 0.2); }
 
         /* --- CANLI DESTEK --- */
-        .chat-widget { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--primary), #3b82f6); width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 1.6rem; cursor: pointer; box-shadow: 0 10px 30px rgba(79, 70, 229, 0.5); z-index: 4000; transition: 0.3s; border: 2px solid rgba(255,255,255,0.1); }
+        .chat-widget { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--primary), #6a0dad); width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 1.6rem; cursor: pointer; box-shadow: 0 10px 30px rgba(138, 43, 226, 0.5); z-index: 4000; transition: 0.3s; border: 2px solid rgba(255,255,255,0.1); }
         .chat-widget:hover { transform: scale(1.1) translateY(-5px); }
         
         .chat-window { position: fixed; bottom: 110px; right: 30px; width: 340px; background: rgba(13, 13, 20, 0.95); border: 1px solid var(--border-hover); border-radius: 20px; backdrop-filter: blur(25px); z-index: 4000; transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
@@ -165,7 +166,7 @@
         /* --- ADMIN PANELİ --- */
         .admin-layout { display: grid; grid-template-columns: 250px 1fr; gap: 30px; }
         .admin-sidebar button { width: 100%; text-align: left; background: transparent; border: none; color: var(--text-muted); padding: 15px 20px; border-radius: 12px; cursor: pointer; font-size: 1rem; margin-bottom: 8px; transition: 0.3s; font-weight: 600; display: flex; align-items: center; gap: 10px; }
-        .admin-sidebar button.active, .admin-sidebar button:hover { background: rgba(0, 210, 255, 0.1); color: var(--accent); border: 1px solid rgba(0, 210, 255, 0.2); }
+        .admin-sidebar button.active, .admin-sidebar button:hover { background: rgba(179, 102, 255, 0.1); color: var(--accent); border: 1px solid rgba(179, 102, 255, 0.2); }
         .key-box { background: rgba(0,0,0,0.6); border: 1px dashed var(--accent); padding: 20px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; margin-top: 25px; max-height: 200px; overflow-y: auto; white-space: pre-wrap; font-size: 0.95rem; color: #fff; }
     </style>
 </head>
@@ -194,7 +195,7 @@
     <!-- 1. ANA SAYFA -->
     <div class="page active" id="page-home">
         <div class="home-hero">
-            <div class="home-badge"><i class="fas fa-bolt"></i> Kernel Level Architecture</div>
+            <div class="home-badge"><i class="fas fa-bolt"></i> Elite Detection Bypass</div>
             <h1 class="home-title">Oyunun Kurallarını<br><span>Yeniden Yazın.</span></h1>
             <p class="home-desc">SensiSoftware; profesyonel oyuncular için geliştirilmiş, donanım okuması yapmayan ve tamamen tespit edilemez premium yazılım çözümleri sunar.</p>
             <button class="btn btn-primary" style="padding: 16px 40px; font-size: 1.1rem; border-radius: 12px;" onclick="nav('store')">Mağazayı Keşfet</button>
@@ -204,12 +205,12 @@
             <div class="feat-card">
                 <div class="feat-icon"><i class="fas fa-shield-halved"></i></div>
                 <h3>Sıfır Ban Riski (Ring0)</h3>
-                <p>Yazılımlarımız Kernel seviyesinde çalışır. Vanguard, EAC ve VAC Live gibi sistemler tarafından kesinlikle tespit edilemez.</p>
+                <p>Yazılımlarımız Kernel seviyesinde çalışır. Oyunların gelişmiş koruma sistemleri tarafından kesinlikle tespit edilemez.</p>
             </div>
             <div class="feat-card">
                 <div class="feat-icon"><i class="fas fa-bolt"></i></div>
                 <h3>Anında Otomatik Teslimat</h3>
-                <p>Ödemeniz onaylandığı saniye, lisans anahtarınız ve Sensi Launcher indirme bağlantınız sistem tarafından otomatik tanımlanır.</p>
+                <p>Ödemeniz onaylandığı saniye, lisans anahtarınız ve indirme bağlantınız sistem tarafından otomatik tanımlanır.</p>
             </div>
             <div class="feat-card">
                 <div class="feat-icon"><i class="fas fa-headset"></i></div>
@@ -234,18 +235,18 @@
         </div>
 
         <div class="showcase-grid">
-            <!-- VALORANT KARTI (LOCAL IMAGE EKLENDİ) -->
+            <!-- VALORANT KARTI (PNG GÜNCELLENDİ VE YAZILAR TEMİZLENDİ) -->
             <div class="showcase-card" onclick="openProductModal('val')">
-                <img src="valorant.jpg" alt="Valorant">
+                <img src="valorant.png" alt="Valorant VIP">
                 <div class="card-bg-text">VALORANT</div>
                 <div class="card-overlay">
                     <div class="card-gozat">İNCELE</div>
-                    <div class="card-title">Valorant: Vanguard+</div>
+                    <div class="card-title">Valorant VIP</div>
                 </div>
                 <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
 
-            <!-- DİĞER KARTLAR (SAĞLAM LİNKLER) -->
+            <!-- DİĞER KARTLAR -->
             <div class="showcase-card" onclick="openProductModal('cs2')">
                 <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/ss_164b383416e7dd786f6630f5bb8da4bf5a59dcc8.1920x1080.jpg" alt="CS2">
                 <div class="card-bg-text">C-STRIKE</div>
@@ -290,7 +291,7 @@
             
             <div class="prod-info-side">
                 <h2 id="pm-title">Ürün Başlığı</h2>
-                <div class="sub" id="pm-sub">Altyapı Tipi</div>
+                <div class="sub" id="pm-sub">Premium Çözüm</div>
                 <p id="pm-desc">Açıklama metni.</p>
                 
                 <ul class="prod-feats" id="pm-feats"></ul>
@@ -303,7 +304,7 @@
                         </div>
                         <button class="btn btn-outline" style="padding: 10px 20px;">Sepete Ekle</button>
                     </div>
-                    <div class="p-tier" style="border-color: var(--primary); background: rgba(79, 70, 229, 0.05);">
+                    <div class="p-tier" style="border-color: var(--primary); background: rgba(138, 43, 226, 0.05);">
                         <div class="p-tier-left">
                             <span class="p-tier-name" style="color: var(--primary);">30 Günlük Premium</span>
                             <div class="p-tier-price" id="pm-p30">$0 <span>/ay</span></div>
@@ -315,7 +316,7 @@
         </div>
     </div>
 
-    <!-- GİRİŞ YAP PANELİ (BENİ HATIRLA EKLİ) -->
+    <!-- GİRİŞ YAP PANELİ -->
     <div class="prod-modal-overlay" id="authModal" style="z-index: 4000;">
         <div class="auth-modal">
             <button class="close-prod" style="top: 25px; right: 25px;" onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
@@ -384,7 +385,7 @@
                     <div>
                         <label style="display:block; margin-bottom: 10px; font-size: 0.95rem; color: #888;">Hedef Ürün</label>
                         <select id="genProduct" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: #fff; border-radius: 12px; outline:none;">
-                            <option value="VAL">Valorant: Vanguard+</option>
+                            <option value="VAL">Valorant VIP</option>
                             <option value="CS2">Counter-Strike 2</option>
                             <option value="SPOOF">HWID Spoofer</option>
                         </select>
@@ -409,9 +410,9 @@
     </div>
 
     <script>
-        // Ürün Veritabanı (Valorant Görseli LOCAL OLARAK GÜNCELLENDİ)
+        // Ürün Veritabanı (Valorant Görseli, Başlığı ve Sub-text'i tertemiz güncellendi)
         const productDB = {
-            'val': { title: 'Valorant: Vanguard+', sub: 'Internal Kernel Module', desc: 'Riot Vanguard sistemini ring0 seviyesinde bypass eden, streamproof mimariye sahip özel yapım aimbot ve ESP paketi.', feats: ['<li><i class="fas fa-check"></i> Kusursuz V-Sync Aimbot</li>', '<li><i class="fas fa-check"></i> OBS/Discord Yayında Gizlilik</li>', '<li><i class="fas fa-check"></i> Dahili HWID Koruyucu</li>'], img: 'valorant.jpg', prices: ['$10', '$50'] },
+            'val': { title: 'Valorant VIP', sub: 'Premium Software', desc: 'Riot Vanguard sistemini ring0 seviyesinde bypass eden, streamproof mimariye sahip özel yapım aimbot ve ESP paketi.', feats: ['<li><i class="fas fa-check"></i> Kusursuz V-Sync Aimbot</li>', '<li><i class="fas fa-check"></i> OBS/Discord Yayında Gizlilik</li>', '<li><i class="fas fa-check"></i> Dahili HWID Koruyucu</li>'], img: 'valorant.png', prices: ['$10', '$50'] },
             'cs2': { title: 'Counter-Strike 2', sub: 'External Base', desc: 'Oyun dosyalarına müdahale etmeden çalışan harici konsol mimarisi. VAC Live sistemine takılmaz.', feats: ['<li><i class="fas fa-check"></i> Dinamik Offset Güncellemesi</li>', '<li><i class="fas fa-check"></i> Radar ve Bone ESP</li>', '<li><i class="fas fa-check"></i> Sıfır FPS Düşüşü</li>'], img: 'https://cdn.cloudflare.steamstatic.com/steam/apps/730/ss_164b383416e7dd786f6630f5bb8da4bf5a59dcc8.1920x1080.jpg', prices: ['$5', '$35'] },
             'spoof': { title: 'HWID Spoofer Elite', sub: 'Kernel Driver', desc: 'Ban yemiş donanım seri numaralarını kalıcı veya geçici olarak değiştirir. Anakart, disk ve MAC temizler.', feats: ['<li><i class="fas fa-check"></i> Tüm Anti-Cheatlere Uyumlu</li>', '<li><i class="fas fa-check"></i> Kalıcı (Permanent) Mod</li>', '<li><i class="fas fa-check"></i> Güvenli Disk Temizliği</li>'], img: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000', prices: ['$8', '$25'] },
             'launcher': { title: 'Sensi: AIO Launcher', sub: 'Python Core', desc: 'Tüm SensiSoftware araçlarını tek bir arayüzden yönetmenizi sağlayan güvenli masaüstü platformu.', feats: ['<li><i class="fas fa-check"></i> Otomatik Yazılım Güncelleme</li>', '<li><i class="fas fa-check"></i> Cloud Config Sistemi</li>', '<li><i class="fas fa-check"></i> Güvenli Login Entegrasyonu</li>'], img: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=1000', prices: ['$3', '$15'] }

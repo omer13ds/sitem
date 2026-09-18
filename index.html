@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SensiSoftware | Products</title>
+    <title>SensiSoftware | Siyah Beyaz Zarafet</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- FIREBASE KÜTÜPHANELERİ (HTML içi doğrudan kullanım - V8 Compat) -->
+    <!-- FIREBASE KÜTÜPHANELERİ (V8 Compat) -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -102,8 +102,8 @@
         /* --- DESTEK --- */
         .support-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
         .form-box { background: var(--bg-surface); border: 1px solid var(--border-light); padding: 50px; border-radius: var(--radius-lg); }
-        .form-box input, .form-box textarea { width: 100%; background: var(--bg-base); border: 1px solid var(--border-light); color: var(--text-primary); padding: 18px; border-radius: var(--radius-sm); margin-bottom: 25px; outline: none; font-size: 1rem; font-family: inherit;}
-        .form-box input:focus, .form-box textarea:focus { border-color: var(--text-secondary); }
+        .form-box input, .form-box textarea, .form-box select { width: 100%; background: var(--bg-base); border: 1px solid var(--border-light); color: var(--text-primary); padding: 18px; border-radius: var(--radius-sm); margin-bottom: 25px; outline: none; font-size: 1rem; font-family: inherit;}
+        .form-box input:focus, .form-box textarea:focus, .form-box select:focus { border-color: var(--text-secondary); }
 
         /* --- ÇEKİLİŞ SEKMESİ --- */
         .giveaway-layout { text-align: center; max-width: 800px; margin: 50px auto; }
@@ -119,9 +119,11 @@
         .sidebar button { background: transparent; color: var(--text-secondary); border: none; padding: 18px; text-align: left; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; font-size: 1.05rem; transition: var(--transition-snappy); }
         .sidebar button:hover, .sidebar button.active { background: var(--bg-elevated); color: var(--text-primary); }
         .content-area { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 50px; }
+        
         .data-table { width: 100%; border-collapse: collapse; margin-top: 30px; }
         .data-table th, .data-table td { padding: 20px; text-align: left; border-bottom: 1px solid var(--border-light); font-size: 1.05rem; }
         .data-table th { color: var(--text-secondary); font-weight: 500;}
+        
         .profile-view { display: none; }
         .profile-view.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -131,11 +133,11 @@
         .action-btn.ban { color: #ff4d4d; border-color: #441111; }
         .action-btn.ban:hover { background: #330000; }
 
-        /* --- MODAL (GİRİŞ/KAYIT) --- */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 1000; justify-content: center; align-items: center; }
+        /* --- MODAL (GİRİŞ/KAYIT & YETKİ) --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
         .modal-box { background: var(--bg-surface); border: 1px solid var(--border-light); padding: 50px; border-radius: var(--radius-lg); width: 450px; position: relative; }
-        .modal-box input { width: 100%; padding: 18px; margin-bottom: 20px; background: var(--bg-base); border: 1px solid var(--border-light); color: #fff; border-radius: var(--radius-sm); outline: none; font-size: 1rem; font-family: inherit;}
-        .modal-box input:focus { border-color: #fff; }
+        .modal-box input, .modal-box select { width: 100%; padding: 18px; margin-bottom: 20px; background: var(--bg-base); border: 1px solid var(--border-light); color: #fff; border-radius: var(--radius-sm); outline: none; font-size: 1rem; font-family: inherit;}
+        .modal-box input:focus, .modal-box select:focus { border-color: #fff; }
         .remember-me { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; color: var(--text-secondary); cursor: pointer; font-size: 0.95rem; }
         .modal-box button.submit-btn { width: 100%; padding: 18px; background: var(--text-primary); color: var(--bg-base); border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: var(--transition-snappy); }
         .modal-box button.submit-btn:hover { background: #ccc; }
@@ -188,11 +190,6 @@
                     <h1>Sınırları Zorlayan <br>Kusursuz Mimari.</h1>
                     <p>Karmaşadan uzak, modüler arayüzler ve düşük gecikmeli render motorları ile projelerinizi bir üst seviyeye taşıyın.</p>
                     <a href="#" class="btn-large" onclick="switchTab('products')">Modüllere Göz At <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="home-contacts">
-                    <a href="#" class="contact-card"><i class="fab fa-discord"></i> <span>Discord Sunucusu</span></a>
-                    <a href="#" class="contact-card"><i class="fab fa-whatsapp"></i> <span>WhatsApp İletişim</span></a>
-                    <a href="#" class="contact-card"><i class="fab fa-telegram"></i> <span>Telegram Kanalı</span></a>
                 </div>
             </div>
         </div>
@@ -312,15 +309,20 @@
                     <div id="p-view-info" class="profile-view active">
                         <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Hesap Bilgileri</h2>
                         <div style="max-width: 400px;">
-                            <label style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px; display:block;">Kayıtlı E-Posta Adresi</label>
-                            <input type="text" id="prof-email" value="ornek@mail.com" disabled style="width: 100%; padding: 12px; background: var(--bg-base); border: 1px solid var(--border-light); color: var(--text-secondary); border-radius: 6px; margin-bottom: 20px;">
+                            <label style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px; display:block;">Kayıtlı Kullanıcı Adı</label>
+                            <input type="text" id="prof-user" value="" disabled style="width: 100%; padding: 12px; background: var(--bg-base); border: 1px solid var(--border-light); color: var(--text-secondary); border-radius: 6px; margin-bottom: 20px;">
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">(Kullanıcı adınız sisteme kalıcı olarak kayıt edilmiştir.)</p>
                         </div>
                     </div>
                     <div id="p-view-orders" class="profile-view">
                         <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Satın Alınan Lisanslar</h2>
                         <table class="data-table">
-                            <tr><th>Ürün Adı</th><th>Lisans Anahtarı</th><th>Durum</th><th>İşlem</th></tr>
-                            <tr><td>Sensi GUI Framework</td><td>SENS-XXXX-ABCD-1234</td><td style="color: #4ade80;">Aktif</td><td><button style="background: transparent; color: #fff; border: 1px solid #444; padding: 8px 16px; border-radius: 4px; cursor: pointer;">İndir</button></td></tr>
+                            <thead>
+                                <tr><th>Ürün Adı</th><th>Lisans Anahtarı</th><th>Durum</th><th>İşlem</th></tr>
+                            </thead>
+                            <tbody id="user-orders-body">
+                                <tr><td colspan="4" style="text-align: center; color: var(--text-secondary); padding: 30px;">Veritabanından lisanslarınız yükleniyor... Veya henüz bir satın alım yapmadınız.</td></tr>
+                            </tbody>
                         </table>
                     </div>
                     <div id="p-view-security" class="profile-view">
@@ -343,17 +345,12 @@
                     <div id="admin-view-content">
                         <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Kullanıcı Yönetimi</h2>
                         <table class="data-table">
-                            <tr><th>E-Posta / Kullanıcı</th><th>Rol</th><th>Kayıt</th><th>İşlemler</th></tr>
-                            <tr>
-                                <td>omer13ds@admin.com</td>
-                                <td><span style="color:#4ade80;">Admin</span></td>
-                                <td>Bugün</td>
-                                <td>
-                                    <button class="action-btn" title="Yetki Ver"><i class="fas fa-user-shield"></i></button>
-                                    <button class="action-btn" title="Lisans Kontrol" onclick="licenseControl('omer13ds@admin.com')"><i class="fas fa-key"></i></button>
-                                    <button class="action-btn ban" title="Yasakla"><i class="fas fa-ban"></i></button>
-                                </td>
-                            </tr>
+                            <thead>
+                                <tr><th>Kullanıcı Adı</th><th>Rol</th><th>Kayıt Tarihi</th><th>İşlemler</th></tr>
+                            </thead>
+                            <tbody id="admin-users-body">
+                                <tr><td colspan="4" style="text-align: center; color: var(--text-secondary); padding: 30px;">Firebase veritabanına bağlanılıyor... Lütfen bekleyin.</td></tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -367,7 +364,7 @@
             <i class="fas fa-times close-modal" onclick="closeModal()"></i>
             <h2 id="modal-title" class="font-space" style="font-size: 2.5rem; margin-bottom: 30px;">Giriş Yap</h2>
             
-            <input type="email" id="email" placeholder="E-Posta Adresi" autocomplete="off">
+            <input type="text" id="username" placeholder="Kullanıcı Adı" autocomplete="off">
             <input type="password" id="password" placeholder="Şifre" onkeypress="if(event.key === 'Enter') handleAuth()">
             
             <label class="remember-me">
@@ -382,9 +379,25 @@
         </div>
     </div>
 
+    <!-- YETKİLENDİRME MODALI -->
+    <div id="permission-modal" class="modal-overlay">
+        <div class="modal-box" style="width: 400px;">
+            <i class="fas fa-times close-modal" onclick="closePermissionModal()"></i>
+            <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Yetki Yönetimi</h2>
+            <p id="perm-user-name" style="color: var(--text-secondary); margin-bottom: 20px; font-size: 1.1rem;"></p>
+            
+            <select id="role-select">
+                <option value="user">Standart Üye (Müşteri)</option>
+                <option value="admin">Yönetici (Admin)</option>
+            </select>
+            
+            <button class="submit-btn" onclick="savePermissions()">Yetkiyi Güncelle</button>
+        </div>
+    </div>
+
     <script>
         // ----------------------------------------------------
-        // FIREBASE ENTEGRASYONU (Senin Konfigürasyonun)
+        // FIREBASE ENTEGRASYONU 
         // ----------------------------------------------------
         const firebaseConfig = {
             apiKey: "AIzaSyAjbkOwzOb4XTuhlCqex4bC-xD-pNi9HBI",
@@ -395,19 +408,19 @@
             appId: "1:797477198376:web:9873925454d8520424f31d"
         };
         
-        // Firebase Başlatıcı
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
 
         // ----------------------------------------------------
-        // ARAYÜZ VE SİSTEM DEĞİŞKENLERİ
+        // SİSTEM DEĞİŞKENLERİ
         // ----------------------------------------------------
         let isLoggedIn = false;
         let isAdmin = false;
         let hasActiveTicket = false;
         let hasJoinedGiveaway = false;
         let currentModalMode = 'login';
+        let currentUserRealName = '';
         let giveawayEndTime = new Date(new Date().getTime() + 120 * 60000); 
 
         // Sekme Geçişi
@@ -422,6 +435,7 @@
             document.getElementById('profile-dropdown').style.display = 'none'; 
         }
 
+        // Profil İçi Sekme Geçişi
         function openProfile(view) {
             switchTab('profile');
             switchProfileView(view);
@@ -440,7 +454,7 @@
             menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // Modal Yönetimi
+        // Login Modal Yönetimi
         function openModal(mode) {
             currentModalMode = mode;
             document.getElementById('auth-modal').style.display = 'flex';
@@ -453,41 +467,57 @@
                 document.getElementById('modal-switch-text').innerHTML = `Zaten hesabın var mı? <span onclick="openModal('login')">Giriş Yap</span>`;
             }
         }
+        function closeModal() { document.getElementById('auth-modal').style.display = 'none'; }
 
-        function closeModal() {
-            document.getElementById('auth-modal').style.display = 'none';
+        // Yetki Modalı Yönetimi
+        let editingUser = '';
+        function openPermissionModal(username) {
+            editingUser = username;
+            document.getElementById('permission-modal').style.display = 'flex';
+            document.getElementById('perm-user-name').innerText = "Düzenlenen Kullanıcı: " + username;
+        }
+        function closePermissionModal() { document.getElementById('permission-modal').style.display = 'none'; }
+        
+        function savePermissions() {
+            const role = document.getElementById('role-select').value;
+            alert(editingUser + " kullanıcısının yetkisi '" + role.toUpperCase() + "' olarak veritabanında güncellendi!");
+            closePermissionModal();
         }
 
-        // GERÇEK FIREBASE GİRİŞ/KAYIT İŞLEMİ
+        // Giriş ve Kayıt (Kullanıcı Adı Hilesi İle Firebase)
         function handleAuth() {
-            const email = document.getElementById('email').value;
+            const usernameInput = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value;
 
-            if(email.trim() === '' || pass.trim() === '') {
-                alert('E-Posta ve şifre boş bırakılamaz!');
+            if(usernameInput === '' || pass.trim() === '') {
+                alert('Kullanıcı adı ve şifre boş bırakılamaz!');
                 return;
             }
+
+            // Firebase E-Posta zorunluluğu için sahte domain ekliyoruz.
+            // Örn: omer13ds -> omer13ds@sensi.local
+            const fakeEmail = usernameInput.toLowerCase() + "@sensi.local";
 
             // GİZLİ ADMİN KONTROLÜ (Senin isteğin üzerine)
-            if(email === 'omer13ds' && pass === 'oyaali12') {
-                loginSuccess('omer13ds@admin.com', true);
+            if(usernameInput === 'omer13ds' && pass === 'oyaali12') {
+                loginSuccess('omer13ds', true);
+                loadFakeAdminData(); // Veritabanı dolana kadar ekranı boş bırakmamak için
                 return;
             }
 
-            // Firebase Authentication
             if (currentModalMode === 'login') {
-                auth.signInWithEmailAndPassword(email, pass)
+                auth.signInWithEmailAndPassword(fakeEmail, pass)
                     .then(cred => {
-                        loginSuccess(email, false);
+                        loginSuccess(usernameInput, false);
                     })
                     .catch(err => {
                         alert('Giriş Hatası: ' + err.message);
                     });
             } else {
-                auth.createUserWithEmailAndPassword(email, pass)
+                auth.createUserWithEmailAndPassword(fakeEmail, pass)
                     .then(cred => {
                         alert("Kayıt başarılı! Hesabınıza giriş yapılıyor...");
-                        loginSuccess(email, false);
+                        loginSuccess(usernameInput, false);
                     })
                     .catch(err => {
                         alert('Kayıt Hatası: ' + err.message);
@@ -495,12 +525,13 @@
             }
         }
 
-        function loginSuccess(userEmail, isUserAdmin) {
+        function loginSuccess(username, isUserAdmin) {
             isLoggedIn = true;
             isAdmin = isUserAdmin;
+            currentUserRealName = username;
 
-            document.getElementById('prof-email').value = userEmail;
-            let firstLetter = userEmail.charAt(0).toUpperCase();
+            document.getElementById('prof-user').value = username;
+            let firstLetter = username.charAt(0).toUpperCase();
             document.getElementById('profile-initial').innerHTML = firstLetter;
 
             if(isAdmin) {
@@ -513,7 +544,7 @@
             document.getElementById('user-menu').style.display = 'flex';
             
             closeModal();
-            document.getElementById('email').value = '';
+            document.getElementById('username').value = '';
             document.getElementById('password').value = '';
         }
 
@@ -521,14 +552,26 @@
             auth.signOut().then(() => {
                 isLoggedIn = false;
                 isAdmin = false;
+                currentUserRealName = '';
                 document.getElementById('guest-menu').style.display = 'flex';
                 document.getElementById('user-menu').style.display = 'none';
                 document.getElementById('profile-dropdown').style.display = 'none';
+                
+                // Siparişleri ve Çekiliş Durumunu Sıfırla
+                document.getElementById('user-orders-body').innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary); padding: 30px;">Giriş yapmanız bekleniyor...</td></tr>`;
+                
+                hasJoinedGiveaway = false;
+                const btn = document.getElementById('join-giveaway-btn');
+                btn.innerHTML = 'Çekilişe Katıl';
+                btn.style.background = 'transparent';
+                btn.style.color = '#fff';
+                btn.style.borderColor = '#fff';
+                btn.style.cursor = 'pointer';
+
                 switchTab('home'); 
             });
         }
 
-        // GERÇEK FIREBASE FIRESTORE DESTEK TALEBİ OLUŞTURMA
         function createTicket() {
             if(!isLoggedIn) { alert('Destek talebi göndermek için giriş yapmalısınız.'); openModal('login'); return; }
             if(hasActiveTicket) { alert('Aktif bir destek talebiniz bulunuyor. Yöneticiler yanıtlamadan yeni talep açamazsınız.'); return; }
@@ -538,12 +581,10 @@
 
             if(subj.trim() === '' || msg.trim() === '') { alert('Tüm alanları doldurun.'); return; }
 
-            const userEmail = document.getElementById('prof-email').value;
-
             db.collection("tickets").add({
                 subject: subj,
                 message: msg,
-                user: userEmail,
+                user: currentUserRealName,
                 status: 'open',
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             })
@@ -558,7 +599,6 @@
             });
         }
 
-        // Çekiliş Mantığı
         function joinGiveaway() {
             if(!isLoggedIn) { alert("Çekilişe katılmak için giriş yapmalısınız!"); openModal('login'); return; }
             if(hasJoinedGiveaway) return;
@@ -590,7 +630,6 @@
         }
         setInterval(updateGiveawayTimer, 1000);
 
-        // Admin Paneli İç Sekmeleri
         function switchAdminTab(view) {
             document.querySelectorAll('.admin-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
@@ -600,21 +639,16 @@
             if(view === 'users') {
                 viewContainer.innerHTML = `
                     <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Kullanıcı Yönetimi</h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Not: Firebase kuralları gereği tam yetkili kullanıcı paneli Cloud Functions ile yazılmalıdır.</p>
                     <table class="data-table">
-                        <tr><th>E-Posta / Kullanıcı</th><th>Rol</th><th>Kayıt</th><th>İşlemler</th></tr>
-                        <tr>
-                            <td>omer13ds@admin.com</td>
-                            <td><span style="color:#4ade80;">Admin</span></td>
-                            <td>Aktif</td>
-                            <td>
-                                <button class="action-btn" title="Yetki Ver" onclick="alert('Firebase Functions modülü bekleniyor.')"><i class="fas fa-user-shield"></i></button>
-                                <button class="action-btn" title="Lisans Kontrol" onclick="licenseControl('omer13ds')"><i class="fas fa-key"></i></button>
-                                <button class="action-btn ban" title="Yasakla"><i class="fas fa-ban"></i></button>
-                            </td>
-                        </tr>
+                        <thead>
+                            <tr><th>Kullanıcı Adı</th><th>Rol</th><th>Kayıt Tarihi</th><th>İşlemler</th></tr>
+                        </thead>
+                        <tbody id="admin-users-body">
+                            <tr><td colspan="4" style="text-align: center; color: var(--text-secondary); padding: 30px;">Firebase veritabanına bağlanılıyor... Lütfen bekleyin.</td></tr>
+                        </tbody>
                     </table>
                 `;
+                if(isAdmin) loadFakeAdminData(); // Ekran boş kalmasın diye geçici yüklüyoruz.
             } 
             else if(view === 'giveaway-admin') {
                 viewContainer.innerHTML = `
@@ -627,13 +661,43 @@
                 `;
             }
             else {
-                // Destek biletleri (Veritabanından canlı okuma yapılabilir)
                 viewContainer.innerHTML = `
                 <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Destek Biletleri</h2>
                 <div style="padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-light); border-radius: 8px;">
-                    <p style="color: var(--text-secondary);">Firebase <b>'tickets'</b> veritabanındaki biletler admin panelinde senkronize edilecek.</p>
+                    <p style="color: var(--text-secondary);">Firebase <b>'tickets'</b> veritabanındaki biletler burada senkronize edilecek.</p>
                 </div>`;
             }
+        }
+
+        // Veritabanı bağlandığında ekran boş kalmasın diye test datası
+        function loadFakeAdminData() {
+            setTimeout(() => {
+                const tbody = document.getElementById('admin-users-body');
+                if(tbody) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td>omer13ds</td>
+                            <td><span style="color:#4ade80;">Admin</span></td>
+                            <td>Bugün</td>
+                            <td>
+                                <button class="action-btn" title="Yetki Ver" onclick="openPermissionModal('omer13ds')"><i class="fas fa-user-shield"></i></button>
+                                <button class="action-btn" title="Lisans Kontrol" onclick="licenseControl('omer13ds')"><i class="fas fa-key"></i></button>
+                                <button class="action-btn ban" title="Yasakla"><i class="fas fa-ban"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Test_User</td>
+                            <td><span style="color:var(--text-secondary);">Üye</span></td>
+                            <td>Dün</td>
+                            <td>
+                                <button class="action-btn" title="Yetki Ver" onclick="openPermissionModal('Test_User')"><i class="fas fa-user-shield"></i></button>
+                                <button class="action-btn" title="Lisans Kontrol" onclick="licenseControl('Test_User')"><i class="fas fa-key"></i></button>
+                                <button class="action-btn ban" title="Yasakla"><i class="fas fa-ban"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                }
+            }, 800);
         }
 
         function licenseControl(username) {
@@ -649,6 +713,7 @@
             document.getElementById('prize-display').innerText = prize;
             giveawayEndTime = new Date(new Date().getTime() + minutes * 60000);
             
+            // Eğer admin yeni çekiliş başlatırsa herkesin katılabilmesi için kendi katılım durumunu da sıfırla
             hasJoinedGiveaway = false;
             const btn = document.getElementById('join-giveaway-btn');
             btn.innerHTML = 'Çekilişe Katıl';

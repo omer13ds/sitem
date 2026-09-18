@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SensiSoftware | Products</title>
+    <title>SensiSoftware | Siyah Beyaz Zarafet</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -24,7 +24,7 @@
             --text-muted: #666666;
             --radius-sm: 8px;
             --radius-md: 12px;
-            --radius-lg: 24px; 
+            --radius-lg: 24px;
             --transition-fast: all 0.2s ease;
             --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -73,64 +73,43 @@
         .btn-large { display: inline-flex; align-items: center; gap: 12px; background: var(--text-primary); color: var(--bg-base); padding: 20px 45px; border-radius: var(--radius-sm); font-size: 1.15rem; font-weight: 700; text-decoration: none; transition: var(--transition-fast); border: 1px solid var(--text-primary); cursor: pointer;}
         .btn-large:hover { background: transparent; color: var(--text-primary); }
 
-        /* --- YENİ SIRALI (YATAY) ÜRÜNLER KISMI --- */
+        /* --- YENİ DİKEY (FOTOĞRAFLI) ÜRÜNLER KISMI --- */
         .section-header { margin-bottom: 50px; text-align: center; }
         .section-header h2 { font-size: 3.5rem; font-weight: 700; letter-spacing: -1.5px; }
         .section-header p { color: var(--text-secondary); font-size: 1.1rem; margin-top: 10px; }
         
-        /* Kare değil, yukarıdan aşağı sıralı liste mantığı */
-        .products-list { display: flex; flex-direction: column; gap: 30px; max-width: 1100px; margin: 0 auto; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 40px; max-width: 1400px; margin: 0 auto; }
         
         .product-card { 
-            background: linear-gradient(145deg, var(--bg-surface), var(--bg-base)); 
+            background: var(--bg-surface); 
             border: 1px solid var(--border-light); 
             border-radius: var(--radius-lg); 
-            padding: 40px; 
-            display: flex; flex-direction: row; align-items: center; justify-content: space-between;
-            position: relative; transition: all 0.4s ease; overflow: hidden; gap: 40px;
+            display: flex; flex-direction: column;
+            position: relative; transition: all 0.4s ease; overflow: hidden;
         }
-        .product-card::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03), transparent 80%);
-            opacity: 0; transition: var(--transition-smooth); pointer-events: none;
-        }
-        .product-card:hover { border-color: var(--border-hover); transform: translateX(8px); box-shadow: -10px 20px 40px rgba(0,0,0,0.6); }
-        .product-card:hover::after { opacity: 1; }
-        
-        .prod-info { flex: 2; }
-        .prod-info-header { display: flex; align-items: center; gap: 20px; margin-bottom: 15px; }
-        .icon-box { 
-            width: 60px; height: 60px; background: var(--bg-elevated); border-radius: var(--radius-md); 
-            display: flex; align-items: center; justify-content: center; font-size: 1.8rem; 
-            border: 1px solid var(--border-light); transition: var(--transition-fast);
-        }
-        .product-card:hover .icon-box { background: var(--text-primary); color: var(--bg-base); }
-        .prod-info h3 { font-size: 1.8rem; margin: 0; }
-        .prod-info p { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 20px; }
+        .product-card:hover { border-color: var(--border-hover); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
 
-        /* Yatay hizalı özellikler */
-        .features { list-style: none; display: flex; flex-wrap: wrap; gap: 15px; margin: 0; padding: 0; }
-        .features li { font-size: 0.95rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; background: var(--bg-base); padding: 8px 16px; border-radius: 100px; border: 1px solid var(--border-light); }
-        .features li i { color: var(--text-primary); font-size: 0.8rem; }
+        /* Fotoğraf Alanı */
+        .prod-image-wrapper { width: 100%; height: 200px; background: var(--bg-elevated); border-bottom: 1px solid var(--border-light); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .prod-image-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .product-card:hover .prod-image-wrapper img { transform: scale(1.05); }
+        .prod-image-placeholder { font-size: 4rem; color: var(--border-light); }
 
-        /* Sağ taraf: Fiyat ve Buton alanı */
-        .prod-action { flex: 1; display: flex; flex-direction: column; align-items: flex-end; border-left: 1px solid var(--border-light); padding-left: 40px; min-width: 300px; }
-        .price-tag { margin-bottom: 20px; text-align: right; }
-        .price-tag h4 { font-size: 2.8rem; font-weight: 700; color: #fff; }
-        .price-tag span { font-size: 0.85rem; color: var(--text-muted); display: block; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+        /* İçerik Alanı */
+        .prod-content { padding: 30px; display: flex; flex-direction: column; flex: 1; }
+        .prod-content h3 { font-size: 1.6rem; margin-bottom: 10px; }
+        .prod-content p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; flex: 1; }
 
-        .price-toggle { display: flex; width: 100%; background: var(--bg-base); border-radius: 100px; padding: 6px; margin-bottom: 20px; border: 1px solid var(--border-light); }
-        .price-toggle button { flex: 1; background: transparent; border: none; color: var(--text-secondary); padding: 10px; border-radius: 100px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: inherit; font-size: 0.9rem; }
+        .price-tag { display: flex; align-items: baseline; gap: 8px; margin-bottom: 20px; }
+        .price-tag h4 { font-size: 2.2rem; font-weight: 700; color: #fff; }
+        .price-tag span { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        .price-toggle { display: flex; width: 100%; background: var(--bg-base); border-radius: 100px; padding: 6px; margin-bottom: 25px; border: 1px solid var(--border-light); }
+        .price-toggle button { flex: 1; background: transparent; border: none; color: var(--text-secondary); padding: 10px; border-radius: 100px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: inherit; font-size: 0.85rem; }
         .price-toggle button.active { background: var(--text-primary); color: var(--bg-base); }
 
         .btn-buy { width: 100%; padding: 16px; background: var(--text-primary); color: var(--bg-base); border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: 0.2s;}
         .btn-buy:hover { background: #d4d4d4; }
-
-        @media (max-width: 900px) {
-            .product-card { flex-direction: column; align-items: stretch; gap: 30px; }
-            .prod-action { border-left: none; border-top: 1px solid var(--border-light); padding-left: 0; padding-top: 30px; align-items: center; }
-            .prod-action .price-tag { text-align: center; }
-        }
 
         /* --- DESTEK --- */
         .support-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
@@ -174,8 +153,14 @@
         .btn-submit { width: 100%; padding: 16px; background: var(--text-primary); color: var(--bg-base); border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: 0.2s; }
         .btn-submit:hover { background: #d4d4d4; }
         
+        /* TOAST BİLDİRİM & ÇEKİLİŞ POPUP */
         #toast { position: fixed; bottom: 30px; right: 30px; background: #fff; color: #000; padding: 16px 24px; border-radius: 8px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateX(150%); transition: transform 0.4s ease; z-index: 9999; display: flex; align-items: center; gap: 10px; }
         #toast.show { transform: translateX(0); }
+
+        #gw-popup { position: fixed; bottom: 30px; right: -350px; background: var(--bg-elevated); border: 1px solid var(--border-light); padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); transition: right 0.5s ease; z-index: 9998; cursor: pointer;}
+        #gw-popup.show { right: 30px; }
+        .gw-icon { font-size: 2rem; color: #4ade80; }
+
         .profile-view { display: none; }
         .profile-view.active { display: block; animation: fadeSlideUp 0.3s ease; }
     </style>
@@ -220,12 +205,12 @@
                 <div class="home-layout">
                     <h1>Sınırları Zorlayan <br>Kusursuz Mimari.</h1>
                     <p>Karmaşadan uzak, modüler arayüzler ve düşük gecikmeli render motorları ile projelerinizi bir üst seviyeye taşıyın.</p>
-                    <button class="btn-large" onclick="switchTab('products')">Modüllere Göz At <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn-large" onclick="switchTab('products')">Göz At <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
 
-        <!-- YENİ SIRALI VE ESTETİK ÜRÜNLER KISMI -->
+        <!-- ÜRÜNLER (DİKEY - FOTOĞRAFLI YENİ TASARIM) -->
         <div id="tab-products" class="tab-content">
             <div class="tab-inner">
                 <div class="section-header">
@@ -233,34 +218,8 @@
                     <p>İhtiyacınıza uygun, anında teslim edilen gelişmiş yazılım modülleri.</p>
                 </div>
                 
-                <div class="products-list" id="store-products-container">
-                    <!-- Firebase veritabanı boşsa geçici ürünler (Sıralı / Dikey Liste görünümü) -->
-                    <div class="product-card">
-                        <div class="prod-info">
-                            <div class="prod-info-header">
-                                <div class="icon-box"><i class="fas fa-window-maximize"></i></div>
-                                <h3>Sensi GUI Framework</h3>
-                            </div>
-                            <p>Python projeleriniz için (Tkinter/Pygame) özel tasarlanmış masaüstü arayüz mimarisi. Yönetim panellerini baştan yaratın.</p>
-                            <ul class="features">
-                                <li><i class="fas fa-check"></i> Entegre Destek Bileti Sistemi</li>
-                                <li><i class="fas fa-check"></i> Gelişmiş Admin Kontrol Paneli</li>
-                                <li><i class="fas fa-check"></i> Çekiliş Yönetimi Modülü</li>
-                            </ul>
-                        </div>
-                        <div class="prod-action">
-                            <div class="price-tag">
-                                <h4 id="price-def1">₺899</h4>
-                                <span id="period-def1">Sınırsız Lisans</span>
-                            </div>
-                            <div class="price-toggle">
-                                <button onclick="changePrice('def1', 50, 'Günlük', this)">Gün</button>
-                                <button onclick="changePrice('def1', 250, 'Aylık', this)">Ay</button>
-                                <button class="active" onclick="changePrice('def1', 899, 'Sınırsız', this)">Sınır</button>
-                            </div>
-                            <button class="btn-buy" onclick="alert('Lütfen admin panelinden veritabanına ürün ekleyin.')">Satın Al</button>
-                        </div>
-                    </div>
+                <div class="products-grid" id="store-products-container">
+                    <p style="text-align: center; color: var(--text-secondary); width: 100%;">Ürünler veritabanından yükleniyor...</p>
                 </div>
             </div>
         </div>
@@ -456,9 +415,7 @@
             <i class="fas fa-times close-modal" onclick="closeModal('license-modal')"></i>
             <h2 class="font-space" style="margin-bottom: 20px;">Lisans Tanımla</h2>
             <p style="color: var(--text-secondary); margin-bottom: 15px;" id="license-username-display"></p>
-            <label style="color:var(--text-secondary); font-size:0.9rem;">Ürün Seç</label>
             <select id="license-product" class="input-base" style="padding-left:16px;"></select>
-            <label style="color:var(--text-secondary); font-size:0.9rem;">Abonelik Tipi</label>
             <select id="license-duration" class="input-base" style="padding-left:16px;">
                 <option value="daily">Günlük (24 Saat)</option>
                 <option value="monthly">Aylık (30 Gün)</option>
@@ -468,12 +425,13 @@
         </div>
     </div>
 
-    <!-- ADMIN: ÜRÜN EKLE MODALI -->
+    <!-- ADMIN: ÜRÜN EKLE MODALI (Fotoğraf Linki Eklendi) -->
     <div id="product-modal" class="modal-overlay">
         <div class="modal-box">
             <i class="fas fa-times close-modal" onclick="closeModal('product-modal')"></i>
             <h2 class="font-space" id="prod-modal-title" style="margin-bottom: 20px;">Yeni Ürün Ekle</h2>
             <input type="text" id="prod-name" class="input-base" style="padding-left:16px;" placeholder="Ürün Adı">
+            <input type="text" id="prod-img" class="input-base" style="padding-left:16px;" placeholder="Fotoğraf Linki URL (Opsiyonel)">
             <textarea id="prod-desc" class="input-base" style="padding-left:16px; min-height: 80px;" placeholder="Açıklama (Örn: Python modülleri...)"></textarea>
             <div style="display:flex; gap:10px;">
                 <input type="number" id="prod-daily" class="input-base" style="padding-left:16px;" placeholder="Gün (₺)">
@@ -515,8 +473,16 @@
         </div>
     </div>
 
-    <!-- TOAST BİLDİRİM -->
+    <!-- TOAST BİLDİRİM VE ÇEKİLİŞ POPUP -->
     <div id="toast"><i class="fas fa-bell" style="color: var(--bg-base);"></i> <span id="toast-msg"></span></div>
+    
+    <div id="gw-popup" onclick="switchTab('giveaway'); document.getElementById('gw-popup').classList.remove('show');" style="position: fixed; bottom: 30px; right: -350px; background: var(--bg-elevated); border: 1px solid var(--border-light); padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); transition: right 0.5s ease; z-index: 9998; cursor: pointer;">
+        <i class="fas fa-gift" style="font-size: 2rem; color: #4ade80;"></i>
+        <div>
+            <h4 class="font-space" style="margin-bottom: 5px;">Aktif Çekiliş Var!</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Hemen katılın ve kazanın.</p>
+        </div>
+    </div>
 
     <script>
         // ----------------------------------------------------
@@ -612,7 +578,7 @@
         }
 
         // ----------------------------------------------------
-        // FIREBASE AUTH (KULLANICI ADI SİSTEMİ)
+        // FIREBASE AUTH
         // ----------------------------------------------------
         function handleAuth() {
             const uname = document.getElementById('username').value.trim().toLowerCase();
@@ -687,6 +653,15 @@
             
             loadUserLicenses();
             loadUserTickets();
+            
+            // Eğer aktif çekiliş varsa popup göster (sadece o oturumda 1 kez)
+            if(!sessionStorage.getItem('gwPopupShown') && document.getElementById('prize-display').innerText !== "Yönetici bekleniyor...") {
+                setTimeout(() => {
+                    document.getElementById('gw-popup').classList.add('show');
+                    sessionStorage.setItem('gwPopupShown', 'true');
+                    setTimeout(() => { document.getElementById('gw-popup').classList.remove('show'); }, 6000);
+                }, 2000);
+            }
         }
 
         function logoutUser() {
@@ -697,10 +672,8 @@
         }
 
         // ----------------------------------------------------
-        // FIREBASE FIRESTORE
+        // 1. ÜRÜNLER (DİKEY, FOTOĞRAFLI TASARIM)
         // ----------------------------------------------------
-
-        // 1. ÜRÜNLER (YENİ DİKEY TASARIMLI SIRA YAPI)
         db.collection("products").onSnapshot(snapshot => {
             allProducts = [];
             snapshot.forEach(doc => allProducts.push({ id: doc.id, ...doc.data() }));
@@ -710,34 +683,38 @@
 
         function renderStoreProducts() {
             const container = document.getElementById('store-products-container');
-            if(allProducts.length === 0) return; 
+            if(allProducts.length === 0) {
+                container.innerHTML = `<p style="text-align: center; color: var(--text-secondary); width: 100%;">Henüz mağazaya ürün eklenmemiş.</p>`;
+                return;
+            }
             
             container.innerHTML = ''; 
             allProducts.forEach(prod => {
                 const div = document.createElement('div');
                 div.className = 'product-card';
+                
+                // Eğer admin panelinden fotoğraf URL girildiyse o gösterilir, yoksa ikon çıkar
+                let mediaHtml = prod.imageUrl 
+                    ? `<div class="prod-image-wrapper"><img src="${prod.imageUrl}" alt="${prod.name}"></div>`
+                    : `<div class="prod-image-wrapper"><i class="fas fa-image prod-image-placeholder"></i></div>`;
+
                 div.innerHTML = `
-                    <div class="prod-info">
-                        <div class="prod-info-header">
-                            <div class="icon-box"><i class="fas fa-cube"></i></div>
-                            <h3>${prod.name}</h3>
-                        </div>
+                    ${mediaHtml}
+                    <div class="prod-content">
+                        <h3>${prod.name}</h3>
                         <p>${prod.desc}</p>
-                        <ul class="features">
-                            <li><i class="fas fa-check"></i> Anında Teslimat</li>
-                            <li><i class="fas fa-check"></i> Python Uyumlu Altyapı</li>
-                        </ul>
-                    </div>
-                    <div class="prod-action">
+                        
                         <div class="price-tag">
                             <h4 id="price-${prod.id}">₺${prod.priceLifetime || 0}</h4>
                             <span id="period-${prod.id}">Sınırsız Lisans</span>
                         </div>
+
                         <div class="price-toggle">
                             <button onclick="changePrice('${prod.id}', ${prod.priceDaily}, 'Günlük', this)">Günlük</button>
                             <button onclick="changePrice('${prod.id}', ${prod.priceMonthly}, 'Aylık', this)">Aylık</button>
                             <button class="active" onclick="changePrice('${prod.id}', ${prod.priceLifetime}, 'Sınırsız', this)">Sınırsız</button>
                         </div>
+
                         <button class="btn-buy" onclick="alert('Shopier satın alma paneline yönlendirileceksiniz.')">Satın Al</button>
                     </div>
                 `;
@@ -745,7 +722,9 @@
             });
         }
 
+        // ----------------------------------------------------
         // 2. KULLANICILAR
+        // ----------------------------------------------------
         db.collection("users").onSnapshot(snapshot => {
             allUsers = [];
             snapshot.forEach(doc => allUsers.push({ id: doc.id, ...doc.data() }));
@@ -784,7 +763,9 @@
             });
         }
 
+        // ----------------------------------------------------
         // 3. DESTEK BİLETLERİ (KULLANICI VE ADMİN)
+        // ----------------------------------------------------
         db.collection("tickets").orderBy("timestamp", "desc").onSnapshot(snapshot => {
             allTickets = [];
             snapshot.docChanges().forEach(change => {
@@ -837,7 +818,7 @@
                 const statusColor = t.status === 'open' ? '#facc15' : '#4ade80';
                 const statusText = t.status === 'open' ? 'Bekliyor' : 'Çözüldü';
                 let actionBtn = t.status === 'resolved' 
-                    ? `<button class="action-btn" style="border-color:#4ade80; color:#4ade80;" onclick="readAdminReply('${t.id}')">Yanıtı Gör</button>` 
+                    ? `<button class="action-btn" style="border-color:#4ade80; color:#4ade80;" onclick="readUserTicketReply('${t.id}')">Yanıtı Gör</button>` 
                     : `<span style="color:var(--text-secondary); font-size:0.9rem;">İnceleniyor...</span>`;
                 
                 tbody.innerHTML += `
@@ -850,7 +831,7 @@
             });
         }
 
-        function readAdminReply(id) {
+        function readUserTicketReply(id) {
             const t = allTickets.find(x => x.id === id);
             if(!t) return;
             document.getElementById('ut-msg').innerText = t.message;
@@ -970,7 +951,7 @@
             if(!userToBan) return;
             db.collection('users').doc(userToBan.id).update({ role: 'banned' }).then(() => {
                 closeModal('ban-modal');
-                showToast(userToBan.name + " başarıyla yasaklandı.");
+                showToast(userToBan.name + " yasaklandı.");
                 userToBan = null;
             });
         }
@@ -1032,6 +1013,7 @@
 
         function openAddProductModal() {
             document.getElementById('prod-name').value = '';
+            document.getElementById('prod-img').value = '';
             document.getElementById('prod-desc').value = '';
             document.getElementById('prod-daily').value = '';
             document.getElementById('prod-monthly').value = '';
@@ -1041,6 +1023,7 @@
 
         function saveProduct() {
             const name = document.getElementById('prod-name').value;
+            const imgUrl = document.getElementById('prod-img').value;
             const desc = document.getElementById('prod-desc').value;
             const pd = parseInt(document.getElementById('prod-daily').value) || 0;
             const pm = parseInt(document.getElementById('prod-monthly').value) || 0;
@@ -1049,7 +1032,7 @@
             if(!name || !desc) return alert("İsim ve açıklama boş olamaz.");
 
             db.collection("products").add({
-                name: name, desc: desc, priceDaily: pd, priceMonthly: pm, priceLifetime: pl
+                name: name, imageUrl: imgUrl, desc: desc, priceDaily: pd, priceMonthly: pm, priceLifetime: pl
             }).then(() => {
                 closeModal('product-modal');
                 showToast("Yeni ürün eklendi.");
@@ -1062,9 +1045,16 @@
             }
         }
 
-        // Çekiliş Mantığı
-        let giveawayEndTime = new Date(new Date().getTime() + 120 * 60000); 
-        let hasJoinedGiveaway = false;
+        // ÇEKİLİŞ MANTIĞI VE FIREBASE ENTEGRASYONU
+        db.collection('settings').doc('giveaway').onSnapshot(doc => {
+            if(doc.exists) {
+                const data = doc.data();
+                if(data.active) {
+                    document.getElementById('prize-display').innerText = data.prize;
+                    giveawayEndTime = data.endTime.toDate();
+                }
+            }
+        });
 
         function joinGiveaway() {
             if(!currentUser) { alert("Çekilişe katılmak için giriş yapmalısınız!"); openModal('login'); return; }
@@ -1074,6 +1064,23 @@
             btn.innerHTML = 'Katıldınız <i class="fas fa-check-circle"></i>';
             btn.style.background = '#4ade80'; btn.style.color = '#000';
             btn.style.borderColor = '#4ade80'; btn.style.cursor = 'default';
+        }
+
+        function setNewGiveaway() {
+            const prize = document.getElementById('admin-prize').value;
+            const minutes = parseInt(document.getElementById('admin-time').value);
+
+            if(prize.trim() === '' || isNaN(minutes)) { alert('Lütfen ödül adını ve süreyi eksiksiz girin.'); return; }
+
+            const endTime = new Date(Date.now() + minutes * 60000);
+
+            db.collection('settings').doc('giveaway').set({
+                prize: prize,
+                endTime: firebase.firestore.Timestamp.fromDate(endTime),
+                active: true
+            }).then(() => {
+                alert('Çekiliş başarıyla Firebase üzerinden başlatıldı!');
+            });
         }
 
         setInterval(() => {

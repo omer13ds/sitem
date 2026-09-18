@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SensiSoftware | Next-Gen Software Platform</title>
+    <title>SensiSoftware | Premium Dijital Çözümler</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-body: #05070c;
-            --surface-glass: rgba(15, 20, 32, 0.55);
-            --surface-card: rgba(22, 28, 45, 0.4);
-            --surface-card-hover: rgba(30, 38, 56, 0.6);
-            --border-glass: rgba(255, 255, 255, 0.06);
-            --border-glow: rgba(59, 130, 246, 0.3);
+            /* Gece / Morumsu Koyu Tema */
+            --bg-dark: #05030a;
+            --bg-lighter: #0b0716;
+            --surface-glass: rgba(18, 12, 33, 0.6);
+            --border-glass: rgba(139, 92, 246, 0.15);
+            --border-glow: rgba(168, 85, 247, 0.5);
             
-            --accent-primary: #3b82f6;
-            --accent-secondary: #8b5cf6;
-            --accent-cyan: #06b6d4;
-            --accent-emerald: #10b981;
+            --accent-purple: #9333ea;
+            --accent-light-purple: #c084fc;
+            --accent-blue: #3b82f6;
             
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-darker: #64748b;
             
-            --radius-main: 24px;
-            --radius-btn: 14px;
             --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -33,665 +30,474 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
-        body, html {
+        body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
         /* --- ARKA PLAN EFEKTLERİ --- */
-        #bg-canvas {
+        .ambient-background {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -2;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(147, 51, 234, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.08), transparent 25%);
             pointer-events: none;
         }
 
-        .ambient-glows {
+        .noise-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -3;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .glow-sphere {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(160px);
-            opacity: 0.20;
-            animation: pulseGlow 20s ease-in-out infinite alternate;
-        }
-
-        .glow-1 { width: 700px; height: 700px; background: var(--accent-primary); top: -250px; left: -200px; }
-        .glow-2 { width: 650px; height: 650px; background: var(--accent-secondary); bottom: -250px; right: -200px; animation-delay: -5s; }
-
-        @keyframes pulseGlow {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
-            100% { transform: translate(80px, 50px) scale(1.1); opacity: 0.25; }
-        }
-
-        .grid-pattern {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 40px 40px;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/%3E%3C/svg%3E');
             z-index: -1;
             pointer-events: none;
         }
 
-        /* --- UYGULAMA ANA DÜZEN KAPSAYICISI --- */
-        .app-container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            width: 100vw;
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 24px 40px;
-            gap: 24px;
-        }
-
-        /* --- HİZALANMIŞ ÜST MENÜ (HEADER) --- */
+        /* --- NAVBAR --- */
         header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 20px 5%;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            height: 80px;
-            width: 100%;
-            padding: 0 32px;
-            background: var(--surface-glass);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-main);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            flex-shrink: 0;
-            z-index: 50;
-        }
-
-        .brand-logo {
-            display: flex;
             align-items: center;
-            gap: 16px;
-            text-decoration: none;
-            cursor: pointer;
+            background: rgba(5, 3, 10, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            z-index: 100;
         }
 
-        .brand-icon {
-            width: 46px;
-            height: 46px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.4rem;
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .brand-text {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .brand-text span {
-            background: linear-gradient(135deg, #60a5fa, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header-tabs {
+        .brand {
             display: flex;
             align-items: center;
             gap: 12px;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 8px;
-            border-radius: 16px;
-            border: 1px solid var(--border-glass);
+            text-decoration: none;
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
-        .tab-btn {
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-secondary);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            padding: 12px 26px;
-            border-radius: 12px;
-            cursor: pointer;
+        .brand i {
+            color: var(--accent-light-purple);
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.5));
+        }
+
+        .nav-links {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
             transition: var(--transition-smooth);
-            outline: none;
         }
 
-        .tab-btn:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.04);
+        .nav-links a:hover {
+            color: var(--accent-light-purple);
         }
 
-        .tab-btn.active {
-            color: #ffffff;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25));
-            border-color: var(--border-glow);
-            box-shadow: 0 4px 25px rgba(59, 130, 246, 0.2);
-        }
-
-        /* --- DİNAMİK PENCERE (VIEWPORT) ALANI --- */
-        .view-viewport {
-            flex: 1;
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            border-radius: var(--radius-main);
-        }
-
-        .window-view {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--surface-glass);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-main);
-            padding: 60px 80px; /* Ferahlık için padding artırıldı */
-            overflow-y: auto;
-            display: none;
-            opacity: 0;
-            transform: scale(0.99) translateY(10px);
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .window-view.active {
-            display: block;
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-
-        /* Scrollbar */
-        .window-view::-webkit-scrollbar { width: 8px; }
-        .window-view::-webkit-scrollbar-track { background: transparent; }
-        .window-view::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        .window-view::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.4); }
-
-        /* --- PENCERE 1: ANA SAYFA --- */
-        .hero-layout {
+        /* --- HERO BÖLÜMÜ --- */
+        .hero {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             text-align: center;
-            min-height: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
+            padding: 120px 5% 60px;
+            position: relative;
         }
 
         .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            color: #60a5fa;
-            padding: 10px 26px;
+            background: rgba(147, 51, 234, 0.1);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            color: var(--accent-light-purple);
+            padding: 8px 20px;
             border-radius: 30px;
             font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 32px;
-            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .hero-title {
+        .hero h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 4.5rem;
+            font-size: clamp(3rem, 6vw, 5.5rem);
             font-weight: 700;
             line-height: 1.1;
-            letter-spacing: -1.5px;
             margin-bottom: 24px;
+            max-width: 1000px;
         }
 
-        .hero-title span {
-            background: linear-gradient(135deg, #60a5fa, #c084fc, #38bdf8);
+        .hero h1 span {
+            background: linear-gradient(to right, #c084fc, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-description {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            max-width: 760px;
-            margin-bottom: 48px;
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 50px;
             font-weight: 300;
         }
 
-        .btn-main {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 18px 42px;
-            border-radius: var(--radius-btn);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            cursor: pointer;
-            display: inline-flex;
+        /* --- SPONSOR / PARTNER BÖLÜMÜ --- */
+        .partners {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 12px;
-            transition: var(--transition-smooth);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-            text-decoration: none;
-            letter-spacing: 0.5px;
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            max-width: 800px;
         }
 
-        .btn-main:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.45);
+        .partners-text {
+            font-size: 0.85rem;
+            color: var(--text-darker);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
         }
 
-        /* --- PENCERE 2: MAĞAZA (SHOPIER) --- */
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 16px;
+        .partner-logos {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 16px;
+            gap: 40px;
         }
 
-        .section-sub {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            font-weight: 300;
+        .partner-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            opacity: 0.7;
+            transition: var(--transition-smooth);
         }
 
-        /* E-Ticaret Ürün Izgarası */
-        .shop-grid {
+        .partner-logo.shopier {
+            color: #00D084; /* Shopier'in andıran yeşil tonu */
+            opacity: 0.9;
+        }
+
+        .partner-logo.shopier i {
+            font-size: 1.8rem;
+        }
+
+        /* --- MAĞAZA (ÜRÜNLER) BÖLÜMÜ --- */
+        .store-section {
+            padding: 100px 5%;
+            background: var(--bg-lighter);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .store-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 32px;
-            max-width: 1300px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .product-card {
-            background: var(--surface-card);
+            background: var(--surface-glass);
             border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            padding: 40px 32px;
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
             transition: var(--transition-smooth);
             display: flex;
             flex-direction: column;
-            position: relative;
             overflow: hidden;
         }
 
         .product-card:hover {
-            background: var(--surface-card-hover);
             border-color: var(--border-glow);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 30px rgba(59, 130, 246, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(147, 51, 234, 0.15);
+        }
+
+        /* Kart içi parlama efekti */
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(147, 51, 234, 0.1);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--accent-light-purple);
+            margin-bottom: 24px;
+        }
+
+        .product-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .product-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        .product-features li i {
+            color: var(--accent-blue);
+            margin-top: 4px;
         }
 
         .product-price {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: #fff;
             margin-bottom: 24px;
             display: flex;
-            align-items: flex-start;
-            gap: 4px;
+            align-items: baseline;
+            gap: 5px;
         }
 
         .product-price span {
             font-size: 1rem;
-            color: var(--text-muted);
-            margin-top: 6px;
+            color: var(--text-darker);
+            font-weight: 400;
         }
 
-        .product-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
-
-        .product-card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 32px;
-            flex: 1;
-        }
-
-        .features-list {
-            list-style: none;
-            margin-bottom: 36px;
-        }
-
-        .features-list li {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .features-list li i {
-            color: var(--accent-primary);
-        }
-
-        /* Shopier Butonu Özelleştirmesi */
-        .btn-shopier {
-            background: #ffffff;
-            color: #000000;
-            font-weight: 700;
-            font-size: 1.05rem;
-            padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-            text-decoration: none;
+        /* --- ANİMASYONLU SATIN AL BUTONU --- */
+        .btn-buy {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
+            width: 100%;
+            padding: 18px;
+            background: #110c1f;
+            border: 1px solid var(--accent-purple);
+            border-radius: 14px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            overflow: hidden;
             transition: var(--transition-smooth);
-            border: none;
-            width: 100%;
+            z-index: 1;
         }
 
-        .btn-shopier:hover {
-            background: #f8fafc;
-            transform: scale(1.03);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+        /* Butonun içinden geçen parlama animasyonu */
+        .btn-buy::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.6), transparent);
+            transform: skewX(-20deg);
+            transition: 0s;
+            z-index: -1;
         }
 
-        /* FOOTER */
+        .btn-buy:hover {
+            background: var(--accent-purple);
+            box-shadow: 0 0 25px rgba(147, 51, 234, 0.4);
+            transform: scale(1.02);
+        }
+
+        .btn-buy:hover::before {
+            animation: shine 0.8s ease-out;
+        }
+
+        @keyframes shine {
+            100% { left: 200%; }
+        }
+
+        /* --- FOOTER --- */
         footer {
-            height: 56px;
-            width: 100%;
-            padding: 0 32px;
-            background: var(--surface-glass);
-            backdrop-filter: blur(24px);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-main);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+            color: var(--text-darker);
             font-size: 0.9rem;
-            color: var(--text-muted);
-            flex-shrink: 0;
+            background: var(--bg-dark);
         }
 
-        @media (max-width: 900px) {
-            .app-container { padding: 16px; gap: 16px; }
-            header { height: auto; padding: 20px; flex-direction: column; gap: 20px; }
-            .header-tabs { width: 100%; justify-content: center; flex-wrap: wrap; }
-            .hero-title { font-size: 3rem; }
-            .window-view { padding: 40px 24px; }
-            .shop-grid { grid-template-columns: 1fr; }
+        @media (max-width: 768px) {
+            header { padding: 20px; }
+            .nav-links { display: none; } /* Mobilde menüyü gizle (hamburger menü eklenebilir) */
+            .hero { padding-top: 150px; }
+            .hero h1 { font-size: 2.5rem; }
+            .store-section { padding: 60px 5%; }
+            .section-header h2 { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="bg-canvas"></canvas>
+    <div class="ambient-background"></div>
+    <div class="noise-overlay"></div>
 
-    <div class="ambient-glows">
-        <div class="glow-sphere glow-1"></div>
-        <div class="glow-sphere glow-2"></div>
-    </div>
-    <div class="grid-pattern"></div>
+    <header>
+        <a href="#" class="brand">
+            <i class="fas fa-layer-group"></i> SensiSoftware
+        </a>
+        <nav class="nav-links">
+            <a href="#home">Ana Sayfa</a>
+            <a href="#store">Modüller</a>
+            <a href="#docs">Dökümantasyon</a>
+        </nav>
+    </header>
 
-    <div class="app-container">
-
-        <header>
-            <a class="brand-logo" onclick="switchTab('home')">
-                <div class="brand-icon"><i class="fas fa-cube"></i></div>
-                <div class="brand-text">
-                    Sensi<span>Software</span>
+    <section id="home" class="hero">
+        <div class="hero-badge">Sensi Engine v2.4</div>
+        <h1>Gelişmiş Mimari, <br><span>Sınır Tanımayan Yazılımlar.</span></h1>
+        <p>Projelerinize entegre edebileceğiniz modüler masaüstü arayüz sistemleri, düşük gecikmeli render motorları ve oyun mekaniği analiz araçları.</p>
+        
+        <div class="partners">
+            <div class="partners-text">Resmi Ödeme Altyapısı</div>
+            <div class="partner-logos">
+                <!-- Shopier Logosu/Vurgusu -->
+                <div class="partner-logo shopier">
+                    <i class="fas fa-shield-check"></i>
+                    <span>Shopier</span>
                 </div>
-            </a>
-
-            <div class="header-tabs">
-                <button class="tab-btn active" data-tab="home" onclick="switchTab('home')">
-                    <i class="fas fa-house"></i> Ana Sayfa
-                </button>
-                <button class="tab-btn" data-tab="shop" onclick="switchTab('shop')">
-                    <i class="fas fa-shopping-bag"></i> Mağaza
-                </button>
-                <button class="tab-btn" data-tab="docs" onclick="switchTab('docs')">
-                    <i class="fas fa-book-open"></i> Dökümantasyon
-                </button>
-            </div>
-        </header>
-
-        <div class="view-viewport">
-
-            <!-- ANA SAYFA -->
-            <div id="view-home" class="window-view active">
-                <div class="hero-layout">
-                    <div class="hero-badge">
-                        <i class="fas fa-sparkles"></i> SensiSoftware Premium Mimarisi
-                    </div>
-                    <h1 class="hero-title">Gelişmiş Yazılım & <span>Profesyonel Çözümler</span></h1>
-                    <p class="hero-description">
-                        Modern arayüz tasarımları, gelişmiş analiz sistemleri ve yüksek performanslı masaüstü yazılım mimarileriyle projelerinize seviye atlatın.
-                    </p>
-                    
-                    <button class="btn-main" onclick="switchTab('shop')">
-                        <i class="fas fa-store"></i> Mağazayı Keşfet
-                    </button>
+                <div class="partner-logo">
+                    <i class="fab fa-python"></i>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- MAĞAZA (SHOPIER) PENCERESİ -->
-            <div id="view-shop" class="window-view">
-                <div class="section-header">
-                    <h2 class="section-title"><i class="fas fa-store" style="color: var(--accent-primary);"></i> Lisans & Ürünler</h2>
-                    <p class="section-sub">Tüm satın alımlar Shopier güvencesiyle anında dijital olarak teslim edilir.</p>
-                </div>
+    <section id="store" class="store-section">
+        <div class="section-header">
+            <h2>Dijital Mağaza</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Güvenli altyapı üzerinden anında teslimat.</p>
+        </div>
 
-                <div class="shop-grid">
-                    
-                    <!-- Ürün 1 -->
-                    <div class="product-card">
-                        <div class="product-price">₺899 <span>/ lisans</span></div>
-                        <h3>Sensi Auth & GUI Framework</h3>
-                        <p>Python tabanlı gelişmiş masaüstü arayüz mimarisi. Kullanıcı girişi, admin paneli ve ticket destek sistemi entegre gelir.</p>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check"></i> Tkinter / Pygame Desteği</li>
-                            <li><i class="fas fa-check"></i> Dinamik Profil Navigasyonları</li>
-                            <li><i class="fas fa-check"></i> 7/24 Teknik Altyapı Desteği</li>
-                        </ul>
-                        <!-- Kendi Shopier linkini href içerisine ekle -->
-                        <a href="https://shopier.com/SENSISOFTWARE_URUN_LINKI" target="_blank" class="btn-shopier">
-                            <i class="fas fa-credit-card"></i> Shopier ile Satın Al
-                        </a>
-                    </div>
+        <div class="store-grid">
+            
+            <!-- ÜRÜN 1 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-window-restore"></i></div>
+                <h3 class="product-title">Sensi GUI Framework</h3>
+                <p class="product-desc">Modüler mimari ile tasarlanmış masaüstü uygulama arayüz kütüphanesi. Kullanıcı doğrulama (auth), destek biletleri ve admin paneli hazır gelir.</p>
+                
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Tkinter / Pygame Entegrasyonu</li>
+                    <li><i class="fas fa-check"></i> Dinamik Profil Navigasyonu</li>
+                    <li><i class="fas fa-check"></i> Özelleştirilebilir Tema Sistemi</li>
+                </ul>
 
-                    <!-- Ürün 2 -->
-                    <div class="product-card">
-                        <div class="product-price">₺1,499 <span>/ lisans</span></div>
-                        <h3>Sensi Overlay & Radar Engine</h3>
-                        <p>Dışarıdan (external) 2D render imkanı sunan, düşük gecikmeli bellek okuma/yazma (pymem) yönetim aracı.</p>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check"></i> Gelişmiş ViewMatrix Algoritmaları</li>
-                            <li><i class="fas fa-check"></i> Düşük CPU/RAM Tüketimi</li>
-                            <li><i class="fas fa-check"></i> Tam Özelleştirilebilir Çizim Motoru</li>
-                        </ul>
-                        <!-- Kendi Shopier linkini href içerisine ekle -->
-                        <a href="https://shopier.com/SENSISOFTWARE_URUN_LINKI" target="_blank" class="btn-shopier">
-                            <i class="fas fa-credit-card"></i> Shopier ile Satın Al
-                        </a>
-                    </div>
-
-                    <!-- Ürün 3 -->
-                    <div class="product-card">
-                        <div class="product-price">₺650 <span>/ lisans</span></div>
-                        <h3>FPS Mechanics Analyzer Pro</h3>
-                        <p>Oyun mekaniklerini analiz etmek ve sunucu bazlı eğitim simülasyonları tasarlamak için özel test yazılımı.</p>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check"></i> Yaw / Pitch Açı Hesaplamaları</li>
-                            <li><i class="fas fa-check"></i> Modüler Dosya Mimarisi</li>
-                            <li><i class="fas fa-check"></i> Lokal Sunucu Test İmkanı</li>
-                        </ul>
-                        <!-- Kendi Shopier linkini href içerisine ekle -->
-                        <a href="https://shopier.com/SENSISOFTWARE_URUN_LINKI" target="_blank" class="btn-shopier">
-                            <i class="fas fa-credit-card"></i> Shopier ile Satın Al
-                        </a>
-                    </div>
-
-                </div>
+                <div class="product-price">₺899 <span>/ lisans</span></div>
+                
+                <a href="https://shopier.com/LINK_BURAYA" target="_blank" class="btn-buy">
+                    Satın Al <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
 
-            <!-- DÖKÜMANTASYON -->
-            <div id="view-docs" class="window-view">
-                <div class="section-header">
-                    <h2 class="section-title"><i class="fas fa-book-open" style="color: var(--accent-primary);"></i> Bilgi Bankası</h2>
-                    <p class="section-sub">Satın aldığınız modüllerin entegrasyonu ve API kullanımı.</p>
-                </div>
-                <div class="hero-layout" style="min-height: auto; max-width: 800px;">
-                    <p class="hero-description" style="text-align: center;">
-                        Shopier üzerinden satın aldığınız lisans anahtarlarını, yazılımı açtıktan sonra "Aktivasyon" bölümüne girerek tam sürüme geçiş yapabilirsiniz. Detaylı rehberler satın alım sonrası mail adresinize iletilmektedir.
-                    </p>
-                </div>
+            <!-- ÜRÜN 2 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-crosshairs"></i></div>
+                <h3 class="product-title">External Radar & Overlay</h3>
+                <p class="product-desc">Harici (external) render imkanı sunan, düşük gecikmeli bellek yönetimi (pymem) aracı. Dinamik ofset güncellemelerini destekler.</p>
+                
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Gelişmiş ViewMatrix Algoritmaları</li>
+                    <li><i class="fas fa-check"></i> Düşük CPU/RAM Tüketimi</li>
+                    <li><i class="fas fa-check"></i> 2D Dış Çizim (Overlay) Motoru</li>
+                </ul>
+
+                <div class="product-price">₺1,499 <span>/ lisans</span></div>
+                
+                <a href="https://shopier.com/LINK_BURAYA" target="_blank" class="btn-buy">
+                    Satın Al <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- ÜRÜN 3 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-server"></i></div>
+                <h3 class="product-title">FPS Mechanics Simulator</h3>
+                <p class="product-desc">Kendi sunucunuzda test edebileceğiniz, mekanik analiz ve eğitim odaklı simülasyon yazılım mimarisi.</p>
+                
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Yaw & Pitch Trigonometrik Hesapları</li>
+                    <li><i class="fas fa-check"></i> Modüler Dosya Yapısı</li>
+                    <li><i class="fas fa-check"></i> Lokal Sunucu Mimarisi</li>
+                </ul>
+
+                <div class="product-price">₺650 <span>/ lisans</span></div>
+                
+                <a href="https://shopier.com/LINK_BURAYA" target="_blank" class="btn-buy">
+                    Satın Al <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
 
         </div>
+    </section>
 
-        <footer>
-            <div>&copy; 2026 SensiSoftware. Tüm hakları saklıdır.</div>
-            <div>Güvenli Alışveriş by Shopier</div>
-        </footer>
+    <footer>
+        <p>&copy; 2026 SensiSoftware. Tüm hakları saklıdır. Shopier güvencesiyle korunmaktadır.</p>
+    </footer>
 
-    </div>
-
-    <script>
-        // PENCERE / SEKME DEĞİŞTİRİCİ MOTOR
-        function switchTab(tabName) {
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-tab') === tabName) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-
-            const views = document.querySelectorAll('.window-view');
-            views.forEach(view => {
-                view.classList.remove('active');
-            });
-
-            const targetView = document.getElementById('view-' + tabName);
-            if (targetView) {
-                targetView.classList.add('active');
-            }
-        }
-
-        // CANLI PARÇACIK MOTORU (PARTICLES) - Biraz daha sakinleştirildi
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                this.speedY = (Math.random() - 0.5) * 0.4;
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-
-            draw() {
-                ctx.fillStyle = 'rgba(96, 165, 250, 0.3)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            const count = Math.floor((canvas.width * canvas.height) / 25000);
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
-            }
-        }
-        initParticles();
-
-        function drawLines() {
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a; b < particles.length; b++) {
-                    let dx = particles[a].x - particles[b].x;
-                    let dy = particles[a].y - particles[b].y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 120) {
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.8 - dist / 120})`;
-                        ctx.lineWidth = 0.4;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            drawLines();
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
 </body>
 </html>

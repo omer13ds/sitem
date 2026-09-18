@@ -9,10 +9,11 @@
     <style>
         :root {
             --bg-body: #05070c;
-            --surface-glass: rgba(15, 20, 32, 0.65);
-            --surface-card: rgba(22, 28, 45, 0.5);
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(59, 130, 246, 0.4);
+            --surface-glass: rgba(15, 20, 32, 0.55);
+            --surface-card: rgba(22, 28, 45, 0.4);
+            --surface-card-hover: rgba(30, 38, 56, 0.6);
+            --border-glass: rgba(255, 255, 255, 0.06);
+            --border-glow: rgba(59, 130, 246, 0.3);
             
             --accent-primary: #3b82f6;
             --accent-secondary: #8b5cf6;
@@ -23,9 +24,9 @@
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
             
-            --radius-main: 20px;
-            --radius-btn: 12px;
-            --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            --radius-main: 24px;
+            --radius-btn: 14px;
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -65,27 +66,25 @@
         .glow-sphere {
             position: absolute;
             border-radius: 50%;
-            filter: blur(140px);
-            opacity: 0.25;
-            animation: pulseGlow 16s ease-in-out infinite alternate;
+            filter: blur(160px);
+            opacity: 0.20;
+            animation: pulseGlow 20s ease-in-out infinite alternate;
         }
 
-        .glow-1 { width: 650px; height: 650px; background: var(--accent-primary); top: -200px; left: -150px; }
-        .glow-2 { width: 600px; height: 600px; background: var(--accent-secondary); bottom: -200px; right: -150px; animation-delay: -5s; }
-        .glow-3 { width: 450px; height: 450px; background: var(--accent-cyan); top: 30%; left: 40%; opacity: 0.15; animation-delay: -10s; }
+        .glow-1 { width: 700px; height: 700px; background: var(--accent-primary); top: -250px; left: -200px; }
+        .glow-2 { width: 650px; height: 650px; background: var(--accent-secondary); bottom: -250px; right: -200px; animation-delay: -5s; }
 
         @keyframes pulseGlow {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
-            100% { transform: translate(60px, 40px) scale(1.15); opacity: 0.3; }
+            0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+            100% { transform: translate(80px, 50px) scale(1.1); opacity: 0.25; }
         }
 
         .grid-pattern {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-            background-size: 32px 32px;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -1;
-            opacity: 0.6;
             pointer-events: none;
         }
 
@@ -95,8 +94,10 @@
             flex-direction: column;
             height: 100vh;
             width: 100vw;
-            padding: 20px 28px;
-            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px 40px;
+            gap: 24px;
         }
 
         /* --- HİZALANMIŞ ÜST MENÜ (HEADER) --- */
@@ -104,45 +105,44 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 72px;
+            height: 80px;
             width: 100%;
-            padding: 0 24px;
+            padding: 0 32px;
             background: var(--surface-glass);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-main);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             flex-shrink: 0;
             z-index: 50;
         }
 
-        /* LOGO VE BİLGİ ALANI */
         .brand-logo {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             text-decoration: none;
             cursor: pointer;
         }
 
         .brand-icon {
-            width: 42px;
-            height: 42px;
+            width: 46px;
+            height: 46px;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 1.25rem;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            font-size: 1.4rem;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .brand-text {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-primary);
             letter-spacing: -0.5px;
@@ -157,42 +157,13 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.25);
-            color: var(--accent-emerald);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: 6px;
-        }
-
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--accent-emerald);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent-emerald);
-            animation: blink 2s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        /* SAĞA HİZALANMIŞ SEKME BUTONLARI */
         .header-tabs {
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 6px;
-            border-radius: 14px;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            border-radius: 16px;
             border: 1px solid var(--border-glass);
         }
 
@@ -201,40 +172,28 @@
             border: 1px solid transparent;
             color: var(--text-secondary);
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            padding: 10px 22px;
-            border-radius: 10px;
+            padding: 12px 26px;
+            border-radius: 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 9px;
+            gap: 10px;
             transition: var(--transition-smooth);
             outline: none;
-            user-select: none;
-        }
-
-        .tab-btn i {
-            font-size: 0.95rem;
-            transition: var(--transition-smooth);
         }
 
         .tab-btn:hover {
             color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .tab-btn.active {
             color: #ffffff;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3));
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25));
             border-color: var(--border-glow);
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
-        }
-
-        .tab-btn.active i {
-            color: #60a5fa;
-            transform: scale(1.1);
+            box-shadow: 0 4px 25px rgba(59, 130, 246, 0.2);
         }
 
         /* --- DİNAMİK PENCERE (VIEWPORT) ALANI --- */
@@ -247,22 +206,20 @@
             border-radius: var(--radius-main);
         }
 
-        /* PENCERE EKRANLARI DÜZENİ */
         .window-view {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: var(--surface-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-main);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-            padding: 40px 50px;
+            padding: 60px 80px; /* Ferahlık için padding artırıldı */
             overflow-y: auto;
             display: none;
             opacity: 0;
-            transform: scale(0.98) translateY(12px);
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0.99) translateY(10px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .window-view.active {
@@ -271,11 +228,11 @@
             transform: scale(1) translateY(0);
         }
 
-        /* PENCERE KAYDIRMA ÇUBUĞU */
-        .window-view::-webkit-scrollbar { width: 6px; }
-        .window-view::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); border-radius: 10px; }
-        .window-view::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
-        .window-view::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.5); }
+        /* Scrollbar */
+        .window-view::-webkit-scrollbar { width: 8px; }
+        .window-view::-webkit-scrollbar-track { background: transparent; }
+        .window-view::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        .window-view::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.4); }
 
         /* --- PENCERE 1: ANA SAYFA --- */
         .hero-layout {
@@ -285,32 +242,32 @@
             justify-content: center;
             text-align: center;
             min-height: 100%;
-            max-width: 960px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(59, 130, 246, 0.12);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            gap: 10px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.25);
             color: #60a5fa;
-            padding: 8px 22px;
+            padding: 10px 26px;
             border-radius: 30px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 24px;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+            margin-bottom: 32px;
+            letter-spacing: 0.5px;
         }
 
         .hero-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.8rem;
+            font-size: 4.5rem;
             font-weight: 700;
-            line-height: 1.12;
+            line-height: 1.1;
             letter-spacing: -1.5px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .hero-title span {
@@ -320,317 +277,187 @@
         }
 
         .hero-description {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 680px;
-            margin-bottom: 36px;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 50px;
+            line-height: 1.8;
+            max-width: 760px;
+            margin-bottom: 48px;
+            font-weight: 300;
         }
 
         .btn-main {
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             color: #ffffff;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 16px 36px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 18px 42px;
             border-radius: var(--radius-btn);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             transition: var(--transition-smooth);
-            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.35);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
             text-decoration: none;
+            letter-spacing: 0.5px;
         }
 
         .btn-main:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.5);
-        }
-
-        .btn-outline {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-            font-weight: 600;
-            font-size: 1rem;
-            padding: 16px 36px;
-            border-radius: var(--radius-btn);
-            border: 1px solid var(--border-glass);
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition-smooth);
-            text-decoration: none;
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .stat-card {
-            background: var(--surface-card);
-            border: 1px solid var(--border-glass);
-            padding: 20px;
-            border-radius: 16px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: var(--transition-smooth);
-        }
-
-        .stat-card:hover {
-            border-color: var(--border-glow);
             transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.45);
         }
 
-        .stat-number {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #60a5fa;
-            margin-bottom: 4px;
+        /* --- PENCERE 2: MAĞAZA (SHOPIER) --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
         }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* --- PENCERE 2: HİZMETLER --- */
+        
         .section-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.2rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 16px;
         }
 
         .section-sub {
             color: var(--text-secondary);
-            font-size: 1.05rem;
-            margin-bottom: 36px;
+            font-size: 1.2rem;
+            font-weight: 300;
         }
 
-        .cards-grid {
+        /* E-Ticaret Ürün Izgarası */
+        .shop-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .card-item {
-            background: var(--surface-card);
-            border: 1px solid var(--border-glass);
-            padding: 32px 26px;
-            border-radius: 18px;
-            transition: var(--transition-smooth);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card-item:hover {
-            border-color: var(--border-glow);
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(59, 130, 246, 0.15);
-        }
-
-        .card-icon-wrapper {
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            color: #60a5fa;
-            margin-bottom: 20px;
-        }
-
-        .card-item h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .card-item p {
-            color: var(--text-secondary);
-            font-size: 0.92rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .card-tag {
-            align-self: flex-start;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-glass);
-            color: var(--text-muted);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.78rem;
-            font-weight: 600;
-        }
-
-        /* --- PENCERE 3: İNDİR --- */
-        .download-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            min-height: 100%;
-            max-width: 800px;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 32px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
-        .download-box-hero {
-            background: linear-gradient(180deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+        .product-card {
+            background: var(--surface-card);
             border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            padding: 50px 40px;
-            width: 100%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .download-app-icon {
-            width: 84px;
-            height: 84px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: #ffffff;
-            margin: 0 auto 24px;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .dl-specs {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin: 28px 0 36px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            flex-wrap: wrap;
-        }
-
-        .dl-specs span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 8px 16px;
-            border-radius: 10px;
-            border: 1px solid var(--border-glass);
-        }
-
-        .dl-specs span i { color: #60a5fa; }
-
-        /* --- PENCERE 4: REHBER --- */
-        .docs-grid {
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            gap: 28px;
-            height: 100%;
-        }
-
-        .docs-sidebar {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border-glass);
-            border-radius: 16px;
-            padding: 16px;
+            border-radius: 20px;
+            padding: 40px 32px;
+            transition: var(--transition-smooth);
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .doc-link {
-            padding: 12px 16px;
-            border-radius: 10px;
+        .product-card:hover {
+            background: var(--surface-card-hover);
+            border-color: var(--border-glow);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 30px rgba(59, 130, 246, 0.15);
+        }
+
+        .product-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .product-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .product-card p {
             color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            flex: 1;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 36px;
+        }
+
+        .features-list li {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: var(--transition-smooth);
-            cursor: pointer;
         }
 
-        .doc-link:hover, .doc-link.active {
-            background: rgba(59, 130, 246, 0.15);
-            color: #60a5fa;
+        .features-list li i {
+            color: var(--accent-primary);
         }
 
-        .doc-content {
-            background: var(--surface-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 16px;
-            padding: 30px;
-            line-height: 1.7;
-        }
-
-        .doc-content h3 { font-size: 1.4rem; margin-bottom: 14px; }
-        .doc-content p { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.95rem; }
-
-        .code-box {
-            background: #090d16;
-            border: 1px solid var(--border-glass);
+        /* Shopier Butonu Özelleştirmesi */
+        .btn-shopier {
+            background: #ffffff;
+            color: #000000;
+            font-weight: 700;
+            font-size: 1.05rem;
             padding: 16px;
-            border-radius: 10px;
-            font-family: monospace;
-            color: #38bdf8;
-            font-size: 0.9rem;
-            margin-top: 15px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: var(--transition-smooth);
+            border: none;
+            width: 100%;
+        }
+
+        .btn-shopier:hover {
+            background: #f8fafc;
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
         }
 
         /* FOOTER */
         footer {
-            height: 48px;
+            height: 56px;
             width: 100%;
-            padding: 0 24px;
+            padding: 0 32px;
             background: var(--surface-glass);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-main);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 0.82rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
             flex-shrink: 0;
         }
 
-        @media (max-width: 850px) {
-            .app-container { padding: 12px; gap: 12px; }
-            header { height: auto; padding: 14px; flex-direction: column; gap: 12px; }
-            .header-tabs { width: 100%; justify-content: center; }
-            .hero-title { font-size: 2.4rem; }
-            .stats-grid, .docs-grid { grid-template-columns: 1fr; }
+        @media (max-width: 900px) {
+            .app-container { padding: 16px; gap: 16px; }
+            header { height: auto; padding: 20px; flex-direction: column; gap: 20px; }
+            .header-tabs { width: 100%; justify-content: center; flex-wrap: wrap; }
+            .hero-title { font-size: 3rem; }
+            .window-view { padding: 40px 24px; }
+            .shop-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -641,7 +468,6 @@
     <div class="ambient-glows">
         <div class="glow-sphere glow-1"></div>
         <div class="glow-sphere glow-2"></div>
-        <div class="glow-sphere glow-3"></div>
     </div>
     <div class="grid-pattern"></div>
 
@@ -653,144 +479,110 @@
                 <div class="brand-text">
                     Sensi<span>Software</span>
                 </div>
-                <div class="status-badge">
-                    <div class="status-dot"></div> ONLINE
-                </div>
             </a>
 
             <div class="header-tabs">
                 <button class="tab-btn active" data-tab="home" onclick="switchTab('home')">
                     <i class="fas fa-house"></i> Ana Sayfa
                 </button>
-                <button class="tab-btn" data-tab="services" onclick="switchTab('services')">
-                    <i class="fas fa-layer-group"></i> Hizmetler
-                </button>
-                <button class="tab-btn" data-tab="download" onclick="switchTab('download')">
-                    <i class="fas fa-download"></i> İndir
+                <button class="tab-btn" data-tab="shop" onclick="switchTab('shop')">
+                    <i class="fas fa-shopping-bag"></i> Mağaza
                 </button>
                 <button class="tab-btn" data-tab="docs" onclick="switchTab('docs')">
-                    <i class="fas fa-book-open"></i> Rehber
+                    <i class="fas fa-book-open"></i> Dökümantasyon
                 </button>
             </div>
         </header>
 
         <div class="view-viewport">
 
+            <!-- ANA SAYFA -->
             <div id="view-home" class="window-view active">
                 <div class="hero-layout">
                     <div class="hero-badge">
-                        <i class="fas fa-sparkles"></i> SensiSoftware Platform v2.4
+                        <i class="fas fa-sparkles"></i> SensiSoftware Premium Mimarisi
                     </div>
-                    <h1 class="hero-title">Gelişmiş Yazılım & <span>Dijital Araçlar</span></h1>
+                    <h1 class="hero-title">Gelişmiş Yazılım & <span>Profesyonel Çözümler</span></h1>
                     <p class="hero-description">
-                        SensiSoftware; yüksek performanslı masaüstü araçlarını, özel modülleri ve kapsamlı teknoloji dökümanlarını tek bir pencerede birleştiren entegre ekosistemdir.
+                        Modern arayüz tasarımları, gelişmiş analiz sistemleri ve yüksek performanslı masaüstü yazılım mimarileriyle projelerinize seviye atlatın.
                     </p>
                     
-                    <div class="hero-actions">
-                        <button class="btn-main" onclick="switchTab('download')">
-                            <i class="fas fa-rocket"></i> SensiLauncher İndir
-                        </button>
-                        <button class="btn-outline" onclick="switchTab('services')">
-                            <i class="fas fa-compass"></i> Modülleri Keşfet
-                        </button>
-                    </div>
-
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number"><i class="fas fa-bolt"></i> %100</div>
-                            <div class="stat-label">Optimize Kod Yapısı</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number"><i class="fas fa-shield-halved"></i> Güvenli</div>
-                            <div class="stat-label">Dahili Modül Koruması</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number"><i class="fas fa-cubes"></i> Multi-Tool</div>
-                            <div class="stat-label">Çok Yönlü Sistem</div>
-                        </div>
-                    </div>
+                    <button class="btn-main" onclick="switchTab('shop')">
+                        <i class="fas fa-store"></i> Mağazayı Keşfet
+                    </button>
                 </div>
             </div>
 
-            <div id="view-services" class="window-view">
-                <h2 class="section-title"><i class="fas fa-cubes" style="color: var(--accent-primary);"></i> Hizmetler & Modüller</h2>
-                <p class="section-sub">SensiSoftware platformu dahilindeki tüm sistem ve araç kategorileri.</p>
-
-                <div class="cards-grid">
-                    <div class="card-item">
-                        <div>
-                            <div class="card-icon-wrapper"><i class="fas fa-laptop-code"></i></div>
-                            <h3>Masaüstü Uygulamaları</h3>
-                            <p>Python ve modern grafik kütüphaneleri ile geliştirilmiş, yüksek yanıt hızına sahip arayüz yazılımları.</p>
-                        </div>
-                        <div class="card-tag">Uygulama</div>
-                    </div>
-
-                    <div class="card-item">
-                        <div>
-                            <div class="card-icon-wrapper"><i class="fas fa-sliders-h"></i></div>
-                            <h3>Sistem & Donanım Araçları</h3>
-                            <p>Sistem sürücüleri, GPU yapılandırmaları ve donanım optimizasyonları için yardımcı araçlar.</p>
-                        </div>
-                        <div class="card-tag">Sistem</div>
-                    </div>
-
-                    <div class="card-item">
-                        <div>
-                            <div class="card-icon-wrapper"><i class="fas fa-gamepad"></i></div>
-                            <h3>Oyun & Grafik Araçları</h3>
-                            <p>2D/3D oyun mekanikleri, Raylib/Godot entegrasyonları ve geliştirici araçları.</p>
-                        </div>
-                        <div class="card-tag">Geliştirici</div>
-                    </div>
-
-                    <div class="card-item">
-                        <div>
-                            <div class="card-icon-wrapper"><i class="fas fa-database"></i></div>
-                            <h3>Veri & İçerik Yönetimi</h3>
-                            <p>Bilgi dosyalarınızı düzenleyen, içerik paylaşımını kolaylaştıran verimli veri modülleri.</p>
-                        </div>
-                        <div class="card-tag">Veri</div>
-                    </div>
+            <!-- MAĞAZA (SHOPIER) PENCERESİ -->
+            <div id="view-shop" class="window-view">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fas fa-store" style="color: var(--accent-primary);"></i> Lisans & Ürünler</h2>
+                    <p class="section-sub">Tüm satın alımlar Shopier güvencesiyle anında dijital olarak teslim edilir.</p>
                 </div>
-            </div>
 
-            <div id="view-download" class="window-view">
-                <div class="download-container">
-                    <div class="download-box-hero">
-                        <div class="download-app-icon"><i class="fas fa-rocket"></i></div>
-                        <h2 class="section-title" style="justify-content: center;">SensiSoftware Launcher</h2>
-                        <p class="section-sub" style="margin-bottom: 20px;">Tüm uygulama, modül ve güncellenen araçlara erişmek için masaüstü başlatıcıyı edinin.</p>
-
-                        <div class="dl-specs">
-                            <span><i class="fab fa-windows"></i> Windows 10 / 11</span>
-                            <span><i class="fas fa-microchip"></i> 64-bit Mimarisi</span>
-                            <span><i class="fas fa-check-circle"></i> Sürüm 2.4.0</span>
-                        </div>
-
-                        <a href="#" class="btn-main" onclick="startDownload(event)">
-                            <i class="fas fa-download"></i> SensiSoftware Launcher İndir (.exe)
+                <div class="shop-grid">
+                    
+                    <!-- Ürün 1 -->
+                    <div class="product-card">
+                        <div class="product-price">₺899 <span>/ lisans</span></div>
+                        <h3>Sensi Auth & GUI Framework</h3>
+                        <p>Python tabanlı gelişmiş masaüstü arayüz mimarisi. Kullanıcı girişi, admin paneli ve ticket destek sistemi entegre gelir.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> Tkinter / Pygame Desteği</li>
+                            <li><i class="fas fa-check"></i> Dinamik Profil Navigasyonları</li>
+                            <li><i class="fas fa-check"></i> 7/24 Teknik Altyapı Desteği</li>
+                        </ul>
+                        <!-- Kendi Shopier linkini href içerisine ekle -->
+                        <a href="https://shopier.com/SENSISOFTWARE_URUN_LINKI" target="_blank" class="btn-shopier">
+                            <i class="fas fa-credit-card"></i> Shopier ile Satın Al
                         </a>
                     </div>
+
+                    <!-- Ürün 2 -->
+                    <div class="product-card">
+                        <div class="product-price">₺1,499 <span>/ lisans</span></div>
+                        <h3>Sensi Overlay & Radar Engine</h3>
+                        <p>Dışarıdan (external) 2D render imkanı sunan, düşük gecikmeli bellek okuma/yazma (pymem) yönetim aracı.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> Gelişmiş ViewMatrix Algoritmaları</li>
+                            <li><i class="fas fa-check"></i> Düşük CPU/RAM Tüketimi</li>
+                            <li><i class="fas fa-check"></i> Tam Özelleştirilebilir Çizim Motoru</li>
+                        </ul>
+                        <!-- Kendi Shopier linkini href içerisine ekle -->
+                        <a href="https://shopier.com/SENSISOFTWARE_URUN_LINKI" target="_blank" class="btn-shopier">
+                            <i class="fas fa-credit-card"></i> Shopier ile Satın Al
+                        </a>
+                    </div>
+
+                    <!-- Ürün 3 -->
+                    <div class="product-card">
+                        <div class="product-price">₺650 <span>/ lisans</span></div>
+                        <h3>FPS Mechanics Analyzer Pro</h3>
+                        <p>Oyun mekaniklerini analiz etmek ve sunucu bazlı eğitim simülasyonları tasarlamak için özel test yazılımı.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> Yaw / Pitch Açı Hesaplamaları</li>
+                            <li><i class="fas fa-check"></i> Modüler Dosya Mimarisi</li>
+                            <li><i class="fas fa-check"></i> Lokal Sunucu Test İmkanı</li>
+                        </ul>
+                        <!-- Kendi Shopier linkini href içerisine ekle -->
+                        <a href="https://shopier.com/SENSISOFTWARE_URUN_LINKI" target="_blank" class="btn-shopier">
+                            <i class="fas fa-credit-card"></i> Shopier ile Satın Al
+                        </a>
+                    </div>
+
                 </div>
             </div>
 
+            <!-- DÖKÜMANTASYON -->
             <div id="view-docs" class="window-view">
-                <h2 class="section-title"><i class="fas fa-book-open" style="color: var(--accent-primary);"></i> Bilgi Bankası & Rehber</h2>
-                <p class="section-sub">SensiSoftware kullanımı ve araç kurulumları hakkında dökümanlar.</p>
-
-                <div class="docs-grid">
-                    <div class="docs-sidebar">
-                        <div class="doc-link active" onclick="showDocContent('setup')"><i class="fas fa-gear"></i> Kurulum Adımları</div>
-                        <div class="doc-link" onclick="showDocContent('modules')"><i class="fas fa-puzzle-piece"></i> Modül Yönetimi</div>
-                        <div class="doc-link" onclick="showDocContent('faq')"><i class="fas fa-circle-question"></i> SSS</div>
-                    </div>
-
-                    <div class="doc-content" id="doc-body">
-                        <h3>1. SensiSoftware Kurulumu</h3>
-                        <p>Launcher dosyasını indirdikten sonra çalıştırmanız yeterlidir. Sistem otomatik olarak gerekli modülleri senkronize eder.</p>
-                        <div class="code-box">$ sensisoftware --init --check-updates</div>
-                    </div>
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fas fa-book-open" style="color: var(--accent-primary);"></i> Bilgi Bankası</h2>
+                    <p class="section-sub">Satın aldığınız modüllerin entegrasyonu ve API kullanımı.</p>
+                </div>
+                <div class="hero-layout" style="min-height: auto; max-width: 800px;">
+                    <p class="hero-description" style="text-align: center;">
+                        Shopier üzerinden satın aldığınız lisans anahtarlarını, yazılımı açtıktan sonra "Aktivasyon" bölümüne girerek tam sürüme geçiş yapabilirsiniz. Detaylı rehberler satın alım sonrası mail adresinize iletilmektedir.
+                    </p>
                 </div>
             </div>
 
@@ -798,7 +590,7 @@
 
         <footer>
             <div>&copy; 2026 SensiSoftware. Tüm hakları saklıdır.</div>
-            <div>SensiLauncher Active Engine v2.4</div>
+            <div>Güvenli Alışveriş by Shopier</div>
         </footer>
 
     </div>
@@ -826,40 +618,7 @@
             }
         }
 
-        function showDocContent(type) {
-            const docBody = document.getElementById('doc-body');
-            const links = document.querySelectorAll('.doc-link');
-            links.forEach(l => l.classList.remove('active'));
-
-            if (type === 'setup') {
-                links[0].classList.add('active');
-                docBody.innerHTML = `
-                    <h3>1. SensiSoftware Kurulumu</h3>
-                    <p>Launcher dosyasını indirdikten sonra çalıştırmanız yeterlidir. Sistem otomatik olarak gerekli modülleri senkronize eder.</p>
-                    <div class="code-box">$ sensisoftware --init --check-updates</div>
-                `;
-            } else if (type === 'modules') {
-                links[1].classList.add('active');
-                docBody.innerHTML = `
-                    <h3>2. Modül Yapılandırması</h3>
-                    <p>İçerisinde bulunan grafik, yazılım ve sistem araçlarını Launcher arayüzünden tek tıkla aktif edebilirsiniz.</p>
-                    <div class="code-box">$ sensisoftware module install --all</div>
-                `;
-            } else if (type === 'faq') {
-                links[2].classList.add('active');
-                docBody.innerHTML = `
-                    <h3>3. Sıkça Sorulan Sorular</h3>
-                    <p><b>S: Yazılımlar Windows 11 ile uyumlu mu?</b><br>C: Evet, tüm SensiSoftware araçları Windows 10/11 64-bit ile tam uyumludur.</p>
-                `;
-            }
-        }
-
-        function startDownload(e) {
-            e.preventDefault();
-            alert('SensiSoftware Launcher indirmesi başlatılıyor...');
-        }
-
-        // CANLI PARÇACIK MOTORU (PARTICLES)
+        // CANLI PARÇACIK MOTORU (PARTICLES) - Biraz daha sakinleştirildi
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -875,9 +634,9 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 0.7;
-                this.speedY = (Math.random() - 0.5) * 0.7;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
             }
 
             update() {
@@ -888,7 +647,7 @@
             }
 
             draw() {
-                ctx.fillStyle = 'rgba(96, 165, 250, 0.4)';
+                ctx.fillStyle = 'rgba(96, 165, 250, 0.3)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -897,7 +656,7 @@
 
         function initParticles() {
             particles = [];
-            const count = Math.floor((canvas.width * canvas.height) / 20000);
+            const count = Math.floor((canvas.width * canvas.height) / 25000);
             for (let i = 0; i < count; i++) {
                 particles.push(new Particle());
             }
@@ -911,9 +670,9 @@
                     let dy = particles[a].y - particles[b].y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
 
-                    if (dist < 110) {
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${1 - dist / 110})`;
-                        ctx.lineWidth = 0.5;
+                    if (dist < 120) {
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.8 - dist / 120})`;
+                        ctx.lineWidth = 0.4;
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
                         ctx.lineTo(particles[b].x, particles[b].y);

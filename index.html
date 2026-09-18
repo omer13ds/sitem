@@ -33,7 +33,7 @@
         h1, h2, h3, h4, .logo, .font-space { font-family: 'Space Grotesk', sans-serif; }
 
         /* --- HEADER --- */
-        header { width: 100%; padding: 25px 5vw; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; z-index: 100; border-bottom: 1px solid var(--border-light); background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); }
+        header { width: 100%; padding: 25px 5vw; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; z-index: 50; border-bottom: 1px solid var(--border-light); background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); }
         .header-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1700px; margin: 0 auto; }
         .logo { font-size: 1.6rem; font-weight: 700; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 12px; flex: 1; }
         .nav-menu { display: flex; gap: 6px; background: var(--bg-surface); padding: 6px; border-radius: 100px; border: 1px solid var(--border-light); }
@@ -58,24 +58,11 @@
         .dropdown-menu a { padding: 16px 20px; color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; transition: var(--transition-fast); }
         .dropdown-menu a:hover { background: var(--bg-elevated); color: var(--text-primary); padding-left: 25px; }
 
-        /* --- TIKLANMAMA SORUNUNUN ÇÖZÜLDÜĞÜ YER (DISPLAY: NONE) --- */
+        /* --- MAIN TABS --- */
         main { flex: 1; position: relative; width: 100%; }
-        .tab-content { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            padding: 40px 5vw 100px; 
-            display: none; /* Gizliyken sistemde fiziki yer kaplamaz, tıklamaları engellemez! */
-            overflow-y: auto; scrollbar-width: none; 
-        }
-        .tab-content.active { 
-            display: block; /* Sadece aktif olan sekme görünür */
-            animation: fadeSlideUp 0.4s ease forwards;
-        }
-
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
+        .tab-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 40px 5vw 100px; display: none; overflow-y: auto; scrollbar-width: none; }
+        .tab-content.active { display: block; animation: fadeSlideUp 0.4s ease forwards; z-index: 10; }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .tab-inner { width: 100%; max-width: 1700px; margin: 0 auto; }
 
         /* --- HOME --- */
@@ -92,7 +79,6 @@
         .product-card { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 40px; display: flex; flex-direction: column; position: relative; transition: all 0.3s ease; }
         .product-card:hover { border-color: var(--border-hover); transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
         
-        /* Şık Fiyat Seçim Barı */
         .price-toggle { display: flex; background: var(--bg-elevated); border-radius: 100px; padding: 6px; margin-bottom: 25px; border: 1px solid var(--border-light); }
         .price-toggle button { flex: 1; background: transparent; border: none; color: var(--text-secondary); padding: 10px; border-radius: 100px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: inherit; font-size: 0.9rem; }
         .price-toggle button.active { background: var(--text-primary); color: var(--bg-base); }
@@ -109,12 +95,12 @@
         .btn-buy { width: 100%; padding: 16px; background: var(--bg-elevated); color: var(--text-primary); border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-weight: 700; cursor: pointer; transition: 0.2s; }
         .btn-buy:hover { background: var(--text-primary); color: var(--bg-base); }
 
-        /* --- FORMLAR --- */
+        /* --- DESTEK --- */
         .form-box { background: var(--bg-surface); border: 1px solid var(--border-light); padding: 40px; border-radius: var(--radius-lg); }
         .input-base { width: 100%; background: var(--bg-base); border: 1px solid var(--border-light); color: var(--text-primary); padding: 16px; border-radius: var(--radius-sm); margin-bottom: 20px; outline: none; font-size: 1rem; font-family: inherit;}
         .input-base:focus { border-color: var(--text-secondary); }
 
-        /* --- PANEL LAYOUT (Kullanıcı & Admin) --- */
+        /* --- PANEL LAYOUT --- */
         .panel-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; height: 100%; }
         .sidebar { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 25px; display: flex; flex-direction: column; gap: 10px; }
         .sidebar button { background: transparent; color: var(--text-secondary); border: none; padding: 16px; text-align: left; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; font-size: 1rem; transition: 0.2s; }
@@ -135,21 +121,16 @@
         .btn-action-icon:hover { background: #1a1a1a; border-color: #555; }
         .btn-action-icon.ban { color: #f43f5e; border-color: #4c1d25; }
         .btn-action-icon.ban:hover { background: #2e0f14; border-color: #f43f5e; }
-
         .search-bar { width: 100%; padding: 14px; background: var(--bg-base); border: 1px solid var(--border-light); border-radius: var(--radius-sm); color: #fff; margin-bottom: 20px; font-family: inherit; outline: none; }
 
         /* --- MODALLAR --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
         .modal-box { background: var(--bg-surface); border: 1px solid var(--border-light); padding: 40px; border-radius: var(--radius-lg); width: 450px; position: relative; max-height: 90vh; overflow-y: auto;}
         .close-modal { position: absolute; top: 25px; right: 25px; cursor: pointer; color: var(--text-secondary); font-size: 1.5rem; }
-        
         .btn-submit { width: 100%; padding: 16px; background: var(--text-primary); color: var(--bg-base); border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: 0.2s; }
         .btn-submit:hover { background: #d4d4d4; }
-
-        /* TOAST BİLDİRİM */
         #toast { position: fixed; bottom: 30px; right: 30px; background: #fff; color: #000; padding: 16px 24px; border-radius: 8px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateX(150%); transition: transform 0.4s ease; z-index: 9999; display: flex; align-items: center; gap: 10px; }
         #toast.show { transform: translateX(0); }
-
         .profile-view { display: none; }
         .profile-view.active { display: block; animation: fadeSlideUp 0.3s ease; }
     </style>
@@ -193,17 +174,62 @@
                 <div class="home-layout">
                     <h1>Sınırları Zorlayan <br>Kusursuz Mimari.</h1>
                     <p>Karmaşadan uzak, modüler arayüzler ve düşük gecikmeli render motorları ile projelerinizi bir üst seviyeye taşıyın.</p>
-                    <button class="btn-large" onclick="switchTab('products')">Modüllere Göz At <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn-large" onclick="switchTab('products')">Göz At <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
 
-        <!-- ÜRÜNLER (TAMAMEN DİNAMİK VE ŞIK) -->
+        <!-- ÜRÜNLER -->
         <div id="tab-products" class="tab-content">
             <div class="tab-inner">
                 <div class="section-header"><h2>Lisanslı Ürünler</h2></div>
                 <div class="products-grid" id="store-products-container">
-                    <p style="color: var(--text-secondary);">Ürünler veritabanından yükleniyor...</p>
+                    <!-- ÜRÜN YÜKLENİYOR YAZISI YERİNE, SİTE BOŞ DURMASIN DİYE VARSAYILAN KARTLAR -->
+                    <!-- Veritabanında ürün varsa bunlar silinip yenisi gelecek -->
+                    <div class="product-card" id="default-product-1">
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fas fa-window-maximize"></i></div>
+                            <div class="price-tag"><h4 id="price-def1">₺899</h4><span id="period-def1">Sınırsız</span></div>
+                        </div>
+                        <h3>Sensi GUI Framework</h3>
+                        <p>Python projeleriniz için (Tkinter/Pygame) özel tasarlanmış masaüstü arayüz mimarisi.</p>
+                        <div class="price-toggle">
+                            <button onclick="changePrice('def1', 50, 'Günlük', this)">Günlük</button>
+                            <button onclick="changePrice('def1', 250, 'Aylık', this)">Aylık</button>
+                            <button class="active" onclick="changePrice('def1', 899, 'Sınırsız', this)">Sınırsız</button>
+                        </div>
+                        <button class="btn-buy">Satın Al</button>
+                    </div>
+
+                    <div class="product-card" id="default-product-2">
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fas fa-crosshairs"></i></div>
+                            <div class="price-tag"><h4 id="price-def2">₺1,499</h4><span id="period-def2">Sınırsız</span></div>
+                        </div>
+                        <h3>External Radar Engine</h3>
+                        <p>Düşük gecikmeli, harici 2D radar motoru. World-to-Screen hesaplamaları içerir.</p>
+                        <div class="price-toggle">
+                            <button onclick="changePrice('def2', 75, 'Günlük', this)">Günlük</button>
+                            <button onclick="changePrice('def2', 400, 'Aylık', this)">Aylık</button>
+                            <button class="active" onclick="changePrice('def2', 1499, 'Sınırsız', this)">Sınırsız</button>
+                        </div>
+                        <button class="btn-buy">Satın Al</button>
+                    </div>
+
+                    <div class="product-card" id="default-product-3">
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fas fa-server"></i></div>
+                            <div class="price-tag"><h4 id="price-def3">₺650</h4><span id="period-def3">Sınırsız</span></div>
+                        </div>
+                        <h3>FPS Mechanics Simulator</h3>
+                        <p>Oyun içi mekanikleri analiz etmek ve test etmek için geliştirilmiş eğitim aracı.</p>
+                        <div class="price-toggle">
+                            <button onclick="changePrice('def3', 30, 'Günlük', this)">Günlük</button>
+                            <button onclick="changePrice('def3', 150, 'Aylık', this)">Aylık</button>
+                            <button class="active" onclick="changePrice('def3', 650, 'Sınırsız', this)">Sınırsız</button>
+                        </div>
+                        <button class="btn-buy">Satın Al</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -213,6 +239,7 @@
             <div class="tab-inner" style="max-width: 800px;">
                 <div class="section-header"><h2>Destek Talebi Oluştur</h2></div>
                 <div class="form-box">
+                    <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem; margin-bottom: 25px;">Satın aldığınız modüllerin API entegrasyonları, ofset güncellemeleri veya mimari yapılandırmaları hakkında teknik destek ekibimizden anında yardım alabilirsiniz.</p>
                     <input type="text" id="ticket-subject" class="input-base" placeholder="Konu Başlığı">
                     <textarea id="ticket-msg" class="input-base" placeholder="Detaylı açıklama..." style="min-height: 120px;"></textarea>
                     <button class="btn-submit" onclick="createTicket()">Talebi Gönder</button>
@@ -220,7 +247,7 @@
             </div>
         </div>
 
-        <!-- HAKKIMIZDA (Geri Getirildi) -->
+        <!-- HAKKIMIZDA -->
         <div id="tab-about" class="tab-content">
             <div class="tab-inner">
                 <div class="section-header"><h2>Hakkımızda</h2></div>
@@ -236,7 +263,7 @@
             <div class="tab-inner" style="text-align: center; max-width: 600px; margin: 50px auto;">
                 <h2 class="font-space" style="font-size: 3rem;"><i class="fas fa-gift"></i> Aktif Çekiliş</h2>
                 <div style="font-size: 2.5rem; color: #fff; margin: 40px 0;" id="gw-timer" class="font-space">00:00:00</div>
-                <div style="font-size: 1.5rem; margin-bottom: 40px;" id="prize-display" class="font-space">Yönetici bekleniyor...</div>
+                <div style="font-size: 1.5rem; margin-bottom: 30px;" id="prize-display" class="font-space">Yönetici bekleniyor...</div>
                 <button class="btn-large" id="join-giveaway-btn" onclick="joinGiveaway()" style="width: 100%; justify-content:center;">Çekilişe Katıl</button>
             </div>
         </div>
@@ -264,7 +291,7 @@
                         <input type="text" id="prof-user" class="input-base" disabled>
                     </div>
 
-                    <!-- USER: LİSANSLARIM (TAMAMEN DİNAMİK) -->
+                    <!-- USER: LİSANSLARIM -->
                     <div id="p-view-licenses" class="profile-view">
                         <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Lisanslarım</h2>
                         <table class="data-table">
@@ -333,7 +360,6 @@
             <select id="perm-role" class="input-base">
                 <option value="user">Standart Üye</option>
                 <option value="admin">Yönetici (Admin)</option>
-                <option value="banned">Yasaklı (Banlı)</option>
             </select>
             <button class="btn-submit" onclick="savePermission()">Güncelle</button>
         </div>
@@ -390,36 +416,11 @@
     <!-- TOAST -->
     <div id="toast"><i class="fas fa-bell" style="color: var(--bg-base);"></i> <span id="toast-msg"></span></div>
 
+    <!-- ========================================== -->
+    <!-- SADECE UI (ARAYÜZ) JAVASCRIPT FONKSİYONLARI -->
+    <!-- ========================================== -->
     <script>
-        // ----------------------------------------------------
-        // FIREBASE ENTEGRASYONU 
-        // ----------------------------------------------------
-        const firebaseConfig = {
-            apiKey: "AIzaSyAjbkOwzOb4XTuhlCqex4bC-xD-pNi9HBI",
-            authDomain: "sensisoftware-a3ae2.firebaseapp.com",
-            projectId: "sensisoftware-a3ae2",
-            storageBucket: "sensisoftware-a3ae2.firebasestorage.app",
-            messagingSenderId: "797477198376",
-            appId: "1:797477198376:web:9873925454d8520424f31d"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-
-        // ----------------------------------------------------
-        // GLOBAL DEĞİŞKENLER & UI KONTROLLERİ
-        // ----------------------------------------------------
-        let currentUser = null; 
-        let currentModalMode = 'login';
-        
-        let allProducts = [];
-        let allUsers = [];
-        let allTickets = [];
-        
-        let activeAdminUserId = null; 
-        let activeTicketId = null; 
-
-        // Sekme Geçişi
+        // Her şeyden bağımsız UI Fonksiyonları (Hata çıksa bile çalışır)
         function switchTab(tabId) {
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             const targetBtn = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
@@ -430,7 +431,6 @@
             document.getElementById('profile-dropdown').style.display = 'none'; 
         }
 
-        // Profil İçi Geçiş
         function openProfile(view) {
             switchTab('profile');
             if(view === 'admin') {
@@ -444,7 +444,6 @@
         function switchProfileView(viewId) {
             document.querySelectorAll('.profile-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            
             document.querySelectorAll('.profile-view').forEach(view => view.classList.remove('active'));
             document.getElementById('p-view-' + viewId).classList.add('active');
         }
@@ -454,9 +453,9 @@
             menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // Modal Kapatıcı
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         
+        let currentModalMode = 'login';
         function openModal(mode) {
             currentModalMode = mode;
             document.getElementById('auth-modal').style.display = 'flex';
@@ -469,134 +468,13 @@
             }
         }
 
-        function toggleAuthMode() {
-            openModal(currentModalMode === 'login' ? 'register' : 'login');
-        }
+        function toggleAuthMode() { openModal(currentModalMode === 'login' ? 'register' : 'login'); }
 
         function showToast(msg) {
             document.getElementById('toast-msg').innerText = msg;
             const toast = document.getElementById('toast');
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 4000);
-        }
-
-        // ----------------------------------------------------
-        // FIREBASE AUTHENTICATION (KULLANICI ADI SİSTEMİ)
-        // ----------------------------------------------------
-        function handleAuth() {
-            const uname = document.getElementById('username').value.trim().toLowerCase();
-            const pass = document.getElementById('password').value;
-            if(!uname || !pass) return alert("Boş alan bırakmayın.");
-
-            const fakeEmail = uname + "@sensi.local";
-
-            if(uname === 'omer13ds' && pass === 'oyaali12') {
-                auth.signInWithEmailAndPassword(fakeEmail, pass).catch(err => {
-                    auth.createUserWithEmailAndPassword(fakeEmail, pass).then(cred => {
-                        db.collection('users').doc(cred.user.uid).set({ username: uname, email: fakeEmail, role: 'admin' });
-                    });
-                });
-            } else {
-                if(currentModalMode === 'login') {
-                    auth.signInWithEmailAndPassword(fakeEmail, pass).catch(err => alert("Giriş başarısız. Kullanıcı adı veya şifre yanlış."));
-                } else {
-                    auth.createUserWithEmailAndPassword(fakeEmail, pass).then(cred => {
-                        db.collection('users').doc(cred.user.uid).set({ username: uname, email: fakeEmail, role: 'user' });
-                        alert("Kayıt başarılı!");
-                    }).catch(err => alert("Kayıt hatası: " + err.message));
-                }
-            }
-        }
-
-        // Kullanıcı Durumu Dinleyicisi
-        auth.onAuthStateChanged(user => {
-            if(user) {
-                db.collection('users').doc(user.uid).get().then(doc => {
-                    if(doc.exists) {
-                        currentUser = { uid: user.uid, ...doc.data() };
-                        if(currentUser.role === 'banned') {
-                            alert("Hesabınız sistemden uzaklaştırılmıştır.");
-                            auth.signOut();
-                            return;
-                        }
-                        
-                        document.getElementById('prof-user').value = currentUser.username;
-                        document.getElementById('profile-initial').innerHTML = currentUser.username.charAt(0).toUpperCase();
-                        
-                        document.getElementById('guest-menu').style.display = 'none';
-                        document.getElementById('user-menu').style.display = 'flex';
-                        
-                        if(currentUser.role === 'admin') {
-                            document.getElementById('admin-btn').style.display = 'flex';
-                            document.getElementById('admin-sidebar-links').style.display = 'block';
-                        } else {
-                            document.getElementById('admin-btn').style.display = 'none';
-                            document.getElementById('admin-sidebar-links').style.display = 'none';
-                        }
-                        
-                        closeModal('auth-modal');
-                        loadUserLicenses();
-                    }
-                });
-            } else {
-                currentUser = null;
-                document.getElementById('guest-menu').style.display = 'flex';
-                document.getElementById('user-menu').style.display = 'none';
-                document.getElementById('user-licenses-body').innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kayıtlı bir lisansınız bulunmamaktadır.</td></tr>`;
-            }
-        });
-
-        function logoutUser() {
-            auth.signOut().then(() => {
-                switchTab('home');
-                document.getElementById('profile-dropdown').style.display = 'none';
-            });
-        }
-
-        // ----------------------------------------------------
-        // FIREBASE FIRESTORE VERİ ÇEKME VE DİNLEME
-        // ----------------------------------------------------
-
-        // 1. ÜRÜNLERİ ÇEK VE GÖSTER
-        db.collection("products").onSnapshot(snapshot => {
-            allProducts = [];
-            snapshot.forEach(doc => allProducts.push({ id: doc.id, ...doc.data() }));
-            renderStoreProducts();
-            renderAdminProducts();
-        });
-
-        function renderStoreProducts() {
-            const container = document.getElementById('store-products-container');
-            if(allProducts.length === 0) {
-                container.innerHTML = `<p style="color: var(--text-secondary);">Şu an mağazada aktif ürün bulunmamaktadır.</p>`;
-                return;
-            }
-            container.innerHTML = '';
-            
-            allProducts.forEach(prod => {
-                const div = document.createElement('div');
-                div.className = 'product-card';
-                div.innerHTML = `
-                    <div class="card-top">
-                        <div class="icon-box"><i class="fas fa-cube"></i></div>
-                        <div class="price-tag">
-                            <h4 id="price-${prod.id}">₺${prod.priceDaily || 0}</h4>
-                            <span id="period-${prod.id}">Günlük</span>
-                        </div>
-                    </div>
-                    <h3>${prod.name}</h3>
-                    <p>${prod.desc}</p>
-                    
-                    <div class="price-toggle">
-                        <button class="active" onclick="changePrice('${prod.id}', ${prod.priceDaily}, 'Günlük', this)">Günlük</button>
-                        <button onclick="changePrice('${prod.id}', ${prod.priceMonthly}, 'Aylık', this)">Aylık</button>
-                        <button onclick="changePrice('${prod.id}', ${prod.priceLifetime}, 'Sınırsız', this)">Sınırsız</button>
-                    </div>
-
-                    <button class="btn-buy" onclick="alert('Shopier modülü bağlanacak.')">Satın Al</button>
-                `;
-                container.appendChild(div);
-            });
         }
 
         function changePrice(id, price, period, btnElement) {
@@ -606,275 +484,411 @@
             for(let i=0; i<siblings.length; i++) siblings[i].classList.remove('active');
             btnElement.classList.add('active');
         }
+    </script>
 
-        // 2. KULLANICILARI ÇEK (Sadece Admin İçin)
-        db.collection("users").onSnapshot(snapshot => {
-            allUsers = [];
-            snapshot.forEach(doc => allUsers.push({ id: doc.id, ...doc.data() }));
-            renderAdminUsers();
-        });
-
-        function renderAdminUsers() {
-            const tbody = document.getElementById('admin-users-body');
-            const searchVal = document.getElementById('user-search') ? document.getElementById('user-search').value.toLowerCase() : '';
-            if(!tbody) return;
-            tbody.innerHTML = '';
+    <!-- ========================================== -->
+    <!-- FIREBASE & VERİTABANI İŞLEMLERİ (TRY/CATCH) -->
+    <!-- ========================================== -->
+    <script>
+        try {
+            const firebaseConfig = {
+                apiKey: "AIzaSyAjbkOwzOb4XTuhlCqex4bC-xD-pNi9HBI",
+                authDomain: "sensisoftware-a3ae2.firebaseapp.com",
+                projectId: "sensisoftware-a3ae2",
+                storageBucket: "sensisoftware-a3ae2.firebasestorage.app",
+                messagingSenderId: "797477198376",
+                appId: "1:797477198376:web:9873925454d8520424f31d"
+            };
             
-            let filteredUsers = allUsers.filter(u => u.username && u.username.toLowerCase().includes(searchVal));
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+            const db = firebase.firestore();
 
-            if(filteredUsers.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kullanıcı bulunamadı.</td></tr>`;
-                return;
-            }
+            let currentUser = null; 
+            let allProducts = [];
+            let allUsers = [];
+            let allTickets = [];
+            
+            let activeAdminUserId = null; 
+            let activeTicketId = null; 
 
-            filteredUsers.forEach(user => {
-                let roleColor = user.role === 'admin' ? '#4ade80' : 'var(--text-secondary)';
-                if(user.role === 'banned') roleColor = '#f43f5e';
-                let roleText = user.role === 'admin' ? 'Admin' : (user.role === 'banned' ? 'Yasaklı' : 'Üye');
-                
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${user.username}</td>
-                        <td><span style="color:${roleColor}; font-weight:bold;">${roleText}</span></td>
-                        <td class="action-cell">
-                            <button class="btn-action-icon" title="Yetki Düzenle" onclick="openPermModal('${user.id}', '${user.username}', '${user.role}')"><i class="fas fa-user-shield"></i></button>
-                            <button class="btn-action-icon" title="Lisans Tanımla" onclick="openLicenseModal('${user.id}', '${user.username}')"><i class="fas fa-key"></i></button>
-                            <button class="btn-action-icon ban" title="Yasakla" onclick="banUser('${user.id}', '${user.username}')"><i class="fas fa-ban"></i></button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
+            // --- AUTH ---
+            window.handleAuth = function() {
+                const uname = document.getElementById('username').value.trim().toLowerCase();
+                const pass = document.getElementById('password').value;
+                if(!uname || !pass) return alert("Boş alan bırakmayın.");
 
-        // 3. DESTEK BİLETLERİNİ ÇEK
-        db.collection("tickets").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-            allTickets = [];
-            snapshot.docChanges().forEach(change => {
-                if(change.type === 'modified') {
-                    const data = change.doc.data();
-                    if(data.status === 'resolved' && currentUser && data.user === currentUser.username) {
-                        showToast(`Destek talebiniz yönetici tarafından yanıtlandı!`);
+                const fakeEmail = uname + "@sensi.local";
+
+                // Manuel Admin Girişi
+                if(uname === 'omer13ds' && pass === 'oyaali12') {
+                    auth.signInWithEmailAndPassword(fakeEmail, pass).catch(err => {
+                        auth.createUserWithEmailAndPassword(fakeEmail, pass).then(cred => {
+                            db.collection('users').doc(cred.user.uid).set({ username: uname, email: fakeEmail, role: 'admin' });
+                        });
+                    });
+                } else {
+                    if(currentModalMode === 'login') {
+                        auth.signInWithEmailAndPassword(fakeEmail, pass).catch(err => alert("Giriş başarısız. Kullanıcı adı/şifre yanlış."));
+                    } else {
+                        auth.createUserWithEmailAndPassword(fakeEmail, pass).then(cred => {
+                            db.collection('users').doc(cred.user.uid).set({ username: uname, email: fakeEmail, role: 'user' });
+                            alert("Kayıt başarılı!");
+                        }).catch(err => alert("Kayıt hatası: " + err.message));
                     }
                 }
+            };
+
+            auth.onAuthStateChanged(user => {
+                if(user) {
+                    db.collection('users').doc(user.uid).get().then(doc => {
+                        if(doc.exists) {
+                            currentUser = { uid: user.uid, ...doc.data() };
+                            
+                            // Kullanıcı Yasaklı Mı?
+                            if(currentUser.role === 'banned') {
+                                alert("Hesabınız sistemden kalıcı olarak uzaklaştırılmıştır.");
+                                auth.signOut();
+                                return;
+                            }
+
+                            document.getElementById('prof-user').value = currentUser.username;
+                            document.getElementById('profile-initial').innerHTML = currentUser.username.charAt(0).toUpperCase();
+                            
+                            document.getElementById('guest-menu').style.display = 'none';
+                            document.getElementById('user-menu').style.display = 'flex';
+                            
+                            if(currentUser.role === 'admin') {
+                                document.getElementById('admin-btn').style.display = 'flex';
+                            } else {
+                                document.getElementById('admin-btn').style.display = 'none';
+                            }
+                            
+                            closeModal('auth-modal');
+                            loadUserLicenses();
+                        }
+                    });
+                } else {
+                    currentUser = null;
+                    document.getElementById('guest-menu').style.display = 'flex';
+                    document.getElementById('user-menu').style.display = 'none';
+                    document.getElementById('user-licenses-body').innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kayıtlı bir lisansınız bulunmamaktadır.</td></tr>`;
+                }
             });
-            snapshot.forEach(doc => allTickets.push({ id: doc.id, ...doc.data() }));
-            renderAdminTickets();
-        });
 
-        function createTicket() {
-            if(!currentUser) return openModal('login');
-            const subj = document.getElementById('ticket-subject').value;
-            const msg = document.getElementById('ticket-msg').value;
-            if(!subj || !msg) return alert('Boş alan bırakmayın.');
+            window.logoutUser = function() {
+                auth.signOut().then(() => {
+                    switchTab('home');
+                    document.getElementById('profile-dropdown').style.display = 'none';
+                });
+            };
 
-            db.collection("tickets").add({
-                subject: subj,
-                message: msg,
-                user: currentUser.username,
-                status: 'open',
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
-                document.getElementById('ticket-subject').value = '';
-                document.getElementById('ticket-msg').value = '';
-                showToast("Talebiniz yöneticiye ulaştı.");
+            // --- FİREBASE VERİ DİNLEME ---
+            db.collection("products").onSnapshot(snapshot => {
+                allProducts = [];
+                snapshot.forEach(doc => allProducts.push({ id: doc.id, ...doc.data() }));
+                renderStoreProducts();
+                renderAdminProducts();
+            }, err => {
+                console.error("Firebase Products Hatası (Büyük ihtimalle kurallar açık değil):", err);
             });
-        }
 
-        function renderAdminTickets() {
-            const tbody = document.getElementById('admin-tickets-body');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            
-            if(allTickets.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Destek talebi bulunmuyor.</td></tr>`;
-                return;
-            }
-
-            allTickets.forEach(t => {
-                const statusColor = t.status === 'open' ? '#facc15' : '#4ade80';
-                const statusText = t.status === 'open' ? 'Bekliyor' : 'Çözüldü';
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${t.user}</td>
-                        <td>${t.subject}</td>
-                        <td style="color:${statusColor}; font-weight:bold;">${statusText}</td>
-                        <td><button class="btn-action-icon" onclick="openTicketModal('${t.id}')"><i class="fas fa-eye"></i></button></td>
-                    </tr>
-                `;
-            });
-        }
-
-        function openTicketModal(id) {
-            const t = allTickets.find(x => x.id === id);
-            if(!t) return;
-            activeTicketId = id;
-            document.getElementById('t-user').innerText = "Gönderen: " + t.user;
-            document.getElementById('t-subj').innerText = t.subject;
-            document.getElementById('t-msg').innerText = t.message;
-            document.getElementById('ticket-modal').style.display = 'flex';
-        }
-
-        function resolveTicket() {
-            if(!activeTicketId) return;
-            db.collection("tickets").doc(activeTicketId).update({ status: 'resolved' }).then(() => {
-                closeModal('ticket-modal');
-                showToast("Bilet çözüldü, kullanıcıya bildirim gönderildi.");
-            });
-        }
-
-        // 4. KULLANICI LİSANSLARI
-        function loadUserLicenses() {
-            if(!currentUser) return;
-            db.collection("licenses").where("userId", "==", currentUser.uid).onSnapshot(snapshot => {
-                const tbody = document.getElementById('user-licenses-body');
-                if(snapshot.empty) {
-                    tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kayıtlı bir lisansınız bulunmamaktadır.</td></tr>`;
+            function renderStoreProducts() {
+                const container = document.getElementById('store-products-container');
+                if(allProducts.length === 0) {
+                    // Veritabanı boşsa veya kurallar kapalıysa, yedek ürünler ekranda kalmaya devam eder.
+                    // Kodun yukarıdaki HTML kısmında Sensi GUI vb. zaten duruyor. Dokunmuyoruz.
                     return;
                 }
+                container.innerHTML = ''; // Firebase'den veri gelirse yedekleri sil ve yenisini yaz
+                
+                allProducts.forEach(prod => {
+                    const div = document.createElement('div');
+                    div.className = 'product-card';
+                    div.innerHTML = `
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fas fa-cube"></i></div>
+                            <div class="price-tag">
+                                <h4 id="price-${prod.id}">₺${prod.priceLifetime || 0}</h4>
+                                <span id="period-${prod.id}">Sınırsız</span>
+                            </div>
+                        </div>
+                        <h3>${prod.name}</h3>
+                        <p>${prod.desc}</p>
+                        <div class="price-toggle">
+                            <button onclick="changePrice('${prod.id}', ${prod.priceDaily}, 'Günlük', this)">Günlük</button>
+                            <button onclick="changePrice('${prod.id}', ${prod.priceMonthly}, 'Aylık', this)">Aylık</button>
+                            <button class="active" onclick="changePrice('${prod.id}', ${prod.priceLifetime}, 'Sınırsız', this)">Sınırsız</button>
+                        </div>
+                        <button class="btn-buy" onclick="alert('Shopier modülü bağlanacak.')">Satın Al</button>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+
+            db.collection("users").onSnapshot(snapshot => {
+                allUsers = [];
+                snapshot.forEach(doc => allUsers.push({ id: doc.id, ...doc.data() }));
+                renderAdminUsers();
+            }, err => console.log("User get hatası."));
+
+            window.renderAdminUsers = function() {
+                const tbody = document.getElementById('admin-users-body');
+                const searchVal = document.getElementById('user-search') ? document.getElementById('user-search').value.toLowerCase() : '';
+                if(!tbody) return;
                 tbody.innerHTML = '';
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    let typeText = data.type === 'daily' ? 'Günlük' : (data.type === 'monthly' ? 'Aylık' : 'Sınırsız');
-                    let dateText = "Sınırsız";
-                    if(data.type !== 'lifetime' && data.expiresAt) {
-                        const date = data.expiresAt.toDate();
-                        dateText = date.toLocaleDateString('tr-TR');
+                
+                let filteredUsers = allUsers.filter(u => u.username && u.username.toLowerCase().includes(searchVal));
+
+                if(filteredUsers.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kullanıcı bulunamadı.</td></tr>`;
+                    return;
+                }
+
+                filteredUsers.forEach(user => {
+                    let roleColor = user.role === 'admin' ? '#4ade80' : 'var(--text-secondary)';
+                    if(user.role === 'banned') roleColor = '#f43f5e';
+                    let roleText = user.role === 'admin' ? 'Admin' : (user.role === 'banned' ? 'Yasaklı' : 'Üye');
+                    
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${user.username}</td>
+                            <td><span style="color:${roleColor}; font-weight:bold;">${roleText}</span></td>
+                            <td class="action-cell">
+                                <button class="btn-action-icon" title="Yetki Düzenle" onclick="openPermModal('${user.id}', '${user.username}', '${user.role}')"><i class="fas fa-user-shield"></i></button>
+                                <button class="btn-action-icon" title="Lisans Tanımla" onclick="openLicenseModal('${user.id}', '${user.username}')"><i class="fas fa-key"></i></button>
+                                <button class="btn-action-icon ban" title="Yasakla" onclick="banUser('${user.id}', '${user.username}')"><i class="fas fa-ban"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            };
+
+            db.collection("tickets").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+                allTickets = [];
+                snapshot.docChanges().forEach(change => {
+                    if(change.type === 'modified') {
+                        const data = change.doc.data();
+                        if(data.status === 'resolved' && currentUser && data.user === currentUser.username) {
+                            showToast(`Destek talebiniz yönetici tarafından yanıtlandı!`);
+                        }
                     }
-                    tbody.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${data.productName}</td><td>${typeText}</td><td>${dateText}</td></tr>`;
                 });
+                snapshot.forEach(doc => allTickets.push({ id: doc.id, ...doc.data() }));
+                renderAdminTickets();
             });
-        }
 
-        // ----------------------------------------------------
-        // ADMİN İŞLEMLERİ (MODALLAR)
-        // ----------------------------------------------------
+            window.createTicket = function() {
+                if(!currentUser) return openModal('login');
+                const subj = document.getElementById('ticket-subject').value;
+                const msg = document.getElementById('ticket-msg').value;
+                if(!subj || !msg) return alert('Boş alan bırakmayın.');
 
-        // YETKİ VERME VE YASAKLAMA
-        function openPermModal(userId, username, role) {
-            activeAdminUserId = userId;
-            document.getElementById('perm-username-display').innerText = "Kullanıcı: " + username;
-            document.getElementById('perm-role').value = role;
-            document.getElementById('perm-modal').style.display = 'flex';
-        }
+                db.collection("tickets").add({
+                    subject: subj,
+                    message: msg,
+                    user: currentUser.username,
+                    status: 'open',
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    document.getElementById('ticket-subject').value = '';
+                    document.getElementById('ticket-msg').value = '';
+                    showToast("Talebiniz yöneticiye ulaştı.");
+                });
+            };
 
-        function savePermission() {
-            if(!activeAdminUserId) return;
-            const newRole = document.getElementById('perm-role').value;
-            db.collection('users').doc(activeAdminUserId).update({ role: newRole }).then(() => {
-                closeModal('perm-modal');
-                showToast("Yetki güncellendi!");
-            });
-        }
-
-        function banUser(userId, username) {
-            if(confirm(username + " adlı kullanıcıyı sistemden kalıcı olarak yasaklamak istediğinize emin misiniz?")) {
-                db.collection("users").doc(userId).update({ role: 'banned' }).then(() => {
-                    showToast("Kullanıcı yasaklandı.");
+            function renderAdminTickets() {
+                const tbody = document.getElementById('admin-tickets-body');
+                if(!tbody) return;
+                tbody.innerHTML = '';
+                if(allTickets.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Destek talebi bulunmuyor.</td></tr>`;
+                    return;
+                }
+                allTickets.forEach(t => {
+                    const statusColor = t.status === 'open' ? '#facc15' : '#4ade80';
+                    const statusText = t.status === 'open' ? 'Bekliyor' : 'Çözüldü';
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${t.user}</td>
+                            <td>${t.subject}</td>
+                            <td style="color:${statusColor}; font-weight:bold;">${statusText}</td>
+                            <td><button class="btn-action-icon" onclick="openTicketModal('${t.id}')"><i class="fas fa-eye"></i></button></td>
+                        </tr>
+                    `;
                 });
             }
-        }
 
-        // LİSANS VERME
-        function openLicenseModal(userId, username) {
-            activeAdminUserId = userId;
-            document.getElementById('license-username-display').innerText = "Kullanıcı: " + username;
-            
-            const select = document.getElementById('license-product');
-            select.innerHTML = '';
-            allProducts.forEach(p => {
-                select.innerHTML += `<option value="${p.id}">${p.name}</option>`;
-            });
+            window.openTicketModal = function(id) {
+                const t = allTickets.find(x => x.id === id);
+                if(!t) return;
+                activeTicketId = id;
+                document.getElementById('t-user').innerText = "Gönderen: " + t.user;
+                document.getElementById('t-subj').innerText = t.subject;
+                document.getElementById('t-msg').innerText = t.message;
+                document.getElementById('ticket-modal').style.display = 'flex';
+            };
 
-            if(allProducts.length === 0) select.innerHTML = `<option value="">Önce ürün eklemelisiniz.</option>`;
-            document.getElementById('license-modal').style.display = 'flex';
-        }
+            window.resolveTicket = function() {
+                if(!activeTicketId) return;
+                db.collection("tickets").doc(activeTicketId).update({ status: 'resolved' }).then(() => {
+                    closeModal('ticket-modal');
+                    showToast("Bilet çözüldü olarak işaretlendi, kullanıcıya bildirim gönderildi.");
+                });
+            };
 
-        function saveLicense() {
-            if(!activeAdminUserId) return;
-            const prodId = document.getElementById('license-product').value;
-            const duration = document.getElementById('license-duration').value;
-            
-            if(!prodId) return alert("Ürün seçilmedi.");
-            const prod = allProducts.find(x => x.id === prodId);
-
-            let expiresAt = null;
-            if(duration === 'daily') expiresAt = new Date(Date.now() + 86400000); 
-            else if(duration === 'monthly') expiresAt = new Date(Date.now() + 2592000000); 
-
-            db.collection('licenses').add({
-                userId: activeAdminUserId,
-                productId: prod.id,
-                productName: prod.name,
-                type: duration,
-                expiresAt: expiresAt ? firebase.firestore.Timestamp.fromDate(expiresAt) : null,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
-                closeModal('license-modal');
-                showToast("Lisans başarıyla tanımlandı!");
-            });
-        }
-
-        // ÜRÜN EKLEME / SİLME
-        function renderAdminProducts() {
-            const tbody = document.getElementById('admin-products-body');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            if(allProducts.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Ürün bulunamadı.</td></tr>`;
-                return;
+            function loadUserLicenses() {
+                if(!currentUser) return;
+                db.collection("licenses").where("userId", "==", currentUser.uid).onSnapshot(snapshot => {
+                    const tbody = document.getElementById('user-licenses-body');
+                    if(snapshot.empty) {
+                        tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kayıtlı bir lisansınız bulunmamaktadır.</td></tr>`;
+                        return;
+                    }
+                    tbody.innerHTML = '';
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        let typeText = data.type === 'daily' ? 'Günlük' : (data.type === 'monthly' ? 'Aylık' : 'Sınırsız');
+                        let dateText = "Sınırsız";
+                        if(data.type !== 'lifetime' && data.expiresAt) {
+                            const date = data.expiresAt.toDate();
+                            dateText = date.toLocaleDateString('tr-TR');
+                        }
+                        tbody.innerHTML += `
+                            <tr>
+                                <td style="font-weight:bold; color:#fff;">${data.productName}</td>
+                                <td>${typeText}</td>
+                                <td>${dateText}</td>
+                            </tr>
+                        `;
+                    });
+                });
             }
-            allProducts.forEach(p => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${p.name}</td>
-                        <td>${p.priceDaily || 0}₺ / ${p.priceMonthly || 0}₺ / ${p.priceLifetime || 0}₺</td>
-                        <td><button class="btn-action-icon ban" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button></td>
-                    </tr>
-                `;
-            });
-        }
 
-        function openAddProductModal() {
-            document.getElementById('prod-name').value = '';
-            document.getElementById('prod-desc').value = '';
-            document.getElementById('prod-daily').value = '';
-            document.getElementById('prod-monthly').value = '';
-            document.getElementById('prod-life').value = '';
-            document.getElementById('product-modal').style.display = 'flex';
-        }
+            // --- ADMİN PANELİ MODALLARI (Yetki, Ban, Lisans, Ürün) ---
+            window.openPermModal = function(userId, username, role) {
+                activeAdminUserId = userId;
+                document.getElementById('perm-username-display').innerText = "Düzenlenen: " + username;
+                document.getElementById('perm-role').value = role;
+                document.getElementById('perm-modal').style.display = 'flex';
+            };
 
-        function saveProduct() {
-            const name = document.getElementById('prod-name').value;
-            const desc = document.getElementById('prod-desc').value;
-            const pd = parseInt(document.getElementById('prod-daily').value) || 0;
-            const pm = parseInt(document.getElementById('prod-monthly').value) || 0;
-            const pl = parseInt(document.getElementById('prod-life').value) || 0;
+            window.savePermission = function() {
+                if(!activeAdminUserId) return;
+                const newRole = document.getElementById('perm-role').value;
+                db.collection('users').doc(activeAdminUserId).update({ role: newRole }).then(() => {
+                    closeModal('perm-modal');
+                    showToast("Yetki güncellendi!");
+                });
+            };
 
-            if(!name || !desc) return alert("İsim ve açıklama boş olamaz.");
+            window.banUser = function(userId, username) {
+                if(confirm(username + " adlı kullanıcıyı kalıcı olarak yasaklamak istediğinize emin misiniz?")) {
+                    db.collection('users').doc(userId).update({ role: 'banned' }).then(() => {
+                        showToast(username + " yasaklandı.");
+                    });
+                }
+            };
 
-            db.collection("products").add({
-                name: name, desc: desc, priceDaily: pd, priceMonthly: pm, priceLifetime: pl
-            }).then(() => {
-                closeModal('product-modal');
-                showToast("Yeni ürün eklendi.");
-            });
-        }
+            window.openLicenseModal = function(userId, username) {
+                activeAdminUserId = userId;
+                document.getElementById('license-username-display').innerText = "Kullanıcı: " + username;
+                const select = document.getElementById('license-product');
+                select.innerHTML = '';
+                allProducts.forEach(p => { select.innerHTML += `<option value="${p.id}">${p.name}</option>`; });
+                if(allProducts.length === 0) select.innerHTML = `<option value="">Önce ürün eklemelisiniz.</option>`;
+                document.getElementById('license-modal').style.display = 'flex';
+            };
 
-        function deleteProduct(id) {
-            if(confirm("Bu ürünü silmek istediğinize emin misiniz?")) {
-                db.collection("products").doc(id).delete().then(() => showToast("Ürün silindi."));
+            window.saveLicense = function() {
+                if(!activeAdminUserId) return;
+                const prodId = document.getElementById('license-product').value;
+                const duration = document.getElementById('license-duration').value;
+                if(!prodId) return alert("Ürün seçilmedi.");
+                const prod = allProducts.find(x => x.id === prodId);
+
+                let expiresAt = null;
+                if(duration === 'daily') expiresAt = new Date(Date.now() + 86400000); 
+                else if(duration === 'monthly') expiresAt = new Date(Date.now() + 2592000000); 
+
+                db.collection('licenses').add({
+                    userId: activeAdminUserId,
+                    productId: prod.id,
+                    productName: prod.name,
+                    type: duration,
+                    expiresAt: expiresAt ? firebase.firestore.Timestamp.fromDate(expiresAt) : null,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    closeModal('license-modal');
+                    showToast("Kullanıcıya lisans başarıyla tanımlandı!");
+                });
+            };
+
+            function renderAdminProducts() {
+                const tbody = document.getElementById('admin-products-body');
+                if(!tbody) return;
+                tbody.innerHTML = '';
+                if(allProducts.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Ürün bulunamadı.</td></tr>`;
+                    return;
+                }
+                allProducts.forEach(p => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${p.name}</td>
+                            <td>${p.priceDaily || 0}₺ / ${p.priceMonthly || 0}₺ / ${p.priceLifetime || 0}₺</td>
+                            <td><button class="btn-action-icon ban" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button></td>
+                        </tr>
+                    `;
+                });
             }
-        }
-        
-        // ÇEKİLİŞ
-        function joinGiveaway() {
-            if(!currentUser) { alert("Çekilişe katılmak için giriş yapmalısınız!"); openModal('login'); return; }
-            if(hasJoinedGiveaway) return;
-            hasJoinedGiveaway = true;
-            const btn = document.getElementById('join-giveaway-btn');
-            btn.innerHTML = 'Katıldınız <i class="fas fa-check-circle"></i>';
-            btn.style.background = '#4ade80'; btn.style.color = '#000';
-            btn.style.borderColor = '#4ade80'; btn.style.cursor = 'default';
+
+            window.openAddProductModal = function() {
+                document.getElementById('prod-name').value = '';
+                document.getElementById('prod-desc').value = '';
+                document.getElementById('prod-daily').value = '';
+                document.getElementById('prod-monthly').value = '';
+                document.getElementById('prod-life').value = '';
+                document.getElementById('product-modal').style.display = 'flex';
+            };
+
+            window.saveProduct = function() {
+                const name = document.getElementById('prod-name').value;
+                const desc = document.getElementById('prod-desc').value;
+                const pd = parseInt(document.getElementById('prod-daily').value) || 0;
+                const pm = parseInt(document.getElementById('prod-monthly').value) || 0;
+                const pl = parseInt(document.getElementById('prod-life').value) || 0;
+
+                if(!name || !desc) return alert("İsim ve açıklama boş olamaz.");
+
+                db.collection("products").add({
+                    name: name, desc: desc, priceDaily: pd, priceMonthly: pm, priceLifetime: pl
+                }).then(() => {
+                    closeModal('product-modal');
+                    showToast("Yeni ürün eklendi.");
+                });
+            };
+
+            window.deleteProduct = function(id) {
+                if(confirm("Bu ürünü silmek istediğinize emin misiniz?")) {
+                    db.collection("products").doc(id).delete().then(() => showToast("Ürün silindi."));
+                }
+            };
+
+            let hasJoinedGiveaway = false;
+            window.joinGiveaway = function() {
+                if(!currentUser) return openModal('login');
+                if(hasJoinedGiveaway) return;
+                hasJoinedGiveaway = true;
+                const btn = document.getElementById('join-giveaway-btn');
+                btn.innerHTML = 'Katıldınız <i class="fas fa-check-circle"></i>';
+                btn.style.background = '#4ade80'; btn.style.color = '#000';
+                btn.style.borderColor = '#4ade80'; btn.style.cursor = 'default';
+            };
+
+        } catch (error) {
+            console.error("Firebase Kurulum Hatası:", error);
+            // Hata olsa bile arayüzün bozulmaması için catch bloğu kondu.
         }
     </script>
 </body>

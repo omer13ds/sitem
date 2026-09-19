@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SensiSoftware | Siyah Beyaz Zarafet</title>
+    <title>SensiSoftware | Premium Çözümler</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -89,13 +89,11 @@
         }
         .product-card:hover { border-color: var(--border-hover); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
 
-        /* Fotoğraf Alanı */
-        .prod-image-wrapper { width: 100%; height: 260px; background: var(--bg-elevated); border-bottom: 1px solid var(--border-light); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .prod-image-wrapper { width: 100%; height: 240px; background: var(--bg-elevated); border-bottom: 1px solid var(--border-light); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .prod-image-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
         .product-card:hover .prod-image-wrapper img { transform: scale(1.05); }
         .prod-image-placeholder { font-size: 4rem; color: var(--border-light); }
 
-        /* İçerik Alanı */
         .prod-content { padding: 35px; display: flex; flex-direction: column; flex: 1; }
         .prod-content h3 { font-size: 1.6rem; margin-bottom: 10px; }
         .prod-content p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; flex: 1; }
@@ -110,22 +108,20 @@
 
         .btn-buy { width: 100%; padding: 16px; background: var(--text-primary); color: var(--bg-base); border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: 0.2s;}
         .btn-buy:hover { background: #d4d4d4; }
+        
+        .btn-buy.maintenance { background: #1a1a1a; color: #555; border: 1px solid #333; cursor: not-allowed; }
+        .btn-buy.maintenance:hover { background: #1a1a1a; }
 
         /* --- DESTEK --- */
         .support-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
         .support-info-box { background: transparent; }
         .support-info-box h3 { font-size: 2.2rem; margin-bottom: 20px; }
         .support-info-box p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px; }
-        .faq-item { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 20px; margin-bottom: 15px; }
-        .faq-item h4 { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-        .faq-item h4 i { color: var(--text-secondary); }
-        .faq-item p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0; line-height: 1.5; }
         .form-box { background: var(--bg-surface); border: 1px solid var(--border-light); padding: 40px; border-radius: var(--radius-lg); }
         .input-group { position: relative; margin-bottom: 20px; }
-        .input-group i { position: absolute; left: 18px; top: 18px; color: var(--text-muted); font-size: 1.1rem; }
-        .input-base { width: 100%; background: var(--bg-base); border: 1px solid var(--border-light); color: var(--text-primary); padding: 16px 16px 16px 50px; border-radius: var(--radius-sm); outline: none; font-size: 1rem; font-family: inherit; transition: 0.2s;}
+        .input-base { width: 100%; background: var(--bg-base); border: 1px solid var(--border-light); color: var(--text-primary); padding: 16px; border-radius: var(--radius-sm); outline: none; font-size: 1rem; font-family: inherit; transition: 0.2s;}
         .input-base:focus { border-color: var(--text-primary); }
-        textarea.input-base { padding: 16px; min-height: 150px; resize: vertical; }
+        textarea.input-base { min-height: 150px; resize: vertical; }
 
         /* --- PANEL LAYOUT (Kullanıcı & Admin) --- */
         .panel-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; height: 100%; }
@@ -138,13 +134,15 @@
         .data-table th, .data-table td { padding: 18px 15px; text-align: left; border-bottom: 1px solid var(--border-light); font-size: 1rem; }
         .data-table th { color: var(--text-secondary); font-weight: 500;}
         
-        .action-cell { display: flex; gap: 8px; }
+        .action-cell { display: flex; gap: 12px; } /* FERAH BUTON ARALIKLARI */
         .btn-action-icon { background: #080808; border: 1px solid #2a2a2a; color: #fff; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; font-size: 1rem; }
         .btn-action-icon:hover { background: #1a1a1a; border-color: #555; }
         .btn-action-icon.edit { color: #60a5fa; border-color: #1e3a8a; }
         .btn-action-icon.edit:hover { background: #1e3a8a; color: #fff; }
         .btn-action-icon.ban { color: #f43f5e; border-color: #4c1d25; }
         .btn-action-icon.ban:hover { background: #2e0f14; border-color: #f43f5e; }
+        .btn-action-icon.maint { color: #facc15; border-color: #713f12; }
+        .btn-action-icon.maint:hover { background: #422006; color: #fff; }
 
         .search-bar { width: 100%; padding: 16px; background: var(--bg-base); border: 1px solid var(--border-light); border-radius: var(--radius-sm); color: #fff; margin-bottom: 20px; font-family: inherit; outline: none; }
 
@@ -157,9 +155,6 @@
         
         #toast { position: fixed; bottom: 30px; right: 30px; background: #fff; color: #000; padding: 16px 24px; border-radius: 8px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateX(150%); transition: transform 0.4s ease; z-index: 9999; display: flex; align-items: center; gap: 10px; }
         #toast.show { transform: translateX(0); }
-        
-        #gw-popup { position: fixed; bottom: 30px; right: -350px; background: var(--bg-elevated); border: 1px solid var(--border-light); padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); transition: right 0.5s ease; z-index: 9998; cursor: pointer;}
-        #gw-popup.show { right: 30px; }
         
         .profile-view { display: none; }
         .profile-view.active { display: block; animation: fadeSlideUp 0.3s ease; }
@@ -210,7 +205,7 @@
             </div>
         </div>
 
-        <!-- ÜRÜNLER (DİKEY - FOTOĞRAFLI YENİ TASARIM) -->
+        <!-- ÜRÜNLER (DİKEY - FOTOĞRAFLI TASARIM) -->
         <div id="tab-products" class="tab-content">
             <div class="tab-inner">
                 <div class="section-header">
@@ -225,7 +220,7 @@
 
         <!-- DESTEK -->
         <div id="tab-support" class="tab-content">
-            <div class="tab-inner" style="max-width: 800px;">
+            <div class="tab-inner">
                 <div class="section-header" style="text-align: center;"><h2>Destek Merkezi</h2></div>
                 <div class="support-layout">
                     <div class="support-info-box">
@@ -235,20 +230,11 @@
                             <h4><i class="fas fa-shield-alt"></i> Anti-Spam Koruması</h4>
                             <p>Sistem yoğunluğunu önlemek amacıyla, açmış olduğunuz bir destek talebi yöneticilerimiz tarafından yanıtlanmadan yeni bir talep oluşturamazsınız.</p>
                         </div>
-                        <div class="faq-item">
-                            <h4><i class="fas fa-clock"></i> Yanıt Süresi</h4>
-                            <p>Lisans sahibi olan kullanıcılarımızın destek talepleri, sistem havuzunda önceliklendirilir ve ortalama 15 dakika içinde çözülür.</p>
-                        </div>
                     </div>
                     <div class="form-box">
                         <h3 class="font-space" style="font-size: 1.8rem; margin-bottom: 25px;">Yeni Talep Oluştur</h3>
-                        <div class="input-group">
-                            <i class="fas fa-heading"></i>
-                            <input type="text" id="ticket-subject" class="input-base" placeholder="Konu Başlığı">
-                        </div>
-                        <div class="input-group">
-                            <textarea id="ticket-msg" class="input-base" style="padding-left: 16px;" placeholder="Lütfen sorununuzu detaylı bir şekilde açıklayın..."></textarea>
-                        </div>
+                        <input type="text" id="ticket-subject" class="input-base" placeholder="Konu Başlığı">
+                        <textarea id="ticket-msg" class="input-base" placeholder="Lütfen sorununuzu detaylı bir şekilde açıklayın..."></textarea>
                         <button class="btn-submit" onclick="createTicket()">Talebi Gönder <i class="fas fa-paper-plane" style="margin-left:8px;"></i></button>
                     </div>
                 </div>
@@ -291,6 +277,7 @@
                         <button class="profile-btn" onclick="switchProfileView('admin-products')">Ürün Yönetimi</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-tickets')">Destek Biletleri</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-keygen')">Lisans Üretici</button>
+                        <button class="profile-btn" onclick="switchProfileView('admin-keys')">Lisans Yönetimi</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-giveaway')">Çekiliş Ayarları</button>
                     </div>
                 </div>
@@ -299,10 +286,7 @@
                     <!-- USER: BİLGİLERİM -->
                     <div id="p-view-info" class="profile-view active">
                         <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Hesap Bilgileri</h2>
-                        <div class="input-group" style="max-width: 400px;">
-                            <i class="fas fa-user"></i>
-                            <input type="text" id="prof-user" class="input-base" disabled>
-                        </div>
+                        <input type="text" id="prof-user" class="input-base" style="max-width: 400px;" disabled>
                     </div>
 
                     <!-- USER: LİSANSLARIM -->
@@ -330,21 +314,18 @@
                     <!-- ADMIN: KULLANICILAR -->
                     <div id="p-view-admin-users" class="profile-view">
                         <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Kullanıcı Yönetimi</h2>
-                        <div class="input-group">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="user-search" class="search-bar" placeholder="Kullanıcı ara..." oninput="renderAdminUsers()">
-                        </div>
+                        <input type="text" id="user-search" class="search-bar" placeholder="Kullanıcı ara..." oninput="renderAdminUsers()">
                         <table class="data-table">
                             <thead><tr><th>Kullanıcı</th><th>Rol</th><th>İşlemler</th></tr></thead>
                             <tbody id="admin-users-body"></tbody>
                         </table>
                     </div>
 
-                    <!-- ADMIN: ÜRÜN YÖNETİMİ -->
+                    <!-- ADMIN: ÜRÜN YÖNETİMİ (BAKIM MODU EKLENDİ) -->
                     <div id="p-view-admin-products" class="profile-view">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
                             <h2 class="font-space" style="font-size: 2rem;">Ürün Yönetimi</h2>
-                            <button class="btn-submit" style="width: auto; padding: 10px 20px; border-radius: 100px;" onclick="openAddProductModal()"><i class="fas fa-plus"></i> Yeni Ürün Ekle</button>
+                            <button class="btn-submit" style="width: auto; padding: 10px 20px; border-radius: 100px;" onclick="openAddProductModal()"><i class="fas fa-plus"></i> Yeni Ekle</button>
                         </div>
                         <table class="data-table">
                             <thead><tr><th>Ürün Adı</th><th>Fiyatlar (G/A/S)</th><th>İşlem</th></tr></thead>
@@ -361,23 +342,18 @@
                         </table>
                     </div>
 
-                    <!-- ADMIN: LİSANS ÜRETİCİ (YENİ) -->
+                    <!-- ADMIN: LİSANS ÜRETİCİ -->
                     <div id="p-view-admin-keygen" class="profile-view">
                         <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Lisans Üretici</h2>
                         <p style="color: var(--text-secondary); margin-bottom: 20px;">Manuel olarak lisans anahtarı üretip kopyalayabilirsiniz.</p>
-                        
                         <div style="background: rgba(255,255,255,0.02); padding: 30px; border: 1px solid var(--border-light); border-radius: 12px; max-width: 600px;">
-                            <label style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:5px; display:block;">Hedef Ürün</label>
-                            <select id="keygen-product" class="input-base" style="padding-left:16px;">
-                                <option value="Sensi GUI Framework">Sensi GUI Framework</option>
-                                <option value="External Radar Engine">External Radar Engine</option>
-                                <option value="FPS Mechanics Simulator">FPS Mechanics Simulator</option>
-                            </select>
+                            <label style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:5px; display:block;">Hedef Ürün (Sadece Aktif Olanlar)</label>
+                            <select id="keygen-product" class="input-base"></select>
 
                             <div style="display:flex; gap:15px; margin-bottom: 20px;">
                                 <div style="flex: 1;">
                                     <label style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:5px; display:block;">Süre</label>
-                                    <select id="keygen-duration" class="input-base" style="padding-left:16px; margin-bottom: 0;">
+                                    <select id="keygen-duration" class="input-base" style="margin-bottom: 0;">
                                         <option value="daily">Günlük</option>
                                         <option value="monthly">Aylık</option>
                                         <option value="lifetime">Sınırsız</option>
@@ -385,29 +361,36 @@
                                 </div>
                                 <div style="flex: 1;">
                                     <label style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:5px; display:block;">Anahtar Tipi</label>
-                                    <select id="keygen-type" class="input-base" style="padding-left:16px; margin-bottom: 0;">
+                                    <select id="keygen-type" class="input-base" style="margin-bottom: 0;">
                                         <option value="user">Standart Müşteri</option>
                                         <option value="admin">Yönetici (Admin)</option>
                                     </select>
                                 </div>
                                 <div style="flex: 1;">
                                     <label style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:5px; display:block;">Adet</label>
-                                    <input type="number" id="keygen-count" class="input-base" value="1" min="1" style="padding-left:16px; margin-bottom: 0;">
+                                    <input type="number" id="keygen-count" class="input-base" value="1" min="1" style="margin-bottom: 0;">
                                 </div>
                             </div>
-
                             <button class="btn-submit" onclick="generateAdminKeys()">Anahtarları Üret</button>
-                            
-                            <textarea id="keygen-result" class="input-base" style="margin-top:20px; padding-left:16px; min-height: 100px; display:none;" placeholder="Üretilen anahtarlar burada görünecek..." readonly></textarea>
+                            <textarea id="keygen-result" class="input-base" style="margin-top:20px; min-height: 100px; display:none;" readonly></textarea>
                         </div>
+                    </div>
+
+                    <!-- ADMIN: LİSANS YÖNETİMİ VE SİLME -->
+                    <div id="p-view-admin-keys" class="profile-view">
+                        <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Tüm Lisanslar</h2>
+                        <table class="data-table">
+                            <thead><tr><th>Anahtar (Key)</th><th>Ürün</th><th>Kullanıcı (Eğer Varsa)</th><th>İşlem</th></tr></thead>
+                            <tbody id="admin-keys-body"></tbody>
+                        </table>
                     </div>
 
                     <!-- ADMIN: ÇEKİLİŞ YÖNETİMİ -->
                     <div id="p-view-admin-giveaway" class="profile-view">
                         <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Çekiliş Yönetimi</h2>
                         <div style="background: rgba(255,255,255,0.02); padding: 30px; border: 1px solid var(--border-light); border-radius: 12px; max-width: 500px;">
-                            <input type="text" id="admin-prize" class="input-base" style="padding-left:16px;" placeholder="Çekiliş Ödülü (Örn: Sensi GUI Sınırsız)">
-                            <input type="number" id="admin-time" class="input-base" style="padding-left:16px;" placeholder="Süre (Dakika Cinsinden)">
+                            <input type="text" id="admin-prize" class="input-base" placeholder="Çekiliş Ödülü (Örn: Sensi GUI Sınırsız)">
+                            <input type="number" id="admin-time" class="input-base" placeholder="Süre (Dakika Cinsinden)">
                             <button class="btn-submit" onclick="setNewGiveaway()">Çekilişi Başlat / Güncelle</button>
                         </div>
                     </div>
@@ -423,14 +406,8 @@
         <div class="modal-box">
             <i class="fas fa-times close-modal" onclick="closeModal('auth-modal')"></i>
             <h2 id="modal-title" class="font-space" style="font-size: 2rem; margin-bottom: 25px;">Giriş Yap</h2>
-            <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input type="text" id="username" class="input-base" placeholder="Kullanıcı Adı" autocomplete="off">
-            </div>
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="password" class="input-base" placeholder="Şifre" onkeypress="if(event.key === 'Enter') handleAuth()">
-            </div>
+            <input type="text" id="username" class="input-base" placeholder="Kullanıcı Adı" autocomplete="off">
+            <input type="password" id="password" class="input-base" placeholder="Şifre" onkeypress="if(event.key === 'Enter') handleAuth()">
             <button class="btn-submit" onclick="handleAuth()">Onayla</button>
             <div style="text-align: center; margin-top: 15px; color: var(--text-secondary); cursor:pointer;" onclick="toggleAuthMode()" id="auth-switch">Hesabın yok mu? Kayıt Ol</div>
         </div>
@@ -442,7 +419,7 @@
             <i class="fas fa-times close-modal" onclick="closeModal('perm-modal')"></i>
             <h2 class="font-space" style="margin-bottom: 20px;">Yetki Ver</h2>
             <p style="color: var(--text-secondary); margin-bottom: 15px;" id="perm-username-display"></p>
-            <select id="perm-role" class="input-base" style="padding-left:16px;">
+            <select id="perm-role" class="input-base">
                 <option value="user">Standart Üye</option>
                 <option value="admin">Yönetici (Admin)</option>
             </select>
@@ -470,14 +447,14 @@
             <h2 class="font-space" style="margin-bottom: 20px;">Lisans Tanımla</h2>
             <p style="color: var(--text-secondary); margin-bottom: 15px;" id="license-username-display"></p>
             <label style="color:var(--text-secondary); font-size:0.9rem;">Ürün Seç</label>
-            <select id="license-product" class="input-base" style="padding-left:16px;"></select>
+            <select id="license-product" class="input-base"></select>
             <label style="color:var(--text-secondary); font-size:0.9rem;">Abonelik Tipi</label>
-            <select id="license-duration" class="input-base" style="padding-left:16px;">
+            <select id="license-duration" class="input-base">
                 <option value="daily">Günlük (24 Saat)</option>
                 <option value="monthly">Aylık (30 Gün)</option>
                 <option value="lifetime">Sınırsız (Ömür Boyu)</option>
             </select>
-            <button class="btn-submit" onclick="saveLicense()">Lisansı Ver</button>
+            <button class="btn-submit" onclick="assignLicenseToUser()">Lisansı Üret ve Ver</button>
         </div>
     </div>
 
@@ -486,13 +463,13 @@
         <div class="modal-box">
             <i class="fas fa-times close-modal" onclick="closeModal('product-modal')"></i>
             <h2 class="font-space" id="prod-modal-title" style="margin-bottom: 20px;">Yeni Ürün Ekle</h2>
-            <input type="text" id="prod-name" class="input-base" style="padding-left:16px;" placeholder="Ürün Adı">
-            <input type="text" id="prod-img" class="input-base" style="padding-left:16px;" placeholder="Fotoğraf URL (Opsiyonel)">
-            <textarea id="prod-desc" class="input-base" style="padding-left:16px; min-height: 80px;" placeholder="Açıklama (Örn: Python modülleri...)"></textarea>
+            <input type="text" id="prod-name" class="input-base" placeholder="Ürün Adı">
+            <input type="text" id="prod-img" class="input-base" placeholder="Fotoğraf URL (Opsiyonel)">
+            <textarea id="prod-desc" class="input-base" placeholder="Açıklama (Örn: Python modülleri...)" style="min-height: 80px;"></textarea>
             <div style="display:flex; gap:10px;">
-                <input type="number" id="prod-daily" class="input-base" style="padding-left:16px;" placeholder="Gün (₺)">
-                <input type="number" id="prod-monthly" class="input-base" style="padding-left:16px;" placeholder="Ay (₺)">
-                <input type="number" id="prod-life" class="input-base" style="padding-left:16px;" placeholder="Sınır (₺)">
+                <input type="number" id="prod-daily" class="input-base" placeholder="Gün (₺)">
+                <input type="number" id="prod-monthly" class="input-base" placeholder="Ay (₺)">
+                <input type="number" id="prod-life" class="input-base" placeholder="Sınır (₺)">
             </div>
             <button class="btn-submit" onclick="saveProduct()">Kaydet</button>
         </div>
@@ -508,7 +485,7 @@
                 <h4 id="t-subj" style="color: #fff; margin-bottom: 10px; font-size: 1.1rem;"></h4>
                 <p id="t-msg" style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"></p>
             </div>
-            <textarea id="admin-ticket-reply" class="input-base" style="padding-left:16px; min-height: 100px;" placeholder="Kullanıcıya iletilecek yanıtınızı buraya yazın..."></textarea>
+            <textarea id="admin-ticket-reply" class="input-base" placeholder="Kullanıcıya iletilecek yanıtınızı buraya yazın..." style="min-height: 100px;"></textarea>
             <button class="btn-submit" onclick="resolveTicket()">Yanıtla ve Çözüldü İşaretle</button>
         </div>
     </div>
@@ -529,16 +506,8 @@
         </div>
     </div>
 
-    <!-- TOAST BİLDİRİM & ÇEKİLİŞ POPUP -->
+    <!-- TOAST BİLDİRİM -->
     <div id="toast"><i class="fas fa-bell" style="color: var(--bg-base);"></i> <span id="toast-msg"></span></div>
-    
-    <div id="gw-popup" onclick="switchTab('giveaway'); document.getElementById('gw-popup').classList.remove('show');" style="position: fixed; bottom: 30px; right: -350px; background: var(--bg-elevated); border: 1px solid var(--border-light); padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); transition: right 0.5s ease; z-index: 9998; cursor: pointer;">
-        <i class="fas fa-gift" style="font-size: 2rem; color: #4ade80;"></i>
-        <div>
-            <h4 class="font-space" style="margin-bottom: 5px;">Aktif Çekiliş Var!</h4>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">Hemen katılın ve kazanın.</p>
-        </div>
-    </div>
 
     <script>
         // ----------------------------------------------------
@@ -565,8 +534,10 @@
         let allProducts = [];
         let allUsers = [];
         let allTickets = [];
+        let allLicenses = []; // Adminin tüm keyleri görebilmesi için
         
         let activeAdminUserId = null; 
+        let activeAdminUserEmail = null;
         let userToBan = null;
         let activeTicketId = null; 
         let activeEditProductId = null;
@@ -635,7 +606,7 @@
         }
 
         // ----------------------------------------------------
-        // FIREBASE AUTH (KULLANICI ADI SİSTEMİ)
+        // FIREBASE AUTH 
         // ----------------------------------------------------
         function handleAuth() {
             const uname = document.getElementById('username').value.trim().toLowerCase();
@@ -645,7 +616,7 @@
             const fakeEmail = uname + "@sensi.local";
 
             if(uname === 'omer13ds' && pass === 'oyaali12') {
-                loginSuccess('omer13ds', true);
+                loginSuccess('omer13ds', true, fakeEmail);
                 auth.signInWithEmailAndPassword(fakeEmail, pass).catch(err => {
                     auth.createUserWithEmailAndPassword(fakeEmail, pass).then(cred => {
                         db.collection('users').doc(cred.user.uid).set({ username: uname, email: fakeEmail, role: 'admin' });
@@ -674,10 +645,10 @@
                             auth.signOut();
                             return;
                         }
-                        loginSuccess(data.username, data.role === 'admin');
+                        loginSuccess(data.username, data.role === 'admin', user.email);
                     }
                 }).catch(err => {
-                    loginSuccess(user.email.split('@')[0], user.email.startsWith('omer13ds'));
+                    loginSuccess(user.email.split('@')[0], user.email.startsWith('omer13ds'), user.email);
                 });
             } else {
                 currentUser = null;
@@ -687,8 +658,8 @@
             }
         });
 
-        function loginSuccess(username, isUserAdmin) {
-            currentUser = { username: username, role: isUserAdmin ? 'admin' : 'user' };
+        function loginSuccess(username, isUserAdmin, uEmail) {
+            currentUser = { username: username, role: isUserAdmin ? 'admin' : 'user', email: uEmail, uid: auth.currentUser ? auth.currentUser.uid : null };
             
             document.getElementById('prof-user').value = username;
             document.getElementById('profile-initial').innerHTML = username.charAt(0).toUpperCase();
@@ -710,14 +681,6 @@
             
             loadUserLicenses();
             loadUserTickets();
-            
-            if(!sessionStorage.getItem('gwPopupShown') && document.getElementById('prize-display').innerText !== "Yönetici bekleniyor...") {
-                setTimeout(() => {
-                    document.getElementById('gw-popup').classList.add('show');
-                    sessionStorage.setItem('gwPopupShown', 'true');
-                    setTimeout(() => { document.getElementById('gw-popup').classList.remove('show'); }, 6000);
-                }, 2000);
-            }
         }
 
         function logoutUser() {
@@ -731,17 +694,25 @@
         // FIREBASE FIRESTORE
         // ----------------------------------------------------
 
-        // 1. ÜRÜNLER 
+        // 1. ÜRÜNLER (DİKEY, FOTOĞRAFLI TASARIM & BAKIM MODU)
         db.collection("products").onSnapshot(snapshot => {
             allProducts = [];
-            snapshot.forEach(doc => allProducts.push({ id: doc.id, ...doc.data() }));
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                // Eğer isMaintenance alanı yoksa false kabul et
+                allProducts.push({ id: doc.id, isMaintenance: false, ...data });
+            });
             renderStoreProducts();
             renderAdminProducts();
+            populateKeygenSelects();
         });
 
         function renderStoreProducts() {
             const container = document.getElementById('store-products-container');
-            if(allProducts.length === 0) return; 
+            if(allProducts.length === 0) {
+                container.innerHTML = `<p style="text-align: center; color: var(--text-secondary); width: 100%;">Henüz mağazaya ürün eklenmemiş.</p>`;
+                return;
+            }
             
             container.innerHTML = ''; 
             allProducts.forEach(prod => {
@@ -749,8 +720,12 @@
                 div.className = 'product-card';
                 
                 let mediaHtml = prod.imageUrl 
-                    ? `<div class="prod-image-wrapper"><img src="${prod.imageUrl}" alt="${prod.name}"></div>`
+                    ? `<div class="prod-image-wrapper"><img src="${prod.imageUrl}"></div>`
                     : `<div class="prod-image-wrapper"><i class="fas fa-image prod-image-placeholder"></i></div>`;
+
+                let buyBtnHtml = prod.isMaintenance 
+                    ? `<button class="btn-buy maintenance" disabled>BAKIMDA</button>`
+                    : `<button class="btn-buy" onclick="alert('Shopier satın alma paneline yönlendirileceksiniz.')">Satın Al</button>`;
 
                 div.innerHTML = `
                     ${mediaHtml}
@@ -768,8 +743,7 @@
                             <button onclick="changePrice('${prod.id}', ${prod.priceMonthly}, 'Aylık', this)">Aylık</button>
                             <button class="active" onclick="changePrice('${prod.id}', ${prod.priceLifetime}, 'Sınırsız', this)">Sınırsız</button>
                         </div>
-
-                        <button class="btn-buy" onclick="alert('Shopier satın alma paneline yönlendirileceksiniz.')">Satın Al</button>
+                        ${buyBtnHtml}
                     </div>
                 `;
                 container.appendChild(div);
@@ -807,7 +781,7 @@
                         <td><span style="color:${roleColor}; font-weight:bold;">${roleText}</span></td>
                         <td class="action-cell">
                             <button class="btn-action-icon" title="Yetki Düzenle" onclick="openPermModal('${user.id}', '${user.username}', '${user.role}')"><i class="fas fa-user-shield"></i></button>
-                            <button class="btn-action-icon" title="Lisans Tanımla" onclick="openLicenseModal('${user.id}', '${user.username}')"><i class="fas fa-key"></i></button>
+                            <button class="btn-action-icon" title="Lisans Tanımla" onclick="openLicenseModal('${user.id}', '${user.username}', '${user.email}')"><i class="fas fa-key"></i></button>
                             <button class="btn-action-icon ban" title="Yasakla" onclick="openBanModal('${user.id}', '${user.username}')"><i class="fas fa-ban"></i></button>
                         </td>
                     </tr>
@@ -818,14 +792,6 @@
         // 3. DESTEK BİLETLERİ (KULLANICI VE ADMİN)
         db.collection("tickets").orderBy("timestamp", "desc").onSnapshot(snapshot => {
             allTickets = [];
-            snapshot.docChanges().forEach(change => {
-                if(change.type === 'modified') {
-                    const data = change.doc.data();
-                    if(data.status === 'resolved' && currentUser && data.user === currentUser.username) {
-                        showToast(`Destek talebiniz yönetici tarafından yanıtlandı!`);
-                    }
-                }
-            });
             snapshot.forEach(doc => allTickets.push({ id: doc.id, ...doc.data() }));
             renderAdminTickets();
             loadUserTickets();
@@ -838,11 +804,7 @@
             if(!subj || !msg) return alert('Boş alan bırakmayın.');
 
             db.collection("tickets").add({
-                subject: subj,
-                message: msg,
-                reply: '', 
-                user: currentUser.username,
-                status: 'open',
+                subject: subj, message: msg, reply: '', user: currentUser.username, status: 'open',
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
                 document.getElementById('ticket-subject').value = '';
@@ -937,36 +899,70 @@
             if(!activeTicketId) return;
             const replyMsg = document.getElementById('admin-ticket-reply').value;
             db.collection("tickets").doc(activeTicketId).update({ 
-                status: 'resolved',
-                reply: replyMsg
+                status: 'resolved', reply: replyMsg
             }).then(() => {
                 closeModal('ticket-modal');
                 showToast("Bilet yanıtlandı ve çözüldü!");
             });
         }
 
-        // 4. KULLANICI LİSANSLARI
+        // 4. KULLANICI LİSANSLARI & ADMİN LİSANS YÖNETİMİ
+        db.collection("licenses").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+            allLicenses = [];
+            snapshot.forEach(doc => allLicenses.push({ id: doc.id, ...doc.data() }));
+            loadUserLicenses();
+            renderAdminLicenses();
+        });
+
         function loadUserLicenses() {
             const userAuth = auth.currentUser;
             if(!userAuth) return;
-            db.collection("licenses").where("userId", "==", userAuth.uid).onSnapshot(snapshot => {
-                const tbody = document.getElementById('user-licenses-body');
-                if(snapshot.empty) {
-                    tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kayıtlı bir lisansınız bulunmamaktadır.</td></tr>`;
-                    return;
+            const tbody = document.getElementById('user-licenses-body');
+            const myLicenses = allLicenses.filter(l => l.userId === userAuth.uid);
+
+            if(myLicenses.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kayıtlı bir lisansınız bulunmamaktadır.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = '';
+            myLicenses.forEach(data => {
+                let typeText = data.type === 'daily' ? 'Günlük' : (data.type === 'monthly' ? 'Aylık' : 'Sınırsız');
+                let dateText = "Sınırsız";
+                if(data.type !== 'lifetime' && data.expiresAt) {
+                    const date = data.expiresAt.toDate();
+                    dateText = date.toLocaleDateString('tr-TR');
                 }
-                tbody.innerHTML = '';
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    let typeText = data.type === 'daily' ? 'Günlük' : (data.type === 'monthly' ? 'Aylık' : 'Sınırsız');
-                    let dateText = "Sınırsız";
-                    if(data.type !== 'lifetime' && data.expiresAt) {
-                        const date = data.expiresAt.toDate();
-                        dateText = date.toLocaleDateString('tr-TR');
-                    }
-                    tbody.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${data.productName}</td><td>${typeText}</td><td>${dateText}</td></tr>`;
-                });
+                tbody.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${data.productName}</td><td>${typeText}</td><td>${dateText}</td></tr>`;
             });
+        }
+
+        function renderAdminLicenses() {
+            const tbody = document.getElementById('admin-keys-body');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            if(allLicenses.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Üretilmiş lisans anahtarı bulunmuyor.</td></tr>`;
+                return;
+            }
+            allLicenses.forEach(l => {
+                const userDisplay = l.userEmail ? l.userEmail.split('@')[0] : (l.userId === "admin_generated" ? "Boşta" : "Bilinmeyen");
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="color:#4ade80; font-weight:bold; font-family:monospace; font-size:1.1rem;">${l.id}</td>
+                        <td>${l.productName}</td>
+                        <td>${userDisplay}</td>
+                        <td class="action-cell">
+                            <button class="btn-action-icon ban" title="Anahtarı Sil" onclick="deleteLicense('${l.id}')"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteLicense(id) {
+            if(confirm("DİKKAT: Bu lisansı silmek istediğinize emin misiniz? Bu lisansa sahip kullanıcı programa bir daha giriş yapamaz!")) {
+                db.collection("licenses").doc(id).delete().then(() => showToast("Lisans anahtarı veritabanından silindi."));
+            }
         }
 
         // ----------------------------------------------------
@@ -1004,19 +1000,35 @@
             });
         }
 
-        function openLicenseModal(userId, username) {
+        // OTOMATİK LİSANS ÜRETİCİ FONKSİYONU
+        function generateKeyFormat(productName) {
+            let prefix = "SENS";
+            if(productName.includes("GUI")) prefix = "SENS-GUI";
+            else if(productName.includes("Radar")) prefix = "SENS-RDR";
+            else if(productName.includes("Simulator")) prefix = "SENS-SIM";
+            
+            const part1 = Math.random().toString(36).substring(2, 6).toUpperCase();
+            const part2 = Math.random().toString(36).substring(2, 6).toUpperCase();
+            return `${prefix}-${part1}-${part2}`;
+        }
+
+        // 1. ADMİN: KULLANICIYA LİSANS TANIMLA
+        function openLicenseModal(userId, username, email) {
             activeAdminUserId = userId;
+            activeAdminUserEmail = email;
             document.getElementById('license-username-display').innerText = "Kullanıcı: " + username;
             
             const select = document.getElementById('license-product');
             select.innerHTML = '';
-            allProducts.forEach(p => { select.innerHTML += `<option value="${p.id}">${p.name}</option>`; });
-            if(allProducts.length === 0) select.innerHTML = `<option value="">Önce ürün eklemelisiniz.</option>`;
+            allProducts.forEach(p => { 
+                if(!p.isMaintenance) select.innerHTML += `<option value="${p.id}">${p.name}</option>`; 
+            });
+            if(select.innerHTML === '') select.innerHTML = `<option value="">Önce ürün eklemelisiniz.</option>`;
             
             document.getElementById('license-modal').style.display = 'flex';
         }
 
-        function saveLicense() {
+        function assignLicenseToUser() {
             if(!activeAdminUserId) return;
             const prodId = document.getElementById('license-product').value;
             const duration = document.getElementById('license-duration').value;
@@ -1027,19 +1039,83 @@
             if(duration === 'daily') expiresAt = new Date(Date.now() + 86400000); 
             else if(duration === 'monthly') expiresAt = new Date(Date.now() + 2592000000); 
 
-            db.collection('licenses').add({
+            const newKey = generateKeyFormat(prod.name);
+
+            db.collection('licenses').doc(newKey).set({
                 userId: activeAdminUserId,
+                userEmail: activeAdminUserEmail,
                 productId: prod.id,
                 productName: prod.name,
                 type: duration,
+                keyType: "user",
+                hwid: "",
+                status: "active",
                 expiresAt: expiresAt ? firebase.firestore.Timestamp.fromDate(expiresAt) : null,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
                 closeModal('license-modal');
-                showToast("Lisans başarıyla tanımlandı!");
+                showToast(`Kullanıcıya ${newKey} lisansı başarıyla tanımlandı!`);
             });
         }
 
+        // 2. ADMİN: LİSANS (KEYGEN) ÜRETME EKRANI İÇİN SELECT DOLDURMA
+        function populateKeygenSelects() {
+            const kSelect = document.getElementById('keygen-product');
+            if(kSelect) {
+                kSelect.innerHTML = '';
+                allProducts.forEach(p => {
+                    if(!p.isMaintenance) kSelect.innerHTML += `<option value="${p.name}">${p.name}</option>`;
+                });
+            }
+            
+            const lSelect = document.getElementById('license-product');
+            if(lSelect) {
+                lSelect.innerHTML = '';
+                allProducts.forEach(p => {
+                    if(!p.isMaintenance) lSelect.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+                });
+            }
+        }
+
+        // KEYGEN ÇALIŞTIRICI
+        function generateAdminKeys() {
+            const prodName = document.getElementById('keygen-product').value;
+            const duration = document.getElementById('keygen-duration').value;
+            const keyType = document.getElementById('keygen-type').value;
+            const count = parseInt(document.getElementById('keygen-count').value) || 1;
+            
+            if(!prodName) return alert("Aktif ürün bulunamadı.");
+
+            let generatedKeys = [];
+            let expiresAt = null;
+            if(duration === 'daily') expiresAt = new Date(Date.now() + 86400000); 
+            else if(duration === 'monthly') expiresAt = new Date(Date.now() + 2592000000); 
+            
+            for(let i=0; i<count; i++) {
+                let key = generateKeyFormat(prodName);
+                if (keyType === 'admin') key += "-ADM";
+                generatedKeys.push(key);
+                
+                db.collection('licenses').doc(key).set({
+                    userId: "admin_generated",
+                    productId: "keygen",
+                    productName: prodName,
+                    type: duration,
+                    keyType: keyType,
+                    hwid: "",
+                    status: "active",
+                    expiresAt: expiresAt ? firebase.firestore.Timestamp.fromDate(expiresAt) : null,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            }
+            
+            const resultBox = document.getElementById('keygen-result');
+            resultBox.style.display = 'block';
+            resultBox.value = generatedKeys.join('\n');
+            showToast(count + " adet lisans üretildi ve veritabanına eklendi!");
+        }
+
+        // ÜRÜN YÖNETİMİ
         function renderAdminProducts() {
             const tbody = document.getElementById('admin-products-body');
             if(!tbody) return;
@@ -1049,16 +1125,27 @@
                 return;
             }
             allProducts.forEach(p => {
+                let maintIcon = p.isMaintenance ? 'fa-play' : 'fa-wrench';
+                let maintColor = p.isMaintenance ? '#4ade80' : '#facc15';
+                let maintTitle = p.isMaintenance ? 'Ürünü Aktif Et' : 'Bakıma Al';
+
                 tbody.innerHTML += `
                     <tr>
-                        <td style="font-weight:bold;">${p.name}</td>
+                        <td style="font-weight:bold;">${p.name} ${p.isMaintenance ? '<span style="color:#facc15; font-size:0.8rem; margin-left:5px;">(BAKIMDA)</span>' : ''}</td>
                         <td>${p.priceDaily || 0}₺ / ${p.priceMonthly || 0}₺ / ${p.priceLifetime || 0}₺</td>
                         <td class="action-cell">
-                            <button class="btn-action-icon edit" onclick="openEditProductModal('${p.id}')"><i class="fas fa-pen"></i></button>
-                            <button class="btn-action-icon ban" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button>
+                            <button class="btn-action-icon maint" title="${maintTitle}" style="color:${maintColor}; border-color:${maintColor};" onclick="toggleMaintenance('${p.id}', ${p.isMaintenance})"><i class="fas ${maintIcon}"></i></button>
+                            <button class="btn-action-icon edit" title="Düzenle" onclick="openEditProductModal('${p.id}')"><i class="fas fa-pen"></i></button>
+                            <button class="btn-action-icon ban" title="Sil" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 `;
+            });
+        }
+
+        function toggleMaintenance(id, currentStatus) {
+            db.collection("products").doc(id).update({ isMaintenance: !currentStatus }).then(()=> {
+                showToast(!currentStatus ? "Ürün bakıma alındı." : "Ürün tekrar aktif edildi.");
             });
         }
 
@@ -1106,6 +1193,7 @@
                     showToast("Ürün başarıyla güncellendi.");
                 });
             } else {
+                productData.isMaintenance = false;
                 db.collection("products").add(productData).then(() => {
                     closeModal('product-modal');
                     showToast("Yeni ürün eklendi.");
@@ -1118,103 +1206,6 @@
                 db.collection("products").doc(id).delete().then(() => showToast("Ürün silindi."));
             }
         }
-
-        // --- YENİ ADMİN LİSANS ÜRETİCİ (KEYGEN) ---
-        function generateAdminKeys() {
-            const prodName = document.getElementById('keygen-product').value;
-            const duration = document.getElementById('keygen-duration').value;
-            const keyType = document.getElementById('keygen-type').value;
-            const count = parseInt(document.getElementById('keygen-count').value) || 1;
-            
-            let prefix = "SENS";
-            if(prodName.includes("GUI")) prefix = "SENS-GUI";
-            else if(prodName.includes("Radar")) prefix = "SENS-RDR";
-            else if(prodName.includes("Simulator")) prefix = "SENS-SIM";
-            
-            if (keyType === 'admin') prefix += "-ADM";
-
-            let generatedKeys = [];
-            
-            let expiresAt = null;
-            if(duration === 'daily') expiresAt = new Date(Date.now() + 86400000); 
-            else if(duration === 'monthly') expiresAt = new Date(Date.now() + 2592000000); 
-            
-            for(let i=0; i<count; i++) {
-                const part1 = Math.random().toString(36).substring(2, 6).toUpperCase();
-                const part2 = Math.random().toString(36).substring(2, 6).toUpperCase();
-                const key = `${prefix}-${part1}-${part2}`;
-                generatedKeys.push(key);
-                
-                db.collection('licenses').doc(key).set({
-                    productId: "admin_generated",
-                    productName: prodName,
-                    type: duration,
-                    keyType: keyType,
-                    hwid: "",
-                    status: "active",
-                    expiresAt: expiresAt ? firebase.firestore.Timestamp.fromDate(expiresAt) : null,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                });
-            }
-            
-            const resultBox = document.getElementById('keygen-result');
-            resultBox.style.display = 'block';
-            resultBox.value = generatedKeys.join('\n');
-            showToast(count + " adet lisans üretildi ve veritabanına eklendi!");
-        }
-
-        // ÇEKİLİŞ MANTIĞI 
-        db.collection('settings').doc('giveaway').onSnapshot(doc => {
-            if(doc.exists) {
-                const data = doc.data();
-                if(data.active) {
-                    document.getElementById('prize-display').innerText = data.prize;
-                    giveawayEndTime = data.endTime.toDate();
-                }
-            }
-        });
-
-        function joinGiveaway() {
-            if(!currentUser) { alert("Çekilişe katılmak için giriş yapmalısınız!"); openModal('login'); return; }
-            if(hasJoinedGiveaway) return;
-            hasJoinedGiveaway = true;
-            const btn = document.getElementById('join-giveaway-btn');
-            btn.innerHTML = 'Katıldınız <i class="fas fa-check-circle"></i>';
-            btn.style.background = '#4ade80'; btn.style.color = '#000';
-            btn.style.borderColor = '#4ade80'; btn.style.cursor = 'default';
-        }
-
-        function setNewGiveaway() {
-            const prize = document.getElementById('admin-prize').value;
-            const minutes = parseInt(document.getElementById('admin-time').value);
-
-            if(prize.trim() === '' || isNaN(minutes)) { alert('Lütfen ödül adını ve süreyi eksiksiz girin.'); return; }
-
-            const endTime = new Date(Date.now() + minutes * 60000);
-
-            db.collection('settings').doc('giveaway').set({
-                prize: prize, endTime: firebase.firestore.Timestamp.fromDate(endTime), active: true
-            }).then(() => {
-                alert('Çekiliş başarıyla başlatıldı!');
-            });
-        }
-
-        setInterval(() => {
-            const distance = giveawayEndTime - new Date().getTime();
-            if (distance < 0) {
-                document.getElementById("gw-hrs").innerText = "00";
-                document.getElementById("gw-min").innerText = "00";
-                document.getElementById("gw-sec").innerText = "00";
-                return;
-            }
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("gw-hrs").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("gw-min").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("gw-sec").innerText = seconds < 10 ? "0" + seconds : seconds;
-        }, 1000);
     </script>
 </body>
 </html>

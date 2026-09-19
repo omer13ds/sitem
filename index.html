@@ -27,6 +27,8 @@
             --radius-lg: 24px;
             --transition-fast: all 0.2s ease;
             --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --accent-color: #3b82f6; /* Ferah Mavi */
+            --success-color: #10b981;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,48 +39,48 @@
         header { width: 100%; padding: 25px 5vw; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; z-index: 100; border-bottom: 1px solid var(--border-light); background: rgba(3, 3, 3, 0.85); backdrop-filter: blur(15px); }
         .header-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1700px; margin: 0 auto; }
         .logo { font-size: 1.6rem; font-weight: 700; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 12px; flex: 1; }
-        .nav-menu { display: flex; gap: 6px; background: var(--bg-surface); padding: 6px; border-radius: 100px; border: 1px solid var(--border-light); }
-        .nav-btn { background: transparent; border: none; color: var(--text-secondary); font-size: 0.95rem; font-weight: 500; padding: 10px 24px; border-radius: 100px; cursor: pointer; transition: var(--transition-fast); }
+        .nav-menu { display: flex; gap: 8px; background: var(--bg-surface); padding: 6px; border-radius: 100px; border: 1px solid var(--border-light); }
+        .nav-btn { background: transparent; border: none; color: var(--text-secondary); font-size: 0.95rem; font-weight: 500; padding: 12px 28px; border-radius: 100px; cursor: pointer; transition: var(--transition-fast); }
         .nav-btn:hover { color: var(--text-primary); }
         .nav-btn.active { background: var(--text-primary); color: var(--bg-base); font-weight: 600; }
 
         /* AUTH & PROFILE */
         .auth-actions { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 12px; position: relative; }
-        .btn-auth { border: 1px solid var(--border-light); padding: 10px 24px; border-radius: 100px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: var(--transition-fast); display: flex; align-items: center; gap: 8px; }
+        .btn-auth { border: 1px solid var(--border-light); padding: 12px 28px; border-radius: 100px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: var(--transition-fast); display: flex; align-items: center; gap: 8px; }
         .btn-login { background: transparent; color: var(--text-primary); }
         .btn-login:hover { background: var(--bg-elevated); border-color: var(--border-hover); }
         .btn-register { background: var(--text-primary); color: var(--bg-base); }
         .btn-register:hover { background: #d4d4d4; }
         
-        #user-menu { display: none; align-items: center; gap: 15px; position: relative; }
-        .giveaway-trigger { background: var(--bg-surface); border: 1px solid var(--border-light); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--text-primary); cursor: pointer; transition: var(--transition-fast); }
-        .giveaway-trigger:hover { border-color: var(--text-primary); transform: scale(1.1); }
+        #user-menu { display: none; align-items: center; gap: 20px; position: relative; }
+        .giveaway-trigger { background: var(--bg-surface); border: 1px solid var(--border-light); width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--text-primary); cursor: pointer; transition: var(--transition-fast); }
+        .giveaway-trigger:hover { border-color: var(--text-primary); transform: scale(1.08); box-shadow: 0 0 15px rgba(255,255,255,0.1); }
         .user-profile { display: flex; align-items: center; cursor: pointer; }
-        .avatar-circle { width: 44px; height: 44px; border-radius: 50%; background: var(--text-primary); color: var(--bg-base); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; transition: var(--transition-fast); }
-        .dropdown-menu { position: absolute; top: 60px; right: 0; background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); width: 220px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.9); z-index: 100; }
-        .dropdown-menu a { padding: 16px 20px; color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; transition: var(--transition-fast); }
-        .dropdown-menu a:hover { background: var(--bg-elevated); color: var(--text-primary); padding-left: 25px; }
+        .avatar-circle { width: 46px; height: 46px; border-radius: 50%; background: var(--text-primary); color: var(--bg-base); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; transition: var(--transition-fast); }
+        .dropdown-menu { position: absolute; top: 65px; right: 0; background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); width: 230px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.9); z-index: 100; }
+        .dropdown-menu a { padding: 18px 20px; color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 14px; transition: var(--transition-fast); }
+        .dropdown-menu a:hover { background: var(--bg-elevated); color: var(--text-primary); padding-left: 25px; border-left: 3px solid var(--text-primary); }
 
         /* --- MAIN TABS --- */
         main { flex: 1; position: relative; width: 100%; }
         .tab-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 40px 5vw 100px; display: none; overflow-y: auto; scrollbar-width: none; }
-        .tab-content.active { display: block; animation: fadeSlideUp 0.4s ease forwards; z-index: 10; }
-        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content.active { display: block; animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; z-index: 10; }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .tab-inner { width: 100%; max-width: 1700px; margin: 0 auto; }
 
         /* --- HOME --- */
         .home-layout { max-width: 1100px; margin-bottom: 80px; margin-top: 40px; }
         .home-layout h1 { font-size: clamp(4rem, 6vw, 6rem); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 30px; }
         .home-layout p { font-size: 1.3rem; color: var(--text-secondary); line-height: 1.7; max-width: 800px; margin-bottom: 50px; }
-        .btn-large { display: inline-flex; align-items: center; gap: 12px; background: var(--text-primary); color: var(--bg-base); padding: 20px 45px; border-radius: var(--radius-sm); font-size: 1.15rem; font-weight: 700; text-decoration: none; transition: var(--transition-fast); border: 1px solid var(--text-primary); cursor: pointer;}
-        .btn-large:hover { background: transparent; color: var(--text-primary); }
+        .btn-large { display: inline-flex; align-items: center; gap: 12px; background: var(--text-primary); color: var(--bg-base); padding: 22px 50px; border-radius: var(--radius-sm); font-size: 1.2rem; font-weight: 700; text-decoration: none; transition: var(--transition-fast); border: 1px solid var(--text-primary); cursor: pointer;}
+        .btn-large:hover { background: transparent; color: var(--text-primary); transform: translateY(-3px); }
 
-        /* --- YENİ DİKEY (FOTOĞRAFLI) ÜRÜNLER KISMI --- */
-        .section-header { margin-bottom: 50px; text-align: center; }
+        /* --- ÜRÜNLER (FOTOĞRAFLI DİKEY) --- */
+        .section-header { margin-bottom: 60px; text-align: center; }
         .section-header h2 { font-size: 3.5rem; font-weight: 700; letter-spacing: -1.5px; }
         .section-header p { color: var(--text-secondary); font-size: 1.1rem; margin-top: 10px; }
         
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 40px; max-width: 1400px; margin: 0 auto; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 50px; max-width: 1400px; margin: 0 auto; }
         
         .product-card { 
             background: var(--bg-surface); 
@@ -87,74 +89,73 @@
             display: flex; flex-direction: column;
             position: relative; transition: all 0.4s ease; overflow: hidden;
         }
-        .product-card:hover { border-color: var(--border-hover); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
+        .product-card:hover { border-color: var(--border-hover); transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
 
-        .prod-image-wrapper { width: 100%; height: 240px; background: var(--bg-elevated); border-bottom: 1px solid var(--border-light); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .prod-image-wrapper { width: 100%; height: 260px; background: var(--bg-elevated); border-bottom: 1px solid var(--border-light); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .prod-image-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
         .product-card:hover .prod-image-wrapper img { transform: scale(1.05); }
         .prod-image-placeholder { font-size: 4rem; color: var(--border-light); }
 
-        .prod-content { padding: 35px; display: flex; flex-direction: column; flex: 1; }
-        .prod-content h3 { font-size: 1.6rem; margin-bottom: 10px; }
-        .prod-content p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; flex: 1; }
+        .prod-content { padding: 40px 35px; display: flex; flex-direction: column; flex: 1; }
+        .prod-content h3 { font-size: 1.8rem; margin-bottom: 15px; }
+        .prod-content p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; margin-bottom: 30px; flex: 1; }
 
-        .price-tag { display: flex; align-items: baseline; gap: 8px; margin-bottom: 20px; }
-        .price-tag h4 { font-size: 2.2rem; font-weight: 700; color: #fff; }
-        .price-tag span { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .price-tag { display: flex; align-items: baseline; gap: 10px; margin-bottom: 25px; }
+        .price-tag h4 { font-size: 2.6rem; font-weight: 700; color: #fff; }
+        .price-tag span { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
-        .price-toggle { display: flex; width: 100%; background: var(--bg-base); border-radius: 100px; padding: 6px; margin-bottom: 25px; border: 1px solid var(--border-light); }
-        .price-toggle button { flex: 1; background: transparent; border: none; color: var(--text-secondary); padding: 10px; border-radius: 100px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: inherit; font-size: 0.85rem; }
+        .price-toggle { display: flex; width: 100%; background: var(--bg-base); border-radius: 100px; padding: 8px; margin-bottom: 30px; border: 1px solid var(--border-light); }
+        .price-toggle button { flex: 1; background: transparent; border: none; color: var(--text-secondary); padding: 12px; border-radius: 100px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: inherit; font-size: 0.95rem; }
         .price-toggle button.active { background: var(--text-primary); color: var(--bg-base); }
 
-        .btn-buy { width: 100%; padding: 16px; background: var(--text-primary); color: var(--bg-base); border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: 0.2s;}
+        .btn-buy { width: 100%; padding: 18px; background: var(--text-primary); color: var(--bg-base); border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: 0.2s;}
         .btn-buy:hover { background: #d4d4d4; }
-        
         .btn-buy.maintenance { background: #1a1a1a; color: #555; border: 1px solid #333; cursor: not-allowed; }
-        .btn-buy.maintenance:hover { background: #1a1a1a; }
 
-        /* --- DESTEK --- */
-        .support-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-        .support-info-box { background: transparent; }
-        .support-info-box h3 { font-size: 2.2rem; margin-bottom: 20px; }
-        .support-info-box p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px; }
-        .form-box { background: var(--bg-surface); border: 1px solid var(--border-light); padding: 40px; border-radius: var(--radius-lg); }
-        .input-group { position: relative; margin-bottom: 20px; }
-        .input-base { width: 100%; background: var(--bg-base); border: 1px solid var(--border-light); color: var(--text-primary); padding: 16px; border-radius: var(--radius-sm); outline: none; font-size: 1rem; font-family: inherit; transition: 0.2s;}
-        .input-base:focus { border-color: var(--text-primary); }
-        textarea.input-base { min-height: 150px; resize: vertical; }
+        /* --- FORMLAR --- */
+        .form-box { background: var(--bg-surface); border: 1px solid var(--border-light); padding: 50px; border-radius: var(--radius-lg); }
+        .input-group { position: relative; margin-bottom: 25px; }
+        .input-group i { position: absolute; left: 20px; top: 20px; color: var(--text-muted); font-size: 1.1rem; }
+        .input-base { width: 100%; background: var(--bg-base); border: 1px solid var(--border-light); color: var(--text-primary); padding: 18px 18px 18px 55px; border-radius: var(--radius-sm); outline: none; font-size: 1.05rem; font-family: inherit; transition: 0.2s;}
+        .input-base:focus { border-color: var(--text-secondary); background: #080808; }
+        textarea.input-base { min-height: 160px; resize: vertical; }
 
         /* --- PANEL LAYOUT (Kullanıcı & Admin) --- */
-        .panel-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; height: 100%; }
-        .sidebar { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 25px; display: flex; flex-direction: column; gap: 10px; }
-        .sidebar button { background: transparent; color: var(--text-secondary); border: none; padding: 16px; text-align: left; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; font-size: 1rem; transition: 0.2s; }
-        .sidebar button:hover, .sidebar button.active { background: var(--bg-elevated); color: var(--text-primary); }
-        .content-area { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 40px; }
+        .panel-layout { display: grid; grid-template-columns: 300px 1fr; gap: 50px; height: 100%; }
+        .sidebar { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 30px; display: flex; flex-direction: column; gap: 12px; }
+        .sidebar button { background: transparent; color: var(--text-secondary); border: none; padding: 18px 20px; text-align: left; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; font-size: 1.05rem; transition: 0.2s; }
+        .sidebar button:hover, .sidebar button.active { background: var(--bg-elevated); color: var(--text-primary); padding-left: 25px; }
+        .content-area { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 50px; }
         
-        .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .data-table th, .data-table td { padding: 18px 15px; text-align: left; border-bottom: 1px solid var(--border-light); font-size: 1rem; }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 25px; }
+        .data-table th, .data-table td { padding: 22px 15px; text-align: left; border-bottom: 1px solid var(--border-light); font-size: 1.05rem; }
         .data-table th { color: var(--text-secondary); font-weight: 500;}
         
-        .action-cell { display: flex; gap: 12px; } /* FERAH BUTON ARALIKLARI */
-        .btn-action-icon { background: #080808; border: 1px solid #2a2a2a; color: #fff; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; font-size: 1rem; }
-        .btn-action-icon:hover { background: #1a1a1a; border-color: #555; }
-        .btn-action-icon.edit { color: #60a5fa; border-color: #1e3a8a; }
-        .btn-action-icon.edit:hover { background: #1e3a8a; color: #fff; }
-        .btn-action-icon.ban { color: #f43f5e; border-color: #4c1d25; }
-        .btn-action-icon.ban:hover { background: #2e0f14; border-color: #f43f5e; }
-        .btn-action-icon.maint { color: #facc15; border-color: #713f12; }
-        .btn-action-icon.maint:hover { background: #422006; color: #fff; }
+        /* FERAH VE ŞIK ACTION BUTONLARI */
+        .action-cell { display: flex; gap: 15px; } 
+        .btn-action-icon { background: var(--bg-base); border: 1px solid var(--border-light); color: var(--text-secondary); width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; font-size: 1.05rem; }
+        .btn-action-icon:hover { background: var(--text-primary); color: var(--bg-base); border-color: var(--text-primary); transform: translateY(-2px); }
+        .btn-action-icon.edit:hover { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+        .btn-action-icon.ban:hover { background: #f43f5e; border-color: #f43f5e; color: #fff; }
+        .btn-action-icon.maint:hover { background: #facc15; border-color: #facc15; color: #000; }
+        .btn-action-icon.success:hover { background: #10b981; border-color: #10b981; color: #fff; }
 
-        .search-bar { width: 100%; padding: 16px; background: var(--bg-base); border: 1px solid var(--border-light); border-radius: var(--radius-sm); color: #fff; margin-bottom: 20px; font-family: inherit; outline: none; }
+        .search-bar { width: 100%; padding: 18px 18px 18px 55px; background: var(--bg-base); border: 1px solid var(--border-light); border-radius: var(--radius-sm); color: #fff; margin-bottom: 25px; font-family: inherit; outline: none; }
 
         /* --- MODALLAR --- */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-box { background: var(--bg-surface); border: 1px solid var(--border-light); padding: 40px; border-radius: var(--radius-lg); width: 450px; position: relative; max-height: 90vh; overflow-y: auto;}
-        .close-modal { position: absolute; top: 25px; right: 25px; cursor: pointer; color: var(--text-secondary); font-size: 1.5rem; }
-        .btn-submit { width: 100%; padding: 16px; background: var(--text-primary); color: var(--bg-base); border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: 0.2s; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-box { background: var(--bg-surface); border: 1px solid var(--border-light); padding: 50px; border-radius: var(--radius-lg); width: 480px; position: relative; max-height: 90vh; overflow-y: auto;}
+        .close-modal { position: absolute; top: 25px; right: 25px; cursor: pointer; color: var(--text-secondary); font-size: 1.5rem; transition: 0.2s; }
+        .close-modal:hover { color: #fff; transform: rotate(90deg); }
+        .btn-submit { width: 100%; padding: 18px; background: var(--text-primary); color: var(--bg-base); border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: 0.2s; }
         .btn-submit:hover { background: #d4d4d4; }
         
-        #toast { position: fixed; bottom: 30px; right: 30px; background: #fff; color: #000; padding: 16px 24px; border-radius: 8px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateX(150%); transition: transform 0.4s ease; z-index: 9999; display: flex; align-items: center; gap: 10px; }
+        /* CANLI TOAST BİLDİRİMLERİ */
+        #toast { position: fixed; bottom: 30px; right: 30px; background: #fff; color: #000; padding: 20px 30px; border-radius: 12px; font-weight: 600; box-shadow: 0 15px 40px rgba(0,0,0,0.4); transform: translateX(150%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 9999; display: flex; align-items: center; gap: 15px; font-size: 1.05rem; }
         #toast.show { transform: translateX(0); }
+        
+        #gw-popup { position: fixed; bottom: 30px; right: -350px; background: var(--bg-elevated); border: 1px solid var(--border-light); padding: 25px; border-radius: 16px; display: flex; align-items: center; gap: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.8); transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: 9998; cursor: pointer;}
+        #gw-popup.show { right: 30px; }
         
         .profile-view { display: none; }
         .profile-view.active { display: block; animation: fadeSlideUp 0.3s ease; }
@@ -205,7 +206,7 @@
             </div>
         </div>
 
-        <!-- ÜRÜNLER (DİKEY - FOTOĞRAFLI TASARIM) -->
+        <!-- ÜRÜNLER -->
         <div id="tab-products" class="tab-content">
             <div class="tab-inner">
                 <div class="section-header">
@@ -213,30 +214,26 @@
                     <p>İhtiyacınıza uygun, anında teslim edilen gelişmiş yazılım modülleri.</p>
                 </div>
                 <div class="products-grid" id="store-products-container">
-                    <p style="text-align: center; color: var(--text-secondary); width: 100%;">Ürünler veritabanından yükleniyor...</p>
+                    <p style="text-align: center; color: var(--text-secondary); width: 100%; font-size: 1.2rem;">Ürünler veritabanından yükleniyor...</p>
                 </div>
             </div>
         </div>
 
         <!-- DESTEK -->
         <div id="tab-support" class="tab-content">
-            <div class="tab-inner">
+            <div class="tab-inner" style="max-width: 900px;">
                 <div class="section-header" style="text-align: center;"><h2>Destek Merkezi</h2></div>
-                <div class="support-layout">
-                    <div class="support-info-box">
-                        <h3 class="font-space">Nasıl yardımcı olabiliriz?</h3>
-                        <p>Satın aldığınız modüllerin API entegrasyonları, ofset güncellemeleri veya lisans problemleri hakkında teknik ekibimizden anında destek alabilirsiniz.</p>
-                        <div class="faq-item">
-                            <h4><i class="fas fa-shield-alt"></i> Anti-Spam Koruması</h4>
-                            <p>Sistem yoğunluğunu önlemek amacıyla, açmış olduğunuz bir destek talebi yöneticilerimiz tarafından yanıtlanmadan yeni bir talep oluşturamazsınız.</p>
-                        </div>
-                    </div>
-                    <div class="form-box">
-                        <h3 class="font-space" style="font-size: 1.8rem; margin-bottom: 25px;">Yeni Talep Oluştur</h3>
+                <div class="form-box">
+                    <h3 class="font-space" style="font-size: 1.8rem; margin-bottom: 25px;">Yeni Talep Oluştur</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 30px;">Talepleriniz ortalama 15 dakika içerisinde uzman ekibimiz tarafından yanıtlanmaktadır.</p>
+                    <div class="input-group">
+                        <i class="fas fa-heading"></i>
                         <input type="text" id="ticket-subject" class="input-base" placeholder="Konu Başlığı">
-                        <textarea id="ticket-msg" class="input-base" placeholder="Lütfen sorununuzu detaylı bir şekilde açıklayın..."></textarea>
-                        <button class="btn-submit" onclick="createTicket()">Talebi Gönder <i class="fas fa-paper-plane" style="margin-left:8px;"></i></button>
                     </div>
+                    <div class="input-group">
+                        <textarea id="ticket-msg" class="input-base" style="padding-left: 20px;" placeholder="Lütfen sorununuzu detaylı bir şekilde açıklayın..."></textarea>
+                    </div>
+                    <button class="btn-submit" onclick="createTicket()">Talebi Gönder <i class="fas fa-paper-plane" style="margin-left:8px;"></i></button>
                 </div>
             </div>
         </div>
@@ -255,9 +252,9 @@
         <!-- ÇEKİLİŞ SEKMESİ -->
         <div id="tab-giveaway" class="tab-content">
             <div class="tab-inner" style="text-align: center; max-width: 600px; margin: 50px auto;">
-                <h2 class="font-space" style="font-size: 3rem;"><i class="fas fa-gift"></i> Aktif Çekiliş</h2>
-                <div style="font-size: 2.5rem; color: #fff; margin: 40px 0;" id="gw-timer" class="font-space">00:00:00</div>
-                <div style="font-size: 1.5rem; margin-bottom: 40px;" id="prize-display" class="font-space">Yönetici bekleniyor...</div>
+                <h2 class="font-space" style="font-size: 3.5rem;"><i class="fas fa-gift"></i> Aktif Çekiliş</h2>
+                <div style="font-size: 3.5rem; color: #fff; margin: 50px 0; font-weight: 700;" id="gw-timer" class="font-space">00:00:00</div>
+                <div style="font-size: 1.5rem; margin-bottom: 50px; color: var(--text-secondary);" id="prize-display" class="font-space">Yönetici bekleniyor...</div>
                 <button class="btn-large" id="join-giveaway-btn" onclick="joinGiveaway()" style="width: 100%; justify-content:center;">Çekilişe Katıl</button>
             </div>
         </div>
@@ -271,11 +268,12 @@
                         <button class="profile-btn" onclick="switchProfileView('licenses')">Lisanslarım</button>
                         <button class="profile-btn" onclick="switchProfileView('user-tickets')">Destek Taleplerim</button>
                     </div>
-                    <div id="admin-sidebar-links" style="display: none; border-top: 1px solid var(--border-light); margin-top: 10px; padding-top: 10px;">
-                        <span style="color: var(--text-muted); font-size: 0.8rem; margin-left: 15px; margin-bottom: 5px; display:block;">ADMİN YÖNETİMİ</span>
+                    <div id="admin-sidebar-links" style="display: none; border-top: 1px solid var(--border-light); margin-top: 20px; padding-top: 20px;">
+                        <span style="color: var(--text-muted); font-size: 0.85rem; margin-left: 20px; margin-bottom: 10px; display:block; font-weight: 700;">ADMİN YÖNETİMİ</span>
+                        <button class="profile-btn" onclick="switchProfileView('admin-orders')">Sipariş Geçmişi</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-users')">Kullanıcı Yönetimi</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-products')">Ürün Yönetimi</button>
-                        <button class="profile-btn" onclick="switchProfileView('admin-tickets')">Destek Biletleri</button>
+                        <button class="profile-btn" onclick="switchProfileView('admin-tickets')">Gelen Biletler</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-keygen')">Lisans Üretici</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-keys')">Lisans Yönetimi</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-giveaway')">Çekiliş Ayarları</button>
@@ -283,15 +281,22 @@
                 </div>
                 <div class="content-area">
                     
-                    <!-- USER: BİLGİLERİM -->
+                    <!-- USER: BİLGİLERİM (TARİH EKLENDİ) -->
                     <div id="p-view-info" class="profile-view active">
-                        <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Hesap Bilgileri</h2>
-                        <input type="text" id="prof-user" class="input-base" style="max-width: 400px;" disabled>
+                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Hesap Bilgileri</h2>
+                        <div class="input-group" style="max-width: 450px;">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="prof-user" class="input-base" disabled>
+                        </div>
+                        <div class="input-group" style="max-width: 450px;">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="text" id="prof-created" class="input-base" disabled placeholder="Hesap Oluşturulma Tarihi">
+                        </div>
                     </div>
 
                     <!-- USER: LİSANSLARIM -->
                     <div id="p-view-licenses" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Lisanslarım</h2>
+                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Lisanslarım</h2>
                         <table class="data-table">
                             <thead><tr><th>Ürün</th><th>Abonelik</th><th>Bitiş Tarihi</th></tr></thead>
                             <tbody id="user-licenses-body">
@@ -302,7 +307,7 @@
 
                     <!-- USER: DESTEK TALEPLERİM -->
                     <div id="p-view-user-tickets" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Destek Taleplerim</h2>
+                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Destek Taleplerim</h2>
                         <table class="data-table">
                             <thead><tr><th>Konu</th><th>Durum</th><th>İşlem</th></tr></thead>
                             <tbody id="user-tickets-list-body">
@@ -311,21 +316,35 @@
                         </table>
                     </div>
 
+                    <!-- ADMIN: SİPARİŞ GEÇMİŞİ (YENİ) -->
+                    <div id="p-view-admin-orders" class="profile-view">
+                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Sipariş Geçmişi</h2>
+                        <table class="data-table">
+                            <thead><tr><th>Tarih</th><th>Alıcı E-Posta</th><th>Ürün</th><th>Tutar</th><th>Lisans Key</th></tr></thead>
+                            <tbody id="admin-orders-body">
+                                <tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">Siparişler yükleniyor...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <!-- ADMIN: KULLANICILAR -->
                     <div id="p-view-admin-users" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Kullanıcı Yönetimi</h2>
-                        <input type="text" id="user-search" class="search-bar" placeholder="Kullanıcı ara..." oninput="renderAdminUsers()">
+                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Kullanıcı Yönetimi</h2>
+                        <div class="input-group">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="user-search" class="search-bar" placeholder="Kullanıcı ara..." oninput="renderAdminUsers()">
+                        </div>
                         <table class="data-table">
                             <thead><tr><th>Kullanıcı</th><th>Rol</th><th>İşlemler</th></tr></thead>
                             <tbody id="admin-users-body"></tbody>
                         </table>
                     </div>
 
-                    <!-- ADMIN: ÜRÜN YÖNETİMİ (BAKIM MODU EKLENDİ) -->
+                    <!-- ADMIN: ÜRÜN YÖNETİMİ -->
                     <div id="p-view-admin-products" class="profile-view">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                            <h2 class="font-space" style="font-size: 2rem;">Ürün Yönetimi</h2>
-                            <button class="btn-submit" style="width: auto; padding: 10px 20px; border-radius: 100px;" onclick="openAddProductModal()"><i class="fas fa-plus"></i> Yeni Ekle</button>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                            <h2 class="font-space" style="font-size: 2.2rem;">Ürün Yönetimi</h2>
+                            <button class="btn-submit" style="width: auto; padding: 12px 25px; border-radius: 100px;" onclick="openAddProductModal()"><i class="fas fa-plus"></i> Yeni Ekle</button>
                         </div>
                         <table class="data-table">
                             <thead><tr><th>Ürün Adı</th><th>Fiyatlar (G/A/S)</th><th>İşlem</th></tr></thead>
@@ -335,7 +354,7 @@
 
                     <!-- ADMIN: DESTEK BİLETLERİ -->
                     <div id="p-view-admin-tickets" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Gelen Destek Biletleri</h2>
+                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Gelen Destek Biletleri</h2>
                         <table class="data-table">
                             <thead><tr><th>Kullanıcı</th><th>Konu</th><th>Durum</th><th>İşlem</th></tr></thead>
                             <tbody id="admin-tickets-body"></tbody>
@@ -344,53 +363,54 @@
 
                     <!-- ADMIN: LİSANS ÜRETİCİ -->
                     <div id="p-view-admin-keygen" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Lisans Üretici</h2>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px;">Manuel olarak lisans anahtarı üretip kopyalayabilirsiniz.</p>
-                        <div style="background: rgba(255,255,255,0.02); padding: 30px; border: 1px solid var(--border-light); border-radius: 12px; max-width: 600px;">
-                            <label style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:5px; display:block;">Hedef Ürün (Sadece Aktif Olanlar)</label>
-                            <select id="keygen-product" class="input-base"></select>
+                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 20px;">Lisans Üretici</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px;">Manuel olarak lisans anahtarı üretip kopyalayabilirsiniz.</p>
+                        
+                        <div class="form-box" style="padding: 40px; max-width: 700px;">
+                            <label style="color:var(--text-secondary); font-size:1rem; margin-bottom:10px; display:block;">Hedef Ürün (Sadece Aktif Olanlar)</label>
+                            <select id="keygen-product" class="input-base" style="padding-left:20px;"></select>
 
-                            <div style="display:flex; gap:15px; margin-bottom: 20px;">
+                            <div style="display:flex; gap:20px; margin-bottom: 30px;">
                                 <div style="flex: 1;">
-                                    <label style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:5px; display:block;">Süre</label>
-                                    <select id="keygen-duration" class="input-base" style="margin-bottom: 0;">
+                                    <label style="color:var(--text-secondary); font-size:1rem; margin-bottom:10px; display:block;">Süre</label>
+                                    <select id="keygen-duration" class="input-base" style="padding-left:20px; margin-bottom: 0;">
                                         <option value="daily">Günlük</option>
                                         <option value="monthly">Aylık</option>
                                         <option value="lifetime">Sınırsız</option>
                                     </select>
                                 </div>
                                 <div style="flex: 1;">
-                                    <label style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:5px; display:block;">Anahtar Tipi</label>
-                                    <select id="keygen-type" class="input-base" style="margin-bottom: 0;">
+                                    <label style="color:var(--text-secondary); font-size:1rem; margin-bottom:10px; display:block;">Anahtar Tipi</label>
+                                    <select id="keygen-type" class="input-base" style="padding-left:20px; margin-bottom: 0;">
                                         <option value="user">Standart Müşteri</option>
                                         <option value="admin">Yönetici (Admin)</option>
                                     </select>
                                 </div>
                                 <div style="flex: 1;">
-                                    <label style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:5px; display:block;">Adet</label>
-                                    <input type="number" id="keygen-count" class="input-base" value="1" min="1" style="margin-bottom: 0;">
+                                    <label style="color:var(--text-secondary); font-size:1rem; margin-bottom:10px; display:block;">Adet</label>
+                                    <input type="number" id="keygen-count" class="input-base" value="1" min="1" style="padding-left:20px; margin-bottom: 0;">
                                 </div>
                             </div>
                             <button class="btn-submit" onclick="generateAdminKeys()">Anahtarları Üret</button>
-                            <textarea id="keygen-result" class="input-base" style="margin-top:20px; min-height: 100px; display:none;" readonly></textarea>
+                            <textarea id="keygen-result" class="input-base" style="margin-top:30px; padding-left:20px; min-height: 120px; display:none;" readonly></textarea>
                         </div>
                     </div>
 
-                    <!-- ADMIN: LİSANS YÖNETİMİ VE SİLME -->
+                    <!-- ADMIN: LİSANS YÖNETİMİ (SÜRE UZATMA EKLENDİ) -->
                     <div id="p-view-admin-keys" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Tüm Lisanslar</h2>
+                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Lisans Yönetimi</h2>
                         <table class="data-table">
-                            <thead><tr><th>Anahtar (Key)</th><th>Ürün</th><th>Kullanıcı (Eğer Varsa)</th><th>İşlem</th></tr></thead>
+                            <thead><tr><th>Anahtar (Key)</th><th>Ürün / Tip</th><th>Kullanıcı</th><th>İşlem</th></tr></thead>
                             <tbody id="admin-keys-body"></tbody>
                         </table>
                     </div>
 
                     <!-- ADMIN: ÇEKİLİŞ YÖNETİMİ -->
                     <div id="p-view-admin-giveaway" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2rem; margin-bottom: 20px;">Çekiliş Yönetimi</h2>
-                        <div style="background: rgba(255,255,255,0.02); padding: 30px; border: 1px solid var(--border-light); border-radius: 12px; max-width: 500px;">
-                            <input type="text" id="admin-prize" class="input-base" placeholder="Çekiliş Ödülü (Örn: Sensi GUI Sınırsız)">
-                            <input type="number" id="admin-time" class="input-base" placeholder="Süre (Dakika Cinsinden)">
+                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Çekiliş Yönetimi</h2>
+                        <div class="form-box" style="max-width: 600px;">
+                            <input type="text" id="admin-prize" class="input-base" style="padding-left:20px;" placeholder="Çekiliş Ödülü (Örn: Sensi GUI Sınırsız)">
+                            <input type="number" id="admin-time" class="input-base" style="padding-left:20px;" placeholder="Süre (Dakika Cinsinden)">
                             <button class="btn-submit" onclick="setNewGiveaway()">Çekilişi Başlat / Güncelle</button>
                         </div>
                     </div>
@@ -400,26 +420,47 @@
         </div>
     </main>
 
-    <!-- MODALLAR -->
-    <!-- AUTH MODAL -->
+    <!-- MODALLAR (AUTH, YETKİ, LİSANS, ÜRÜN, BİLET, UZATMA) -->
+    
     <div id="auth-modal" class="modal-overlay">
         <div class="modal-box">
             <i class="fas fa-times close-modal" onclick="closeModal('auth-modal')"></i>
-            <h2 id="modal-title" class="font-space" style="font-size: 2rem; margin-bottom: 25px;">Giriş Yap</h2>
-            <input type="text" id="username" class="input-base" placeholder="Kullanıcı Adı" autocomplete="off">
-            <input type="password" id="password" class="input-base" placeholder="Şifre" onkeypress="if(event.key === 'Enter') handleAuth()">
+            <h2 id="modal-title" class="font-space" style="font-size: 2.2rem; margin-bottom: 30px;">Giriş Yap</h2>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" class="input-base" placeholder="Kullanıcı Adı" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" class="input-base" placeholder="Şifre" onkeypress="if(event.key === 'Enter') handleAuth()">
+            </div>
             <button class="btn-submit" onclick="handleAuth()">Onayla</button>
-            <div style="text-align: center; margin-top: 15px; color: var(--text-secondary); cursor:pointer;" onclick="toggleAuthMode()" id="auth-switch">Hesabın yok mu? Kayıt Ol</div>
+            <div style="text-align: center; margin-top: 20px; color: var(--text-secondary); cursor:pointer; font-weight: 500;" onclick="toggleAuthMode()" id="auth-switch">Hesabın yok mu? Kayıt Ol</div>
         </div>
     </div>
 
-    <!-- ADMIN: YETKİ MODALI -->
+    <!-- SÜRE UZATMA MODALI -->
+    <div id="extend-modal" class="modal-overlay">
+        <div class="modal-box" style="width: 450px;">
+            <i class="fas fa-times close-modal" onclick="closeModal('extend-modal')"></i>
+            <h2 class="font-space" style="margin-bottom: 20px;">Süre Uzat</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;" id="extend-key-display"></p>
+            <select id="extend-duration" class="input-base" style="padding-left:20px;">
+                <option value="1">1 Gün Ekle</option>
+                <option value="7">7 Gün Ekle</option>
+                <option value="30">30 Gün Ekle</option>
+                <option value="lifetime">Sınırsız Yap</option>
+            </select>
+            <button class="btn-submit" onclick="saveExtension()">Süreyi Uzat</button>
+        </div>
+    </div>
+
     <div id="perm-modal" class="modal-overlay">
-        <div class="modal-box" style="width: 400px;">
+        <div class="modal-box" style="width: 450px;">
             <i class="fas fa-times close-modal" onclick="closeModal('perm-modal')"></i>
             <h2 class="font-space" style="margin-bottom: 20px;">Yetki Ver</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 15px;" id="perm-username-display"></p>
-            <select id="perm-role" class="input-base">
+            <p style="color: var(--text-secondary); margin-bottom: 20px;" id="perm-username-display"></p>
+            <select id="perm-role" class="input-base" style="padding-left:20px;">
                 <option value="user">Standart Üye</option>
                 <option value="admin">Yönetici (Admin)</option>
             </select>
@@ -427,29 +468,25 @@
         </div>
     </div>
 
-    <!-- ADMIN: BAN MODALI -->
     <div id="ban-modal" class="modal-overlay">
-        <div class="modal-box" style="width: 400px; text-align: center;">
-            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #f43f5e; margin-bottom: 20px;"></i>
+        <div class="modal-box" style="width: 450px; text-align: center;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3.5rem; color: #f43f5e; margin-bottom: 25px;"></i>
             <h2 class="font-space" style="margin-bottom: 15px;">Kullanıcıyı Yasakla</h2>
-            <p id="ban-user-text" style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.5;"></p>
-            <div style="display: flex; gap: 15px;">
+            <p id="ban-user-text" style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.6;"></p>
+            <div style="display: flex; gap: 20px;">
                 <button class="btn-submit" style="background: transparent; border: 1px solid var(--border-light); color: #fff;" onclick="closeModal('ban-modal')">İptal</button>
                 <button class="btn-submit" style="background: #f43f5e; color: #fff;" onclick="executeBan()">Yasakla</button>
             </div>
         </div>
     </div>
 
-    <!-- ADMIN: LİSANS VERME MODALI -->
     <div id="license-modal" class="modal-overlay">
         <div class="modal-box">
             <i class="fas fa-times close-modal" onclick="closeModal('license-modal')"></i>
             <h2 class="font-space" style="margin-bottom: 20px;">Lisans Tanımla</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 15px;" id="license-username-display"></p>
-            <label style="color:var(--text-secondary); font-size:0.9rem;">Ürün Seç</label>
-            <select id="license-product" class="input-base"></select>
-            <label style="color:var(--text-secondary); font-size:0.9rem;">Abonelik Tipi</label>
-            <select id="license-duration" class="input-base">
+            <p style="color: var(--text-secondary); margin-bottom: 20px;" id="license-username-display"></p>
+            <select id="license-product" class="input-base" style="padding-left:20px;"></select>
+            <select id="license-duration" class="input-base" style="padding-left:20px;">
                 <option value="daily">Günlük (24 Saat)</option>
                 <option value="monthly">Aylık (30 Gün)</option>
                 <option value="lifetime">Sınırsız (Ömür Boyu)</option>
@@ -458,61 +495,66 @@
         </div>
     </div>
 
-    <!-- ADMIN: ÜRÜN EKLE/DÜZENLE MODALI -->
     <div id="product-modal" class="modal-overlay">
-        <div class="modal-box">
+        <div class="modal-box" style="width: 500px;">
             <i class="fas fa-times close-modal" onclick="closeModal('product-modal')"></i>
-            <h2 class="font-space" id="prod-modal-title" style="margin-bottom: 20px;">Yeni Ürün Ekle</h2>
-            <input type="text" id="prod-name" class="input-base" placeholder="Ürün Adı">
-            <input type="text" id="prod-img" class="input-base" placeholder="Fotoğraf URL (Opsiyonel)">
-            <textarea id="prod-desc" class="input-base" placeholder="Açıklama (Örn: Python modülleri...)" style="min-height: 80px;"></textarea>
-            <div style="display:flex; gap:10px;">
-                <input type="number" id="prod-daily" class="input-base" placeholder="Gün (₺)">
-                <input type="number" id="prod-monthly" class="input-base" placeholder="Ay (₺)">
-                <input type="number" id="prod-life" class="input-base" placeholder="Sınır (₺)">
+            <h2 class="font-space" id="prod-modal-title" style="margin-bottom: 30px;">Yeni Ürün Ekle</h2>
+            <input type="text" id="prod-name" class="input-base" style="padding-left:20px;" placeholder="Ürün Adı">
+            <input type="text" id="prod-img" class="input-base" style="padding-left:20px;" placeholder="Fotoğraf URL (Opsiyonel)">
+            <textarea id="prod-desc" class="input-base" style="padding-left:20px; min-height: 100px;" placeholder="Açıklama (Örn: Python modülleri...)"></textarea>
+            <div style="display:flex; gap:15px;">
+                <input type="number" id="prod-daily" class="input-base" style="padding-left:20px;" placeholder="Gün (₺)">
+                <input type="number" id="prod-monthly" class="input-base" style="padding-left:20px;" placeholder="Ay (₺)">
+                <input type="number" id="prod-life" class="input-base" style="padding-left:20px;" placeholder="Sınır (₺)">
             </div>
             <button class="btn-submit" onclick="saveProduct()">Kaydet</button>
         </div>
     </div>
 
-    <!-- ADMIN: BİLET İNCELEME VE YANITLAMA MODALI -->
     <div id="ticket-modal" class="modal-overlay">
-        <div class="modal-box" style="width: 500px;">
+        <div class="modal-box" style="width: 550px;">
             <i class="fas fa-times close-modal" onclick="closeModal('ticket-modal')"></i>
-            <h2 class="font-space" style="margin-bottom: 10px;">Bilet İncele & Yanıtla</h2>
-            <p id="t-user" style="color: var(--text-secondary); margin-bottom: 20px; font-weight:bold;"></p>
-            <div style="background: var(--bg-base); padding: 20px; border-radius: 12px; border: 1px solid var(--border-light); margin-bottom: 20px;">
-                <h4 id="t-subj" style="color: #fff; margin-bottom: 10px; font-size: 1.1rem;"></h4>
-                <p id="t-msg" style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"></p>
+            <h2 class="font-space" style="margin-bottom: 20px;">Bilet İncele & Yanıtla</h2>
+            <p id="t-user" style="color: var(--text-secondary); margin-bottom: 25px; font-weight:bold; font-size: 1.1rem;"></p>
+            <div style="background: var(--bg-base); padding: 25px; border-radius: 16px; border: 1px solid var(--border-light); margin-bottom: 25px;">
+                <h4 id="t-subj" style="color: #fff; margin-bottom: 12px; font-size: 1.2rem;"></h4>
+                <p id="t-msg" style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6;"></p>
             </div>
-            <textarea id="admin-ticket-reply" class="input-base" placeholder="Kullanıcıya iletilecek yanıtınızı buraya yazın..." style="min-height: 100px;"></textarea>
+            <textarea id="admin-ticket-reply" class="input-base" style="padding-left:20px; min-height: 120px;" placeholder="Kullanıcıya iletilecek yanıtınızı buraya yazın..."></textarea>
             <button class="btn-submit" onclick="resolveTicket()">Yanıtla ve Çözüldü İşaretle</button>
         </div>
     </div>
 
-    <!-- KULLANICI: BİLET YANIT OKUMA MODALI -->
     <div id="user-ticket-modal" class="modal-overlay">
-        <div class="modal-box" style="width: 500px;">
+        <div class="modal-box" style="width: 550px;">
             <i class="fas fa-times close-modal" onclick="closeModal('user-ticket-modal')"></i>
-            <h2 class="font-space" style="margin-bottom: 20px;">Talebiniz & Yanıt</h2>
-            <div style="background: var(--bg-surface); padding: 15px; border-radius: 8px; border: 1px solid var(--border-light); margin-bottom: 20px;">
-                <span style="color: var(--text-muted); font-size: 0.85rem;">Sizin Mesajınız:</span>
-                <p id="ut-msg" style="color: #fff; font-size: 0.95rem; margin-top: 5px; line-height: 1.6;"></p>
+            <h2 class="font-space" style="margin-bottom: 30px;">Talebiniz & Yanıt</h2>
+            <div style="background: var(--bg-surface); padding: 25px; border-radius: 12px; border: 1px solid var(--border-light); margin-bottom: 25px;">
+                <span style="color: var(--text-muted); font-size: 0.9rem;">Sizin Mesajınız:</span>
+                <p id="ut-msg" style="color: #fff; font-size: 1.05rem; margin-top: 8px; line-height: 1.6;"></p>
             </div>
-            <div style="background: var(--bg-base); padding: 15px; border-radius: 8px; border: 1px solid #4ade80;">
-                <span style="color: #4ade80; font-size: 0.85rem;"><i class="fas fa-headset"></i> Yönetici Yanıtı:</span>
-                <p id="ut-reply" style="color: #fff; font-size: 0.95rem; margin-top: 5px; line-height: 1.6;"></p>
+            <div style="background: var(--bg-base); padding: 25px; border-radius: 12px; border: 1px solid #4ade80;">
+                <span style="color: #4ade80; font-size: 0.9rem; font-weight: 600;"><i class="fas fa-headset"></i> Yönetici Yanıtı:</span>
+                <p id="ut-reply" style="color: #fff; font-size: 1.05rem; margin-top: 8px; line-height: 1.6;"></p>
             </div>
         </div>
     </div>
 
-    <!-- TOAST BİLDİRİM -->
-    <div id="toast"><i class="fas fa-bell" style="color: var(--bg-base);"></i> <span id="toast-msg"></span></div>
+    <!-- TOAST BİLDİRİM & ÇEKİLİŞ POPUP -->
+    <div id="toast">
+        <i id="toast-icon" class="fas fa-check-circle" style="color: var(--bg-base); font-size: 1.3rem;"></i> 
+        <span id="toast-msg"></span>
+    </div>
+    
+    <div id="gw-popup" onclick="switchTab('giveaway'); document.getElementById('gw-popup').classList.remove('show');">
+        <i class="fas fa-gift" style="font-size: 2.5rem; color: #4ade80;"></i>
+        <div>
+            <h4 class="font-space" style="margin-bottom: 5px; font-size: 1.2rem;">Aktif Çekiliş Var!</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">Hemen katılın ve kazanın.</p>
+        </div>
+    </div>
 
     <script>
-        // ----------------------------------------------------
-        // FIREBASE ENTEGRASYONU 
-        // ----------------------------------------------------
         const firebaseConfig = {
             apiKey: "AIzaSyAjbkOwzOb4XTuhlCqex4bC-xD-pNi9HBI",
             authDomain: "sensisoftware-a3ae2.firebaseapp.com",
@@ -525,24 +567,22 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // ----------------------------------------------------
-        // GLOBAL DEĞİŞKENLER
-        // ----------------------------------------------------
         let currentUser = null; 
         let currentModalMode = 'login';
         
         let allProducts = [];
         let allUsers = [];
         let allTickets = [];
-        let allLicenses = []; // Adminin tüm keyleri görebilmesi için
+        let allLicenses = [];
         
         let activeAdminUserId = null; 
         let activeAdminUserEmail = null;
         let userToBan = null;
         let activeTicketId = null; 
         let activeEditProductId = null;
+        let activeExtendKeyId = null;
 
-        // Sekmeler
+        // SEKMELER
         function switchTab(tabId) {
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             const targetBtn = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
@@ -556,7 +596,7 @@
             switchTab('profile');
             if(view === 'admin') {
                 document.getElementById('admin-sidebar-links').style.display = 'block';
-                switchProfileView('admin-users');
+                switchProfileView('admin-orders'); // Varsayılan siparişleri aç
             } else {
                 switchProfileView(view);
             }
@@ -590,9 +630,14 @@
 
         function toggleAuthMode() { openModal(currentModalMode === 'login' ? 'register' : 'login'); }
 
-        function showToast(msg) {
+        function showToast(msg, isSuccess=true) {
             document.getElementById('toast-msg').innerText = msg;
+            const icon = document.getElementById('toast-icon');
             const toast = document.getElementById('toast');
+            
+            if(isSuccess) { icon.className = "fas fa-check-circle"; icon.style.color = "var(--bg-base)"; } 
+            else { icon.className = "fas fa-info-circle"; icon.style.color = "var(--bg-base)"; }
+            
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 4000);
         }
@@ -605,9 +650,7 @@
             btnElement.classList.add('active');
         }
 
-        // ----------------------------------------------------
-        // FIREBASE AUTH 
-        // ----------------------------------------------------
+        // --- AUTH ---
         function handleAuth() {
             const uname = document.getElementById('username').value.trim().toLowerCase();
             const pass = document.getElementById('password').value;
@@ -616,7 +659,7 @@
             const fakeEmail = uname + "@sensi.local";
 
             if(uname === 'omer13ds' && pass === 'oyaali12') {
-                loginSuccess('omer13ds', true, fakeEmail);
+                loginSuccess('omer13ds', true, fakeEmail, new Date().toISOString());
                 auth.signInWithEmailAndPassword(fakeEmail, pass).catch(err => {
                     auth.createUserWithEmailAndPassword(fakeEmail, pass).then(cred => {
                         db.collection('users').doc(cred.user.uid).set({ username: uname, email: fakeEmail, role: 'admin' });
@@ -645,10 +688,11 @@
                             auth.signOut();
                             return;
                         }
-                        loginSuccess(data.username, data.role === 'admin', user.email);
+                        const creationTime = user.metadata.creationTime || new Date().toISOString();
+                        loginSuccess(data.username, data.role === 'admin', user.email, creationTime);
                     }
                 }).catch(err => {
-                    loginSuccess(user.email.split('@')[0], user.email.startsWith('omer13ds'), user.email);
+                    loginSuccess(user.email.split('@')[0], user.email.startsWith('omer13ds'), user.email, user.metadata.creationTime);
                 });
             } else {
                 currentUser = null;
@@ -658,11 +702,15 @@
             }
         });
 
-        function loginSuccess(username, isUserAdmin, uEmail) {
+        function loginSuccess(username, isUserAdmin, uEmail, cTime) {
             currentUser = { username: username, role: isUserAdmin ? 'admin' : 'user', email: uEmail, uid: auth.currentUser ? auth.currentUser.uid : null };
             
             document.getElementById('prof-user').value = username;
             document.getElementById('profile-initial').innerHTML = username.charAt(0).toUpperCase();
+            
+            // Tarihi Formatla
+            const dateObj = new Date(cTime);
+            document.getElementById('prof-created').value = `Kayıt Tarihi: ${dateObj.toLocaleDateString('tr-TR')} - ${dateObj.toLocaleTimeString('tr-TR').substring(0,5)}`;
             
             document.getElementById('guest-menu').style.display = 'none';
             document.getElementById('user-menu').style.display = 'flex';
@@ -681,6 +729,14 @@
             
             loadUserLicenses();
             loadUserTickets();
+            
+            if(!sessionStorage.getItem('gwPopupShown') && document.getElementById('prize-display').innerText !== "Yönetici bekleniyor...") {
+                setTimeout(() => {
+                    document.getElementById('gw-popup').classList.add('show');
+                    sessionStorage.setItem('gwPopupShown', 'true');
+                    setTimeout(() => { document.getElementById('gw-popup').classList.remove('show'); }, 6000);
+                }, 1500);
+            }
         }
 
         function logoutUser() {
@@ -690,16 +746,13 @@
             });
         }
 
-        // ----------------------------------------------------
-        // FIREBASE FIRESTORE
-        // ----------------------------------------------------
-
-        // 1. ÜRÜNLER (DİKEY, FOTOĞRAFLI TASARIM & BAKIM MODU)
+        // --- FIRESTORE ---
+        
+        // 1. ÜRÜNLER (BAKIM MODU)
         db.collection("products").onSnapshot(snapshot => {
             allProducts = [];
             snapshot.forEach(doc => {
                 const data = doc.data();
-                // Eğer isMaintenance alanı yoksa false kabul et
                 allProducts.push({ id: doc.id, isMaintenance: false, ...data });
             });
             renderStoreProducts();
@@ -710,10 +763,9 @@
         function renderStoreProducts() {
             const container = document.getElementById('store-products-container');
             if(allProducts.length === 0) {
-                container.innerHTML = `<p style="text-align: center; color: var(--text-secondary); width: 100%;">Henüz mağazaya ürün eklenmemiş.</p>`;
+                container.innerHTML = `<p style="text-align: center; color: var(--text-secondary); width: 100%; font-size:1.2rem;">Henüz mağazaya ürün eklenmemiş.</p>`;
                 return;
             }
-            
             container.innerHTML = ''; 
             allProducts.forEach(prod => {
                 const div = document.createElement('div');
@@ -732,12 +784,10 @@
                     <div class="prod-content">
                         <h3>${prod.name}</h3>
                         <p>${prod.desc}</p>
-                        
                         <div class="price-tag">
                             <h4 id="price-${prod.id}">₺${prod.priceLifetime || 0}</h4>
                             <span id="period-${prod.id}">Sınırsız Lisans</span>
                         </div>
-
                         <div class="price-toggle">
                             <button onclick="changePrice('${prod.id}', ${prod.priceDaily}, 'Günlük', this)">Günlük</button>
                             <button onclick="changePrice('${prod.id}', ${prod.priceMonthly}, 'Aylık', this)">Aylık</button>
@@ -750,7 +800,39 @@
             });
         }
 
-        // 2. KULLANICILAR
+        // 2. SİPARİŞLER (ADMİN CANLI BİLDİRİM)
+        db.collection("orders").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+            snapshot.docChanges().forEach(change => {
+                if(change.type === 'added' && currentUser && currentUser.role === 'admin') {
+                    // Sayfa ilk yüklendiğinde hepsi "added" gelir, bu yüzden zamanı kontrol etmek en iyisidir
+                    // Ama basitçe toast gösterelim.
+                    showToast(`💰 Yeni Sipariş! ${change.doc.data().buyerEmail} bir ürün aldı.`, false);
+                }
+            });
+            
+            const tbody = document.getElementById('admin-orders-body');
+            if(!tbody) return;
+            if(snapshot.empty) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">Henüz hiç sipariş alınmamış.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const d = data.timestamp ? data.timestamp.toDate().toLocaleDateString('tr-TR') : "Tarihsiz";
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${d}</td>
+                        <td style="color:#60a5fa;">${data.buyerEmail}</td>
+                        <td style="font-weight:bold;">${data.productName}</td>
+                        <td style="color:#10b981;">₺${data.price}</td>
+                        <td style="font-family:monospace; color:var(--text-secondary); font-size:1rem;">${data.licenseKey}</td>
+                    </tr>
+                `;
+            });
+        });
+
+        // 3. KULLANICILAR
         db.collection("users").onSnapshot(snapshot => {
             allUsers = [];
             snapshot.forEach(doc => allUsers.push({ id: doc.id, ...doc.data() }));
@@ -764,24 +846,21 @@
             tbody.innerHTML = '';
             
             let filteredUsers = allUsers.filter(u => u.username && u.username.toLowerCase().includes(searchVal));
-
             if(filteredUsers.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kullanıcı bulunamadı.</td></tr>`;
                 return;
             }
-
             filteredUsers.forEach(user => {
                 let roleColor = user.role === 'admin' ? '#4ade80' : 'var(--text-secondary)';
                 if(user.role === 'banned') roleColor = '#f43f5e';
                 let roleText = user.role === 'admin' ? 'Admin' : (user.role === 'banned' ? 'Yasaklı' : 'Üye');
-                
                 tbody.innerHTML += `
                     <tr>
-                        <td>${user.username}</td>
+                        <td style="font-size:1.05rem;">${user.username}</td>
                         <td><span style="color:${roleColor}; font-weight:bold;">${roleText}</span></td>
                         <td class="action-cell">
-                            <button class="btn-action-icon" title="Yetki Düzenle" onclick="openPermModal('${user.id}', '${user.username}', '${user.role}')"><i class="fas fa-user-shield"></i></button>
-                            <button class="btn-action-icon" title="Lisans Tanımla" onclick="openLicenseModal('${user.id}', '${user.username}', '${user.email}')"><i class="fas fa-key"></i></button>
+                            <button class="btn-action-icon edit" title="Yetki Düzenle" onclick="openPermModal('${user.id}', '${user.username}', '${user.role}')"><i class="fas fa-user-shield"></i></button>
+                            <button class="btn-action-icon success" title="Lisans Tanımla" onclick="openLicenseModal('${user.id}', '${user.username}', '${user.email}')"><i class="fas fa-key"></i></button>
                             <button class="btn-action-icon ban" title="Yasakla" onclick="openBanModal('${user.id}', '${user.username}')"><i class="fas fa-ban"></i></button>
                         </td>
                     </tr>
@@ -789,9 +868,20 @@
             });
         }
 
-        // 3. DESTEK BİLETLERİ (KULLANICI VE ADMİN)
+        // 4. DESTEK BİLETLERİ VE BİLDİRİMLER
         db.collection("tickets").orderBy("timestamp", "desc").onSnapshot(snapshot => {
             allTickets = [];
+            snapshot.docChanges().forEach(change => {
+                const data = change.doc.data();
+                if(change.type === 'added' && currentUser && currentUser.role === 'admin') {
+                    showToast(`🚨 Yeni Bilet: ${data.user} destek talebi açtı.`, false);
+                }
+                if(change.type === 'modified') {
+                    if(data.status === 'resolved' && currentUser && data.user === currentUser.username) {
+                        showToast(`Destek talebiniz yönetici tarafından yanıtlandı!`, true);
+                    }
+                }
+            });
             snapshot.forEach(doc => allTickets.push({ id: doc.id, ...doc.data() }));
             renderAdminTickets();
             loadUserTickets();
@@ -819,24 +909,21 @@
             const tbody = document.getElementById('user-tickets-list-body');
             if(!tbody) return;
             tbody.innerHTML = '';
-            
             const myTickets = allTickets.filter(t => t.user === currentUser.username);
             if(myTickets.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Talebiniz bulunmuyor.</td></tr>`;
                 return;
             }
-
             myTickets.forEach(t => {
                 const statusColor = t.status === 'open' ? '#facc15' : '#4ade80';
                 const statusText = t.status === 'open' ? 'Bekliyor' : 'Çözüldü';
                 let actionBtn = t.status === 'resolved' 
                     ? `<button class="btn-auth" style="border-color:#4ade80; color:#4ade80;" onclick="readUserTicketReply('${t.id}')">Yanıtı Gör</button>` 
                     : `<span style="color:var(--text-secondary); font-size:0.9rem;">İnceleniyor...</span>`;
-                
                 tbody.innerHTML += `
                     <tr>
-                        <td style="font-weight:bold;">${t.subject}</td>
-                        <td style="color:${statusColor};">${statusText}</td>
+                        <td style="font-weight:bold; font-size:1.05rem;">${t.subject}</td>
+                        <td style="color:${statusColor}; font-weight:bold;">${statusText}</td>
                         <td>${actionBtn}</td>
                     </tr>
                 `;
@@ -855,22 +942,20 @@
             const tbody = document.getElementById('admin-tickets-body');
             if(!tbody) return;
             tbody.innerHTML = '';
-            
             if(allTickets.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Destek talebi bulunmuyor.</td></tr>`;
                 return;
             }
-
             allTickets.forEach(t => {
                 const statusColor = t.status === 'open' ? '#facc15' : '#4ade80';
                 const statusText = t.status === 'open' ? 'Bekliyor' : 'Çözüldü';
                 tbody.innerHTML += `
                     <tr>
-                        <td style="font-weight:bold;">${t.user}</td>
-                        <td>${t.subject}</td>
+                        <td style="font-size:1.05rem;">${t.user}</td>
+                        <td style="font-weight:bold;">${t.subject}</td>
                         <td style="color:${statusColor}; font-weight:bold;">${statusText}</td>
                         <td class="action-cell">
-                            <button class="btn-action-icon" title="Yanıtla" onclick="openTicketModal('${t.id}')"><i class="fas fa-reply"></i></button>
+                            <button class="btn-action-icon edit" title="Yanıtla" onclick="openTicketModal('${t.id}')"><i class="fas fa-reply"></i></button>
                             <button class="btn-action-icon ban" title="Sil" onclick="deleteTicket('${t.id}')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
@@ -898,15 +983,13 @@
         function resolveTicket() {
             if(!activeTicketId) return;
             const replyMsg = document.getElementById('admin-ticket-reply').value;
-            db.collection("tickets").doc(activeTicketId).update({ 
-                status: 'resolved', reply: replyMsg
-            }).then(() => {
+            db.collection("tickets").doc(activeTicketId).update({ status: 'resolved', reply: replyMsg }).then(() => {
                 closeModal('ticket-modal');
                 showToast("Bilet yanıtlandı ve çözüldü!");
             });
         }
 
-        // 4. KULLANICI LİSANSLARI & ADMİN LİSANS YÖNETİMİ
+        // 5. KULLANICI & ADMİN LİSANS YÖNETİMİ
         db.collection("licenses").orderBy("timestamp", "desc").onSnapshot(snapshot => {
             allLicenses = [];
             snapshot.forEach(doc => allLicenses.push({ id: doc.id, ...doc.data() }));
@@ -932,7 +1015,7 @@
                     const date = data.expiresAt.toDate();
                     dateText = date.toLocaleDateString('tr-TR');
                 }
-                tbody.innerHTML += `<tr><td style="font-weight:bold; color:#fff;">${data.productName}</td><td>${typeText}</td><td>${dateText}</td></tr>`;
+                tbody.innerHTML += `<tr><td style="font-weight:bold; color:#fff; font-size:1.05rem;">${data.productName}</td><td>${typeText}</td><td>${dateText}</td></tr>`;
             });
         }
 
@@ -948,10 +1031,11 @@
                 const userDisplay = l.userEmail ? l.userEmail.split('@')[0] : (l.userId === "admin_generated" ? "Boşta" : "Bilinmeyen");
                 tbody.innerHTML += `
                     <tr>
-                        <td style="color:#4ade80; font-weight:bold; font-family:monospace; font-size:1.1rem;">${l.id}</td>
-                        <td>${l.productName}</td>
+                        <td style="color:#4ade80; font-weight:bold; font-family:monospace; font-size:1.15rem;">${l.id}</td>
+                        <td style="font-size:1.05rem;">${l.productName} <br><span style="color:var(--text-muted); font-size:0.85rem;">${l.type.toUpperCase()}</span></td>
                         <td>${userDisplay}</td>
                         <td class="action-cell">
+                            <button class="btn-action-icon edit" title="Süre Uzat" onclick="openExtendModal('${l.id}')"><i class="fas fa-clock"></i></button>
                             <button class="btn-action-icon ban" title="Anahtarı Sil" onclick="deleteLicense('${l.id}')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
@@ -961,13 +1045,50 @@
 
         function deleteLicense(id) {
             if(confirm("DİKKAT: Bu lisansı silmek istediğinize emin misiniz? Bu lisansa sahip kullanıcı programa bir daha giriş yapamaz!")) {
-                db.collection("licenses").doc(id).delete().then(() => showToast("Lisans anahtarı veritabanından silindi."));
+                db.collection("licenses").doc(id).delete().then(() => showToast("Lisans anahtarı veritabanından silindi.", false));
             }
         }
 
-        // ----------------------------------------------------
-        // ADMİN İŞLEMLERİ (MODALLAR)
-        // ----------------------------------------------------
+        // LİSANS SÜRE UZATMA
+        function openExtendModal(keyId) {
+            activeExtendKeyId = keyId;
+            document.getElementById('extend-key-display').innerText = "Seçilen Anahtar: " + keyId;
+            document.getElementById('extend-modal').style.display = 'flex';
+        }
+
+        function saveExtension() {
+            if(!activeExtendKeyId) return;
+            const daysToAdd = document.getElementById('extend-duration').value;
+            const licenseDoc = db.collection('licenses').doc(activeExtendKeyId);
+            
+            licenseDoc.get().then(doc => {
+                if(doc.exists) {
+                    const data = doc.data();
+                    let newType = data.type;
+                    let newDate = null;
+                    
+                    if(daysToAdd === 'lifetime') {
+                        newType = 'lifetime';
+                        newDate = null;
+                    } else {
+                        // Eğer zaten sınırsızsa ve gün ekleniyorsa, bugünden itibaren say
+                        let baseDate = (data.expiresAt && data.type !== 'lifetime') ? data.expiresAt.toDate() : new Date();
+                        newDate = new Date(baseDate.getTime() + (parseInt(daysToAdd) * 86400000));
+                        newType = 'extended';
+                    }
+
+                    licenseDoc.update({
+                        type: newType,
+                        expiresAt: newDate ? firebase.firestore.Timestamp.fromDate(newDate) : null
+                    }).then(() => {
+                        closeModal('extend-modal');
+                        showToast(`Lisans süresi başarıyla güncellendi!`);
+                    });
+                }
+            });
+        }
+
+        // --- ADMİN İŞLEMLERİ ---
 
         function openPermModal(userId, username, role) {
             activeAdminUserId = userId;
@@ -981,7 +1102,7 @@
             const newRole = document.getElementById('perm-role').value;
             db.collection('users').doc(activeAdminUserId).update({ role: newRole }).then(() => {
                 closeModal('perm-modal');
-                showToast("Yetki güncellendi!");
+                showToast("Yetki başarıyla güncellendi!");
             });
         }
 
@@ -995,12 +1116,11 @@
             if(!userToBan) return;
             db.collection('users').doc(userToBan.id).update({ role: 'banned' }).then(() => {
                 closeModal('ban-modal');
-                showToast(userToBan.name + " yasaklandı.");
+                showToast(userToBan.name + " yasaklandı.", false);
                 userToBan = null;
             });
         }
 
-        // OTOMATİK LİSANS ÜRETİCİ FONKSİYONU
         function generateKeyFormat(productName) {
             let prefix = "SENS";
             if(productName.includes("GUI")) prefix = "SENS-GUI";
@@ -1012,7 +1132,7 @@
             return `${prefix}-${part1}-${part2}`;
         }
 
-        // 1. ADMİN: KULLANICIYA LİSANS TANIMLA
+        // ADMİN: KULLANICIYA LİSANS TANIMLA
         function openLicenseModal(userId, username, email) {
             activeAdminUserId = userId;
             activeAdminUserEmail = email;
@@ -1058,7 +1178,6 @@
             });
         }
 
-        // 2. ADMİN: LİSANS (KEYGEN) ÜRETME EKRANI İÇİN SELECT DOLDURMA
         function populateKeygenSelects() {
             const kSelect = document.getElementById('keygen-product');
             if(kSelect) {
@@ -1067,17 +1186,8 @@
                     if(!p.isMaintenance) kSelect.innerHTML += `<option value="${p.name}">${p.name}</option>`;
                 });
             }
-            
-            const lSelect = document.getElementById('license-product');
-            if(lSelect) {
-                lSelect.innerHTML = '';
-                allProducts.forEach(p => {
-                    if(!p.isMaintenance) lSelect.innerHTML += `<option value="${p.id}">${p.name}</option>`;
-                });
-            }
         }
 
-        // KEYGEN ÇALIŞTIRICI
         function generateAdminKeys() {
             const prodName = document.getElementById('keygen-product').value;
             const duration = document.getElementById('keygen-duration').value;
@@ -1115,7 +1225,6 @@
             showToast(count + " adet lisans üretildi ve veritabanına eklendi!");
         }
 
-        // ÜRÜN YÖNETİMİ
         function renderAdminProducts() {
             const tbody = document.getElementById('admin-products-body');
             if(!tbody) return;
@@ -1131,7 +1240,7 @@
 
                 tbody.innerHTML += `
                     <tr>
-                        <td style="font-weight:bold;">${p.name} ${p.isMaintenance ? '<span style="color:#facc15; font-size:0.8rem; margin-left:5px;">(BAKIMDA)</span>' : ''}</td>
+                        <td style="font-weight:bold; font-size:1.05rem;">${p.name} ${p.isMaintenance ? '<span style="color:#facc15; font-size:0.8rem; margin-left:5px;">(BAKIMDA)</span>' : ''}</td>
                         <td>${p.priceDaily || 0}₺ / ${p.priceMonthly || 0}₺ / ${p.priceLifetime || 0}₺</td>
                         <td class="action-cell">
                             <button class="btn-action-icon maint" title="${maintTitle}" style="color:${maintColor}; border-color:${maintColor};" onclick="toggleMaintenance('${p.id}', ${p.isMaintenance})"><i class="fas ${maintIcon}"></i></button>
@@ -1145,7 +1254,7 @@
 
         function toggleMaintenance(id, currentStatus) {
             db.collection("products").doc(id).update({ isMaintenance: !currentStatus }).then(()=> {
-                showToast(!currentStatus ? "Ürün bakıma alındı." : "Ürün tekrar aktif edildi.");
+                showToast(!currentStatus ? "Ürün bakıma alındı." : "Ürün tekrar aktif edildi.", !currentStatus ? false : true);
             });
         }
 
@@ -1203,9 +1312,63 @@
 
         function deleteProduct(id) {
             if(confirm("Bu ürünü silmek istediğinize emin misiniz?")) {
-                db.collection("products").doc(id).delete().then(() => showToast("Ürün silindi."));
+                db.collection("products").doc(id).delete().then(() => showToast("Ürün silindi.", false));
             }
         }
+
+        // ÇEKİLİŞ
+        db.collection('settings').doc('giveaway').onSnapshot(doc => {
+            if(doc.exists) {
+                const data = doc.data();
+                if(data.active) {
+                    document.getElementById('prize-display').innerText = data.prize;
+                    giveawayEndTime = data.endTime.toDate();
+                }
+            }
+        });
+
+        let giveawayEndTime = new Date(new Date().getTime() + 120 * 60000); 
+        let hasJoinedGiveaway = false;
+
+        function joinGiveaway() {
+            if(!currentUser) { alert("Çekilişe katılmak için giriş yapmalısınız!"); openModal('login'); return; }
+            if(hasJoinedGiveaway) return;
+            hasJoinedGiveaway = true;
+            const btn = document.getElementById('join-giveaway-btn');
+            btn.innerHTML = 'Katıldınız <i class="fas fa-check-circle"></i>';
+            btn.style.background = '#4ade80'; btn.style.color = '#000';
+            btn.style.borderColor = '#4ade80'; btn.style.cursor = 'default';
+        }
+
+        function setNewGiveaway() {
+            const prize = document.getElementById('admin-prize').value;
+            const minutes = parseInt(document.getElementById('admin-time').value);
+
+            if(prize.trim() === '' || isNaN(minutes)) { alert('Lütfen ödül adını ve süreyi eksiksiz girin.'); return; }
+
+            const endTime = new Date(Date.now() + minutes * 60000);
+            db.collection('settings').doc('giveaway').set({
+                prize: prize, endTime: firebase.firestore.Timestamp.fromDate(endTime), active: true
+            }).then(() => {
+                showToast('Çekiliş başarıyla başlatıldı!');
+            });
+        }
+
+        setInterval(() => {
+            const distance = giveawayEndTime - new Date().getTime();
+            if (distance < 0) {
+                document.getElementById("gw-hrs").innerText = "00";
+                document.getElementById("gw-min").innerText = "00";
+                document.getElementById("gw-sec").innerText = "00";
+                return;
+            }
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("gw-hrs").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("gw-min").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("gw-sec").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }, 1000);
     </script>
 </body>
 </html>

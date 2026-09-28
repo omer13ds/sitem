@@ -21,7 +21,7 @@
             --border-hover: rgba(250, 204, 21, 0.3);
             --accent: #facc15; 
             --accent-hover: #eab308;
-            --success: #00ff80;
+            --success: #00ff80; 
             --danger: #f43f5e;
             --text-primary: #ffffff;
             --text-secondary: #9ca3af;
@@ -124,88 +124,101 @@
         .filter-btn:hover { border-color: var(--accent); color: var(--text-primary); transform: translateY(-3px);}
         .filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); box-shadow: 0 5px 15px rgba(250,204,21,0.3);}
 
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; max-width: 1500px; margin: 0 auto; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 35px; max-width: 1500px; margin: 0 auto; }
         
-        /* 🔥 YENİ GELİŞMİŞ & FERAH KART TASARIMI 🔥 */
+        /* 🌟🔥 YEPYENİ GELİŞMİŞ VİP KART TASARIMI 🔥🌟 */
+        @keyframes rgbBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .product-card { 
-            background: linear-gradient(145deg, rgba(30, 30, 35, 0.4), rgba(15, 15, 18, 0.8));
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            border-radius: 20px; 
+            position: relative;
             padding: 24px;
             display: flex; 
             flex-direction: column; 
-            gap: 18px;
-            position: relative; 
-            transition: var(--transition-bounce); 
-            overflow: hidden; 
+            gap: 20px;
+            border-radius: 20px; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             opacity: 0; 
-            animation: fadeInUpItem 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeInUpItem 0.6s ease forwards;
+            z-index: 1;
+            text-align: left;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
-        
-        /* Parıldama efekti için ufak bir ışık hüzmesi */
+
+        /* Arka planı kartın içine hapsediyoruz */
+        .product-card::after {
+            content: '';
+            position: absolute;
+            inset: 2px; /* Dış çerçeve için 2px boşluk */
+            background: linear-gradient(145deg, #15151a, #0a0a0c);
+            border-radius: 18px;
+            z-index: -1;
+        }
+
+        /* Dönen/Animasyonlu Neon Çerçeve */
         .product-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; height: 100%;
-            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, -20%), rgba(255,255,255,0.06), transparent 40%);
-            z-index: 0;
-            pointer-events: none;
-            transition: opacity 0.4s;
-            opacity: 0;
+            inset: 0;
+            background: linear-gradient(60deg, #facc15, #ff0055, #00ff80, #facc15);
+            background-size: 300% 300%;
+            border-radius: 20px;
+            z-index: -2;
+            animation: rgbBorder 4s linear infinite;
+            opacity: 0.15;
+            transition: all 0.4s ease;
         }
 
         .product-card:hover { 
-            border-color: rgba(250, 204, 21, 0.4); 
-            transform: translateY(-8px); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 25px rgba(250,204,21,0.15); 
+            transform: translateY(-10px) scale(1.02); 
         }
-        .product-card:hover::before { opacity: 1; }
-
-        .card-top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1;
+        .product-card:hover::before { 
+            opacity: 1; 
+            filter: blur(8px); /* Hoverda dışarı doğru efsane parlar */
         }
 
+        /* Kartın içi (Görseller ve metinler) */
+        .card-top-row { display: flex; justify-content: space-between; align-items: center; z-index: 2; }
+        
         .game-pill {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
+            background: rgba(250, 204, 21, 0.15);
+            color: var(--accent);
             padding: 6px 14px;
-            border-radius: 100px;
-            font-size: 0.7rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            box-shadow: 0 0 15px rgba(250,204,21,0.1);
         }
 
         .status-pill {
             background: rgba(0, 255, 128, 0.1);
-            border: 1px solid rgba(0, 255, 128, 0.3);
-            color: var(--success);
+            color: #00ff80;
             padding: 6px 14px;
-            border-radius: 100px;
-            font-size: 0.7rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            box-shadow: 0 0 10px rgba(0, 255, 128, 0.15);
+            gap: 8px;
+            border: 1px solid rgba(0, 255, 128, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 128, 0.15);
         }
-        .status-pill i { font-size: 0.5rem; text-shadow: 0 0 5px var(--success);}
+        .status-pill i { font-size: 0.6rem; animation: blink 2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         .prod-image-wrapper { 
             width: 100%; 
-            height: 190px; 
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0.3));
-            border-radius: 14px; 
+            height: 200px; 
+            background-color: #0d0d12;
+            border-radius: 12px; 
             border: 1px solid rgba(255,255,255,0.05);
             display: flex; 
             align-items: center; 
@@ -213,48 +226,74 @@
             color: rgba(255,255,255,0.1);
             font-size: 3rem;
             overflow: hidden; 
+            z-index: 2;
+            position: relative;
+        }
+        /* Görselin üzerine hafif kararık gradient efekti */
+        .prod-image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #0a0a0c 0%, transparent 50%);
             z-index: 1;
         }
-        .prod-image-wrapper img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;}
-        .product-card:hover .prod-image-wrapper img { transform: scale(1.08); opacity: 1;}
+        .prod-image-wrapper img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); z-index: 0; position:relative;}
+        .product-card:hover .prod-image-wrapper img { transform: scale(1.1) rotate(2deg); }
 
-        .prod-info { display: flex; flex-direction: column; z-index: 1; }
-        .prod-info h3 { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.5px;}
-        .prod-info p { color: #a1a1aa; font-size: 0.9rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
+        .prod-info { z-index: 2; display: flex; flex-direction: column; gap: 8px; }
+        .prod-info h3 { font-size: 1.6rem; font-weight: 800; color: #fff; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.5);}
+        .prod-info p { color: #a1a1aa; font-size: 0.95rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin:0;}
 
         .price-row { 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 18px;
+            border-top: 1px dashed rgba(255,255,255,0.1);
+            padding-top: 20px;
             margin-top: auto;
-            z-index: 1;
+            z-index: 2;
         }
-        .price-row h4 { font-size: 1.7rem; font-weight: 800; color: #fff; display: flex; align-items: baseline; gap: 4px;}
-        .price-row h4 span { font-size: 1rem; color: var(--accent); }
-        .price-row .duration-tag { font-size: 0.75rem; color: #a1a1aa; text-transform:uppercase; font-weight:700; letter-spacing:1px; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 6px;}
+        .price-row h4 { font-size: 1.8rem; font-weight: 800; color: #fff; display: flex; align-items: flex-start; gap: 2px; margin:0;}
+        .price-row h4 span { font-size: 1rem; color: var(--accent); margin-top:4px;}
+        .price-row .duration-tag { font-size: 0.8rem; color: #fff; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 8px; font-weight:700; letter-spacing:1px;}
 
+        /* Özel Animasyonlu Satın Al Butonu */
         .btn-buy { 
             width: 100%; 
-            padding: 16px; 
-            background: linear-gradient(135deg, var(--accent), #f59e0b);
-            color: #000; 
-            border: none; 
+            padding: 18px; 
+            background: transparent;
+            color: var(--accent); 
+            border: 2px solid var(--accent); 
             border-radius: 12px; 
             font-weight: 800; 
-            font-size: 0.95rem; 
+            font-size: 1rem; 
             text-transform: uppercase; 
-            letter-spacing: 1px; 
+            letter-spacing: 2px; 
             cursor: pointer; 
-            transition: var(--transition-bounce);
-            z-index: 1;
-            box-shadow: 0 6px 15px rgba(250, 204, 21, 0.2);
+            transition: all 0.3s ease;
+            z-index: 2;
+            position: relative;
+            overflow: hidden;
         }
-        .btn-buy:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(250, 204, 21, 0.4); }
+        .btn-buy::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--accent);
+            transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+        }
+        .product-card:hover .btn-buy::before { left: 0; }
+        .product-card:hover .btn-buy { color: #000; box-shadow: 0 0 20px rgba(250, 204, 21, 0.5); border-color: transparent;}
         
-        .btn-buy.maintenance { background: rgba(244, 63, 94, 0.1); color: var(--danger); border: 1px solid rgba(244, 63, 94, 0.3); box-shadow: none; cursor: not-allowed;}
-        .product-card:hover .btn-buy.maintenance { background: rgba(244, 63, 94, 0.1); transform: none; }
+        .btn-buy.maintenance { 
+            background: rgba(244, 63, 94, 0.05); 
+            color: var(--danger); 
+            border: 2px dashed var(--danger); 
+            cursor: not-allowed;
+        }
+        .product-card:hover .btn-buy.maintenance::before { left: -100%; }
+        .product-card:hover .btn-buy.maintenance { color: var(--danger); box-shadow: none; border-color: var(--danger);}
 
         /* FORMLAR & PANEL */
         .form-box { background: var(--bg-surface); backdrop-filter:blur(10px); border: 1px solid var(--border-light); padding: 40px; border-radius: var(--radius-lg); }
@@ -362,7 +401,6 @@
                 
                 <div class="game-filter-bar" id="store-filter-bar">
                     <button class="filter-btn active" onclick="setCategoryFilter('all')">TÜMÜ</button>
-                    <!-- Dinamik Kategoriler Buraya Gelecek -->
                 </div>
 
                 <div class="products-grid" id="store-products-container">
@@ -1003,7 +1041,7 @@
             populateKeygenSelects();
         });
 
-        // 🔥 GÜNCELLENEN KART RENDER FONKSİYONU 🔥
+        // 🔥 GÜNCELLENEN VİP KART RENDER FONKSİYONU 🔥
         function renderStoreProducts() {
             const container = document.getElementById('store-products-container');
             if(!container) return;
@@ -1033,7 +1071,6 @@
                 let currentPrice = prod.price || prod.priceLifetime || 0;
                 let gameNameTag = prod.categoryName || (prod.name.split(' ')[0] || "GAME");
 
-                // Yeni ferah ve gelişmiş kart yapısı eklendi.
                 div.innerHTML = `
                     <div class="card-top-row">
                         <div class="game-pill">${gameNameTag}</div>

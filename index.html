@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SensiSoftware | Elite Hacks</title>
+    <title>SensiSoftware | Premium Hacks</title>
+    
+    <!-- FONTLAR VE İKONLAR -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -13,33 +15,38 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     
     <style>
+        /* === TEMEL DEĞİŞKENLER VE RENKLER === */
         :root {
-            /* GECE MORU VE NEON TEMASI */
-            --bg-base: #05030a;
+            --bg-base: #040208;
             --bg-surface: rgba(13, 8, 24, 0.7);
-            --bg-elevated: #0f0b1a;
-            --border-light: rgba(138, 43, 226, 0.15);
-            --border-hover: rgba(138, 43, 226, 0.4);
-            --accent: #b026ff; /* Neon Mor */
-            --accent-light: #d17bff;
+            --bg-elevated: #0a0614;
+            --border-light: rgba(138, 43, 226, 0.2);
+            --border-hover: rgba(138, 43, 226, 0.5);
+            --accent: #b026ff; 
             --accent-hover: #9000ff;
             --success: #00ffcc; 
             --danger: #ff0055;
-            --text-primary: #f8fafc;
+            --text-primary: #ffffff;
             --text-secondary: #94a3b8;
-            --text-muted: #475569;
-            --radius-sm: 8px; 
-            --radius-md: 14px;
-            --radius-lg: 20px;
-            --transition-fast: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --transition-bounce: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --text-muted: #4b5563;
+            --radius-sm: 6px; 
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --transition-fast: all 0.3s ease;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
         
-        @keyframes starDrift { from { background-position: 0 0; } to { background-position: 1000px 500px; } }
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 10px rgba(176,38,255,0.2); } 50% { box-shadow: 0 0 30px rgba(176,38,255,0.5); } 100% { box-shadow: 0 0 10px rgba(176,38,255,0.2); } }
+        @keyframes starDrift { 
+            from { background-position: 0 0; } 
+            to { background-position: 1000px 500px; } 
+        }
 
+        /* === GENEL SAYFA YAPISI === */
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: var(--bg-base); 
@@ -49,196 +56,939 @@
             flex-direction: column; 
             overflow: hidden; 
             background-image: 
-                radial-gradient(circle at 50% -10%, #150a24 0%, transparent 60%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23ffffff' opacity='0.05'/%3E%3Ccircle cx='150' cy='80' r='1.5' fill='%23b026ff' opacity='0.15'/%3E%3Ccircle cx='80' cy='160' r='0.5' fill='%23ffffff' opacity='0.05'/%3E%3Ccircle cx='180' cy='180' r='1' fill='%2300ffcc' opacity='0.1'/%3E%3C/svg%3E");
+                radial-gradient(circle at 50% 0%, #11081f 0%, transparent 60%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23ffffff' opacity='0.03'/%3E%3Ccircle cx='150' cy='80' r='1.5' fill='%23b026ff' opacity='0.08'/%3E%3Ccircle cx='80' cy='160' r='0.5' fill='%23ffffff' opacity='0.03'/%3E%3Ccircle cx='180' cy='180' r='1' fill='%2300ffcc' opacity='0.05'/%3E%3C/svg%3E");
             background-size: 100% 100%, 300px 300px;
-            animation: starDrift 100s linear infinite;
+            animation: starDrift 120s linear infinite;
         }
         
-        h1, h2, h3, h4, .logo, .font-space { font-family: 'Space Grotesk', sans-serif; }
-        ::selection { background: var(--accent); color: #fff; }
-
-        /* HEADER */
-        header { width: 100%; padding: 20px 5vw; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; z-index: 100; border-bottom: 1px solid var(--border-light); background: rgba(5, 3, 10, 0.85); backdrop-filter: blur(15px); }
-        .header-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1700px; margin: 0 auto; }
-        .logo { font-size: 1.6rem; font-weight: 800; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 12px; flex: 1; text-transform: uppercase; letter-spacing: 2px; transition: var(--transition-fast);}
-        .logo:hover { text-shadow: 0 0 20px rgba(176, 38, 255, 0.6); }
-        .logo i { color: var(--accent); font-size: 1.8rem;}
+        h1, h2, h3, h4, .logo, .font-space { 
+            font-family: 'Space Grotesk', sans-serif; 
+        }
         
-        .nav-menu { display: flex; gap: 10px; background: rgba(255,255,255,0.02); padding: 8px; border-radius: 100px; border: 1px solid var(--border-light);}
-        .nav-btn { background: transparent; border: none; color: var(--text-secondary); font-size: 0.9rem; font-weight: 700; padding: 12px 25px; border-radius: 100px; cursor: pointer; transition: var(--transition-fast); text-transform: uppercase; letter-spacing: 1px;}
-        .nav-btn:hover { color: var(--text-primary); background: rgba(176,38,255,0.1); }
-        .nav-btn.active { color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-hover)); box-shadow: 0 0 20px rgba(176, 38, 255, 0.4); }
+        ::selection { 
+            background: var(--accent); 
+            color: #fff; 
+        }
 
-        /* AUTH & PROFILE */
-        .auth-actions { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 15px; position: relative; }
-        .btn-auth { border: 1px solid var(--border-light); padding: 12px 28px; border-radius: 100px; font-size: 0.9rem; font-weight: 800; cursor: pointer; transition: var(--transition-bounce); display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px;}
-        .btn-login { background: rgba(255,255,255,0.02); color: var(--text-primary); }
-        .btn-login:hover { background: rgba(176,38,255,0.1); border-color: var(--accent); transform: scale(1.05); }
-        .btn-register { background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: #fff; border: none; }
-        .btn-register:hover { box-shadow: 0 0 25px rgba(176, 38, 255, 0.6); transform: scale(1.05);}
+        /* === HEADER (ÜST MENÜ) === */
+        header { 
+            width: 100%; 
+            padding: 15px 5vw; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-shrink: 0; 
+            z-index: 100; 
+            border-bottom: 1px solid var(--border-light); 
+            background: rgba(6, 4, 10, 0.85); 
+            backdrop-filter: blur(12px); 
+        }
+
+        .header-inner { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            width: 100%; 
+            max-width: 1600px; 
+            margin: 0 auto; 
+        }
+
+        .logo { 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: var(--text-primary); 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            flex: 1; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            transition: var(--transition-fast);
+        }
+
+        .logo:hover { 
+            text-shadow: 0 0 15px rgba(176, 38, 255, 0.5); 
+        }
+
+        .logo i { 
+            color: var(--accent); 
+            font-size: 1.6rem;
+        }
         
-        #user-menu { display: none; align-items: center; gap: 20px; position: relative; }
-        .giveaway-trigger { background: rgba(176, 38, 255, 0.1); border: 1px solid rgba(176, 38, 255, 0.3); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--accent-light); cursor: pointer; transition: var(--transition-bounce); animation: pulseGlow 3s infinite;}
-        .giveaway-trigger:hover { background: var(--accent); color: #fff; transform: scale(1.1); box-shadow: 0 0 25px rgba(176,38,255,0.6);}
-        .user-profile { display: flex; align-items: center; cursor: pointer; }
-        .avatar-circle { width: 45px; height: 45px; border-radius: 50%; background: var(--bg-elevated); color: var(--text-primary); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; transition: var(--transition-fast); border: 2px solid var(--border-light);}
-        .avatar-circle:hover { border-color: var(--accent); box-shadow: 0 0 15px rgba(176,38,255,0.4); }
+        .nav-menu { 
+            display: flex; 
+            gap: 5px; 
+            background: rgba(255,255,255,0.03); 
+            padding: 6px; 
+            border-radius: 100px; 
+            border: 1px solid var(--border-light);
+        }
+
+        .nav-btn { 
+            background: transparent; 
+            border: none; 
+            color: var(--text-secondary); 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            padding: 10px 20px; 
+            border-radius: 100px; 
+            cursor: pointer; 
+            transition: var(--transition-fast); 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover { 
+            color: var(--text-primary); 
+            background: rgba(176,38,255,0.1); 
+        }
+
+        .nav-btn.active { 
+            color: #fff; 
+            background: var(--accent); 
+            box-shadow: 0 0 15px rgba(176, 38, 255, 0.4); 
+        }
+
+        /* === AUTH & PROFİL === */
+        .auth-actions { 
+            flex: 1; 
+            display: flex; 
+            justify-content: flex-end; 
+            align-items: center; 
+            gap: 12px; 
+            position: relative; 
+        }
+
+        .btn-auth { 
+            border: 1px solid var(--border-light); 
+            padding: 10px 24px; 
+            border-radius: 100px; 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: var(--transition-fast); 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            text-transform: uppercase;
+        }
+
+        .btn-login { 
+            background: transparent; 
+            color: var(--text-primary); 
+        }
+
+        .btn-login:hover { 
+            background: rgba(176,38,255,0.1); 
+            border-color: var(--accent); 
+        }
+
+        .btn-register { 
+            background: var(--accent); 
+            color: #fff; 
+            border-color: var(--accent); 
+        }
+
+        .btn-register:hover { 
+            background: var(--accent-hover); 
+            box-shadow: 0 0 20px rgba(176, 38, 255, 0.5);
+        }
         
-        .dropdown-menu { position: absolute; top: 65px; right: 0; background: rgba(10, 5, 20, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--border-light); border-radius: var(--radius-md); width: 250px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.9); z-index: 100; padding: 10px 0;}
-        .dropdown-menu a { padding: 15px 20px; color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 14px; transition: var(--transition-fast); font-weight: 600;}
-        .dropdown-menu a:hover { background: rgba(176,38,255,0.1); color: var(--accent-light); padding-left: 25px;}
-
-        /* MAIN TABS */
-        main { flex: 1; position: relative; width: 100%; }
-        .tab-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 50px 5vw 100px; display: none; overflow-y: auto; scrollbar-width: none; }
-        .tab-content::-webkit-scrollbar { display: none; }
-        .tab-content.active { display: block; animation: fadeSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; z-index: 10; }
+        #user-menu { 
+            display: none; 
+            align-items: center; 
+            gap: 15px; 
+            position: relative; 
+        }
         
-        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUpItem { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+        .user-profile { 
+            display: flex; 
+            align-items: center; 
+            cursor: pointer; 
+        }
 
-        .tab-inner { width: 100%; max-width: 1700px; margin: 0 auto; }
+        .avatar-circle { 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            background: var(--bg-elevated); 
+            color: var(--text-primary); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            transition: var(--transition-fast); 
+            border: 2px solid var(--border-light);
+        }
 
-        /* HOME */
-        .home-layout { max-width: 1100px; margin-top: 80px; text-align: center; margin-left: auto; margin-right: auto;}
-        .home-layout h1 { font-size: clamp(3.5rem, 5vw, 6.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -2px; margin-bottom: 25px; text-transform: uppercase;}
-        .home-layout h1 span { color: transparent; -webkit-text-stroke: 2px var(--accent); text-shadow: 0 0 30px rgba(176,38,255,0.3); }
-        .home-layout p { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.8; max-width: 800px; margin: 0 auto 50px auto; }
+        .avatar-circle:hover { 
+            border-color: var(--accent); 
+            box-shadow: 0 0 15px rgba(176,38,255,0.5); 
+        }
         
-        .hero-badges { display:flex; justify-content:center; gap:20px; margin-bottom:60px; flex-wrap: wrap;}
-        .badge { background: rgba(0, 255, 204, 0.05); color: var(--success); padding: 12px 24px; border-radius: 100px; font-weight: 800; font-size: 0.95rem; border: 1px solid rgba(0, 255, 204, 0.2); display:flex; align-items:center; gap:10px; box-shadow: 0 0 20px rgba(0,255,204,0.1);}
-        .badge.gold { background: rgba(176, 38, 255, 0.05); color: var(--accent-light); border-color: rgba(176, 38, 255, 0.3); box-shadow: 0 0 20px rgba(176,38,255,0.15);}
-        .badge.shield { background: rgba(255, 0, 85, 0.05); color: var(--danger); border-color: rgba(255, 0, 85, 0.2); box-shadow: 0 0 20px rgba(255,0,85,0.1);}
+        .dropdown-menu { 
+            position: absolute; 
+            top: 55px; 
+            right: 0; 
+            background: rgba(10, 6, 20, 0.95); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid var(--border-light); 
+            border-radius: var(--radius-md); 
+            width: 220px; 
+            display: none; 
+            flex-direction: column; 
+            overflow: hidden; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9); 
+            z-index: 100; 
+            padding: 8px 0;
+        }
 
-        .btn-large { display: inline-flex; align-items: center; gap: 15px; background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: #fff; padding: 20px 50px; border-radius: 100px; font-size: 1.1rem; font-weight: 800; text-decoration: none; transition: var(--transition-bounce); border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 10px 30px rgba(176, 38, 255, 0.3);}
-        .btn-large:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(176, 38, 255, 0.5); }
+        .dropdown-menu a { 
+            padding: 12px 18px; 
+            color: var(--text-secondary); 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            transition: var(--transition-fast); 
+            font-weight: 600;
+        }
 
-        /* HAKKIMIZDA TAB */
-        .about-box { background: rgba(10, 5, 20, 0.6); backdrop-filter: blur(20px); border: 1px solid var(--border-light); padding: 60px; border-radius: var(--radius-lg); text-align: center; max-width: 1000px; margin: 0 auto; box-shadow: inset 0 0 50px rgba(176,38,255,0.02);}
-        .about-box h3 { font-size: 2.5rem; color: var(--accent-light); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; text-shadow: 0 0 20px rgba(176,38,255,0.3);}
-        .about-box p { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.9; margin-bottom: 20px;}
-        .about-box .highlight { color: #fff; font-weight: 700; }
+        .dropdown-menu a:hover { 
+            background: rgba(176,38,255,0.1); 
+            color: var(--accent); 
+            padding-left: 22px; 
+        }
 
-        /* ÜRÜNLER KISMI */
-        .section-header { margin-bottom: 60px; text-align: center;}
-        .section-header h4 { font-size: 1.1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 15px; font-weight: 800; text-shadow: 0 0 15px rgba(176,38,255,0.3);}
-        .section-header h2 { font-size: 3.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 15px; text-transform:uppercase;}
+        /* === SEKME İÇERİKLERİ (TABS) === */
+        main { 
+            flex: 1; 
+            position: relative; 
+            width: 100%; 
+        }
+
+        .tab-content { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            padding: 40px 5vw 100px; 
+            display: none; 
+            overflow-y: auto; 
+            scrollbar-width: none; 
+        }
+
+        .tab-content::-webkit-scrollbar { 
+            display: none; 
+        }
+
+        .tab-content.active { 
+            display: block; 
+            animation: fadeSlideUp 0.4s ease forwards; 
+            z-index: 10; 
+        }
         
-        .game-filter-bar { display: flex; gap: 15px; margin-bottom: 60px; flex-wrap: wrap; justify-content: center;}
-        .filter-btn { background: rgba(10,5,20,0.5); border: 1px solid var(--border-light); color: var(--text-secondary); padding: 12px 28px; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer; transition: var(--transition-bounce); border-radius: 100px;}
-        .filter-btn:hover { border-color: var(--accent); color: var(--text-primary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(176,38,255,0.2);}
-        .filter-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: #fff; border:none; box-shadow: 0 5px 25px rgba(176,38,255,0.4);}
-
-        /* 🔥 AŞIRI LÜKS UZUN (PORTRAIT) ÜRÜN KARTLARI 🔥 */
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; max-width: 1300px; margin: 0 auto; }
+        @keyframes fadeSlideUp { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
         
+        @keyframes fadeInUpItem { 
+            from { opacity: 0; transform: translateY(15px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .tab-inner { 
+            width: 100%; 
+            max-width: 1600px; 
+            margin: 0 auto; 
+        }
+
+        /* === HOME SEKME İÇERİĞİ === */
+        .home-layout { 
+            max-width: 900px; 
+            margin-top: 60px; 
+            text-align: center; 
+            margin-left: auto; 
+            margin-right: auto;
+        }
+
+        .home-layout h1 { 
+            font-size: clamp(3rem, 5vw, 5.5rem); 
+            font-weight: 800; 
+            line-height: 1.1; 
+            letter-spacing: -1px; 
+            margin-bottom: 25px; 
+            text-transform: uppercase;
+        }
+
+        .home-layout h1 span { 
+            color: var(--accent); 
+            text-shadow: 0 0 20px rgba(176,38,255,0.4); 
+        }
+
+        .home-layout p { 
+            font-size: 1.15rem; 
+            color: var(--text-secondary); 
+            line-height: 1.7; 
+            max-width: 700px; 
+            margin: 0 auto 40px auto; 
+        }
+        
+        .hero-badges { 
+            display:flex; 
+            justify-content:center; 
+            gap:15px; 
+            margin-bottom:50px; 
+            flex-wrap: wrap;
+        }
+
+        .badge { 
+            background: rgba(0, 255, 204, 0.05); 
+            color: var(--success); 
+            padding: 10px 20px; 
+            border-radius: 100px; 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            border: 1px solid rgba(0, 255, 204, 0.2); 
+            display:flex; 
+            align-items:center; 
+            gap:8px;
+        }
+
+        .badge.gold { 
+            background: rgba(176, 38, 255, 0.05); 
+            color: var(--accent); 
+            border-color: rgba(176, 38, 255, 0.3);
+        }
+
+        .badge.shield { 
+            background: rgba(255, 0, 85, 0.05); 
+            color: var(--danger); 
+            border-color: rgba(255, 0, 85, 0.2);
+        }
+
+        .btn-large { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 12px; 
+            background: var(--accent); 
+            color: #fff; 
+            padding: 18px 45px; 
+            border-radius: 100px; 
+            font-size: 1rem; 
+            font-weight: 800; 
+            text-decoration: none; 
+            transition: var(--transition-fast); 
+            border: none; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(176, 38, 255, 0.3);
+        }
+
+        .btn-large:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 30px rgba(176, 38, 255, 0.5); 
+            background: var(--accent-hover);
+        }
+
+        /* === HAKKIMIZDA SEKME İÇERİĞİ === */
+        .about-box { 
+            background: rgba(10, 6, 20, 0.6); 
+            border: 1px solid var(--border-light); 
+            padding: 50px; 
+            border-radius: var(--radius-lg); 
+            text-align: center; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .about-box h3 { 
+            font-size: 2.2rem; 
+            color: var(--accent); 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            margin-bottom: 20px;
+        }
+
+        .about-box p { 
+            font-size: 1.05rem; 
+            color: var(--text-secondary); 
+            line-height: 1.8; 
+            margin-bottom: 15px;
+        }
+
+        /* === ÜRÜNLER & MAĞAZA SEKME İÇERİĞİ === */
+        .section-header { 
+            margin-bottom: 40px; 
+            text-align: center;
+        }
+
+        .section-header h4 { 
+            font-size: 0.9rem; 
+            color: var(--accent); 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            margin-bottom: 10px; 
+            font-weight: 700;
+        }
+
+        .section-header h2 { 
+            font-size: 2.8rem; 
+            font-weight: 800; 
+            letter-spacing: -1px; 
+            margin-bottom: 10px; 
+            text-transform:uppercase;
+        }
+
+        .section-header p { 
+            color: var(--text-secondary); 
+            font-size: 1rem; 
+            max-width: 500px; 
+            margin: 0 auto;
+        }
+        
+        .game-filter-bar { 
+            display: flex; 
+            gap: 12px; 
+            margin-bottom: 40px; 
+            flex-wrap: wrap; 
+            justify-content: center;
+        }
+
+        .filter-btn { 
+            background: rgba(15,8,30,0.6); 
+            border: 1px solid var(--border-light); 
+            color: var(--text-secondary); 
+            padding: 10px 24px; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            cursor: pointer; 
+            transition: var(--transition-fast); 
+            border-radius: 100px;
+        }
+
+        .filter-btn:hover { 
+            border-color: var(--accent); 
+            color: var(--text-primary); 
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active { 
+            background: var(--accent); 
+            color: #fff; 
+            border-color: var(--accent); 
+            box-shadow: 0 0 15px rgba(176,38,255,0.4);
+        }
+
+        .products-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px; 
+            max-width: 1300px; 
+            margin: 0 auto; 
+        }
+        
+        /* 🔥 LÜKS, İNCE VE ANİMASYONLU ÜRÜN KARTLARI 🔥 */
         .product-card { 
-            background: linear-gradient(160deg, rgba(20, 10, 35, 0.8) 0%, rgba(5, 2, 10, 0.95) 100%);
+            position: relative;
+            background: linear-gradient(160deg, rgba(20, 10, 35, 0.7) 0%, rgba(5, 2, 10, 0.9) 100%);
             border: 1px solid rgba(176, 38, 255, 0.15); 
-            border-radius: 20px; 
-            padding: 30px;
+            border-radius: var(--radius-lg); 
+            padding: 20px;
             display: flex; 
             flex-direction: column; 
-            position: relative; 
-            transition: var(--transition-bounce); 
-            overflow: hidden; 
-            min-height: 580px; /* Daha uzunlamasına */
-            opacity: 0; 
-            animation: fadeInUpItem 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05);
-            backdrop-filter: blur(20px);
+            gap: 15px;
+            transition: all 0.4s ease;
+            z-index: 1;
+            animation: fadeInUpItem 0.5s ease forwards;
+            opacity: 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            min-height: 450px;
         }
-        
-        .product-card::after {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at top, rgba(176,38,255,0.1), transparent 60%);
-            opacity: 0; transition: 0.5s; pointer-events: none;
+
+        /* Hover olunca dışarı vuran neon glow */
+        .product-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(45deg, var(--accent), transparent, var(--accent));
+            background-size: 200% 200%;
+            border-radius: var(--radius-lg);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: starDrift 3s linear infinite;
         }
 
         .product-card:hover { 
-            border-color: rgba(176, 38, 255, 0.5); 
-            transform: translateY(-12px); 
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 40px rgba(176, 38, 255, 0.15); 
+            transform: translateY(-6px); 
+            border-color: rgba(176, 38, 255, 0.6);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 20px rgba(176, 38, 255, 0.15);
         }
-        .product-card:hover::after { opacity: 1; }
 
-        .card-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; z-index: 2; position:relative;}
-        .game-pill { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; backdrop-filter: blur(5px);}
-        .status-pill { background: rgba(0, 255, 204, 0.08); border: 1px solid rgba(0, 255, 204, 0.3); color: var(--success); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; box-shadow: 0 0 15px rgba(0,255,204,0.1);}
-        @keyframes pulseDot { 0% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,204,0.7); } 70% { opacity: 0.5; box-shadow: 0 0 0 5px rgba(0,255,204,0); } 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,204,0); } }
-        .status-pill i { font-size: 0.5rem; animation: pulseDot 2s infinite; border-radius: 50%;}
+        .product-card:hover::before { 
+            opacity: 0.3; 
+        }
 
-        /* Fotoğraflar Artık Daha Büyük ve Belirgin */
-        .prod-image-wrapper { width: 100%; height: 250px; background: #08040f; border-radius: 14px; position: relative; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(176,38,255,0.1); box-shadow: inset 0 5px 20px rgba(0,0,0,0.8); z-index: 2;}
-        .prod-image-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); opacity: 0.85;}
-        .product-card:hover .prod-image-wrapper img { transform: scale(1.08); opacity: 1;}
-        .prod-image-placeholder { font-size: 4rem; color: #150a24; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0;}
+        .card-top-row { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
 
-        .prod-info { display: flex; flex-direction: column; z-index: 2; position: relative;}
-        .prod-info h3 { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -0.5px;}
-        .prod-info p { color: #94a3b8; font-size: 0.95rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
+        .game-pill { 
+            background: rgba(255,255,255,0.05); 
+            color: #fff; 
+            padding: 5px 12px; 
+            border-radius: 8px; 
+            font-size: 0.65rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
 
-        /* Seçenekler Sistemi (1 Gün, 1 Hafta vs.) */
-        .var-selector { display: flex; gap: 8px; margin: 25px 0; z-index: 2; position:relative; background: rgba(0,0,0,0.4); padding: 5px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);}
-        .var-btn { flex:1; background: transparent; border: none; color: var(--text-secondary); padding: 10px 0; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; cursor: pointer; border-radius: 8px; transition: var(--transition-fast);}
-        .var-btn:hover { color: #fff;}
-        .var-btn.active { background: var(--accent); color: #fff; box-shadow: 0 0 15px rgba(176,38,255,0.3);}
+        .status-pill { 
+            background: rgba(0, 255, 204, 0.05); 
+            color: var(--success); 
+            padding: 5px 12px; 
+            border-radius: 8px; 
+            font-size: 0.65rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-        .price-row { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; margin-top: auto; z-index: 2; position: relative;}
-        .price-row h4 { font-size: 2.2rem; font-weight: 800; color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.2); margin:0; display:flex; align-items:flex-start; gap:2px; transition: 0.3s;}
-        .price-row h4 span { font-size: 1.1rem; color: var(--accent-light); margin-top:4px;}
-
-        .btn-buy { width: 100%; padding: 20px; background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: #fff; border: none; border-radius: 14px; font-weight: 800; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.4s ease; z-index: 2; position: relative; box-shadow: 0 5px 20px rgba(176, 38, 255, 0.2); margin-top: 20px;}
-        .product-card:hover .btn-buy { box-shadow: 0 10px 30px rgba(176, 38, 255, 0.5); transform: translateY(-2px);}
-        .btn-buy.maintenance { background: rgba(255, 0, 85, 0.1); color: var(--danger); border: 1px solid rgba(255, 0, 85, 0.3); cursor: not-allowed; box-shadow:none;}
-        .product-card:hover .btn-buy.maintenance { transform: none; box-shadow:none;}
-
-        /* FORMLAR & PANEL - FERAH VE BÜYÜK */
-        .form-box { background: rgba(13, 8, 24, 0.8); backdrop-filter:blur(15px); border: 1px solid var(--border-light); padding: 50px; border-radius: var(--radius-lg); box-shadow: 0 20px 50px rgba(0,0,0,0.5);}
-        .input-group { position: relative; margin-bottom: 25px; }
-        .input-group i { position: absolute; left: 20px; top: 20px; color: var(--text-muted); font-size: 1.1rem; }
-        .input-base { width: 100%; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); color: var(--text-primary); padding: 18px 18px 18px 55px; border-radius: var(--radius-md); outline: none; font-size: 1rem; font-family: inherit; transition: 0.3s;}
-        .input-base:focus { border-color: var(--accent); box-shadow: inset 0 0 15px rgba(176,38,255,0.1), 0 0 10px rgba(176,38,255,0.2);}
-        textarea.input-base { min-height: 150px; resize: vertical; }
-
-        .panel-layout { display: grid; grid-template-columns: 280px 1fr; gap: 50px; height: 100%; }
-        .sidebar { background: rgba(13, 8, 24, 0.8); backdrop-filter:blur(15px); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 30px; display: flex; flex-direction: column; gap: 10px; }
-        .sidebar button { background: transparent; color: var(--text-secondary); border: none; padding: 16px 20px; text-align: left; border-radius: var(--radius-md); cursor: pointer; font-weight: 700; font-size: 0.95rem; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px;}
-        .sidebar button:hover, .sidebar button.active { background: rgba(176, 38, 255, 0.1); color: var(--text-primary); padding-left: 25px; border-left: 4px solid var(--accent); }
-        .content-area { background: rgba(13, 8, 24, 0.8); backdrop-filter:blur(15px); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 50px; }
+        .status-pill i { 
+            font-size: 0.45rem; 
+            animation: pulse 2s infinite; 
+        }
         
-        .data-table { width: 100%; border-collapse: collapse; margin-top: 30px; }
-        .data-table th, .data-table td { padding: 22px 20px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem; }
-        .data-table th { color: var(--text-secondary); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1.5px;}
-        
-        .action-cell { display: flex; gap: 12px; } 
-        .btn-action-icon { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-secondary); width: 44px; height: 44px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition-bounce); font-size: 1.1rem; }
-        .btn-action-icon:hover { transform: translateY(-4px); background:#fff; color:#000; border-color:#fff;}
+        @keyframes pulse { 
+            0% { opacity: 1; } 
+            50% { opacity: 0.4; } 
+            100% { opacity: 1; } 
+        }
 
-        /* ÇARK (WHEEL) TASARIMI - KÜÇÜK VE DÜZENLİ */
-        .wheel-container { position: relative; width: 300px; height: 300px; margin: 0 auto 50px auto; border-radius: 50%; border: 6px solid #fff; box-shadow: 0 0 30px rgba(176,38,255,0.3); overflow: hidden; background: #05030a;}
-        .wheel-pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid var(--accent); z-index: 10;}
-        .wheel { width: 100%; height: 100%; border-radius: 50%; transition: transform 5s cubic-bezier(0.15, 0.9, 0.2, 1); position: relative; }
-        .wheel-slice { position: absolute; top: 0; right: 0; width: 50%; height: 50%; transform-origin: 0% 100%; display: flex; align-items: center; justify-content: center; clip-path: polygon(0 100%, 100% 0, 100% 100%); }
-        .wheel-text { position: absolute; left: 15px; top: 60%; transform: translateY(-50%) rotate(45deg); font-weight: 800; font-size: 0.75rem; color: #fff; text-transform: uppercase; white-space: nowrap;}
+        .prod-image-wrapper { 
+            width: 100%; 
+            height: 150px; 
+            background: #000; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            position: relative;
+            border: 1px solid rgba(176,38,255,0.1);
+        }
 
-        .spin-info { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 30px; font-weight: 700;}
-        .spin-info span { color: #fff; font-weight: 800; font-size: 1.3rem;}
+        .prod-image-wrapper img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0.8; 
+            transition: transform 0.5s ease;
+        }
 
-        /* MODALLAR */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(12px); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-box { background: #0a0514; border: 1px solid rgba(176,38,255,0.2); padding: 45px; border-radius: var(--radius-lg); width: 480px; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 30px 60px rgba(0,0,0,1), inset 0 0 30px rgba(176,38,255,0.05); animation: fadeSlideUp 0.3s ease forwards;}
-        .close-modal { position: absolute; top: 25px; right: 25px; cursor: pointer; color: var(--text-secondary); font-size: 1.4rem; transition: var(--transition-bounce); }
-        .close-modal:hover { color: var(--accent); transform: rotate(90deg) scale(1.2); }
-        .btn-submit { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: #fff; border: none; border-radius: var(--radius-sm); font-weight: 800; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: var(--transition-bounce); margin-top: 15px;}
-        .btn-submit:hover { box-shadow: 0 0 25px rgba(176,38,255,0.5); transform: translateY(-3px);}
+        .product-card:hover .prod-image-wrapper img { 
+            transform: scale(1.08); 
+            opacity: 1;
+        }
+
+        .prod-image-placeholder { 
+            font-size: 3rem; 
+            color: #1a1525; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+        }
+
+        .prod-info { 
+            flex:1; 
+            display:flex; 
+            flex-direction:column; 
+            gap:5px;
+        }
+
+        .prod-info h3 { 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: #fff; 
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .prod-info p { 
+            color: var(--text-secondary); 
+            font-size: 0.85rem; 
+            line-height: 1.5; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 2; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+            margin:0;
+        }
+
+        /* Varyasyon (Günlük, Haftalık vb) Butonları */
+        .var-selector { 
+            display: flex; 
+            gap: 6px; 
+            background: rgba(0,0,0,0.5); 
+            padding: 5px; 
+            border-radius: 10px; 
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .var-btn { 
+            flex:1; 
+            background: transparent; 
+            border: none; 
+            color: var(--text-secondary); 
+            padding: 8px 0; 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            border-radius: 6px; 
+            transition: var(--transition-fast);
+        }
+
+        .var-btn:hover { 
+            color: #fff;
+        }
+
+        .var-btn.active { 
+            background: var(--accent); 
+            color: #fff; 
+            box-shadow: 0 0 10px rgba(176,38,255,0.4);
+        }
+
+        .price-row { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            border-top: 1px solid rgba(255,255,255,0.05); 
+            padding-top: 15px; 
+            margin-top: 5px;
+        }
+
+        .price-row h4 { 
+            font-size: 1.6rem; 
+            font-weight: 800; 
+            color: #fff; 
+            margin:0;
+            transition: 0.3s;
+        }
+
+        .price-row span { 
+            font-size: 0.75rem; 
+            color: var(--accent); 
+            font-weight:700; 
+            text-transform:uppercase;
+        }
+
+        .btn-buy { 
+            width: 100%; 
+            padding: 14px; 
+            background: rgba(176, 38, 255, 0.1); 
+            color: var(--accent); 
+            border: 1px solid var(--accent); 
+            border-radius: 10px; 
+            font-weight: 800; 
+            font-size: 0.9rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            margin-top: 5px;
+        }
+
+        .product-card:hover .btn-buy { 
+            background: var(--accent); 
+            color: #fff; 
+            box-shadow: 0 0 20px rgba(176,38,255,0.4);
+        }
+
+        .btn-buy.maintenance { 
+            background: rgba(255,0,85,0.05); 
+            color: var(--danger); 
+            border-color: rgba(255,0,85,0.3);
+            cursor: not-allowed;
+        }
+
+        .product-card:hover .btn-buy.maintenance { 
+            background: rgba(255,0,85,0.05); 
+            color: var(--danger); 
+            box-shadow:none;
+        }
+
+        /* === FORMLAR VE ADMİN PANEL YAPISI === */
+        .form-box { 
+            background: rgba(13, 8, 24, 0.6); 
+            border: 1px solid var(--border-light); 
+            padding: 35px; 
+            border-radius: var(--radius-lg); 
+        }
+
+        .input-group { 
+            position: relative; 
+            margin-bottom: 20px; 
+        }
+
+        .input-group i { 
+            position: absolute; 
+            left: 15px; 
+            top: 15px; 
+            color: var(--text-muted); 
+            font-size: 1rem; 
+        }
+
+        .input-base { 
+            width: 100%; 
+            background: #0a0614; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            color: var(--text-primary); 
+            padding: 14px 14px 14px 45px; 
+            border-radius: var(--radius-sm); 
+            outline: none; 
+            font-size: 0.9rem; 
+            font-family: inherit; 
+            transition: 0.3s;
+        }
+
+        .input-base:focus { 
+            border-color: var(--accent); 
+            box-shadow: 0 0 10px rgba(176,38,255,0.1);
+        }
+
+        textarea.input-base { 
+            min-height: 120px; 
+            resize: vertical; 
+        }
+
+        .panel-layout { 
+            display: grid; 
+            grid-template-columns: 250px 1fr; 
+            gap: 30px; 
+            height: 100%; 
+        }
+
+        .sidebar { 
+            background: rgba(13, 8, 24, 0.6); 
+            border: 1px solid var(--border-light); 
+            border-radius: var(--radius-lg); 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 6px; 
+        }
+
+        .sidebar button { 
+            background: transparent; 
+            color: var(--text-secondary); 
+            border: none; 
+            padding: 14px 18px; 
+            text-align: left; 
+            border-radius: var(--radius-sm); 
+            cursor: pointer; 
+            font-weight: 600; 
+            font-size: 0.85rem; 
+            transition: 0.2s; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar button:hover, .sidebar button.active { 
+            background: rgba(176, 38, 255, 0.1); 
+            color: #fff; 
+            padding-left: 22px; 
+            border-left: 3px solid var(--accent); 
+        }
+
+        .content-area { 
+            background: rgba(13, 8, 24, 0.6); 
+            border: 1px solid var(--border-light); 
+            border-radius: var(--radius-lg); 
+            padding: 35px; 
+        }
         
-        #toast { position: fixed; bottom: 40px; right: 40px; background: #fff; color: #000; padding: 20px 30px; border-radius: 100px; font-weight: 800; box-shadow: 0 10px 40px rgba(176,38,255,0.3); transform: translateX(150%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 9999; display: flex; align-items: center; gap: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;}
-        #toast.show { transform: translateX(0); }
+        .data-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+        }
+
+        .data-table th, .data-table td { 
+            padding: 16px 15px; 
+            text-align: left; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            font-size: 0.85rem; 
+        }
+
+        .data-table th { 
+            color: var(--text-secondary); 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+            letter-spacing: 1px;
+        }
         
-        .profile-view { display: none; }
-        .profile-view.active { display: block; animation: fadeSlideUp 0.4s ease; }
+        .action-cell { 
+            display: flex; 
+            gap: 8px; 
+        } 
+
+        .btn-action-icon { 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            color: var(--text-secondary); 
+            width: 36px; 
+            height: 36px; 
+            border-radius: var(--radius-sm); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            font-size: 0.9rem; 
+        }
+
+        .btn-action-icon:hover { 
+            background: #fff; 
+            color: #000; 
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .search-bar { 
+            width: 100%; 
+            padding: 14px 14px 14px 45px; 
+            background: rgba(0,0,0,0.5); 
+            border: 1px solid var(--border-light); 
+            border-radius: var(--radius-sm); 
+            color: #fff; 
+            margin-bottom: 15px; 
+            font-family: inherit; 
+            outline: none; 
+            transition: 0.3s;
+        }
+
+        .search-bar:focus { 
+            border-color: var(--accent); 
+        }
+
+        /* === MODALLAR (AÇILIR PENCERELER) === */
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.85); 
+            backdrop-filter: blur(8px); 
+            z-index: 1000; 
+            justify-content: center; 
+            align-items: center; 
+        }
+
+        .modal-box { 
+            background: #0a0614; 
+            border: 1px solid rgba(176,38,255,0.2); 
+            padding: 35px; 
+            border-radius: var(--radius-lg); 
+            width: 450px; 
+            position: relative; 
+            max-height: 90vh; 
+            overflow-y: auto; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9); 
+            animation: fadeSlideUp 0.3s ease forwards;
+        }
+
+        .close-modal { 
+            position: absolute; 
+            top: 20px; 
+            right: 20px; 
+            cursor: pointer; 
+            color: var(--text-secondary); 
+            font-size: 1.2rem; 
+            transition: 0.2s; 
+        }
+
+        .close-modal:hover { 
+            color: var(--accent); 
+            transform: rotate(90deg);
+        }
+
+        .btn-submit { 
+            width: 100%; 
+            padding: 15px; 
+            background: var(--accent); 
+            color: #fff; 
+            border: none; 
+            border-radius: var(--radius-sm); 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover { 
+            background: var(--accent-hover); 
+            box-shadow: 0 0 15px rgba(176,38,255,0.4); 
+            transform: translateY(-2px);
+        }
+        
+        /* === BİLDİRİM (TOAST) EKRANI === */
+        #toast { 
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px; 
+            background: #fff; 
+            color: #000; 
+            padding: 14px 22px; 
+            border-radius: 100px; 
+            font-weight: 700; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            transform: translateX(150%); 
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            z-index: 9999; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+        }
+
+        #toast.show { 
+            transform: translateX(0); 
+        }
+        
+        .profile-view { 
+            display: none; 
+        }
+
+        .profile-view.active { 
+            display: block; 
+            animation: fadeSlideUp 0.3s ease; 
+        }
     </style>
 </head>
 <body>
@@ -251,15 +1001,14 @@
             <div class="nav-menu">
                 <button class="nav-btn active" data-tab="home" onclick="switchTab('home')">Anasayfa</button>
                 <button class="nav-btn" data-tab="products" onclick="switchTab('products')">Mağaza</button>
-                <button class="nav-btn" data-tab="support" onclick="switchTab('support')">Biletler</button>
+                <button class="nav-btn" data-tab="support" onclick="switchTab('support')">Destek</button>
                 <button class="nav-btn" data-tab="about" onclick="switchTab('about')">Hakkımızda</button>
             </div>
             <div class="auth-actions" id="guest-menu">
                 <button class="btn-auth btn-login" onclick="openModal('login')">Giriş Yap</button>
-                <button class="btn-auth btn-register" onclick="switchTab('products')">Premium Mağaza</button>
+                <button class="btn-auth btn-register" onclick="switchTab('products')">Lisans Al</button>
             </div>
             <div class="auth-actions" id="user-menu">
-                <div class="giveaway-trigger" onclick="switchTab('wheel')" title="Şans Çarkı"><i class="fas fa-dharmachakra"></i></div>
                 <div class="user-profile" onclick="toggleDropdown()">
                     <div class="avatar-circle" id="profile-initial"><i class="fas fa-user"></i></div>
                 </div>
@@ -275,7 +1024,7 @@
     </header>
 
     <main>
-        <!-- HOME TAB -->
+        <!-- === HOME TAB === -->
         <div id="tab-home" class="tab-content active">
             <div class="tab-inner">
                 <div class="home-layout">
@@ -285,7 +1034,7 @@
                     <div class="hero-badges">
                         <span class="badge"><i class="fas fa-shield-check"></i> %100 Undetected</span>
                         <span class="badge gold"><i class="fas fa-users"></i> +3000 Aktif Üye</span>
-                        <span class="badge shield"><i class="fas fa-bolt"></i> Otomatik Teslimat</span>
+                        <span class="badge shield"><i class="fas fa-bolt"></i> Anında Teslimat</span>
                     </div>
 
                     <button class="btn-large" onclick="switchTab('products')">Ürünleri İncele <i class="fas fa-arrow-right"></i></button>
@@ -293,26 +1042,24 @@
             </div>
         </div>
 
-        <!-- ABOUT TAB -->
+        <!-- === ABOUT TAB === -->
         <div id="tab-about" class="tab-content">
             <div class="tab-inner">
-                <div class="section-header" style="text-align: center;">
-                    <h4>Vizyonumuz</h4>
+                <div class="section-header">
                     <h2>Hakkımızda</h2>
                 </div>
-                <div class="form-box" style="max-width: 900px; margin: 0 auto; text-align:center;">
-                    <h3 class="font-space" style="font-size: 2.5rem; margin-bottom: 25px; color: var(--accent-light);">SensiSoftware Premium</h3>
-                    <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.8;">Piyasadaki güvensiz ve sürekli ban yediren yazılımlardan sıkılmadınız mı? SensiSoftware olarak Kernel (Ring0) seviyesinde geliştirdiğimiz özel bypass modüllerimizle donanım tabanlı %100 koruma sağlıyoruz. Sistemlerimiz karşısında tüm Anti-Cheat yazılımları tamamen kördür. Hile kullanırken güvende hissedin, gerisini profesyonellere bırakın.</p>
+                <div class="form-box" style="max-width: 800px; margin: 0 auto; text-align:center;">
+                    <h3 class="font-space" style="font-size: 1.8rem; margin-bottom: 15px; color: var(--accent);">SensiSoftware Premium</h3>
+                    <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.6;">Python tabanlı masaüstü uygulamaları (GUI), derinlemesine bellek analizi ve gelişmiş overlay mimarilerini kusursuzca harmanlayan bağımsız bir teknoloji girişimiyiz. EAC, BattlEye, Vanguard gibi Anti-Cheat yazılımları donanım tabanlı sistemlerimiz karşısında tamamen kördür. Hile kullanırken güvende hissedin, gerisini profesyonellere bırakın.</p>
                 </div>
             </div>
         </div>
 
-        <!-- PRODUCTS TAB -->
+        <!-- === PRODUCTS TAB === -->
         <div id="tab-products" class="tab-content">
             <div class="tab-inner">
                 <div class="section-header">
-                    <h4>Elite Mağaza</h4>
-                    <h2>Tüm lisanslar, tek bir yerde.</h2>
+                    <h2>Premium Mağaza</h2>
                     <p>Sisteminize en uygun yazılımı seçin, anında teslimat ile oyunun hakimi olun.</p>
                 </div>
                 
@@ -321,50 +1068,33 @@
                 </div>
 
                 <div class="products-grid" id="store-products-container">
-                    <p style="text-align: center; color: var(--text-secondary); width: 100%; font-size: 1.1rem; grid-column: 1 / -1;">Yazılımlar yükleniyor...</p>
+                    <p style="text-align: center; color: var(--text-secondary); width: 100%; font-size: 1rem; grid-column: 1 / -1;">Yazılımlar yükleniyor...</p>
                 </div>
             </div>
         </div>
 
-        <!-- TICKET SUPPORT TAB -->
+        <!-- === TICKET SUPPORT TAB === -->
         <div id="tab-support" class="tab-content">
-            <div class="tab-inner" style="max-width: 900px;">
-                <div class="section-header" style="text-align: center;">
-                    <h4>7/24 Aktif</h4>
+            <div class="tab-inner" style="max-width: 800px;">
+                <div class="section-header">
                     <h2>Destek Merkezi</h2>
                 </div>
                 <div class="form-box">
-                    <h3 class="font-space" style="font-size: 1.5rem; margin-bottom: 20px; text-transform:uppercase;">Yeni Bilet Oluştur</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 30px; font-size:0.95rem;">Teknik ekibimiz genellikle 15-30 dakika içerisinde yanıt vermektedir.</p>
+                    <h3 class="font-space" style="font-size: 1.2rem; margin-bottom: 15px; text-transform:uppercase;">Yeni Bilet Oluştur</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; font-size:0.85rem;">Teknik ekibimiz genellikle 15-30 dakika içerisinde yanıt vermektedir.</p>
                     <div class="input-group">
                         <i class="fas fa-heading"></i>
-                        <input type="text" id="ticket-subject" class="input-base" placeholder="Konu Başlığı">
+                        <input type="text" id="ticket-subject" class="input-base" style="padding-left:35px;" placeholder="Konu Başlığı">
                     </div>
                     <div class="input-group">
-                        <textarea id="ticket-msg" class="input-base" style="padding-left: 20px;" placeholder="Lütfen sorununuzu detaylı bir şekilde açıklayın..."></textarea>
+                        <textarea id="ticket-msg" class="input-base" style="padding-left: 15px;" placeholder="Lütfen sorununuzu detaylı bir şekilde açıklayın..."></textarea>
                     </div>
-                    <button class="btn-submit" onclick="createTicket()">Talebi Gönder <i class="fas fa-paper-plane" style="margin-left:8px;"></i></button>
+                    <button class="btn-submit" onclick="createTicket()">Talebi Gönder</button>
                 </div>
             </div>
         </div>
 
-        <!-- YENİ: ÇARK (WHEEL) TAB -->
-        <div id="tab-wheel" class="tab-content">
-            <div class="tab-inner" style="text-align: center; max-width: 800px; margin: 0 auto;">
-                <h2 class="font-space" style="font-size: 3.5rem; color: var(--text-primary); text-transform:uppercase; margin-bottom:10px;"><i class="fas fa-dharmachakra" style="color:var(--accent);"></i> Şans Çarkı</h2>
-                <p style="color: var(--text-secondary); font-size:1.1rem; margin-bottom: 50px;">Kayıtlı üyelerimiz her 3 günde bir bedava çevirme hakkı kazanır!</p>
-                
-                <div class="wheel-container">
-                    <div class="wheel-pointer"></div>
-                    <div class="wheel" id="spin-wheel"></div>
-                </div>
-
-                <div class="spin-info">Kalan Çevirme Hakkınız: <span id="user-spin-count">0</span></div>
-                <button class="btn-large" id="btn-spin" onclick="spinWheel()" style="width: 100%; max-width: 350px; justify-content:center; font-size: 1.2rem; padding: 22px;">Çarkı Çevir</button>
-            </div>
-        </div>
-
-        <!-- PROFILE / ADMIN PANEL -->
+        <!-- === PROFILE / ADMIN PANEL === -->
         <div id="tab-profile" class="tab-content">
             <div class="tab-inner panel-layout">
                 <div class="sidebar">
@@ -373,44 +1103,51 @@
                         <button class="profile-btn" onclick="switchProfileView('licenses')"><i class="fas fa-key" style="width:20px;"></i> Lisanslarım</button>
                         <button class="profile-btn" onclick="switchProfileView('user-tickets')"><i class="fas fa-ticket-alt" style="width:20px;"></i> Biletlerim</button>
                     </div>
-                    <div id="admin-sidebar-links" style="display: none; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 15px; padding-top: 15px;">
-                        <span style="color: var(--accent); font-size: 0.75rem; margin-left: 20px; margin-bottom: 15px; display:block; font-weight: 800; letter-spacing: 2px;">ADMİN YÖNETİMİ</span>
-                        <button class="profile-btn" onclick="switchProfileView('admin-users')">Kullanıcı & Çark Hakkı</button>
+                    <div id="admin-sidebar-links" style="display: none; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 10px; padding-top: 10px;">
+                        <span style="color: var(--text-muted); font-size: 0.7rem; margin-left: 15px; margin-bottom: 10px; display:block; font-weight: 700; letter-spacing: 1px;">ADMİN YÖNETİMİ</span>
+                        <button class="profile-btn" onclick="switchProfileView('admin-users')">Kullanıcı Yönetimi</button>
+                        <button class="profile-btn" onclick="switchProfileView('admin-hwid')">HWID Talepleri</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-orders')">Sipariş Geçmişi</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-categories')">Kategori Yönetimi</button>
-                        <button class="profile-btn" onclick="switchProfileView('admin-products')">Ürün & Fiyat Yönetimi</button>
+                        <button class="profile-btn" onclick="switchProfileView('admin-products')">Ürün Yönetimi</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-tickets')">Gelen Biletler</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-keygen')">Lisans Üretici</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-keys')">Lisans Yönetimi</button>
-                        <button class="profile-btn" onclick="switchProfileView('admin-wheel-settings')">Çark Ayarları</button>
                     </div>
                 </div>
                 <div class="content-area">
                     
                     <div id="p-view-info" class="profile-view active">
-                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px; text-transform:uppercase;">Hesap Bilgileri</h2>
-                        <div class="input-group" style="max-width: 450px;">
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 25px; text-transform:uppercase;">Hesap Bilgileri</h2>
+                        <div class="input-group" style="max-width: 400px;">
                             <i class="fas fa-user"></i>
-                            <input type="text" id="prof-user" class="input-base" disabled>
+                            <input type="text" id="prof-user" class="input-base" style="padding-left:35px;" disabled>
                         </div>
-                        <div class="input-group" style="max-width: 450px;">
+                        <div class="input-group" style="max-width: 400px;">
                             <i class="fas fa-calendar-alt"></i>
-                            <input type="text" id="prof-created" class="input-base" disabled placeholder="Hesap Oluşturulma Tarihi">
+                            <input type="text" id="prof-created" class="input-base" style="padding-left:35px;" disabled placeholder="Hesap Oluşturulma Tarihi">
                         </div>
                     </div>
 
                     <div id="p-view-licenses" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px; text-transform:uppercase;">Lisanslarım</h2>
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 25px; text-transform:uppercase;">Lisanslarım</h2>
                         <table class="data-table">
-                            <thead><tr><th>Ürün Adı</th><th>Anahtar</th><th>Kalan Süre</th></tr></thead>
+                            <thead>
+                                <tr>
+                                    <th>Ürün Adı</th>
+                                    <th>Anahtar</th>
+                                    <th>Kalan Süre</th>
+                                    <th>İşlem (Loader / HWID)</th>
+                                </tr>
+                            </thead>
                             <tbody id="user-licenses-body">
-                                <tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kayıtlı bir lisansınız bulunmamaktadır.</td></tr>
+                                <tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Kayıtlı bir lisansınız bulunmamaktadır.</td></tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div id="p-view-user-tickets" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px; text-transform:uppercase;">Destek Taleplerim</h2>
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 25px; text-transform:uppercase;">Destek Taleplerim</h2>
                         <table class="data-table">
                             <thead><tr><th>Konu</th><th>Durum</th><th>İşlem</th></tr></thead>
                             <tbody id="user-tickets-list-body">
@@ -419,12 +1156,12 @@
                         </table>
                     </div>
 
-                    <!-- ADMIN GÖRÜNÜMLERİ -->
+                    <!-- === ADMIN GÖRÜNÜMLERİ === -->
                     <div id="p-view-admin-users" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px; text-transform:uppercase;">Kullanıcı & Çark Yönetimi</h2>
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 20px; text-transform:uppercase;">Kullanıcı Yönetimi</h2>
                         <div class="input-group">
                             <i class="fas fa-search"></i>
-                            <input type="text" id="user-search" class="search-bar" placeholder="Kullanıcı ara..." oninput="renderAdminUsers()">
+                            <input type="text" id="user-search" class="search-bar" style="padding-left:35px; margin-bottom:10px;" placeholder="Kullanıcı ara..." oninput="renderAdminUsers()">
                         </div>
                         <table class="data-table">
                             <thead><tr><th>Kullanıcı</th><th>Rol</th><th>İşlemler</th></tr></thead>
@@ -432,8 +1169,18 @@
                         </table>
                     </div>
 
+                    <div id="p-view-admin-hwid" class="profile-view">
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 20px; text-transform:uppercase;">HWID Talepleri</h2>
+                        <table class="data-table">
+                            <thead><tr><th>Kullanıcı</th><th>Key</th><th>Ürün</th><th>İşlem</th></tr></thead>
+                            <tbody id="admin-hwid-body">
+                                <tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Talep yok.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <div id="p-view-admin-orders" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px; text-transform:uppercase;">Sipariş Geçmişi</h2>
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 20px; text-transform:uppercase;">Sipariş Geçmişi</h2>
                         <table class="data-table">
                             <thead><tr><th>Tarih</th><th>Alıcı E-Posta</th><th>Ürün</th><th>Tutar</th><th>Lisans Key</th></tr></thead>
                             <tbody id="admin-orders-body">
@@ -443,31 +1190,31 @@
                     </div>
 
                     <div id="p-view-admin-categories" class="profile-view">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 30px; align-items:center;">
-                            <h2 class="font-space" style="font-size: 2.2rem; text-transform:uppercase;">Kategoriler</h2>
-                            <button class="btn-submit" style="width: auto; padding: 12px 25px; margin-top:0;" onclick="openCategoryModal()"><i class="fas fa-plus"></i> Ekle</button>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px; align-items:center;">
+                            <h2 class="font-space" style="font-size: 1.6rem; text-transform:uppercase;">Kategoriler</h2>
+                            <button class="btn-submit" style="width: auto; padding: 8px 16px; margin-top:0;" onclick="openCategoryModal()"><i class="fas fa-plus"></i> Ekle</button>
                         </div>
                         <table class="data-table">
                             <thead><tr><th>Kategori Adı</th><th>İşlem</th></tr></thead>
                             <tbody id="admin-categories-body">
-                                <tr><td colspan="2" style="text-align: center; color: var(--text-secondary);">Kategoriler Yükleniyor...</td></tr>
+                                <tr><td colspan="2" style="text-align: center; color: var(--text-secondary);">Yükleniyor...</td></tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div id="p-view-admin-products" class="profile-view">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 30px; align-items:center;">
-                            <h2 class="font-space" style="font-size: 2.2rem; text-transform:uppercase;">Ürün & Fiyat Yönetimi</h2>
-                            <button class="btn-submit" style="width: auto; padding: 12px 25px; margin-top:0;" onclick="openAddProductModal()"><i class="fas fa-plus"></i> Yeni Ekle</button>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px; align-items:center;">
+                            <h2 class="font-space" style="font-size: 1.6rem; text-transform:uppercase;">Ürün Yönetimi</h2>
+                            <button class="btn-submit" style="width: auto; padding: 8px 16px; margin-top:0;" onclick="openAddProductModal()"><i class="fas fa-plus"></i> Ekle</button>
                         </div>
                         <table class="data-table">
-                            <thead><tr><th>Ürün Adı</th><th>Kategori</th><th>Lifetime Fiyat</th><th>İşlem</th></tr></thead>
+                            <thead><tr><th>Ürün</th><th>Kategori</th><th>LT Fiyat</th><th>İşlem</th></tr></thead>
                             <tbody id="admin-products-body"></tbody>
                         </table>
                     </div>
 
                     <div id="p-view-admin-tickets" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px; text-transform:uppercase;">Gelen Biletler</h2>
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 20px; text-transform:uppercase;">Gelen Biletler</h2>
                         <table class="data-table">
                             <thead><tr><th>Kullanıcı</th><th>Konu</th><th>Durum</th><th>İşlem</th></tr></thead>
                             <tbody id="admin-tickets-body"></tbody>
@@ -475,59 +1222,44 @@
                     </div>
 
                     <div id="p-view-admin-keygen" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 20px; text-transform:uppercase;">Lisans Üretici</h2>
-                        <p style="color: var(--text-secondary); margin-bottom: 30px;">Manuel olarak lisans anahtarı üretip kopyalayabilirsiniz.</p>
-                        <div class="form-box" style="padding: 30px; max-width: 700px;">
-                            <label style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:10px; display:block; text-transform:uppercase; letter-spacing:1px; font-weight:800;">Hedef Ürün</label>
-                            <select id="keygen-product" class="input-base" style="padding-left:20px; margin-bottom:25px;"></select>
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 20px; text-transform:uppercase;">Lisans Üretici</h2>
+                        <div class="form-box" style="padding: 25px; max-width: 600px;">
+                            <label style="color:var(--text-secondary); font-size:0.8rem; margin-bottom:8px; display:block;">Hedef Ürün</label>
+                            <select id="keygen-product" class="input-base" style="padding-left:15px; margin-bottom:15px;"></select>
 
-                            <div style="display:flex; gap:20px; margin-bottom: 25px;">
+                            <div style="display:flex; gap:15px; margin-bottom: 15px;">
                                 <div style="flex: 1;">
-                                    <label style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:10px; display:block; text-transform:uppercase; font-weight:800;">Süre</label>
-                                    <select id="keygen-duration" class="input-base" style="padding-left:20px; margin-bottom: 0;">
-                                        <option value="daily">Günlük</option>
-                                        <option value="monthly">Aylık</option>
+                                    <label style="color:var(--text-secondary); font-size:0.8rem; margin-bottom:8px; display:block;">Süre</label>
+                                    <select id="keygen-duration" class="input-base" style="padding-left:15px; margin-bottom: 0;">
+                                        <option value="daily">1 Gün</option>
+                                        <option value="weekly">1 Hafta</option>
+                                        <option value="monthly">1 Ay</option>
                                         <option value="lifetime">Sınırsız</option>
                                     </select>
                                 </div>
                                 <div style="flex: 1;">
-                                    <label style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:10px; display:block; text-transform:uppercase; font-weight:800;">Tip</label>
-                                    <select id="keygen-type" class="input-base" style="padding-left:20px; margin-bottom: 0;">
+                                    <label style="color:var(--text-secondary); font-size:0.8rem; margin-bottom:8px; display:block;">Tip</label>
+                                    <select id="keygen-type" class="input-base" style="padding-left:15px; margin-bottom: 0;">
                                         <option value="user">Standart</option>
                                         <option value="admin">Yönetici</option>
                                     </select>
                                 </div>
                                 <div style="flex: 1;">
-                                    <label style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:10px; display:block; text-transform:uppercase; font-weight:800;">Adet</label>
-                                    <input type="number" id="keygen-count" class="input-base" value="1" min="1" style="padding-left:20px; margin-bottom: 0;">
+                                    <label style="color:var(--text-secondary); font-size:0.8rem; margin-bottom:8px; display:block;">Adet</label>
+                                    <input type="number" id="keygen-count" class="input-base" value="1" min="1" style="padding-left:15px; margin-bottom: 0;">
                                 </div>
                             </div>
-                            <button class="btn-submit" onclick="generateAdminKeys()">Anahtarları Üret</button>
-                            <textarea id="keygen-result" class="input-base" style="margin-top:25px; padding-left:20px; min-height: 120px; display:none;" readonly></textarea>
+                            <button class="btn-submit" onclick="generateAdminKeys()">Üret</button>
+                            <textarea id="keygen-result" class="input-base" style="margin-top:15px; padding-left:15px; min-height: 80px; display:none;" readonly></textarea>
                         </div>
                     </div>
 
                     <div id="p-view-admin-keys" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px; text-transform:uppercase;">Lisans Yönetimi</h2>
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 20px; text-transform:uppercase;">Lisans Yönetimi</h2>
                         <table class="data-table">
-                            <thead><tr><th>Anahtar (Key)</th><th>Ürün</th><th>Kalan Süre</th><th>Kullanıcı</th><th>İşlem</th></tr></thead>
+                            <thead><tr><th>Key</th><th>Ürün</th><th>Kalan Süre</th><th>Kullanıcı</th><th>İşlem</th></tr></thead>
                             <tbody id="admin-keys-body"></tbody>
                         </table>
-                    </div>
-
-                    <!-- ÇARK AYARLARI -->
-                    <div id="p-view-admin-wheel-settings" class="profile-view">
-                        <h2 class="font-space" style="font-size: 2.2rem; margin-bottom: 30px; text-transform:uppercase;">Çark Oran Ayarları</h2>
-                        <div class="form-box" style="max-width: 600px;">
-                            <div style="background: rgba(0,240,255,0.05); border: 1px solid var(--border-light); padding:20px; border-radius:12px; margin-bottom:20px;">
-                                <p style="color:#fff; font-size:0.9rem; line-height: 1.6; margin:0;">
-                                    Öğeleri ve çıkma şanslarını (yüzde) girin. Örnek Format:<br>
-                                    <span style="color:var(--accent); font-weight:bold; font-family:monospace; font-size:1.1rem; display:block; margin-top:10px;">Boş:50, 1 Gün CS2:20, %50 İndirim:25, VIP Lisans:5</span>
-                                </p>
-                            </div>
-                            <textarea id="admin-wheel-items" class="input-base" style="min-height: 150px; margin-bottom:20px; padding-left:20px; font-family:monospace; font-size:1.1rem;" placeholder="Boş:50, VIP:10..."></textarea>
-                            <button class="btn-submit" onclick="saveWheelSettings()">Ayarları Kaydet ve Çarkı Güncelle</button>
-                        </div>
                     </div>
 
                 </div>
@@ -535,62 +1267,66 @@
         </div>
     </main>
 
-    <!-- MODALLAR -->
+    <!-- === MODALLAR (AÇILIR PENCERELER) === -->
+
     <div id="auth-modal" class="modal-overlay">
         <div class="modal-box">
             <i class="fas fa-times close-modal" onclick="closeModal('auth-modal')"></i>
-            <h2 id="modal-title" class="font-space" style="font-size: 2rem; margin-bottom: 30px; text-transform:uppercase;">Giriş Yap</h2>
+            <h2 id="modal-title" class="font-space" style="font-size: 1.6rem; margin-bottom: 20px;">Giriş Yap</h2>
             <div class="input-group">
                 <i class="fas fa-user"></i>
-                <input type="text" id="username" class="input-base" placeholder="Kullanıcı Adı" autocomplete="off">
+                <input type="text" id="username" class="input-base" style="padding-left:35px;" placeholder="Kullanıcı Adı" autocomplete="off">
             </div>
             <div class="input-group">
                 <i class="fas fa-lock"></i>
-                <input type="password" id="password" class="input-base" placeholder="Şifre" onkeypress="if(event.key === 'Enter') handleAuth()">
+                <input type="password" id="password" class="input-base" style="padding-left:35px;" placeholder="Şifre" onkeypress="if(event.key === 'Enter') handleAuth()">
             </div>
             <button class="btn-submit" onclick="handleAuth()">Onayla</button>
-            <div style="text-align: center; margin-top: 25px; color: var(--text-secondary); cursor:pointer; font-weight: 800; font-size:0.95rem; text-transform:uppercase; letter-spacing:1px;" onclick="toggleAuthMode()" id="auth-switch">Kayıt Ol</div>
+            <div style="text-align: center; margin-top: 15px; color: var(--text-secondary); cursor:pointer; font-size:0.85rem;" onclick="toggleAuthMode()" id="auth-switch">Kayıt Ol</div>
         </div>
     </div>
 
     <div id="category-modal" class="modal-overlay">
-        <div class="modal-box" style="width: 400px;">
+        <div class="modal-box" style="width: 350px;">
             <i class="fas fa-times close-modal" onclick="closeModal('category-modal')"></i>
-            <h2 class="font-space" id="cat-modal-title" style="margin-bottom: 25px; text-transform:uppercase;">Kategori Ekle</h2>
-            <input type="text" id="cat-name" class="input-base" style="padding-left:20px; margin-bottom:20px;" placeholder="Kategori Adı (Örn: Valorant)">
+            <h2 class="font-space" id="cat-modal-title" style="margin-bottom: 20px;">Kategori Ekle</h2>
+            <input type="text" id="cat-name" class="input-base" style="padding-left:15px; margin-bottom:15px;" placeholder="Ad (Örn: Valorant)">
             <button class="btn-submit" onclick="saveCategory()">Kaydet</button>
         </div>
     </div>
 
-    <!-- 🔥 DETAYLI ÜRÜN MODALI (Günlük, Haftalık, Aylık, Lifetime Link ve Fiyatları) 🔥 -->
+    <!-- DETAYLI ÜRÜN MODALI (Günlük, Haftalık, Aylık, Lifetime Fiyat/Link ve Loader Linki) -->
     <div id="product-modal" class="modal-overlay">
         <div class="modal-box" style="width: 550px;">
             <i class="fas fa-times close-modal" onclick="closeModal('product-modal')"></i>
-            <h2 class="font-space" id="prod-modal-title" style="margin-bottom: 25px; text-transform:uppercase;">Yeni Ürün Ekle</h2>
+            <h2 class="font-space" id="prod-modal-title" style="margin-bottom: 20px;">Yeni Ürün</h2>
             
-            <input type="text" id="prod-name" class="input-base" style="padding-left:20px; margin-bottom:15px;" placeholder="Ürün Adı">
-            <select id="prod-category" class="input-base" style="padding-left:20px; margin-bottom:15px;"></select>
-            <input type="text" id="prod-img" class="input-base" style="padding-left:20px; margin-bottom:15px;" placeholder="Kalıcı Fotoğraf URL (Örn: Imgur)">
-            <textarea id="prod-desc" class="input-base" style="padding-left:20px; min-height: 80px; margin-bottom:20px;" placeholder="Açıklama..."></textarea>
+            <input type="text" id="prod-name" class="input-base" style="padding-left:15px; margin-bottom:10px;" placeholder="Ürün Adı">
+            <select id="prod-category" class="input-base" style="padding-left:15px; margin-bottom:10px;"></select>
             
-            <div style="background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-bottom:20px;">
-                <label style="color:var(--accent); font-weight:800; font-size:0.85rem; margin-bottom:15px; display:block; text-transform:uppercase; letter-spacing:1px;">Varyasyon Fiyat ve Linkleri</label>
+            <input type="text" id="prod-img" class="input-base" style="padding-left:15px; margin-bottom:10px;" placeholder="Görsel URL (Imgur vb.)">
+            <input type="text" id="prod-download" class="input-base" style="padding-left:15px; margin-bottom:10px; border-color:var(--accent);" placeholder="Loader İndirme Linki (İsteğe Bağlı)">
+            
+            <textarea id="prod-desc" class="input-base" style="padding-left:15px; min-height: 70px; margin-bottom:15px;" placeholder="Ürün Açıklaması..."></textarea>
+            
+            <div style="background: rgba(0,0,0,0.5); padding:15px; border-radius:8px; margin-bottom:15px; border:1px solid #222;">
+                <label style="color:var(--accent); font-size:0.75rem; margin-bottom:10px; display:block; text-transform:uppercase;">Varyasyon Fiyatları ve Linkleri</label>
                 
-                <div style="display:flex; gap:10px; margin-bottom:10px;">
-                    <input type="number" id="prod-price-1d" class="input-base" style="padding:12px 20px; font-size:0.85rem;" placeholder="1 Gün Fiyat">
-                    <input type="text" id="prod-link-1d" class="input-base" style="padding:12px 20px; font-size:0.85rem;" placeholder="1 Gün Shopier Linki">
+                <div style="display:flex; gap:10px; margin-bottom:8px;">
+                    <input type="number" id="prod-price-1d" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Gün Fiyat">
+                    <input type="text" id="prod-link-1d" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Gün Shopier Link">
                 </div>
-                <div style="display:flex; gap:10px; margin-bottom:10px;">
-                    <input type="number" id="prod-price-1w" class="input-base" style="padding:12px 20px; font-size:0.85rem;" placeholder="1 Hafta Fiyat">
-                    <input type="text" id="prod-link-1w" class="input-base" style="padding:12px 20px; font-size:0.85rem;" placeholder="1 Hafta Shopier Linki">
+                <div style="display:flex; gap:10px; margin-bottom:8px;">
+                    <input type="number" id="prod-price-1w" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Hafta Fiyat">
+                    <input type="text" id="prod-link-1w" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Hafta Shopier Link">
                 </div>
-                <div style="display:flex; gap:10px; margin-bottom:10px;">
-                    <input type="number" id="prod-price-1m" class="input-base" style="padding:12px 20px; font-size:0.85rem;" placeholder="1 Ay Fiyat">
-                    <input type="text" id="prod-link-1m" class="input-base" style="padding:12px 20px; font-size:0.85rem;" placeholder="1 Ay Shopier Linki">
+                <div style="display:flex; gap:10px; margin-bottom:8px;">
+                    <input type="number" id="prod-price-1m" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Ay Fiyat">
+                    <input type="text" id="prod-link-1m" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Ay Shopier Link">
                 </div>
                 <div style="display:flex; gap:10px;">
-                    <input type="number" id="prod-price-lt" class="input-base" style="padding:12px 20px; font-size:0.85rem;" placeholder="Lifetime Fiyat">
-                    <input type="text" id="prod-link-lt" class="input-base" style="padding:12px 20px; font-size:0.85rem;" placeholder="Lifetime Shopier Linki">
+                    <input type="number" id="prod-price-lt" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="Sınırsız Fiyat">
+                    <input type="text" id="prod-link-lt" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="Sınırsız Shopier Link">
                 </div>
             </div>
 
@@ -599,104 +1335,97 @@
     </div>
 
     <div id="extend-modal" class="modal-overlay">
-        <div class="modal-box">
+        <div class="modal-box" style="width:350px;">
             <i class="fas fa-times close-modal" onclick="closeModal('extend-modal')"></i>
-            <h2 class="font-space" style="margin-bottom: 20px; text-transform:uppercase;">Süre Uzat</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size:0.95rem; font-family:monospace;" id="extend-key-display"></p>
-            <select id="extend-duration" class="input-base" style="padding-left:20px; margin-bottom:15px;">
+            <h2 class="font-space" style="margin-bottom: 15px;">Süre Uzat</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 15px; font-size:0.8rem;" id="extend-key-display"></p>
+            <select id="extend-duration" class="input-base" style="padding-left:15px; margin-bottom:15px;">
                 <option value="1">1 Gün Ekle</option>
                 <option value="7">7 Gün Ekle</option>
                 <option value="30">30 Gün Ekle</option>
                 <option value="lifetime">Sınırsız Yap</option>
             </select>
-            <button class="btn-submit" onclick="saveExtension()">Süreyi Uzat</button>
+            <button class="btn-submit" onclick="saveExtension()">Uzat</button>
         </div>
     </div>
 
     <div id="perm-modal" class="modal-overlay">
-        <div class="modal-box">
+        <div class="modal-box" style="width:350px;">
             <i class="fas fa-times close-modal" onclick="closeModal('perm-modal')"></i>
-            <h2 class="font-space" style="margin-bottom: 20px; text-transform:uppercase;">Yetki & Çark Yönetimi</h2>
-            <p style="color: var(--accent-light); margin-bottom: 20px; font-size:1.1rem; font-weight:800;" id="perm-username-display"></p>
-            
-            <label style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:10px; display:block; text-transform:uppercase; font-weight:800;">Rol Belirle</label>
-            <select id="perm-role" class="input-base" style="padding-left:20px; margin-bottom:20px;">
+            <h2 class="font-space" style="margin-bottom: 15px;">Yetki Yönetimi</h2>
+            <p style="color: #fff; margin-bottom: 15px; font-size:0.9rem;" id="perm-username-display"></p>
+            <select id="perm-role" class="input-base" style="padding-left:15px; margin-bottom:15px;">
                 <option value="user">Standart Üye</option>
-                <option value="admin">Yönetici (Admin)</option>
+                <option value="admin">Yönetici</option>
             </select>
-            
-            <label style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:10px; display:block; text-transform:uppercase; font-weight:800;">Manuel Çark Hakkı Ekle</label>
-            <div style="display:flex; gap:10px; margin-bottom:25px;">
-                <input type="number" id="perm-spin-add" class="input-base" style="padding-left:20px; margin-bottom:0;" placeholder="Adet (Örn: 1)">
-                <button class="btn-submit" style="width:auto; padding: 15px 25px; margin-top:0;" onclick="addManualSpinRight()"><i class="fas fa-plus"></i></button>
-            </div>
-
-            <button class="btn-submit" onclick="savePermission()">Rolü Güncelle</button>
+            <button class="btn-submit" onclick="savePermission()">Güncelle</button>
         </div>
     </div>
 
     <div id="ban-modal" class="modal-overlay">
-        <div class="modal-box" style="text-align: center;">
-            <i class="fas fa-exclamation-triangle" style="font-size: 3.5rem; color: var(--danger); margin-bottom: 25px; text-shadow: 0 0 20px rgba(255,0,85,0.4);"></i>
-            <h2 class="font-space" style="margin-bottom: 15px; text-transform:uppercase;">Kullanıcıyı Yasakla</h2>
-            <p id="ban-user-text" style="color: var(--text-secondary); margin-bottom: 30px; font-size:1rem; line-height: 1.6;"></p>
-            <div style="display: flex; gap: 15px;">
-                <button class="btn-submit" style="background: transparent; border: 1px solid var(--border-light); color: #fff; box-shadow:none;" onclick="closeModal('ban-modal')">İptal</button>
-                <button class="btn-submit" style="background: var(--danger); color: #fff; box-shadow: 0 0 20px rgba(255,0,85,0.4);" onclick="executeBan()">Yasakla</button>
+        <div class="modal-box" style="text-align: center; width:350px;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 2.5rem; color: var(--danger); margin-bottom: 15px;"></i>
+            <h2 class="font-space" style="margin-bottom: 10px;">Yasakla</h2>
+            <p id="ban-user-text" style="color: var(--text-secondary); margin-bottom: 20px; font-size:0.85rem;"></p>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-submit" style="background: transparent; border: 1px solid #333; color: #fff;" onclick="closeModal('ban-modal')">İptal</button>
+                <button class="btn-submit" style="background: var(--danger); color: #fff;" onclick="executeBan()">Yasakla</button>
             </div>
         </div>
     </div>
 
+    <!-- LİSANS TANIMLAMA EKRANI GERİ GELDİ -->
     <div id="license-modal" class="modal-overlay">
-        <div class="modal-box">
+        <div class="modal-box" style="width:350px;">
             <i class="fas fa-times close-modal" onclick="closeModal('license-modal')"></i>
-            <h2 class="font-space" style="margin-bottom: 20px; text-transform:uppercase;">Lisans Tanımla</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size:1rem; font-weight:800;" id="license-username-display"></p>
-            <select id="license-product" class="input-base" style="padding-left:20px; margin-bottom:15px;"></select>
-            <select id="license-duration" class="input-base" style="padding-left:20px; margin-bottom:20px;">
-                <option value="daily">Günlük (24 Saat)</option>
-                <option value="weekly">Haftalık (7 Gün)</option>
-                <option value="monthly">Aylık (30 Gün)</option>
-                <option value="lifetime">Sınırsız (Ömür Boyu)</option>
+            <h2 class="font-space" style="margin-bottom: 15px;">Lisans Tanımla</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 15px; font-size:0.85rem;" id="license-username-display"></p>
+            <select id="license-product" class="input-base" style="padding-left:15px; margin-bottom:10px;"></select>
+            <select id="license-duration" class="input-base" style="padding-left:15px; margin-bottom:15px;">
+                <option value="daily">1 Gün</option>
+                <option value="weekly">1 Hafta</option>
+                <option value="monthly">1 Ay</option>
+                <option value="lifetime">Sınırsız</option>
             </select>
             <button class="btn-submit" onclick="assignLicenseToUser()">Lisansı Üret ve Ver</button>
         </div>
     </div>
 
     <div id="ticket-modal" class="modal-overlay">
-        <div class="modal-box" style="width: 550px;">
+        <div class="modal-box" style="width: 450px;">
             <i class="fas fa-times close-modal" onclick="closeModal('ticket-modal')"></i>
-            <h2 class="font-space" style="margin-bottom: 20px; text-transform:uppercase;">Bilet İncele</h2>
-            <p id="t-user" style="color: var(--accent); margin-bottom: 20px; font-weight:800; font-size: 1rem;"></p>
-            <div style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-bottom: 20px;">
-                <h4 id="t-subj" style="color: #fff; margin-bottom: 10px; font-size: 1.1rem;"></h4>
-                <p id="t-msg" style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;"></p>
+            <h2 class="font-space" style="margin-bottom: 15px;">Bilet İncele</h2>
+            <p id="t-user" style="color: #fff; margin-bottom: 10px; font-size: 0.85rem;"></p>
+            <div style="background: #0f0f0f; padding: 15px; border-radius: 6px; border: 1px solid #222; margin-bottom: 15px;">
+                <h4 id="t-subj" style="color: #fff; margin-bottom: 5px; font-size: 0.9rem;"></h4>
+                <p id="t-msg" style="color: var(--text-secondary); font-size: 0.85rem;"></p>
             </div>
-            <textarea id="admin-ticket-reply" class="input-base" style="padding-left:20px; min-height: 120px; margin-bottom:15px;" placeholder="Yanıtınızı buraya yazın..."></textarea>
+            <textarea id="admin-ticket-reply" class="input-base" style="padding-left:15px; min-height: 80px; margin-bottom:10px;" placeholder="Yanıtınız..."></textarea>
             <button class="btn-submit" onclick="resolveTicket()">Yanıtla ve Kapat</button>
         </div>
     </div>
 
     <div id="user-ticket-modal" class="modal-overlay">
-        <div class="modal-box" style="width: 550px;">
+        <div class="modal-box" style="width: 450px;">
             <i class="fas fa-times close-modal" onclick="closeModal('user-ticket-modal')"></i>
-            <h2 class="font-space" style="margin-bottom: 25px; text-transform:uppercase;">Talebiniz & Yanıt</h2>
-            <div style="background: rgba(0,0,0,0.4); padding: 25px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-bottom: 20px;">
-                <span style="color: var(--text-muted); font-size: 0.85rem; text-transform:uppercase; letter-spacing:1px; font-weight:800;">Sizin Mesajınız:</span>
-                <p id="ut-msg" style="color: #fff; font-size: 1rem; margin-top: 8px; line-height: 1.6;"></p>
+            <h2 class="font-space" style="margin-bottom: 15px;">Talebiniz & Yanıt</h2>
+            <div style="background: #0f0f0f; padding: 15px; border-radius: 6px; border: 1px solid #222; margin-bottom: 10px;">
+                <span style="color: var(--text-muted); font-size: 0.75rem;">Mesajınız:</span>
+                <p id="ut-msg" style="color: #fff; font-size: 0.85rem; margin-top: 5px;"></p>
             </div>
-            <div style="background: rgba(0, 240, 255, 0.05); padding: 25px; border-radius: var(--radius-sm); border: 1px solid var(--accent); box-shadow: inset 0 0 20px rgba(0,240,255,0.05);">
-                <span style="color: var(--accent); font-size: 0.85rem; font-weight: 800; text-transform:uppercase; letter-spacing:1px;"><i class="fas fa-headset"></i> Yönetici Yanıtı:</span>
-                <p id="ut-reply" style="color: #fff; font-size: 1rem; margin-top: 8px; line-height: 1.6;"></p>
+            <div style="background: rgba(176,38,255,0.05); padding: 15px; border-radius: 6px; border: 1px solid var(--border-light);">
+                <span style="color: var(--accent); font-size: 0.75rem;"><i class="fas fa-headset"></i> Yönetici Yanıtı:</span>
+                <p id="ut-reply" style="color: #fff; font-size: 0.85rem; margin-top: 5px;"></p>
             </div>
         </div>
     </div>
 
     <div id="toast">
-        <i id="toast-icon" class="fas fa-check-circle" style="color: #000; font-size: 1.3rem;"></i> 
+        <i id="toast-icon" class="fas fa-check-circle" style="color: #000; font-size: 1rem;"></i> 
         <span id="toast-msg"></span>
     </div>
 
+    <!-- === JAVASCRIPT KODLARI (TÜM FONKSİYONLAR AÇIK VE EKSİKSİZ) === -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyAjbkOwzOb4XTuhlCqex4bC-xD-pNi9HBI",
@@ -710,7 +1439,7 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        let currentUser = null; 
+        let currentUser = null;
         let currentModalMode = 'login';
         
         let allCategories = [];
@@ -719,112 +1448,141 @@
         let allTickets = [];
         let allLicenses = [];
         
-        let activeAdminUserId = null; 
+        let activeAdminUserId = null;
+        let activeAdminUsername = null;
+        let activeAdminUserEmail = null;
+        let userToBan = null;
         let activeTicketId = null; 
         let activeEditProductId = null;
         let activeEditCategoryId = null; 
         let activeExtendKeyId = null;
         let selectedStoreCategory = 'all'; 
 
-        // ÇARK SİSTEMİ DEĞİŞKENLERİ
-        let wheelSettings = [{name: "Boş", chance: 50}, {name: "VIP", chance: 50}]; 
-        let isSpinning = false;
-        let userSpinRights = 0;
-        let userLastSpinDate = null;
-        const SPIN_COOLDOWN_MS = 3 * 24 * 60 * 60 * 1000; 
-
+        // Kalan Süre Hesaplama
         function formatRemainingTime(expiresAtObj, type) {
-            if (type === 'lifetime' || !expiresAtObj) return '<span style="color:var(--accent); font-weight:800;">SINIRSIZ</span>';
-            const diff = (expiresAtObj.toDate ? expiresAtObj.toDate().getTime() : new Date(expiresAtObj).getTime()) - new Date().getTime();
+            if (type === 'lifetime' || !expiresAtObj) {
+                return '<span style="color:var(--accent); font-weight:700;">Sınırsız</span>';
+            }
             
-            if (diff <= 0) return '<span style="color:var(--danger); font-weight:800;">SÜRESİ DOLDU</span>';
+            const diff = (expiresAtObj.toDate ? expiresAtObj.toDate().getTime() : new Date(expiresAtObj).getTime()) - new Date().getTime();
+            if (diff <= 0) {
+                return '<span style="color:var(--danger); font-weight:700;">Süresi Doldu</span>';
+            }
+            
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            return `<span style="color:#fff; font-weight:800;">${days} Gün ${hours} Saat</span>`;
+            return `<span style="color:#fff; font-weight:700;">${days} Gün ${hours} Saat</span>`;
         }
 
+        // Tab Değiştirme
         function switchTab(tabId) {
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            const targetBtn = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
-            if(targetBtn) targetBtn.classList.add('active');
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const tb = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
+            if(tb) {
+                tb.classList.add('active');
+            }
+            
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
             document.getElementById('tab-' + tabId).classList.add('active');
             document.getElementById('profile-dropdown').style.display = 'none'; 
-            if(tabId === 'wheel') drawWheel();
         }
 
-        function openProfile(view) {
-            switchTab('profile');
-            if(view === 'admin') {
-                document.getElementById('admin-sidebar-links').style.display = 'block';
-                switchProfileView('admin-users');
+        // Profil İçi Geçişler
+        function openProfile(view) { 
+            switchTab('profile'); 
+            if(view === 'admin') { 
+                document.getElementById('admin-sidebar-links').style.display = 'block'; 
+                switchProfileView('admin-users'); 
             } else {
-                switchProfileView(view);
+                switchProfileView(view); 
             }
         }
 
-        function switchProfileView(viewId) {
-            document.querySelectorAll('.profile-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            document.querySelectorAll('.profile-view').forEach(view => view.classList.remove('active'));
-            document.getElementById('p-view-' + viewId).classList.add('active');
+        function switchProfileView(viewId) { 
+            document.querySelectorAll('.profile-btn').forEach(btn => {
+                btn.classList.remove('active');
+            }); 
+            if(event && event.target) {
+                event.target.classList.add('active'); 
+            }
+            
+            document.querySelectorAll('.profile-view').forEach(view => {
+                view.classList.remove('active');
+            }); 
+            document.getElementById('p-view-' + viewId).classList.add('active'); 
         }
 
-        function toggleDropdown() {
-            const menu = document.getElementById('profile-dropdown');
-            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        // Menüler ve Modallar
+        function toggleDropdown() { 
+            const m = document.getElementById('profile-dropdown'); 
+            m.style.display = m.style.display === 'flex' ? 'none' : 'flex'; 
         }
 
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function closeModal(id) { 
+            document.getElementById(id).style.display = 'none'; 
+        }
         
         function openModal(mode) {
             currentModalMode = mode;
             document.getElementById('auth-modal').style.display = 'flex';
-            if(mode === 'login') {
-                document.getElementById('modal-title').innerText = 'Giriş Yap';
-                document.getElementById('auth-switch').innerText = 'Kayıt Ol';
-            } else {
-                document.getElementById('modal-title').innerText = 'Kayıt Ol';
-                document.getElementById('auth-switch').innerText = 'Zaten hesabın var mı? Giriş Yap';
-            }
+            document.getElementById('modal-title').innerText = mode === 'login' ? 'Giriş Yap' : 'Kayıt Ol';
+            document.getElementById('auth-switch').innerText = mode === 'login' ? 'Kayıt Ol' : 'Giriş Yap';
         }
 
-        function toggleAuthMode() { openModal(currentModalMode === 'login' ? 'register' : 'login'); }
-
-        function showToast(msg, isSuccess=true) {
-            document.getElementById('toast-msg').innerText = msg;
-            const icon = document.getElementById('toast-icon');
-            const toast = document.getElementById('toast');
-            if(isSuccess) { icon.className = "fas fa-check-circle"; icon.style.color = "#000"; } 
-            else { icon.className = "fas fa-info-circle"; icon.style.color = "#000"; }
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 4000);
+        function toggleAuthMode() { 
+            openModal(currentModalMode === 'login' ? 'register' : 'login'); 
         }
 
+        function showToast(msg, isSuccess=true) { 
+            document.getElementById('toast-msg').innerText = msg; 
+            document.getElementById('toast-icon').className = isSuccess ? "fas fa-check-circle" : "fas fa-info-circle"; 
+            const t = document.getElementById('toast'); 
+            t.classList.add('show'); 
+            setTimeout(() => {
+                t.classList.remove('show');
+            }, 4000); 
+        }
+
+        // ================= AUTH İŞLEMLERİ =================
         function handleAuth() {
             const uname = document.getElementById('username').value.trim().toLowerCase();
             const pass = document.getElementById('password').value;
-            if(!uname || !pass) return alert("Boş alan bırakmayın.");
-
+            
+            if(!uname || !pass) {
+                return alert("Boş alan bırakmayın.");
+            }
+            
             const fakeEmail = uname + "@sensi.local";
 
             if(uname === 'omer13ds' && pass === 'oyaali12') {
                 loginSuccess('omer13ds', true, fakeEmail, new Date().toISOString());
-                auth.signInWithEmailAndPassword(fakeEmail, pass).catch(err => {
-                    auth.createUserWithEmailAndPassword(fakeEmail, pass).then(cred => {
-                        db.collection('users').doc(cred.user.uid).set({ username: uname, email: fakeEmail, role: 'admin', extraSpins: 0 });
+                auth.signInWithEmailAndPassword(fakeEmail, pass).catch(() => {
+                    auth.createUserWithEmailAndPassword(fakeEmail, pass).then(c => {
+                        db.collection('users').doc(c.user.uid).set({ 
+                            username: uname, 
+                            email: fakeEmail, 
+                            role: 'admin' 
+                        });
                     });
                 });
                 return;
             }
-
+            
             if(currentModalMode === 'login') {
-                auth.signInWithEmailAndPassword(fakeEmail, pass).catch(err => alert("Giriş başarısız."));
+                auth.signInWithEmailAndPassword(fakeEmail, pass).catch(() => alert("Giriş başarısız."));
             } else {
-                auth.createUserWithEmailAndPassword(fakeEmail, pass).then(cred => {
-                    db.collection('users').doc(cred.user.uid).set({ username: uname, email: fakeEmail, role: 'user', extraSpins: 0 });
-                    alert("Kayıt başarılı!");
-                }).catch(err => alert("Hata: " + err.message));
+                auth.createUserWithEmailAndPassword(fakeEmail, pass).then(c => { 
+                    db.collection('users').doc(c.user.uid).set({ 
+                        username: uname, 
+                        email: fakeEmail, 
+                        role: 'user' 
+                    }); 
+                    alert("Kayıt başarılı!"); 
+                }).catch(e => alert("Hata: " + e.message));
             }
         }
 
@@ -832,20 +1590,12 @@
             if(user) {
                 db.collection('users').doc(user.uid).onSnapshot(doc => {
                     if(doc.exists) {
-                        const data = doc.data();
-                        if(data.role === 'banned') return auth.signOut();
-                        
-                        userLastSpinDate = data.lastSpinDate ? data.lastSpinDate.toDate().getTime() : 0;
-                        let extraSpins = data.extraSpins || 0;
-                        let hasFreeSpin = (Date.now() - userLastSpinDate) >= SPIN_COOLDOWN_MS;
-                        
-                        userSpinRights = extraSpins + (hasFreeSpin ? 1 : 0);
-                        let spinCountEl = document.getElementById('user-spin-count');
-                        if(spinCountEl) spinCountEl.innerText = userSpinRights;
-
+                        const d = doc.data();
+                        if(d.role === 'banned') {
+                            return auth.signOut();
+                        }
                         if(!currentUser) {
-                            const creationTime = user.metadata.creationTime || new Date().toISOString();
-                            loginSuccess(data.username, data.role === 'admin', user.email, creationTime);
+                            loginSuccess(d.username, d.role === 'admin', user.email, user.metadata.creationTime);
                         }
                     }
                 });
@@ -853,205 +1603,247 @@
                 currentUser = null;
                 document.getElementById('guest-menu').style.display = 'flex';
                 document.getElementById('user-menu').style.display = 'none';
-                document.getElementById('user-licenses-body').innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kayıtlı bir lisansınız bulunmamaktadır.</td></tr>`;
+                document.getElementById('user-licenses-body').innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Kayıtlı lisansınız yok.</td></tr>`;
             }
         });
 
         function loginSuccess(username, isUserAdmin, uEmail, cTime) {
-            currentUser = { username: username, role: isUserAdmin ? 'admin' : 'user', uid: auth.currentUser ? auth.currentUser.uid : null };
+            currentUser = { 
+                username: username, 
+                role: isUserAdmin ? 'admin' : 'user', 
+                email: uEmail, 
+                uid: auth.currentUser ? auth.currentUser.uid : null 
+            };
+            
             document.getElementById('prof-user').value = username;
             document.getElementById('profile-initial').innerHTML = username.charAt(0).toUpperCase();
-            document.getElementById('guest-menu').style.display = 'none';
+            document.getElementById('prof-created').value = new Date(cTime).toLocaleDateString('tr-TR');
+            
+            document.getElementById('guest-menu').style.display = 'none'; 
             document.getElementById('user-menu').style.display = 'flex';
             
-            if(isUserAdmin) {
-                document.getElementById('admin-btn').style.display = 'flex';
-                document.getElementById('admin-sidebar-links').style.display = 'block';
-            } else {
-                document.getElementById('admin-btn').style.display = 'none';
-                document.getElementById('admin-sidebar-links').style.display = 'none';
+            if(isUserAdmin) { 
+                document.getElementById('admin-btn').style.display = 'flex'; 
+                document.getElementById('admin-sidebar-links').style.display = 'block'; 
+            } else { 
+                document.getElementById('admin-btn').style.display = 'none'; 
+                document.getElementById('admin-sidebar-links').style.display = 'none'; 
             }
             
             closeModal('auth-modal');
-            loadUserLicenses();
+            loadUserLicenses(); 
             loadUserTickets();
         }
 
-        function logoutUser() {
-            auth.signOut().then(() => { switchTab('home'); document.getElementById('profile-dropdown').style.display = 'none'; });
+        function logoutUser() { 
+            auth.signOut().then(() => { 
+                switchTab('home'); 
+                document.getElementById('profile-dropdown').style.display = 'none'; 
+            }); 
         }
-
 
         // ================= KATEGORİ SİSTEMİ =================
-        db.collection("categories").onSnapshot(snapshot => {
-            allCategories = [];
-            snapshot.forEach(doc => allCategories.push({ id: doc.id, ...doc.data() }));
-            renderAdminCategories();
-            renderStoreFilterBar();
-            populateCategorySelect();
-            renderStoreProducts();
+        db.collection("categories").onSnapshot(snap => { 
+            allCategories = []; 
+            snap.forEach(doc => allCategories.push({ id: doc.id, ...doc.data() })); 
+            renderAdminCategories(); 
+            renderStoreFilterBar(); 
+            populateCategorySelect(); 
+            renderStoreProducts(); 
         });
 
-        function renderAdminCategories() {
-            const tbody = document.getElementById('admin-categories-body');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            if(allCategories.length === 0) return tbody.innerHTML = `<tr><td colspan="2" style="text-align: center; color: var(--text-secondary);">Kategori yok.</td></tr>`;
-            allCategories.forEach(cat => {
-                tbody.innerHTML += `<tr><td style="font-weight:800; font-size:1rem; text-transform:uppercase; letter-spacing:1px;">${cat.name}</td><td class="action-cell"><button class="btn-action-icon edit" onclick="openCategoryModal('${cat.id}')"><i class="fas fa-pen"></i></button><button class="btn-action-icon ban" onclick="deleteCategory('${cat.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
-            });
+        function renderAdminCategories() { 
+            const tb = document.getElementById('admin-categories-body'); 
+            if(!tb) return; 
+            tb.innerHTML = ''; 
+            
+            if(allCategories.length === 0) {
+                tb.innerHTML = `<tr><td colspan="2" style="text-align:center;">Yok</td></tr>`;
+                return;
+            }
+            
+            allCategories.forEach(c => { 
+                tb.innerHTML += `
+                    <tr>
+                        <td style="font-weight:600; font-size:0.85rem;">${c.name}</td>
+                        <td class="action-cell">
+                            <button class="btn-action-icon edit" onclick="openCategoryModal('${c.id}')"><i class="fas fa-pen"></i></button>
+                            <button class="btn-action-icon ban" onclick="deleteCategory('${c.id}')"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `; 
+            }); 
         }
 
-        function renderStoreFilterBar() {
-            const bar = document.getElementById('store-filter-bar');
-            if(!bar) return;
-            bar.innerHTML = `<button class="filter-btn ${selectedStoreCategory === 'all' ? 'active' : ''}" onclick="setCategoryFilter('all')">TÜMÜ</button>`;
-            allCategories.forEach(cat => { bar.innerHTML += `<button class="filter-btn ${selectedStoreCategory === cat.name ? 'active' : ''}" onclick="setCategoryFilter('${cat.name}')">${cat.name}</button>`; });
+        function renderStoreFilterBar() { 
+            const b = document.getElementById('store-filter-bar'); 
+            if(!b) return; 
+            
+            b.innerHTML = `<button class="filter-btn ${selectedStoreCategory === 'all' ? 'active' : ''}" onclick="setCategoryFilter('all')">TÜMÜ</button>`; 
+            
+            allCategories.forEach(c => { 
+                b.innerHTML += `<button class="filter-btn ${selectedStoreCategory === c.name ? 'active' : ''}" onclick="setCategoryFilter('${c.name}')">${c.name}</button>`; 
+            }); 
         }
 
-        function populateCategorySelect() {
-            const select = document.getElementById('prod-category');
-            if(!select) return;
-            select.innerHTML = '<option value="">Kategori Seçin</option>';
-            allCategories.forEach(cat => select.innerHTML += `<option value="${cat.name}">${cat.name}</option>`);
+        function populateCategorySelect() { 
+            const s = document.getElementById('prod-category'); 
+            if(!s) return; 
+            
+            s.innerHTML = '<option value="">Seçiniz</option>'; 
+            
+            allCategories.forEach(c => {
+                s.innerHTML += `<option value="${c.name}">${c.name}</option>`;
+            }); 
         }
 
-        function setCategoryFilter(catName) { selectedStoreCategory = catName; renderStoreFilterBar(); renderStoreProducts(); }
-        function openCategoryModal() { activeEditCategoryId = null; document.getElementById('cat-modal-title').innerText = "Kategori Ekle"; document.getElementById('cat-name').value = ''; document.getElementById('category-modal').style.display = 'flex'; }
-        function openEditCategoryModal(id) { const cat = allCategories.find(x => x.id === id); if(!cat) return; activeEditCategoryId = id; document.getElementById('cat-modal-title').innerText = "Kategori Düzenle"; document.getElementById('cat-name').value = cat.name; document.getElementById('category-modal').style.display = 'flex'; }
-        function saveCategory() { const name = document.getElementById('cat-name').value.trim(); if(!name) return; if(activeEditCategoryId) db.collection("categories").doc(activeEditCategoryId).update({ name: name }).then(() => { closeModal('category-modal'); showToast("Güncellendi."); }); else db.collection("categories").add({ name: name }).then(() => { closeModal('category-modal'); showToast("Eklendi."); }); }
-        function deleteCategory(id) { if(confirm("Emin misiniz?")) db.collection("categories").doc(id).delete(); }
+        function setCategoryFilter(n) { 
+            selectedStoreCategory = n; 
+            renderStoreFilterBar(); 
+            renderStoreProducts(); 
+        }
 
+        function openCategoryModal(id=null) { 
+            activeEditCategoryId = id; 
+            document.getElementById('cat-modal-title').innerText = id ? "Düzenle" : "Ekle"; 
+            document.getElementById('cat-name').value = id ? allCategories.find(x=>x.id===id).name : ''; 
+            document.getElementById('category-modal').style.display = 'flex'; 
+        }
+
+        function saveCategory() { 
+            const n = document.getElementById('cat-name').value.trim(); 
+            if(!n) return; 
+            
+            if(activeEditCategoryId) {
+                db.collection("categories").doc(activeEditCategoryId).update({ name: n }).then(() => closeModal('category-modal')); 
+            } else {
+                db.collection("categories").add({ name: n }).then(() => closeModal('category-modal')); 
+            }
+        }
+
+        function deleteCategory(id) { 
+            if(confirm("Emin misiniz?")) {
+                db.collection("categories").doc(id).delete(); 
+            }
+        }
 
         // ================= ÜRÜN SİSTEMİ (ÇOKLU VARYASYON & LÜKS KARTLAR) =================
-        db.collection("products").onSnapshot(snapshot => {
-            allProducts = [];
-            snapshot.forEach(doc => allProducts.push({ id: doc.id, isMaintenance: false, categoryName: '', ...doc.data() }));
-            renderStoreProducts();
-            renderAdminProducts();
-            populateKeygenSelects();
+        db.collection("products").onSnapshot(snap => { 
+            allProducts = []; 
+            snap.forEach(doc => allProducts.push({ id: doc.id, isMaintenance: false, categoryName: '', ...doc.data() })); 
+            renderStoreProducts(); 
+            renderAdminProducts(); 
+            populateKeygenSelects(); 
+            loadUserLicenses(); 
         });
+        
+        function setProductVariant(prodId, type) {
+            document.querySelectorAll(`.var-btn[data-prod="${prodId}"]`).forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.var-btn[data-prod="${prodId}"][data-dur="${type}"]`).classList.add('active');
 
-        // Ürün kartındaki fiyat/link değişim mantığı
-        function setProductVariant(prodId, durationType) {
-            // Butonları güncelle
-            document.querySelectorAll(`.var-btn[data-prod="${prodId}"]`).forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`.var-btn[data-prod="${prodId}"][data-dur="${durationType}"]`).classList.add('active');
+            const p = allProducts.find(x => x.id === prodId); 
+            if(!p) return;
+            
+            let pr = 0;
+            let lk = "#";
+            let nm = "Ömür Boyu";
+            
+            if(type === '1d') { 
+                pr = p.price1d || 0; 
+                nm = "1 Gün"; 
+                lk = p.link1d || '#'; 
+            } else if(type === '1w') { 
+                pr = p.price1w || 0; 
+                nm = "1 Hafta"; 
+                lk = p.link1w || '#'; 
+            } else if(type === '1m') { 
+                pr = p.price1m || 0; 
+                nm = "1 Ay"; 
+                lk = p.link1m || '#'; 
+            } else { 
+                pr = p.priceLt || 0; 
+                nm = "Sınırsız"; 
+                lk = p.linkLt || '#'; 
+            }
 
-            const prod = allProducts.find(p => p.id === prodId);
-            if(!prod) return;
-
-            let displayPrice = 0;
-            let displayDuration = "Ömür Boyu";
-            let targetLink = "#";
-
-            if(durationType === '1d') { displayPrice = prod.price1d || 0; displayDuration = "1 Günlük"; targetLink = prod.link1d || '#'; }
-            else if(durationType === '1w') { displayPrice = prod.price1w || 0; displayDuration = "1 Haftalık"; targetLink = prod.link1w || '#'; }
-            else if(durationType === '1m') { displayPrice = prod.price1m || 0; displayDuration = "1 Aylık"; targetLink = prod.link1m || '#'; }
-            else if(durationType === 'lt') { displayPrice = prod.priceLt || 0; displayDuration = "Ömür Boyu"; targetLink = prod.linkLt || '#'; }
-
-            // Animasyonlu fiyat değişimi için opacity hilesi
-            const priceWrapper = document.getElementById(`price-wrapper-${prodId}`);
-            priceWrapper.style.opacity = 0;
-            setTimeout(() => {
-                document.getElementById(`price-val-${prodId}`).innerText = `₺${displayPrice}`;
-                document.getElementById(`dur-val-${prodId}`).innerText = displayDuration;
-                priceWrapper.style.opacity = 1;
-            }, 200);
-
-            // Satın al butonunun linkini güncelle
-            const buyBtn = document.getElementById(`buy-btn-${prodId}`);
-            if(!prod.isMaintenance) {
-                buyBtn.setAttribute('onclick', `window.open('${targetLink}', '_blank')`);
+            document.getElementById(`price-val-${p.id}`).innerText = `₺${pr}`;
+            document.getElementById(`dur-val-${p.id}`).innerText = nm;
+            
+            if(!p.isMaintenance) {
+                document.getElementById(`buy-btn-${p.id}`).setAttribute('onclick', `window.open('${lk}', '_blank')`);
             }
         }
 
         function renderStoreProducts() {
-            const container = document.getElementById('store-products-container');
-            if(!container) return;
+            const c = document.getElementById('store-products-container'); 
+            if(!c) return;
             
-            let filteredProducts = selectedStoreCategory !== 'all' ? allProducts.filter(p => p.categoryName === selectedStoreCategory) : allProducts;
-
-            if(filteredProducts.length === 0) {
-                container.innerHTML = `<p style="text-align: center; color: var(--text-secondary); width: 100%; font-size:1.1rem; grid-column: 1 / -1; margin-top:30px;">Bu kategoride yazılım bulunmuyor.</p>`;
+            let filtered = selectedStoreCategory !== 'all' ? allProducts.filter(p => p.categoryName === selectedStoreCategory) : allProducts;
+            
+            if(filtered.length === 0) {
+                c.innerHTML = `<p style="text-align: center; color: var(--text-secondary); width: 100%; grid-column: 1 / -1;">Bu kategoride yazılım bulunmuyor.</p>`;
                 return;
             }
-            container.innerHTML = ''; 
             
-            filteredProducts.forEach((prod, index) => {
-                const div = document.createElement('div');
-                div.className = 'product-card';
-                div.style.animationDelay = `${index * 0.1}s`;
-
-                let mediaHtml = prod.imageUrl 
-                    ? `<img src="${prod.imageUrl}" onerror="this.outerHTML='<i class=\\'fas fa-image prod-image-placeholder\\'></i>'">` 
-                    : `<i class="fas fa-image prod-image-placeholder"></i>`;
+            c.innerHTML = ''; 
+            
+            filtered.forEach((p, i) => {
+                const div = document.createElement('div'); 
+                div.className = 'product-card'; 
+                div.style.animationDelay = `${i * 0.1}s`;
                 
-                // İlk render'da varsayılan olarak Lifetime (Ömür boyu) ayarlarını gösterelim. Eğer lt yoksa fiyatı 0 yazsın.
-                let defaultPrice = prod.priceLt || 0;
-                let defaultLink = prod.linkLt || '#';
-
-                let buyBtnHtml = prod.isMaintenance 
-                    ? `<button id="buy-btn-${prod.id}" class="btn-buy maintenance" disabled>GÜNCELLEMEDE</button>` 
-                    : `<button id="buy-btn-${prod.id}" class="btn-buy" onclick="window.open('${defaultLink}', '_blank')">SATIN AL</button>`;
-
-                let gameNameTag = prod.categoryName || (prod.name.split(' ')[0] || "YAZILIM");
-
+                let mHtml = p.imageUrl ? `<img src="${p.imageUrl}" onerror="this.outerHTML='<i class=\\'fas fa-image prod-image-placeholder\\'></i>'">` : `<i class="fas fa-image prod-image-placeholder"></i>`;
+                let bHtml = p.isMaintenance ? `<button id="buy-btn-${p.id}" class="btn-buy maintenance" disabled>GÜNCELLEMEDE</button>` : `<button id="buy-btn-${p.id}" class="btn-buy" onclick="window.open('${p.linkLt || '#'}', '_blank')">SATIN AL</button>`;
+                
                 div.innerHTML = `
                     <div class="card-top-row">
-                        <div class="game-pill">${gameNameTag}</div>
+                        <div class="game-pill">${p.categoryName || 'YAZILIM'}</div>
                         <div class="status-pill"><i class="fas fa-circle"></i> UNDETECTED</div>
                     </div>
-                    
-                    <div class="prod-image-wrapper">
-                        ${mediaHtml}
-                    </div>
-                    
+                    <div class="prod-image-wrapper">${mHtml}</div>
                     <div class="prod-info">
-                        <h3>${prod.name}</h3>
-                        <p>${prod.desc}</p>
+                        <h3>${p.name}</h3>
+                        <p>${p.desc}</p>
                     </div>
-
                     <div class="var-selector">
-                        <button class="var-btn" data-prod="${prod.id}" data-dur="1d" onclick="setProductVariant('${prod.id}', '1d')">1G</button>
-                        <button class="var-btn" data-prod="${prod.id}" data-dur="1w" onclick="setProductVariant('${prod.id}', '1w')">1H</button>
-                        <button class="var-btn" data-prod="${prod.id}" data-dur="1m" onclick="setProductVariant('${prod.id}', '1m')">1A</button>
-                        <button class="var-btn active" data-prod="${prod.id}" data-dur="lt" onclick="setProductVariant('${prod.id}', 'lt')">Sınırsız</button>
+                        <button class="var-btn" data-prod="${p.id}" data-dur="1d" onclick="setProductVariant('${p.id}', '1d')">1G</button>
+                        <button class="var-btn" data-prod="${p.id}" data-dur="1w" onclick="setProductVariant('${p.id}', '1w')">1H</button>
+                        <button class="var-btn" data-prod="${p.id}" data-dur="1m" onclick="setProductVariant('${p.id}', '1m')">1A</button>
+                        <button class="var-btn active" data-prod="${p.id}" data-dur="lt" onclick="setProductVariant('${p.id}', 'lt')">LT</button>
                     </div>
-
-                    <div class="price-row" id="price-wrapper-${prod.id}" style="transition: opacity 0.2s;">
-                        <h4 id="price-val-${prod.id}">₺${defaultPrice} <span>.00</span></h4>
-                        <span class="duration" id="dur-val-${prod.id}">Ömür Boyu</span>
+                    <div class="price-row">
+                        <h4 id="price-val-${p.id}">₺${p.priceLt || 0}</h4>
+                        <span id="dur-val-${p.id}">SINIRSIZ</span>
                     </div>
-                    
-                    ${buyBtnHtml}
+                    ${bHtml}
                 `;
-                container.appendChild(div);
+                c.appendChild(div);
             });
         }
 
         function renderAdminProducts() {
-            const tbody = document.getElementById('admin-products-body');
-            if(!tbody) return;
-            tbody.innerHTML = '';
+            const tb = document.getElementById('admin-products-body'); 
+            if(!tb) return; 
+            
+            tb.innerHTML = '';
+            
             if(allProducts.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Ürün bulunamadı.</td></tr>`;
+                tb.innerHTML = `<tr><td colspan="4" style="text-align: center;">Ürün yok.</td></tr>`;
                 return;
             }
+            
             allProducts.forEach(p => {
-                let maintIcon = p.isMaintenance ? 'fa-play' : 'fa-wrench';
-                let maintColor = p.isMaintenance ? 'var(--success)' : 'var(--accent)';
-                let currentPrice = p.priceLt || 0; // Admin panelde Lifetime fiyatını referans gösterelim
-                let catDisplay = p.categoryName || '<span style="color:var(--text-secondary)">Genel</span>';
-
-                tbody.innerHTML += `
+                let mCol = p.isMaintenance ? 'var(--danger)' : '#fff';
+                tb.innerHTML += `
                     <tr>
-                        <td style="font-weight:800; font-size:0.95rem; color:#fff;">${p.name} ${p.isMaintenance ? `<span style="color:var(--danger); font-size:0.75rem; margin-left:5px;">(BAKIMDA)</span>` : ''}</td>
-                        <td style="color:var(--text-secondary); font-size:0.85rem; text-transform:uppercase; font-weight:700;">${catDisplay}</td>
-                        <td style="color:var(--accent); font-weight:800;">${currentPrice}₺</td>
+                        <td style="font-weight:600; color:#fff;">${p.name}</td>
+                        <td style="color:var(--text-secondary);">${p.categoryName || '-'}</td>
+                        <td style="font-weight:600;">${p.priceLt||0}₺</td>
                         <td class="action-cell">
-                            <button class="btn-action-icon maint" style="color:${maintColor}; border-color:${maintColor};" onclick="toggleMaintenance('${p.id}', ${p.isMaintenance})"><i class="fas ${maintIcon}"></i></button>
-                            <button class="btn-action-icon edit" onclick="openEditProductModal('${p.id}')"><i class="fas fa-pen"></i></button>
+                            <button class="btn-action-icon" style="color:${mCol};" onclick="toggleMaintenance('${p.id}', ${p.isMaintenance})"><i class="fas fa-power-off"></i></button>
+                            <button class="btn-action-icon edit" onclick="openAddProductModal('${p.id}')"><i class="fas fa-pen"></i></button>
                             <button class="btn-action-icon ban" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
@@ -1059,462 +1851,512 @@
             });
         }
 
-        function toggleMaintenance(id, currentStatus) { db.collection("products").doc(id).update({ isMaintenance: !currentStatus }); }
-
-        function openAddProductModal() {
-            activeEditProductId = null;
-            document.getElementById('prod-modal-title').innerText = "Yeni Ürün Ekle";
-            document.getElementById('prod-name').value = '';
-            document.getElementById('prod-category').value = '';
-            document.getElementById('prod-img').value = '';
-            document.getElementById('prod-desc').value = '';
-            
-            document.getElementById('prod-price-1d').value = ''; document.getElementById('prod-link-1d').value = '';
-            document.getElementById('prod-price-1w').value = ''; document.getElementById('prod-link-1w').value = '';
-            document.getElementById('prod-price-1m').value = ''; document.getElementById('prod-link-1m').value = '';
-            document.getElementById('prod-price-lt').value = ''; document.getElementById('prod-link-lt').value = '';
-            
-            document.getElementById('product-modal').style.display = 'flex';
+        function toggleMaintenance(id, s) { 
+            db.collection("products").doc(id).update({ isMaintenance: !s }); 
         }
-
-        function openEditProductModal(id) {
-            const p = allProducts.find(x => x.id === id);
-            if(!p) return;
-            activeEditProductId = id;
-            document.getElementById('prod-modal-title').innerText = "Ürünü Düzenle";
-            document.getElementById('prod-name').value = p.name;
-            document.getElementById('prod-category').value = p.categoryName || '';
-            document.getElementById('prod-img').value = p.imageUrl || '';
-            document.getElementById('prod-desc').value = p.desc;
+        
+        function openAddProductModal(id=null) {
+            activeEditProductId = id; 
+            const p = id ? allProducts.find(x => x.id === id) : null;
             
-            document.getElementById('prod-price-1d').value = p.price1d || ''; document.getElementById('prod-link-1d').value = p.link1d || '';
-            document.getElementById('prod-price-1w').value = p.price1w || ''; document.getElementById('prod-link-1w').value = p.link1w || '';
-            document.getElementById('prod-price-1m').value = p.price1m || ''; document.getElementById('prod-link-1m').value = p.link1m || '';
-            document.getElementById('prod-price-lt').value = p.priceLt || ''; document.getElementById('prod-link-lt').value = p.linkLt || '';
-
+            document.getElementById('prod-modal-title').innerText = id ? "Düzenle" : "Yeni Ürün";
+            
+            document.getElementById('prod-name').value = p ? p.name : ''; 
+            document.getElementById('prod-category').value = p ? (p.categoryName || '') : ''; 
+            document.getElementById('prod-img').value = p ? (p.imageUrl || '') : ''; 
+            document.getElementById('prod-download').value = p ? (p.downloadLink || '') : ''; 
+            document.getElementById('prod-desc').value = p ? p.desc : '';
+            
+            document.getElementById('prod-price-1d').value = p ? (p.price1d || '') : ''; 
+            document.getElementById('prod-link-1d').value = p ? (p.link1d || '') : '';
+            
+            document.getElementById('prod-price-1w').value = p ? (p.price1w || '') : ''; 
+            document.getElementById('prod-link-1w').value = p ? (p.link1w || '') : '';
+            
+            document.getElementById('prod-price-1m').value = p ? (p.price1m || '') : ''; 
+            document.getElementById('prod-link-1m').value = p ? (p.link1m || '') : '';
+            
+            document.getElementById('prod-price-lt').value = p ? (p.priceLt || '') : ''; 
+            document.getElementById('prod-link-lt').value = p ? (p.linkLt || '') : '';
+            
             document.getElementById('product-modal').style.display = 'flex';
         }
 
         function saveProduct() {
-            const name = document.getElementById('prod-name').value;
-            if(!name) return alert("İsim boş olamaz.");
-
-            const data = { 
-                name: name, categoryName: document.getElementById('prod-category').value,
-                imageUrl: document.getElementById('prod-img').value, desc: document.getElementById('prod-desc').value, 
-                
-                price1d: parseInt(document.getElementById('prod-price-1d').value) || 0, link1d: document.getElementById('prod-link-1d').value,
-                price1w: parseInt(document.getElementById('prod-price-1w').value) || 0, link1w: document.getElementById('prod-link-1w').value,
-                price1m: parseInt(document.getElementById('prod-price-1m').value) || 0, link1m: document.getElementById('prod-link-1m').value,
-                priceLt: parseInt(document.getElementById('prod-price-lt').value) || 0, linkLt: document.getElementById('prod-link-lt').value
+            const n = document.getElementById('prod-name').value; 
+            if(!n) return;
+            
+            const d = { 
+                name: n, 
+                categoryName: document.getElementById('prod-category').value, 
+                imageUrl: document.getElementById('prod-img').value, 
+                downloadLink: document.getElementById('prod-download').value, 
+                desc: document.getElementById('prod-desc').value, 
+                price1d: parseInt(document.getElementById('prod-price-1d').value) || 0, 
+                link1d: document.getElementById('prod-link-1d').value,
+                price1w: parseInt(document.getElementById('prod-price-1w').value) || 0, 
+                link1w: document.getElementById('prod-link-1w').value,
+                price1m: parseInt(document.getElementById('prod-price-1m').value) || 0, 
+                link1m: document.getElementById('prod-link-1m').value,
+                priceLt: parseInt(document.getElementById('prod-price-lt').value) || 0, 
+                linkLt: document.getElementById('prod-link-lt').value
             };
-
-            if(activeEditProductId) db.collection("products").doc(activeEditProductId).update(data).then(() => closeModal('product-modal'));
-            else { data.isMaintenance = false; db.collection("products").add(data).then(() => closeModal('product-modal')); }
+            
+            if(activeEditProductId) {
+                db.collection("products").doc(activeEditProductId).update(d).then(() => closeModal('product-modal'));
+            } else { 
+                d.isMaintenance = false; 
+                db.collection("products").add(d).then(() => closeModal('product-modal')); 
+            } 
         }
 
-        function deleteProduct(id) { if(confirm("Emin misiniz?")) db.collection("products").doc(id).delete(); }
+        function deleteProduct(id) { 
+            if(confirm("Emin misiniz?")) {
+                db.collection("products").doc(id).delete(); 
+            }
+        }
 
+        // ================= HWID SİSTEMİ =================
+        function requestHwidReset(lId) { 
+            if(confirm("HWID sıfırlansın mı?")) {
+                db.collection('licenses').doc(lId).update({ hwidStatus: 'pending' }).then(() => showToast("Talep iletildi.")); 
+            }
+        }
 
-        // ================= DİĞER KULLANICI / SİPARİŞ FONKSİYONLARI =================
-        db.collection("orders").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-            const tbody = document.getElementById('admin-orders-body');
-            if(!tbody) return;
-            if(snapshot.empty) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">Sipariş yok.</td></tr>`;
+        function renderAdminHwidRequests() {
+            const tb = document.getElementById('admin-hwid-body'); 
+            if(!tb) return; 
+            tb.innerHTML = '';
+            
+            const pending = allLicenses.filter(l => l.hwidStatus === 'pending');
+            if(pending.length === 0) {
+                tb.innerHTML = `<tr><td colspan="4" style="text-align:center;">Talep yok.</td></tr>`;
                 return;
             }
-            tbody.innerHTML = '';
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                const d = data.timestamp ? data.timestamp.toDate().toLocaleDateString('tr-TR') : "Tarihsiz";
-                tbody.innerHTML += `<tr><td>${d}</td><td style="color:var(--text-secondary);">${data.buyerEmail}</td><td style="font-weight:600; color: #fff;">${data.productName}</td><td style="font-weight:600;">₺${data.price}</td><td style="font-family:monospace; color:var(--text-secondary); font-size:0.9rem;">${data.licenseKey}</td></tr>`;
-            });
-        });
 
-        db.collection("users").onSnapshot(snapshot => {
-            allUsers = [];
-            snapshot.forEach(doc => allUsers.push({ id: doc.id, ...doc.data() }));
-            renderAdminUsers();
-        });
-
-        function renderAdminUsers() {
-            const tbody = document.getElementById('admin-users-body');
-            const searchVal = document.getElementById('user-search') ? document.getElementById('user-search').value.toLowerCase() : '';
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            let filteredUsers = allUsers.filter(u => u.username && u.username.toLowerCase().includes(searchVal));
-            if(filteredUsers.length === 0) return tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kullanıcı bulunamadı.</td></tr>`;
-            
-            filteredUsers.forEach(user => {
-                let roleColor = user.role === 'admin' ? 'var(--accent)' : 'var(--text-secondary)';
-                if(user.role === 'banned') roleColor = 'var(--danger)';
-                let roleText = user.role === 'admin' ? 'Admin' : (user.role === 'banned' ? 'Yasaklı' : 'Üye');
-                tbody.innerHTML += `
+            pending.forEach(l => { 
+                tb.innerHTML += `
                     <tr>
-                        <td style="font-size:0.9rem; font-weight:600;">${user.username} <span style="font-size:0.7rem; color:var(--text-secondary); margin-left:5px;">(Hak: ${user.extraSpins||0})</span></td>
-                        <td><span style="color:${roleColor}; font-weight:800; text-transform:uppercase; font-size:0.75rem;">${roleText}</span></td>
+                        <td style="color:#fff;">${l.userName}</td>
+                        <td style="color:var(--accent);">${l.id}</td>
+                        <td>${l.productName}</td>
                         <td class="action-cell">
-                            <button class="btn-action-icon edit" onclick="openPermModal('${user.id}', '${user.username}', '${user.role}')"><i class="fas fa-user-cog"></i></button>
-                            <button class="btn-action-icon ban" onclick="openBanModal('${user.id}', '${user.username}')"><i class="fas fa-ban"></i></button>
+                            <button class="btn-action-icon" style="color:var(--success);" onclick="approveHwid('${l.id}')"><i class="fas fa-check"></i></button>
+                            <button class="btn-action-icon" style="color:var(--danger);" onclick="rejectHwid('${l.id}')"><i class="fas fa-times"></i></button>
                         </td>
                     </tr>
-                `;
+                `; 
             });
         }
 
-        function openPermModal(userId, username, role) {
-            activeAdminUserId = userId;
-            document.getElementById('perm-username-display').innerText = username;
-            document.getElementById('perm-role').value = role;
-            document.getElementById('perm-spin-add').value = '';
-            document.getElementById('perm-modal').style.display = 'flex';
+        function approveHwid(id) { 
+            db.collection('licenses').doc(id).update({ 
+                hwidStatus: firebase.firestore.FieldValue.delete(), 
+                hwid: "" 
+            }); 
         }
 
-        function savePermission() {
-            if(!activeAdminUserId) return;
-            db.collection('users').doc(activeAdminUserId).update({ role: document.getElementById('perm-role').value }).then(() => closeModal('perm-modal'));
+        function rejectHwid(id) { 
+            db.collection('licenses').doc(id).update({ 
+                hwidStatus: firebase.firestore.FieldValue.delete() 
+            }); 
         }
 
-        function addManualSpinRight() {
-            if(!activeAdminUserId) return;
-            const count = parseInt(document.getElementById('perm-spin-add').value);
-            if(isNaN(count) || count === 0) return;
-            db.collection('users').doc(activeAdminUserId).update({ extraSpins: firebase.firestore.FieldValue.increment(count) }).then(() => { document.getElementById('perm-spin-add').value = ''; showToast(`Çark hakkı güncellendi!`); });
-        }
-
-        function openBanModal(userId, username) {
-            userToBan = { id: userId, name: username };
-            document.getElementById('ban-user-text').innerText = `${username} adlı kullanıcıyı uzaklaştırmak üzeresiniz. Emin misiniz?`;
-            document.getElementById('ban-modal').style.display = 'flex';
-        }
-        function executeBan() {
-            if(!userToBan) return;
-            db.collection('users').doc(userToBan.id).update({ role: 'banned' }).then(() => { closeModal('ban-modal'); userToBan = null; });
-        }
-
-        // ================= TICKET SİSTEMİ =================
-        db.collection("tickets").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-            allTickets = [];
-            snapshot.forEach(doc => allTickets.push({ id: doc.id, ...doc.data() }));
-            renderAdminTickets();
-            loadUserTickets();
+        // ================= KULLANICILAR VE SİPARİŞLER =================
+        db.collection("orders").orderBy("timestamp", "desc").onSnapshot(snap => { 
+            const tb = document.getElementById('admin-orders-body'); 
+            if(!tb) return; 
+            tb.innerHTML = ''; 
+            
+            if(snap.empty) {
+                tb.innerHTML = `<tr><td colspan="5" style="text-align:center;">Yok</td></tr>`;
+                return;
+            }
+            
+            snap.forEach(doc => { 
+                const d = doc.data(); 
+                tb.innerHTML += `
+                    <tr>
+                        <td>${d.timestamp ? d.timestamp.toDate().toLocaleDateString('tr-TR') : ''}</td>
+                        <td>${d.buyerEmail}</td>
+                        <td style="color:#fff;">${d.productName}</td>
+                        <td style="color:var(--accent);">₺${d.price}</td>
+                        <td style="font-family:monospace;">${d.licenseKey}</td>
+                    </tr>
+                `; 
+            }); 
         });
 
-        function createTicket() {
-            if(!currentUser) return openModal('login');
-            const subj = document.getElementById('ticket-subject').value;
-            const msg = document.getElementById('ticket-msg').value;
-            if(!subj || !msg) return alert('Boş alan bırakmayın.');
+        db.collection("users").onSnapshot(snap => { 
+            allUsers = []; 
+            snap.forEach(doc => allUsers.push({ id: doc.id, ...doc.data() })); 
+            renderAdminUsers(); 
+        });
 
-            db.collection("tickets").add({
-                subject: subj, message: msg, reply: '', user: currentUser.username, status: 'open',
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
-                document.getElementById('ticket-subject').value = '';
-                document.getElementById('ticket-msg').value = '';
-                showToast("Talebiniz ekibe ulaştı.");
-                switchProfileView('user-tickets'); 
-            });
-        }
-
-        function loadUserTickets() {
-            if(!currentUser) return;
-            const tbody = document.getElementById('user-tickets-list-body');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            const myTickets = allTickets.filter(t => t.user === currentUser.username);
-            if(myTickets.length === 0) return tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Talebiniz bulunmuyor.</td></tr>`;
+        function renderAdminUsers() { 
+            const tb = document.getElementById('admin-users-body'); 
+            if(!tb) return; 
+            tb.innerHTML = ''; 
             
-            myTickets.forEach(t => {
-                const statusColor = t.status === 'open' ? 'var(--text-primary)' : 'var(--text-secondary)';
-                let actionBtn = t.status === 'resolved' ? `<button class="btn-auth" style="border-color:#333; color:#fff; padding: 6px 12px; font-size: 0.75rem;" onclick="readUserTicketReply('${t.id}')">Yanıtı Gör</button>` : `<span style="color:var(--text-secondary); font-size:0.75rem;">İnceleniyor...</span>`;
-                tbody.innerHTML += `<tr><td style="font-weight:600; font-size:0.9rem;">${t.subject}</td><td style="color:${statusColor}; font-weight:800; text-transform:uppercase; font-size:0.75rem;">${t.status==='open'?'Bekliyor':'Çözüldü'}</td><td>${actionBtn}</td></tr>`;
-            });
-        }
-
-        function readUserTicketReply(id) {
-            const t = allTickets.find(x => x.id === id);
-            if(!t) return;
-            document.getElementById('ut-msg').innerText = t.message;
-            document.getElementById('ut-reply').innerText = t.reply || "Yönetici yanıtlamış.";
-            document.getElementById('user-ticket-modal').style.display = 'flex';
-        }
-
-        function renderAdminTickets() {
-            const tbody = document.getElementById('admin-tickets-body');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            if(allTickets.length === 0) return tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Destek talebi bulunmuyor.</td></tr>`;
+            const s = document.getElementById('user-search') ? document.getElementById('user-search').value.toLowerCase() : ''; 
+            let flt = allUsers.filter(u => u.username && u.username.toLowerCase().includes(s)); 
             
-            allTickets.forEach(t => {
-                const statusColor = t.status === 'open' ? 'var(--accent)' : 'var(--text-secondary)';
-                tbody.innerHTML += `
+            if(flt.length === 0) return; 
+            
+            flt.forEach(u => { 
+                let cl = u.role === 'admin' ? 'var(--accent)' : (u.role === 'banned' ? 'var(--danger)' : 'var(--text-secondary)'); 
+                tb.innerHTML += `
                     <tr>
-                        <td style="font-size:0.85rem;">${t.user}</td>
-                        <td style="font-weight:600;">${t.subject}</td>
-                        <td style="color:${statusColor}; font-weight:800; text-transform:uppercase; font-size:0.75rem;">${t.status==='open'?'Bekliyor':'Çözüldü'}</td>
+                        <td style="color:#fff;">${u.username}</td>
+                        <td><span style="color:${cl}; font-size:0.75rem; text-transform:uppercase;">${u.role}</span></td>
                         <td class="action-cell">
-                            <button class="btn-action-icon edit" onclick="openTicketModal('${t.id}')"><i class="fas fa-reply"></i></button>
+                            <button class="btn-action-icon edit" onclick="openPermModal('${u.id}', '${u.username}', '${u.role}')"><i class="fas fa-cog"></i></button>
+                            <button class="btn-action-icon" style="color:var(--success);" onclick="openLicenseModal('${u.id}', '${u.username}', '${u.email}')"><i class="fas fa-key"></i></button>
+                            <button class="btn-action-icon" style="color:var(--danger);" onclick="openBanModal('${u.id}', '${u.username}')"><i class="fas fa-ban"></i></button>
+                        </td>
+                    </tr>
+                `; 
+            }); 
+        }
+
+        function openPermModal(id, n, r) { 
+            activeAdminUserId = id; 
+            document.getElementById('perm-username-display').innerText = n; 
+            document.getElementById('perm-role').value = r; 
+            document.getElementById('perm-modal').style.display = 'flex'; 
+        }
+
+        function savePermission() { 
+            if(activeAdminUserId) {
+                db.collection('users').doc(activeAdminUserId).update({ role: document.getElementById('perm-role').value }).then(() => closeModal('perm-modal')); 
+            }
+        }
+
+        function openBanModal(id, n) { 
+            userToBan = { id: id, name: n }; 
+            document.getElementById('ban-user-text').innerText = `${n} yasaklanacak.`; 
+            document.getElementById('ban-modal').style.display = 'flex'; 
+        }
+
+        function executeBan() { 
+            if(userToBan) {
+                db.collection('users').doc(userToBan.id).update({ role: 'banned' }).then(() => { 
+                    closeModal('ban-modal'); 
+                    userToBan = null; 
+                }); 
+            }
+        }
+
+        // ================= BİLETLER =================
+        db.collection("tickets").orderBy("timestamp", "desc").onSnapshot(snap => { 
+            allTickets = []; 
+            snap.forEach(doc => allTickets.push({ id: doc.id, ...doc.data() })); 
+            renderAdminTickets(); 
+            loadUserTickets(); 
+        });
+
+        function createTicket() { 
+            if(!currentUser) return openModal('login'); 
+            
+            const s = document.getElementById('ticket-subject').value;
+            const m = document.getElementById('ticket-msg').value; 
+            
+            if(!s || !m) return; 
+            
+            db.collection("tickets").add({ 
+                subject: s, 
+                message: m, 
+                reply: '', 
+                user: currentUser.username, 
+                status: 'open', 
+                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+            }).then(() => { 
+                document.getElementById('ticket-subject').value = ''; 
+                document.getElementById('ticket-msg').value = ''; 
+                showToast("İletildi."); 
+                switchProfileView('user-tickets'); 
+            }); 
+        }
+
+        function loadUserTickets() { 
+            if(!currentUser) return; 
+            const tb = document.getElementById('user-tickets-list-body'); 
+            if(!tb) return; 
+            tb.innerHTML = ''; 
+            
+            const myT = allTickets.filter(t => t.user === currentUser.username); 
+            if(myT.length===0) {
+                tb.innerHTML=`<tr><td colspan="3" style="text-align:center;">Yok.</td></tr>`;
+                return;
+            }
+            
+            myT.forEach(t => { 
+                let cl = t.status === 'open' ? 'var(--text-secondary)' : 'var(--success)'; 
+                let b = t.status === 'resolved' ? `<button class="btn-action-icon" style="width:auto; padding:0 10px; color:var(--success);" onclick="readUserTicketReply('${t.id}')">Gör</button>` : '-'; 
+                tb.innerHTML += `
+                    <tr>
+                        <td style="color:#fff;">${t.subject}</td>
+                        <td style="color:${cl}; font-size:0.75rem; text-transform:uppercase;">${t.status}</td>
+                        <td>${b}</td>
+                    </tr>
+                `; 
+            }); 
+        }
+
+        function readUserTicketReply(id) { 
+            const t = allTickets.find(x => x.id === id); 
+            if(!t) return; 
+            
+            document.getElementById('ut-msg').innerText = t.message; 
+            document.getElementById('ut-reply').innerText = t.reply || "Yanıtlandı."; 
+            document.getElementById('user-ticket-modal').style.display = 'flex'; 
+        }
+
+        function renderAdminTickets() { 
+            const tb = document.getElementById('admin-tickets-body'); 
+            if(!tb) return; 
+            tb.innerHTML = ''; 
+            if(allTickets.length===0) return; 
+            
+            allTickets.forEach(t => { 
+                let cl = t.status === 'open' ? 'var(--accent)' : 'var(--text-secondary)'; 
+                tb.innerHTML += `
+                    <tr>
+                        <td>${t.user}</td>
+                        <td style="color:#fff;">${t.subject}</td>
+                        <td style="color:${cl}; font-size:0.75rem;">${t.status}</td>
+                        <td class="action-cell">
+                            <button class="btn-action-icon" onclick="openTicketModal('${t.id}')"><i class="fas fa-reply"></i></button>
                             <button class="btn-action-icon ban" onclick="deleteTicket('${t.id}')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
+                `; 
+            }); 
+        }
+
+        function deleteTicket(id) { 
+            if(confirm("Sil?")) {
+                db.collection("tickets").doc(id).delete(); 
+            }
+        }
+
+        function openTicketModal(id) { 
+            const t = allTickets.find(x => x.id === id); 
+            if(!t) return; 
+            
+            activeTicketId = id; 
+            document.getElementById('t-user').innerText = t.user; 
+            document.getElementById('t-subj').innerText = t.subject; 
+            document.getElementById('t-msg').innerText = t.message; 
+            document.getElementById('admin-ticket-reply').value = t.reply || ''; 
+            document.getElementById('ticket-modal').style.display = 'flex'; 
+        }
+
+        function resolveTicket() { 
+            if(!activeTicketId) return; 
+            
+            db.collection("tickets").doc(activeTicketId).update({ 
+                status: 'resolved', 
+                reply: document.getElementById('admin-ticket-reply').value 
+            }).then(() => closeModal('ticket-modal')); 
+        }
+
+        // ================= LİSANS SİSTEMİ =================
+        db.collection("licenses").orderBy("timestamp", "desc").onSnapshot(snap => { 
+            allLicenses = []; 
+            snap.forEach(doc => allLicenses.push({ id: doc.id, ...doc.data() })); 
+            loadUserLicenses(); 
+            renderAdminLicenses(); 
+            renderAdminHwidRequests(); 
+        });
+
+        function loadUserLicenses() {
+            if(!auth.currentUser) return; 
+            const tb = document.getElementById('user-licenses-body'); 
+            if(!tb) return; 
+            tb.innerHTML = '';
+            
+            const my = allLicenses.filter(l => l.userId === auth.currentUser.uid);
+            
+            if(my.length === 0) {
+                tb.innerHTML = `<tr><td colspan="4" style="text-align:center;">Yok</td></tr>`;
+                return;
+            }
+            
+            my.forEach(d => {
+                const pMatch = allProducts.find(p => p.id === d.productId) || {};
+                
+                let dlBtn = pMatch.downloadLink ? `<button class="btn-action-icon" style="width:auto; padding:0 12px; font-size:0.75rem; color:#fff;" onclick="window.open('${pMatch.downloadLink}', '_blank')"><i class="fas fa-download"></i></button>` : '';
+                let hwBtn = d.hwidStatus === 'pending' ? `<span style="color:var(--accent); font-size:0.7rem;">Bekliyor</span>` : `<button class="btn-action-icon" style="width:auto; padding:0 12px; font-size:0.75rem; color:var(--danger);" onclick="requestHwidReset('${d.id}')"><i class="fas fa-microchip"></i></button>`;
+                
+                tb.innerHTML += `
+                    <tr>
+                        <td style="color:#fff;">${d.productName}</td>
+                        <td style="font-family:monospace; color:var(--text-secondary);">${d.id}</td>
+                        <td>${formatRemainingTime(d.expiresAt, d.type)}</td>
+                        <td style="display:flex; gap:5px;">${dlBtn}${hwBtn}</td>
+                    </tr>
                 `;
             });
         }
 
-        function deleteTicket(id) { if(confirm("Bu bileti silmek istiyor musunuz?")) db.collection("tickets").doc(id).delete(); }
-
-        function openTicketModal(id) {
-            const t = allTickets.find(x => x.id === id);
-            if(!t) return;
-            activeTicketId = id;
-            document.getElementById('t-user').innerText = t.user;
-            document.getElementById('t-subj').innerText = t.subject;
-            document.getElementById('t-msg').innerText = t.message;
-            document.getElementById('admin-ticket-reply').value = t.reply || ''; 
-            document.getElementById('ticket-modal').style.display = 'flex';
-        }
-
-        function resolveTicket() {
-            if(!activeTicketId) return;
-            db.collection("tickets").doc(activeTicketId).update({ status: 'resolved', reply: document.getElementById('admin-ticket-reply').value }).then(() => { closeModal('ticket-modal'); showToast("Bilet yanıtlandı."); });
-        }
-
-        // ================= LİSANS SİSTEMİ =================
-        db.collection("licenses").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-            allLicenses = [];
-            snapshot.forEach(doc => allLicenses.push({ id: doc.id, ...doc.data() }));
-            loadUserLicenses();
-            renderAdminLicenses();
-        });
-
-        function loadUserLicenses() {
-            const userAuth = auth.currentUser;
-            if(!userAuth) return;
-            const tbody = document.getElementById('user-licenses-body');
-            const myLicenses = allLicenses.filter(l => l.userId === userAuth.uid);
-
-            if(myLicenses.length === 0) return tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Kayıtlı bir lisansınız bulunmamaktadır.</td></tr>`;
+        function renderAdminLicenses() { 
+            const tb = document.getElementById('admin-keys-body'); 
+            if(!tb) return; 
+            tb.innerHTML = ''; 
             
-            tbody.innerHTML = '';
-            myLicenses.forEach(data => {
-                const timeDisplay = formatRemainingTime(data.expiresAt, data.type);
-                tbody.innerHTML += `<tr><td style="font-weight:800; color:#fff; font-size:0.95rem;">${data.productName}</td><td style="font-family:monospace; color:var(--text-secondary);">${data.id}</td><td>${timeDisplay}</td></tr>`;
-            });
-        }
-
-        function renderAdminLicenses() {
-            const tbody = document.getElementById('admin-keys-body');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            if(allLicenses.length === 0) return tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">Anahtar bulunmuyor.</td></tr>`;
-            
-            allLicenses.forEach(l => {
-                const userDisplay = l.userName ? l.userName : (l.userId === "admin_generated" ? '<span style="color:var(--text-secondary);">Boşta</span>' : "Bilinmeyen");
-                tbody.innerHTML += `
+            allLicenses.forEach(l => { 
+                tb.innerHTML += `
                     <tr>
-                        <td style="font-family:monospace; font-size:0.85rem; color:var(--text-secondary);">${l.id}</td>
-                        <td style="font-size:0.9rem; color:#fff; font-weight:700;">${l.productName}</td>
+                        <td style="font-family:monospace; font-size:0.8rem;">${l.id}</td>
+                        <td style="color:#fff;">${l.productName}</td>
                         <td>${formatRemainingTime(l.expiresAt, l.type)}</td>
-                        <td style="font-weight:700; font-size:0.85rem;">${userDisplay}</td>
+                        <td>${l.userName||'Boşta'}</td>
                         <td class="action-cell">
                             <button class="btn-action-icon edit" onclick="openExtendModal('${l.id}')"><i class="fas fa-clock"></i></button>
                             <button class="btn-action-icon ban" onclick="deleteLicense('${l.id}')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
-                `;
-            });
+                `; 
+            }); 
         }
 
-        function deleteLicense(id) { if(confirm("DİKKAT: Bu lisansı silmek istediğinize emin misiniz?")) db.collection("licenses").doc(id).delete(); }
-
-        function openExtendModal(keyId) {
-            activeExtendKeyId = keyId;
-            document.getElementById('extend-key-display').innerText = keyId;
-            document.getElementById('extend-modal').style.display = 'flex';
-        }
-
-        function saveExtension() {
-            if(!activeExtendKeyId) return;
-            const daysToAdd = document.getElementById('extend-duration').value;
-            const licenseDoc = db.collection('licenses').doc(activeExtendKeyId);
-            
-            licenseDoc.get().then(doc => {
-                if(doc.exists) {
-                    const data = doc.data();
-                    let newType = data.type;
-                    let newDate = null;
-                    if(daysToAdd === 'lifetime') {
-                        newType = 'lifetime';
-                        newDate = null;
-                    } else {
-                        let baseDate = (data.expiresAt && data.type !== 'lifetime') ? data.expiresAt.toDate() : new Date();
-                        newDate = new Date(baseDate.getTime() + (parseInt(daysToAdd) * 86400000));
-                        newType = 'extended';
-                    }
-                    licenseDoc.update({ type: newType, expiresAt: newDate ? firebase.firestore.Timestamp.fromDate(newDate) : null }).then(() => closeModal('extend-modal'));
-                }
-            });
-        }
-
-        function generateKeyFormat() {
-            return `SENS-${Math.random().toString(36).substr(2, 6).toUpperCase()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
-        }
-
-        function populateKeygenSelects() {
-            const kSelect = document.getElementById('keygen-product');
-            if(kSelect) {
-                kSelect.innerHTML = '';
-                allProducts.forEach(p => {
-                    if(!p.isMaintenance) kSelect.innerHTML += `<option value="${p.name}">${p.name}</option>`;
-                });
+        function deleteLicense(id) { 
+            if(confirm("Sil?")) {
+                db.collection("licenses").doc(id).delete(); 
             }
+        }
+
+        function openExtendModal(id) { 
+            activeExtendKeyId = id; 
+            document.getElementById('extend-key-display').innerText = id; 
+            document.getElementById('extend-modal').style.display = 'flex'; 
+        }
+
+        function saveExtension() { 
+            if(!activeExtendKeyId) return; 
+            
+            const d = document.getElementById('extend-duration').value; 
+            const lDoc = db.collection('licenses').doc(activeExtendKeyId); 
+            
+            lDoc.get().then(doc => { 
+                if(doc.exists) { 
+                    let dt = doc.data();
+                    let nT = dt.type;
+                    let nD = null; 
+                    
+                    if(d === 'lifetime') {
+                        nT = 'lifetime'; 
+                    } else { 
+                        nD = new Date((dt.expiresAt && dt.type !== 'lifetime' ? dt.expiresAt.toDate() : new Date()).getTime() + (parseInt(d)*86400000)); 
+                        nT = 'extended'; 
+                    } 
+                    lDoc.update({ type: nT, expiresAt: nD ? firebase.firestore.Timestamp.fromDate(nD) : null }).then(() => closeModal('extend-modal')); 
+                } 
+            }); 
+        }
+
+        function generateKeyFormat() { 
+            return `SENS-${Math.random().toString(36).substr(2,4).toUpperCase()}-${Math.random().toString(36).substr(2,4).toUpperCase()}`; 
+        }
+
+        function openLicenseModal(id, un, m) { 
+            activeAdminUserId = id; 
+            activeAdminUsername = un; 
+            activeAdminUserEmail = m; 
+            
+            document.getElementById('license-username-display').innerText = un; 
+            
+            const s = document.getElementById('license-product'); 
+            s.innerHTML = ''; 
+            
+            allProducts.forEach(p => { 
+                if(!p.isMaintenance) s.innerHTML += `<option value="${p.id}">${p.name}</option>`; 
+            }); 
+            
+            document.getElementById('license-modal').style.display = 'flex'; 
+        }
+
+        function assignLicenseToUser() {
+            if(!activeAdminUserId) return; 
+            
+            const pid = document.getElementById('license-product').value;
+            const d = document.getElementById('license-duration').value; 
+            const pr = allProducts.find(x => x.id === pid); 
+            
+            if(!pr) return;
+            
+            let ea = null; 
+            if(d === 'daily') ea = new Date(Date.now()+86400000); 
+            else if(d === 'weekly') ea = new Date(Date.now()+604800000); 
+            else if(d === 'monthly') ea = new Date(Date.now()+2592000000);
+            
+            db.collection('licenses').doc(generateKeyFormat()).set({ 
+                userId: activeAdminUserId, 
+                userName: activeAdminUsername, 
+                userEmail: activeAdminUserEmail, 
+                productId: pr.id, 
+                productName: pr.name, 
+                type: d, 
+                keyType: "user", 
+                hwid: "", 
+                status: "active", 
+                expiresAt: ea ? firebase.firestore.Timestamp.fromDate(ea) : null, 
+                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+            }).then(() => { 
+                closeModal('license-modal'); 
+                showToast("Tanımlandı!"); 
+            });
+        }
+
+        function populateKeygenSelects() { 
+            const k = document.getElementById('keygen-product'); 
+            if(k) { 
+                k.innerHTML = ''; 
+                allProducts.forEach(p => { 
+                    if(!p.isMaintenance) k.innerHTML += `<option value="${p.name}">${p.name}</option>`; 
+                }); 
+            } 
         }
 
         function generateAdminKeys() {
-            const prodName = document.getElementById('keygen-product').value;
-            const duration = document.getElementById('keygen-duration').value;
-            const keyType = document.getElementById('keygen-type').value;
-            const count = parseInt(document.getElementById('keygen-count').value) || 1;
-            if(!prodName) return alert("Aktif ürün bulunamadı.");
-
-            let generatedKeys = [];
-            let expiresAt = null;
-            if(duration === 'daily') expiresAt = new Date(Date.now() + 86400000); 
-            else if(duration === 'weekly') expiresAt = new Date(Date.now() + 604800000); 
-            else if(duration === 'monthly') expiresAt = new Date(Date.now() + 2592000000); 
+            const pn = document.getElementById('keygen-product').value;
+            const d = document.getElementById('keygen-duration').value;
+            const t = document.getElementById('keygen-type').value;
+            const c = parseInt(document.getElementById('keygen-count').value)||1; 
             
-            for(let i=0; i<count; i++) {
-                let key = generateKeyFormat();
-                if (keyType === 'admin') key += "-ADM";
-                generatedKeys.push(key);
+            if(!pn) return;
+            
+            let gk = [];
+            let ea = null; 
+            
+            if(d === 'daily') ea = new Date(Date.now()+86400000); 
+            else if(d === 'weekly') ea = new Date(Date.now()+604800000); 
+            else if(d === 'monthly') ea = new Date(Date.now()+2592000000);
+            
+            for(let i=0; i<c; i++) { 
+                let k = generateKeyFormat(); 
+                if(t === 'admin') k+="-ADM"; 
+                gk.push(k); 
                 
-                db.collection('licenses').doc(key).set({
-                    userId: "admin_generated",
-                    userName: "Boşta",
-                    productId: "keygen",
-                    productName: prodName,
-                    type: duration,
-                    keyType: keyType,
-                    hwid: "",
-                    status: "active",
-                    expiresAt: expiresAt ? firebase.firestore.Timestamp.fromDate(expiresAt) : null,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                });
-            }
-            const resultBox = document.getElementById('keygen-result');
-            resultBox.style.display = 'block';
-            resultBox.value = generatedKeys.join('\n');
-            showToast(count + " adet lisans üretildi!");
-        }
-
-        // ================= YÜZDELİKLİ ÇARK SİSTEMİ =================
-        db.collection('settings').doc('wheel_v2').onSnapshot(doc => {
-            if(doc.exists) {
-                const data = doc.data();
-                if(data.settingsString) {
-                    document.getElementById('admin-wheel-items').value = data.settingsString;
-                    parseWheelSettings(data.settingsString);
-                }
-            } else {
-                parseWheelSettings("Boş:50, VIP Lisans:5, 1 Gün CS2:20, %50 İndirim:25");
-            }
-        });
-
-        function parseWheelSettings(rawStr) {
-            wheelSettings = [];
-            let parts = rawStr.split(',');
-            parts.forEach(p => {
-                let s = p.split(':');
-                if(s.length === 2) {
-                    let wName = s[0].trim();
-                    let wChance = parseFloat(s[1]);
-                    if(!isNaN(wChance)) wheelSettings.push({name: wName, chance: wChance});
-                }
-            });
-            if(wheelSettings.length < 2) {
-                wheelSettings = [{name: "Boş", chance: 50}, {name: "Hata", chance: 50}];
-            }
-            drawWheel();
-        }
-
-        function saveWheelSettings() {
-            let rawText = document.getElementById('admin-wheel-items').value;
-            db.collection('settings').doc('wheel_v2').set({ settingsString: rawText }).then(() => showToast("Çark ayarları güncellendi!"));
-        }
-
-        function drawWheel() {
-            const wheelDiv = document.getElementById('spin-wheel');
-            wheelDiv.innerHTML = ''; 
-            
-            let sliceAngle = 360 / wheelSettings.length;
-            let bgColors = [];
-            
-            wheelSettings.forEach((item, i) => {
-                let color = i % 2 === 0 ? '#0b0614' : '#140c24';
-                if(item.name.toLowerCase() === 'boş') color = '#05030a'; 
-                bgColors.push(`${color} ${i * sliceAngle}deg ${(i + 1) * sliceAngle}deg`);
-            });
-            wheelDiv.style.background = `conic-gradient(${bgColors.join(', ')})`;
-
-            wheelSettings.forEach((item, i) => {
-                let textDiv = document.createElement('div');
-                textDiv.className = 'wheel-slice';
-                let rotation = (i * sliceAngle) + (sliceAngle / 2);
-                textDiv.style.transform = `rotate(${rotation}deg)`;
-                let textColor = item.name.toLowerCase() === 'boş' ? '#555' : '#fff';
-                textDiv.innerHTML = `<span class="wheel-text" style="color:${textColor};">${item.name}</span>`;
-                wheelDiv.appendChild(textDiv);
-            });
-        }
-
-        function spinWheel() {
-            if(!currentUser) { alert("Giriş yapmalısınız!"); openModal('login'); return; }
-            if(isSpinning) return;
-            if(userSpinRights <= 0) { alert("Şu anda çevirme hakkınız bulunmuyor! 3 günde bir ücretsiz hak kazanırsınız."); return; }
-
-            isSpinning = true;
-            const wheelDiv = document.getElementById('spin-wheel');
-            
-            let totalChance = wheelSettings.reduce((sum, item) => sum + item.chance, 0);
-            let randomVal = Math.random() * totalChance;
-            let cumulative = 0;
-            let winIndex = 0;
-            
-            for(let i=0; i<wheelSettings.length; i++) {
-                cumulative += wheelSettings[i].chance;
-                if(randomVal <= cumulative) { winIndex = i; break; }
+                db.collection('licenses').doc(k).set({ 
+                    userId: "admin_generated", 
+                    userName: "Boşta", 
+                    productId: "keygen", 
+                    productName: pn, 
+                    type: d, 
+                    keyType: t, 
+                    hwid: "", 
+                    status: "active", 
+                    expiresAt: ea ? firebase.firestore.Timestamp.fromDate(ea) : null, 
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+                }); 
             }
             
-            let sliceAngle = 360 / wheelSettings.length;
-            let stopAngle = (360 * 5) - (winIndex * sliceAngle) - (sliceAngle / 2); 
-            
-            wheelDiv.style.transform = `rotate(${stopAngle}deg)`;
-
-            setTimeout(() => {
-                isSpinning = false;
-                let wonItem = wheelSettings[winIndex].name;
-                
-                userSpinRights -= 1;
-                document.getElementById('user-spin-count').innerText = userSpinRights;
-
-                let updateData = {};
-                let hasFreeSpin = (Date.now() - userLastSpinDate) >= SPIN_COOLDOWN_MS;
-                if(hasFreeSpin) updateData.lastSpinDate = firebase.firestore.FieldValue.serverTimestamp();
-                else updateData.extraSpins = firebase.firestore.FieldValue.increment(-1);
-
-                db.collection('users').doc(currentUser.uid).update(updateData);
-
-                if(wonItem.toLowerCase() === 'boş') showToast("Maalesef, boş çıktı.", false);
-                else { alert(`Tebrikler! ${wonItem} kazandınız. (Bilet oluşturarak ödülünüzü isteyin)`); showToast(`${wonItem} kazandınız!`); }
-
-                setTimeout(() => {
-                    wheelDiv.style.transition = 'none';
-                    wheelDiv.style.transform = `rotate(${stopAngle % 360}deg)`;
-                    requestAnimationFrame(() => requestAnimationFrame(() => wheelDiv.style.transition = 'transform 5s cubic-bezier(0.15, 0.9, 0.2, 1)'));
-                }, 100);
-            }, 5000);
+            const r = document.getElementById('keygen-result');
+            r.style.display = 'block'; 
+            r.value = gk.join('\n'); 
+            showToast("Üretildi!");
         }
 
     </script>

@@ -35,10 +35,12 @@
             --transition-fast: all 0.3s ease;
         }
 
+        /* TIKLAMA ÇİZGİLERİNİ VE İMLECİ YOK ETME KODU */
         * { 
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
+            outline: none !important; 
         }
         
         @keyframes starDrift { 
@@ -60,6 +62,20 @@
                 url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23ffffff' opacity='0.03'/%3E%3Ccircle cx='150' cy='80' r='1.5' fill='%23b026ff' opacity='0.08'/%3E%3Ccircle cx='80' cy='160' r='0.5' fill='%23ffffff' opacity='0.03'/%3E%3Ccircle cx='180' cy='180' r='1' fill='%2300ffcc' opacity='0.05'/%3E%3C/svg%3E");
             background-size: 100% 100%, 300px 300px;
             animation: starDrift 120s linear infinite;
+
+            /* Boş yerlere tıklanınca metin seçimini kapat */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Sadece form elemanlarında yazı seçilebilsin */
+        input, textarea, select {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
         }
         
         h1, h2, h3, h4, .logo, .font-space { 
@@ -319,7 +335,7 @@
         }
 
         .home-layout h1 { 
-            font-size: clamp(3rem, 5vw, 5.5rem); 
+            font-size: clamp(2.5rem, 4.5vw, 4.5rem); 
             font-weight: 800; 
             line-height: 1.1; 
             letter-spacing: -1px; 
@@ -516,7 +532,6 @@
             min-height: 450px;
         }
 
-        /* Hover olunca dışarı vuran neon glow */
         .product-card::before {
             content: '';
             position: absolute;
@@ -571,6 +586,20 @@
             display: flex;
             align-items: center;
             gap: 6px;
+        }
+
+        /* İNDİRİM ETİKETİ */
+        .discount-badge {
+            background: rgba(176, 38, 255, 0.15);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 10px rgba(176,38,255,0.4);
         }
 
         .status-pill i { 
@@ -642,7 +671,6 @@
             margin:0;
         }
 
-        /* Varyasyon (Günlük, Haftalık vb) Butonları */
         .var-selector { 
             display: flex; 
             gap: 6px; 
@@ -1028,7 +1056,8 @@
         <div id="tab-home" class="tab-content active">
             <div class="tab-inner">
                 <div class="home-layout">
-                    <h1>Sınırları Zorlayan <br>Kusursuz Mimari.</h1>
+                    <!-- BURADAKİ YAZI DEĞİŞTİ -->
+                    <h1>Asla Banlatmayan<br><span>Yazılımlar ve Hileler.</span></h1>
                     <p>Karmaşadan uzak, modüler arayüzler ve düşük gecikmeli render motorları ile projelerinizi bir üst seviyeye taşıyın.</p>
                     
                     <div class="hero-badges">
@@ -1113,6 +1142,8 @@
                         <button class="profile-btn" onclick="switchProfileView('admin-tickets')">Gelen Biletler</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-keygen')">Lisans Üretici</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-keys')">Lisans Yönetimi</button>
+                        <!-- YENİ UYGULAMA YÖNETİMİ EN ALTTA -->
+                        <button class="profile-btn" style="color: var(--accent);" onclick="switchProfileView('admin-apps')"><i class="fas fa-server"></i> Uygulama Yönetimi</button>
                     </div>
                 </div>
                 <div class="content-area">
@@ -1202,6 +1233,7 @@
                         </table>
                     </div>
 
+                    <!-- ÜRÜN YÖNETİMİ ORİJİNAL HALİNDE -->
                     <div id="p-view-admin-products" class="profile-view">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 20px; align-items:center;">
                             <h2 class="font-space" style="font-size: 1.6rem; text-transform:uppercase;">Ürün Yönetimi</h2>
@@ -1262,6 +1294,16 @@
                         </table>
                     </div>
 
+                    <!-- YEPYENİ UYGULAMA YÖNETİMİ PANELİ -->
+                    <div id="p-view-admin-apps" class="profile-view">
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 5px; text-transform:uppercase;">Uygulama Yönetimi</h2>
+                        <p style="color: var(--text-secondary); font-size:0.9rem; margin-bottom: 20px;">Firebase ile bağladığınız uygulamaları buradan genel bakıma alabilirsiniz.</p>
+                        <table class="data-table">
+                            <thead><tr><th>Uygulama (Ürün)</th><th>Durum</th><th>İşlem</th></tr></thead>
+                            <tbody id="admin-apps-body"></tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -1295,7 +1337,7 @@
         </div>
     </div>
 
-    <!-- DETAYLI ÜRÜN MODALI (Günlük, Haftalık, Aylık, Lifetime Fiyat/Link ve Loader Linki) -->
+    <!-- DETAYLI ÜRÜN MODALI (Günlük, Haftalık, Aylık, Lifetime Fiyat/Link, İndirim ve Loader Linki) -->
     <div id="product-modal" class="modal-overlay">
         <div class="modal-box" style="width: 550px;">
             <i class="fas fa-times close-modal" onclick="closeModal('product-modal')"></i>
@@ -1307,25 +1349,29 @@
             <input type="text" id="prod-img" class="input-base" style="padding-left:15px; margin-bottom:10px;" placeholder="Görsel URL (Imgur vb.)">
             <input type="text" id="prod-download" class="input-base" style="padding-left:15px; margin-bottom:10px; border-color:var(--accent);" placeholder="Loader İndirme Linki (İsteğe Bağlı)">
             
+            <!-- İNDİRİM YÜZDESİ BURAYA EKLENDİ -->
+            <input type="number" id="prod-discount" class="input-base" style="padding-left:15px; margin-bottom:10px;" placeholder="İndirim Yüzdesi (Örn: 10) İsteğe Bağlı">
+            
             <textarea id="prod-desc" class="input-base" style="padding-left:15px; min-height: 70px; margin-bottom:15px;" placeholder="Ürün Açıklaması..."></textarea>
             
             <div style="background: rgba(0,0,0,0.5); padding:15px; border-radius:8px; margin-bottom:15px; border:1px solid #222;">
                 <label style="color:var(--accent); font-size:0.75rem; margin-bottom:10px; display:block; text-transform:uppercase;">Varyasyon Fiyatları ve Linkleri</label>
                 
+                <!-- FİYATLAR ONDALIKLI GİRİLEBİLİR -->
                 <div style="display:flex; gap:10px; margin-bottom:8px;">
-                    <input type="number" id="prod-price-1d" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Gün Fiyat">
+                    <input type="number" step="0.01" id="prod-price-1d" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Gün Fiyat">
                     <input type="text" id="prod-link-1d" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Gün Shopier Link">
                 </div>
                 <div style="display:flex; gap:10px; margin-bottom:8px;">
-                    <input type="number" id="prod-price-1w" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Hafta Fiyat">
+                    <input type="number" step="0.01" id="prod-price-1w" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Hafta Fiyat">
                     <input type="text" id="prod-link-1w" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Hafta Shopier Link">
                 </div>
                 <div style="display:flex; gap:10px; margin-bottom:8px;">
-                    <input type="number" id="prod-price-1m" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Ay Fiyat">
+                    <input type="number" step="0.01" id="prod-price-1m" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Ay Fiyat">
                     <input type="text" id="prod-link-1m" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Ay Shopier Link">
                 </div>
                 <div style="display:flex; gap:10px;">
-                    <input type="number" id="prod-price-lt" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="Sınırsız Fiyat">
+                    <input type="number" step="0.01" id="prod-price-lt" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="Sınırsız Fiyat">
                     <input type="text" id="prod-link-lt" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="Sınırsız Shopier Link">
                 </div>
             </div>
@@ -1374,7 +1420,6 @@
         </div>
     </div>
 
-    <!-- LİSANS TANIMLAMA EKRANI GERİ GELDİ -->
     <div id="license-modal" class="modal-overlay">
         <div class="modal-box" style="width:350px;">
             <i class="fas fa-times close-modal" onclick="closeModal('license-modal')"></i>
@@ -1425,7 +1470,7 @@
         <span id="toast-msg"></span>
     </div>
 
-    <!-- === JAVASCRIPT KODLARI (TÜM FONKSİYONLAR AÇIK VE EKSİKSİZ) === -->
+    <!-- === JAVASCRIPT KODLARI === -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyAjbkOwzOb4XTuhlCqex4bC-xD-pNi9HBI",
@@ -1458,40 +1503,33 @@
         let activeExtendKeyId = null;
         let selectedStoreCategory = 'all'; 
 
-        // Kalan Süre Hesaplama
+        // Küsüratlı Fiyatları Güzelleştirici Fonksiyon (ör: 149.99'u 149,99 yapar, düzleri düz gösterir)
+        function formatPrice(val) {
+            return Number(val).toLocaleString('tr-TR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+        }
+
         function formatRemainingTime(expiresAtObj, type) {
             if (type === 'lifetime' || !expiresAtObj) {
                 return '<span style="color:var(--accent); font-weight:700;">Sınırsız</span>';
             }
-            
             const diff = (expiresAtObj.toDate ? expiresAtObj.toDate().getTime() : new Date(expiresAtObj).getTime()) - new Date().getTime();
-            if (diff <= 0) {
-                return '<span style="color:var(--danger); font-weight:700;">Süresi Doldu</span>';
-            }
+            if (diff <= 0) return '<span style="color:var(--danger); font-weight:700;">Süresi Doldu</span>';
             
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             return `<span style="color:#fff; font-weight:700;">${days} Gün ${hours} Saat</span>`;
         }
 
-        // Tab Değiştirme
         function switchTab(tabId) {
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             const tb = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
-            if(tb) {
-                tb.classList.add('active');
-            }
+            if(tb) tb.classList.add('active');
             
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.getElementById('tab-' + tabId).classList.add('active');
             document.getElementById('profile-dropdown').style.display = 'none'; 
         }
 
-        // Profil İçi Geçişler
         function openProfile(view) { 
             switchTab('profile'); 
             if(view === 'admin') { 
@@ -1503,28 +1541,22 @@
         }
 
         function switchProfileView(viewId) { 
-            document.querySelectorAll('.profile-btn').forEach(btn => {
-                btn.classList.remove('active');
-            }); 
-            if(event && event.target) {
+            document.querySelectorAll('.profile-btn').forEach(btn => btn.classList.remove('active')); 
+            if(event && event.target && event.target.tagName === 'BUTTON') {
                 event.target.classList.add('active'); 
+            } else if(event && event.target && event.target.tagName === 'I') {
+                event.target.parentElement.classList.add('active');
             }
-            
-            document.querySelectorAll('.profile-view').forEach(view => {
-                view.classList.remove('active');
-            }); 
+            document.querySelectorAll('.profile-view').forEach(v => v.classList.remove('active')); 
             document.getElementById('p-view-' + viewId).classList.add('active'); 
         }
 
-        // Menüler ve Modallar
         function toggleDropdown() { 
             const m = document.getElementById('profile-dropdown'); 
             m.style.display = m.style.display === 'flex' ? 'none' : 'flex'; 
         }
 
-        function closeModal(id) { 
-            document.getElementById(id).style.display = 'none'; 
-        }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         
         function openModal(mode) {
             currentModalMode = mode;
@@ -1533,54 +1565,37 @@
             document.getElementById('auth-switch').innerText = mode === 'login' ? 'Kayıt Ol' : 'Giriş Yap';
         }
 
-        function toggleAuthMode() { 
-            openModal(currentModalMode === 'login' ? 'register' : 'login'); 
-        }
+        function toggleAuthMode() { openModal(currentModalMode === 'login' ? 'register' : 'login'); }
 
         function showToast(msg, isSuccess=true) { 
             document.getElementById('toast-msg').innerText = msg; 
             document.getElementById('toast-icon').className = isSuccess ? "fas fa-check-circle" : "fas fa-info-circle"; 
             const t = document.getElementById('toast'); 
             t.classList.add('show'); 
-            setTimeout(() => {
-                t.classList.remove('show');
-            }, 4000); 
+            setTimeout(() => t.classList.remove('show'), 4000); 
         }
 
-        // ================= AUTH İŞLEMLERİ =================
+        // === AUTH ===
         function handleAuth() {
             const uname = document.getElementById('username').value.trim().toLowerCase();
             const pass = document.getElementById('password').value;
-            
-            if(!uname || !pass) {
-                return alert("Boş alan bırakmayın.");
-            }
-            
+            if(!uname || !pass) return alert("Boş alan bırakmayın.");
             const fakeEmail = uname + "@sensi.local";
 
             if(uname === 'omer13ds' && pass === 'oyaali12') {
                 loginSuccess('omer13ds', true, fakeEmail, new Date().toISOString());
                 auth.signInWithEmailAndPassword(fakeEmail, pass).catch(() => {
                     auth.createUserWithEmailAndPassword(fakeEmail, pass).then(c => {
-                        db.collection('users').doc(c.user.uid).set({ 
-                            username: uname, 
-                            email: fakeEmail, 
-                            role: 'admin' 
-                        });
+                        db.collection('users').doc(c.user.uid).set({ username: uname, email: fakeEmail, role: 'admin' });
                     });
                 });
                 return;
             }
-            
             if(currentModalMode === 'login') {
                 auth.signInWithEmailAndPassword(fakeEmail, pass).catch(() => alert("Giriş başarısız."));
             } else {
                 auth.createUserWithEmailAndPassword(fakeEmail, pass).then(c => { 
-                    db.collection('users').doc(c.user.uid).set({ 
-                        username: uname, 
-                        email: fakeEmail, 
-                        role: 'user' 
-                    }); 
+                    db.collection('users').doc(c.user.uid).set({ username: uname, email: fakeEmail, role: 'user' }); 
                     alert("Kayıt başarılı!"); 
                 }).catch(e => alert("Hata: " + e.message));
             }
@@ -1591,12 +1606,8 @@
                 db.collection('users').doc(user.uid).onSnapshot(doc => {
                     if(doc.exists) {
                         const d = doc.data();
-                        if(d.role === 'banned') {
-                            return auth.signOut();
-                        }
-                        if(!currentUser) {
-                            loginSuccess(d.username, d.role === 'admin', user.email, user.metadata.creationTime);
-                        }
+                        if(d.role === 'banned') return auth.signOut();
+                        if(!currentUser) loginSuccess(d.username, d.role === 'admin', user.email, user.metadata.creationTime);
                     }
                 });
             } else {
@@ -1608,13 +1619,7 @@
         });
 
         function loginSuccess(username, isUserAdmin, uEmail, cTime) {
-            currentUser = { 
-                username: username, 
-                role: isUserAdmin ? 'admin' : 'user', 
-                email: uEmail, 
-                uid: auth.currentUser ? auth.currentUser.uid : null 
-            };
-            
+            currentUser = { username: username, role: isUserAdmin ? 'admin' : 'user', email: uEmail, uid: auth.currentUser ? auth.currentUser.uid : null };
             document.getElementById('prof-user').value = username;
             document.getElementById('profile-initial').innerHTML = username.charAt(0).toUpperCase();
             document.getElementById('prof-created').value = new Date(cTime).toLocaleDateString('tr-TR');
@@ -1629,7 +1634,6 @@
                 document.getElementById('admin-btn').style.display = 'none'; 
                 document.getElementById('admin-sidebar-links').style.display = 'none'; 
             }
-            
             closeModal('auth-modal');
             loadUserLicenses(); 
             loadUserTickets();
@@ -1642,7 +1646,7 @@
             }); 
         }
 
-        // ================= KATEGORİ SİSTEMİ =================
+        // === KATEGORİ ===
         db.collection("categories").onSnapshot(snap => { 
             allCategories = []; 
             snap.forEach(doc => allCategories.push({ id: doc.id, ...doc.data() })); 
@@ -1656,31 +1660,25 @@
             const tb = document.getElementById('admin-categories-body'); 
             if(!tb) return; 
             tb.innerHTML = ''; 
-            
             if(allCategories.length === 0) {
                 tb.innerHTML = `<tr><td colspan="2" style="text-align:center;">Yok</td></tr>`;
                 return;
             }
-            
             allCategories.forEach(c => { 
-                tb.innerHTML += `
-                    <tr>
-                        <td style="font-weight:600; font-size:0.85rem;">${c.name}</td>
-                        <td class="action-cell">
-                            <button class="btn-action-icon edit" onclick="openCategoryModal('${c.id}')"><i class="fas fa-pen"></i></button>
-                            <button class="btn-action-icon ban" onclick="deleteCategory('${c.id}')"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                `; 
+                tb.innerHTML += `<tr>
+                    <td style="font-weight:600; font-size:0.85rem;">${c.name}</td>
+                    <td class="action-cell">
+                        <button class="btn-action-icon edit" onclick="openCategoryModal('${c.id}')"><i class="fas fa-pen"></i></button>
+                        <button class="btn-action-icon ban" onclick="deleteCategory('${c.id}')"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`; 
             }); 
         }
 
         function renderStoreFilterBar() { 
             const b = document.getElementById('store-filter-bar'); 
             if(!b) return; 
-            
             b.innerHTML = `<button class="filter-btn ${selectedStoreCategory === 'all' ? 'active' : ''}" onclick="setCategoryFilter('all')">TÜMÜ</button>`; 
-            
             allCategories.forEach(c => { 
                 b.innerHTML += `<button class="filter-btn ${selectedStoreCategory === c.name ? 'active' : ''}" onclick="setCategoryFilter('${c.name}')">${c.name}</button>`; 
             }); 
@@ -1689,12 +1687,8 @@
         function populateCategorySelect() { 
             const s = document.getElementById('prod-category'); 
             if(!s) return; 
-            
             s.innerHTML = '<option value="">Seçiniz</option>'; 
-            
-            allCategories.forEach(c => {
-                s.innerHTML += `<option value="${c.name}">${c.name}</option>`;
-            }); 
+            allCategories.forEach(c => s.innerHTML += `<option value="${c.name}">${c.name}</option>`); 
         }
 
         function setCategoryFilter(n) { 
@@ -1713,80 +1707,60 @@
         function saveCategory() { 
             const n = document.getElementById('cat-name').value.trim(); 
             if(!n) return; 
-            
-            if(activeEditCategoryId) {
-                db.collection("categories").doc(activeEditCategoryId).update({ name: n }).then(() => closeModal('category-modal')); 
-            } else {
-                db.collection("categories").add({ name: n }).then(() => closeModal('category-modal')); 
-            }
+            if(activeEditCategoryId) db.collection("categories").doc(activeEditCategoryId).update({ name: n }).then(() => closeModal('category-modal')); 
+            else db.collection("categories").add({ name: n }).then(() => closeModal('category-modal')); 
         }
 
-        function deleteCategory(id) { 
-            if(confirm("Emin misiniz?")) {
-                db.collection("categories").doc(id).delete(); 
-            }
-        }
+        function deleteCategory(id) { if(confirm("Emin misiniz?")) db.collection("categories").doc(id).delete(); }
 
-        // ================= ÜRÜN SİSTEMİ (ÇOKLU VARYASYON & LÜKS KARTLAR) =================
+        // === ÜRÜN VE UYGULAMA SİSTEMİ ===
         db.collection("products").onSnapshot(snap => { 
             allProducts = []; 
             snap.forEach(doc => allProducts.push({ id: doc.id, isMaintenance: false, categoryName: '', ...doc.data() })); 
             renderStoreProducts(); 
             renderAdminProducts(); 
+            renderAdminApps(); // YENİ EKLENEN UYGULAMA YÖNETİMİ İÇİN
             populateKeygenSelects(); 
             loadUserLicenses(); 
         });
         
         function setProductVariant(prodId, type) {
-            document.querySelectorAll(`.var-btn[data-prod="${prodId}"]`).forEach(btn => {
-                btn.classList.remove('active');
-            });
+            document.querySelectorAll(`.var-btn[data-prod="${prodId}"]`).forEach(btn => btn.classList.remove('active'));
             document.querySelector(`.var-btn[data-prod="${prodId}"][data-dur="${type}"]`).classList.add('active');
 
             const p = allProducts.find(x => x.id === prodId); 
             if(!p) return;
             
-            let pr = 0;
-            let lk = "#";
-            let nm = "Ömür Boyu";
+            let pr = parseFloat(p.priceLt) || 0;
+            let lk = p.linkLt || '#';
+            let nm = "Sınırsız";
             
-            if(type === '1d') { 
-                pr = p.price1d || 0; 
-                nm = "1 Gün"; 
-                lk = p.link1d || '#'; 
-            } else if(type === '1w') { 
-                pr = p.price1w || 0; 
-                nm = "1 Hafta"; 
-                lk = p.link1w || '#'; 
-            } else if(type === '1m') { 
-                pr = p.price1m || 0; 
-                nm = "1 Ay"; 
-                lk = p.link1m || '#'; 
-            } else { 
-                pr = p.priceLt || 0; 
-                nm = "Sınırsız"; 
-                lk = p.linkLt || '#'; 
+            if(type === '1d') { pr = parseFloat(p.price1d) || 0; nm = "1 Gün"; lk = p.link1d || '#'; }
+            else if(type === '1w') { pr = parseFloat(p.price1w) || 0; nm = "1 Hafta"; lk = p.link1w || '#'; }
+            else if(type === '1m') { pr = parseFloat(p.price1m) || 0; nm = "1 Ay"; lk = p.link1m || '#'; }
+
+            // İndirim hesaplama
+            let finalPrice = pr;
+            let oldPriceHtml = '';
+            if (p.discountPct && p.discountPct > 0) {
+                finalPrice = pr - (pr * (p.discountPct / 100));
+                oldPriceHtml = `<span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; margin-right: 8px;">₺${formatPrice(pr)}</span>`;
             }
 
-            document.getElementById(`price-val-${p.id}`).innerText = `₺${pr}`;
+            document.getElementById(`price-val-${p.id}`).innerHTML = `${oldPriceHtml}₺${formatPrice(finalPrice)}`;
             document.getElementById(`dur-val-${p.id}`).innerText = nm;
             
-            if(!p.isMaintenance) {
-                document.getElementById(`buy-btn-${p.id}`).setAttribute('onclick', `window.open('${lk}', '_blank')`);
-            }
+            if(!p.isMaintenance) document.getElementById(`buy-btn-${p.id}`).setAttribute('onclick', `window.open('${lk}', '_blank')`);
         }
 
         function renderStoreProducts() {
             const c = document.getElementById('store-products-container'); 
             if(!c) return;
-            
             let filtered = selectedStoreCategory !== 'all' ? allProducts.filter(p => p.categoryName === selectedStoreCategory) : allProducts;
-            
             if(filtered.length === 0) {
                 c.innerHTML = `<p style="text-align: center; color: var(--text-secondary); width: 100%; grid-column: 1 / -1;">Bu kategoride yazılım bulunmuyor.</p>`;
                 return;
             }
-            
             c.innerHTML = ''; 
             
             filtered.forEach((p, i) => {
@@ -1795,12 +1769,23 @@
                 div.style.animationDelay = `${i * 0.1}s`;
                 
                 let mHtml = p.imageUrl ? `<img src="${p.imageUrl}" onerror="this.outerHTML='<i class=\\'fas fa-image prod-image-placeholder\\'></i>'">` : `<i class="fas fa-image prod-image-placeholder"></i>`;
-                let bHtml = p.isMaintenance ? `<button id="buy-btn-${p.id}" class="btn-buy maintenance" disabled>GÜNCELLEMEDE</button>` : `<button id="buy-btn-${p.id}" class="btn-buy" onclick="window.open('${p.linkLt || '#'}', '_blank')">SATIN AL</button>`;
+                let bHtml = p.isMaintenance ? `<button id="buy-btn-${p.id}" class="btn-buy maintenance" disabled>BAKIMDA</button>` : `<button id="buy-btn-${p.id}" class="btn-buy" onclick="window.open('${p.linkLt || '#'}', '_blank')">SATIN AL</button>`;
                 
+                // İNDİRİM HESAPLAMA EKRANI
+                let finalPrice = parseFloat(p.priceLt) || 0;
+                let oldPriceHtml = '';
+                let badgeHtml = `<div class="status-pill"><i class="fas fa-circle"></i> UNDETECTED</div>`;
+                
+                if(p.discountPct && p.discountPct > 0) {
+                    finalPrice = finalPrice - (finalPrice * p.discountPct / 100);
+                    oldPriceHtml = `<span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; margin-right: 8px;">₺${formatPrice(p.priceLt || 0)}</span>`;
+                    badgeHtml = `<div class="discount-badge">%${p.discountPct} İNDİRİM</div>`;
+                }
+
                 div.innerHTML = `
                     <div class="card-top-row">
                         <div class="game-pill">${p.categoryName || 'YAZILIM'}</div>
-                        <div class="status-pill"><i class="fas fa-circle"></i> UNDETECTED</div>
+                        ${badgeHtml}
                     </div>
                     <div class="prod-image-wrapper">${mHtml}</div>
                     <div class="prod-info">
@@ -1814,7 +1799,7 @@
                         <button class="var-btn active" data-prod="${p.id}" data-dur="lt" onclick="setProductVariant('${p.id}', 'lt')">LT</button>
                     </div>
                     <div class="price-row">
-                        <h4 id="price-val-${p.id}">₺${p.priceLt || 0}</h4>
+                        <h4 id="price-val-${p.id}">${oldPriceHtml}₺${formatPrice(finalPrice)}</h4>
                         <span id="dur-val-${p.id}">SINIRSIZ</span>
                     </div>
                     ${bHtml}
@@ -1823,26 +1808,22 @@
             });
         }
 
+        // ESKİ ÜRÜN YÖNETİMİ ORİJİNAL HALİ
         function renderAdminProducts() {
             const tb = document.getElementById('admin-products-body'); 
             if(!tb) return; 
-            
             tb.innerHTML = '';
-            
             if(allProducts.length === 0) {
                 tb.innerHTML = `<tr><td colspan="4" style="text-align: center;">Ürün yok.</td></tr>`;
                 return;
             }
-            
             allProducts.forEach(p => {
-                let mCol = p.isMaintenance ? 'var(--danger)' : '#fff';
                 tb.innerHTML += `
                     <tr>
                         <td style="font-weight:600; color:#fff;">${p.name}</td>
                         <td style="color:var(--text-secondary);">${p.categoryName || '-'}</td>
-                        <td style="font-weight:600;">${p.priceLt||0}₺</td>
+                        <td style="font-weight:600;">${formatPrice(p.priceLt || 0)}₺</td>
                         <td class="action-cell">
-                            <button class="btn-action-icon" style="color:${mCol};" onclick="toggleMaintenance('${p.id}', ${p.isMaintenance})"><i class="fas fa-power-off"></i></button>
                             <button class="btn-action-icon edit" onclick="openAddProductModal('${p.id}')"><i class="fas fa-pen"></i></button>
                             <button class="btn-action-icon ban" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button>
                         </td>
@@ -1851,31 +1832,56 @@
             });
         }
 
-        function toggleMaintenance(id, s) { 
-            db.collection("products").doc(id).update({ isMaintenance: !s }); 
+        // YENİ UYGULAMA YÖNETİMİ (BAKIM MODU İÇİN)
+        function renderAdminApps() {
+            const tb = document.getElementById('admin-apps-body');
+            if(!tb) return;
+            tb.innerHTML = '';
+            if(allProducts.length === 0) {
+                tb.innerHTML = `<tr><td colspan="3" style="text-align: center;">Uygulama bulunamadı.</td></tr>`;
+                return;
+            }
+            allProducts.forEach(p => {
+                let statusText = p.isMaintenance ? '<span style="color:var(--danger); font-weight:700;">BAKIMDA</span>' : '<span style="color:var(--success); font-weight:700;">AKTİF</span>';
+                let actionBtn = p.isMaintenance 
+                    ? `<button class="btn-action-icon" style="color:var(--success);" onclick="toggleAppMaintenance('${p.id}', ${p.isMaintenance})" title="Aktif Et"><i class="fas fa-play"></i></button>`
+                    : `<button class="btn-action-icon" style="color:var(--danger);" onclick="toggleAppMaintenance('${p.id}', ${p.isMaintenance})" title="Bakıma Al"><i class="fas fa-power-off"></i></button>`;
+                
+                tb.innerHTML += `
+                    <tr>
+                        <td style="color:#fff; font-weight:600;">${p.name}</td>
+                        <td>${statusText}</td>
+                        <td class="action-cell">
+                            ${actionBtn}
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function toggleAppMaintenance(id, currentStatus) { 
+            db.collection("products").doc(id).update({ isMaintenance: !currentStatus }); 
+            showToast(currentStatus ? "Uygulama aktif edildi!" : "Uygulama bakıma alındı!");
         }
         
         function openAddProductModal(id=null) {
             activeEditProductId = id; 
             const p = id ? allProducts.find(x => x.id === id) : null;
-            
             document.getElementById('prod-modal-title').innerText = id ? "Düzenle" : "Yeni Ürün";
             
             document.getElementById('prod-name').value = p ? p.name : ''; 
             document.getElementById('prod-category').value = p ? (p.categoryName || '') : ''; 
             document.getElementById('prod-img').value = p ? (p.imageUrl || '') : ''; 
             document.getElementById('prod-download').value = p ? (p.downloadLink || '') : ''; 
+            document.getElementById('prod-discount').value = p ? (p.discountPct || '') : ''; 
             document.getElementById('prod-desc').value = p ? p.desc : '';
             
             document.getElementById('prod-price-1d').value = p ? (p.price1d || '') : ''; 
             document.getElementById('prod-link-1d').value = p ? (p.link1d || '') : '';
-            
             document.getElementById('prod-price-1w').value = p ? (p.price1w || '') : ''; 
             document.getElementById('prod-link-1w').value = p ? (p.link1w || '') : '';
-            
             document.getElementById('prod-price-1m').value = p ? (p.price1m || '') : ''; 
             document.getElementById('prod-link-1m').value = p ? (p.link1m || '') : '';
-            
             document.getElementById('prod-price-lt').value = p ? (p.priceLt || '') : ''; 
             document.getElementById('prod-link-lt').value = p ? (p.linkLt || '') : '';
             
@@ -1891,14 +1897,15 @@
                 categoryName: document.getElementById('prod-category').value, 
                 imageUrl: document.getElementById('prod-img').value, 
                 downloadLink: document.getElementById('prod-download').value, 
+                discountPct: parseFloat(document.getElementById('prod-discount').value) || 0,
                 desc: document.getElementById('prod-desc').value, 
-                price1d: parseInt(document.getElementById('prod-price-1d').value) || 0, 
+                price1d: parseFloat(document.getElementById('prod-price-1d').value) || 0, 
                 link1d: document.getElementById('prod-link-1d').value,
-                price1w: parseInt(document.getElementById('prod-price-1w').value) || 0, 
+                price1w: parseFloat(document.getElementById('prod-price-1w').value) || 0, 
                 link1w: document.getElementById('prod-link-1w').value,
-                price1m: parseInt(document.getElementById('prod-price-1m').value) || 0, 
+                price1m: parseFloat(document.getElementById('prod-price-1m').value) || 0, 
                 link1m: document.getElementById('prod-link-1m').value,
-                priceLt: parseInt(document.getElementById('prod-price-lt').value) || 0, 
+                priceLt: parseFloat(document.getElementById('prod-price-lt').value) || 0, 
                 linkLt: document.getElementById('prod-link-lt').value
             };
             
@@ -1910,80 +1917,48 @@
             } 
         }
 
-        function deleteProduct(id) { 
-            if(confirm("Emin misiniz?")) {
-                db.collection("products").doc(id).delete(); 
-            }
-        }
+        function deleteProduct(id) { if(confirm("Emin misiniz?")) db.collection("products").doc(id).delete(); }
 
-        // ================= HWID SİSTEMİ =================
+        // === HWID, USERS, ORDERS ===
         function requestHwidReset(lId) { 
-            if(confirm("HWID sıfırlansın mı?")) {
-                db.collection('licenses').doc(lId).update({ hwidStatus: 'pending' }).then(() => showToast("Talep iletildi.")); 
-            }
+            if(confirm("HWID sıfırlansın mı?")) db.collection('licenses').doc(lId).update({ hwidStatus: 'pending' }).then(() => showToast("Talep iletildi.")); 
         }
 
         function renderAdminHwidRequests() {
             const tb = document.getElementById('admin-hwid-body'); 
             if(!tb) return; 
             tb.innerHTML = '';
-            
             const pending = allLicenses.filter(l => l.hwidStatus === 'pending');
-            if(pending.length === 0) {
-                tb.innerHTML = `<tr><td colspan="4" style="text-align:center;">Talep yok.</td></tr>`;
-                return;
-            }
-
+            if(pending.length === 0) { tb.innerHTML = `<tr><td colspan="4" style="text-align:center;">Talep yok.</td></tr>`; return; }
             pending.forEach(l => { 
-                tb.innerHTML += `
-                    <tr>
-                        <td style="color:#fff;">${l.userName}</td>
-                        <td style="color:var(--accent);">${l.id}</td>
-                        <td>${l.productName}</td>
-                        <td class="action-cell">
-                            <button class="btn-action-icon" style="color:var(--success);" onclick="approveHwid('${l.id}')"><i class="fas fa-check"></i></button>
-                            <button class="btn-action-icon" style="color:var(--danger);" onclick="rejectHwid('${l.id}')"><i class="fas fa-times"></i></button>
-                        </td>
-                    </tr>
-                `; 
+                tb.innerHTML += `<tr>
+                    <td style="color:#fff;">${l.userName}</td>
+                    <td style="color:var(--accent);">${l.id}</td>
+                    <td>${l.productName}</td>
+                    <td class="action-cell">
+                        <button class="btn-action-icon" style="color:var(--success);" onclick="approveHwid('${l.id}')"><i class="fas fa-check"></i></button>
+                        <button class="btn-action-icon" style="color:var(--danger);" onclick="rejectHwid('${l.id}')"><i class="fas fa-times"></i></button>
+                    </td>
+                </tr>`; 
             });
         }
+        function approveHwid(id) { db.collection('licenses').doc(id).update({ hwidStatus: firebase.firestore.FieldValue.delete(), hwid: "" }); }
+        function rejectHwid(id) { db.collection('licenses').doc(id).update({ hwidStatus: firebase.firestore.FieldValue.delete() }); }
 
-        function approveHwid(id) { 
-            db.collection('licenses').doc(id).update({ 
-                hwidStatus: firebase.firestore.FieldValue.delete(), 
-                hwid: "" 
-            }); 
-        }
-
-        function rejectHwid(id) { 
-            db.collection('licenses').doc(id).update({ 
-                hwidStatus: firebase.firestore.FieldValue.delete() 
-            }); 
-        }
-
-        // ================= KULLANICILAR VE SİPARİŞLER =================
         db.collection("orders").orderBy("timestamp", "desc").onSnapshot(snap => { 
             const tb = document.getElementById('admin-orders-body'); 
             if(!tb) return; 
             tb.innerHTML = ''; 
-            
-            if(snap.empty) {
-                tb.innerHTML = `<tr><td colspan="5" style="text-align:center;">Yok</td></tr>`;
-                return;
-            }
-            
+            if(snap.empty) { tb.innerHTML = `<tr><td colspan="5" style="text-align:center;">Yok</td></tr>`; return; }
             snap.forEach(doc => { 
                 const d = doc.data(); 
-                tb.innerHTML += `
-                    <tr>
-                        <td>${d.timestamp ? d.timestamp.toDate().toLocaleDateString('tr-TR') : ''}</td>
-                        <td>${d.buyerEmail}</td>
-                        <td style="color:#fff;">${d.productName}</td>
-                        <td style="color:var(--accent);">₺${d.price}</td>
-                        <td style="font-family:monospace;">${d.licenseKey}</td>
-                    </tr>
-                `; 
+                tb.innerHTML += `<tr>
+                    <td>${d.timestamp ? d.timestamp.toDate().toLocaleDateString('tr-TR') : ''}</td>
+                    <td>${d.buyerEmail}</td>
+                    <td style="color:#fff;">${d.productName}</td>
+                    <td style="color:var(--accent);">₺${formatPrice(d.price)}</td>
+                    <td style="font-family:monospace;">${d.licenseKey}</td>
+                </tr>`; 
             }); 
         });
 
@@ -1997,25 +1972,20 @@
             const tb = document.getElementById('admin-users-body'); 
             if(!tb) return; 
             tb.innerHTML = ''; 
-            
             const s = document.getElementById('user-search') ? document.getElementById('user-search').value.toLowerCase() : ''; 
             let flt = allUsers.filter(u => u.username && u.username.toLowerCase().includes(s)); 
-            
             if(flt.length === 0) return; 
-            
             flt.forEach(u => { 
                 let cl = u.role === 'admin' ? 'var(--accent)' : (u.role === 'banned' ? 'var(--danger)' : 'var(--text-secondary)'); 
-                tb.innerHTML += `
-                    <tr>
-                        <td style="color:#fff;">${u.username}</td>
-                        <td><span style="color:${cl}; font-size:0.75rem; text-transform:uppercase;">${u.role}</span></td>
-                        <td class="action-cell">
-                            <button class="btn-action-icon edit" onclick="openPermModal('${u.id}', '${u.username}', '${u.role}')"><i class="fas fa-cog"></i></button>
-                            <button class="btn-action-icon" style="color:var(--success);" onclick="openLicenseModal('${u.id}', '${u.username}', '${u.email}')"><i class="fas fa-key"></i></button>
-                            <button class="btn-action-icon" style="color:var(--danger);" onclick="openBanModal('${u.id}', '${u.username}')"><i class="fas fa-ban"></i></button>
-                        </td>
-                    </tr>
-                `; 
+                tb.innerHTML += `<tr>
+                    <td style="color:#fff;">${u.username}</td>
+                    <td><span style="color:${cl}; font-size:0.75rem; text-transform:uppercase;">${u.role}</span></td>
+                    <td class="action-cell">
+                        <button class="btn-action-icon edit" onclick="openPermModal('${u.id}', '${u.username}', '${u.role}')"><i class="fas fa-cog"></i></button>
+                        <button class="btn-action-icon" style="color:var(--success);" onclick="openLicenseModal('${u.id}', '${u.username}', '${u.email}')"><i class="fas fa-key"></i></button>
+                        <button class="btn-action-icon" style="color:var(--danger);" onclick="openBanModal('${u.id}', '${u.username}')"><i class="fas fa-ban"></i></button>
+                    </td>
+                </tr>`; 
             }); 
         }
 
@@ -2025,29 +1995,19 @@
             document.getElementById('perm-role').value = r; 
             document.getElementById('perm-modal').style.display = 'flex'; 
         }
-
         function savePermission() { 
-            if(activeAdminUserId) {
-                db.collection('users').doc(activeAdminUserId).update({ role: document.getElementById('perm-role').value }).then(() => closeModal('perm-modal')); 
-            }
+            if(activeAdminUserId) db.collection('users').doc(activeAdminUserId).update({ role: document.getElementById('perm-role').value }).then(() => closeModal('perm-modal')); 
         }
-
         function openBanModal(id, n) { 
             userToBan = { id: id, name: n }; 
             document.getElementById('ban-user-text').innerText = `${n} yasaklanacak.`; 
             document.getElementById('ban-modal').style.display = 'flex'; 
         }
-
         function executeBan() { 
-            if(userToBan) {
-                db.collection('users').doc(userToBan.id).update({ role: 'banned' }).then(() => { 
-                    closeModal('ban-modal'); 
-                    userToBan = null; 
-                }); 
-            }
+            if(userToBan) db.collection('users').doc(userToBan.id).update({ role: 'banned' }).then(() => { closeModal('ban-modal'); userToBan = null; }); 
         }
 
-        // ================= BİLETLER =================
+        // === TICKETS ===
         db.collection("tickets").orderBy("timestamp", "desc").onSnapshot(snap => { 
             allTickets = []; 
             snap.forEach(doc => allTickets.push({ id: doc.id, ...doc.data() })); 
@@ -2057,19 +2017,11 @@
 
         function createTicket() { 
             if(!currentUser) return openModal('login'); 
-            
             const s = document.getElementById('ticket-subject').value;
             const m = document.getElementById('ticket-msg').value; 
-            
             if(!s || !m) return; 
-            
             db.collection("tickets").add({ 
-                subject: s, 
-                message: m, 
-                reply: '', 
-                user: currentUser.username, 
-                status: 'open', 
-                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+                subject: s, message: m, reply: '', user: currentUser.username, status: 'open', timestamp: firebase.firestore.FieldValue.serverTimestamp() 
             }).then(() => { 
                 document.getElementById('ticket-subject').value = ''; 
                 document.getElementById('ticket-msg').value = ''; 
@@ -2083,30 +2035,18 @@
             const tb = document.getElementById('user-tickets-list-body'); 
             if(!tb) return; 
             tb.innerHTML = ''; 
-            
             const myT = allTickets.filter(t => t.user === currentUser.username); 
-            if(myT.length===0) {
-                tb.innerHTML=`<tr><td colspan="3" style="text-align:center;">Yok.</td></tr>`;
-                return;
-            }
-            
+            if(myT.length===0) { tb.innerHTML=`<tr><td colspan="3" style="text-align:center;">Yok.</td></tr>`; return; }
             myT.forEach(t => { 
                 let cl = t.status === 'open' ? 'var(--text-secondary)' : 'var(--success)'; 
                 let b = t.status === 'resolved' ? `<button class="btn-action-icon" style="width:auto; padding:0 10px; color:var(--success);" onclick="readUserTicketReply('${t.id}')">Gör</button>` : '-'; 
-                tb.innerHTML += `
-                    <tr>
-                        <td style="color:#fff;">${t.subject}</td>
-                        <td style="color:${cl}; font-size:0.75rem; text-transform:uppercase;">${t.status}</td>
-                        <td>${b}</td>
-                    </tr>
-                `; 
+                tb.innerHTML += `<tr><td style="color:#fff;">${t.subject}</td><td style="color:${cl}; font-size:0.75rem; text-transform:uppercase;">${t.status}</td><td>${b}</td></tr>`; 
             }); 
         }
 
         function readUserTicketReply(id) { 
             const t = allTickets.find(x => x.id === id); 
             if(!t) return; 
-            
             document.getElementById('ut-msg').innerText = t.message; 
             document.getElementById('ut-reply').innerText = t.reply || "Yanıtlandı."; 
             document.getElementById('user-ticket-modal').style.display = 'flex'; 
@@ -2117,33 +2057,21 @@
             if(!tb) return; 
             tb.innerHTML = ''; 
             if(allTickets.length===0) return; 
-            
             allTickets.forEach(t => { 
                 let cl = t.status === 'open' ? 'var(--accent)' : 'var(--text-secondary)'; 
-                tb.innerHTML += `
-                    <tr>
-                        <td>${t.user}</td>
-                        <td style="color:#fff;">${t.subject}</td>
-                        <td style="color:${cl}; font-size:0.75rem;">${t.status}</td>
-                        <td class="action-cell">
-                            <button class="btn-action-icon" onclick="openTicketModal('${t.id}')"><i class="fas fa-reply"></i></button>
-                            <button class="btn-action-icon ban" onclick="deleteTicket('${t.id}')"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                `; 
+                tb.innerHTML += `<tr>
+                    <td>${t.user}</td><td style="color:#fff;">${t.subject}</td><td style="color:${cl}; font-size:0.75rem;">${t.status}</td>
+                    <td class="action-cell">
+                        <button class="btn-action-icon" onclick="openTicketModal('${t.id}')"><i class="fas fa-reply"></i></button>
+                        <button class="btn-action-icon ban" onclick="deleteTicket('${t.id}')"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`; 
             }); 
         }
-
-        function deleteTicket(id) { 
-            if(confirm("Sil?")) {
-                db.collection("tickets").doc(id).delete(); 
-            }
-        }
-
+        function deleteTicket(id) { if(confirm("Sil?")) db.collection("tickets").doc(id).delete(); }
         function openTicketModal(id) { 
             const t = allTickets.find(x => x.id === id); 
             if(!t) return; 
-            
             activeTicketId = id; 
             document.getElementById('t-user').innerText = t.user; 
             document.getElementById('t-subj').innerText = t.subject; 
@@ -2151,17 +2079,12 @@
             document.getElementById('admin-ticket-reply').value = t.reply || ''; 
             document.getElementById('ticket-modal').style.display = 'flex'; 
         }
-
         function resolveTicket() { 
             if(!activeTicketId) return; 
-            
-            db.collection("tickets").doc(activeTicketId).update({ 
-                status: 'resolved', 
-                reply: document.getElementById('admin-ticket-reply').value 
-            }).then(() => closeModal('ticket-modal')); 
+            db.collection("tickets").doc(activeTicketId).update({ status: 'resolved', reply: document.getElementById('admin-ticket-reply').value }).then(() => closeModal('ticket-modal')); 
         }
 
-        // ================= LİSANS SİSTEMİ =================
+        // === LICENSES ===
         db.collection("licenses").orderBy("timestamp", "desc").onSnapshot(snap => { 
             allLicenses = []; 
             snap.forEach(doc => allLicenses.push({ id: doc.id, ...doc.data() })); 
@@ -2175,28 +2098,18 @@
             const tb = document.getElementById('user-licenses-body'); 
             if(!tb) return; 
             tb.innerHTML = '';
-            
             const my = allLicenses.filter(l => l.userId === auth.currentUser.uid);
-            
-            if(my.length === 0) {
-                tb.innerHTML = `<tr><td colspan="4" style="text-align:center;">Yok</td></tr>`;
-                return;
-            }
-            
+            if(my.length === 0) { tb.innerHTML = `<tr><td colspan="4" style="text-align:center;">Yok</td></tr>`; return; }
             my.forEach(d => {
                 const pMatch = allProducts.find(p => p.id === d.productId) || {};
-                
                 let dlBtn = pMatch.downloadLink ? `<button class="btn-action-icon" style="width:auto; padding:0 12px; font-size:0.75rem; color:#fff;" onclick="window.open('${pMatch.downloadLink}', '_blank')"><i class="fas fa-download"></i></button>` : '';
                 let hwBtn = d.hwidStatus === 'pending' ? `<span style="color:var(--accent); font-size:0.7rem;">Bekliyor</span>` : `<button class="btn-action-icon" style="width:auto; padding:0 12px; font-size:0.75rem; color:var(--danger);" onclick="requestHwidReset('${d.id}')"><i class="fas fa-microchip"></i></button>`;
-                
-                tb.innerHTML += `
-                    <tr>
-                        <td style="color:#fff;">${d.productName}</td>
-                        <td style="font-family:monospace; color:var(--text-secondary);">${d.id}</td>
-                        <td>${formatRemainingTime(d.expiresAt, d.type)}</td>
-                        <td style="display:flex; gap:5px;">${dlBtn}${hwBtn}</td>
-                    </tr>
-                `;
+                tb.innerHTML += `<tr>
+                    <td style="color:#fff;">${d.productName}</td>
+                    <td style="font-family:monospace; color:var(--text-secondary);">${d.id}</td>
+                    <td>${formatRemainingTime(d.expiresAt, d.type)}</td>
+                    <td style="display:flex; gap:5px;">${dlBtn}${hwBtn}</td>
+                </tr>`;
             });
         }
 
@@ -2204,119 +2117,71 @@
             const tb = document.getElementById('admin-keys-body'); 
             if(!tb) return; 
             tb.innerHTML = ''; 
-            
             allLicenses.forEach(l => { 
-                tb.innerHTML += `
-                    <tr>
-                        <td style="font-family:monospace; font-size:0.8rem;">${l.id}</td>
-                        <td style="color:#fff;">${l.productName}</td>
-                        <td>${formatRemainingTime(l.expiresAt, l.type)}</td>
-                        <td>${l.userName||'Boşta'}</td>
-                        <td class="action-cell">
-                            <button class="btn-action-icon edit" onclick="openExtendModal('${l.id}')"><i class="fas fa-clock"></i></button>
-                            <button class="btn-action-icon ban" onclick="deleteLicense('${l.id}')"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                `; 
+                tb.innerHTML += `<tr>
+                    <td style="font-family:monospace; font-size:0.8rem;">${l.id}</td>
+                    <td style="color:#fff;">${l.productName}</td>
+                    <td>${formatRemainingTime(l.expiresAt, l.type)}</td>
+                    <td>${l.userName||'Boşta'}</td>
+                    <td class="action-cell">
+                        <button class="btn-action-icon edit" onclick="openExtendModal('${l.id}')"><i class="fas fa-clock"></i></button>
+                        <button class="btn-action-icon ban" onclick="deleteLicense('${l.id}')"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`; 
             }); 
         }
-
-        function deleteLicense(id) { 
-            if(confirm("Sil?")) {
-                db.collection("licenses").doc(id).delete(); 
-            }
-        }
+        function deleteLicense(id) { if(confirm("Sil?")) db.collection("licenses").doc(id).delete(); }
 
         function openExtendModal(id) { 
             activeExtendKeyId = id; 
             document.getElementById('extend-key-display').innerText = id; 
             document.getElementById('extend-modal').style.display = 'flex'; 
         }
-
         function saveExtension() { 
             if(!activeExtendKeyId) return; 
-            
             const d = document.getElementById('extend-duration').value; 
             const lDoc = db.collection('licenses').doc(activeExtendKeyId); 
-            
             lDoc.get().then(doc => { 
                 if(doc.exists) { 
-                    let dt = doc.data();
-                    let nT = dt.type;
-                    let nD = null; 
-                    
-                    if(d === 'lifetime') {
-                        nT = 'lifetime'; 
-                    } else { 
-                        nD = new Date((dt.expiresAt && dt.type !== 'lifetime' ? dt.expiresAt.toDate() : new Date()).getTime() + (parseInt(d)*86400000)); 
-                        nT = 'extended'; 
-                    } 
+                    let dt = doc.data(); let nT = dt.type; let nD = null; 
+                    if(d === 'lifetime') { nT = 'lifetime'; } 
+                    else { nD = new Date((dt.expiresAt && dt.type !== 'lifetime' ? dt.expiresAt.toDate() : new Date()).getTime() + (parseInt(d)*86400000)); nT = 'extended'; } 
                     lDoc.update({ type: nT, expiresAt: nD ? firebase.firestore.Timestamp.fromDate(nD) : null }).then(() => closeModal('extend-modal')); 
                 } 
             }); 
         }
 
-        function generateKeyFormat() { 
-            return `SENS-${Math.random().toString(36).substr(2,4).toUpperCase()}-${Math.random().toString(36).substr(2,4).toUpperCase()}`; 
-        }
+        function generateKeyFormat() { return `SENS-${Math.random().toString(36).substr(2,4).toUpperCase()}-${Math.random().toString(36).substr(2,4).toUpperCase()}`; }
 
         function openLicenseModal(id, un, m) { 
-            activeAdminUserId = id; 
-            activeAdminUsername = un; 
-            activeAdminUserEmail = m; 
-            
+            activeAdminUserId = id; activeAdminUsername = un; activeAdminUserEmail = m; 
             document.getElementById('license-username-display').innerText = un; 
-            
             const s = document.getElementById('license-product'); 
             s.innerHTML = ''; 
-            
-            allProducts.forEach(p => { 
-                if(!p.isMaintenance) s.innerHTML += `<option value="${p.id}">${p.name}</option>`; 
-            }); 
-            
+            allProducts.forEach(p => { if(!p.isMaintenance) s.innerHTML += `<option value="${p.id}">${p.name}</option>`; }); 
             document.getElementById('license-modal').style.display = 'flex'; 
         }
 
         function assignLicenseToUser() {
             if(!activeAdminUserId) return; 
-            
             const pid = document.getElementById('license-product').value;
             const d = document.getElementById('license-duration').value; 
             const pr = allProducts.find(x => x.id === pid); 
-            
             if(!pr) return;
-            
             let ea = null; 
             if(d === 'daily') ea = new Date(Date.now()+86400000); 
             else if(d === 'weekly') ea = new Date(Date.now()+604800000); 
             else if(d === 'monthly') ea = new Date(Date.now()+2592000000);
-            
             db.collection('licenses').doc(generateKeyFormat()).set({ 
-                userId: activeAdminUserId, 
-                userName: activeAdminUsername, 
-                userEmail: activeAdminUserEmail, 
-                productId: pr.id, 
-                productName: pr.name, 
-                type: d, 
-                keyType: "user", 
-                hwid: "", 
-                status: "active", 
-                expiresAt: ea ? firebase.firestore.Timestamp.fromDate(ea) : null, 
-                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
-            }).then(() => { 
-                closeModal('license-modal'); 
-                showToast("Tanımlandı!"); 
-            });
+                userId: activeAdminUserId, userName: activeAdminUsername, userEmail: activeAdminUserEmail, 
+                productId: pr.id, productName: pr.name, type: d, keyType: "user", hwid: "", status: "active", 
+                expiresAt: ea ? firebase.firestore.Timestamp.fromDate(ea) : null, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+            }).then(() => { closeModal('license-modal'); showToast("Tanımlandı!"); });
         }
 
         function populateKeygenSelects() { 
             const k = document.getElementById('keygen-product'); 
-            if(k) { 
-                k.innerHTML = ''; 
-                allProducts.forEach(p => { 
-                    if(!p.isMaintenance) k.innerHTML += `<option value="${p.name}">${p.name}</option>`; 
-                }); 
-            } 
+            if(k) { k.innerHTML = ''; allProducts.forEach(p => { if(!p.isMaintenance) k.innerHTML += `<option value="${p.name}">${p.name}</option>`; }); } 
         }
 
         function generateAdminKeys() {
@@ -2324,39 +2189,20 @@
             const d = document.getElementById('keygen-duration').value;
             const t = document.getElementById('keygen-type').value;
             const c = parseInt(document.getElementById('keygen-count').value)||1; 
-            
             if(!pn) return;
-            
-            let gk = [];
-            let ea = null; 
-            
+            let gk = []; let ea = null; 
             if(d === 'daily') ea = new Date(Date.now()+86400000); 
             else if(d === 'weekly') ea = new Date(Date.now()+604800000); 
             else if(d === 'monthly') ea = new Date(Date.now()+2592000000);
-            
             for(let i=0; i<c; i++) { 
-                let k = generateKeyFormat(); 
-                if(t === 'admin') k+="-ADM"; 
-                gk.push(k); 
-                
+                let k = generateKeyFormat(); if(t === 'admin') k+="-ADM"; gk.push(k); 
                 db.collection('licenses').doc(k).set({ 
-                    userId: "admin_generated", 
-                    userName: "Boşta", 
-                    productId: "keygen", 
-                    productName: pn, 
-                    type: d, 
-                    keyType: t, 
-                    hwid: "", 
-                    status: "active", 
-                    expiresAt: ea ? firebase.firestore.Timestamp.fromDate(ea) : null, 
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+                    userId: "admin_generated", userName: "Boşta", productId: "keygen", productName: pn, type: d, keyType: t, hwid: "", status: "active", 
+                    expiresAt: ea ? firebase.firestore.Timestamp.fromDate(ea) : null, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
                 }); 
             }
-            
             const r = document.getElementById('keygen-result');
-            r.style.display = 'block'; 
-            r.value = gk.join('\n'); 
-            showToast("Üretildi!");
+            r.style.display = 'block'; r.value = gk.join('\n'); showToast("Üretildi!");
         }
 
     </script>

@@ -1161,7 +1161,7 @@
             <div class="nav-menu">
                 <button class="nav-btn active" data-tab="home" onclick="switchTab('home')">Anasayfa</button>
                 <button class="nav-btn" data-tab="products" onclick="switchTab('products')">Mağaza</button>
-                <button class="nav-btn" data-tab="giveaways" onclick="switchTab('giveaways')">Çekilişler</button> <!-- YENİ -->
+                <button class="nav-btn" data-tab="giveaways" onclick="switchTab('giveaways')">Çekilişler</button> 
                 <button class="nav-btn" data-tab="support" onclick="switchTab('support')">Destek</button>
                 <button class="nav-btn" data-tab="about" onclick="switchTab('about')">Hakkımızda</button>
             </div>
@@ -1227,7 +1227,7 @@
             </div>
         </div>
 
-        <!-- === ÇEKİLİŞLER (GIVEAWAYS) TAB YENİ === -->
+        <!-- === ÇEKİLİŞLER (GIVEAWAYS) TAB === -->
         <div id="tab-giveaways" class="tab-content">
             <div class="tab-inner">
                 <div class="section-header">
@@ -1300,7 +1300,6 @@
                         <button class="profile-btn" onclick="switchProfileView('admin-keygen')">Lisans Üretici</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-keys')">Lisans Yönetimi</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-apps')">Uygulama Yönetimi</button>
-                        <!-- YENİ ADMİN SEKMELERİ -->
                         <button class="profile-btn" style="color: var(--accent);" onclick="switchProfileView('admin-giveaways')"><i class="fas fa-gift"></i> Çekiliş Yönetimi</button>
                         <button class="profile-btn" style="color: #00ffcc;" onclick="switchProfileView('admin-social')"><i class="fas fa-share-alt"></i> Sosyal Medya</button>
                     </div>
@@ -1461,7 +1460,7 @@
                         </table>
                     </div>
 
-                    <!-- YENİ: ÇEKİLİŞ YÖNETİMİ PANELİ -->
+                    <!-- ÇEKİLİŞ YÖNETİMİ PANELİ -->
                     <div id="p-view-admin-giveaways" class="profile-view">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 20px; align-items:center;">
                             <div>
@@ -1478,7 +1477,7 @@
                         </table>
                     </div>
 
-                    <!-- YENİ: SOSYAL MEDYA YÖNETİMİ PANELİ -->
+                    <!-- SOSYAL MEDYA YÖNETİMİ PANELİ -->
                     <div id="p-view-admin-social" class="profile-view">
                         <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 20px; text-transform:uppercase;">Sosyal Medya Linkleri</h2>
                         <div class="form-box" style="max-width: 600px;">
@@ -1513,7 +1512,6 @@
                 <i class="fas fa-lock"></i>
                 <input type="password" id="password" class="input-base" style="padding-left:35px;" placeholder="Şifre" onkeypress="if(event.key === 'Enter') handleAuth()">
             </div>
-            <!-- YENİ BENİ UNUTMA KUTUCUĞU -->
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px; margin-top: -5px;">
                 <input type="checkbox" id="remember-me" checked style="accent-color: var(--accent); cursor: pointer; width: 16px; height: 16px;">
                 <label for="remember-me" style="color: var(--text-secondary); font-size: 0.85rem; cursor: pointer;">Beni Unutma</label>
@@ -1524,7 +1522,7 @@
         </div>
     </div>
 
-    <!-- YENİ: ÇEKİLİŞ EKLEME MODALI -->
+    <!-- ÇEKİLİŞ EKLEME MODALI -->
     <div id="giveaway-modal" class="modal-overlay">
         <div class="modal-box" style="width: 450px;">
             <i class="fas fa-times close-modal" onclick="closeModal('giveaway-modal')"></i>
@@ -1747,7 +1745,7 @@
         }
 
         function switchTab(tabId) {
-            if(tabId !== 'profile') playTransition(); // Sekme geçişlerinde ufak efekt
+            if(tabId !== 'profile') playTransition(); 
             
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             const tb = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
@@ -1829,10 +1827,9 @@
             const pass = document.getElementById('password').value;
             if(!uname || !pass) return alert("Boş alan bırakmayın.");
             
-            playTransition(); // Giriş yaparken ufak yükleme animasyonu
+            playTransition(); 
             const fakeEmail = uname + "@sensi.local";
             
-            // BENİ UNUTMA MANTIĞI
             const persistType = document.getElementById('remember-me').checked 
                 ? firebase.auth.Auth.Persistence.LOCAL 
                 : firebase.auth.Auth.Persistence.SESSION;
@@ -1978,7 +1975,7 @@
             renderAdminProducts(); 
             renderAdminApps(); 
             populateKeygenSelects();
-            populateGiveawayProductSelect(); // ÇEKİLİŞ ÜRÜN SEÇİMİ
+            populateGiveawayProductSelect(); 
             loadUserLicenses(); 
         });
         
@@ -2010,7 +2007,6 @@
             if(!p.isMaintenance) document.getElementById(`buy-btn-${p.id}`).setAttribute('onclick', `window.open('${lk}', '_blank')`);
         }
 
-        // MAĞAZADA ÜRÜNLER ARTIK VARSAYILAN OLARAK 1G SEÇİLİ GELİYOR
         function renderStoreProducts() {
             const c = document.getElementById('store-products-container'); 
             if(!c) return;
@@ -2028,7 +2024,6 @@
                 
                 let mHtml = p.imageUrl ? `<img src="${p.imageUrl}" onerror="this.outerHTML='<i class=\\'fas fa-image prod-image-placeholder\\'></i>'">` : `<i class="fas fa-image prod-image-placeholder"></i>`;
                 
-                // İLK AÇILIŞ: 1 GÜNLÜK (1D) FİYATLARI ALINIYOR (LIFETIME YERİNE)
                 let initialPrice = parseFloat(p.price1d) || 0;
                 let initialLink = p.link1d || '#';
                 
@@ -2240,9 +2235,10 @@
                     ? `<span style="color:var(--accent);">Devam Ediyor</span>` 
                     : `<span style="color:var(--success);">Kazanan: ${g.winner}</span>`;
                 
+                // YENİ: AKTİF ÇEKİLİŞTE DE SİL BUTONU EKLENDİ
                 let actionHtml = g.status === 'active' 
-                    ? `<button class="btn-action-icon" style="color:var(--success); width:auto; padding:0 10px;" onclick="resolveGiveaway('${g.id}')">Sonuçlandır</button>`
-                    : `<button class="btn-action-icon ban" onclick="deleteGiveaway('${g.id}')"><i class="fas fa-trash"></i></button>`;
+                    ? `<div style="display:flex; gap:8px;"><button class="btn-action-icon" style="color:var(--success); width:auto; padding:0 10px;" onclick="resolveGiveaway('${g.id}')">Sonuçlandır</button><button class="btn-action-icon ban" onclick="deleteGiveaway('${g.id}')" title="Sil"><i class="fas fa-trash"></i></button></div>`
+                    : `<button class="btn-action-icon ban" onclick="deleteGiveaway('${g.id}')" title="Sil"><i class="fas fa-trash"></i></button>`;
 
                 tb.innerHTML += `
                     <tr>
@@ -2260,24 +2256,20 @@
             if(confirm("Silmek istediğinize emin misiniz?")) db.collection("giveaways").doc(id).delete();
         }
 
-        // RASTGELE KULLANICI SEÇİP LİSANS TANIMLAMA (SONUÇLANDIRMA)
         function resolveGiveaway(gId) {
             if(!confirm("Çekilişi şimdi sonuçlandırıp rastgele bir üyeye lisans vermek istiyor musunuz?")) return;
 
             const g = allGiveaways.find(x => x.id === gId);
             if(!g) return;
 
-            // Admin ve Banlı olmayan üyeleri filtrele
             const eligibleUsers = allUsers.filter(u => u.role === 'user');
             if(eligibleUsers.length === 0) {
                 alert("Sistemde çekilişe katılabilecek standart kullanıcı bulunamadı!");
                 return;
             }
 
-            // Rastgele kazanan belirle
             const winnerUser = eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)];
 
-            // Lisans süresini hesapla
             let ea = null; 
             if(g.duration === 'daily') ea = new Date(Date.now()+86400000); 
             else if(g.duration === 'weekly') ea = new Date(Date.now()+604800000); 
@@ -2285,7 +2277,6 @@
             
             const newKey = generateKeyFormat();
 
-            // Lisansı kaydet
             db.collection('licenses').doc(newKey).set({ 
                 userId: winnerUser.id, 
                 userName: winnerUser.username, 
@@ -2299,7 +2290,6 @@
                 expiresAt: ea ? firebase.firestore.Timestamp.fromDate(ea) : null, 
                 timestamp: firebase.firestore.FieldValue.serverTimestamp() 
             }).then(() => { 
-                // Çekiliş dokümanını güncelle
                 db.collection("giveaways").doc(g.id).update({
                     status: 'completed',
                     winner: winnerUser.username
@@ -2313,7 +2303,6 @@
             const c = document.getElementById('user-giveaways-container');
             if(!c) return;
 
-            // Önceki sayaçları temizle
             giveawayIntervals.forEach(clearInterval);
             giveawayIntervals = [];
 
@@ -2344,7 +2333,6 @@
                 `;
                 c.appendChild(div);
 
-                // Geri Sayım Mantığı
                 const targetTime = g.endDate.toDate().getTime();
                 const interval = setInterval(() => {
                     const now = new Date().getTime();
@@ -2422,6 +2410,7 @@
             renderAdminUsers(); 
         });
 
+        // YENİ: BAN KALDIRMA VE SİLME BUTONLARI EKLENDİ
         function renderAdminUsers() { 
             const tb = document.getElementById('admin-users-body'); 
             if(!tb) return; 
@@ -2431,16 +2420,35 @@
             if(flt.length === 0) return; 
             flt.forEach(u => { 
                 let cl = u.role === 'admin' ? 'var(--accent)' : (u.role === 'banned' ? 'var(--danger)' : 'var(--text-secondary)'); 
+                
+                let banBtn = u.role === 'banned' 
+                    ? `<button class="btn-action-icon" style="color:var(--success);" onclick="executeUnban('${u.id}')" title="Ban Kaldır"><i class="fas fa-undo"></i></button>`
+                    : `<button class="btn-action-icon" style="color:var(--danger);" onclick="openBanModal('${u.id}', '${u.username}')" title="Yasakla"><i class="fas fa-ban"></i></button>`;
+
                 tb.innerHTML += `<tr>
                     <td style="color:#fff;">${u.username}</td>
                     <td><span style="color:${cl}; font-size:0.75rem; text-transform:uppercase;">${u.role}</span></td>
                     <td class="action-cell">
-                        <button class="btn-action-icon edit" onclick="openPermModal('${u.id}', '${u.username}', '${u.role}')"><i class="fas fa-cog"></i></button>
-                        <button class="btn-action-icon" style="color:var(--success);" onclick="openLicenseModal('${u.id}', '${u.username}', '${u.email}')"><i class="fas fa-key"></i></button>
-                        <button class="btn-action-icon" style="color:var(--danger);" onclick="openBanModal('${u.id}', '${u.username}')"><i class="fas fa-ban"></i></button>
+                        <button class="btn-action-icon edit" onclick="openPermModal('${u.id}', '${u.username}', '${u.role}')" title="Yetki Düzenle"><i class="fas fa-cog"></i></button>
+                        <button class="btn-action-icon" style="color:var(--success);" onclick="openLicenseModal('${u.id}', '${u.username}', '${u.email}')" title="Lisans Tanımla"><i class="fas fa-key"></i></button>
+                        ${banBtn}
+                        <button class="btn-action-icon" style="color:#ff4444;" onclick="deleteUser('${u.id}', '${u.username}')" title="Kullanıcıyı Sil"><i class="fas fa-trash"></i></button>
                     </td>
                 </tr>`; 
             }); 
+        }
+
+        // YENİ: KULLANICI SİL VE BAN KALDIR FONKSİYONLARI
+        function deleteUser(id, un) {
+            if(confirm(`${un} adlı kullanıcıyı sistemden tamamen silmek istediğinize emin misiniz? (Bu işlem geri alınamaz!)`)) {
+                db.collection('users').doc(id).delete().then(() => showToast("Kullanıcı tamamen silindi."));
+            }
+        }
+
+        function executeUnban(id) {
+            if(confirm("Kullanıcının yasaklamasını kaldırmak istediğinize emin misiniz?")) {
+                db.collection('users').doc(id).update({ role: 'user' }).then(() => showToast("Yasaklama kaldırıldı!"));
+            }
         }
 
         function openPermModal(id, n, r) { 
@@ -2458,7 +2466,7 @@
             document.getElementById('ban-modal').style.display = 'flex'; 
         }
         function executeBan() { 
-            if(userToBan) db.collection('users').doc(userToBan.id).update({ role: 'banned' }).then(() => { closeModal('ban-modal'); userToBan = null; }); 
+            if(userToBan) db.collection('users').doc(userToBan.id).update({ role: 'banned' }).then(() => { closeModal('ban-modal'); userToBan = null; showToast("Kullanıcı Yasaklandı!"); }); 
         }
 
         // === TICKETS ===

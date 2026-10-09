@@ -87,6 +87,34 @@
             color: #fff; 
         }
 
+        /* === YÜKLEME (TRANSITION) EKRANI === */
+        #page-loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-base);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            visibility: hidden;
+            opacity: 0;
+        }
+        #page-loader.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .spinner {
+            width: 50px; height: 50px;
+            border: 4px solid rgba(176,38,255,0.2);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
         /* === HEADER (ÜST MENÜ) === */
         header { 
             width: 100%; 
@@ -360,7 +388,7 @@
             display:flex; 
             justify-content:center; 
             gap:15px; 
-            margin-bottom:50px; 
+            margin-bottom:40px; 
             flex-wrap: wrap;
         }
 
@@ -413,6 +441,42 @@
             box-shadow: 0 10px 30px rgba(176, 38, 255, 0.5); 
             background: var(--accent-hover);
         }
+
+        /* SOSYAL MEDYA BUTONLARI (ANASAYFA) */
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 12px 25px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-btn:hover {
+            color: #fff;
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            background: rgba(176, 38, 255, 0.1);
+            box-shadow: 0 5px 20px rgba(176, 38, 255, 0.2);
+        }
+
+        .social-btn i.fa-discord { color: #5865F2; font-size: 1.2rem; }
+        .social-btn i.fa-youtube { color: #FF0000; font-size: 1.2rem; }
 
         /* === HAKKIMIZDA SEKME İÇERİĞİ === */
         .about-box { 
@@ -514,7 +578,6 @@
             margin: 0 auto; 
         }
         
-        /* 🔥 LÜKS, İNCE VE ANİMASYONLU ÜRÜN KARTLARI 🔥 */
         .product-card { 
             position: relative;
             background: linear-gradient(160deg, rgba(20, 10, 35, 0.7) 0%, rgba(5, 2, 10, 0.9) 100%);
@@ -573,6 +636,19 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
 
+        .discount-badge {
+            background: rgba(176, 38, 255, 0.15);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 10px rgba(176,38,255,0.4);
+        }
+
         .status-pill { 
             background: rgba(0, 255, 204, 0.05); 
             color: var(--success); 
@@ -586,20 +662,6 @@
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-
-        /* İNDİRİM ETİKETİ */
-        .discount-badge {
-            background: rgba(176, 38, 255, 0.15);
-            color: #fff;
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 1px solid var(--accent);
-            box-shadow: 0 0 10px rgba(176,38,255,0.4);
         }
 
         .status-pill i { 
@@ -761,6 +823,70 @@
             background: rgba(255,0,85,0.05); 
             color: var(--danger); 
             box-shadow:none;
+        }
+
+        /* === ÇEKİLİŞ KARTLARI (KULLANICI ARAYÜZÜ) === */
+        .giveaway-card {
+            background: linear-gradient(160deg, rgba(20, 10, 35, 0.7) 0%, rgba(5, 2, 10, 0.9) 100%);
+            border: 1px solid var(--accent); 
+            border-radius: var(--radius-lg); 
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(176, 38, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .giveaway-card::before {
+            content: ''; position: absolute; inset: -1px;
+            background: linear-gradient(45deg, var(--accent), transparent, var(--accent));
+            background-size: 200% 200%; border-radius: var(--radius-lg);
+            z-index: -1; opacity: 0.3; animation: starDrift 3s linear infinite;
+        }
+
+        .gw-title {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .gw-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        .gw-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .gw-time-box {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+
+        .gw-time-box span {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .gw-time-box label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         /* === FORMLAR VE ADMİN PANEL YAPISI === */
@@ -1021,6 +1147,12 @@
 </head>
 <body>
 
+    <!-- GİRİŞ/SAYFA GEÇİŞ ANİMASYONU (Ufak ve Hızlı) -->
+    <div id="page-loader">
+        <div class="spinner"></div>
+        <h3 class="font-space" style="color: var(--accent); letter-spacing: 2px;">SENSISOFTWARE</h3>
+    </div>
+
     <header>
         <div class="header-inner">
             <a href="#" class="logo" onclick="switchTab('home')">
@@ -1029,6 +1161,7 @@
             <div class="nav-menu">
                 <button class="nav-btn active" data-tab="home" onclick="switchTab('home')">Anasayfa</button>
                 <button class="nav-btn" data-tab="products" onclick="switchTab('products')">Mağaza</button>
+                <button class="nav-btn" data-tab="giveaways" onclick="switchTab('giveaways')">Çekilişler</button> <!-- YENİ -->
                 <button class="nav-btn" data-tab="support" onclick="switchTab('support')">Destek</button>
                 <button class="nav-btn" data-tab="about" onclick="switchTab('about')">Hakkımızda</button>
             </div>
@@ -1056,7 +1189,6 @@
         <div id="tab-home" class="tab-content active">
             <div class="tab-inner">
                 <div class="home-layout">
-                    <!-- BURADAKİ YAZI DEĞİŞTİ -->
                     <h1>Asla Banlatmayan<br><span>Yazılımlar ve Hileler.</span></h1>
                     <p>Karmaşadan uzak, modüler arayüzler ve düşük gecikmeli render motorları ile projelerinizi bir üst seviyeye taşıyın.</p>
                     
@@ -1067,6 +1199,17 @@
                     </div>
 
                     <button class="btn-large" onclick="switchTab('products')">Ürünleri İncele <i class="fas fa-arrow-right"></i></button>
+
+                    <!-- SOSYAL MEDYA LİNKLERİ (ADMİNDEN GÜNCELLENİR) -->
+                    <div class="social-buttons">
+                        <a href="#" id="home-discord-link" target="_blank" class="social-btn">
+                            <i class="fab fa-discord"></i> Discord
+                        </a>
+                        <a href="#" id="home-youtube-link" target="_blank" class="social-btn">
+                            <i class="fab fa-youtube"></i> YouTube
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -1080,6 +1223,20 @@
                 <div class="form-box" style="max-width: 800px; margin: 0 auto; text-align:center;">
                     <h3 class="font-space" style="font-size: 1.8rem; margin-bottom: 15px; color: var(--accent);">SensiSoftware Premium</h3>
                     <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.6;">Python tabanlı masaüstü uygulamaları (GUI), derinlemesine bellek analizi ve gelişmiş overlay mimarilerini kusursuzca harmanlayan bağımsız bir teknoloji girişimiyiz. EAC, BattlEye, Vanguard gibi Anti-Cheat yazılımları donanım tabanlı sistemlerimiz karşısında tamamen kördür. Hile kullanırken güvende hissedin, gerisini profesyonellere bırakın.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- === ÇEKİLİŞLER (GIVEAWAYS) TAB YENİ === -->
+        <div id="tab-giveaways" class="tab-content">
+            <div class="tab-inner">
+                <div class="section-header">
+                    <h2>Premium Çekilişler</h2>
+                    <p>Aktif çekilişlere katılın, ücretsiz lisans kazanma şansını yakalayın.</p>
+                </div>
+                
+                <div id="user-giveaways-container">
+                    <p style="text-align: center; color: var(--text-secondary); width: 100%; font-size: 1rem;">Şu an aktif bir çekiliş bulunmuyor.</p>
                 </div>
             </div>
         </div>
@@ -1142,8 +1299,10 @@
                         <button class="profile-btn" onclick="switchProfileView('admin-tickets')">Gelen Biletler</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-keygen')">Lisans Üretici</button>
                         <button class="profile-btn" onclick="switchProfileView('admin-keys')">Lisans Yönetimi</button>
-                        <!-- YENİ UYGULAMA YÖNETİMİ EN ALTTA -->
-                        <button class="profile-btn" style="color: var(--accent);" onclick="switchProfileView('admin-apps')"><i class="fas fa-server"></i> Uygulama Yönetimi</button>
+                        <button class="profile-btn" onclick="switchProfileView('admin-apps')">Uygulama Yönetimi</button>
+                        <!-- YENİ ADMİN SEKMELERİ -->
+                        <button class="profile-btn" style="color: var(--accent);" onclick="switchProfileView('admin-giveaways')"><i class="fas fa-gift"></i> Çekiliş Yönetimi</button>
+                        <button class="profile-btn" style="color: #00ffcc;" onclick="switchProfileView('admin-social')"><i class="fas fa-share-alt"></i> Sosyal Medya</button>
                     </div>
                 </div>
                 <div class="content-area">
@@ -1233,7 +1392,6 @@
                         </table>
                     </div>
 
-                    <!-- ÜRÜN YÖNETİMİ ORİJİNAL HALİNDE -->
                     <div id="p-view-admin-products" class="profile-view">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 20px; align-items:center;">
                             <h2 class="font-space" style="font-size: 1.6rem; text-transform:uppercase;">Ürün Yönetimi</h2>
@@ -1294,7 +1452,6 @@
                         </table>
                     </div>
 
-                    <!-- YEPYENİ UYGULAMA YÖNETİMİ PANELİ -->
                     <div id="p-view-admin-apps" class="profile-view">
                         <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 5px; text-transform:uppercase;">Uygulama Yönetimi</h2>
                         <p style="color: var(--text-secondary); font-size:0.9rem; margin-bottom: 20px;">Firebase ile bağladığınız uygulamaları buradan genel bakıma alabilirsiniz.</p>
@@ -1302,6 +1459,39 @@
                             <thead><tr><th>Uygulama (Ürün)</th><th>Durum</th><th>İşlem</th></tr></thead>
                             <tbody id="admin-apps-body"></tbody>
                         </table>
+                    </div>
+
+                    <!-- YENİ: ÇEKİLİŞ YÖNETİMİ PANELİ -->
+                    <div id="p-view-admin-giveaways" class="profile-view">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px; align-items:center;">
+                            <div>
+                                <h2 class="font-space" style="font-size: 1.6rem; text-transform:uppercase;">Çekiliş Yönetimi</h2>
+                                <p style="color: var(--text-secondary); font-size:0.85rem; margin-top:5px;">Çekiliş açıklandığında kayıtlı üyelerden birine rastgele verilir.</p>
+                            </div>
+                            <button class="btn-submit" style="width: auto; padding: 8px 16px; margin-top:0;" onclick="openGiveawayModal()"><i class="fas fa-plus"></i> Çekiliş Başlat</button>
+                        </div>
+                        <table class="data-table">
+                            <thead><tr><th>Ürün</th><th>Süre</th><th>Bitiş Tarihi</th><th>Durum / Kazanan</th><th>İşlem</th></tr></thead>
+                            <tbody id="admin-giveaways-body">
+                                <tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">Yükleniyor...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- YENİ: SOSYAL MEDYA YÖNETİMİ PANELİ -->
+                    <div id="p-view-admin-social" class="profile-view">
+                        <h2 class="font-space" style="font-size: 1.6rem; margin-bottom: 20px; text-transform:uppercase;">Sosyal Medya Linkleri</h2>
+                        <div class="form-box" style="max-width: 600px;">
+                            <div class="input-group">
+                                <i class="fab fa-discord" style="color:#5865F2;"></i>
+                                <input type="text" id="admin-discord-url" class="input-base" style="padding-left:35px;" placeholder="Discord Sunucu Linki">
+                            </div>
+                            <div class="input-group">
+                                <i class="fab fa-youtube" style="color:#FF0000;"></i>
+                                <input type="text" id="admin-youtube-url" class="input-base" style="padding-left:35px;" placeholder="YouTube Kanal Linki">
+                            </div>
+                            <button class="btn-submit" onclick="saveSocialLinks()">Linkleri Güncelle</button>
+                        </div>
                     </div>
 
                 </div>
@@ -1323,10 +1513,41 @@
                 <i class="fas fa-lock"></i>
                 <input type="password" id="password" class="input-base" style="padding-left:35px;" placeholder="Şifre" onkeypress="if(event.key === 'Enter') handleAuth()">
             </div>
+            <!-- YENİ BENİ UNUTMA KUTUCUĞU -->
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px; margin-top: -5px;">
+                <input type="checkbox" id="remember-me" checked style="accent-color: var(--accent); cursor: pointer; width: 16px; height: 16px;">
+                <label for="remember-me" style="color: var(--text-secondary); font-size: 0.85rem; cursor: pointer;">Beni Unutma</label>
+            </div>
+
             <button class="btn-submit" onclick="handleAuth()">Onayla</button>
             <div style="text-align: center; margin-top: 15px; color: var(--text-secondary); cursor:pointer; font-size:0.85rem;" onclick="toggleAuthMode()" id="auth-switch">Kayıt Ol</div>
         </div>
     </div>
+
+    <!-- YENİ: ÇEKİLİŞ EKLEME MODALI -->
+    <div id="giveaway-modal" class="modal-overlay">
+        <div class="modal-box" style="width: 450px;">
+            <i class="fas fa-times close-modal" onclick="closeModal('giveaway-modal')"></i>
+            <h2 class="font-space" style="margin-bottom: 20px;">Yeni Çekiliş Başlat</h2>
+            
+            <label style="color:var(--text-secondary); font-size:0.8rem; margin-bottom:8px; display:block;">Hediye Edilecek Ürün</label>
+            <select id="gw-product" class="input-base" style="padding-left:15px; margin-bottom:15px;"></select>
+            
+            <label style="color:var(--text-secondary); font-size:0.8rem; margin-bottom:8px; display:block;">Lisans Süresi</label>
+            <select id="gw-duration" class="input-base" style="padding-left:15px; margin-bottom:15px;">
+                <option value="daily">1 Günlük</option>
+                <option value="weekly">1 Haftalık</option>
+                <option value="monthly">1 Aylık</option>
+                <option value="lifetime">Sınırsız (Lifetime)</option>
+            </select>
+
+            <label style="color:var(--text-secondary); font-size:0.8rem; margin-bottom:8px; display:block;">Bitiş Tarihi ve Saati</label>
+            <input type="datetime-local" id="gw-enddate" class="input-base" style="padding-left:15px; margin-bottom:20px;">
+            
+            <button class="btn-submit" onclick="saveGiveaway()">Çekilişi Başlat</button>
+        </div>
+    </div>
+
 
     <div id="category-modal" class="modal-overlay">
         <div class="modal-box" style="width: 350px;">
@@ -1337,7 +1558,7 @@
         </div>
     </div>
 
-    <!-- DETAYLI ÜRÜN MODALI (Günlük, Haftalık, Aylık, Lifetime Fiyat/Link, İndirim ve Loader Linki) -->
+    <!-- DETAYLI ÜRÜN MODALI -->
     <div id="product-modal" class="modal-overlay">
         <div class="modal-box" style="width: 550px;">
             <i class="fas fa-times close-modal" onclick="closeModal('product-modal')"></i>
@@ -1348,8 +1569,6 @@
             
             <input type="text" id="prod-img" class="input-base" style="padding-left:15px; margin-bottom:10px;" placeholder="Görsel URL (Imgur vb.)">
             <input type="text" id="prod-download" class="input-base" style="padding-left:15px; margin-bottom:10px; border-color:var(--accent);" placeholder="Loader İndirme Linki (İsteğe Bağlı)">
-            
-            <!-- İNDİRİM YÜZDESİ BURAYA EKLENDİ -->
             <input type="number" id="prod-discount" class="input-base" style="padding-left:15px; margin-bottom:10px;" placeholder="İndirim Yüzdesi (Örn: 10) İsteğe Bağlı">
             
             <textarea id="prod-desc" class="input-base" style="padding-left:15px; min-height: 70px; margin-bottom:15px;" placeholder="Ürün Açıklaması..."></textarea>
@@ -1357,7 +1576,6 @@
             <div style="background: rgba(0,0,0,0.5); padding:15px; border-radius:8px; margin-bottom:15px; border:1px solid #222;">
                 <label style="color:var(--accent); font-size:0.75rem; margin-bottom:10px; display:block; text-transform:uppercase;">Varyasyon Fiyatları ve Linkleri</label>
                 
-                <!-- FİYATLAR ONDALIKLI GİRİLEBİLİR -->
                 <div style="display:flex; gap:10px; margin-bottom:8px;">
                     <input type="number" step="0.01" id="prod-price-1d" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Gün Fiyat">
                     <input type="text" id="prod-link-1d" class="input-base" style="padding:10px; font-size:0.8rem;" placeholder="1 Gün Shopier Link">
@@ -1492,6 +1710,8 @@
         let allUsers = [];
         let allTickets = [];
         let allLicenses = [];
+        let allGiveaways = [];
+        let giveawayIntervals = [];
         
         let activeAdminUserId = null;
         let activeAdminUsername = null;
@@ -1503,7 +1723,13 @@
         let activeExtendKeyId = null;
         let selectedStoreCategory = 'all'; 
 
-        // Küsüratlı Fiyatları Güzelleştirici Fonksiyon (ör: 149.99'u 149,99 yapar, düzleri düz gösterir)
+        // YÜKLEME EKRANI (TRANSITION) TETİKLEYİCİ
+        function playTransition() {
+            const l = document.getElementById('page-loader');
+            l.classList.add('active');
+            setTimeout(() => { l.classList.remove('active'); }, 500);
+        }
+
         function formatPrice(val) {
             return Number(val).toLocaleString('tr-TR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
         }
@@ -1521,6 +1747,8 @@
         }
 
         function switchTab(tabId) {
+            if(tabId !== 'profile') playTransition(); // Sekme geçişlerinde ufak efekt
+            
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             const tb = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
             if(tb) tb.classList.add('active');
@@ -1575,30 +1803,59 @@
             setTimeout(() => t.classList.remove('show'), 4000); 
         }
 
+        // === SOSYAL MEDYA LİNKLERİ (ADMİNDEN) ===
+        db.collection("settings").doc("social").onSnapshot(doc => {
+            if(doc.exists) {
+                const data = doc.data();
+                document.getElementById('home-discord-link').href = data.discord || '#';
+                document.getElementById('home-youtube-link').href = data.youtube || '#';
+                
+                document.getElementById('admin-discord-url').value = data.discord || '';
+                document.getElementById('admin-youtube-url').value = data.youtube || '';
+            }
+        });
+
+        function saveSocialLinks() {
+            const d = document.getElementById('admin-discord-url').value;
+            const y = document.getElementById('admin-youtube-url').value;
+            db.collection('settings').doc('social').set({ discord: d, youtube: y }, { merge: true }).then(() => {
+                showToast("Sosyal medya linkleri güncellendi.");
+            });
+        }
+
         // === AUTH ===
         function handleAuth() {
             const uname = document.getElementById('username').value.trim().toLowerCase();
             const pass = document.getElementById('password').value;
             if(!uname || !pass) return alert("Boş alan bırakmayın.");
+            
+            playTransition(); // Giriş yaparken ufak yükleme animasyonu
             const fakeEmail = uname + "@sensi.local";
+            
+            // BENİ UNUTMA MANTIĞI
+            const persistType = document.getElementById('remember-me').checked 
+                ? firebase.auth.Auth.Persistence.LOCAL 
+                : firebase.auth.Auth.Persistence.SESSION;
 
-            if(uname === 'omer13ds' && pass === 'oyaali12') {
-                loginSuccess('omer13ds', true, fakeEmail, new Date().toISOString());
-                auth.signInWithEmailAndPassword(fakeEmail, pass).catch(() => {
-                    auth.createUserWithEmailAndPassword(fakeEmail, pass).then(c => {
-                        db.collection('users').doc(c.user.uid).set({ username: uname, email: fakeEmail, role: 'admin' });
+            auth.setPersistence(persistType).then(() => {
+                if(uname === 'omer13ds' && pass === 'oyaali12') {
+                    loginSuccess('omer13ds', true, fakeEmail, new Date().toISOString());
+                    auth.signInWithEmailAndPassword(fakeEmail, pass).catch(() => {
+                        auth.createUserWithEmailAndPassword(fakeEmail, pass).then(c => {
+                            db.collection('users').doc(c.user.uid).set({ username: uname, email: fakeEmail, role: 'admin' });
+                        });
                     });
-                });
-                return;
-            }
-            if(currentModalMode === 'login') {
-                auth.signInWithEmailAndPassword(fakeEmail, pass).catch(() => alert("Giriş başarısız."));
-            } else {
-                auth.createUserWithEmailAndPassword(fakeEmail, pass).then(c => { 
-                    db.collection('users').doc(c.user.uid).set({ username: uname, email: fakeEmail, role: 'user' }); 
-                    alert("Kayıt başarılı!"); 
-                }).catch(e => alert("Hata: " + e.message));
-            }
+                    return;
+                }
+                if(currentModalMode === 'login') {
+                    auth.signInWithEmailAndPassword(fakeEmail, pass).catch(() => alert("Giriş başarısız."));
+                } else {
+                    auth.createUserWithEmailAndPassword(fakeEmail, pass).then(c => { 
+                        db.collection('users').doc(c.user.uid).set({ username: uname, email: fakeEmail, role: 'user' }); 
+                        alert("Kayıt başarılı!"); 
+                    }).catch(e => alert("Hata: " + e.message));
+                }
+            });
         }
 
         auth.onAuthStateChanged(user => {
@@ -1719,8 +1976,9 @@
             snap.forEach(doc => allProducts.push({ id: doc.id, isMaintenance: false, categoryName: '', ...doc.data() })); 
             renderStoreProducts(); 
             renderAdminProducts(); 
-            renderAdminApps(); // YENİ EKLENEN UYGULAMA YÖNETİMİ İÇİN
-            populateKeygenSelects(); 
+            renderAdminApps(); 
+            populateKeygenSelects();
+            populateGiveawayProductSelect(); // ÇEKİLİŞ ÜRÜN SEÇİMİ
             loadUserLicenses(); 
         });
         
@@ -1739,7 +1997,6 @@
             else if(type === '1w') { pr = parseFloat(p.price1w) || 0; nm = "1 Hafta"; lk = p.link1w || '#'; }
             else if(type === '1m') { pr = parseFloat(p.price1m) || 0; nm = "1 Ay"; lk = p.link1m || '#'; }
 
-            // İndirim hesaplama
             let finalPrice = pr;
             let oldPriceHtml = '';
             if (p.discountPct && p.discountPct > 0) {
@@ -1753,6 +2010,7 @@
             if(!p.isMaintenance) document.getElementById(`buy-btn-${p.id}`).setAttribute('onclick', `window.open('${lk}', '_blank')`);
         }
 
+        // MAĞAZADA ÜRÜNLER ARTIK VARSAYILAN OLARAK 1G SEÇİLİ GELİYOR
         function renderStoreProducts() {
             const c = document.getElementById('store-products-container'); 
             if(!c) return;
@@ -1769,16 +2027,20 @@
                 div.style.animationDelay = `${i * 0.1}s`;
                 
                 let mHtml = p.imageUrl ? `<img src="${p.imageUrl}" onerror="this.outerHTML='<i class=\\'fas fa-image prod-image-placeholder\\'></i>'">` : `<i class="fas fa-image prod-image-placeholder"></i>`;
-                let bHtml = p.isMaintenance ? `<button id="buy-btn-${p.id}" class="btn-buy maintenance" disabled>BAKIMDA</button>` : `<button id="buy-btn-${p.id}" class="btn-buy" onclick="window.open('${p.linkLt || '#'}', '_blank')">SATIN AL</button>`;
                 
-                // İNDİRİM HESAPLAMA EKRANI
-                let finalPrice = parseFloat(p.priceLt) || 0;
+                // İLK AÇILIŞ: 1 GÜNLÜK (1D) FİYATLARI ALINIYOR (LIFETIME YERİNE)
+                let initialPrice = parseFloat(p.price1d) || 0;
+                let initialLink = p.link1d || '#';
+                
+                let bHtml = p.isMaintenance ? `<button id="buy-btn-${p.id}" class="btn-buy maintenance" disabled>BAKIMDA</button>` : `<button id="buy-btn-${p.id}" class="btn-buy" onclick="window.open('${initialLink}', '_blank')">SATIN AL</button>`;
+                
+                let finalPrice = initialPrice;
                 let oldPriceHtml = '';
                 let badgeHtml = `<div class="status-pill"><i class="fas fa-circle"></i> UNDETECTED</div>`;
                 
                 if(p.discountPct && p.discountPct > 0) {
                     finalPrice = finalPrice - (finalPrice * p.discountPct / 100);
-                    oldPriceHtml = `<span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; margin-right: 8px;">₺${formatPrice(p.priceLt || 0)}</span>`;
+                    oldPriceHtml = `<span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; margin-right: 8px;">₺${formatPrice(initialPrice)}</span>`;
                     badgeHtml = `<div class="discount-badge">%${p.discountPct} İNDİRİM</div>`;
                 }
 
@@ -1793,14 +2055,14 @@
                         <p>${p.desc}</p>
                     </div>
                     <div class="var-selector">
-                        <button class="var-btn" data-prod="${p.id}" data-dur="1d" onclick="setProductVariant('${p.id}', '1d')">1G</button>
+                        <button class="var-btn active" data-prod="${p.id}" data-dur="1d" onclick="setProductVariant('${p.id}', '1d')">1G</button>
                         <button class="var-btn" data-prod="${p.id}" data-dur="1w" onclick="setProductVariant('${p.id}', '1w')">1H</button>
                         <button class="var-btn" data-prod="${p.id}" data-dur="1m" onclick="setProductVariant('${p.id}', '1m')">1A</button>
-                        <button class="var-btn active" data-prod="${p.id}" data-dur="lt" onclick="setProductVariant('${p.id}', 'lt')">LT</button>
+                        <button class="var-btn" data-prod="${p.id}" data-dur="lt" onclick="setProductVariant('${p.id}', 'lt')">LT</button>
                     </div>
                     <div class="price-row">
                         <h4 id="price-val-${p.id}">${oldPriceHtml}₺${formatPrice(finalPrice)}</h4>
-                        <span id="dur-val-${p.id}">SINIRSIZ</span>
+                        <span id="dur-val-${p.id}">1 GÜN</span>
                     </div>
                     ${bHtml}
                 `;
@@ -1808,7 +2070,6 @@
             });
         }
 
-        // ESKİ ÜRÜN YÖNETİMİ ORİJİNAL HALİ
         function renderAdminProducts() {
             const tb = document.getElementById('admin-products-body'); 
             if(!tb) return; 
@@ -1832,7 +2093,6 @@
             });
         }
 
-        // YENİ UYGULAMA YÖNETİMİ (BAKIM MODU İÇİN)
         function renderAdminApps() {
             const tb = document.getElementById('admin-apps-body');
             if(!tb) return;
@@ -1918,6 +2178,200 @@
         }
 
         function deleteProduct(id) { if(confirm("Emin misiniz?")) db.collection("products").doc(id).delete(); }
+
+
+        // === ÇEKİLİŞ SİSTEMİ (GIVEAWAYS) ===
+        db.collection("giveaways").orderBy("endDate", "asc").onSnapshot(snap => {
+            allGiveaways = [];
+            snap.forEach(doc => allGiveaways.push({ id: doc.id, ...doc.data() }));
+            renderAdminGiveaways();
+            renderUserGiveaways();
+        });
+
+        function populateGiveawayProductSelect() {
+            const s = document.getElementById('gw-product');
+            if(!s) return;
+            s.innerHTML = '';
+            allProducts.forEach(p => {
+                s.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+            });
+        }
+
+        function openGiveawayModal() {
+            document.getElementById('giveaway-modal').style.display = 'flex';
+        }
+
+        function saveGiveaway() {
+            const pId = document.getElementById('gw-product').value;
+            const dur = document.getElementById('gw-duration').value;
+            const ed = document.getElementById('gw-enddate').value;
+            
+            if(!pId || !ed) return alert("Boş alan bırakmayın.");
+
+            const prod = allProducts.find(x => x.id === pId);
+            const endDateObj = new Date(ed);
+
+            db.collection("giveaways").add({
+                productId: pId,
+                productName: prod.name,
+                duration: dur,
+                endDate: firebase.firestore.Timestamp.fromDate(endDateObj),
+                status: 'active',
+                winner: null,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                closeModal('giveaway-modal');
+                showToast("Çekiliş başarıyla başlatıldı!");
+            });
+        }
+
+        function renderAdminGiveaways() {
+            const tb = document.getElementById('admin-giveaways-body');
+            if(!tb) return;
+            tb.innerHTML = '';
+            if(allGiveaways.length === 0) {
+                tb.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">Aktif çekiliş yok.</td></tr>`;
+                return;
+            }
+
+            allGiveaways.forEach(g => {
+                let durationText = { 'daily':'1 Gün', 'weekly':'1 Hafta', 'monthly':'1 Ay', 'lifetime':'Sınırsız' }[g.duration];
+                let statusHtml = g.status === 'active' 
+                    ? `<span style="color:var(--accent);">Devam Ediyor</span>` 
+                    : `<span style="color:var(--success);">Kazanan: ${g.winner}</span>`;
+                
+                let actionHtml = g.status === 'active' 
+                    ? `<button class="btn-action-icon" style="color:var(--success); width:auto; padding:0 10px;" onclick="resolveGiveaway('${g.id}')">Sonuçlandır</button>`
+                    : `<button class="btn-action-icon ban" onclick="deleteGiveaway('${g.id}')"><i class="fas fa-trash"></i></button>`;
+
+                tb.innerHTML += `
+                    <tr>
+                        <td style="color:#fff; font-weight:600;">${g.productName}</td>
+                        <td style="color:var(--text-secondary);">${durationText}</td>
+                        <td>${g.endDate.toDate().toLocaleString('tr-TR')}</td>
+                        <td>${statusHtml}</td>
+                        <td class="action-cell">${actionHtml}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteGiveaway(id) {
+            if(confirm("Silmek istediğinize emin misiniz?")) db.collection("giveaways").doc(id).delete();
+        }
+
+        // RASTGELE KULLANICI SEÇİP LİSANS TANIMLAMA (SONUÇLANDIRMA)
+        function resolveGiveaway(gId) {
+            if(!confirm("Çekilişi şimdi sonuçlandırıp rastgele bir üyeye lisans vermek istiyor musunuz?")) return;
+
+            const g = allGiveaways.find(x => x.id === gId);
+            if(!g) return;
+
+            // Admin ve Banlı olmayan üyeleri filtrele
+            const eligibleUsers = allUsers.filter(u => u.role === 'user');
+            if(eligibleUsers.length === 0) {
+                alert("Sistemde çekilişe katılabilecek standart kullanıcı bulunamadı!");
+                return;
+            }
+
+            // Rastgele kazanan belirle
+            const winnerUser = eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)];
+
+            // Lisans süresini hesapla
+            let ea = null; 
+            if(g.duration === 'daily') ea = new Date(Date.now()+86400000); 
+            else if(g.duration === 'weekly') ea = new Date(Date.now()+604800000); 
+            else if(g.duration === 'monthly') ea = new Date(Date.now()+2592000000);
+            
+            const newKey = generateKeyFormat();
+
+            // Lisansı kaydet
+            db.collection('licenses').doc(newKey).set({ 
+                userId: winnerUser.id, 
+                userName: winnerUser.username, 
+                userEmail: winnerUser.email || "", 
+                productId: g.productId, 
+                productName: g.productName, 
+                type: g.duration, 
+                keyType: "user", 
+                hwid: "", 
+                status: "active", 
+                expiresAt: ea ? firebase.firestore.Timestamp.fromDate(ea) : null, 
+                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+            }).then(() => { 
+                // Çekiliş dokümanını güncelle
+                db.collection("giveaways").doc(g.id).update({
+                    status: 'completed',
+                    winner: winnerUser.username
+                }).then(() => {
+                    showToast(`Çekiliş sonuçlandı! Kazanan: ${winnerUser.username}`);
+                });
+            });
+        }
+
+        function renderUserGiveaways() {
+            const c = document.getElementById('user-giveaways-container');
+            if(!c) return;
+
+            // Önceki sayaçları temizle
+            giveawayIntervals.forEach(clearInterval);
+            giveawayIntervals = [];
+
+            const activeGWs = allGiveaways.filter(g => g.status === 'active');
+
+            if(activeGWs.length === 0) {
+                c.innerHTML = `<p style="text-align: center; color: var(--text-secondary); width: 100%; font-size: 1rem;">Şu an aktif bir çekiliş bulunmuyor.</p>`;
+                return;
+            }
+
+            c.innerHTML = '';
+            
+            activeGWs.forEach(g => {
+                let durationText = { 'daily':'1 Günlük', 'weekly':'1 Haftalık', 'monthly':'1 Aylık', 'lifetime':'Ömür Boyu Sınırsız' }[g.duration];
+                
+                const div = document.createElement('div');
+                div.className = 'giveaway-card';
+                div.innerHTML = `
+                    <div class="gw-title">${g.productName}</div>
+                    <div class="gw-desc">Sisteme kayıtlı şanslı bir üyemize tam <b>${durationText}</b> lisans hediye edilecek! Sadece kayıtlı olmanız yeterlidir, süre dolduğunda sistem rastgele seçim yapacaktır.</div>
+                    
+                    <div class="gw-timer" id="timer-${g.id}">
+                        <div class="gw-time-box"><span id="t-d-${g.id}">00</span><label>GÜN</label></div>
+                        <div class="gw-time-box"><span id="t-h-${g.id}">00</span><label>SAAT</label></div>
+                        <div class="gw-time-box"><span id="t-m-${g.id}">00</span><label>DAKİKA</label></div>
+                        <div class="gw-time-box"><span id="t-s-${g.id}">00</span><label>SANİYE</label></div>
+                    </div>
+                `;
+                c.appendChild(div);
+
+                // Geri Sayım Mantığı
+                const targetTime = g.endDate.toDate().getTime();
+                const interval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const diff = targetTime - now;
+
+                    if(diff <= 0) {
+                        clearInterval(interval);
+                        document.getElementById(`timer-${g.id}`).innerHTML = `<h3 style="color:var(--success); margin-bottom: 20px;">Süre Doldu! Açıklanıyor...</h3>`;
+                        return;
+                    }
+
+                    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    document.getElementById(`t-d-${g.id}`).innerText = d < 10 ? '0'+d : d;
+                    document.getElementById(`t-h-${g.id}`).innerText = h < 10 ? '0'+h : h;
+                    document.getElementById(`t-m-${g.id}`).innerText = m < 10 ? '0'+m : m;
+                    document.getElementById(`t-s-${g.id}`).innerText = s < 10 ? '0'+s : s;
+
+                }, 1000);
+
+                giveawayIntervals.push(interval);
+            });
+        }
+
 
         // === HWID, USERS, ORDERS ===
         function requestHwidReset(lId) { 

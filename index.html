@@ -2538,21 +2538,27 @@
         });
 
         function loadUserLicenses() {
-            if(!auth.currentUser) return; 
+            if(!auth.currentUser || !currentUser) return; 
             const tb = document.getElementById('user-licenses-body'); 
             if(!tb) return; 
             tb.innerHTML = '';
-            const my = allLicenses.filter(l => l.userId === auth.currentUser.uid);
-            if(my.length === 0) { tb.innerHTML = `<tr><td colspan="4" style="text-align:center;">Yok</td></tr>`; return; }
+            
+            // KULLANICI ID VEYA KULLANICI ADI EŞLEŞMESİ (ASLA UÇmaz)
+            const my = allLicenses.filter(l => l.userId === auth.currentUser.uid || (l.userName && l.userName.toLowerCase() === currentUser.username.toLowerCase()));
+            
+            if(my.length === 0) { 
+                tb.innerHTML = `<tr><td colspan="4" style="text-align:center; color: var(--text-secondary);">Kayıtlı lisansınız yok.</td></tr>`; 
+                return; 
+            }
+            
             my.forEach(d => {
                 const pMatch = allProducts.find(p => p.id === d.productId) || {};
                 let dlBtn = pMatch.downloadLink ? `<button class="btn-action-icon" style="width:auto; padding:0 12px; font-size:0.75rem; color:#fff;" onclick="window.open('${pMatch.downloadLink}', '_blank')"><i class="fas fa-download"></i></button>` : '';
                 let hwBtn = d.hwidStatus === 'pending' ? `<span style="color:var(--accent); font-size:0.7rem;">Bekliyor</span>` : `<button class="btn-action-icon" style="width:auto; padding:0 12px; font-size:0.75rem; color:var(--danger);" onclick="requestHwidReset('${d.id}')"><i class="fas fa-microchip"></i></button>`;
-                
                 let copyBtn = `<button class="btn-action-icon" style="width:auto; padding:0 12px; font-size:0.75rem; color:var(--accent);" onclick="copyToClipboard('${d.id}')" title="Lisansı Kopyala"><i class="fas fa-copy"></i></button>`;
 
                 tb.innerHTML += `<tr>
-                    <td style="color:#fff;">${d.productName}</td>
+                    <td style="color:#fff;">${d.productName || 'Yazılım'}</td>
                     <td style="font-family:monospace; color:var(--text-secondary);">${d.id}</td>
                     <td>${formatRemainingTime(d.expiresAt, d.type)}</td>
                     <td style="display:flex; gap:5px;">${copyBtn}${dlBtn}${hwBtn}</td>
